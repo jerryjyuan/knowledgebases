@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://rxjs-dev.firebaseapp.com/guide/operators -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>RxJS</title>
+  <!--<base href="/">--><base href=".">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="https://rxjs-dev.firebaseapp.com/assets/images/favicons/favicon.ico">
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-32x32.png"-->
+        <!--sizes="32x32">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-194x194.png"-->
+        <!--sizes="194x194">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-96x96.png"-->
+        <!--sizes="96x96">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-16x16.png"-->
+        <!--sizes="16x16">-->
+  <!--<link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+  <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+
+  <!-- NOTE: These need to be kept in sync with `ngsw-config.json`. -->
+  <link href="./RxJS_files/icon" rel="stylesheet">
+  <link href="./RxJS_files/css" rel="stylesheet">
+  <link href="./RxJS_files/font-awesome.min.css" rel="stylesheet">
+  <!-- -->
+
+  <link rel="manifest" href="https://rxjs-dev.firebaseapp.com/pwa-manifest.json">
+  <meta name="theme-color" content="#d81b60">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+
+  <script async="" src="./RxJS_files/analytics.js.download"></script><script>
+    // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
+    var tag = document.createElement('meta'); tag.name = 'googlebot'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+    tag = document.createElement('meta'); tag.name = 'robots'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  // Note this is a customised version of the GA tracking snippet
+  // See the comments below for more info
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+  ~i.name.indexOf('NG_DEFER_BOOTSTRAP')|| // only load library if not running e2e tests
+  m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  </script>
+  <!-- End Google Analytics -->
+
+  <script>
+    // Report fatal errors to Google Analytics
+    window.onerror = function() {
+      ga('send', 'exception', {exDescription: formatError.apply(null, arguments), exFatal: true});
+
+      function formatError(msg, url, line, col, e) {
+        var stack;
+        msg = msg.replace(/^Error: /, '');
+        if (e) {
+          stack = e.stack
+              // strip the leading "Error: " from the stack trace
+              .replace(/^Error: /, '')
+              // strip the message from the stack trace, if present
+              .replace(msg + '\n', '')
+              // strip leading spaces
+              .replace(/^ +/gm, '')
+              // strip all leading "at " for each frame
+              .replace(/^at /gm, '')
+              // replace long urls with just the last segment: `filename:line:column`
+              .replace(/(?: \(|@)http.+\/([^/)]+)\)?(?:\n|$)/gm, '@$1\n')
+              // replace "eval code" in Edge
+              .replace(/ *\(eval code(:\d+:\d+)\)(?:\n|$)/gm, '@???$1\n')
+        } else {
+          line = line || '?';
+          col = col || '?';
+          stack = url + ':' + line + ':' + col;
+        }
+        return (msg + '\n' + stack).substr(0, 150);
+      }
+    };
+  </script>
+
+  <script>
+    if (window.document.documentMode) {
+      // polyfill IE11 in a blocking way
+      var s = document.createElement('script');
+      s.src = 'generated/ie-polyfills.min.js';
+      document.head.appendChild(s);
+    } else if (!Object.assign) {
+      // polyfill other non-evergreen browsers in a blocking way
+      var polyfillUrl = "https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find&flags=gated&unknown=polyfill";
+
+      // send a blocking XHR to fetch the polyfill
+      // then append it to the document so that its eval-ed synchronously
+      // this is required because the method used for IE is not reliable with other non-evergreen browsers
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        var code = this.responseText;
+        s.appendChild(document.createTextNode(code));
+        document.head.appendChild(s);
+      });
+      xhr.open("GET", polyfillUrl, false);
+      xhr.send();
+    }
+  </script>
+
+  <script>
+    //load CE polyfill
+    //HACK: webpack's html plugin mangles the document.write calls if we don't trick it.
+
+    //load the ES5 shim for browsers with native CE support
+    function loadCustomElementsShim(){
+      document.write('<scri' + 'pt src="assets/js/native-shim.js"><' + '/script>');
+    }
+
+    //load the full custom elements polyfill for browsers without support
+    function loadCustomElementsPolyfill(){
+      document.write('<scri' + 'pt src="assets/js/custom-elements.min.js"><' + '/script>');
+    }
+    //detect if we have native CE support
+    if(!window.customElements){
+      loadCustomElementsPolyfill();
+    }
+    else {
+      loadCustomElementsShim();
+    }
+  </script><script src="./RxJS_files/native-shim.js.download"></script>
+
+<link rel="stylesheet" href="./RxJS_files/styles.ed062bead85c40ac60b2.css"><style>@media (-ms-high-contrast:active){.mat-toolbar{outline:solid 1px}}.mat-toolbar-row,.mat-toolbar-single-row{display:flex;box-sizing:border-box;padding:0 16px;width:100%;flex-direction:row;align-items:center;white-space:nowrap}.mat-toolbar-multiple-rows{display:flex;box-sizing:border-box;flex-direction:column;width:100%}.mat-toolbar-multiple-rows{min-height:64px}.mat-toolbar-row,.mat-toolbar-single-row{height:64px}@media (max-width:599px){.mat-toolbar-multiple-rows{min-height:56px}.mat-toolbar-row,.mat-toolbar-single-row{height:56px}}</style><style>.mat-icon{background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1,1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><style>.mat-button .mat-button-focus-overlay,.mat-icon-button .mat-button-focus-overlay{opacity:0}.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:.04}@media (hover:none){.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:0}}.mat-button,.mat-flat-button,.mat-icon-button,.mat-stroked-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-button[disabled],.mat-flat-button[disabled],.mat-icon-button[disabled],.mat-stroked-button[disabled]{cursor:default}.mat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-button.cdk-program-focused .mat-button-focus-overlay,.mat-flat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-flat-button.cdk-program-focused .mat-button-focus-overlay,.mat-icon-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-icon-button.cdk-program-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-raised-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1)}.mat-raised-button::-moz-focus-inner{border:0}.mat-raised-button[disabled]{cursor:default}.mat-raised-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-raised-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-raised-button::-moz-focus-inner{border:0}._mat-animation-noopable.mat-raised-button{transition:none;animation:none}.mat-stroked-button{border:1px solid currentColor;padding:0 15px;line-height:34px}.mat-stroked-button .mat-button-focus-overlay,.mat-stroked-button .mat-button-ripple.mat-ripple{top:-1px;left:-1px;right:-1px;bottom:-1px}.mat-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:56px;height:56px;padding:0;flex-shrink:0}.mat-fab::-moz-focus-inner{border:0}.mat-fab[disabled]{cursor:default}.mat-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-fab{transition:none;animation:none}.mat-fab .mat-button-wrapper{padding:16px 0;display:inline-block;line-height:24px}.mat-mini-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:40px;height:40px;padding:0;flex-shrink:0}.mat-mini-fab::-moz-focus-inner{border:0}.mat-mini-fab[disabled]{cursor:default}.mat-mini-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-mini-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-mini-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-mini-fab{transition:none;animation:none}.mat-mini-fab .mat-button-wrapper{padding:8px 0;display:inline-block;line-height:24px}.mat-icon-button{padding:0;min-width:0;width:40px;height:40px;flex-shrink:0;line-height:40px;border-radius:50%}.mat-icon-button .mat-icon,.mat-icon-button i{line-height:24px}.mat-button-focus-overlay,.mat-button-ripple.mat-ripple{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-button-ripple.mat-ripple:not(:empty){transform:translateZ(0)}.mat-button-focus-overlay{opacity:0;transition:opacity .2s cubic-bezier(.35,0,.25,1),background-color .2s cubic-bezier(.35,0,.25,1)}._mat-animation-noopable .mat-button-focus-overlay{transition:none}@media (-ms-high-contrast:active){.mat-button-focus-overlay{background-color:#fff}}@media (-ms-high-contrast:black-on-white){.mat-button-focus-overlay{background-color:#000}}.mat-button-ripple-round{border-radius:50%;z-index:1}.mat-button .mat-button-wrapper>*,.mat-fab .mat-button-wrapper>*,.mat-flat-button .mat-button-wrapper>*,.mat-icon-button .mat-button-wrapper>*,.mat-mini-fab .mat-button-wrapper>*,.mat-raised-button .mat-button-wrapper>*,.mat-stroked-button .mat-button-wrapper>*{vertical-align:middle}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button{display:block;font-size:inherit;width:2.5em;height:2.5em}@media (-ms-high-contrast:active){.mat-button,.mat-fab,.mat-flat-button,.mat-icon-button,.mat-mini-fab,.mat-raised-button{outline:solid 1px}}</style><style>.mat-drawer-container{position:relative;z-index:1;box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-opened{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:background-color,visibility}@media (-ms-high-contrast:active){.mat-drawer-backdrop{opacity:.5}}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%,0,0)}@media (-ms-high-contrast:active){.mat-drawer,[dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}}@media (-ms-high-contrast:active){.mat-drawer.mat-drawer-end,[dir=rtl] .mat-drawer{border-left:solid 1px currentColor;border-right:none}}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer{transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer.mat-drawer-end{left:0;right:auto;transform:translate3d(-100%,0,0)}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}</style><script charset="utf-8" src="./RxJS_files/2-es2015.4bfd0144ba4334eb1944.js.download"></script><script charset="utf-8" src="./RxJS_files/10-es2015.ce9c57dfb56979dbe79c.js.download"></script><script charset="utf-8" src="./RxJS_files/18-es2015.dd3c96af3ae1c8ebc276.js.download"></script><meta name="twitter:title" content="RxJS"><meta name="twitter:card" content="summary"><meta property="og:title" content="RxJS"><meta property="og:type" content="article"></head>
+<body>
+
+  <aio-shell ng-version="8.0.0" class="mode-stable sidenav-open page-guide-operators folder-guide view-SideNav aio-notification-hide"><div id="top-of-page"></div><!----><mat-toolbar class="app-toolbar no-print mat-toolbar mat-primary mat-toolbar-multiple-rows" color="primary"><mat-toolbar-row class="notification-container mat-toolbar-row"><aio-notification expirationdate="2018-07-01" notificationid="angular-v6-announcement" class="ng-tns-c2-0 ng-trigger ng-trigger-hideAnimation" style="height: 0px;"><span class="content"><a href="https://blog.angular.io/version-6-0-0-of-angular-now-available-cc56b0efa7a4"><mat-icon aria-label="Announcement" class="icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="insert_comment" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon><span class="message">Version 6 of Angular Now Available!</span><span class="action-button">Learn More</span></a></span><button class="close-button mat-icon-button" aria-label="Close" mat-icon-button=""><span class="mat-button-wrapper"><mat-icon aria-label="Dismiss notification" class="mat-icon notranslate ng-tns-c2-0 mat-icon-no-color" role="img" svgicon="close" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div></button></aio-notification></mat-toolbar-row><mat-toolbar-row class="mat-toolbar-row"><button class="hamburger mat-button" mat-button="" title="Docs menu"><span class="mat-button-wrapper"><mat-icon class="mat-icon notranslate mat-icon-no-color" role="img" svgicon="menu" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button><a class="nav-link home" href="https://rxjs-dev.firebaseapp.com/"><!----><img alt="Home" height="40" src="./RxJS_files/logo.png" title="Home" width="150" class="ng-star-inserted"><!----></a><!----><aio-top-menu class="ng-star-inserted"><ul role="navigation"><!----><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="Overview">Overview</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/api" title="Reference">Reference</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration">Migration</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/team" title="Team">Team</a></li></ul></aio-top-menu><aio-search-box class="search-container"><input aria-label="search" placeholder="Search" type="search"></aio-search-box><div class="toolbar-external-icons-container"><a href="https://github.com/ReactiveX/rxjs" target="_blank" title="GitHub"><img alt="View on GitHub" src="./RxJS_files/github-icon.svg"></a></div></mat-toolbar-row></mat-toolbar><!----><mat-sidenav-container class="sidenav-container mat-drawer-container mat-sidenav-container mat-drawer-transition"><!----><div class="mat-drawer-backdrop ng-star-inserted"></div><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><mat-sidenav class="sidenav mat-drawer mat-sidenav ng-tns-c6-1 ng-trigger ng-trigger-transform mat-drawer-side ng-star-inserted" tabindex="-1" style="transform: none; visibility: visible;"><div class="mat-drawer-inner-container"><!----><aio-nav-menu><!----><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><a class="vertical-menu-item heading level-1 expanded selected ng-star-inserted" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="RxJS Overview"> Overview <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></a><!----><div class="heading-children level-1 expanded selected"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observable" title="Observables."> Observables </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observer" title="Observer."> Observer </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 expanded selected" href="https://rxjs-dev.firebaseapp.com/guide/operators" title="Operators."> Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/subscription" title="Subscription."> Subscription </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/subject" title="Subjects."> Subjects </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/scheduler" title="Scheduler."> Scheduler </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-2 collapsed ng-star-inserted" type="button" title="Testing." aria-pressed="false"> Testing <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-2 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/marble-testing" title="Marble Testing."> Marble Testing </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/internal-marble-tests" title="Contribute tests to RxJS."> Contribute tests to RxJS </a></div><!----></aio-nav-item></div></div></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/installation" title="Installation"> Installation </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/api" title="RxJS Reference"> Reference </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/operator-decision-tree" title="Operator Decision Tree"> Operator Decision Tree </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-1 collapsed ng-star-inserted" type="button" title="About Version 6." aria-pressed="false"> About Version 6 <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-1 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration."> Migration </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/pipeable-operators" title="Pipeable Operators."> Pipeable Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/api/deprecations" title="List of Deprecations"> Deprecations </a></div><!----></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/resources" title="External Resources"> External Resources </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/code-of-conduct" title="Code of Conduct"> Code of Conduct </a></div><!----></aio-nav-item></aio-nav-menu></div></mat-sidenav><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><!----><mat-sidenav-content cdkscrollable="" class="mat-drawer-content mat-sidenav-content ng-star-inserted" style="margin-left: 260px;"><section class="sidenav-content" role="main" id="guide-operators"><aio-mode-banner><!----></aio-mode-banner><aio-doc-viewer class=""><div style="opacity: 1;">
+<div class="content">
+<p>RxJS is mostly useful for its <em>operators</em>, even though the Observable is the foundation. Operators are the essential pieces that allow complex asynchronous code to be easily composed in a declarative manner.</p>
+<h2>What are operators?</h2>
+<p>Operators are <strong>functions</strong>. There are two kinds of operators:</p>
+<p><strong>Pipeable Operators</strong> are the kind that can be piped to Observables  using the syntax <code>observableInstance.pipe(operator())</code>. These  include, <a href="https://rxjs-dev.firebaseapp.com/api/operators/filter"><code>filter(...)</code></a>,  and  <a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeMap"><code>mergeMap(...)</code></a>. When called, they do not <em>change</em> the existing Observable instance. Instead, they return a <em>new</em> Observable, whose subscription logic is based on the first Observable.</p>
+<p><span class="informal">A Pipeable Operator is a function that takes an Observable as its input and returns another Observable. It is a pure operation: the previous Observable stays unmodified.</span></p>
+<p>A Pipeable Operator is essentially a pure function which takes one Observable as input and generates another Observable as output. Subscribing to the output Observable will also subscribe to the input Observable.</p>
+<p><strong>Creation Operators</strong> are the other kind of operator, which can be called as standalone functions to create a new Observable. For example: <code>of(1, 2, 3)</code> creates an observable that will emit 1, 2, and 3, one right after another. Creation operators will be discussed in more detail in a later section.</p>
+<p>For example, the operator called <a href="https://rxjs-dev.firebaseapp.com/api/operators/map"><code>map</code></a> is analogous to the Array method of the same name. Just as <code>[1, 2, 3].map(x =&gt; x * x)</code> will yield <code>[1, 4, 9]</code>, the Observable created like this:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+map(x =&gt; x * x)(of(1, 2, 3)).subscribe((v) =&gt; console.log(`value: ${v}`));
+
+// Logs:
+// value: 1 
+// value: 4
+// value: 9 
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> of </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> map </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+map</span><span class="pun">(</span><span class="pln">x </span><span class="pun">=&gt;</span><span class="pln"> x </span><span class="pun">*</span><span class="pln"> x</span><span class="pun">)(</span><span class="pln">of</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)).</span><span class="pln">subscribe</span><span class="pun">((</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">value</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`));</span><span class="pln">
+
+</span><span class="com">// Logs:</span><span class="pln">
+</span><span class="com">// value: 1 </span><span class="pln">
+</span><span class="com">// value: 4</span><span class="pln">
+</span><span class="com">// value: 9</span></code>
+    </pre></aio-code></code-example>
+<p>will emit <code>1</code>, <code>4</code>, <code>9</code>.  Another useful operator is <a href="https://rxjs-dev.firebaseapp.com/api/operators/first"><code>first</code></a>:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { of } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+first()(of(1, 2, 3)).subscribe((v) =&gt; console.log(`value: ${v}`));
+
+// Logs:
+// value: 1 
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> of </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> first </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+first</span><span class="pun">()(</span><span class="pln">of</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)).</span><span class="pln">subscribe</span><span class="pun">((</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">value</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`));</span><span class="pln">
+
+</span><span class="com">// Logs:</span><span class="pln">
+</span><span class="com">// value: 1</span></code>
+    </pre></aio-code></code-example>
+<p>Note that <code>map</code> logically must be constructed on the fly, since it must be given the mapping function to.  By contrast, <code>first</code> could be a constant, but is nonetheless constructed on the fly.  As a general practice, all operators are constructed, whether they need arguments or not.</p>
+<h2>Piping</h2>
+<p>Pipeable operators are functions, so they <em>could</em> be used like ordinary functions: <code>op()(obs)</code> — but in practice, there tend to be many of them convolved together, and quickly become unreadable: <code>op4()(op3()(op2()(op1()(obs))))</code>. For that reason, Observables have a method called <code>.pipe()</code> that accomplishes the same thing while being much easier to read:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+obs.pipe(
+  op1(),
+  op2(),
+  op3(),
+  op3(),
+)
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="pln">obs</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">
+  op1</span><span class="pun">(),</span><span class="pln">
+  op2</span><span class="pun">(),</span><span class="pln">
+  op3</span><span class="pun">(),</span><span class="pln">
+  op3</span><span class="pun">(),</span><span class="pln">
+</span><span class="pun">)</span></code>
+    </pre></aio-code></code-example>
+<p>As a stylistic matter, <code>op()(obs)</code> is never used, even if there is only one operator; <code>obs.pipe(op())</code> is universally preferred.</p>
+<h2>Creation Operators</h2>
+<p><strong>What are creation operators?</strong> Distinct from pipeable operators, creation operators are functions that can be used to create an Observable with some common predefined behavior or by joining other Observables.</p>
+<p>A typical example of a creation operator would be the <code>interval</code> function. It takes a number (not an Observable) as input argument, and produces an Observable as output:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { interval } from 'rxjs';
+
+const observable = interval(1000 /* number of milliseconds */);
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> interval </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="kwd">const</span><span class="pln"> observable </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">(</span><span class="lit">1000</span><span class="pln"> </span><span class="com">/* number of milliseconds */</span><span class="pun">);</span></code>
+    </pre></aio-code></code-example>
+<p>See the list of <a href="https://rxjs-dev.firebaseapp.com/guide/operators#creation-operators">all static creation operators here</a>.</p>
+<h2>Higher-order Observables</h2>
+<p>Observables most commonly emit ordinary values like strings and numbers, but surprisingly often, it is necessary to handle Observables <em>of</em> Observables, so-called higher-order Observables.  For example, imagine you had an Observable emitting strings that were the URLs of files you wanted to see.  The code might look like this:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+const fileObservable = urlObservable.pipe(
+   map(url =&gt; http.get(url)),
+);
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">const</span><span class="pln"> fileObservable </span><span class="pun">=</span><span class="pln"> urlObservable</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">
+   map</span><span class="pun">(</span><span class="pln">url </span><span class="pun">=&gt;</span><span class="pln"> http</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="pln">url</span><span class="pun">)),</span><span class="pln">
+</span><span class="pun">);</span></code>
+    </pre></aio-code></code-example>
+<p><code>http.get()</code> returns an Observable (of string or string arrays probably) for each individual URL.  Now you have an Observables <em>of</em> Observables, a higher-order Observable.</p>
+<p>But how do you work with a higher-order Observable? Typically, by <em>flattening</em>: by (somehow) converting a higher-order Observable into an ordinary Observable.  For example:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+const fileObservable = urlObservable.pipe(
+   map(url =&gt; http.get(url)),
+   concatAll(),
+);
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">const</span><span class="pln"> fileObservable </span><span class="pun">=</span><span class="pln"> urlObservable</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">
+   map</span><span class="pun">(</span><span class="pln">url </span><span class="pun">=&gt;</span><span class="pln"> http</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="pln">url</span><span class="pun">)),</span><span class="pln">
+   concatAll</span><span class="pun">(),</span><span class="pln">
+</span><span class="pun">);</span></code>
+    </pre></aio-code></code-example>
+<p>The <a href="https://rxjs-dev.firebaseapp.com/api/operators/concatAll"><code>concatAll()</code></a> operator subscribes to each "inner" Observable that comes out of the "outer" Observable, and copies all the emitted values until that Observable completes, and goes on to the next one.  All of the values are in that way concatenated.  Other useful flattening operators (called <a href="https://rxjs-dev.firebaseapp.com/guide/operators#join-operators"><em>join operators</em></a>) are</p>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeAll"><code>mergeAll()</code></a> — subscribes to each inner Observable as it arrives, then emits each value as it arrives</li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/switchAll"><code>switchAll()</code></a> — subscribes to the first inner Observable when it arrives, and emits each value as it arrives, but when the next inner Observable arrives, unsubscribes to the previous one, and subscribes to the new one.</li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/exhaust"><code>exhaust()</code></a> — subscribes to the first inner Observable when it arrives, and emits each value as it arrives, discarding all newly arriving inner Observables until that first one completes, then waits for the next inner Observable.</li>
+</ul>
+<p>Just as many array library combine <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map()</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"><code>flat()</code></a> (or <code>flatten()</code>) into a single <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap"><code>flatMap()</code></a>, there are mapping equivalents of all the RxJS flattening operators <a href="https://rxjs-dev.firebaseapp.com/api/operators/concatMap"><code>concatMap()</code></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeMap"><code>mergeMap()</code></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/switchMap"><code>switchMap()</code></a>, and <a href="https://rxjs-dev.firebaseapp.com/api/operators/exhaustMap"><code>exhaustMap()</code></a>.</p>
+<h2>Marble diagrams</h2>
+<p>To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. <em>Marble Diagrams</em> are visual representations of how operators work, and include the input Observable(s), the operator and its parameters, and the output Observable.</p>
+<p><span class="informal">In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.</span></p>
+<p>Below you can see the anatomy of a marble diagram.</p>
+<img src="./RxJS_files/marble-diagram-anatomy.svg">
+<p>Throughout this documentation site, we extensively use marble diagrams to explain how operators work. They may be really useful in other contexts too, like on a whiteboard or even in our unit tests (as ASCII diagrams).</p>
+<h2>Categories of operators</h2>
+<p>There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, joining, multicasting, error handling, utility, etc. In the following list you will find all the operators organized in categories.</p>
+<p>For a complete overview, see the <a href="https://rxjs-dev.firebaseapp.com/api">references page</a>.</p>
+<h3>Creation Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/ajax/ajax"><code>ajax</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/bindCallback"><code>bindCallback</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/bindNodeCallback"><code>bindNodeCallback</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/defer"><code>defer</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/empty"><code>empty</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/from"><code>from</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/fromEvent"><code>fromEvent</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/fromEventPattern"><code>fromEventPattern</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/generate"><code>generate</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/interval"><code>interval</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/of"><code>of</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/range"><code>range</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/throwError"><code>throwError</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/timer"><code>timer</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/iif"><code>iif</code></a></li>
+</ul>
+<h3>Join Creation Operators</h3>
+<p>These are Observable creation operators that also have join functionality -- emitting values of multiple source Observables.</p>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/combineLatest"><code>combineLatest</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/concat"><code>concat</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/forkJoin"><code>forkJoin</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/merge"><code>merge</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/partition"><code>partition</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/race"><code>race</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/index/function/zip"><code>zip</code></a></li>
+</ul>
+<h3>Transformation Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/buffer"><code>buffer</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/bufferCount"><code>bufferCount</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/bufferTime"><code>bufferTime</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/bufferToggle"><code>bufferToggle</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/bufferWhen"><code>bufferWhen</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/concatMap"><code>concatMap</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/concatMapTo"><code>concatMapTo</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/exhaust"><code>exhaust</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/exhaustMap"><code>exhaustMap</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/expand"><code>expand</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/groupBy"><code>groupBy</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/map"><code>map</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mapTo"><code>mapTo</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeMap"><code>mergeMap</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeMapTo"><code>mergeMapTo</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeScan"><code>mergeScan</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/pairwise"><code>pairwise</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/partition"><code>partition</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/pluck"><code>pluck</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/scan"><code>scan</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/switchMap"><code>switchMap</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/switchMapTo"><code>switchMapTo</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/window"><code>window</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/windowCount"><code>windowCount</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/windowTime"><code>windowTime</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/windowToggle"><code>windowToggle</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/windowWhen"><code>windowWhen</code></a></li>
+</ul>
+<h3>Filtering Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/audit"><code>audit</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/auditTime"><code>auditTime</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/debounce"><code>debounce</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/debounceTime"><code>debounceTime</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/distinct"><code>distinct</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/class/es6/Observable.js~Observable.html#instance-method-distinctKey"><code>distinctKey</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged"><code>distinctUntilChanged</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilKeyChanged"><code>distinctUntilKeyChanged</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/elementAt"><code>elementAt</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/filter"><code>filter</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/first"><code>first</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/ignoreElements"><code>ignoreElements</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/last"><code>last</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/sample"><code>sample</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/sampleTime"><code>sampleTime</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/single"><code>single</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/skip"><code>skip</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/skipLast"><code>skipLast</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/skipUntil"><code>skipUntil</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/skipWhile"><code>skipWhile</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/take"><code>take</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/takeLast"><code>takeLast</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/takeUntil"><code>takeUntil</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/takeWhile"><code>takeWhile</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/throttle"><code>throttle</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/throttleTime"><code>throttleTime</code></a></li>
+</ul>
+<h3>Join Operators</h3>
+<p>Also see the <a href="https://rxjs-dev.firebaseapp.com/guide/operators#join-creation-operators">Join Creation Operators</a> section above.</p>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/combineAll"><code>combineAll</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/concatAll"><code>concatAll</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/exhaust"><code>exhaust</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/mergeAll"><code>mergeAll</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/startWith"><code>startWith</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/withLatestFrom"><code>withLatestFrom</code></a></li>
+</ul>
+<h3>Multicasting Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/multicast"><code>multicast</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/publish"><code>publish</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/publishBehavior"><code>publishBehavior</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/publishLast"><code>publishLast</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/publishReplay"><code>publishReplay</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/share"><code>share</code></a></li>
+</ul>
+<h3>Error Handling Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/catchError"><code>catchError</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/retry"><code>retry</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/retryWhen"><code>retryWhen</code></a></li>
+</ul>
+<h3>Utility Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/tap"><code>tap</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/delay"><code>delay</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/delayWhen"><code>delayWhen</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/dematerialize"><code>dematerialize</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/materialize"><code>materialize</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/observeOn"><code>observeOn</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/subscribeOn"><code>subscribeOn</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/timeInterval"><code>timeInterval</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/timestamp"><code>timestamp</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/timeout"><code>timeout</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/timeoutWith"><code>timeoutWith</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/toArray"><code>toArray</code></a></li>
+</ul>
+<h3>Conditional and Boolean Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/defaultIfEmpty"><code>defaultIfEmpty</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/every"><code>every</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/find"><code>find</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/findIndex"><code>findIndex</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/isEmpty"><code>isEmpty</code></a></li>
+</ul>
+<h3>Mathematical and Aggregate Operators</h3>
+<ul>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/count"><code>count</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/max"><code>max</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/min"><code>min</code></a></li>
+<li><a href="https://rxjs-dev.firebaseapp.com/api/operators/reduce"><code>reduce</code></a></li>
+</ul>
+<h2>Creating custom operators</h2>
+<h3>Use the <code>pipe()</code> function to make new operators</h3>
+<p>If there is a commonly used sequence of operators in your code, use the <code>pipe()</code> function to extract the sequence into a new operator. Even if a sequence is not that common, breaking it out into a single operator can improve readability.</p>
+<p>For example, you could make a function that discarded odd values and doubled even values like this:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { pipe } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+function discardOddDoubleEven() {
+  return pipe(
+    filter(v =&gt; ! (v % 2)),
+    map(v =&gt; v + v),
+  );
+}
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> pipe </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> filter</span><span class="pun">,</span><span class="pln"> map </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+</span><span class="kwd">function</span><span class="pln"> discardOddDoubleEven</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">return</span><span class="pln"> pipe</span><span class="pun">(</span><span class="pln">
+    filter</span><span class="pun">(</span><span class="pln">v </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">!</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v </span><span class="pun">%</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)),</span><span class="pln">
+    map</span><span class="pun">(</span><span class="pln">v </span><span class="pun">=&gt;</span><span class="pln"> v </span><span class="pun">+</span><span class="pln"> v</span><span class="pun">),</span><span class="pln">
+  </span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></code>
+    </pre></aio-code></code-example>
+<p>(The <code>pipe()</code> function is analogous to, but not the same thing as, the <code>.pipe()</code> method on an Observable.)</p>
+<h3>Creating new operators from scratch</h3>
+<p>It is more complicated, but if you have to write an operator that cannot be made from a combination of existing operators (a rare occurrance), you can write an operator from scratch using the Observable constructor, like this:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { Observable } from 'rxjs';
+
+function delay(delayInMillis) {
+  return (observable) =&gt; new Observable(observer =&gt; {
+    // this function will called each time this
+    // Observable is subscribed to.
+    const allTimerIDs = new Set();
+    const subscription = observable.subscribe({
+      next(value) {
+        const timerID = setTimeout(() =&gt; {
+          observer.next(value);
+          allTimerIDs.delete(timerID);
+        }, delayInMillis);
+        allTimerIDs.add(timerID);
+      },
+      error(err) {
+        observer.error(err);
+      },
+      complete() {
+        observer.complete();
+      }
+    });
+    // the return value is the teardown function,
+    // which will be invoked when the new
+    // Observable is unsubscribed from.
+    return () =&gt; {
+      subscription.unsubscribe();
+      allTimerIDs.forEach(timerID =&gt; {
+        clearTimeout(timerID);
+      });
+    }
+  });
+}
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">Observable</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="kwd">function</span><span class="pln"> delay</span><span class="pun">(</span><span class="pln">delayInMillis</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L3"><span class="pln">  </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">(</span><span class="pln">observable</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Observable</span><span class="pun">(</span><span class="pln">observer </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L4"><span class="pln">    </span><span class="com">// this function will called each time this</span></li><li class="L5"><span class="pln">    </span><span class="com">// Observable is subscribed to.</span></li><li class="L6"><span class="pln">    </span><span class="kwd">const</span><span class="pln"> allTimerIDs </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Set</span><span class="pun">();</span></li><li class="L7"><span class="pln">    </span><span class="kwd">const</span><span class="pln"> subscription </span><span class="pun">=</span><span class="pln"> observable</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L8"><span class="pln">      next</span><span class="pun">(</span><span class="pln">value</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L9"><span class="pln">        </span><span class="kwd">const</span><span class="pln"> timerID </span><span class="pun">=</span><span class="pln"> setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">          observer</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="pln">value</span><span class="pun">);</span></li><li class="L1"><span class="pln">          allTimerIDs</span><span class="pun">.</span><span class="kwd">delete</span><span class="pun">(</span><span class="pln">timerID</span><span class="pun">);</span></li><li class="L2"><span class="pln">        </span><span class="pun">},</span><span class="pln"> delayInMillis</span><span class="pun">);</span></li><li class="L3"><span class="pln">        allTimerIDs</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">timerID</span><span class="pun">);</span></li><li class="L4"><span class="pln">      </span><span class="pun">},</span></li><li class="L5"><span class="pln">      error</span><span class="pun">(</span><span class="pln">err</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">        observer</span><span class="pun">.</span><span class="pln">error</span><span class="pun">(</span><span class="pln">err</span><span class="pun">);</span></li><li class="L7"><span class="pln">      </span><span class="pun">},</span></li><li class="L8"><span class="pln">      complete</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></li><li class="L9"><span class="pln">        observer</span><span class="pun">.</span><span class="pln">complete</span><span class="pun">();</span></li><li class="L0"><span class="pln">      </span><span class="pun">}</span></li><li class="L1"><span class="pln">    </span><span class="pun">});</span></li><li class="L2"><span class="pln">    </span><span class="com">// the return value is the teardown function,</span></li><li class="L3"><span class="pln">    </span><span class="com">// which will be invoked when the new</span></li><li class="L4"><span class="pln">    </span><span class="com">// Observable is unsubscribed from.</span></li><li class="L5"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">      subscription</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span></li><li class="L7"><span class="pln">      allTimerIDs</span><span class="pun">.</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">timerID </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L8"><span class="pln">        clearTimeout</span><span class="pun">(</span><span class="pln">timerID</span><span class="pun">);</span></li><li class="L9"><span class="pln">      </span><span class="pun">});</span></li><li class="L0"><span class="pln">    </span><span class="pun">}</span></li><li class="L1"><span class="pln">  </span><span class="pun">});</span></li><li class="L2"><span class="pun">}</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>Note that you must</p>
+<ol>
+<li>implement all three Observer functions, <code>next()</code>, <code>error()</code>, and <code>complete()</code> when subscribing to the input Observable.</li>
+<li>implement a "teardown" function that cleans up when the Observable completes (in this case by unsubscribing and clearing any pending timeouts).</li>
+<li>return that teardown function from the function passed to the Observable constructor.</li>
+</ol>
+<p>Of course, this is only an example; the <code>delay()</code> operator <a href="https://rxjs-dev.firebaseapp.com/api/operators/delay">already exists</a>.</p>
+
+</div>
+<!-- links to this doc:
+-->
+<!-- links from this doc:
+ - ../class/es6/Observable.js~Observable.html#instance-method-distinctKey
+ - /api
+ - /api/ajax/ajax
+ - /api/index/function/bindCallback
+ - /api/index/function/bindNodeCallback
+ - /api/index/function/combineLatest
+ - /api/index/function/concat
+ - /api/index/function/defer
+ - /api/index/function/empty
+ - /api/index/function/forkJoin
+ - /api/index/function/from
+ - /api/index/function/fromEvent
+ - /api/index/function/fromEventPattern
+ - /api/index/function/generate
+ - /api/index/function/iif
+ - /api/index/function/interval
+ - /api/index/function/merge
+ - /api/index/function/of
+ - /api/index/function/partition
+ - /api/index/function/race
+ - /api/index/function/range
+ - /api/index/function/throwError
+ - /api/index/function/timer
+ - /api/index/function/zip
+ - /api/operators/audit
+ - /api/operators/auditTime
+ - /api/operators/buffer
+ - /api/operators/bufferCount
+ - /api/operators/bufferTime
+ - /api/operators/bufferToggle
+ - /api/operators/bufferWhen
+ - /api/operators/catchError
+ - /api/operators/combineAll
+ - /api/operators/concatAll
+ - /api/operators/concatMap
+ - /api/operators/concatMapTo
+ - /api/operators/count
+ - /api/operators/debounce
+ - /api/operators/debounceTime
+ - /api/operators/defaultIfEmpty
+ - /api/operators/delay
+ - /api/operators/delayWhen
+ - /api/operators/dematerialize
+ - /api/operators/distinct
+ - /api/operators/distinctUntilChanged
+ - /api/operators/distinctUntilKeyChanged
+ - /api/operators/elementAt
+ - /api/operators/every
+ - /api/operators/exhaust
+ - /api/operators/exhaustMap
+ - /api/operators/expand
+ - /api/operators/filter
+ - /api/operators/find
+ - /api/operators/findIndex
+ - /api/operators/first
+ - /api/operators/groupBy
+ - /api/operators/ignoreElements
+ - /api/operators/isEmpty
+ - /api/operators/last
+ - /api/operators/map
+ - /api/operators/mapTo
+ - /api/operators/materialize
+ - /api/operators/max
+ - /api/operators/mergeAll
+ - /api/operators/mergeMap
+ - /api/operators/mergeMapTo
+ - /api/operators/mergeScan
+ - /api/operators/min
+ - /api/operators/multicast
+ - /api/operators/observeOn
+ - /api/operators/pairwise
+ - /api/operators/partition
+ - /api/operators/pluck
+ - /api/operators/publish
+ - /api/operators/publishBehavior
+ - /api/operators/publishLast
+ - /api/operators/publishReplay
+ - /api/operators/reduce
+ - /api/operators/retry
+ - /api/operators/retryWhen
+ - /api/operators/sample
+ - /api/operators/sampleTime
+ - /api/operators/scan
+ - /api/operators/share
+ - /api/operators/single
+ - /api/operators/skip
+ - /api/operators/skipLast
+ - /api/operators/skipUntil
+ - /api/operators/skipWhile
+ - /api/operators/startWith
+ - /api/operators/subscribeOn
+ - /api/operators/switchAll
+ - /api/operators/switchMap
+ - /api/operators/switchMapTo
+ - /api/operators/take
+ - /api/operators/takeLast
+ - /api/operators/takeUntil
+ - /api/operators/takeWhile
+ - /api/operators/tap
+ - /api/operators/throttle
+ - /api/operators/throttleTime
+ - /api/operators/timeInterval
+ - /api/operators/timeout
+ - /api/operators/timeoutWith
+ - /api/operators/timestamp
+ - /api/operators/toArray
+ - /api/operators/window
+ - /api/operators/windowCount
+ - /api/operators/windowTime
+ - /api/operators/windowToggle
+ - /api/operators/windowWhen
+ - /api/operators/withLatestFrom
+ - guide/operators#creation-operators
+ - guide/operators#join-creation-operators
+ - guide/operators#join-operators
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+--></div></aio-doc-viewer><aio-dt><!----></aio-dt></section></mat-sidenav-content></mat-sidenav-container><!----></aio-shell>
+
+  <noscript>
+    <div class="background-sky hero"></div>
+    <section id="intro">
+      <div class="hero-logo">
+        <img src="assets/images/favicons/favicon-192x192.png" width="250" height="250" alt="RxJS logo">
+      </div>
+      <div class="headline-container">
+        <h2 class="hero-headline">RxJS</h2>
+        <span class="hero-subheadline">Reactive Extensions Library for JavaScript</span>
+      </div>
+    </section>
+    <h2 style="color: red; text-align: center;">
+      <b><i>This website requires JavaScript.</i></b>
+    </h2>
+  </noscript>
+  <script src="./RxJS_files/rxjs.umd.min.js.download" async=""></script>
+  <script src="./RxJS_files/devtools-welcome.js.download"></script>
+<script src="./RxJS_files/runtime-es2015.0f4e217eb07993c03e55.js.download" type="module"></script><script src="./RxJS_files/polyfills-es2015.6f82c5b100e7eb2e837a.js.download" type="module"></script><script src="./RxJS_files/runtime-es5.81550ebf6333e570f677.js.download" nomodule=""></script><script src="./RxJS_files/polyfills-es5.141dc20dd7f1b2d25976.js.download" nomodule=""></script><script src="./RxJS_files/main-es2015.7199f632fe5a9a1ccbcb.js.download" type="module"></script><script src="./RxJS_files/main-es5.598fd983caf0db9756f2.js.download" nomodule=""></script>
+
+<div class="cdk-live-announcer-element cdk-visually-hidden" aria-atomic="true" aria-live="polite"></div></body></html>

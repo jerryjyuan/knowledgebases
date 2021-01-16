@@ -1,0 +1,147 @@
+
+
+Dev Factory:
+	JFrog/Artifactory: Repositories
+		PROD
+		NP
+	==>Similar to many companies' other maven repositories OR NPM repositories, + many other repos
+
+==>Web Portal:
+	NP:	https://xxxrepo/asrtifactory/webapp: login: use: AD - NP login
+		==>NP Env: used for DEV processes etc.
+		==>Use: Central-PROD-REPO/Central-NPM-Repo: for development needs
+	PROD: ...
+		==>PROD Env: ... ==>For app prod running?
+
+==>Tool
+	Repository:
+		==>Serve as many scenarios: maven, npm, etc.
+	
+	set default registry
+		npm config set registry https://registry-url/api/npm/<REPO-NAME>
+	set default registry: scoped packages
+		npm config set @<SCOPE>:registry https://registry-url/api/npm/<REPO-NAME>
+	
+	Open Windows CLI:
+		1) npm login
+		2) npm basic authentication:
+			.npmrc:
+				_auth=<API-KEY>
+				==>This will be the token generated for the selected repository as default repository
+				==>npm will check this line and use it to login to the default repository (without the need to run: npm login)
+				==>for scoped registry: add: @<SCOPE>:registry=https:registry_url
+	
+	Install: default repo:
+		npm install pkg
+		OR: npm install pkg --registry https://registry-url/api/npm/<REPO-NAME>
+	
+	NodeJS:
+		Backbone JS lib: like Java JDK APIs
+		==>What node command connections to npm commands?
+	NPM:
+		Installed globally into nodejs location, or independently installed on its own...
+		==>It will use: <user-home>/.npmrc as init script run:
+			.npmrc:
+				==>can have many configurations as long as npm commands need
+				==>These configurations can be enabled based on npm CLI commands syntaxes or options/arguments
+		==>node_modules: also used by npm
+		==>NPM commands connect to ng commands via: package.json
+	
+==>Search:
+	==>You can search any tool + repo + version: such as @angular/cli 8.x
+
+	
+
+
+
+
+==>JFrog Artifactory and Angular App Development:
+
+	==>Env Setup
+	
+	==>Local/Windows/Laptop Env Setup and Enabling:
+		
+		==>Connect to JFrog:
+			==>Use: .npmrc
+			==>CLI
+			
+			==>This will not go to internet: npmjs registry to look for artifacts
+			
+		==>JFrog: test connection
+			==>Method 1:	==>Run one single npm install: so if the install is successful, then it proves: the JFrog connection is enabled
+								npm install express -dd
+								==>Show: "npm info ok."
+							==>Or: npm install express ==>Has special meaning to show the connection is successful? - Seems like special: TBD
+
+			==>Internal JFrog: no proxy needed
+			
+				npm config delete proxy -g
+				npm config delete https-proxy -g
+			
+			==>Internet: need proxy?
+			
+			
+			
+		==>
+
+
+		==>Stage: Create New Apps and Build:
+		
+		==>Stage: Enabling Processes:
+					==>Enable SASS:	binding.mode
+					
+					==>Enable core packages
+					==>Enable 2nd packages
+					
+					https://www.npmjs.con/browse/star
+					
+					npm install -g typescript ?
+		
+		==>Stage: Remove Dev's Concerns:
+					==>
+					==>
+		
+		==>Stage: Dev
+		
+		==>Stage: ...
+		
+
+		==>Stage: Publish/Deploy:
+			==>Publish to JFrog from local builds
+			
+			==>
+
+
+	Repository:
+		==>Serve as many scenarios: maven, npm, etc.
+	
+	set default registry
+		npm config set registry https://registry-url/api/npm/<REPO-NAME>
+	set default registry: scoped packages
+		npm config set @<SCOPE>:registry https://registry-url/api/npm/<REPO-NAME>
+	
+	Open Windows CLI:
+		1) npm login
+		2) npm basic authentication:
+			.npmrc:
+				_auth=<API-KEY>
+				==>This will be the token generated for the selected repository as default repository
+				==>npm will check this line and use it to login to the default repository (without the need to run: npm login)
+				==>for scoped registry: add: @<SCOPE>:registry=https:registry_url
+	
+	Install: default repo:
+		npm install pkg
+		OR: npm install pkg --registry https://registry-url/api/npm/<REPO-NAME>
+	
+	NodeJS:
+		Backbone JS lib: like Java JDK APIs
+		==>What node command connections to npm commands?
+	NPM:
+		Installed globally into nodejs location, or independently installed on its own...
+		==>It will use: <user-home>/.npmrc as init script run:
+			.npmrc:
+				==>can have many configurations as long as npm commands need
+				==>These configurations can be enabled based on npm CLI commands syntaxes or options/arguments
+		==>node_modules: also used by npm
+		==>NPM commands connect to ng commands via: package.json
+	

@@ -1,0 +1,53 @@
+
+
+==>RMT: 
+
+==>angular-google-maps: component AGM:
+	==>Production: Obtain a google MAP API key
+	==>AgmCoreModule
+	(1) https://angular-maps.com/
+		https://stackblitz.com/edit/angular-google-maps-demo
+	(2) https://www.digitalocean.com/community/tutorials/angular-angular-google-maps
+	(3) https://medium.com/@kheronn.machado/maps-angular7-en-3a800490fdec
+	(4) https://blog.ng-book.com/angular-and-google-maps-a-tutorial/
+	(5) https://dev.to/devpato/setup-google-maps-with-agm-in-angular-app-33em
+
+==>Example 3: GMap APIs:
+	https://medium.com/@balramchavan/integrating-google-maps-in-angular-5-ca5f68009f29
+	Source Repo: https://github.com/ultrasonicsoft/googlemaps-angular6
+	npm install --save @types/googlemaps
+	index.html:
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+	Google Map API Key:
+		`https://developers.google.com/maps/documentation/javascript/get-api-key`. If not, after free usage, Google Map will start showing watermark.
+	html template syntax:
+		<div #gmap style="width:100%;height:400px"></div>
+	
+	app.component.html:
+		import { } from '@types/googlemaps';
+	
+		Access <div #gmap>: gmapElement is a reference to <div #gmap> inside app.component.html file. ViewChild directive creates a direct link between <div> element and a gmapElement member variable.
+	
+		By default Google Map control shall render map as well as have few controls for changing zoom, full screen etc. You can access native Google Maps API via Angular
+		
+		e.preventDefault() function call. It is to avoid refreshing complete page on form submit
+		
+==>Example 4:	Maps JavaScript API + Google MAP JS APIs
+	https://morioh.com/p/11d933ad6801
+	==>Maps JavaScript API:
+		https://morioh.com/topic/google-maps
+	==>Google Maps JS:
+		https://maps.googleapis.com/maps/api/js?key=AIzaSyDRmqZ-1VD-DbsccElMGtMtlRz9FndbPB4&amp;callback=initMap
+		
+	==>	
+		Access <div #mapRef>: mapElement is a reference to <div #mapRef> inside app.component.html file. 
+		ViewChild directive creates a direct link between element and a mapElement member variable.
+		
+		@ViewChild('mapRef', {static: true }) mapElement: ElementRef;
+		
+==>Example 5: 
+	APIs: https://developers.google.com/maps/documentation/javascript/reference/info-window
+	Examples:
+		(1) https://timdeschryver.dev/blog/google-maps-as-an-angular-component
+
+		

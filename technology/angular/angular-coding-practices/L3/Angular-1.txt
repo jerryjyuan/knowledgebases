@@ -1,0 +1,228 @@
+
+==========================================================
+Angular:
+
+==>Angular Certification:
+	==>Below is the curated list of websites who provide Angular certification Training:
+	https://www.dotnettricks.com/learn/angular/is-there-any-certification-for-angular
+
+	DotNetTricks
+
+	Edureka
+
+	Simplilearn
+
+	Vskills
+
+	Edunextgen
+
+	Zeolearn
+
+==>Angular Training:
+	Free Training:
+		DotNetTricks
+		W3School
+		Edx
+		Codecademy
+		Lynda
+
+	Paid Training:
+		Udemy
+		Udacity
+		medium.com
+		angulartraining
+			https://blog.angulartraining.com/why-i-started-an-angular-certification-exam-f131a9e446ed
+			https://www.angulartraining.com/angular-certification.html
+	
+	https://www.unitedstateszipcodes.org/
+	https://www.zipmap.net/California.htm
+	https://www.unitedstateszipcodes.org/printable-zip-code-maps/
+		https://www.unitedstateszipcodes.org/maps/ohio-zip-code-map.png
+	
+==>Current Focuses:
+	==>Apps: more example apps
+			 ==>Real Apps:
+				Enterprise Apps:
+					1) Systems/Servers
+					2) Infrastructures
+					3) Corporate Jars/Frameworks
+					4) Many Components
+					5) Very sophisticated business models and flows: lead to 5000-10000 code lines in some classes
+					6) Enterprise apps: those functions are enabled by sophisticated business flows and models: which are powered by 5000 code lines in some classes
+					7) Small parts of the enterprise apps can be resembled and practiced by POC apps
+			 ==>POC Apps: good enough on laptop / self-apps
+			 ==>Use some examples to resemble some design and code modules
+			 ==>
+	==>MD Practices
+
+
+- Take JS and NodeJS as the new web front-runner
+- Add various front-runners:
+	OOP
+	JS/HTML
+	TS
+	Java/PHP
+	Swift
+	...
+- Simplified Code
+
+
+Playgrounds:
+	- https://stackblitz.com/edit/angular-material-playground
+	- https://codepen.io/kkasaei/pen/EPJdRq
+	- Angular Playground:
+		https://angularplayground.it/
+	- Angular CLI: Playground:
+		1) Angular Playground – Developing and Running Components in a Sandbox
+		   ng add angular-playground
+			https://blog.codewithdan.com/angular-playground-developing-and-running-components-in-a-sandbox/
+	- Jumpstarter App:
+		https://angularplayground.it/	===>Stage 1->2->5
+	
+Top Tools:
+	https://blog.bitsrc.io/my-top-favorite-tools-for-angular-developers-c2ed96397f6b
+	
+
+Schematics:
+		==>Similar to: templates, packages, libs, modules, ...
+		==>Similar to XMLSchema
+		
+		==>ng g component ...: one type of basic schematics
+		==>MD is: another schematics scenarios
+		
+		==>
+		
+		Schematics: similar to another handy tool to "ng add xxx"
+		
+		Component schematics
+	
+	Concepts:
+		==>No.1: Template or "Part"
+		==>No.2: Tiny POC...
+		==>...
+		==>Core: ng generate: how many types of generated parts can be:
+					usage: ng generate <schematic> [options]
+					arguments:
+					  <schematic>:
+						The schematic or collection:schematic to generate.
+			Available Schematics:
+			  1) Collection "@schematics/angular" (default):
+				appShell
+				application
+				class
+				component: one type of "Schematics"
+					Example 1: ng g component cdk/cdk-drag-and-drop --module app.module
+							   ng g @schematics/angular:component cdk/cdk-drag-and-drop1 --module app.module
+								==>Generate mini POC for this component
+				directive
+				enum
+				guard
+				interceptor
+				interface
+				library
+				module
+				pipe
+				service
+				serviceWorker
+				webWorker
+			2) @angular/material:
+				Example 1: ng generate @angular/material:tree <component-name>
+			3) @angular/cdk: another Collection
+				Example 1:	ng g @angular/cdk:drag-drop md-schematics/mds-drag-and-drop --module app.module
+								==>Generate mini POC for this CDK "drag-drop"
+	
+==========================================================
+For each section of the apps:
+	- There should be some official document website:
+		TS:
+			https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html
+		Angular Versions Update
+
+
+==========================================================
+Angular Apps/Dev/Coding:
+
+- Best utilize Angular-APIs
+	===>Example 1: Directive to decorate an HTML selector: OnChanges API: ngOnChanges()
+	===>
+- Best utilize Angular Annotations
+
+- 
+
+==========================================================
+Interceptor:
+
+	- Struts
+	- Servlet - Filter
+	- Java Spring AOP: cross modules
+	- Angular: interceptor:
+		- interceptor chains
+		- event handlers
+		- event stream
+	
+	
+Usage:
+	- Angular APIs:
+		- Do similar coding like Struts Interceptors and Servlet Filtering
+		- Similar logic
+		===>Modules/EventHandlers/
+		===>Bypassing interceptors: HttpBackend module and APIs
+	- Enable better processing of the requests via customized interceptors
+	- Handle multiple events via interceptors
+	- Conduct preprocessing functionalities:
+		- like adding headers or process headers, etc.
+		- Enable logging: like AOP
+	- Help with Observables with multiple values
+	- Retrieve the URL prefix:
+		One solution is to provide the full URL to your application on the server, and write an interceptor that can retrieve this value and prepend it to the request URL.
+	- 		
+
+
+
+
+==========================================================
+
+
+==========================================================
+UI - Custom Directives: SIMPLE!
+
+	https://blog.angulartraining.com/tutorial-how-to-create-your-own-angular-directive-3532d7f31fab
+	https://malcoded.com/posts/angular-custom-directives/
+	https://www.sitepoint.com/practical-guide-angular-directives/
+	
+	
+- Angular Directives:
+	===>Directive: manage and deorate selectors/elements of HTML DOM
+	===>Reasons:
+		- Reason 1: Overdo - if using a component: due to creation of a new selector/tag
+		- Reason 2: Universal usage for all related components
+		- 
+- 
+
+
+==========================================================
+Material Design - UI:
+
+- Resources:
+	https://getmdl.io/started/
+	https://www.sitepoint.com/angular-material-design-components/
+	https://www.smashingmagazine.com/2018/10/news-application-with-angular-and-material-design/
+
+- MD:
+	Components
+	Directives:
+		- If you know how to create custom Directives - it will help with MD directive tags
+	? - Decorator?
+	? - Pipes?
+	
+	===>Component-HTML-template syntaxes: use MD tags
+		===>Browser-HTML: view source: still show MD tags
+			===>The real code are in .js files
+
+
+	===>All the code flows:
+		===>It still process .js files for each Angular tags and MD tags
+
+
+
+==========================================================

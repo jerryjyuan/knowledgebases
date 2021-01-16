@@ -1,0 +1,58 @@
+
+==========================================================
+Bootstrap:
+
+==========================================================
+How to Do Bootstrap?
+
+	==>Open documentations:
+		==>https://getbootstrap.com/docs/4.5/getting-started/introduction/
+		==>Search: works very well
+	==>RWD: Almost all bootstrap tags are falling into definition: RWD
+	==>No.1: Layout is No.1 ...: this is the key and important starting points...
+		==>Choose GRID, FLEX - how about other like flow?
+			==>BootStrap: Grid/Flex:
+				==>...
+				https://getbootstrap.com/docs/4.5/getting-started/introduction/
+				https://www.w3schools.com/bootstrap4/bootstrap_flex.asp
+			==>CSS Flexbox Layout
+				https://www.w3schools.com/html/html_layout.asp
+			==>CSS Layout - float and clear
+				https://www.w3schools.com/css/css_float.asp
+		==>Use col-x: super useful: replacing conventional <table>
+	==>No.2: Sections: inside container
+	==>No.3/4: GRID:
+				==>Enable table: why: => Enable parts/data display: table is the most common ways
+				==>In Bootstrap: it is using: Row + Col-xxx
+	===================>The above all belong to "layout" design: can enable: 4 tiers: Container + Section + Row + Col-xxx			
+						==>Then you can add secondary/tertiary styling into the above 4-tiers: see above examples:
+							==>These secondary/tertiary styling: can almost be very flexible to choose from the bootstrap document items
+						==>If the secondary/tertiary styling are sufficient: you add your own customized styling into it...
+	==>No.5: Contents: the real meat
+		==>Contents can be expressed and enabled using several main tags below:
+			<a>
+			<button>..., ...
+			...
+		==>Contents Design:
+			==>Still following into the above Methods 1-4, etc.
+			==>Typical Styling: enable category:
+				==>Fonting
+				==>Backgrounding
+				==>Coloring
+				==>href...
+				==============>You can use all kinds of Bootstrap tags to do these styling
+				==>Also you can add your own "styling" to the contents styling as part of the stacking
+
+
+
+
+
+
+
+	==>Pick up Bootstrap or Material Design?
+		==>Point 1: good comparison:
+					https://codinglatte.com/posts/angular/angular-material-and-bootstrap-framework-components-comparison/
+		==>Point 2: ...
+		==>Point 3: Can enable both in the same app...: these can work together in the same app, and pages, ...
+
+==========================================================

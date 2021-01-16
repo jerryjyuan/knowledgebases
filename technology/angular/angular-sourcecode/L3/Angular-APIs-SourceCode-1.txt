@@ -1,0 +1,89 @@
+
+==============================================
+
+
+
+
+==============================================
+What is UMD in angular?
+The point of UMD is to serve as a universal bundle that supports most common module formats (CommonJS, AMD, global state). In the case of Angular the UMDs are also pure ES5 which makes them runnable in all browsers. The typical use case of UMDs in Angular is unit testing or JiT builds during development.
+
+Universal Module Definition
+UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
+
+Asynchronous module definition (AMD) is a specification for the programming language JavaScript. It defines an application programming interface (API) that defines code modules and their dependencies, and loads them asynchronously if desired.
+
+==============================================
+https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm
+https://exploringjs.com/es6/ch_modules.html#static-module-structure
+https://www.codementor.io/@stevebelovarich/use-rollup-to-build-angular-2-web-apps-du1089cq5
+https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/
+https://dev.to/bennypowers/you-should-be-using-esm-kn3
+
+SystemJS is a module loader that can import modules at run time in any of the popular formats used today (CommonJS, UMD, AMD, ES6). It is built on top of the ES6 module loader polyfill and is smart enough to detect the format being used and handle it appropriately. ... You configure these things within System.
+
+In fact, angular2-all.umd.js must be used if you want to implement Angular2 applications with ES5.
+
+angular2.js is the core module to implement Angular2 applications with ES6 or TypeScript. This file must be used along with a module manager like SystemJS.
+
+For ES5 one should use UMD modules: angular2-all.umd.js and Rx.umd.js. For Typescript or ES6, use angular2.js and Rx.js (they also require system.js).
+
+ESM
+ESM stands for ES Modules. It is Javascript's proposal to implement a standard module system.
+
+Summary
+ESM is the best module format thanks to its simple syntax, async nature, and tree-shakeability.
+UMD works everywhere and usually used as a fallback in case ESM does not work
+CJS is synchronous and good for back end.
+AMD is asynchronous and good for front end.
+
+ECMAScript 6 modules are less flexible and force you to be static.
+
+ESM2015 is a pure ES2015 (ES6) distribution of Angular. ESM5 is a hybrid format consisting mostly of regular ES5 JavaScript, but with import/export statements added as the only ES2015 feature.
+
+Rollup is a module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application. It uses the new standardized format for code modules included in the ES6 revision of JavaScript, instead of previous idiosyncratic solutions such as CommonJS and AMD.
+
+Tools like Browserify and Webpack have been fairly popular among UI engineers to bundle their source code. Rollup is fairly new—and honestly a breath of fresh air after moving my Angular 2 source code from Alpha to RC. Along the way I tried every option to make a stable development and production environment from using Gulp, SystemJS, JSPM, Angular CLI and then Webpack, and now Rollup.
+
+esm: A Simple Solution
+esm is an excellent package by Microsoft developer John-David Dalton of lodash fame, et al. It's a module loader that transforms es modules at run time instead of transpiling them.
+
+FESM. Meaning: Flattened ECMAScript Module. This is a very important update that you will likely never notice. Angular v4 ships flattened versions of modules in the ECMAScript Module format.
+
+A flat ES Module is a bundled ES module that only exports the public API.
+
+*.d.ts files are used to provide typescript type information about a module that's written in JavaScript, for example underscore / lodash / aws-sdk.
+
+This will allow you to use the javascript modules without the need to convert them to ts without getting any type error on you code.
+
+for example if you have a folder myAwesomeLib, with index.js and index.d.ts files
+
+on your code you will be able to import the code with
+
+import { SomeMethod } from './myAwesomeLib';
+or
+
+import { SomeMethod } from './myAwesomeLib/index';
+your typescript will rely on the .d.ts file to find the correct types for the SomeMethod
+
+What is index D TS file?
+d. ts files are used to provide typescript type information about a module that's written in JavaScript, for example underscore / lodash / aws-sdk. This will allow you to use the javascript modules without the need to convert them to ts without getting any type error on you code.Jul 25, 2018
+
+What is the main usage of index.d.ts in Typescript? - Stack Overflowstackoverflow.com › questions › what-is-the-main-usage-...
+Search for: What is index D TS file?
+What is index TS used for?
+A barrel is the name for an index. ts file. A barrel is a way to roll-up exports from several modules into a single module. Now a consumer can import what it needs from the barrel.
+
+How do I create a D TS file?
+ts files in your project, you will need to do up-to four steps:
+Add TypeScript to your dev dependencies.
+Add a tsconfig. json to configure TypeScript.
+Run the TypeScript compiler to generate the corresponding d. ts files for JS files.
+(optional) Edit your package. json to reference the types.
+
+What is barrel in angular?
+A barrel, in Angular, is simply a module file which provides a centralized place for exporting components, interfaces, services etc. In turn, in your main module file, you make all imports from that single source that you defined in the barrel file.
+
+A barrel is a way to rollup exports from several modules into a single convenient module. The barrel itself is a module file that re-exports selected exports of other modules.
+
+==============================================

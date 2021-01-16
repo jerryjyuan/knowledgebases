@@ -1,0 +1,309 @@
+
+=====================================================
+
+=====================================================
+Angular - Data Flows: Type 1:	User Events
+
+	==>Component vs. User events
+
+==>It means: on a page: user does various keyboard events as input: such as: clicks
+==>Page: take it as an event and add some data into the component's method's arguments or just call some methods
+==>
+
+<AnyDOM-Selector/Element (event)="componentMethodCall(...)" ... ...>
+
+=====================================================
+Angular - Data Flows: Type 2:	Display component data to HTML page as output
+
+	==>Component vs. HTML display
+
+==>{{}} interpolation
+
+=====================================================
+Angular - Data Flows: Type 3:	Form Submit - similar to normal HTML form submissions
+
+	==>Component vs. HTML form and form control
+
+	2-way binding: ngModel
+
+==>It means: two-way binding still existing in Angular 2+ or 8+
+			 ==>Some articles said: Angule 2+ doesn't have 2-way binding any more... - not true
+			    [Baeldung]: What I mean was: no 2-way binding any more except "form control" scenarios: Like Romania with WWII and WARSAW Pact
+				[Jerry]: Then your article should be clearer..., are you also working on Angular?
+						 So: form can have it using [(ngModel)], but other scenarios like <component-selector [(ngModel)]="areaCode" ... =>Cannot do it?
+				[Baeldung]: I am actually more like Frenchman, do you think so? Welcome to Paris
+				[Jerry]:    I like Paris a lot and London, Berlin, and sometimes I like creeks a lot... crooked creeks...
+==>Required:
+	import { FormsModule } from '@angular/forms';
+	Treat it as a form and form control: but you don't need <form ...></form>
+
+<input #npa type="text" name="npa" value="" size=3 maxlength=3 class="sform" [(ngModel)]="areaCode">
+	==>This can display the component initial value and also add user entered value into the component, which is called: 2-way binding and "left/right sources"
+<button class="but_lookup" (click)="lookup()">Look Up</button>
+
+areaCode: string = '';
+==>Cannot be private: private only means inside component
+
+
+Form Control Dev Procedures:
+	Steps 1:
+		==>Setup imports
+		==>Create a form
+		==>Sync HTML and form
+		==>Submit the form
+	Steps 2:
+		==>Add validation
+		==>Controls: access/group/arrays
+		==>Custom validators / Async validators
+	Steps 3:
+		==>Functional Events: status / value changes: add functions
+		==>Setting/Patching values
+		
+		
+
+
+=====================================================
+Angular - Data Flows: Type 4:	Attribute Binding
+
+	==>Component vs. HTML Selector/element's attributes
+	
+<agm-map [latitude]="lat" [longitude]="lng">
+     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+
+==>These attributes/properties define the selector of the component: its behaviors, its configurations, etc.
+	==>Provide config through these portals to the component, so component can enable various behaviors and actions and displays
+	==>Mostly these attributes: attribue to the selector
+	==>This is one main way for 3rd party or open source component to be enabled into your HTML code
+	
+	Attribute means: attribute: decorate the selector
+	==>Type 1: existing/built-in HTML tag/selector's attributes
+	==>Type 2: This customized HTML tag/selector - which is an Angular component's selector - they have attributes too - similar to default HTML tag/selector
+	They don't need @Input
+	==>They belong to HTML's attribute concept domain
+		==>They are together with: Attribute, class, and style bindings: belong to HTML/CSS concepts: Decorate all kinds of HTML tags/selectors (built-in and component-enabled...)
+
+=====================================================
+Angular - Data Flows: Type 5:	@Input Binding:
+
+	==>Component vs. Parent Component...
+
+==>This enables: extensive capabilities for data inputs - especially from parent component to child component
+
+Use: @Input
+
+
+==>Parent: Hosting Component or ...
+==>Child:  embedded component/selector in hosting HTML code
+
+Using a 3rd Component:
+	@Input and @Output: a lot
+	
+	==>@Input passing in data: properties are right names... (attributes are characteristics or decorating selectors, ..., similar to class, or style, etc. binding)
+	
+	==>It is between components:
+		@Input() and @Output() allow Angular to share data between the parent context and child directives or components
+		
+	==>Why is this different from attribute binding?
+		==>No.1: This is "Event binding" domain
+		==>No.2: Event happening cross components...
+		==>No.3: This flow actually combines several parts of "event binding" into @Input and @Output mechnanisms
+		==>No.4: They (@Input) use similar syntax like [] - similar to attribute binding: because they run out of syntax, so have to borrower attribute binding syntax, ..., 
+					unless introduce Russian/Spanish language symbols, etc.
+					==>It is actual data passing from parent to child, but use the similar syntax - share is common in human world - so @Input makes the main difference, ...
+				 But @Output: () is part of even binding syntax, their own
+				 
+				 ==>3 Tier to understand @Output: actual 3-tier component structure: (bottom is the "default/primitive/built-in" event-component: actually a Directive: no HTML)
+							https://angular.io/guide/event-binding#custom-events-with-eventemitter
+							HTML Events:
+								https://developer.mozilla.org/en-US/docs/Web/Events
+								https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
+								==>Event Handler:
+									<element (click)=""
+									<element on-click=""
+									<element on<EventName>="..."
+										<element onClick="" ==>maybe inaccurate
+										<button onclick="handleClick()">
+									element.onclick="..."
+					1) Tier 1: just know how to define @Output in child component and use it in both parent and child html files:
+								==>Child compoent:
+									==>Child Component is like a parent component of the "default/primitive/built-in" event-component...
+										(click): is like an @Output event-name inside the internal "default/primitive/built-in" event-component
+								==>2 HTML files
+									- Child: HTML:
+										<normal-selector (Normal-Event-name) = "Child-Handler-method(DATA-passed-in-from child HTML page sections)"/>
+										==>The selector should be normal selector, if it is another component selector: too complicated: but it is possible
+										==>The event should be normal event: if it is another component @Output event-name: too complicated: but it is possible
+										(These are example of 3-tier Component: Default Event belong the default component level, can be another customized component to enable 4-tier)
+										==>The Child-Handler-method(): used to intake its HTML's DATA-passed-in-from child HTML page sections into this method
+												==>This method then assign it to its @Output() event-name (event is like a built-in EVENT class/object/instance)
+												==>Then this event will do similar as "normal event": emit to its parent-handler-method()
+													==>I am sure: the "normal event" internal code is also a "new EventEmitter<string>();"
+									- Parent HTML: see below
+								==>Parent component: a method (in html code inside 1st part as the child "selector" with 2nd-part as "@Output-event-name"
+									with 3rd part as parent's method call) call: 
+									how to save the value into its field
+									
+									<child-selector (@Output-Event-name) = "Parent-Handler-method($event-DATA-saved)"/>
+									
+									Similar to:
+									<child-selector (User-Event-name) = "Parent-Handler-method($event-DATA-saved)"/>
+									
+									1) 2nd-part as "@Output-event-name": it is indeed an EVENT
+									
+									HTML selector is also called: HTML control
+									
+					2) Tier 2: enable in-brain (brainVirtual) image and flow charts to illustrate how the data flows are done - like Angular Doc shows
+					3) Tier 3: look into @Output Angular source code to know how this internal code flow is done for passing data between components
+		
+		MD: use somewhat different way to express @Input:
+			<input matInput placeholder="Ex. Pizza" value="Sushi">
+			@Input placeholder
+			1) Point 1: Weird Form? ==>In order to: Directive that allows a native input to work inside a `MatFormField`
+			2) Point 2: @Input not using bracket...
+			Because MD's internal code: enable all these configurations on its own ways in MD...
+			
+			While Subjects are Observables, Subjects also implement an Observer interface.
+			A Subject is like an Observable, but can multicast to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners. Every Subject is an Observable.
+			==>Subject: multiple observers
+			==>Observable: for one observer
+			
+		
+		Event Binding Domains:
+			1) Example 1: 	User Events: common UI/HTML world events: click, ..., ...
+							==>From keyboard, mouse, etc.
+							==>Angular enables these common events as "primitive events" - just like Java primitive types, ...
+								==>These "normal event" internal code is also a "new EventEmitter<string>();"
+									==>So when "click": it emits to its parent component class: which is the child component of another parent component...
+			2) Example 2:	Component Events:
+							==>Parent pushed event into child compoent - see above
+			3) 
+	
+=====================================================
+Angular - Data Flows: Type 6:	Inter-component communications and data passing:
+
+==>Parent to Child:
+	3 Ways:
+		==>@Input + field
+		   (belong to: Event Binding)
+		==>@Input + Setter
+		   (belong to: Event Binding)
+		==>Init lifecycle Hook method: ngOnChanges()
+
+==>Child to Parent:
+	4 ways:
+		==>Emitter: @Output
+		==>ViewChild:
+			==>Can be used for DOM elements in addition to components (Angular components, MD components, and customized app components)
+		==>TemplateRef: Create local reference: cannot access/manipulate child component elements/members
+		==>Shared Service:
+			==>Use a Service for Parent-Child-Component Communication
+
+==>Inter-Components:
+	==>Global-API Service
+	==>Angular 10:
+		Angular 10 Component Communication: Angular 10 Message Service
+		Communicating Between Components with Observable & Subject
+		https://jasonwatmore.com/post/2020/07/06/angular-10-communicating-between-components-with-observable-subject
+		==>Observable.subscribe() and Subject.next():
+			 subscribe to new messages in any component with onMessage()
+		==>The subject next method is used to send messages to an observable which are then sent (send messages from any component with the sendMessage(message: string)) 
+			to all angular components that are subscribers (a.k.a. observers) of that observable.
+			==>clear messages from any component with the clearMessages()
+	==>Shared Services
+	
+	
+==>ViewChild:
+The following selectors are supported.
+
+Any class with the @Component or @Directive decorator
+A template reference variable as a string (e.g. query <my-component #cmp></my-component> with @ViewChild('cmp'))
+Any provider defined in the child component tree of the current component (e.g. @ViewChild(SomeService) someService: SomeService)
+Any provider defined through a string token (e.g. @ViewChild('someToken') someTokenVal: any)
+A TemplateRef (e.g. query <ng-template></ng-template> with @ViewChild(TemplateRef) template;)
+
+=====================================================
+Angular - Data Flows: Type 7:	
+
+==>Enable data fields or members to be public: it is another way to pass data:
+	==>Example 1: public members of components: available to its html template files
+==>Imports/Exports/Providers as well
+
+=====================================================
+Angular - Data Flows: Type 8:	
+
+==>App Level Service Modules:
+	==>Pass data among different components, services, and modules
+		==>Use a Service for Cross-Component Communication
+	==>
+	
+=====================================================
+Angualr - Data Flows: Type 9:
+
+==>Communicating Between Components with Observable & Subject
+	https://jasonwatmore.com/post/2019/02/07/angular-7-communicating-between-components-with-observable-subject
+	
+=====================================================
+Angular - Data Flows: Type 10:	
+
+==>App Integrations:
+
+
+=====================================================
+Angular - Data Flows: Type 11:	
+
+==>Cloud:
+
+
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================

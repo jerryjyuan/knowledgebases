@@ -1,0 +1,24 @@
+
+=========================================================== 
+App Components:
+
+- HTML template files:
+
+	===>Add normal HTML elements
+		===>Many core HTML tags could have material counterpart components
+	===>Add Material Design Components:
+		- 1) Simplify the HTML
+		- 2) Take Material components like what your OWN components you want to create to enable HTML display
+			 ===>But not for functions: function components become your app real components
+			 ===>These material components:
+			 	 1) simply the HTML
+			 	 2) also enable many UI displays
+	===>Add your application functional components
+
+- CSS style URLs:
+	===>Similar to Spring Boot, if you don't add anything, it uses the defaults or globals
+	===>Also there are 4 default themes, those defaults can enable default css for this component
+	===>You can add this component's specific styles into this file
+- 
+
+=========================================================== 

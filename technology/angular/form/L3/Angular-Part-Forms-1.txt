@@ -1,0 +1,42 @@
+
+==========================================================
+Angular Forms:
+
+- Types:
+	Many types:
+		- Model-driven
+		- Reactive-driven:	===>Reactive <-> Observable
+			- Key 1: state
+			- Key 2: observable streams: inputs
+			- Sync: use "events"/"observables"/"manage-state": to do data sync
+		- Template-driven:
+			- 
+			- Sync: use directive/etc to enable data sync...
+		- ...
+		- Dynamic
+- 
+- Natures:
+	- Nature 1:	High-level concept:
+				- Angular adds these forms and APIs: create an Angular FORM - integrated with HTML FORM
+					- APIs/...: directives/providers: enable HTML Form functions
+					- Handle: user inputs
+	- Nature 2:	Angular built-in or provided "Form" component - especially tailored for 
+		- Built-in/default "features" and usage of many existing Angular core features into these form components
+			- Enabling
+			- Enabled working associations with DOM and Common Form
+			- Enabled variables
+			- Customizations
+			- Error handling
+		- Default/built-in parts: template/elements/integrations
+
+- Pros:
+	- Time:
+		Avoid building native/time-consuming HTML native forms in Angular component/template code
+	- Reuse:
+		Using Angular Forms: can reuse them in various modules
+	- Variety:
+		Enable a variety of forms
+	- 
+
+
+==========================================================

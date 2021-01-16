@@ -1,0 +1,56 @@
+
+==========================================================
+How To Do: Angular Dev: Better:
+
+
+==>
+
+==>Use: Use "Install-Schematic":
+		ng add xxx
+
+==>Use: Use "Angular-Schematic":
+		https://material.angular.io/guide/schematics
+		==>ng g @schematics/angular:component cdk/cdk-drag-and-drop1 --module app.module
+			~== ng g component cdk/cdk-drag-and-drop1 --module app.module
+		==>All:
+				appShell
+				application
+				class
+				component
+				directive
+				enum
+				guard
+				interceptor
+				interface
+				library
+				module
+				pipe
+				service
+				serviceWorker
+				webWorker
+==>Use: Use "MaterialDesign-Schematic":
+		https://material.angular.io/guide/schematics
+		==>ng generate @angular/material:tree <component-name>
+		
+		Goals:
+			==>Goal 1: easily generate Material Design components
+			==>Treat these as mini-POCs
+			==>
+			
+		==>Styling: MD:
+		
+			https://material.angular.io/guide/theming-your-components
+			
+			
+			
+==>Use: Use "CDK-Schematic":
+		https://material.angular.io/guide/schematics
+		==>ng g @angular/cdk:drag-drop md-schematics/mds-drag-and-drop --module app.module
+		
+		Styling:
+			https://material.angular.io/cdk/drag-drop/overview#styling
+			
+		
+==>
+
+==========================================================

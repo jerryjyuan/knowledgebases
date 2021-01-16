@@ -1,0 +1,44 @@
+
+============================================================
+FM: MissionMap/RMT:
+	==>2019/09:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+Angular App: MissionMap/RMT:
+
+	==>...
+	==>...
+
+
+
+
+============================================================
+How to build up this app?
+
+(1) Services APIs app
+(2) Angular UI app
+(3) E2E test utility
+(4) DB module
+(5) DCU Module
+
+============================================================
+==>Step 2:
+	==>Scaffolding: Assigned to Jerry
+	==>angular/cli:
+		==>package.json:
+			==>devDependencies:	==>this enables a local dev copy of AngularCLI: will override the global or non-dev one:
+				Dev:		npm install --save-dev <package-name>:	==>for dev: you can use any versions - so no need to uninstall or change global version
+				Non-Dev: 	npm install --save <package-name>
+				Global: 	npm install -g <package-name>
+				Questions: can we have multiple versions for global?
+		==>
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

@@ -1,0 +1,11 @@
+
+https://medium.com/@madhavmahesh/exporting-an-excel-file-in-angular-927756ac9857
+
+npm install file-saver — save
+npm install xlsx — save
+
+https://www.grapecity.com/spreadjs?utm_source=Adwords&utm_medium=CPC&utm_campaign=SpreadJS-Tech&utm_term=Angular%20excel&gclid=Cj0KCQjw28T8BRDbARIsAEOMBcwTIlxhWBeLtf4a4OO83NPJBOoy2dy7ULRzXX6RuyE_9Afs7PiZCt0aApNsEALw_wcB
+
+
+
+

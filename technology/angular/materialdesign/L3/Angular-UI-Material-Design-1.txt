@@ -1,0 +1,51 @@
+
+=========================================================== 
+Angular UI: Enable Material Design
+
+npm install @angular/cli
+ng add @angular/material:
+	- add angular material, CDK, animations
+
+import { MatDialog } from '@angular/material';
+
+Good Examples:
+	https://www.sitepoint.com/angular-material-design-components/
+	
+=========================================================== 
+Angular UI:
+	>=50% Angular UI Applications: Use Material Design
+
+===>Enable Angular UI app as a material design:
+	ng add...
+	Or: manually them into package.json
+	===>This is the way how Angular Material, Animations, and CDK get into the app
+	===>This is the way how Angular UI has its Animation APIs and features integrated with Material Design
+		===>Similar to @SpringBootApplication: 3 annotations together
+	
+===>Some of advanced Material Design: require dependencies:
+	hammerjs: gesture recognition
+
+===>Treat Material Design Modules: like another sub-module undernearth app-root component
+
+	app-root
+		xxx-maintenance-tool
+			create-edit
+			xxxConfiguration
+			xxxstein
+		dock
+		login
+		material-design:
+			MD Module
+			MD Components
+			MD Schematics...
+			
+			===>In this way, we can easily know how to use MD modules/components/...
+			===>How to use Material Design components - similar to how to use: xxx-yyy-configuration-table component
+			
+===>Differences between MD and CDK:
+	- MD: existing components - UI parts
+	- CDK: Dev Kit...
+		   - More like some additional or advanced components and developing components
+	- 
+
+===========================================================

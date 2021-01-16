@@ -1,0 +1,40 @@
+
+
+============================================================
+BNSF: Workflow Management:
+	==>2017/08:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+BNSF:
+	==>1) ReactJS + BNSF-Spring-Security + Maven Apps + BNSF Internal Repo:
+			==>Matt: helpful: but not very much
+			==>Holly: doing ReactJS
+			==>Michael: silly ... BNSF project manager
+			==>Barath: nice and tried to help me work on something
+			====>Issues:
+				 1) Barath did not give me some warm-up tasks to show my performance
+				 2) Siva did not help in real ways in performance or ...
+				 3) React App team: didn't give me some easier tasks to start with as a new joinee
+	==>2) Moved to another app?
+			==>Maven?
+			
+	==>3) Moved to Holly Taylor's app:
+			==>Team member was a QingDynasty's oriental girl from India
+			==>Plus another test team girl
+			==>Ms QingDynasty girl:
+				==>Work hard and ok
+				==>Equipped with Angular 2.x
+				==>Seem like a single girl that devoted to work much
+				==>Worked for Target previously
+			Again:
+				 1) Holly: did not help Jerry with some marriage with Angular ...
+				 2) Siva did not help in real ways in performance or ...
+				 3) This App team: didn't give me some easier tasks to start with as a new joinee:
+					==>Gave Jerry a task: pagination... ==>Jerry was almost getting it done...
+			
+			I started knowing Angular 2.x...
+
+============================================================
+

@@ -1,0 +1,306 @@
+
+============================================================
+Spring/Java SOAP:
+	- Spring SOAP:
+		Together with Spring Boot: enable SOAP as beans and defaults and auto-configuration...
+		Payload vs JAX-WS: QName
+		==>Self-Experiences:
+			==>Worldpay: SOAP API projects
+			==>Spring Framework: SOAP APIs/Documents and example apps
+	- Apache CXF
+		==>Self-Experiences:
+			==>Allegiant Air: Apache CXF SOAP API projects
+			==>Union Bank: Apache CXF SOAP API projects
+	- Axis 2
+		==>Self-Experiences:
+			==>Qualcomm: Axis2_1.3: SOAP API projects
+			==>Current Axis2.x: document and example apps
+	- Java JDK JAX-WS APIs:
+		==>More aggressive and combined API functions
+		==>Generate schema files from WSDL:
+			Document Style: XML document(literal): wsimport:
+				Examples: belongs to JDK bin executables:
+					  wsimport stock.wsdl -b stock.xml -b stock.xjb
+					  wsimport -d generated http://example.org/stock?wsdl
+			RPC(Encoded): wsgen ==>Generate client stub files from WSDL
+		==>Self-Experiences:
+			==>Current JDK JAX-WS APIs and many tutorials: document and example apps: including Mkyong.com, etc.
+			
+	All of the above frameworks are based on Java JDK JAX-WS while JDK JAX-WS can do it on its own.
+	==>Some frameworks have their own additional APIs, wrapper APIs, and also some additional marshallers/unmarshallers, etc.
+
+============================================================
+Questions:
+
+==>SOAP-Server and SOAP-Client: have to be in same framework implementation, right?
+	==>That is my understanding based on my previous projects
+	
+==>
+
+
+============================================================
+In Action 1:
+============================================================
+
+==>To build up a new project from scratch:
+	==>Use: Spring Boot + SOAP
+		==>Step 1:	Create scaffolding:	DONE
+			1) Remove tomcat: not sure why ==>TBD:
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web-services</artifactId>
+					<exclusions>
+						<exclusion>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-starter-tomcat</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>			
+
+			2) Add WSDL generation plugin:
+			<!-- tag::wsdl[] -->
+			<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>0.14.0</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<schemaLanguage>WSDL</schemaLanguage>
+						<generatePackage>com.example.consumingwebservice.wsdl</generatePackage>
+						<schemas>
+							<schema>
+								<url>http://localhost:8080/ws/countries.wsdl</url>
+							</schema>
+						</schemas>
+					</configuration>
+			</plugin>
+			<!-- end::wsdl[] -->
+								
+		==>Step 2:	API documents + Requirements Gathering
+		==>Step 3:	Schema jar file: contains: schema object/domain classes
+					==>Method 1: Server side provides it
+					==>Method 2: Use Spring Boot tools to create a schema jar from WSDL file...
+								 Spring SOAP: use: XsdSchema...: but mostly by beans or Spring Boot auto-config tools... see below
+								 Or: use: JAX-WS: wsimport?
+								 
+					Do we have WSDL?
+					Because the WSDL is based on created by schema classes (DefaultWsdl11Definition and XmlSchema beans, etc.)
+				        - Used for: DefaultWsdl11Definition:  create and expose WSDL:
+                                              - Get schema Java classes
+                                              - Configure operation/location/schema, etc.
+                                              - Generate/return WSDL
+                    Server Side: if it is done and serving:
+                    	1) They have both WSDL form and Java schema form
+								==>Normally as XML reader/writer: 2 players: XSD and Schema files
+								==>But on SOAP server side:  there are 3 players instead of 2 players: XSD and Schema
+									==>XSD
+									==>Schema class files
+									==>WSDL: this is needed for description of SOAP APIs
+										==>WSDL is generated from XSD: but almost the same...
+										==>Schema files can be generated from XSD OR WSDL
+										==>WSDL is like both XSD and Schema files:
+											1) SOAPUI request XML is based on WSDL (XSD as well)
+											2) ...
+                    	2) Client Side:
+                    		==>Spring WS uses Spring Framework’s OXM module, which has the Jaxb2Marshaller to serialize and deserialize XML requests
+                    		==>Spring SOAP Way: Spring SOAP can use its way to talk to Server url:
+                    			(not via: xxx?wsdl: 1) it is web browser way 2) Or: it is an old way if it is by Java code)
+                    			(right now: Spring SOAP has some plugins...)
+                    			OK, still Spring SOAP uses some similar url like: xxx?wsdl ==>like: "xxx.wsdl"
+                    				==>Like: http://localhost:8080/ws/countries.wsdl
+                    				==>This is Spring SOAP way... to mimic xxx?wsdl way
+                    			==>Via: Direct WSDL:
+                    				==>How does Spring SOAP Client directly use the direct WSDL?
+                    				https://aniweb02.peerlessnetwork.com
+                    				==>Have to login to download the WSDL?
+                    			==>Via: WSDL generation plugin:
+                    				maven-jaxb2-plugin
+										at com.sun.tools.xjc.ModelLoader.loadWSDL(ModelLoader.java:373)
+                    				==>The plugin internally does:
+                    					1) Server team/doc will provide end point like: http://localhost:8080/ws/countries.wsdl
+                    					2) Wrapper JAX-WS APIs: ...:
+                    						==>Internally it uses JAX-WS APIs and logic
+                    						==>But on the surface: it fetches these schema files into client side and create the schema package
+                    						It combines the following steps:
+                    							1) Inquire WSDL remotely like: xxx?wsdl
+                    							2) Based on the WSDL: it talks to server side with their schema files on server copy:
+                    								==>But the server side needs to be in Spring SOAP implementation
+                    								==>Because the server side needs to know these and implement them in this way
+                    							3) And then fetch them into client side: the plugin does all these internally via its APIs
+                    						==>Does this plugin do this each time when running maven builds?
+                    							==>Or it sees the files generated, so it only runs one time to generate the schema files?
+                    					3) Obtain the schema classes into its maven location for client to do integration
+                    					4) Put the generated schema classes: com.example.consumingwebservice.wsdl package
+                    						==>This is similar to a provided schema.jar file
+                    						==>Client side can directly use these schema classes in the client calls
+                    				The Generate Domain Objects Based on a WSDL section describes the WSDL generation plugin
+                    			==>And then into their schema domain files on the server side via the server url
+                    			==>And obtain the WSDL files via these schema files on the server side
+                    			==>Use the WSDL file obtained... and then...
+                    			==>Similar to JAX-WS - but use its own wrapper APIs on top of JAX-WS APIs underneath these wrapper APIs
+                    			==>
+                    		==>Can get the WSDL by: xxx?wsdl call: ==>Server side will parse this url and talks to its internal code (schema code)
+                    				==>And return a response as a WSDL file for client to check and use
+                    				So client side: has the WSDL in this way
+                    				==>But not all the server sides do the same as this URL - Aka: support this xxx?wsdl
+                    				==>Even they support it, the internal processing could be different based on different framework and libs like: Axis2 or Spring SOAP
+                    				==>But client side still needs to convert this WSDL into a schema.jar:
+                    					How? - Spring SOAP has a way: from WSDL to schema.jar
+                    		==>OR: Server people/doc give you the WSDL file:
+                    				==>But client side still needs to convert this WSDL into a schema.jar:
+                    					How? - Spring SOAP has a way: from WSDL to schema.jar
+                    		==>OR: Server people/doc give you the schema.jar file directly: because client side only needs the schema.jar
+                    				for Java code integration with server SOAP calls
+                    				
+                    ==>Spring SOAP Ways: obtain schema.jar:
+                    	1) Main Principle: WSDL -> Schema files: similar to reader's: XSD to schema files
+                    		==>Does JAX-WS ways not need a schema.jar????????
+                    			Because they use endpoint and QName to do many internal processing, so they don't need a schema.jar on client side?
+                    			I know axis2 needs a client side schema/stub jar files... - so does Spring SOAP client side...
+                    			
+                    			If JAX-WS way doesn't need a client side schema.jar, how?
+                    				1) They access to the endpoint of SOAP API url
+                    				2) Use: some QName ways to inspect and obtain server side code in terms of their WSDL and Schema files on the server
+                    				3) Then via some internal complicated processing APIs to enable client side via the endpoint and QName etc
+                    					to "remotely" utilize the schema domain files on the server side instead of having a localized
+                    					"client-side" schema file copies...
+                    					==>In this way, they are still enable to fulfill the SOAP calls, but directly use
+                    						"remote" server side copy of schema files without the need of having a client side copy of schema files
+                    					==>But this could cause more internal APIs and processing logic
+                    					==>Also when they are in the session with the calls on endpoint, the remote server processes these QName calls
+                    						the server side needs to be in JAX-WS impl as well...
+                    						==>If the server side is not in JAX-WS, client side cannot use this way without schema.jar
+                    						==>E.g.: if server side is in Spring SOAP, then client side can use the way without schema.jar? - NO
+                    							==>If server side is in JAX-WS, then client side may not need schema.jar...
+                    						==>How do we know client side needs some schema.jar?
+                    							==>For sure communication (developer communications) between server and client is needed when doing integration in Java ==>So we know
+                    							==>How about: if we use SOAPUI/Postman to talk to Server SOAP APIs?
+                    								==>We don't need to worry about the integration or schema.jar because we use xml request files (which meets WSDL needs)
+                    								==>So no schema.jar is needed for these scenarios
+                    					
+                    	2) Method 1: Spring SOAP XsdSchema ? - via plugin? - or ... Spring SOAP APIs...
+                    		==>Reader/Writer: XSD files => Schema files
+                    		==>In SOAP: WSDL ==> Schema files
+                    		==>So Spring SOAP APIs: call server side in some programmatic ways via APIs: like we use: browser: xxx?wsdl
+                    			==>These calls: fetch the WSDL file from server side via their supported url for WSDL:
+                    				==>Similar: use web browser to do: xxx?wsdl call
+                    			==>After Spring SOAP APIs obtains the WSDL: it converts it into a schema.jar for us to do the integration
+                    				JAXB jars is required: should be in classpath? - JAXB jars are not part of normal JDK (it is inside J2EE side)
+                    				maven plugin: org.codehaus.mojo:jaxb2-maven-plugin:2.4: ===>bring in the jaxb2 jar
+                    				==>schema.jar: can be in extracted classes files
+                    				==>schema.jar: have to be explicitly enabled in client side code because the schema domain classes
+                    								need to be in "import" statements in the client calls
+                    								==>Otherwise, it functions like SOAPUI/Postman...:
+                    									==>SOAPUI/Postman: add xml request files as request data to send to SOAP server
+                    									==>Client Java code: send java code using schema domain classes:
+                    										==>It will be converted (marshalled) to similar SOAPUI/Postman xml formatted data on http to server side
+                    	3) Method 2: does Spring SOAP have a CLI like JAX-WS's wsimport or Axis2's wsdl2java?
+                    	
+		==>Step 4:	Module Designs:
+					==>1) Create a SOAPClientUtil.java: contains the direct calls to SOAP Servers:
+								==>request/response/factory/endpoint-API/...
+								==>Java client has some marshalling/unmarshing processes on Java client side: done by Spring SOAP APIs/Lib
+								==>SOAP libs/protocols handle many of these internal logic for our SOAP API apps...
+					==>2) 
+	==>References Apps:
+		==>Worldpay SOAP projects
+		==>Spring-Official-Guides / Spring SOAP Online Tutorial Apps:
+			==>Good Reference App: https://spring.io/guides/gs/consuming-web-service/#initial
+		==>ReferenceDocument/APIs: Spring SOAP APIs + JDK JAX-WS APIs
+		==>programcreek/Baeldung/Mkyong/...
+
+
+	==>Implementations
+	
+		Configuration Modules:
+			1) @Configuration
+				==>Bean 1: Need to configure: the schema domain classes with the marshaller: Jaxb2Marshaller:
+					==>This "marshaller": from Spring SOAP APIs: do both marshalling (serialize) and unmarshalling (deserialize)
+					==>This marshaller feature needs to be enabled for: schema classes generated:
+						1) So it points to the package and when XML requests come in, the marshaller can use this package's domain classes to do:
+							==>Function 1: Client code: schema classes => XML format request to Server Side: this marshaller can do this
+							==>Function 2: Client code: server return xml response file => client receives it ==> this marshaller does demarshalling
+											to convert the xml response file into schema domain code in the client side
+				==>Bean 2: Need to configure the client bean as well:
+					==>Set WS url
+					==>Configure marshaller/unmarshaller
+				
+				Is this the same way as Worldpay SOAP projects?
+				==>TBD...
+					Worldpay uses: some more complicated ways - and the above way uses: Spring Boot Auto-Configuration + Spring SOAP/WS API beans in better way:
+					==>"Complicated" Ways:
+						==>Use some similar ways to JAX-WS to obtain the endpoints... - to handle the client side schema.jar...
+						==>And then: call its APIs via...
+					==>"This Simpler" Ways:
+						==>"Beanified" Ways... - stick to some newer @Bean ways ==>More wrapping ways by newer Spring WS APIs
+						==>Enable some wrapper API/classes via newer Spring WS APIs:
+							==>Some support super classes
+							==>Some support interfaces
+							Wrapping more logic into these support classes/interfaces
+				
+			2) 
+		
+		Client Modules:
+			https://docs.spring.io/spring-ws/docs/current/api/index.html?overview-summary.html
+			
+			==>Way 1: extends WebServiceGatewaySupport:
+				==>org.springframework.ws.client.core.support.WebServiceGatewaySupport
+					https://docs.spring.io/spring-ws/docs/current/api/index.html?org/springframework/ws/client/core/support/WebServiceGatewaySupport.html
+				==>have an API: getWebServiceTemplate()
+			
+			==>Way 2: Spring Boot: Auto-configured with customization option
+				Spring Boot does not provide any single auto-configured WebServiceTemplate bean
+				==>Same as RestTemplate
+				==>
+				
+			SOAP: always POST:
+				always used POST but according to the W3C standard, SOAP supports both POST and GET methods. ... 
+				SOAP requests (XML messages) are usually too complex and verbose to be included in the query string, 
+				so almost every implementation (for example JAX-WS) supports only POST
+				==>SOAP also defines a binding to the HTTP protocol. When binding to HTTP, all SOAP requests are sent through HTTP POST
+					==>SOAP: do many protocols: but when working with HTTP, it chooses POST
+		
+		Client Util Modules:
+	
+			Response Object
+		
+		
+	
+	==>Unit Testing:
+		1) Mock: @WebServiceClientTest
+		2) 
+		
+	==>Curl Testing:
+		==>This uses similar SOPPUI request file?
+	
+	==>SOAPUI/Postman Tests:
+		==>SOAPUI/Postman internally: use the JAXB jar...
+		==>Compile a test request xml file based on WSDL file
+
+	==>Deployment:
+	
+		==>Tomcat
+		
+		
+==>Spring SOAP:
+	==>Facet 1: Server Side Implementation:
+				https://docs.spring.io/spring-ws/docs/current/reference/
+				Producing a SOAP web service - Spring
+	==>Facet 2: Client Side Integration:
+				Consuming a SOAP web service - Spring
+
+==>Misc:
+	==>If using RESTful APIs, but using XML, what about?
+		==>These XML are for the data sending: not for WSDL
+		==>It is just use XML to transmit data in lieu of JSON format
+	
+	==>
+	
+	
+	

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://rxjs-dev.firebaseapp.com/guide/subject#asyncsubject -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>RxJS - Subject</title>
+  <!--<base href="/">--><base href=".">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="https://rxjs-dev.firebaseapp.com/assets/images/favicons/favicon.ico">
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-32x32.png"-->
+        <!--sizes="32x32">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-194x194.png"-->
+        <!--sizes="194x194">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-96x96.png"-->
+        <!--sizes="96x96">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-16x16.png"-->
+        <!--sizes="16x16">-->
+  <!--<link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+  <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+
+  <!-- NOTE: These need to be kept in sync with `ngsw-config.json`. -->
+  <link href="./RxJS - Subject_files/icon" rel="stylesheet">
+  <link href="./RxJS - Subject_files/css" rel="stylesheet">
+  <link href="./RxJS - Subject_files/font-awesome.min.css" rel="stylesheet">
+  <!-- -->
+
+  <link rel="manifest" href="https://rxjs-dev.firebaseapp.com/pwa-manifest.json">
+  <meta name="theme-color" content="#d81b60">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+
+  <script async="" src="./RxJS - Subject_files/analytics.js.download"></script><script>
+    // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
+    var tag = document.createElement('meta'); tag.name = 'googlebot'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+    tag = document.createElement('meta'); tag.name = 'robots'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  // Note this is a customised version of the GA tracking snippet
+  // See the comments below for more info
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+  ~i.name.indexOf('NG_DEFER_BOOTSTRAP')|| // only load library if not running e2e tests
+  m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  </script>
+  <!-- End Google Analytics -->
+
+  <script>
+    // Report fatal errors to Google Analytics
+    window.onerror = function() {
+      ga('send', 'exception', {exDescription: formatError.apply(null, arguments), exFatal: true});
+
+      function formatError(msg, url, line, col, e) {
+        var stack;
+        msg = msg.replace(/^Error: /, '');
+        if (e) {
+          stack = e.stack
+              // strip the leading "Error: " from the stack trace
+              .replace(/^Error: /, '')
+              // strip the message from the stack trace, if present
+              .replace(msg + '\n', '')
+              // strip leading spaces
+              .replace(/^ +/gm, '')
+              // strip all leading "at " for each frame
+              .replace(/^at /gm, '')
+              // replace long urls with just the last segment: `filename:line:column`
+              .replace(/(?: \(|@)http.+\/([^/)]+)\)?(?:\n|$)/gm, '@$1\n')
+              // replace "eval code" in Edge
+              .replace(/ *\(eval code(:\d+:\d+)\)(?:\n|$)/gm, '@???$1\n')
+        } else {
+          line = line || '?';
+          col = col || '?';
+          stack = url + ':' + line + ':' + col;
+        }
+        return (msg + '\n' + stack).substr(0, 150);
+      }
+    };
+  </script>
+
+  <script>
+    if (window.document.documentMode) {
+      // polyfill IE11 in a blocking way
+      var s = document.createElement('script');
+      s.src = 'generated/ie-polyfills.min.js';
+      document.head.appendChild(s);
+    } else if (!Object.assign) {
+      // polyfill other non-evergreen browsers in a blocking way
+      var polyfillUrl = "https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find&flags=gated&unknown=polyfill";
+
+      // send a blocking XHR to fetch the polyfill
+      // then append it to the document so that its eval-ed synchronously
+      // this is required because the method used for IE is not reliable with other non-evergreen browsers
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        var code = this.responseText;
+        s.appendChild(document.createTextNode(code));
+        document.head.appendChild(s);
+      });
+      xhr.open("GET", polyfillUrl, false);
+      xhr.send();
+    }
+  </script>
+
+  <script>
+    //load CE polyfill
+    //HACK: webpack's html plugin mangles the document.write calls if we don't trick it.
+
+    //load the ES5 shim for browsers with native CE support
+    function loadCustomElementsShim(){
+      document.write('<scri' + 'pt src="assets/js/native-shim.js"><' + '/script>');
+    }
+
+    //load the full custom elements polyfill for browsers without support
+    function loadCustomElementsPolyfill(){
+      document.write('<scri' + 'pt src="assets/js/custom-elements.min.js"><' + '/script>');
+    }
+    //detect if we have native CE support
+    if(!window.customElements){
+      loadCustomElementsPolyfill();
+    }
+    else {
+      loadCustomElementsShim();
+    }
+  </script><script src="./RxJS - Subject_files/native-shim.js.download"></script>
+
+<link rel="stylesheet" href="./RxJS - Subject_files/styles.ed062bead85c40ac60b2.css"><style>@media (-ms-high-contrast:active){.mat-toolbar{outline:solid 1px}}.mat-toolbar-row,.mat-toolbar-single-row{display:flex;box-sizing:border-box;padding:0 16px;width:100%;flex-direction:row;align-items:center;white-space:nowrap}.mat-toolbar-multiple-rows{display:flex;box-sizing:border-box;flex-direction:column;width:100%}.mat-toolbar-multiple-rows{min-height:64px}.mat-toolbar-row,.mat-toolbar-single-row{height:64px}@media (max-width:599px){.mat-toolbar-multiple-rows{min-height:56px}.mat-toolbar-row,.mat-toolbar-single-row{height:56px}}</style><style>.mat-icon{background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1,1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><style>.mat-button .mat-button-focus-overlay,.mat-icon-button .mat-button-focus-overlay{opacity:0}.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:.04}@media (hover:none){.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:0}}.mat-button,.mat-flat-button,.mat-icon-button,.mat-stroked-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-button[disabled],.mat-flat-button[disabled],.mat-icon-button[disabled],.mat-stroked-button[disabled]{cursor:default}.mat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-button.cdk-program-focused .mat-button-focus-overlay,.mat-flat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-flat-button.cdk-program-focused .mat-button-focus-overlay,.mat-icon-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-icon-button.cdk-program-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-raised-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1)}.mat-raised-button::-moz-focus-inner{border:0}.mat-raised-button[disabled]{cursor:default}.mat-raised-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-raised-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-raised-button::-moz-focus-inner{border:0}._mat-animation-noopable.mat-raised-button{transition:none;animation:none}.mat-stroked-button{border:1px solid currentColor;padding:0 15px;line-height:34px}.mat-stroked-button .mat-button-focus-overlay,.mat-stroked-button .mat-button-ripple.mat-ripple{top:-1px;left:-1px;right:-1px;bottom:-1px}.mat-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:56px;height:56px;padding:0;flex-shrink:0}.mat-fab::-moz-focus-inner{border:0}.mat-fab[disabled]{cursor:default}.mat-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-fab{transition:none;animation:none}.mat-fab .mat-button-wrapper{padding:16px 0;display:inline-block;line-height:24px}.mat-mini-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:40px;height:40px;padding:0;flex-shrink:0}.mat-mini-fab::-moz-focus-inner{border:0}.mat-mini-fab[disabled]{cursor:default}.mat-mini-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-mini-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-mini-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-mini-fab{transition:none;animation:none}.mat-mini-fab .mat-button-wrapper{padding:8px 0;display:inline-block;line-height:24px}.mat-icon-button{padding:0;min-width:0;width:40px;height:40px;flex-shrink:0;line-height:40px;border-radius:50%}.mat-icon-button .mat-icon,.mat-icon-button i{line-height:24px}.mat-button-focus-overlay,.mat-button-ripple.mat-ripple{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-button-ripple.mat-ripple:not(:empty){transform:translateZ(0)}.mat-button-focus-overlay{opacity:0;transition:opacity .2s cubic-bezier(.35,0,.25,1),background-color .2s cubic-bezier(.35,0,.25,1)}._mat-animation-noopable .mat-button-focus-overlay{transition:none}@media (-ms-high-contrast:active){.mat-button-focus-overlay{background-color:#fff}}@media (-ms-high-contrast:black-on-white){.mat-button-focus-overlay{background-color:#000}}.mat-button-ripple-round{border-radius:50%;z-index:1}.mat-button .mat-button-wrapper>*,.mat-fab .mat-button-wrapper>*,.mat-flat-button .mat-button-wrapper>*,.mat-icon-button .mat-button-wrapper>*,.mat-mini-fab .mat-button-wrapper>*,.mat-raised-button .mat-button-wrapper>*,.mat-stroked-button .mat-button-wrapper>*{vertical-align:middle}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button{display:block;font-size:inherit;width:2.5em;height:2.5em}@media (-ms-high-contrast:active){.mat-button,.mat-fab,.mat-flat-button,.mat-icon-button,.mat-mini-fab,.mat-raised-button{outline:solid 1px}}</style><style>.mat-drawer-container{position:relative;z-index:1;box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-opened{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:background-color,visibility}@media (-ms-high-contrast:active){.mat-drawer-backdrop{opacity:.5}}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%,0,0)}@media (-ms-high-contrast:active){.mat-drawer,[dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}}@media (-ms-high-contrast:active){.mat-drawer.mat-drawer-end,[dir=rtl] .mat-drawer{border-left:solid 1px currentColor;border-right:none}}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer{transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer.mat-drawer-end{left:0;right:auto;transform:translate3d(-100%,0,0)}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}</style><script charset="utf-8" src="./RxJS - Subject_files/17-es2015.ac0ef64ee9152a94ed6a.js.download"></script><script charset="utf-8" src="./RxJS - Subject_files/2-es2015.4bfd0144ba4334eb1944.js.download"></script><script charset="utf-8" src="./RxJS - Subject_files/10-es2015.ce9c57dfb56979dbe79c.js.download"></script><script charset="utf-8" src="./RxJS - Subject_files/18-es2015.dd3c96af3ae1c8ebc276.js.download"></script><meta name="twitter:title" content="RxJS - Subject"><meta name="twitter:card" content="summary"><meta property="og:title" content="RxJS - Subject"><meta property="og:type" content="article"></head>
+<body>
+
+  <aio-shell ng-version="8.0.0" class="mode-stable sidenav-open page-guide-subject folder-guide view-SideNav aio-notification-hide"><div id="top-of-page"></div><!----><mat-toolbar class="app-toolbar no-print mat-toolbar mat-primary mat-toolbar-multiple-rows" color="primary"><mat-toolbar-row class="notification-container mat-toolbar-row"><aio-notification expirationdate="2018-07-01" notificationid="angular-v6-announcement" class="ng-tns-c2-0 ng-trigger ng-trigger-hideAnimation" style="height: 0px;"><span class="content"><a href="https://blog.angular.io/version-6-0-0-of-angular-now-available-cc56b0efa7a4"><mat-icon aria-label="Announcement" class="icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="insert_comment" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon><span class="message">Version 6 of Angular Now Available!</span><span class="action-button">Learn More</span></a></span><button class="close-button mat-icon-button" aria-label="Close" mat-icon-button=""><span class="mat-button-wrapper"><mat-icon aria-label="Dismiss notification" class="mat-icon notranslate ng-tns-c2-0 mat-icon-no-color" role="img" svgicon="close" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div></button></aio-notification></mat-toolbar-row><mat-toolbar-row class="mat-toolbar-row"><button class="hamburger mat-button" mat-button="" title="Docs menu"><span class="mat-button-wrapper"><mat-icon class="mat-icon notranslate mat-icon-no-color" role="img" svgicon="menu" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button><a class="nav-link home" href="https://rxjs-dev.firebaseapp.com/"><!----><img alt="Home" height="40" src="./RxJS - Subject_files/logo.png" title="Home" width="150" class="ng-star-inserted"><!----></a><!----><aio-top-menu class="ng-star-inserted"><ul role="navigation"><!----><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="Overview">Overview</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/api" title="Reference">Reference</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration">Migration</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/team" title="Team">Team</a></li></ul></aio-top-menu><aio-search-box class="search-container"><input aria-label="search" placeholder="Search" type="search"></aio-search-box><div class="toolbar-external-icons-container"><a href="https://github.com/ReactiveX/rxjs" target="_blank" title="GitHub"><img alt="View on GitHub" src="./RxJS - Subject_files/github-icon.svg"></a></div></mat-toolbar-row></mat-toolbar><!----><mat-sidenav-container class="sidenav-container mat-drawer-container mat-sidenav-container mat-drawer-transition has-floating-toc"><!----><div class="mat-drawer-backdrop ng-star-inserted"></div><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><mat-sidenav class="sidenav mat-drawer mat-sidenav ng-tns-c6-1 ng-trigger ng-trigger-transform mat-drawer-side ng-star-inserted" tabindex="-1" style="transform: none; visibility: visible;"><div class="mat-drawer-inner-container"><!----><aio-nav-menu><!----><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><a class="vertical-menu-item heading level-1 expanded selected ng-star-inserted" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="RxJS Overview"> Overview <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></a><!----><div class="heading-children level-1 expanded selected"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observable" title="Observables."> Observables </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observer" title="Observer."> Observer </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/operators" title="Operators."> Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/subscription" title="Subscription."> Subscription </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 expanded selected" href="https://rxjs-dev.firebaseapp.com/guide/subject" title="Subjects."> Subjects </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/scheduler" title="Scheduler."> Scheduler </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-2 collapsed ng-star-inserted" type="button" title="Testing." aria-pressed="false"> Testing <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-2 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/marble-testing" title="Marble Testing."> Marble Testing </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/internal-marble-tests" title="Contribute tests to RxJS."> Contribute tests to RxJS </a></div><!----></aio-nav-item></div></div></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/installation" title="Installation"> Installation </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/api" title="RxJS Reference"> Reference </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/operator-decision-tree" title="Operator Decision Tree"> Operator Decision Tree </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-1 collapsed ng-star-inserted" type="button" title="About Version 6." aria-pressed="false"> About Version 6 <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-1 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration."> Migration </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/pipeable-operators" title="Pipeable Operators."> Pipeable Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/api/deprecations" title="List of Deprecations"> Deprecations </a></div><!----></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/resources" title="External Resources"> External Resources </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/code-of-conduct" title="Code of Conduct"> Code of Conduct </a></div><!----></aio-nav-item></aio-nav-menu></div></mat-sidenav><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><!----><mat-sidenav-content cdkscrollable="" class="mat-drawer-content mat-sidenav-content ng-star-inserted" style="margin-left: 260px;"><section class="sidenav-content" role="main" id="guide-subject"><aio-mode-banner><!----></aio-mode-banner><aio-doc-viewer class=""><div style="opacity: 1;">
+<div class="content">
+<h1 id="subject">Subject</h1><aio-toc class="embedded" ng-version="8.0.0"><!----><div class="toc-inner no-print collapsed ng-star-inserted"><!----><!----><button aria-label="Expand/collapse contents" class="toc-heading embedded secondary ng-star-inserted" title="Expand/collapse contents" type="button" aria-pressed="false"> Contents <mat-icon class="rotating-icon mat-icon notranslate collapsed mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><ul class="toc-list embedded"><!----><!----><!----><!----><!----><!----><li title="Multicasted Observables" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#multicasted-observables">Multicasted Observables</a></li><!----><!----><!----><li title="Reference counting" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#reference-counting">Reference counting</a></li><!----><!----><!----><li title="BehaviorSubject" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#behaviorsubject">BehaviorSubject</a></li><!----><!----><!----><li title="ReplaySubject" class="h2 secondary ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#replaysubject">ReplaySubject</a></li><!----><!----><!----><li title="AsyncSubject" class="h2 secondary ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#asyncsubject">AsyncSubject</a></li><!----></ul><!----><button aria-label="Expand/collapse contents" class="toc-more-items embedded material-icons collapsed ng-star-inserted" title="Expand/collapse contents" type="button" aria-pressed="false"></button></div></aio-toc>
+<p><strong>What is a Subject?</strong> An RxJS Subject is a special type of Observable that allows values to be multicasted to many Observers. While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast.</p>
+<p><span class="informal">A Subject is like an Observable, but can multicast to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners.</span></p>
+<p><strong>Every Subject is an Observable.</strong> Given a Subject, you can <code>subscribe</code> to it, providing an Observer, which will start receiving values normally. From the perspective of the Observer, it cannot tell whether the Observable execution is coming from a plain unicast Observable or a Subject.</p>
+<p>Internally to the Subject, <code>subscribe</code> does not invoke a new execution that delivers values. It simply registers the given Observer in a list of Observers, similarly to how <code>addListener</code> usually works in other libraries and languages.</p>
+<p><strong>Every Subject is an Observer.</strong> It is an object with the methods <code>next(v)</code>, <code>error(e)</code>, and <code>complete()</code>. To feed a new value to the Subject, just call <code>next(theValue)</code>, and it will be multicasted to the Observers registered to listen to the Subject.</p>
+<p>In the example below, we have two Observers attached to a Subject, and we feed some values to the Subject:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { Subject } from 'rxjs';
+
+const subject = new Subject&lt;number&gt;();
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+subject.next(1);
+subject.next(2);
+
+// Logs:
+// observerA: 1
+// observerB: 1
+// observerA: 2
+// observerB: 2
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">Subject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">&lt;</span><span class="pln">number</span><span class="pun">&gt;();</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L5"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L6"><span class="pun">});</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L8"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L9"><span class="pun">});</span></li><li class="L0"><span class="pln">&nbsp;</span></li><li class="L1"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></li><li class="L2"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="com">// Logs:</span></li><li class="L5"><span class="com">// observerA: 1</span></li><li class="L6"><span class="com">// observerB: 1</span></li><li class="L7"><span class="com">// observerA: 2</span></li><li class="L8"><span class="com">// observerB: 2</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>Since a Subject is an Observer, this also means you may provide a Subject as the argument to the <code>subscribe</code> of any Observable, like the example below shows:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { Subject, from } from 'rxjs';
+
+const subject = new Subject&lt;number&gt;();
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+const observable = from([1, 2, 3]);
+
+observable.subscribe(subject); // You can subscribe providing a Subject
+
+// Logs:
+// observerA: 1
+// observerB: 1
+// observerA: 2
+// observerB: 2
+// observerA: 3
+// observerB: 3
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">,</span><span class="pln"> from </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">&lt;</span><span class="pln">number</span><span class="pun">&gt;();</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L5"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L6"><span class="pun">});</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L8"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L9"><span class="pun">});</span></li><li class="L0"><span class="pln">&nbsp;</span></li><li class="L1"><span class="kwd">const</span><span class="pln"> observable </span><span class="pun">=</span><span class="pln"> from</span><span class="pun">([</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">]);</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">observable</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">(</span><span class="pln">subject</span><span class="pun">);</span><span class="pln"> </span><span class="com">// You can subscribe providing a Subject</span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="com">// Logs:</span></li><li class="L6"><span class="com">// observerA: 1</span></li><li class="L7"><span class="com">// observerB: 1</span></li><li class="L8"><span class="com">// observerA: 2</span></li><li class="L9"><span class="com">// observerB: 2</span></li><li class="L0"><span class="com">// observerA: 3</span></li><li class="L1"><span class="com">// observerB: 3</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>With the approach above, we essentially just converted a unicast Observable execution to multicast, through the Subject. This demonstrates how Subjects are the only way of making any Observable execution be shared to multiple Observers.</p>
+<p>There are also a few specializations of the <code>Subject</code> type: <code>BehaviorSubject</code>, <code>ReplaySubject</code>, and <code>AsyncSubject</code>.</p>
+<h2 id="multicasted-observables">Multicasted Observables</h2>
+<p>A "multicasted Observable" passes notifications through a Subject which may have many subscribers, whereas a plain "unicast Observable" only sends notifications to a single Observer.</p>
+<p><span class="informal">A multicasted Observable uses a Subject under the hood to make multiple Observers see the same Observable execution.</span></p>
+<p>Under the hood, this is how the <code>multicast</code> operator works: Observers subscribe to an underlying Subject, and the Subject subscribes to the source Observable. The following example is similar to the previous example which used <code>observable.subscribe(subject)</code>:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { from, Subject } from 'rxjs';
+import { multicast } from 'rxjs/operators';
+
+const source = from([1, 2, 3]);
+const subject = new Subject();
+const multicasted = source.pipe(multicast(subject));
+
+// These are, under the hood, `subject.subscribe({...})`:
+multicasted.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+multicasted.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+// This is, under the hood, `source.subscribe(subject)`:
+multicasted.connect();
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> from</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Subject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> multicast </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="kwd">const</span><span class="pln"> source </span><span class="pun">=</span><span class="pln"> from</span><span class="pun">([</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">]);</span></li><li class="L4"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">();</span></li><li class="L5"><span class="kwd">const</span><span class="pln"> multicasted </span><span class="pun">=</span><span class="pln"> source</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">multicast</span><span class="pun">(</span><span class="pln">subject</span><span class="pun">));</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="com">// These are, under the hood, `subject.subscribe({...})`:</span></li><li class="L8"><span class="pln">multicasted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L9"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L0"><span class="pun">});</span></li><li class="L1"><span class="pln">multicasted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L2"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L3"><span class="pun">});</span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="com">// This is, under the hood, `source.subscribe(subject)`:</span></li><li class="L6"><span class="pln">multicasted</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">();</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p><code>multicast</code> returns an Observable that looks like a normal Observable, but works like a Subject when it comes to subscribing. <code>multicast</code> returns a <code>ConnectableObservable</code>, which is simply an Observable with the <code>connect()</code> method.</p>
+<p>The <code>connect()</code> method is important to determine exactly when the shared Observable execution  will start. Because <code>connect()</code> does <code>source.subscribe(subject)</code> under the hood, <code>connect()</code> returns a Subscription, which you can unsubscribe from in order to cancel the shared Observable execution.</p>
+<h3 id="reference-counting">Reference counting</h3>
+<p>Calling <code>connect()</code> manually and handling the Subscription is often cumbersome. Usually, we want to <em>automatically</em> connect when the first Observer arrives, and automatically cancel the shared execution when the last Observer unsubscribes.</p>
+<p>Consider the following example where subscriptions occur as outlined by this list:</p>
+<ol>
+<li>First Observer subscribes to the multicasted Observable</li>
+<li><strong>The multicasted Observable is connected</strong></li>
+<li>The <code>next</code> value <code>0</code> is delivered to the first Observer</li>
+<li>Second Observer subscribes to the multicasted Observable</li>
+<li>The <code>next</code> value <code>1</code> is delivered to the first Observer</li>
+<li>The <code>next</code> value <code>1</code> is delivered to the second Observer</li>
+<li>First Observer unsubscribes from the multicasted Observable</li>
+<li>The <code>next</code> value <code>2</code> is delivered to the second Observer</li>
+<li>Second Observer unsubscribes from the multicasted Observable</li>
+<li><strong>The connection to the multicasted Observable is unsubscribed</strong></li>
+</ol>
+<p>To achieve that with explicit calls to <code>connect()</code>, we write the following code:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { interval, Subject } from 'rxjs';
+import { multicast } from 'rxjs/operators';
+
+const source = interval(500);
+const subject = new Subject();
+const multicasted = source.pipe(multicast(subject));
+let subscription1, subscription2, subscriptionConnect;
+
+subscription1 = multicasted.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+// We should call `connect()` here, because the first
+// subscriber to `multicasted` is interested in consuming values
+subscriptionConnect = multicasted.connect();
+
+setTimeout(() =&gt; {
+  subscription2 = multicasted.subscribe({
+    next: (v) =&gt; console.log(`observerB: ${v}`)
+  });
+}, 600);
+
+setTimeout(() =&gt; {
+  subscription1.unsubscribe();
+}, 1200);
+
+// We should unsubscribe the shared Observable execution here,
+// because `multicasted` would have no more subscribers after this
+setTimeout(() =&gt; {
+  subscription2.unsubscribe();
+  subscriptionConnect.unsubscribe(); // for the shared Observable execution
+}, 2000);
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> interval</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Subject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> multicast </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="kwd">const</span><span class="pln"> source </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">(</span><span class="lit">500</span><span class="pun">);</span></li><li class="L4"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">();</span></li><li class="L5"><span class="kwd">const</span><span class="pln"> multicasted </span><span class="pun">=</span><span class="pln"> source</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">multicast</span><span class="pun">(</span><span class="pln">subject</span><span class="pun">));</span></li><li class="L6"><span class="kwd">let</span><span class="pln"> subscription1</span><span class="pun">,</span><span class="pln"> subscription2</span><span class="pun">,</span><span class="pln"> subscriptionConnect</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln">subscription1 </span><span class="pun">=</span><span class="pln"> multicasted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L9"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L0"><span class="pun">});</span></li><li class="L1"><span class="com">// We should call `connect()` here, because the first</span></li><li class="L2"><span class="com">// subscriber to `multicasted` is interested in consuming values</span></li><li class="L3"><span class="pln">subscriptionConnect </span><span class="pun">=</span><span class="pln"> multicasted</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">();</span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">  subscription2 </span><span class="pun">=</span><span class="pln"> multicasted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L7"><span class="pln">    next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L8"><span class="pln">  </span><span class="pun">});</span></li><li class="L9"><span class="pun">},</span><span class="pln"> </span><span class="lit">600</span><span class="pun">);</span></li><li class="L0"><span class="pln">&nbsp;</span></li><li class="L1"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L2"><span class="pln">  subscription1</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span></li><li class="L3"><span class="pun">},</span><span class="pln"> </span><span class="lit">1200</span><span class="pun">);</span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="com">// We should unsubscribe the shared Observable execution here,</span></li><li class="L6"><span class="com">// because `multicasted` would have no more subscribers after this</span></li><li class="L7"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L8"><span class="pln">  subscription2</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span></li><li class="L9"><span class="pln">  subscriptionConnect</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span><span class="pln"> </span><span class="com">// for the shared Observable execution</span></li><li class="L0"><span class="pun">},</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">);</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>If we wish to avoid explicit calls to <code>connect()</code>, we can use ConnectableObservable's <code>refCount()</code> method (reference counting), which returns an Observable that keeps track of how many subscribers it has. When the number of subscribers increases from <code>0</code> to <code>1</code>, it will call <code>connect()</code> for us, which starts the shared execution. Only when the number of subscribers decreases from <code>1</code> to <code>0</code> will it be fully unsubscribed, stopping further execution.</p>
+<p><span class="informal"><code>refCount</code> makes the multicasted Observable automatically start executing when the first subscriber arrives, and stop executing when the last subscriber leaves.</span></p>
+<p>Below is an example:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { interval, Subject } from 'rxjs';
+import { multicast, refCount } from 'rxjs/operators';
+
+const source = interval(500);
+const subject = new Subject();
+const refCounted = source.pipe(multicast(subject), refCount());
+let subscription1, subscription2;
+
+// This calls `connect()`, because
+// it is the first subscriber to `refCounted`
+console.log('observerA subscribed');
+subscription1 = refCounted.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+
+setTimeout(() =&gt; {
+  console.log('observerB subscribed');
+  subscription2 = refCounted.subscribe({
+    next: (v) =&gt; console.log(`observerB: ${v}`)
+  });
+}, 600);
+
+setTimeout(() =&gt; {
+  console.log('observerA unsubscribed');
+  subscription1.unsubscribe();
+}, 1200);
+
+// This is when the shared Observable execution will stop, because
+// `refCounted` would have no more subscribers after this
+setTimeout(() =&gt; {
+  console.log('observerB unsubscribed');
+  subscription2.unsubscribe();
+}, 2000);
+
+// Logs
+// observerA subscribed
+// observerA: 0
+// observerB subscribed
+// observerA: 1
+// observerB: 1
+// observerA unsubscribed
+// observerB: 2
+// observerB unsubscribed
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> interval</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Subject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> multicast</span><span class="pun">,</span><span class="pln"> refCount </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="kwd">const</span><span class="pln"> source </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">(</span><span class="lit">500</span><span class="pun">);</span></li><li class="L4"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Subject</span><span class="pun">();</span></li><li class="L5"><span class="kwd">const</span><span class="pln"> refCounted </span><span class="pun">=</span><span class="pln"> source</span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">multicast</span><span class="pun">(</span><span class="pln">subject</span><span class="pun">),</span><span class="pln"> refCount</span><span class="pun">());</span></li><li class="L6"><span class="kwd">let</span><span class="pln"> subscription1</span><span class="pun">,</span><span class="pln"> subscription2</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="com">// This calls `connect()`, because</span></li><li class="L9"><span class="com">// it is the first subscriber to `refCounted`</span></li><li class="L0"><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'observerA subscribed'</span><span class="pun">);</span></li><li class="L1"><span class="pln">subscription1 </span><span class="pun">=</span><span class="pln"> refCounted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L2"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L3"><span class="pun">});</span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'observerB subscribed'</span><span class="pun">);</span></li><li class="L7"><span class="pln">  subscription2 </span><span class="pun">=</span><span class="pln"> refCounted</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L8"><span class="pln">    next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L9"><span class="pln">  </span><span class="pun">});</span></li><li class="L0"><span class="pun">},</span><span class="pln"> </span><span class="lit">600</span><span class="pun">);</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L3"><span class="pln">  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'observerA unsubscribed'</span><span class="pun">);</span></li><li class="L4"><span class="pln">  subscription1</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span></li><li class="L5"><span class="pun">},</span><span class="pln"> </span><span class="lit">1200</span><span class="pun">);</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="com">// This is when the shared Observable execution will stop, because</span></li><li class="L8"><span class="com">// `refCounted` would have no more subscribers after this</span></li><li class="L9"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'observerB unsubscribed'</span><span class="pun">);</span></li><li class="L1"><span class="pln">  subscription2</span><span class="pun">.</span><span class="pln">unsubscribe</span><span class="pun">();</span></li><li class="L2"><span class="pun">},</span><span class="pln"> </span><span class="lit">2000</span><span class="pun">);</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="com">// Logs</span></li><li class="L5"><span class="com">// observerA subscribed</span></li><li class="L6"><span class="com">// observerA: 0</span></li><li class="L7"><span class="com">// observerB subscribed</span></li><li class="L8"><span class="com">// observerA: 1</span></li><li class="L9"><span class="com">// observerB: 1</span></li><li class="L0"><span class="com">// observerA unsubscribed</span></li><li class="L1"><span class="com">// observerB: 2</span></li><li class="L2"><span class="com">// observerB unsubscribed</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>The <code>refCount()</code> method only exists on ConnectableObservable, and it returns an <code>Observable</code>, not another ConnectableObservable.</p>
+<h2 id="behaviorsubject">BehaviorSubject</h2>
+<p>One of the variants of Subjects is the <code>BehaviorSubject</code>, which has a notion of "the current value". It stores the latest value emitted to its consumers, and whenever a new Observer subscribes, it will immediately receive the "current value" from the <code>BehaviorSubject</code>.</p>
+<p><span class="informal">BehaviorSubjects are useful for representing "values over time". For instance, an event stream of birthdays is a Subject, but the stream of a person's age would be a BehaviorSubject.</span></p>
+<p>In the following example, the BehaviorSubject is initialized with the value <code>0</code> which the first Observer receives when it subscribes. The second Observer receives the value <code>2</code> even though it subscribed after the value <code>2</code> was sent.</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { BehaviorSubject } from 'rxjs';
+const subject = new BehaviorSubject(0); // 0 is the initial value
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+
+subject.next(1);
+subject.next(2);
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+subject.next(3);
+
+// Logs
+// observerA: 0
+// observerA: 1
+// observerA: 2
+// observerB: 2
+// observerA: 3
+// observerB: 3
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">BehaviorSubject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">BehaviorSubject</span><span class="pun">(</span><span class="lit">0</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 0 is the initial value</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L4"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L5"><span class="pun">});</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></li><li class="L8"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span></li><li class="L9"><span class="pln">&nbsp;</span></li><li class="L0"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L1"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L2"><span class="pun">});</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">3</span><span class="pun">);</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="com">// Logs</span></li><li class="L7"><span class="com">// observerA: 0</span></li><li class="L8"><span class="com">// observerA: 1</span></li><li class="L9"><span class="com">// observerA: 2</span></li><li class="L0"><span class="com">// observerB: 2</span></li><li class="L1"><span class="com">// observerA: 3</span></li><li class="L2"><span class="com">// observerB: 3</span></li></ol></code>
+    </pre></aio-code></code-example>
+<h2 id="replaysubject">ReplaySubject</h2>
+<p>A <code>ReplaySubject</code> is similar to a <code>BehaviorSubject</code> in that it can send old values to new subscribers, but it can also <em>record</em> a part of the Observable execution.</p>
+<p><span class="informal">A <code>ReplaySubject</code> records multiple values from the Observable execution and replays them to new subscribers.</span></p>
+<p>When creating a <code>ReplaySubject</code>, you can specify how many values to replay:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { ReplaySubject } from 'rxjs';
+const subject = new ReplaySubject(3); // buffer 3 values for new subscribers
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+
+subject.next(1);
+subject.next(2);
+subject.next(3);
+subject.next(4);
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+subject.next(5);
+
+// Logs:
+// observerA: 1
+// observerA: 2
+// observerA: 3
+// observerA: 4
+// observerB: 2
+// observerB: 3
+// observerB: 4
+// observerA: 5
+// observerB: 5
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">ReplaySubject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReplaySubject</span><span class="pun">(</span><span class="lit">3</span><span class="pun">);</span><span class="pln"> </span><span class="com">// buffer 3 values for new subscribers</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L4"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L5"><span class="pun">});</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></li><li class="L8"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span></li><li class="L9"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">3</span><span class="pun">);</span></li><li class="L0"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L3"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L4"><span class="pun">});</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">5</span><span class="pun">);</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="com">// Logs:</span></li><li class="L9"><span class="com">// observerA: 1</span></li><li class="L0"><span class="com">// observerA: 2</span></li><li class="L1"><span class="com">// observerA: 3</span></li><li class="L2"><span class="com">// observerA: 4</span></li><li class="L3"><span class="com">// observerB: 2</span></li><li class="L4"><span class="com">// observerB: 3</span></li><li class="L5"><span class="com">// observerB: 4</span></li><li class="L6"><span class="com">// observerA: 5</span></li><li class="L7"><span class="com">// observerB: 5</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>You can also specify a <em>window time</em> in milliseconds, besides of the buffer size, to determine how old the recorded values can be. In the following example we use a large buffer size of <code>100</code>, but a window time parameter of just <code>500</code> milliseconds.</p>
+<!-- skip-example -->
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { ReplaySubject } from 'rxjs';
+const subject = new ReplaySubject(100, 500 /* windowTime */);
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+
+let i = 1;
+setInterval(() =&gt; subject.next(i++), 200);
+
+setTimeout(() =&gt; {
+  subject.subscribe({
+    next: (v) =&gt; console.log(`observerB: ${v}`)
+  });
+}, 1000);
+
+// Logs
+// observerA: 1
+// observerA: 2
+// observerA: 3
+// observerA: 4
+// observerA: 5
+// observerB: 3
+// observerB: 4
+// observerB: 5
+// observerA: 6
+// observerB: 6
+// ...
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">ReplaySubject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReplaySubject</span><span class="pun">(</span><span class="lit">100</span><span class="pun">,</span><span class="pln"> </span><span class="lit">500</span><span class="pln"> </span><span class="com">/* windowTime */</span><span class="pun">);</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L4"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L5"><span class="pun">});</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="kwd">let</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></li><li class="L8"><span class="pln">setInterval</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="pln">i</span><span class="pun">++),</span><span class="pln"> </span><span class="lit">200</span><span class="pun">);</span></li><li class="L9"><span class="pln">&nbsp;</span></li><li class="L0"><span class="pln">setTimeout</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">  subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L2"><span class="pln">    next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L3"><span class="pln">  </span><span class="pun">});</span></li><li class="L4"><span class="pun">},</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">);</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="com">// Logs</span></li><li class="L7"><span class="com">// observerA: 1</span></li><li class="L8"><span class="com">// observerA: 2</span></li><li class="L9"><span class="com">// observerA: 3</span></li><li class="L0"><span class="com">// observerA: 4</span></li><li class="L1"><span class="com">// observerA: 5</span></li><li class="L2"><span class="com">// observerB: 3</span></li><li class="L3"><span class="com">// observerB: 4</span></li><li class="L4"><span class="com">// observerB: 5</span></li><li class="L5"><span class="com">// observerA: 6</span></li><li class="L6"><span class="com">// observerB: 6</span></li><li class="L7"><span class="com">// ...</span></li></ol></code>
+    </pre></aio-code></code-example>
+<h2 id="asyncsubject">AsyncSubject</h2>
+<p>The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes.</p>
+<code-example language="js" ng-version="8.0.0"><div style="display: none">
+import { AsyncSubject } from 'rxjs';
+const subject = new AsyncSubject();
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerA: ${v}`)
+});
+
+subject.next(1);
+subject.next(2);
+subject.next(3);
+subject.next(4);
+
+subject.subscribe({
+  next: (v) =&gt; console.log(`observerB: ${v}`)
+});
+
+subject.next(5);
+subject.complete();
+
+// Logs:
+// observerA: 5
+// observerB: 5
+</div><!----><aio-code><pre class="prettyprint lang-js">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><ol class="linenums"><li class="L0"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="typ">AsyncSubject</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span></li><li class="L1"><span class="kwd">const</span><span class="pln"> subject </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AsyncSubject</span><span class="pun">();</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L4"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerA</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L5"><span class="pun">});</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></li><li class="L8"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span></li><li class="L9"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">3</span><span class="pun">);</span></li><li class="L0"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">subject</span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">({</span></li><li class="L3"><span class="pln">  next</span><span class="pun">:</span><span class="pln"> </span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="pln">observerB</span><span class="pun">:</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">v</span><span class="pun">}`)</span></li><li class="L4"><span class="pun">});</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="pln">subject</span><span class="pun">.</span><span class="pln">next</span><span class="pun">(</span><span class="lit">5</span><span class="pun">);</span></li><li class="L7"><span class="pln">subject</span><span class="pun">.</span><span class="pln">complete</span><span class="pun">();</span></li><li class="L8"><span class="pln">&nbsp;</span></li><li class="L9"><span class="com">// Logs:</span></li><li class="L0"><span class="com">// observerA: 5</span></li><li class="L1"><span class="com">// observerB: 5</span></li></ol></code>
+    </pre></aio-code></code-example>
+<p>The AsyncSubject is similar to the <a href="https://rxjs-dev.firebaseapp.com/api/operators/last"><code>last()</code></a> operator, in that it waits for the <code>complete</code> notification in order to deliver a single value.</p>
+
+</div>
+<!-- links to this doc:
+-->
+<!-- links from this doc:
+ - /api/operators/last
+--></div></aio-doc-viewer><aio-dt><!----></aio-dt></section></mat-sidenav-content></mat-sidenav-container><!----><div class="toc-container no-print ng-star-inserted" style="max-height: 850px;"><aio-lazy-ce selector="aio-toc"><aio-toc ng-version="8.0.0"><!----><div class="toc-inner no-print collapsed ng-star-inserted"><!----><!----><ul class="toc-list"><!----><!----><!----><li title="Subject" class="h1 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#subject">Subject</a></li><!----><!----><!----><li title="Multicasted Observables" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#multicasted-observables">Multicasted Observables</a></li><!----><!----><!----><li title="Reference counting" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#reference-counting">Reference counting</a></li><!----><!----><!----><li title="BehaviorSubject" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#behaviorsubject">BehaviorSubject</a></li><!----><!----><!----><li title="ReplaySubject" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#replaysubject">ReplaySubject</a></li><!----><!----><!----><li title="AsyncSubject" class="h2 ng-star-inserted active"><a href="https://rxjs-dev.firebaseapp.com/guide/subject#asyncsubject">AsyncSubject</a></li><!----></ul><!----></div></aio-toc></aio-lazy-ce></div></aio-shell>
+
+  <noscript>
+    <div class="background-sky hero"></div>
+    <section id="intro">
+      <div class="hero-logo">
+        <img src="assets/images/favicons/favicon-192x192.png" width="250" height="250" alt="RxJS logo">
+      </div>
+      <div class="headline-container">
+        <h2 class="hero-headline">RxJS</h2>
+        <span class="hero-subheadline">Reactive Extensions Library for JavaScript</span>
+      </div>
+    </section>
+    <h2 style="color: red; text-align: center;">
+      <b><i>This website requires JavaScript.</i></b>
+    </h2>
+  </noscript>
+  <script src="./RxJS - Subject_files/rxjs.umd.min.js.download" async=""></script>
+  <script src="./RxJS - Subject_files/devtools-welcome.js.download"></script>
+<script src="./RxJS - Subject_files/runtime-es2015.0f4e217eb07993c03e55.js.download" type="module"></script><script src="./RxJS - Subject_files/polyfills-es2015.6f82c5b100e7eb2e837a.js.download" type="module"></script><script src="./RxJS - Subject_files/runtime-es5.81550ebf6333e570f677.js.download" nomodule=""></script><script src="./RxJS - Subject_files/polyfills-es5.141dc20dd7f1b2d25976.js.download" nomodule=""></script><script src="./RxJS - Subject_files/main-es2015.7199f632fe5a9a1ccbcb.js.download" type="module"></script><script src="./RxJS - Subject_files/main-es5.598fd983caf0db9756f2.js.download" nomodule=""></script>
+
+<div class="cdk-live-announcer-element cdk-visually-hidden" aria-atomic="true" aria-live="polite"></div></body></html>

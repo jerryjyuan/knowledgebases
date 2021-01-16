@@ -1,0 +1,21 @@
+
+
+==============================================
+How to Search Angular: JS:
+
+==>APIs:
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
+
+==>Source Code:
+	http://reactivex.io/rxjs/source.html
+
+==>Resources:
+	https://angular.io/guide/rx-library
+
+
+
+==============================================
+
+
+==============================================
+

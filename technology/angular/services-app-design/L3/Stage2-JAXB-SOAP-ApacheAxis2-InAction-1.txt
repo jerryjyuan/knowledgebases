@@ -1,0 +1,203 @@
+
+============================================================
+SOAP: Axis2:
+
+==>Can be integrated with Spring SOAP client?
+	==>SOAP is common
+	==>WSDL is common
+	==>...
+
+============================================================
+XML/Java: Concepts:
+
+SAX
+DOM/JDOM
+JAXP
+JAXB
+StAX API (Streaming API for XML)
+
+SOAP/WSDL/XSD
+XML Reader/Writer/XSD
+
+XMLBeans:
+	IntelliJIDEA likes it
+
+DTD/XSD
+
+XSLT
+
+============================================================
+Axis2 Specials:
+
+	Use: ANT
+	Enabled:	varied build.xml with embedded ANT targets and operations/goals
+
+	POJO
+	AXIOM:	AXIs Object Model
+	ADB:	Axis Data binding
+	JiBX: 	JiBX Data Binding
+	
+============================================================
+Axis2 Server: SOAP: After Refreshing More:
+
+Summaries:
+	==>Axis2 is actually so easy
+
+==>Standalone CLI/Server:
+	==>Only work for JDK 8
+
+	%AXIS2_HOME%\bin\java2wsdl.bat -cp . -cn samples.quickstart.service.pojo.StockQuoteService -of StockQuoteService.wsdl
+
+		C:\Users\jerry\apps\axis2\samples1>javac -cp . samples\quickstart\service\pojo\StockQuoteService.java
+		Note: samples\quickstart\service\pojo\StockQuoteService.java uses unchecked or unsafe operations.
+		Note: Recompile with -Xlint:unchecked for details.
+
+		C:\Users\jerry\apps\axis2\samples1>java2wsdl.bat -cp . -cn samples.quickstart.service.pojo.StockQuoteService -of StockQuoteService.wsdl
+		Using AXIS2_HOME:   C:\Users\jerry\Downloads\Installs\axis2-1.7.9
+		Using JAVA_HOME:    C:\Program Files\Java\jdk1.8.0_261
+		log4j:WARN No appenders could be found for logger (org.apache.axis2.util.Loader).
+		log4j:WARN Please initialize the log4j system properly.
+		C:\Users\jerry\apps\axis2\samples1>
+
+	==>Provide some examples in the bundle
+
+
+
+==>WAR-Server on Tomcat:
+	5 Ways:
+	
+	==>deploying Plain Old Java Objects (POJO), 
+		==>Different services.xml
+		==>Service Class: use POJO class
+	==>building the service using AXIOM's OMElement, 
+		==>Different services.xml
+		==>Service Class: use AXIOM
+	==>generating the service using Axis2 Databinding Framework (ADB), 
+	==>generating the service using XMLBeans, 
+	==>generating the service using JiBX
+	
+	Axis2 Official Ways: All use: ANT build to create servcies
+	
+	Other ways: can be maven, ...
+
+
+
+
+============================================================
+Axis2 Server: SOAP: Before Refreshing More
+
+==>Special inward impl vendor for SOAP solutions:
+	==>JAX-WS
+	==>Spring SOAP-APIs
+	==>Apache CXF SOAP-APIs
+	==>...
+	==>JBoss SOAP???
+
+==>Axis2 SOAP Server:
+	==>70%: Axis2 WAR deployment on some servlet container: Tomcat, or app server
+	==>10%: Build Axis2 SOAP APIs as server part and deployed to servlet container or app server:
+			==>JT's team
+	==>20%: Start CLI from Axis2 standalone server: serve as the server SOAP services
+	
+	==>Server: So their services SOAP server APIs: development are unique... ==>Heavily based on Axis2 server distribution bundle
+	
+	==>Client: So their client modules are also special - can tightly coupled with the server distribution bundle's creation of the client modules
+	
+		==>So it is not easy Spring Boot + Axis2-client: ...
+		
+		==>But Spring + Axis2-client is: possible ==>But may not be optimal as using the server distribution bundle to build the Axis2-client
+		
+		==>Same as maven build:  may not be optimal as using the server distribution bundle to build the Axis2-client
+		
+		So, the optimal way to build Axis2 server and client: should use: the axis2 server distribution bundle
+
+Questions:
+
+	==>Can you build up Spring Boot and Spring SOAP client ==>talk to Axis2 Server SOAP APIs?
+	
+		1) Step 1: download Axis2 server distribution bundle or WAR file
+		2) Step 2: build an Axis2 server SOAP services - run on the standalone bundle or deploy to the WAR and on the tomcat: ==>Enable Axis2 SOAP Services APIs
+		3) Step 3: 1) build up an Axis2-client using "axis2 server distribution bundle": to do some testing
+				   2) Optional 2: create Spring or Spring Boot or maven project with Axis2-client module: and then to some testing
+				   3) and then use Spring or Spring Boot together with Spring SOAP clients: create the client modules using the Axis2 server WSDL
+						==>Create test modules from SOAP client to call Axis2 Server: and see if it works
+	
+============================================================
+Axis2 Client Module:
+
+	/**
+	 * This is the Axis 2 client call: Now: 1.7.9
+	 * Axis 2 Client: created by XmlBeans from Maven plugin
+	 * https://dzone.com/articles/creating-apache-axis2-client-jar-from-a-wsdl-using
+	 * 
+	 * All the elements extend XmlBeans, so a lot of useful functionalities are available by default. 
+	 * For example, just doing a toString on any of the objects will generate the corresponding SOAP 
+	 * message for that object
+	 * 
+	 * 
+	 *
+	 *  https://axis.apache.org/axis2/java/core/docs/installationguide.html
+		Binary distribution	axis2-1.7.9-bin.zip	SHA512 PGP
+			==>CLI / Standalone Server
+		Source distribution	axis2-1.7.9-src.zip	SHA512 PGP
+		WAR distribution	axis2-1.7.9-war.zip	SHA512 PGP
+			==>Can be deployed onto a servlet container
+			
+		==>Axis 2 service APIs can be deployed to the Axis 2 server (standalone):
+			==>%?
+					==>This could be: 20%
+		==>These APIs can be deployed to normal web SOAP deployment as well
+			==>%?
+				1) axis2 WAR file (axis2 server and services container) inside one servlet container
+					==>This could be: 70%
+				2) Pure standalone Axis 2 server app inside one servlet container
+					==>This could be: 10%
+					Axis2_1.3: JT's team: use this way
+					
+		To deploy a new Web service in Axis2 the following three steps must 
+		be performed:
+		  1) Create the Web service implementation class, supporting classes 
+		     and the services.xml file, 
+		  2) Archive the class files into a jar with the services.xml file in 
+		     the META-INF directory
+		  3) Drop the jar file to the $AXIS2_HOME/WEB-INF/services directory
+		     where $AXIS2_HOME represents the install directory of your Axis2 
+		     runtime. (In the case of a servelet container this would be the
+		     "axis2" directory inside "webapps".)
+		
+		To verify the deployment please go to http://<yourip>:<port>/axis2/ and
+		follow the "Services" Link.
+
+		Service Archive plugin for Eclipse	axis2-eclipse-service-plugin-1.7.9.zip	SHA512 PGP
+		Code Generator plugin for Eclipse	axis2-eclipse-codegen-plugin-1.7.9.zip	SHA512 PGP
+		Axis2 plugin for IntelliJ IDEA	axis2-idea-plugin-1.7.9.zip	SHA512 PGP
+			==>IntellijIDEA can do IDE code generation
+			
+			
+		==>Very Proprietary SOAP Framework: Axis2
+		https://axis.apache.org/axis2/java/core/docs/quickstartguide.html
+		
+		Creating services
+			Deploying POJOs
+			Building the service using AXIOM
+			Generating the service using ADB
+			Generating the service using XMLBeans
+			Generating the service using JiBX
+		
+		Generating Clients
+			Creating a client using AXIOM
+			Generating a client using ADB
+			Generating a client using XML Beans
+			Generating a client using JiBX
+			Or: use maven plugin to generate Axis2 client
+	
+		Based on its proprietary natures, and inward personality, it is not so common
+		to integrate Axis2 services/SOAP-APIs with:
+			SpringFramework
+			SpringBoot
+			...
+			
+	 * 
+	 */
+
+============================================================

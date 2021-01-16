@@ -1,0 +1,9 @@
+
+https://www.ag-grid.com/angular-grid/
+
+npm install --save ag-grid-community ag-grid-angular
+
+Angular Version	ag-Grid Versions
+6	18 - 22
+7 - 9	18 - 23+ (23 recommended for Angular 9)
+7 - 10+	24+ (24+ for Angular 10)

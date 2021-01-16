@@ -1,0 +1,23 @@
+
+
+============================================================
+BNY Mellon: JSP/Java/Angular work:
+	==>2019/12:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+
+Angular Guys:
+	Mr Qian/USAGuy/Holly: they worked on Angular modules while I worked on some existing apps
+	
+	I also tried to work on Angular modules...
+	
+	Apps: Angular:
+	
+		==>Use: maven-exec-plugin
+		
+	...
+
+============================================================
+

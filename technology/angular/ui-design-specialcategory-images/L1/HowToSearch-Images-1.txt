@@ -1,0 +1,26 @@
+
+==============================================
+How to Search Images:
+
+Method 1:
+	==>Open: Google:
+		==>Go to Images: search anything...
+
+	==>Open: Edge:
+		==>Go to Images: search anything...
+		
+	Then do a screen print: entirely or partial image
+
+Method 2:
+	Bootstrap 4 ==>Icons ==>Many open source icons
+		https://getbootstrap.com/docs/4.0/extend/icons/
+		https://useiconic.com/open/
+	Material Icons:
+		https://material.io/resources/icons/?style=baseline
+	Google Icons:
+		https://www.w3schools.com/icons/google_icons_intro.asp
+
+==============================================
+
+
+==============================================

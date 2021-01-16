@@ -1,0 +1,290 @@
+
+==========================================================
+Angular Injector:
+
+- Angular Concepts:
+	- Angular takes many common concepts:
+		HTML/CSS/JS/Java.../OOP/...
+		HTML:
+			Form
+			Control: some of the DOM elements:
+				- DOM elements: take user event inputs
+				- DOM elements: take data binding
+				- DOM elements: take app/module output displays
+			...
+	- Root
+	- Application-Wide
+	- Metadata
+	- Resolution
+	- LogicalTree / RenderTree (DOM HTML Tree)
+	- Host/Parent/Child
+	- Tag(Component)/Selector/DOM-Element
+	- Modifiers:
+		- constructor(@Optional() public optional: OptionalService)
+		- constructor(@Self() public flower: FlowerService) {}:
+			providers: [{ provide: FlowerService, useValue: { emoji: '...' } }]
+		constructor(@Optional() @SkipSelf() parent: Person)
+		- What difference between @Self and @Host?
+			- Angular calls this parent component the "host": this is obvious when having a parent/child component
+	- Instances:
+		Component instances
+		Service instances
+	- component factoriess
+	- entry components:
+		For tree-shaking
+		2 - automatically included:
+			- @NgModule.bootstrap
+			- In router configuration: they are dynamically loaded
+		2 - can be added
+			- bootstrap needs
+			- dynamically loaded: maybe: including dialog components...
+		Don't include components that are referenced in the templates of other components.
+	- Harmless Scenarios:
+		- Add some components into entry components - but might impact tree-shaking
+		- Add a component in both bootstrap and entry components parts
+		- import multiple times ...
+		- ...
+	- Service/Provider/Token (Injectee) / Dependency Providers:
+		- Way 1: @Injectable({ ...: root}) or @NgModule
+		- Way 2: Direct used in some component: providers list: this only enables its use in this component tree
+		
+		Ways:
+			- Use class:
+				1) Use Class name
+				2) Use: provide: xxx, useClass: yyy (useClass / useExisting / useValue / useFactory)
+				3) Variations:
+					- Class Provider with dependencies
+					- Aliased Provider
+					- Value Provider
+			- Use non-class:
+				1) Object Literals
+				2) ... - but cannot use: Interface
+					===>when TypeScript is transpiled to JavaScript, the interface disappears
+					===>JS: doesn't have interfaces
+			- Use assisting ways:
+				1) InjectionToken API
+				2) @Inject annotation
+				3) provide and inject the configuration object in an NgModule like AppModule
+			- Use predefined tokens and multiple providers
+				- A provider object can associate any of these injection tokens with one or more callback functions that take app-specific initialization actions
+				- Multiple providers can be associated with a single token
+			- Use tree-shakable providers
+		
+	- Injector Working Logic - LookingFor/Search:
+		- ElementInjector Tree:
+			- 1) Search Entire-LogicalTree: Aka: Component-templateUrl tree
+			- 2) @Host @Self @SkipSelf: applied to these element injector search... 
+				 - not for ModuleInjector tree search...? - Maybe also... - but for sure limit ElementInjector Tree search
+			- 3) ElementInjector search only goes highest to AppComponent level
+		- ModuleInjector Tree: as fallback injector tree - after ElementInjector
+			- 1) Search @NgModule() tree
+			- 2) Start with closest @NgModule after ElementInjector search process:
+				 - Closest: aka: its closest parent or controlling Module class - it goes up to its parent tree until AppModule
+				 - Then go up to PlatformInjector and NullInjector
+				   ===> @Optional: for NullInjector use
+			- 3) Practically: these ModuleInjector Tree is actually consolidated and flattened into one single module injector array:
+				 ===><app-child> ModuleInjector and the <app-root> ModuleInjector are flattened into one ModuleInjector
+				 ===>So: actually: ModuleInjector search is simplified
+		- <#VIEW></VIEW>: mean rendered DOM tree - visible and rendered view:
+			The <#VIEW> here represents an instance of a template
+	- XXXModule: Root Level Modules:
+				 - forRoot(): for methods that configure services in root modules
+	- XXXModule: Feature Modules - some of them: lazy-loaded modules
+				 - forChild(): for methods that configure services in feature modules
+				 - Example 1:	RouterModule also offers a forChild() static method for configuring the routes of lazy-loaded modules
+
+
+	Services:
+		- Imports a Module: create a new service instance
+			- Example 1:	ElementInjector?
+							===>It will create a new instance for each service to each of the component instances - via component's ElementInjector
+							===>sandboxing because each service and component instance has its own sandbox to play in
+							
+			- @Optional:	Help prevent multiple instances of one service
+		- Injecting service
+			- Example 1:	Singleton Service: application-wide single service: which is why from AppModule/Root
+							===>1) inject into root: providedIn
+							===>2) AppModule:	==>Include the service
+												==>In a module that is only imported by AppModule
+							Notes:
+								- Singleton service like the root injector can exist in other level as well:
+								- Each injector creates a singleton instance of a dependency
+								- A particular service can be provided and created at any level of the injector hierarchy, 
+									which means that there can be multiple instances of a service if it is provided by multiple injectors.
+									providers: [HeroService]
+			- 
+
+- Angular Injection - DI:
+
+	- Types and Implementations:
+		1) Built-in:
+			NullInjector:				Top master: always return error - do not disturb me - unless use a modifier: @Optional: return null
+			Platform ModuleInjector:	PlatformModule: provide some platform level services: for multiple apps
+		2) App Modules:
+			1) Injectors:
+				Root ModuleInjector:		AppModule - enable root injector for the entire app
+												===>Always register application-wide services with the root AppModule, not the root AppComponent
+												===>The service provided by the root AppModule takes precedence over services provided by imported NgModules. The AppModule always wins.
+											===>All eagerly loaded modules' providers are added to this root injector												
+											===>All lazily-loaded modules' providers are added to a newly created child injector
+												===>This scenario causes your app to create a new instance every time
+													===>But better than each component instance creates its own service instance
+												===>Lazy-loaded modules and their components can inject AppModule services; they can't inject AppComponent services
+												===>To limit access to a service, consider lazy loading the NgModule that provides that service
+											===>AppComponent: it is a component ElementInjector:
+															  - One level below AppModule Injector
+															  - routing operates at the root level where AppComponent services don't exist
+											Under AppModule-Injector: the real root injector:
+												- Lazy-loaded Modules: they create their own child injector
+												- AppComponet: they create their below-root component tree injector (ElementInjector)
+													===>lazy-loaded modules can't reach them
+													===>Other component trees can not see AppComponent injector's services
+														- Example 1: rare component trees inside the apps
+														- Example 2: libraries' component trees
+												===>These 2 cannot refer to each other
+				Feature Modules: 			Consolidated into AppModule Injector: flattened/Combined
+											- When you import an NgModule, Angular adds the module's service providers (the contents of its providers list) to the application root injector.
+											- Merging NgModule providers into the application injector makes it easy for a module library to enrich the entire application with new services.
+												By adding the HttpClientModule once, every application component can make HTTP requests
+				Element Injector:			For each @Directive and @Component
+											- Theoretically: AppComponent is a component/ElementInjector
+			2) App Design and Implementations:
+				1) Design and create: AppModule class: this module class automatically has the root ModuleInjector enabled for the entire app
+				2) For each component class:
+					- Has built-in ElementInjector enabled - but empty
+					- If this component wants some services (services are main injectees):
+						===>then add Providers: to list its own level's service object + also make them available for child components
+						===>Common ways: to inject its own service: using constructor - but this is not the only way
+				3) For each @Directive class:
+					- It can do the same as the component class
+				4) For injectee (aka: provider): aka: make themselves available to the app and other @Component and @Directive:
+					- No.1: Service class(es)
+							@Injectable({
+								providedIn: root
+									===>This can be overriden:
+										1) In AppModule:
+										   src/app/app.module.ts (providers)
+										   Add another/new service class into: providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }]: this will override this enabled root-level service
+							})
+								===>Pros: good for tree-shaking
+							Or:
+							@NgModule({
+								providers: [...]
+							})
+					- 
+	
+	- Global/Application-Wide:
+		Register:
+			@Injectable()
+			@Injectable({JSON String})
+			makes the service automatically available to the whole application and thus singleton by default
+			===>Practice 1: Why becoming application-wide? ===>Register on the root-component level
+							===>Providers that are created this way automatically are made available to the entire application and don't need to be listed in any module
+			===>Practice 2: Register on the some-intermediary-component level: make it available in that component tree
+	
+	- Component Based:
+		Component-Level - Injector: every component has a component-level injector: <= ElementInjector <= Angular enables this for every single DOM element <= It is configured by Providers
+							===>@Component
+							===>@Directive
+		===>Specify it: 	===>in providers/viewProviders List...	===>This provide its own definition of the service: useXXX
+							===>Using viewProviders makes services visibile in the <#VIEW>
+								viewProviders: [{ provide: AnimalService, useValue: { emoji: '...' } }]
+								===>Same as Providers except: not in use if not in #VIEW
+								1) Practical Point 1: Parent/Child component: these are the same
+									<parent><child></child></parent>
+									===>This is the normal case: make child component inside the #VIEW of parent component
+									===>So the parent's viewProviders can be enabled inside this child component
+								2) Exception:
+									===>Not using this common way, instead using the "ng-content" to inject "contents"
+									===>Because viewProviders only visible in #VIEW, so the content injection doesn't see this viewProviders
+								Summaries:
+									===>Practically the same
+									===>But always prefer to use: Providers: why? ===>Angular injector is based on providers list mainly
+									===>Only special scenarios: use viewProviders
+									
+									
+							===>New Summaries:
+								===>Providers: 2 types: provide services
+								===>Type 1: Providers: Core and Basic type
+								===>Type 2: ViewProviders: different: "Core and Basic type": 
+											aka: better - aka: enabled inside <#VIEW>
+											===>Inside <#VIEW> - means: inside the component's template
+											But: actually Providers could be also mostly inside the template
+											===>But under special scenarios: then ViewProviders become more powerful:
+												- Special Scenario 1: use: "ng-content"
+													===>declared inside the <#VIEW>, it isn't visible to the projected content
+								===>Another point is: the non-displayed ViewProvider content is due to the new child component doesn't
+									have its own Providers and ViewProviders list - so in logical tree - it is not inside its own <#VIEW>
+		
+		===>Normal Ways:
+			Constructors:		===>Just add an injected service into its Constructor(Injected Service): such as from application-wide service
+
+		Benefits:
+			- 1) Utilize component-level injector to enable this service for every component "instance": why need? 
+				 - maybe not, but in case: there is only one single application-wide singleton service, then it really needs this
+				 ====>So in application senses: these multiple component-instance level services and implementations can:
+				 	  enable all concurrent functions for the same component usage or the same component trees
+			- 2) Also can enable more specialized service overriding service in this component - overriding parent levels services
+		
+			Example 1:	Component A:
+							Providers: {} ===>It can inject any provider scenarios like: substitution: services / test services (for testing)
+
+
+- Angular Component Trees/Hierarchy:
+
+	- 
+	
+	- 
+	
+	
+	- template files:
+		- added child-components (elements) into this template: become its child components
+		- 
+
+- 
+
+- Angular Components - inter-communications - refer to parent/child or each other:
+
+	- @Output / @Input
+	
+	- @ViewChild @ViewChildren
+	
+	- 
+
+	- Angular Binding:
+		- Interpolation: In template files:
+			{{Expression}}
+		- Property Binding:
+			[]
+			==>Bind component's fields' data (expression) into template file data elements: []
+		- 2-Way Binding:
+			==>Bind user input (keyboard events) ==>Into the Component's property fields: ()
+			==>Bind component's fields' data into template file data elements: []
+			[()]
+		- CSS Style Binding:
+			Class Binding: enable customized class features for CSS elements
+			Attribute Binding: enable customized attribute features for CSS elements
+
+
+- Angular Module Design:
+
+	- Similar to OOP and Java
+	- Can use most of the Java design patterns and concepts
+		- 3-Tier:
+			- 
+		- Sprint-Boot Styles:
+			- Component (Spring-Boot Controller)
+				- Service Layer: Injected (Similar to Spring Boot autoconfigured @Service):
+					- Singleton Service
+				- Data Layer: SessionStorage - Java Cache
+					- Data Layer API Calls
+					- 1) Enable Angular HttpClient Module
+					- 2) Call Other Apps: RESTful APIs
+						 - 1) If embedded inside a Spring Boot App Module: the Angular modules can obtain configuration data from Spring Boot config data
+					- 3) 
+					- Design Mock Data Objects: for mock data testing
+					- Design Model Class Objects: holding data elements with RESTful APIs
+					- Design Aggregated Data Collection Classes: group related data elements together
+		- Many Java Design Patterns
+
+==========================================================

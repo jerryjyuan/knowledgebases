@@ -1,0 +1,245 @@
+
+=========================================================== 
+Angular - Material Design:
+
+Resources: Material Design:
+	- https://material.angular.io/
+	- https://github.com/angular/components
+	- Angular Material Design:
+			Theming/Styling: https://material.angular.io/guide/typography
+				(https://material.angularjs.org/1.0.1/CSS/typography)
+			Customizing:
+				https://material.angular.io/guide/customizing-component-styles
+	- General Material Design:
+			https://material.io/design/foundation-overview/
+	
+Good App Uses:
+	- 
+	- Use advanced starter:
+		https://github.com/tomastrajan/angular-ngrx-material-starter
+
+SO SO SIMPLE!
+	- Tags:
+		- even simpler than JSTL, Struts tags, ..., tlb coding, ...
+		- if you know how to write html pages, you can quickly know how to use material design tags
+	- Styling:
+		- Material Design has many available stylings existing - you don't need to add your own...
+	
+	Challenges:
+		- Not its difficult tags...
+		- It is:
+			- don't know its names and syntaxes existing
+				- so you need to refer to these offical document urls
+				- so you need to use more and become familiar
+			- forget the tag details...
+				 - check the document url
+			- how to tweaking
+				 - check the document url
+			- 
+
+===>UI Design: main parts:
+	Layout:
+	Headers:
+	Contents:
+		menu/nav	
+		Form		
+		Buttons	
+		Data
+		Popups
+
+===>UI Design: main types:
+
+	Type 1: Container/Layout
+			<mat-card class="xxx">
+			<mat-card-content>
+
+			Card:				50% usage:
+								==>Use 1:	decorative usage (enable a content section): no flow control:	>= 70%
+								==>Use 2:	role
+								==>Use 3:	part of the flow: tabindex
+								Add: its fields
+			Divider
+			Expansion Panel
+			Grid list
+			List
+			Stepper
+			Tabs
+			Tree
+			
+			===>The above can be nested to each other to use multiple-tiered containers/layouts
+
+			Example 1:
+
+				<mat-card class="xxx">
+				  <mat-card-header>
+				  </mat-card-header>
+				  <mat-card-content> 
+				    <form class="xxx">
+				      <mat-tab-group>
+		    	        <mat-tab label="xxx" class="xxx">
+				          <table style="width: 100%" cellspacing="10">
+				            <tr>
+				              <td>
+				                <mat-form-field>
+				                  <mat-label>Name</mat-label>
+				                  <input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+				                </mat-form-field>
+				              </td>
+				            </tr>
+				          </table>
+				        </mat-tab>
+		    		</form>
+				  </mat-card-content> 
+				</mat-card>
+		
+	Type 2: Grouping Functioning
+			<mat-tab-group>
+	
+	Type 3: Replacing or Substituting or Optimizing/Assisting HTML elements
+			1) Menus/Tabs/Navs: part of containers as well
+				<mat-tab label="xxx" class="xxx">
+
+			2) Main Elements:			
+				<mat-checkbox [checked]="isCompany"> Is company?</mat-checkbox>
+	
+			3) Secondary Elements:		
+				<mat-label>Email</mat-label>
+			
+			Questions:
+				- Can we just use normal HTML selectors/elements for these scenarios?
+					- Yes, but using material design tags are better in these scenarios
+						- which is why we have material design tags
+						- also aligned with other material design tags - why not keeping consistent
+				- 
+			
+	Type 4: Required as sub-parts of one parent-material-design-tag:
+			<mat-form-field>
+	
+			<mat-label>Email</mat-label>
+			
+			Questions:
+				- Can normal HTML selectors/elements do the same in lieu of these sub-parts?
+					- Mostly not - because <mat-form-field> is exactly suited for its parent <mat-form>
+				- 
+			Points:
+				- Some sub-parts: are optional
+				- 
+
+	Type 5: Attributes - HTML selectors/elements
+			<input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+
+			Questions:
+				- Do we need to add material design attributes all the time?
+					- Optional, but good to have - but if some syntax is required, then these attributes are needed
+				- 
+
+	Type 6: Sometimes - Material Design tags are weak, so using HTML elements are needed:
+	
+			Example 1: Sometimes HTML table is stronger than Material Design mat-table
+			
+			
+	Type 7:	Any other 3rd party html/css tags or libs are in use together with Matertial Design tags?
+	
+			Example 1:	3rd party's parts functions are stronger, more appropriate, or unique...
+						
+						For example: in case Material Design tags don't have datepicker tags:
+		                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		                  <mat-datepicker #picker></mat-datepicker>						
+						
+
+===>Styling/Theming:
+	- No.1: Refer to Angular document site - theming:
+		https://angular.io/guide/component-styles
+	- No.2: Angular Material Design - theming capabilities
+	- 
+	
+	- More: Theming:
+		https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+
+	- More: Better Look and Feel Design:
+		- Way 1: Use Angulat theming methods:
+				 https://angular.io/guide/component-styles
+		- Way 2: Directly apply Angular MD-themes and MD-theming
+				 ==>Material Design class="xxx" is an important feature to use for all material design tags
+				 https://material.angularjs.org/1.0.1/CSS/typography
+				 Angular Material provides typography CSS classes you can use to create visual consistency across your application.
+		- Way 3: Utilize common built-in or bundled - themes/styles
+		- Way 4: Utilize common open source - themes/styles
+		- Way 5: Utilize 3rd-Party - themes/styles
+		- Way 6: Advanced Usage: Add scss, sass into apps
+		- Way 7: Add app-specific styles: .css
+		- Way 8: Add component-folder's styles: .css
+		- Way 9: Add inline-css and in-header-css into individual html templates
+
+===>Procedures:
+	- Procedure 1: take material design tags similar to HTML elements
+				   - Whatever HTML elements can layout or design - use material design tags
+				   - Aka: replace html elements with material design tags
+	- Procedure 2: Material Design tags work together with HTML elements
+	- 
+
+
+===>Internal Logic:
+	===>Each Material Design tag: like an Angular component class
+		Pros:
+			- Encapsulate the normal html - so simpler code
+			- Optimize or customize the normal html
+			- Enable some widget/gadget/predefined-parts/functionality that html/css cannot do
+	===>Internally each tag-component generate its own component logic and fields and html template
+	===>But the html template might have some internal sophistication/abstraction using its internal objects
+		- more complex than normal component html template
+	===>Ways:
+		- Way 1: directly check the material design tag documents and use them
+				 ===>But sometimes you don't know what will be rendered in the real page
+				 ===>Method 1: Take those tags' names as its meaningful html elements plus its attributes
+		- 
+	===>How all material design tags work with html elements?
+		- Can be intermixed together in the same component html template file
+		- Each component: can directly us material design tags
+						  - because the entire html's headers and footers could be defined in other files
+						  - CSS hierarchies: still follow: local .css file take-precedence and override global/module css
+
+
+===>UI Design: special topics:
+
+	- Topic: 
+	
+	- Topic:	Dialogs/Popups/Elevations:
+	
+					MatDialog
+					MDDialog
+					...
+					Modal
+					...
+					z-index
+					...
+					Angular Material's elevation classes and mixins:
+						https://material.angular.io/guide/elevation
+						- predefined CSS classes
+						- mixins
+						https://material.io/design/environment/elevation.html
+					...
+					
+					
+	- 
+
+
+===========================================================
+Angular:
+	https://github.com/angular
+
+
+Become an advanced Angular developer:
+	- Review:
+		https://github.com/tomastrajan/angular-ngrx-material-starter
+		https://tomastrajan.github.io/angular-ngrx-material-starter#/about
+	- Review More and More:
+		Angular Material Design:
+			Theming/Styling: https://material.angular.io/guide/typography
+				(https://material.angularjs.org/1.0.1/CSS/typography)
+			Customizing:
+				https://material.angular.io/guide/customizing-component-styles
+		General Material Design:
+			https://material.io/design/foundation-overview/
+	- 
+===========================================================

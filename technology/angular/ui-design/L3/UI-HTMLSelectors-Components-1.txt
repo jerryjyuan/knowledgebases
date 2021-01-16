@@ -1,0 +1,6 @@
+
+Design Principle 1:
+	When authoring Angular components, you should re-use these native elements directly when possible, rather than re-implementing well-supported behaviors.
+
+Design Principle 2:
+	For example, instead of creating a custom element for a new variety of button, you can create a component that uses an attribute selector with a native <button> element. This most commonly applies to <button> and <a>, but can be used with many other types of element.

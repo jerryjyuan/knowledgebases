@@ -1,0 +1,72 @@
+
+============================================================
+==>Step 12: App Security Protocol:
+	==>SSO:
+		==>This is the scenario for RMT app: SSO via TAM/AD/...
+	==>Route guard / Auth Guard
+	==>HTTP Interceptors: JWT and Error interceptors
+	==>
+	==>Spring Security and Angular:
+		==>See "https://spring.io/guides/tutorials/spring-security-and-angular-js/"
+	==>
+	
+	==>Coding Practices:
+		==>Angualar: mostly address web level security (XSS/CSRF/CORS), not application level security
+		==>
+		==>XSS:
+			==>1) Method 1: prevent injection:
+				Main Parts: avoid inject code from "Resource URLs" like <script>code into Angular DOM structures/elements: XSS security issues
+				==>Angular does santinization by removing <script> part
+				==>4 Parts (Security Contexts): HTML(innerHTML)/CSS(style)/URL(<a href>)/Resources-URL(3rd-party)
+			==>2) Method 2: Component Template Files: ==>Not concatenate user inputs into template code: such as from component code
+				==>Use: Offline template compiler: template injection: especially for production deployment
+				==>Do not do dynamic template generation
+				==>Exception: build dynamic form in some safe way:
+					==>One type of form and form control
+					1) Use reative form
+					2) Create data model to represent form-control and controls
+					3) Enable form-groups for data + Supply data via services
+					4) Enable component for this form: dynamically create the form + enable display via selector
+					5) Enable validation for the inputs
+			==>3) Method 3: Use templateUrl and templateRef mainly instead of direct usage of DOM elements
+				  Also use Angular Sanitinizer APIs to do sanitizations when needed - especially for untrusted values
+			==>4) Method 4: Enable web server returned header: content-security-policy headers
+			==>5) Practical Ways:
+					==>Angular can:	1) certify some values to be trustable by using santinizer APIs - like FM CHG's bypass
+									2) convert user inputs into trusted values by conversion via some methods in the controller class/code
+		==>CSRF:
+			==>Common Web Tech:
+				==>Browser: same origin policy: only the code from the client domain/browser can:
+												1) access the cookies for that site on client browser
+												2) set the authentication token in the cookies (during the page load or the first GET request) to the request header from the subsequent client browser request
+												3) XSRF/CSRF evil code cannot access to this cookies code and token
+				==>Server/Site: send this randomly generated authentication token into the response to client and stored in their cookies
+				==>The cookies are JS readable
+				==>Then server/site: can validate this token with their side to validate the request from the client
+				==>Evilness-5-Scenario code: cannot access to the cookies/authentication, so CSRF can be prevented - especially againt evil CCP's CSRF
+					==>Example 1: Evil ChinaCCP performs: CSRF to dictate/discriminate/demonize/retaliate/abuse Jerry from evil-CCPers instead of others
+					==>5-Evil-Scenarios:	Dictator/Discriminator/Demonizer/Retaliator/Abuser
+					==>5-Evil-CSRF-Scenarios: CSRF-ed networks' Dictator/Discriminator/Demonizer/Retaliator/Abuser via "networks"
+				==>CSRF demonstrations in abusers and CCP domains...
+			==>Angular Ways: can do the similar ways as the above web ways
+				==>Special Example: HttpClient
+					==>Client (HttpClient API): does the 50% work: send a request => An interceptor does the work: access the cookies and set the X-XSRF-TOKEN in request header
+					==>Angular Server: should do another 50% work: set token and validate the token
+						==>If server does not take the default X-XSRF-TOKEN name, then client HttpClient can use XSRF option APIs to set customized names
+		===>XSSI:
+			==>Named: JSON Vuklnerability: attackers adds <script> ... and make it executable on JSON APIs ...
+			==>Server: prevent it by: adding: ')}], \n' to make it non-executable
+			==>Client: HttpClient: Strip them out before parsing the server JSON API response
+	==>injection
+	
+	==>interceptor
+	
+	==>
+	
+	
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

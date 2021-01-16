@@ -1,0 +1,881 @@
+
+============================================================
+==>Step 7:	Features - Integrations:
+
+	==>Step 7a:	Feature Integration - First-Party Integrations
+		
+	==>Step 7b:	Feature Integration - Second-Party Integrations
+
+	==>Step 7c:	Feature Integration - Third-Party Integrations
+	
+============================================================
+Feature Integration - Second-Party Integrations:
+
+		==>Methodologies:
+			==>Steps 1:	Adding
+			==>Steps 2:	Enabling
+			==>Steps 3: Integrating
+			==>Steps 4:	Configuring
+
+*****************
+==>Methodologies:
+*****************
+	==>JavaScript Datagrid
+		https://www.grapecity.com/wijmo/flexgrid-javascript-data-grid
+	==>Angular Component - Datagrid
+	
+	https://www.ag-grid.com/angular-grid/?gclid=CjwKCAjw9vn4BRBaEiwAh0muDJpHwuXhY-CyNtBEFIm0MBeh_IzSDEYQpurg1bwy00iRovnvEC3LTRoCfJAQAvD_BwE
+	https://github.com/ag-grid/ag-grid-angular-cli-example:
+		Use Angular 9 + ag-grid 23 + bootstrap 4.5
+	==>Steps 1:	Adding:
+				1) Install:
+					==>ng add xxx
+					==>npm install
+					Questions:
+						==>Angular APIs:
+							==>how to know which APIs are addable via its source code?
+								Example:
+								"xxx.d.ts":								C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-backbone\poc-backbone-reference\ag-grid-angular1\node_modules\@angular\common\http\http.d.ts
+							==>Why they use @angular/...
+						==>Party-APIs:
+							==>how to know which APIs are addable via its source code in "node_modules" or documentations?
+							Example:
+							==>main.d.ts:
+								C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-backbone\poc-backbone-reference\ag-grid-angular1\node_modules\ag-grid-angular\main.d.ts
+							==>	C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-backbone\poc-backbone-reference\ag-grid-angular1\node_modules\ag-grid-angular\dist\AgGridAngular.d.ts
+							==>Why they use @xxx/..., or: xxx,
+								==>import {...} from 'rxjs';
+								==>import {...} from 'ag-grid-community';
+								==>import 'ag-grid-enterprise';
+									==>This is correct: ...
+								Because whatever inside "node_module" is being used
+								Also: @xxx is more like Angular internal code and APIs usage
+							==>import { SetFilter } from 'ag-grid-enterprise';
+							==>import 'ag-grid-enterprise'; ==>Why does this work?
+							Why do some packages prefixed with: "@": @ag-grid-enterprise @ag-grid-community
+								==>Different registry and distribution website or vendors
+					Example:
+						npm install --save ag-grid-community ag-grid-angular: 2 together not working???
+						npm install
+						npm install --save ag-grid-enterprise
+						==>Version compatiability: not a main issues - as long as not too far away: better stick to the documentations
+				2) import into app module:
+						import { AgGridModule } from 'ag-grid-angular';
+						AgGridModule.withComponents([])
+				3) import into component/constructor...:
+						import { AgGridAngular } from 'ag-grid-angular';
+	==>Steps 2:	Enabling:
+				==>Enable: .css/.scss:
+							==>SCSS: internally enabled: 1) add SCSS syntaxes 2) add normal css syntaxes
+							@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+							@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+
+							.ag-theme-alpine {
+								@include ag-theme-alpine((
+									odd-row-background-color: #CFD8DC
+								));
+							}		
+							==>Can configure different settings:
+								_ag-theme-alpine-default-params.scss
+							odd-row-background-color: #CFD8DC
+								==>White: full of lights: 255 255 255: become white
+								==>RGB: #aabbcc: 1-9a-f: 1-15: only way to know better is: calculate CF and D8 and DC
+									==>#CFD8DC: CF: 1111 1111 => FF => tough...
+									==>Understand: the more you fill: the more lighter => close to white: FFFFFF
+									==>Estimate: the larger RGB values: the lighter
+								==>Black: no lights: 000000: total empty
+							As per version 2.2, TypeScript now supports the concept of a mixin — a function that can take a class, extend it with some functionality, and then return the new class, allowing other classes to extend from it — allowing classes to mix and share functionalities
+							1) More than a mixture
+							2) More like a Java inheritance: abstract class or interface...
+							@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-grid.css";
+							@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-theme-alpine.css";
+							@import "~bootstrap/dist/css/bootstrap.min.css";
+							==>Enrich the styles: only style.css: use ag-grid default theme + bootstrap css
+							==>Add special fonts:
+								<link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+							==>
+				==>Enable: .html
+				==>Enable: .component.ts
+						implements OnInit
+						@ViewChild('agGrid', {static: false}) agGrid: AgGridAngular;
+	==>Steps 3: Integrating:
+				==>Integrate with HttpClient:
+						constructor(private http: HttpClient)
+				==>Integrate with its own affiliated packages
+	==>Steps 4:	Configuring
+				==>Example: configure ag-grid-angular selector: input and output, ...
+							==>input: rowData
+							==>input: columnDefs
+				==>Example: enable functionality by calling its APIs and functions
+							==>const selectedNodes = this.agGrid.api.getSelectedNodes();
+				==>...
+	==>Steps 5:	Add feature modules and components:
+	
+				==>Add feature modules' components:
+					See below
+				
+				==>AgGridModule.withComponents([...])
+					==>Add app specific components into the AG-GRID table
+	
+				==>Enable Functionalities:
+				
+					==>Table Layout:
+						==>Component: Rich Grid: as main component
+										==>Use: Bootstrap to design layout
+										==><ag-grid-angular>: has its own container and layout
+						==>Component: Header
+						==>Component: Header-Group
+				
+					==>Table Data:
+						==>Component: Data
+						==>Model classes:
+							Enable global static data: and constant data:	import RefData from '../data/refData';
+						==>
+
+					==>Table Functions:
+						==>Component: Render
+					
+					==>Constructor:
+						==>Create/init column defs
+						==>Create/init data
+					
+					==>Page Functionalities:
+					
+						==>Define ag-grid functions: using APIs
+								public api: GridApi;
+								public columnApi: ColumnApi;	
+								==>Built-in functions from ag-grid: Utilize: many @Input (286) and @Output (82) data fields
+								https://www.ag-grid.com/javascript-grid-api/
+								https://www.ag-grid.com/javascript-grid-column-api/
+								(Do not need to navigate github source code)
+								ag-grid has very good documentation - similar to Angular
+								
+								Add: input and output fields
+									https://www.ag-grid.com/javascript-grid-column-definitions/
+								
+									https://www.ag-grid.com/javascript-grid-filtering/
+									
+							1) Table
+							2) Grid
+							3) Column
+							4) Filter:
+								==>Component: Filter
+
+						==>Input fields and output events:
+							==>Output functions: responding to outout events
+							==>Also can interact with private functions, and also ag-grid API functions
+								(ag-grid API functions: built-in functions to define and enable all grid behaviors)
+
+							https://www.ag-grid.com/javascript-grid-events/
+							
+						==>Define/create private functions
+						
+						==>Many components and fields and data are created based on what the ag-grid table needs
+
+				==>Core Logic:	ag-grid does MOST of the needed processing due to its vast functionalities and options of this component
+								==>ag-grid is one of the largest library component in Angular, or in Angular data table
+
+    <ag-grid-angular style="width: 100%; padding-right: 20px; height: 650px;" class="ag-theme-alpine"
+                     [columnDefs]="columnDefs"
+                     [sideBar]="sideBar"
+                     [rowData]="rowData"
+
+                     [defaultColDef]="defaultColDef"
+                     [dateComponent]="'dateComponent'"
+                     [frameworkComponents]="frameworkComponents"
+                     [modules]="modules"
+
+                     enableCharts
+                     enableRangeSelection
+
+                     suppressRowClickSelection
+                     rowSelection="multiple"
+
+                     (gridReady)="onGridReady($event)"
+                     (modelUpdated)="onModelUpdated()"
+                     (cellClicked)="onCellClicked($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+                     (cellContextMenu)="onCellContextMenu($event)">
+    </ag-grid-angular>
+
+
+import {
+    ColDef,
+    ColumnApi,
+    ComponentUtil,
+    Events,
+    Grid,
+    GridApi,
+    GridOptions,
+    GridOptionsWrapper,
+    GridParams,
+    Module,
+    Promise,
+    _
+} from "ag-grid-community";
+
+****************************************************
+Summaries:
+
+		==>Step 7b-1:	Feature - Feature Module Development: Data Table integration:
+						
+						==>ag-grid:
+							https://www.ag-grid.com/
+							https://www.ag-grid.com/documentation-main/documentation.php
+							
+							https://www.npmjs.com/package/ag-grid
+							
+							https://github.com/ag-grid/ag-grid
+							https://github.com/ag-grid/ag-grid/releases
+							https://github.com/ag-grid/ag-grid/tags
+							
+							https://github.com/ag-grid/ag-grid/blob/master/grid-packages/ag-grid-angular/projects/ag-grid-angular/src/lib/ag-grid-angular.component.ts
+							
+							https://www.npmjs.com/package/ag-grid-community?activeTab=readme							
+							
+							
+							Issues List:
+								==>Some theme mixins: not existing
+								
+								==>Some tweaking: between ag-grid-angular selector and: "component code"
+							
+							
+							Summaries:
+								1) A pure child-component: but very comploicated one
+								2) Utilize much more features and APIs than a normal application component
+								3) Utilize: many @Input (286) and @Output (82) data fields: due to configurations and settings, and multiple functions
+											Also define many application events:
+											@Output() public gridReady: EventEmitter<any> = new EventEmitter<any>();
+							How to Develop:
+								==>1) Settings and Configurations: Use: @Input
+								==>2) Display and Backend API calls: Use @Output
+								==>3) Functionality:	Use AG-GRID APIs
+														Example 1:	https://www.ag-grid.com/javascript-grid-export/
+								==>5) Development Procedures:
+										==>In-Advance Summarizing and Categorizations
+										==>Create 1-3 POC apps
+										==>When working on apps: Check the component documents: there are 286 config features and 82 event emitter features
+										==>
+								
+Layout & Styling
+Styling Rows
+Styling Cells
+Themes
+Grid Size
+Custom Icons
+Printing
+
+Client-Side Data
+Overview
+Accessing Data
+Updating Data
+Single Row / Cell,  Transactions,  High Frequency
+Immutable Data
+Context
+
+Server-Side Data
+Row Models
+Server-Side Row Model
+Infinite Row Model
+Viewport Row Model
+								
+import {
+    AfterViewInit,
+    Component,
+    ComponentFactoryResolver,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    ViewContainerRef,
+    ViewEncapsulation
+} from "@angular/core";
+
+import {
+    ColDef,
+    ColumnApi,
+    ComponentUtil,
+    Events,
+    Grid,
+    GridApi,
+    GridOptions,
+    GridOptionsWrapper,
+    GridParams,
+    Module,
+    Promise,
+    _
+} from "ag-grid-community";
+
+import { AngularFrameworkOverrides } from "./angularFrameworkOverrides";
+import { AngularFrameworkComponentWrapper } from "./angularFrameworkComponentWrapper";
+import { AgGridColumn } from "./ag-grid-column.component";
+
+@Component({
+    selector: 'ag-grid-angular',
+    template: '',
+    providers: [
+        AngularFrameworkOverrides,
+        AngularFrameworkComponentWrapper
+    ],
+    // tell angular we don't want view encapsulation, we don't want a shadow root
+    encapsulation: ViewEncapsulation.None
+})
+export class AgGridAngular implements AfterViewInit {
+    // not intended for user to interact with. so putting _ in so if user gets reference
+    // to this object, they kind'a know it's not part of the agreed interface
+    private _nativeElement: any;
+    private _initialised = false;
+    private _destroyed = false;
+
+    private gridParams: GridParams;
+
+    // in order to ensure firing of gridReady is deterministic
+    private _fullyReady: Promise<boolean> = Promise.resolve(true);
+
+    // making these public, so they are accessible to people using the ng2 component references
+    public api: GridApi;
+    public columnApi: ColumnApi;
+
+    @ContentChildren(AgGridColumn) public columns: QueryList<AgGridColumn>;
+
+    constructor(elementDef: ElementRef,
+        private viewContainerRef: ViewContainerRef,
+        private angularFrameworkOverrides: AngularFrameworkOverrides,
+        private frameworkComponentWrapper: AngularFrameworkComponentWrapper,
+        private _componentFactoryResolver: ComponentFactoryResolver) {
+        this._nativeElement = elementDef.nativeElement;
+
+        this.frameworkComponentWrapper.setViewContainerRef(this.viewContainerRef);
+        this.frameworkComponentWrapper.setComponentFactoryResolver(this._componentFactoryResolver);
+    }
+
+    ngAfterViewInit(): void {
+        this.checkForDeprecatedEvents();
+
+        this.gridOptions = ComponentUtil.copyAttributesToGridOptions(this.gridOptions, this, true);
+
+        this.gridParams = {
+            globalEventListener: this.globalEventListener.bind(this),
+            frameworkOverrides: this.angularFrameworkOverrides,
+            providedBeanInstances: {
+                frameworkComponentWrapper: this.frameworkComponentWrapper
+            },
+            modules: (this.modules || []) as any
+        };
+
+        if (this.columns && this.columns.length > 0) {
+            this.gridOptions.columnDefs = this.columns
+                .map((column: AgGridColumn): ColDef => {
+                    return column.toColDef();
+                });
+        }
+
+        new Grid(this._nativeElement, this.gridOptions, this.gridParams);
+
+        if (this.gridOptions.api) {
+            this.api = this.gridOptions.api;
+        }
+
+        if (this.gridOptions.columnApi) {
+            this.columnApi = this.gridOptions.columnApi;
+        }
+
+        this._initialised = true;
+
+        // sometimes, especially in large client apps gridReady can fire before ngAfterViewInit
+        // this ties these together so that gridReady will always fire after agGridAngular's ngAfterViewInit
+        // the actual containing component's ngAfterViewInit will fire just after agGridAngular's
+        this._fullyReady.resolveNow(null, resolve => resolve);
+    }
+
+    public ngOnChanges(changes: any): void {
+        if (this._initialised) {
+            ComponentUtil.processOnChange(changes, this.gridOptions, this.api, this.columnApi);
+        }
+    }
+
+    public ngOnDestroy(): void {
+        if (this._initialised) {
+            // need to do this before the destroy, so we know not to emit any events
+            // while tearing down the grid.
+            this._destroyed = true;
+            if (this.api) {
+                this.api.destroy();
+            }
+        }
+    }
+
+    private checkForDeprecatedEvents() {
+        _.iterateObject<any>(Events, (key, eventName) => {
+            if (this[eventName] && (<EventEmitter<any>>this[eventName]).observers.length > 0) {
+                GridOptionsWrapper.checkEventDeprecation(eventName);
+            }
+        });
+    }
+
+    private globalEventListener(eventType: string, event: any): void {
+        // if we are tearing down, don't emit angular events, as this causes
+        // problems with the angular router
+        if (this._destroyed) {
+            return;
+        }
+
+        // generically look up the eventType
+        let emitter = <EventEmitter<any>>(<any>this)[eventType];
+        if (emitter) {
+            if (eventType === 'gridReady') {
+                // if the user is listening for gridReady, wait for ngAfterViewInit to fire first, then emit the
+                // gridReady event
+                this._fullyReady.then((result => {
+                    emitter.emit(event);
+                }));
+            } else {
+                emitter.emit(event);
+            }
+        } else {
+            console.log('ag-Grid-angular: could not find EventEmitter: ' + eventType);
+        }
+    }
+
+    @Input() public gridOptions: GridOptions;
+    @Input() public modules: Module[];
+
+    // @START@
+    @Input() public slaveGrids : any = undefined;
+    @Input() public alignedGrids : any = undefined;
+    @Input() public rowData : any = undefined;
+    @Input() public columnDefs : any = undefined;
+    @Input() public excelStyles : any = undefined;
+    @Input() public pinnedTopRowData : any = undefined;
+    @Input() public pinnedBottomRowData : any = undefined;
+    @Input() public components : any = undefined;
+    @Input() public frameworkComponents : any = undefined;
+    @Input() public rowStyle : any = undefined;
+    @Input() public context : any = undefined;
+    @Input() public autoGroupColumnDef : any = undefined;
+    @Input() public groupColumnDef : any = undefined;
+    @Input() public localeText : any = undefined;
+    @Input() public icons : any = undefined;
+    @Input() public datasource : any = undefined;
+    @Input() public serverSideDatasource : any = undefined;
+    @Input() public viewportDatasource : any = undefined;
+    @Input() public groupRowRendererParams : any = undefined;
+    @Input() public aggFuncs : any = undefined;
+    @Input() public fullWidthCellRendererParams : any = undefined;
+    @Input() public defaultColGroupDef : any = undefined;
+    @Input() public defaultColDef : any = undefined;
+    @Input() public defaultExportParams : any = undefined;
+    @Input() public columnTypes : any = undefined;
+    @Input() public rowClassRules : any = undefined;
+    @Input() public detailGridOptions : any = undefined;
+    @Input() public detailCellRendererParams : any = undefined;
+    @Input() public loadingCellRendererParams : any = undefined;
+    @Input() public loadingOverlayComponentParams : any = undefined;
+    @Input() public noRowsOverlayComponentParams : any = undefined;
+    @Input() public popupParent : any = undefined;
+    @Input() public colResizeDefault : any = undefined;
+    @Input() public reduxStore : any = undefined;
+    @Input() public statusBar : any = undefined;
+    @Input() public sideBar : any = undefined;
+    @Input() public sortingOrder : any = undefined;
+    @Input() public rowClass : any = undefined;
+    @Input() public rowSelection : any = undefined;
+    @Input() public overlayLoadingTemplate : any = undefined;
+    @Input() public overlayNoRowsTemplate : any = undefined;
+    @Input() public quickFilterText : any = undefined;
+    @Input() public rowModelType : any = undefined;
+    @Input() public editType : any = undefined;
+    @Input() public domLayout : any = undefined;
+    @Input() public clipboardDeliminator : any = undefined;
+    @Input() public rowGroupPanelShow : any = undefined;
+    @Input() public multiSortKey : any = undefined;
+    @Input() public pivotColumnGroupTotals : any = undefined;
+    @Input() public pivotRowTotals : any = undefined;
+    @Input() public pivotPanelShow : any = undefined;
+    @Input() public rowHeight : any = undefined;
+    @Input() public detailRowHeight : any = undefined;
+    @Input() public rowBuffer : any = undefined;
+    @Input() public colWidth : any = undefined;
+    @Input() public headerHeight : any = undefined;
+    @Input() public groupHeaderHeight : any = undefined;
+    @Input() public floatingFiltersHeight : any = undefined;
+    @Input() public pivotHeaderHeight : any = undefined;
+    @Input() public pivotGroupHeaderHeight : any = undefined;
+    @Input() public groupDefaultExpanded : any = undefined;
+    @Input() public minColWidth : any = undefined;
+    @Input() public maxColWidth : any = undefined;
+    @Input() public viewportRowModelPageSize : any = undefined;
+    @Input() public viewportRowModelBufferSize : any = undefined;
+    @Input() public autoSizePadding : any = undefined;
+    @Input() public maxBlocksInCache : any = undefined;
+    @Input() public maxConcurrentDatasourceRequests : any = undefined;
+    @Input() public tooltipShowDelay : any = undefined;
+    @Input() public cacheOverflowSize : any = undefined;
+    @Input() public paginationPageSize : any = undefined;
+    @Input() public cacheBlockSize : any = undefined;
+    @Input() public infiniteInitialRowCount : any = undefined;
+    @Input() public scrollbarWidth : any = undefined;
+    @Input() public paginationStartPage : any = undefined;
+    @Input() public infiniteBlockSize : any = undefined;
+    @Input() public batchUpdateWaitMillis : any = undefined;
+    @Input() public asyncTransactionWaitMillis : any = undefined;
+    @Input() public blockLoadDebounceMillis : any = undefined;
+    @Input() public keepDetailRowsCount : any = undefined;
+    @Input() public undoRedoCellEditingLimit : any = undefined;
+    @Input() public cellFlashDelay : any = undefined;
+    @Input() public cellFadeDelay : any = undefined;
+    @Input() public localeTextFunc : any = undefined;
+    @Input() public groupRowInnerRenderer : any = undefined;
+    @Input() public groupRowInnerRendererFramework : any = undefined;
+    @Input() public dateComponent : any = undefined;
+    @Input() public dateComponentFramework : any = undefined;
+    @Input() public groupRowRenderer : any = undefined;
+    @Input() public groupRowRendererFramework : any = undefined;
+    @Input() public isExternalFilterPresent : any = undefined;
+    @Input() public getRowHeight : any = undefined;
+    @Input() public doesExternalFilterPass : any = undefined;
+    @Input() public getRowClass : any = undefined;
+    @Input() public getRowStyle : any = undefined;
+    @Input() public getRowClassRules : any = undefined;
+    @Input() public traverseNode : any = undefined;
+    @Input() public getContextMenuItems : any = undefined;
+    @Input() public getMainMenuItems : any = undefined;
+    @Input() public processRowPostCreate : any = undefined;
+    @Input() public processCellForClipboard : any = undefined;
+    @Input() public getNodeChildDetails : any = undefined;
+    @Input() public groupRowAggNodes : any = undefined;
+    @Input() public getRowNodeId : any = undefined;
+    @Input() public isFullWidthCell : any = undefined;
+    @Input() public fullWidthCellRenderer : any = undefined;
+    @Input() public fullWidthCellRendererFramework : any = undefined;
+    @Input() public doesDataFlower : any = undefined;
+    @Input() public processSecondaryColDef : any = undefined;
+    @Input() public processSecondaryColGroupDef : any = undefined;
+    @Input() public getBusinessKeyForNode : any = undefined;
+    @Input() public sendToClipboard : any = undefined;
+    @Input() public navigateToNextCell : any = undefined;
+    @Input() public tabToNextCell : any = undefined;
+    @Input() public getDetailRowData : any = undefined;
+    @Input() public processCellFromClipboard : any = undefined;
+    @Input() public getDocument : any = undefined;
+    @Input() public postProcessPopup : any = undefined;
+    @Input() public getChildCount : any = undefined;
+    @Input() public getDataPath : any = undefined;
+    @Input() public loadingCellRenderer : any = undefined;
+    @Input() public loadingCellRendererFramework : any = undefined;
+    @Input() public loadingOverlayComponent : any = undefined;
+    @Input() public loadingOverlayComponentFramework : any = undefined;
+    @Input() public noRowsOverlayComponent : any = undefined;
+    @Input() public noRowsOverlayComponentFramework : any = undefined;
+    @Input() public detailCellRenderer : any = undefined;
+    @Input() public detailCellRendererFramework : any = undefined;
+    @Input() public defaultGroupSortComparator : any = undefined;
+    @Input() public isRowMaster : any = undefined;
+    @Input() public isRowSelectable : any = undefined;
+    @Input() public postSort : any = undefined;
+    @Input() public processHeaderForClipboard : any = undefined;
+    @Input() public paginationNumberFormatter : any = undefined;
+    @Input() public processDataFromClipboard : any = undefined;
+    @Input() public getServerSideGroupKey : any = undefined;
+    @Input() public isServerSideGroup : any = undefined;
+    @Input() public suppressKeyboardEvent : any = undefined;
+    @Input() public createChartContainer : any = undefined;
+    @Input() public processChartOptions : any = undefined;
+    @Input() public getChartToolbarItems : any = undefined;
+    @Input() public fillOperation : any = undefined;
+    @Input() public toolPanelSuppressRowGroups : any = undefined;
+    @Input() public toolPanelSuppressValues : any = undefined;
+    @Input() public toolPanelSuppressPivots : any = undefined;
+    @Input() public toolPanelSuppressPivotMode : any = undefined;
+    @Input() public toolPanelSuppressSideButtons : any = undefined;
+    @Input() public toolPanelSuppressColumnFilter : any = undefined;
+    @Input() public toolPanelSuppressColumnSelectAll : any = undefined;
+    @Input() public toolPanelSuppressColumnExpandAll : any = undefined;
+    @Input() public suppressMakeColumnVisibleAfterUnGroup : any = undefined;
+    @Input() public suppressRowClickSelection : any = undefined;
+    @Input() public suppressCellSelection : any = undefined;
+    @Input() public suppressHorizontalScroll : any = undefined;
+    @Input() public alwaysShowVerticalScroll : any = undefined;
+    @Input() public debug : any = undefined;
+    @Input() public enableBrowserTooltips : any = undefined;
+    @Input() public enableColResize : any = undefined;
+    @Input() public enableCellExpressions : any = undefined;
+    @Input() public enableSorting : any = undefined;
+    @Input() public enableServerSideSorting : any = undefined;
+    @Input() public enableFilter : any = undefined;
+    @Input() public enableServerSideFilter : any = undefined;
+    @Input() public angularCompileRows : any = undefined;
+    @Input() public angularCompileFilters : any = undefined;
+    @Input() public angularCompileHeaders : any = undefined;
+    @Input() public groupSuppressAutoColumn : any = undefined;
+    @Input() public groupSelectsChildren : any = undefined;
+    @Input() public groupIncludeFooter : any = undefined;
+    @Input() public groupIncludeTotalFooter : any = undefined;
+    @Input() public groupUseEntireRow : any = undefined;
+    @Input() public groupSuppressRow : any = undefined;
+    @Input() public groupSuppressBlankHeader : any = undefined;
+    @Input() public forPrint : any = undefined;
+    @Input() public suppressMenuHide : any = undefined;
+    @Input() public rowDeselection : any = undefined;
+    @Input() public unSortIcon : any = undefined;
+    @Input() public suppressMultiSort : any = undefined;
+    @Input() public singleClickEdit : any = undefined;
+    @Input() public suppressLoadingOverlay : any = undefined;
+    @Input() public suppressNoRowsOverlay : any = undefined;
+    @Input() public suppressAutoSize : any = undefined;
+    @Input() public skipHeaderOnAutoSize : any = undefined;
+    @Input() public suppressParentsInRowNodes : any = undefined;
+    @Input() public showToolPanel : any = undefined;
+    @Input() public suppressColumnMoveAnimation : any = undefined;
+    @Input() public suppressMovableColumns : any = undefined;
+    @Input() public suppressFieldDotNotation : any = undefined;
+    @Input() public enableRangeSelection : any = undefined;
+    @Input() public enableRangeHandle : any = undefined;
+    @Input() public enableFillHandle : any = undefined;
+    @Input() public suppressClearOnFillReduction : any = undefined;
+    @Input() public deltaSort : any = undefined;
+    @Input() public suppressTouch : any = undefined;
+    @Input() public suppressAsyncEvents : any = undefined;
+    @Input() public allowContextMenuWithControlKey : any = undefined;
+    @Input() public suppressContextMenu : any = undefined;
+    @Input() public suppressMenuFilterPanel : any = undefined;
+    @Input() public suppressMenuMainPanel : any = undefined;
+    @Input() public suppressMenuColumnPanel : any = undefined;
+    @Input() public rememberGroupStateWhenNewData : any = undefined;
+    @Input() public enableCellChangeFlash : any = undefined;
+    @Input() public suppressDragLeaveHidesColumns : any = undefined;
+    @Input() public suppressMiddleClickScrolls : any = undefined;
+    @Input() public suppressPreventDefaultOnMouseWheel : any = undefined;
+    @Input() public suppressUseColIdForGroups : any = undefined;
+    @Input() public suppressCopyRowsToClipboard : any = undefined;
+    @Input() public copyHeadersToClipboard : any = undefined;
+    @Input() public pivotMode : any = undefined;
+    @Input() public suppressAggFuncInHeader : any = undefined;
+    @Input() public suppressColumnVirtualisation : any = undefined;
+    @Input() public suppressAggAtRootLevel : any = undefined;
+    @Input() public suppressFocusAfterRefresh : any = undefined;
+    @Input() public functionsPassive : any = undefined;
+    @Input() public functionsReadOnly : any = undefined;
+    @Input() public animateRows : any = undefined;
+    @Input() public groupSelectsFiltered : any = undefined;
+    @Input() public groupRemoveSingleChildren : any = undefined;
+    @Input() public groupRemoveLowestSingleChildren : any = undefined;
+    @Input() public enableRtl : any = undefined;
+    @Input() public suppressClickEdit : any = undefined;
+    @Input() public rowDragManaged : any = undefined;
+    @Input() public suppressRowDrag : any = undefined;
+    @Input() public suppressMoveWhenRowDragging : any = undefined;
+    @Input() public enableMultiRowDragging : any = undefined;
+    @Input() public enableGroupEdit : any = undefined;
+    @Input() public embedFullWidthRows : any = undefined;
+    @Input() public deprecatedEmbedFullWidthRows : any = undefined;
+    @Input() public suppressTabbing : any = undefined;
+    @Input() public suppressPaginationPanel : any = undefined;
+    @Input() public floatingFilter : any = undefined;
+    @Input() public groupHideOpenParents : any = undefined;
+    @Input() public groupMultiAutoColumn : any = undefined;
+    @Input() public pagination : any = undefined;
+    @Input() public stopEditingWhenGridLosesFocus : any = undefined;
+    @Input() public paginationAutoPageSize : any = undefined;
+    @Input() public suppressScrollOnNewData : any = undefined;
+    @Input() public purgeClosedRowNodes : any = undefined;
+    @Input() public cacheQuickFilter : any = undefined;
+    @Input() public deltaRowDataMode : any = undefined;
+    @Input() public ensureDomOrder : any = undefined;
+    @Input() public accentedSort : any = undefined;
+    @Input() public pivotTotals : any = undefined;
+    @Input() public suppressChangeDetection : any = undefined;
+    @Input() public valueCache : any = undefined;
+    @Input() public valueCacheNeverExpires : any = undefined;
+    @Input() public aggregateOnlyChangedColumns : any = undefined;
+    @Input() public suppressAnimationFrame : any = undefined;
+    @Input() public suppressExcelExport : any = undefined;
+    @Input() public suppressCsvExport : any = undefined;
+    @Input() public treeData : any = undefined;
+    @Input() public masterDetail : any = undefined;
+    @Input() public suppressMultiRangeSelection : any = undefined;
+    @Input() public enterMovesDownAfterEdit : any = undefined;
+    @Input() public enterMovesDown : any = undefined;
+    @Input() public suppressPropertyNamesCheck : any = undefined;
+    @Input() public rowMultiSelectWithClick : any = undefined;
+    @Input() public contractColumnSelection : any = undefined;
+    @Input() public suppressEnterpriseResetOnNewColumns : any = undefined;
+    @Input() public enableOldSetFilterModel : any = undefined;
+    @Input() public suppressRowHoverHighlight : any = undefined;
+    @Input() public gridAutoHeight : any = undefined;
+    @Input() public suppressRowTransform : any = undefined;
+    @Input() public suppressClipboardPaste : any = undefined;
+    @Input() public suppressLastEmptyLineOnPaste : any = undefined;
+    @Input() public serverSideSortingAlwaysResets : any = undefined;
+    @Input() public reactNext : any = undefined;
+    @Input() public suppressSetColumnStateEvents : any = undefined;
+    @Input() public enableCharts : any = undefined;
+    @Input() public deltaColumnMode : any = undefined;
+    @Input() public suppressMaintainUnsortedOrder : any = undefined;
+    @Input() public enableCellTextSelection : any = undefined;
+    @Input() public suppressBrowserResizeObserver : any = undefined;
+    @Input() public suppressMaxRenderedRowRestriction : any = undefined;
+    @Input() public excludeChildrenWhenTreeDataFiltering : any = undefined;
+    @Input() public tooltipMouseTrack : any = undefined;
+    @Input() public keepDetailRows : any = undefined;
+    @Input() public paginateChildRows : any = undefined;
+    @Input() public preventDefaultOnContextMenu : any = undefined;
+    @Input() public undoRedoCellEditing : any = undefined;
+    @Input() public allowDragFromColumnsToolPanel : any = undefined;
+    @Input() public immutableData : any = undefined;
+    @Input() public immutableColumns : any = undefined;
+    @Input() public pivotSuppressAutoColumn : any = undefined;
+
+
+
+
+
+
+
+
+
+
+    @Output() public columnEverythingChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public newColumnsLoaded: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotModeChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnRowGroupChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public expandOrCollapseAll: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnMoved: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnVisible: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPinned: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnGroupOpened: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnResized: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public displayedColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public virtualColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowGroupOpened: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDataChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDataUpdated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pinnedRowDataChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rangeSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartCreated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartRangeSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartOptionsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartDestroyed: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public toolPanelVisibleChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public modelUpdated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pasteStart: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pasteEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public fillStart: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public fillEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellDoubleClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseDown: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellContextMenu: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellFocused: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowSelected: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public selectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellKeyDown: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellKeyPress: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseOver: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseOut: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public filterChanged: EventEmitter<any> = new EventEmitter<any>();
+	
+	
+    @Output() public filterModified: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public filterOpened: EventEmitter<any> = new EventEmitter<any>();
+	
+	
+    @Output() public sortChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public virtualRowRemoved: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDoubleClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridReady: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridSizeChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public viewportChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public firstDataRendered: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public dragStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public dragStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public checkboxChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowEditingStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowEditingStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellEditingStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellEditingStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public bodyScroll: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public animationQueueEmpty: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public heightScaleChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public paginationChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public componentStateChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public bodyHeightChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public displayedColumnsWidthChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public scrollVisibilityChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnHoverChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public flashCells: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragEnter: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragMove: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragLeave: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public popupToFront: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnRowGroupChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnValueChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnAggFuncChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public keyboardFocus: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public mouseFocus: EventEmitter<any> = new EventEmitter<any>();
+
+						==>
+						==>
+		
+		==>
+		
+		
+	==>Step 7c:	Feature Integration - Third-Party Integrations
+		
+		==>Step 7c-1:	Feature - Feature Module Development: Google API integration
+			==>How to integrate with Google MAP APIs
+				==>Enable: feature module: as main contents pane as google map
+				==>Enable CDK: to use additional Google material design functions and components
+			
+				==>Assigned to Kesava
+				
+			==>ng g component map
+			==>ng g component ...
+			==>Design map.component.html file:
+				==>
+			==>Design map.component.ts file:
+				==>
+				
+				
+			==>Feature Module: Address Search
+				ng g component search-addresses
+			==>Feature Module: Geoareas Search
+				ng g component search-areas
+			==>Feature Module: Properties Search
+				ng g component search-properties
+				
+			==>Feature Module: Selection Feature
+			
+			==>Feature Module: Exporting
+				ng g component excel
+			
+			==>Feature Module: Results
+			
+			
+			
+			
+			
+			Component Design:
+			
+				==>ngOnInit(): initialize some code and processing when @Directive or component initialized
+				==>constructor: assign class member with data by arguments mainly or only - no other init code is added here
+				==>
+				
+		
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

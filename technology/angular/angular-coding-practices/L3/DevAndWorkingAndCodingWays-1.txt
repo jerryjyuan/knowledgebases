@@ -1,0 +1,251 @@
+
+============================================================
+=========>How to Deliver Special Scenarios Ways:
+
+(1) Examples:
+	==>POCs
+	==>Mr Han's project
+	==>
+	
+	==>Freelancer.com
+	==>Bidding
+	==>Auctioning
+
+
+(2) Methods:
+	==>Method 1:	Enable "In-Action: POCs" in your github repos and CL (Continuous Learning): this is the best keys
+						(That is why many good developers all have some githubs' repos and example apps...)
+						(You think: Mkyong.com only for showing us as tutorials? - he also uses them for his own projects...)
+						(I think many magic developers use this way a lot (they have had various in-action-POCs in place ...) and very well besides you think:
+							==>They do that overnight
+							==>They hide inside some caves...
+							==>They are super smart...
+							Even Peter Yellow relied heavily upon "early education" and "special training" and "early/intensive preparations"
+						)
+						==>These in-action-POCs (apps - not just summaries: avoid any ongoing research) have huge values in reality for all kinds of developers
+						==>It is also a way of tracing and keeping updated with all new tech and best tech and most popular tech
+					==>Not just summaries or templates ==>Make it a real "In-Action-POC" app
+					==>This is the best ways to handle "Mr Han's projects":
+						==>If you have these in-action-POC in place, then delivering MrHan's projects only takes: 2-4 hours
+					==>This is also the best ways to handle many projects - that require immediate delivery or overnight delivery
+	==>Method 2:	Staged - POCs: POCs also can be enabled as "staged"
+	
+	==>Method 3:	Overinight...
+	
+	==>Method 7:	Special and Basic-Tolerance Simulating:
+					==>Without violating copyrights
+					==>Only concerns are:
+						==>Show stupidity - due to not thinking on your own
+						==>Show some possible issues
+					==>But: the good parts are: 
+						==>now: more open-sources
+						==>Spring-Boot
+						==>Templates
+	==>Method 8:	Kesava's ways: ask for 2-week close-door Quartz Scheduler ramp-up
+	
+
+============================================================
+=========>Tech and Working Ways:
+
+==>Puppet: someone told you to run this, then run it, no other things...
+==>...
+==>Immediate Use: pick it up...
+==>
+==>Core Flows: very core parts...
+==>
+==>Complete scenarios - summaries
+==>...Expert
+
+==>Know Whys - complete
+==>Think and insights
+==>Put into doc and share with the team
+==>Build up your portfolios
+==>...
+==>Build up your Kingdom: call Mark Zuckberg
+==>Build up your Empire: call Larry Page ...
+(dynasty...)
+==>Build up your Union: call Larry Ellison or Bill Gates...
+==>...
+
+
+
+
+============================================================
+=========>Coding Ways:
+
+==>Scaffolding => POC => Add features one by one => Productionize =>
+
+==>CenterRipplizing:
+	==>Start from the most center methods/APIs and ripplizing into other parts
+	==>Example 1: start from: restTemplate.exchange() call
+	==>Example 2: start from: webserviceTemplate.marshalSendAndReceive() call
+	
+	PROS:
+		==>More accurate
+		==>Easier
+		==>Faster
+	
+	Comparative Methods:
+		==>Sequencing
+		==>Backwarding
+		==>Read API doc and impl...
+		==>Big methods first and divide into smaller methods
+		==>
+
+==>
+
+============================================================
+=========>Angular UI - Coding Ways:
+
+==>Use Wireframe/Mockup/Prototype: enable look and feel:
+	Justifications:
+	1) Mostly: these look and feel and UI designs are: the work for Production Manager / Business Analysts / UI Designers
+	2) Even from them: they generally create these mockups and wireframes by using tools - very little chances they create by HTML handwriting
+		==>If they or most of the ones in the UI world create UI design like these using tools, why do we as developers need to create UI by hand-writing html code?
+	3) Also: creation by tools are more accurate to suit look and feel, and also super faster
+	
+==>
+
+==>Blind typing coding is not so easy:
+	==>Method 1: POC helps enormously + AOP-Summaries help a lot
+	==>Method 2: Faster
+	==>Method 3: Save time to do research and do repeated research
+	==>...
+	
+	
+	TS2341: Property 'numberField2' is private and only accessible within class 'LookupComponent'
+	
+	
+============================================================
+Misc:
+
+==>Windows Systems:
+	==>
+	==>PATH:
+		==>Method 1:	Admin Users - HelpDesk/ServiceDesk/...
+						==>Need to add: System-Panel variables - not user-panel variables: otherwise==>Add to that admin-user's private variables
+		==>
+
+
+==>Linux Systems
+
+
+==>Unix Systems
+
+
+==>...
+
+
+
+============================================================
+How to interpret (self-interpret/better-interpret/enabled-interpret/entire-scenario-interpret/scoped-interpret
+/correction-interpret/educational-interpret/counteract-interpret/context-enabled-interpret(such as CCP-Virus-context)/...) others' questions/points or common questions?
+
+==>Current location: based on context: ...
+	==>...
+	==>Job Search/Recruiters: Current Home/Address...: house/apartment/residence/address/... (especially relocation context, ..., ..., interviews, joining, ...)
+	==>...
+
+
+============================================================
+Abusers:
+
+- Frog-boiling
+- Gateway-ing
+- Stepping
+
+- ...
+
+- Submarining and silent-changing
+- Force-adding...
+- ...
+- Hidden-negotiating
+- Hidden-explaining...
+- ...
+- ...
+
+Jerry:
+	==>Principle 1:	Total-ignoring
+	==>Principle 2: Fighting
+	==>Principle 3: Counteracting
+	==>...
+	==>...
+	==>...
+	
+	
+	
+	They control all resources: So:
+		==>They can set up almost everything
+		==>They can dynamically change/alter almost everything		
+		==>...
+		
+		Believe or not: not meaningdful
+		
+	God
+	Entire Truths
+	Entire Justice
+	...
+	...
+	
+============================================================
+Some Strategies:
+
+==>Example 1: if someone is suspicious about your using other one to do coding for you - like work from home, or...
+	==>Demo yourself
+	==>Show screen-sharing to show you know the code...
+	==>Humiliate him... - we do need to do so sometimes...
+	==>
+	
+==>Example 2: if someone is using this as a strategy: be suspicious about (or explicitly... - see example below) your using other one to do coding for you - like work from home, or...
+				==>But he/she actually knows you are doing your own coding, not using others, but use it as a strategy, ..., like some Chinamen, or ...
+	==>Humiliate him... - we do need to do so sometimes... ==>Only use this way
+	==>Take some or all his/her drawbacks and start targeting them using 4P scenarios: precaution, prevention, preemptive, preoccuption, ...
+	==>
+	
+	Why do they do this, then?
+		- make you nervous
+		- psychologically control you
+		- psychologically make you submissive
+		- abuse you
+		- make you difficult
+		- make you being tested or in test mode
+		- test you
+		
+		- harass you
+		- make you do more ...
+		
+	Some Examples:
+		- Explicit:
+			==>2000 years ago: Premier Zhao pointed to a deer and told everyone in the cabinet and said: this is a horse, ...
+			==>In 2026, China CCP President Xi told everyone in China: China has been having the best democracy and no one died in 1989 students demonstrations
+		- Suspicious
+		- Pretend to be suspicious
+		- 
+	
+	
+Arguments?
+	==>FBI and CCP and some networks and abusers' definitions are WRONG! - no need to argue with wrong definitions!
+	==>
+	
+	
+	...Cascaded / Cascading allegation methodologies and ways: from abusers and FBI/CCP...:
+		==>When some of their big / bigger definitions or allegations cannot be validated or sold to others or Jerry, then:
+			==>They switched to medium or very small ones and try to do the same, and most of them are also invalidated and wrong, then, they also try to
+				pinpoint very tiny ones and make them bigger...
+				......
+				......
+		==>
+	
+Concept: Also innocent
+
+
+Jerry's USA passport is a valid USA passport
+==>Abusers try to use this strategy as a harassment and ChinaCCP/FBI-abusers/SocialAbusers' strategies to abuse Jerry
+==>
+
+============================================================
+Deported?
+
+It was Livilly that got deported back to Nanjing, China
+
+============================================================

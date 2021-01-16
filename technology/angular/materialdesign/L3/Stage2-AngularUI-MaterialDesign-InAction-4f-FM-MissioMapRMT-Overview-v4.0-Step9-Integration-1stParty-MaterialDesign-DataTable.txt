@@ -1,0 +1,21 @@
+
+============================================================
+MD - Data Table:
+
+==>Data Source:
+	==>Reactive APIs: Observable:
+		==>Emit a stream of events/data
+		1) reduce bouncing times
+		2) eliminate duplicates
+		3) 
+	
+==>Server Side: Pagination, Sorting, and Filtering
+
+
+
+
+============================================================
+
+
+
+============================================================

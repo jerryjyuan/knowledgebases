@@ -1,0 +1,331 @@
+
+============================================================
+Angular UI - Material Design: In Action 1:
+
+============================================================
+POC 1: use frontend-maven-plugin:
+
+<Level 2>
+
+maven .m2 folder:
+	Automatically created: when maven build is executed: mvn clean, mvn clean install...
+	Or: md c:\Users\Jonathan\.m2
+		del ...
+		rmdir /Q/S
+	Or: create it on desktop and rename it
+
+npm:
+	1) Generate: .npmrc:
+		npm config...
+		npm config set registry http://...
+		==>Will generate .npmrc file
+		==>Or: manual creation
+	2) Generate: node_modules + package-lock.json:
+		Empty folder:
+			npm install
+			npm install ...
+	3) Generate: node_modules + package-lock.json:
+		
+
+
+	
+==>RMT in Action:
+	==>maven dependency plugin: downloads
+		==>Download and copy nodejs and npm from "repo"? (FM internal repo? artifactory) into local folders into the project folder
+		==>It is search the repo (just like you do a search inside the dashboard): and match the groupid path and download it
+		==>NPM: ok
+		==>NodeJS: 1) use some windows version 2) use local windows version (comment out the repo download part)
+					==>Manually copy the local window nodejs version 10.x to the downloaded file location: and works
+	==>frontend-maven-plugin:
+		==>3 executions
+		==>1) install-node-and-npm:
+				==>install node:
+					==>Step 1: maven install: install it from the downloaded file to maven .m2 repo:
+								==>Trick 1: it uses: win-x64 as: default sub-dir: 1) due to older version 1.0 2) could be configurable...
+					==>step 2: copy the node.exe to target\node\node.exe: if target is not created, it will create it
+				==>install npm:
+					==>Step 1: maven install: install it from the downloaded file to maven .m2 repo
+					==>step 2: copy the npm tar.gz and extract it there to target\node\node_modules: if target is not created, it will create it				
+		==>2) ng install: works: it mainly does updates - not override and recreate the existing files
+		==>3) ng build: works: dist files are recreated
+	==>Local: exec-maven-plugin: not working yet
+		==>Local: AngularCLI: ng serve / ng build: works
+	
+	ng serve:
+		Builds and serves your app, rebuilding on file changes.
+		==>Will not rebuild the dist folder from maven pom build
+		==>Is it because: ng serve doesn't touch dist at all? YES
+			During development, you typically use the ng serve command to build, watch, and serve the application from local memory, using webpack-dev-server
+				https://webpack.js.org/guides/development/#webpack-dev-server
+	
+	Interim techniques: deployment:
+		ng serve:
+			==>It doesn't remove the contents in dist
+		ng build
+			only the ng build command writes the generated build artifacts to the output folder
+			ng build --watch ==>ng serve
+				https://github.com/johnpapa/lite-server
+				$ npm install lite-server --save-dev
+				$ yarn add lite-server --dev # or yarn
+				  "scripts": {
+					"dev": "lite-server"
+				  },
+				$ npm run dev: run the lite-server
+				==>Same as ng serve:
+					PROS:
+						==>PRO 1: can utilize another server instead of the built-in webpack server
+						==>PRO 2: it serves as a local web server: the contents are from dist folder: ng serve is not using dist folder
+		ng test
+	 
+	Question:
+		==>ng build: how can we run its dist? 
+			1) use: lite-server 
+			2) deployed to tomcat or other servers:
+				ng build --prod
+				Copy everything within the output folder (dist/ by default) to a folder on the server.
+			3) other ways? ng deploy?:
+				==>
+		==>ng deploy:
+			1) Serve: as integration hookup:	Deploy to some specific platforms:
+				A number of third-party builders implement deployment capabilities to different platforms
+				ng add [package name]
+				Example 1:
+					ng add @angular/fire
+					ng deploy
+					==>must have or create a Firebase account, and authenticate using that account. The command prompts you to select a Firebase project for deployment
+			2) Deploy to GitHub pages
+			3) To Read: Server configurations
+		==>Misc:
+			Enable PROD: 1) Call enableProdMode() to enable production mode 2) ng build --prod
+			Checklist: Production optimizations
+			Configure: Lazy loading
+			Configure: <base href="/my/app/"> ==>for shared and prod servers etc.
+			Inspect the bundles: to do
+			Differential Loading
+			Configuring serve for ES5
+		
+	
+==>frontend-maven-plugin:
+	==>DOCS: offical doc
+		https://github.com/eirslett/frontend-maven-plugin
+	==>1) Separate frontend(Angular) and backend into 2 maven modules:
+			==>Fedex DMT: place into the same module? - maybe one module together
+			==>This Example:
+				==>This 2 modules: then have 2 pom.xml
+				==>PROS:
+					And only angular module: needs: frontend-maven-plugin
+					Also give Angular module more independency on its own
+					And easily run: ng serve etc
+				==>CONS:
+					But this ends up with: backend module needs to do a resources copying:
+						so the static code can be included into Spring Boot jar (which is from backend module)
+					Also need to configure paths for Angular index.html... - but some doubts...
+	==>2) 
+	==>3) Can run some npm commands
+
+			<resources>
+				<resource>
+					<directory>./dist/frakton</directory>
+					<targetPath>static</targetPath>
+				</resource>
+			</resources>
+				==>frontend-maven-plugin: run: ng build to place compiled contents into the: ${project.parent.basedir}/frontend/dist/frakton/
+											"build": {
+											  "builder": "@angular-devkit/build-angular:browser",
+											  "options": {
+												"outputPath": "dist/frakton",				
+				==>frontend-maven-plugin: use this resource section: to place the contents under: ${project.parent.basedir}/frontend/dist/frakton/static
+					${project.parent.basedir}/frontend/dist/frakton/static/...
+					==>This "<targetPath>static</targetPath>" is read by this frontend-maven-plugin
+					==>Why? because "/static" is a preferred name and folder for Spring Boot build structures when...
+						because Spring Boot has "static resources" terminalogy
+						==>That is why this plugin "frontend-maven-plugin" does this favorite for Spring Boot
+			
+			Functions:
+				1) Install node/npm
+				2) Install all packages from package.json: ng install
+				3) run: ng build
+						
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.7.6</version>
+                <configuration>
+                    <workingDirectory>./</workingDirectory>
+						==>This may be or not be the common maven plugin configurations...
+                    <nodeVersion>v10.16.0</nodeVersion>
+                    <npmVersion>6.10.2</npmVersion>
+					<nodeDownloadRoot...
+					<npmDownloadRoot...
+						==>The installs: can override the existing ones - or: they will not run if existing - not so sure...
+					==>Plugin global config: for all executions
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+						==>Can have local config
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+							<installDirectory>target</installDirectory>
+									==>It installs all node_modules into target folder
+								==>This may not be the common maven plugin configurations...
+								==>Way 1: Usage Doc: https://github.com/eirslett/frontend-maven-plugin
+								==>Way 2: github source code: TBD
+                            <arguments>install</arguments>
+                        </configuration>
+					</execution>
+					==>No.2: npm install
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+					==>No.3: npm run-script build-prod
+							 ==>run-script: maybe under linux env: ...
+                </executions>
+            </plugin>
+			
+	==>4) Manage Paths:		
+		can’t have a single path for the API and Front-end because of conflict. That happens because both back-end and front-end try to manage the path. In our case, Spring Boot will have an advantage by default
+		==>Spring Boot:
+			@Configuration
+			Use: WebMvcConfigurer and to use ResourceHandlers
+			==>Paths: /** (not handled by Spring Boot code like @RestController "/...") ==>go to /static/index.html
+			==>Means: Angular can take these paths except those RESTful APIs paths, etc.
+			==>Spring Boot controls the entire module build ==>And Angular is kind of Fish-Souther: it only exists in /static folder
+				==>Because frontend-maven-plugin: copy all the Angular code into /static folder: as static contents
+				==>So Angular has no control on the entire app jar... which is a Spring Boot jar
+				==>So it needs to the delegation to /static/index.html, so it comes into play from there: run their Angular code
+
+				@Override
+				public void addResourceHandlers(ResourceHandlerRegistry registry) {
+				nbsp;  registry.addResourceHandler("/**")
+						   .addResourceLocations("classpath:/static/")
+						   .resourceChain(true)
+						   .addResolver(new PathResourceResolver() {
+							   @Override
+							   protected Resource getResource(String resourcePath, Resource location) throws IOException {
+								   Resource requestedResource = location.createRelative(resourcePath);
+								   return requestedResource.exists() && requestedResource.isReadable() ? requestedResource
+										   : new ClassPathResource("/static/index.html");
+							   }
+						   });
+				}
+				
+		==>But I don't remember Fedex DMT doing this? - maybe they had similar code
+
+		==>Doubts:
+			==>Spring Boot cannot delegate the requests to static folder by default settings?
+			==>Should be...
+
+	==>5) Add frontend into backend module:
+
+			frontend-webeye is generated the dist/ folder and node_modules
+			
+			<dependency>
+				<groupId>com</groupId>
+				<artifactId>frontend</artifactId>
+				<version>${project.version}</version>
+				<scope>runtime</scope>
+					==>Not used in backend Java code compiling
+			</dependency>
+		
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
+												==>1) Plugin: Get the Angular front-end module's compiled-contents (dist/frakton/) to target/classes/resources/
+														${project.parent.basedir}/frontend/dist/frakton/static/...
+												==>2) Mvn clean install: include these Angular front-end module's compiled-contents into final executable jar
+														==><web-root>/static/index.html
+														==><web-root>/static/main.ts
+														==><web-root>/...
+                            <resources>
+                                <resource>
+                                    <directory>${project.parent.basedir}/frontend/dist/frakton/</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			
+	Examples: 2 apps so far
+		1) Github: frontend-maven-plugin: source code and instructions and some plugin configurations
+		2) Fedex DMT Project
+		3) WebEye Project:	https://frakton.com/utilizing-maven-front-end-plugin-for-angular-spring-boot/
+							https://github.com/FraktonDevelopers/spring-boot-angular-maven-build/blob/master/backend/pom.xml
+
+		4) RMT:
+				==>It is a pure Angular UI, why do they need frontend-maven-plugin?
+				==>Same as the above 2 apps:
+					==>Use this plugin to do the same as AngularCLI work
+					==>1) DMT: it is the same module: has to use it
+					==>2) WebEye: standalone module: but it needs to be built by parent pom.xml, so it uses it as well
+					==>3) RMT: need to run pom.xml maven, so it uses this plugin as well
+					==>But the question is: why using both frontend and exec plugins?
+						==>Profile: local: use exec plugin:
+							v1.6.0
+							ng build-prod --base-href=
+								==>Run build but no base ref?
+							
+							Functions:
+								1) Install node/npm: omitted
+								2) Install all packages from package.json: omitted
+								3) run: ng build
+				
+						==>Other profiles: use frontend plugin
+						
+		
+============================================================
+What Levels:
+	==>Level 1: HowTo/TechParts Summaries
+	==>Level 2: Templating...: with some code snippets, etc.
+				==>Code Parts: Not directly use these code into your real projects - "just for references"
+	==>Level 3:	CenterRipplizing: with summaries mainly:
+				==>not compiling
+				==>This code can be directly used inside your real projects
+	==>Level 4:	CenterRipplizing: with scaffolding code working:
+				==>compiling
+				==>This code can be directly used inside your real projects
+	==>Level 5:	CenterRipplizing: with scaffolding + some functional/business flows working
+				==>compiling
+				==>This code can be directly used inside your real projects
+	==>Level 6:	Deliverable POCs:
+				==>Points:
+					==>Remove extra function/code and summaries and comments
+					==>Remove unneeded and unrelated code
+				==>Types:
+					==>Backbone POCs:
+						==>This can be used for MrHan's Freelancer Project:
+						==>Points:
+							==>Point 1:	MrHan's Project: $40 ==>he got some issues
+										==>Lack enough justifications to put so much efforts and being played or one-side-advantaged-YOU-DO-YOUR-PARTS-FIRST mindsets
+							==>Point 2: Time limits
+							==>Point 3: Basic Demo Needs
+							==>"Internal or private" POCs: send to some contacts or decision-makers... ==>Internal
+					==>Functional POCs:
+						==>This can be used for bidding or auctioning like: bid for projects or compete for projects
+						==>More formal than "Backbone POCs": such as: public demos, ...
+					==>CoreLogic POCs:
+						==>Enriched POCs
+						==>With much more functions and modules than basic-core functions/flows/modules
+
+============================================================

@@ -1,0 +1,206 @@
+
+
+==============================================
+How to Search Angular: rxjs:
+
+==>Documentations:
+	1) Manual + Source Code:
+	http://reactivex.io/rxjs/manual/index.html
+		http://reactivex.io/rxjs/identifiers.html: list various Classes + Source Code
+
+==>APIs:
+	1) APIs + Technical Docs:
+	https://rxjs-dev.firebaseapp.com/
+	https://rxjs-dev.firebaseapp.com/api
+	==>Similar and Simulating to Angular Documentations Site
+	
+	Summaries:
+		==>rxjs: has limited classes, so each class is kind of powerful: including Observable
+		==>Classes like Observavle: has static/public methods: same names and same functions as rxjs' operators(functions) do:
+									==>example 1: map()
+									==>example 2: pipe()
+									...
+			==>Usage: observable.pipe(...) vs. normal pipe(...)
+						==>Pipe: operator:
+							https://rxjs-dev.firebaseapp.com/api/index/function/pipe
+			==>Usage: observable.map(...) vs. normal map(...)
+	
+		==>Angular APIs and rxjs APIs:
+			==>Have many overloaded functions or APIs/methods
+			==>So: parameters: can vary
+			
+	Imports:
+		https://rxjs-dev.firebaseapp.com/guide/installation
+		import { of } from 'rxjs';
+			==>Import parts from "index" package
+		import { pipe } from 'rxjs/operator';
+			==>Import parts from "operators" package
+		
+		
+
+==>Source Code:
+	1) Source Code: es6
+	http://reactivex.io/rxjs/source.html
+		http://reactivex.io/rxjs/file/es6/Observable.js.html
+
+==>Github:
+	?
+
+==>Resources:
+	https://angular.io/guide/rx-library
+
+==============================================
+Approaches:
+	
+==>Angular - With Observables: with APIs:
+
+	==>Angular: utilize Observables' events natures to do event/value(data)/status/response/config/function handling
+		https://angular.io/guide/observables-in-angular
+		
+		Why Observables in Angular?
+			==>...
+			==>Listen to its values changes: events, values, statuses, ..., ...
+				==>Angular code and APIs: can make many parts Observables, ... if needed
+			==>...
+			
+		==>Observables:
+			==>Can be instantiated via constructors
+			  time = new Observable<string>(observer => {
+				setInterval(() => observer.next(new Date().toString()), 1000);
+			  });
+  
+		==>EventEmitter:
+			Transmitting data between components
+			==>EventEmitter extends RxJS Subject =>Observable
+			==>The parent component's function is an event handler, which is also kind of observer/subscriber: 
+				its next() method takes this $event value to the parent component's method
+			
+		==>HttpClient:
+			==>this.http.post(..., ...).subscribe();
+			==>this.http.post(..., ...).map((response: Response) => response.json());
+			==>More method calls:
+				http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map
+		
+		==>Async pipe:
+	
+			<Observable/Promise> | async:
+			==>async is a subscriber to the <Observable/Promise>
+	
+		==>Router:
+			==>this.activatedRoute.url.subscribe(url => console.log('The URL changed to: ' + url));
+		==>Reactive forms: FormControl properties: valueChanges and statusChanges
+			==>
+			
+	==>
+	
+	==>
+	
+	==>
+
+==>Observable: Source
+	==>Point 1: Natures: Async + Lazy:
+				==>Observable's callback functions: can be synchronous:
+					Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+					.subscribe(sumObserver);
+	==>Point 2: Different APIs:
+				==>next
+				==>subscribe
+				==>RxJS Stream APIs - Data-Preprocessors
+				==>Observables do not mutate the server response: but apply with operators: filter is an operator: all operators: "Function"
+					this.navStart = router.events.pipe(
+					  filter(evt => evt instanceof NavigationStart)
+					) as Observable<NavigationStart>;				
+					==>Operators: Pipeable Operators:
+						When called, they do not change the existing Observable instance. Instead, they return a new Observable, whose subscription logic is based on the first Observable.
+						==>Subscribing to the output Observable will also subscribe to the input Observable.
+	==>Point 3: Data Streams: Events (Subscriptions / Responses / Completions)
+				==>Emit: Chained / Multiple events/values/data
+				==>Concepts: Collections/Arrays/...
+	==>Point 4: Error Handling:
+				==>For HTTP APIs: Failed requests can be retried easily
+	==>Point 5: Function: Cancellation
+				==>Can: unsubscribe() / code will be executed 100%
+	==>Point 6: Usage:
+				==>A superset of Promise: it can do whatever a promise can do: toPromise()
+					return new PromiseCtor((resolve, reject) => {
+						let value;
+						this.subscribe((x) => value = x, (err) => reject(err), () => resolve(value));
+					});				
+				==>Different APIs' requirements
+				==>Not using: safety structure: Observable.from():	unify observables and promises
+				==>Use Cases:
+					==>Multiple event values
+					==>Incomplete observables
+					==>Notably unsubscription: want to do: unsubscribe()
+						==>For HTTP APIs: HTTP requests are cancellable through the unsubscribe() method
+				==>Misc:
+					==>For HTTP APIs: Requests can be configured to get progress event updates
+
+==>Promise:
+	==>Point 1: Natures: Async + Eager (can happen immediately)
+	==>Point 2: Different APIs:
+				==>Resolve
+				==>Reject
+				==>Can mutate response through chained .then() calls on promise
+	==>Point 3: Data Streams: Event (Subscription / Response / Completion)
+				==>Single data
+	==>Point 4: Error Handling
+	==>Point 5: Function: Cancellation:
+				==>Cannot
+	==>Point 6: Usage:
+				==>Different APIs' requirements: such as: async functions
+
+==>Subject
+	==>Point 1:	Natures: A type of Observable
+				==>Point 1-1: Subjects allow subscribers of the Subject to push back or trigger their own events on the Subject
+							==>hot Observable (all Subjects) is an Observable that can start emitting (such as: API next()) events before you subscribe (API: subscribe())
+							==>can miss previous events that have already emitted
+							3/4 types as example:
+								==>Regular: cannot replay previous values
+								==>Replay: can replay last emitted value
+								==>Behavior: same as Replay + set up an initial value (as replayable value)
+								==>AsyncSubject:
+									https://rxjs-dev.firebaseapp.com/guide/subject#asyncsubject
+									The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes.
+	==>Point 2: Different APIs: many different Observable types, each with their unique functionality
+	==>Point 3: Data Streams: Same as Observable
+	==>Point 4: Error Handling: Same as Observable
+	==>Point 5: Function: Cancellation: Same as Observable
+	==>Point 6: Usage:
+				==>Similar to Observable
+				==>With special features by its APIs and types
+	Notes:
+		Subject takes similar meaning in English language: "Subject verb Object"...
+	
+	
+==>EventEmitter:
+	==>Point 1: A type of Subject: extends Subject
+	
+==>Multicasted Observables
+	https://rxjs-dev.firebaseapp.com/guide/subject
+	==>A "multicasted Observable" passes notifications through a Subject which may have many subscribers, whereas a plain "unicast Observable" only sends notifications to a single Observer.
+	==>A multicasted Observable uses a Subject under the hood to make multiple Observers see the same Observable execution.
+	
+==>Operators:
+	https://rxjs-dev.firebaseapp.com/guide/operators
+	
+==>Observers: Subscribers
+
+
+==============================================
+Differences: "Reactive" vs "React"
+
+	==>Reactive: common concept for many programming
+	==>React: Means: Facebook's ReactJS domains:
+					 ReactJS: HTML Domain UI
+					 React Native: JSX
+					 
+	"ive" makes a boundary difference of concepts
+
+	==>One concept: React JS from Facebook:
+		Google is heavily backing Flutter, just like Facebook is backing React Native
+	
+
+
+
+==============================================

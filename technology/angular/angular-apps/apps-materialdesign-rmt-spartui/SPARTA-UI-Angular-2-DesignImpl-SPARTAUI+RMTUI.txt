@@ -1,0 +1,612 @@
+
+============================================================
+FM: SPARTA - UI - Angular:
+	==>Natures:
+		==>Nature 1:	The largest Angular UI app that Jerry has worked on
+		==>Nature 2:	FM hired some good Angular developers:
+						(Fanny Mae and FM: utlized any advantages of housing markets or real estates?
+							==>Utilization: Governmental backbones: they both did and do: top 2 national governmental sponsored housing loan tycoons
+							==>Utilization: Money creates money:	they both did and do: real estates and loan businesses: belong to: money creating money areas
+							==>Utilization: Real Estate bubbles or cycles? - maybe not for sure:
+											==>Sometimes: they were in some tough situations due to housing market uprising: like 2005-2007
+											==>Are foreclosures/refinance benefiting/jeapardizing the small banks' loans and/or FMae/FMac? Depends
+							==>Utilization: Ripping off house owners or ...? If existing/any, then not directly by them - at most by small banks' loans
+											==>Are foreclosures/refinance benefiting/jeapardizing the small banks' loans and/or FMae/FMac? Depends
+							==>...
+		==>Nature 3:	Angular 4
+		==>Nature 4:	AngularCLI: 1.7 ==>it is ok - because we use: maven to do the builds + AngularCLI versions are not directly related to Angular versions?
+						==>12/17/2017: Contractors team worked on the app: started the initial work: 2 developers (plus some UI...) worked on it: e.g.: pipeline.components.ts
+										==>Total team developers: 4-6 guys
+						==>1/25/2018:	Contractors team worked on the app: 300 code line
+						==>3/12/2018:	Contractors team worked on the app: 500 code line
+						==>4/10/2018:	Contractors team worked on the app: 600 code line
+						==>6/12/2018:	Contractors team worked on the app: 740 code line: he finished his 6-month work
+										==>3-6 months: this app was delivered to PROD...
+						==>03/29/2019:	Contractors team worked on the app: ~740 code line: the 2nd developer finished his 16-month work
+						==>No more code changes: does a dev team still exist?
+		==>Nature 5:	Look and Feel: should be coming from product manager and business analysts' wireframes or mockup, or prototype
+						==>Based on MSS, but use deep-blue
+						==>
+						
+		
+	==>Challenges:
+		==>Application Size
+		==>Business Logic
+		==>
+
+	
+============================================================
+Topic:	Application:
+
+=>Build:
+	maven: similar for both local and OC container
+
+=>front-maven-plugin: 	install node/npm + npm install:
+						==>This is similar to mvnw, or gradlew: wrapper of the versions
+						==>So you can control how the apps are built with versions
+=>exec-maven-plugin:	prod/openshift:
+							ng build --prod
+						local:
+							ng build
+==>pom.xml:
+	==>Generate a war file:
+		==>But use war plugin to do configurations of web.xml contents to webapp instead of normal webapp module way
+	==>how to package ngapp contents:
+		==>ng build: generate /dist folder... - but where /dist folder goes? - manually deployed or packaged into weblogic war file?
+
+
+
+==>Design:
+	Shared
+	Dashboard
+	Inventory
+
+
+==>Utilization of Angular Open Source Libraries:
+	==>Bootstrap CSS/JS
+	==>Material Design???
+	==>RxJS
+	==>Angular Grid:
+		https://www.ag-grid.com/angular-grid/
+		https://www.ag-grid.com/angular-grid/?gclid=CjwKCAjw9vn4BRBaEiwAh0muDJpHwuXhY-CyNtBEFIm0MBeh_IzSDEYQpurg1bwy00iRovnvEC3LTRoCfJAQAvD_BwE
+	==>
+
+
+
+============================================================
+Topic:	Configurations:
+
+
+============================================================
+Topic:	Styling:
+
+==>style.css
+
+==>bootstrap css:
+	==>3.3.7
+	==>Find Doc:
+		==>Way 1:	https://www.w3schools.com/bootstrap/bootstrap_ver.asp
+					https://www.w3schools.com/bootstrap/default.asp
+		==>Way 2:	https://bootstrapdocs.com/
+					https://getbootstrap.com/docs/3.3/getting-started/
+					https://bootstrapdocs.com/v3.3.6/docs/css/
+					https://blog.getbootstrap.com/2016/07/25/bootstrap-3-3-7-released/
+		==>Way 3:	HTML Doc
+					https://www.tutorialrepublic.com/html-reference/html5-tags.php
+		==>Way 4:	Github:
+					https://github.com/twbs/bootstrap
+	==>
+	
+	==>CSS:
+		Link Mouse to Rat
+		==><link rel="mouse" href="rat.css">
+		==><script type="" src="">
+
+	==>Testing:
+		Online...
+		Local...
+		
+	==>Dev:
+		==>Wireframe... - existing html
+		==>Test Views...
+		==>
+		
+		==>Main Menu - Title part: mostly: use: href="#"
+		
+		<Section>: DIV or ...
+			<Section-Container>: DIV or ...
+				SubSection: DIV or ...
+					Building-Parts/Widgets/Components/...
+				SubSection
+				SubSection
+				SubSection
+			</Section-Container>
+		</Section>
+
+
+==>ngx-bootstrap:	SPARTA-UI:
+							==>AngularCLI: not in use: pure maven builds: so no angular.json ==>also no: Way 1: method 1 and method 2; ==>Also no way 2: import into style.css
+							==>No Way 3
+							==>Pure Way 4:
+								==>>Use 1:	app.module.ts: import all the needed indiviudal modules from 'ngx-bootstrap'
+											All individual files: import individual parts from 'ngx-bootstrap'
+											Exception: xxx.spec.ts: has to import modules as well just like: app.module.ts
+											==>Mostly: you can see: JS part is also in use beyond bootstrap CSS part: ngx-bootstrap is mainly JS code and functions
+											==>Bootstrap css is still coming from: "../node_modules/bootstrap/dist/css/bootstrap.css"
+											==>Also some packages are installed due to dependencies scenarios: used by some other packages inside node_modules
+												==>TBD: is ng-bootstrap a dependency for ngx-bootstrap? - like javax depends upon java
+							==>Procedures:
+								==>Get to documentation:
+									https://valor-software.com/ngx-bootstrap/#/modals ==>Real documentation
+									https://valor-software.com/ngx-bootstrap/#/documentation
+									https://getbootstrap.com/docs/4.0/getting-started/introduction/
+								==>
+								
+								
+								
+								==>ng build:	normally: dist folder
+												SPARTA-UI: where to build to: maybe go to target folder: due to maven plugin's enablement... ==>Actually: in war file...
+												
+								==>SPARTA-UI: Stylishing:
+									==>
+									==>style.css: where included
+									==>bootstrap css: where included
+									==>
+
+==>
+
+
+============================================================
+Topic:	Routing:
+		==>Enable a separate folder for routing module
+		==>
+
+============================================================
+Topic:	Security:
+		==>Router Guards:
+			==>
+			==>Use 2:	pop up some modal to do checks...: existing edits or save...
+			==>
+		==>
+
+
+============================================================
+Topic:	Page Flows:
+		App routing: enabled multiple paths: share the same header section plus with only routing paths: speed up page rendering
+
+		==>Pipeline: Basically common UI layout: header + Main Contents + Right-Side Nav Menu
+					 ==>Why some apps not having footer:
+						==>data table...
+						==>Google Map ...
+						==>
+			
+			==>Global Header Section:
+				==>Logo:
+					==>Bootstrap
+				==>Enable Menu:
+					==>JS + Bootstrap
+					==>Not using Material Design
+				==>
+		
+			==>Page Header Section
+			
+			==>Side Nav Section: included to right side nav menu section
+			
+			==>Main Contents Section: App Loan Section: <app-loan>:
+				==>
+				
+				==><app-column-management>
+				
+				==><ag-grid-angular>
+			
+			
+			==>Right Side Nav Section: SideMenu Display Section:
+			
+			
+			
+
+		==>Pipeline - Dashboard:
+		
+		
+		==>
+
+============================================================
+Topic:	Functional Flows:
+
+	==>Is functions flow very difficult?
+		==>
+	==>
+		
+============================================================
+Topic:	Services:
+
+
+
+============================================================
+============================================================
+============================================================
+App: Code Insights:
+
+
+==>Constructor:
+	==>initialize class fields and variables
+	
+==>Angular lifecycle APIs:
+	==>Initialize data sets by calling some other components and functions
+	==>
+
+==>Code:	Constants:
+			==>
+			==>Constants classes
+				==>define: public static variables	==>Can be used: ConstantClass.variable
+				==>PROS: no need to pass into component/service classes' constructors as arguments
+
+============================================================
+App: App Design Insights:
+
+==>App Config:
+	==>Angular: 4.4.6
+	==>Use AngularCLI: 1.7.0: angular-cli.json:	normally: angular.json ==>This might make some differences
+	==>devkit-core: 0.3.1: To confirm
+	==>environment:
+		==>use Angular environment
+		==>but added with some straightforward ways, not overriding ways (Angular docs: using overriding ways)
+			1) Config enablement:
+				"dev":  "environments/environment.ts"
+				"prod": "environments/environment.prod.ts"
+				==>ng build
+				==>ng build --env=prod
+				This is different from Angular doc - so use: Angular doc ways better
+			2) TS Files
+			3) Usage:
+				import { environment } from 'environment/environments';
+				host = environment.host;
+	Summaries:
+		==>It does use AngularCLI to build + maven plugin to build
+
+==>Styling:
+	==>many css styling:
+		Bootstrap css:
+								==>This is used in all CSS because it is globally defined
+		ag-grid css				==>Styling: ag-grid parts
+		angular-calendar css	==>Styling: calendar parts
+		ngx-bootstrap css		==>Styling: datepicker parts: lots of date pickers on UI pages
+		font-awesome css
+		primeng css
+								==>Part of primeng package: used for messageservice in SPARTA
+		Summaries:
+			==>These node_modules: can be done: npm install primeng ..., ...
+			==>The principles: use the UI component enabled css styling - even though adding some native css code as well on component levels
+			
+==>UI: HTML/CSS:
+	==> <p-xxx>:
+		==>Where does it come from?
+			==>From another powerful UI component: PrimeNg
+		==>Usage:
+			==>It is like MD: enabled HTML tags: can include normal HTML selectors/tags
+			==>
+
+==>UI Design: one main menubar + main contents section
+
+==>UI: App Module
+
+==>UI: Routing Module
+
+	==>Enabled Route Guard:
+		==>Only enable one type of route guard
+		==>implements CanActivate{}
+
+==>UI Components: Application Defined
+
+	Feature Component Modules:	11: main contents sections enabled:
+	
+		==>Dashboard: Main-Dashboard / Pipeline / Deal / Scenario / 
+		==>Inventory: Loan / Deal
+		==>Admin: seller / dataTape / indexRate
+		==>accException + watchlist
+	
+	Shared Component Modules:
+		
+		==>Loan Component:
+			Not belong to above feature components - functions standalone on contents section
+			Loan: listed inside ag-grid table
+		==>...
+
+
+==>UI Components: Integrations
+
+	Many UI components:
+		==>Have component and selector(s)
+		==>Have supporting service(s), and even API functions
+
+	==>UI Component: AG-GRID:
+		==>ag-grid: used for displaying data
+		==>ag-grid-APIs/functions: used to interact with ag-grid tables and columns and data fields to operate on data
+	
+	==>UI Component: ngx-bootstrap components:
+	
+		==>Modal Component
+			import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+			==>BsModalRef:
+				==>Similar to MD's dialogRef
+				==>Enable a reference variable to point to the modal screen component
+			==>BsModalService:
+				==>Used to show/close/etc with Modal Screen
+				==>Similar to MD's dialog window: dialog.open();
+			==>ngx-bs-Modal-Component: Create and define this component
+				self: BsModalRef;
+			==>Caller OR: Base-Component:
+				==>Can be a component OR: a RouteGuard class:
+					==>Whoever can pop up a modal component, can enable ngx-bs modal like this
+				
+			Example:
+				private xxxModal: BsModalRef;
+				xxxModal = modalService.show(ngx-bs-Modal-Component, ...);
+				xxxModal.content.yyy: set up all values for this modal ref: which is set up to the component
+						==>xxxModal.content: is referring to the component: ngx-bs-Modal-Component
+							xxxModal.content ~== ngx-bs-Modal-Component
+							==>xxxRef: just like: "@ViewChild('childCompoent')":	==>childComponent is like this "ngx-bs-Modal-Component"
+							==>Means: represent this ngx-bs-Modal-Component inside this caller/base-component
+						==>xxxModal.content.yyy: yyy is a field inside the component: ngx-bs-Modal-Component
+				How to close this modal?
+					==>xxxModal.content.xxxDialogDone = new EventEmitter();
+					==>xxxModal.content.xxxDialogDone.subscribe(() => {
+						...;
+						...
+						this.xxxModal.hide();
+					});
+			Summaries:
+				==>ngx-bootstrap:
+					have much more modules/parts than modal
+					BUT:
+						SPARTA just shows: Apps don't only stick to 1-2 main libraries ==>They actually utilize various libs with only some of their parts
+				==>Can build a quick POC
+				==>Refer to ngx-bootstrap modal online document and API/function documents for usage
+					How to search:
+						Reference Document:
+							https://valor-software.com/ngx-bootstrap/#/
+						Source Code:
+							https://github.com/valor-software/ngx-bootstrap
+						Installation:
+							https://github.com/valor-software/ngx-bootstrap/blob/development/docs/getting-started/ng-cli.md
+						Resources:
+							https://openbase.io/js/ngx-bootstrap
+							https://wuschools.com/ngx-bootstrap/
+				==>Some Good Info:
+					npm install ngx-bootstrap --save
+					import { AlertModule } from 'ngx-bootstrap';
+					@NgModule({
+					   imports: [AlertModule.forRoot(), ... ],
+					})
+					  "styles": [
+						 "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+						"styles.css",
+					  ],
+					<alert type="success">hello</alert>					 
+		==>
+	
+	==>Service Component: MessageService
+		==>Used for app message notification displays:
+			import {MessageService} from 'primeng/components/common/messageservice';
+			this.messageService.add({
+				severity: 'error',
+				summary: 'Index Rate Admin',
+				detail: 'A failure occurred ...'
+			});
+			Usage:
+				==>Refer to online document for this package about its APIs and arguments
+					How to Search:
+						Reference Documentation:
+							https://www.primefaces.org/primeng/
+						Source Code:
+							https://github.com/primefaces/primeng
+						Resources:
+							https://medium.com/@centizennationwide/angular-material-vs-prime-ng-f54a7255ec95
+					PrimeNg:
+						A comparative UI component with MD and Bootstrap with many UI features
+						MD: Comparatively fewer controls/components as compared to Prime NG.
+					Usage:
+						Used in SPARTA more than just MessageService, it is also used in HTML as selectors p-xxx
+					It has a rich collection of components that would satisfy most of the UI requirements of your application like datatable, dropdown, multiselect, notification messages, accordion, breadcrumbs and other input components. So there would be no need of adding different libraries for different UI requirements.
+				==>Check where it will display:
+					==>Maybe there is an HTML selector for this component, which is placed on the main menu bar or some section
+		==>
+	
+
+==>
+
+==>Modules: Services:
+	==>Add: EnvInfo as Services Modules: configurations
+			==>Initialize main config from environments.ts scenarios
+			==>Declare JSON data for all endpoints and metadata for services modules to use and call
+	==>Add: Interceptor:
+			==>Add common sense interceptor needs: implements HttpInterceptor
+				==>Add some headers and  metadata to the incoming requests
+
+	==>Services Module: Global Services:
+		Env Info Services
+		Global API Services:
+			==>Consolidate and encapsulate service calls into general forms without special service type naming
+
+	==>Services Module: Feature Module Core Services:
+	
+		==>xxxTransformationService
+		==>xxxUtilService
+
+	==>Services Module: Shared Services
+	
+		==>Shared Services are stored inside the same shared folder as shared components
+		
+		==>shared utility components and services
+		
+		==>
+
+	==>Services Module: Inside-Feature-Module Services
+
+
+============================================================
+App: Misc Insights:
+
+==>Mock Module:
+	==>These mock data and service test utils are mainly used for swap all the services for development testing
+	Mock data
+	Mock Services
+	==>Simulate the real service classes:
+		Usage 1: Mock Test in Angular? - like Java Mockito?
+				 ==>But in Angular: this is not the only or main way to do mock testing
+		Usage 2: 
+	
+	getXXX(data)
+
+============================================================
+App: Business Logic and Patterns Insights:
+
+==>Angular Component Rendering:
+	==>Main Components:
+		1) Method 1: Routing Paths: Menus:
+						==>Paths
+		2) Method 2: Routing Paths: RouterLink:
+						==>Paths
+		3) Method 3: As a child component in parent component's html file
+	==>Secondary Components:
+		1) Method 1: As a child component in parent component's html file
+
+
+==>UI - Dashboard: 4 of them
+
+==>UI - Inventory: 2 of them
+
+==>UI - Admin:	   3 of them
+
+	==>UI - Index Rate Admin
+		==>SPARTA-MainUI -> Main Menu Bar
+			==>Routing: /indexRateAdmin => Component
+			==>1) Protected: RouteGuard
+			==>2) ...
+			
+			
+			==>Call IndexRateAdmin Endpoint to get data
+
+==>UI - Misc: 2 of them
+		==>Watchlist
+		
+		==>accException
+
+
+==>L3 Support:
+	==>SPARTA-UI:
+		==>Common Angular UI Design and Components:
+		==>Menus + Router: Paths:
+			==>Services Calls:
+				==>RESTful APIs
+				==>Return service/business data:
+					==>AG-Grid Display data
+		==>Each UI Feature Module:
+			==>Have different service calls and also Grid Table logic
+			==>Integrations:
+				==>Enable services module
+				==>Enable Global API service class
+				==>Invoke various service app endpoints to fetch service/business data: using Angular HttpClient calls
+				==>Data are displayed on AG-GRID tables...			
+			
+	==>Integration with Backend Services Modules: 6-8 modules
+	
+		==>Deal Module
+		
+		==>Loan Module
+		
+		==>...
+		
+		
+		==>History
+
+		==>Calculator
+		
+		==>...
+		
+		
+	==>OCP: Container/ROTN:
+	
+		==>Deploy all of the above modules (including UI) into container as individual applications
+
+		==>Separate from MSS applications - but use the same MSSQL DB
+		
+		==>
+		
+============================================================
+MSS:
+
+	Non-OCP: traditional WebLogic Server Instances
+	MSSQL
+	
+	MSS EAR:
+		==>3 WAR Files + Several small war files...
+		==>PSS-UI: JSF Web War
+			JSF
+			MVC
+			ORM: EclipseLink as ORM framework + JPA
+			Integrated with RESTful API apps
+		==>PSS-WS:
+			==>Provide one single SOAP JAX-WS app: EventService
+			==>TBD: how these APIs are integrated with MSS WAR files? - not looked yet
+		==>SEC-CALC: WAR file to do all kinds of calculators to service calculations
+			==>It does provide RESTful APIs
+			==>It integrates with PSS-UI to provide calculation processes for values
+		==>Many other small war files:
+			==>Provide various RESTful APIs
+			==>TBD: how these APIs are integrated with MSS WAR files? - not looked yet
+
+============================================================
+============================================================
+============================================================
+Topic: Build AG-GRID Component in POC:
+
+import { GridOptions } from 'ag-grid';
+
+private params;
+private gridApi;
+private xxxGridOptions: GridOptions;
+
+this.xxxGridOptions = <GridOptions>{
+	xxx: true,
+	yyy: zzz
+};
+
+/*Ag Grid on grid onInit()*/
+onGridReady(params) {
+	this.params = params;
+	this.gridApi = params.api;
+	this.xxx();
+}
+==>When the ag-grid component html is loaded completely, it passes the above to this component
+==>These like gridApi can operate on grid data: rows (rowData and rowNode and selectedRows, setRowData) and columns (defs, visibility)
+
+HTML:
+
+	<ag-grid-angular #agGrid ...
+		...
+	</ag-grid-angular>
+
+
+Summaries:
+	==>The better ways to enable ag-grid are:
+		1) Set up a quick POC for this
+		2) Refer to ag-grid reference documentations and examples online
+		3) Refer to ag-grid APIs online
+		4) Similar: Java Excel POI APIs
+		5) There is no need to refer to SPARTA ag-grid example
+	
+============================================================
+============================================================
+============================================================
+Misc: Tools:
+
+
+NGX-Admin:
+	https://akveo.github.io/ngx-admin/docs/getting-started/what-is-ngxadmin#what-is-ngxadmin
+
+NGX-Translate
+
+============================================================
+============================================================
+============================================================

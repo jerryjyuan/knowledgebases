@@ -1,0 +1,69 @@
+
+==========================================================
+Sub Topic: Angular:	Testing
+
+
+==========================================================
+How to Search:
+
+	==>Angular Reference Document: Testing
+		==>https://angular.io/guide/testing
+	==>Angular Test Module:
+		==>TestBed: similar to Java / Spring Test / Spring Boot Test
+	==>Test Framework: 	Jasmine: BDD
+						==>Similarity: JUnit and JUnit APIs
+						https://jasmine.github.io/
+						APIs:
+							https://jasmine.github.io/pages/docs_home.html
+							https://jasmine.github.io/api/3.5/global
+						jasmine.Spy: ==>tests with spies
+						==>Similar to Java Mockito
+	==>Test Runner:		Karma
+						==>Similarity: JUnit-Runner + mvn test + SpringRunner
+						https://karma-runner.github.io/latest/index.html
+	==>E2E Test Framework: Protractor
+						https://www.protractortest.org/#/api
+						==>It does require a DOM?
+
+==========================================================
+Angular:
+	...
+	
+	JavaScripts: Events / Callbacks / ==>BDD...
+				 Namespaces / Globals / functions / async / ...
+	
+	
+==========================================================
+Where is testing package?
+
+11:
+package/NgModule
+decorator/directive
+class/interface/function/enum
+pipe/type-alias/const
+
+packages: 9
+	core/common
+	animations/platforms/elements/forms
+	router/service-to-worker/upgrade
+
+	where is testing?
+	in every package...
+
+==========================================================
+@angular/core/testing:
+
+ async ComponentFixture ComponentFixtureAutoDetect ComponentFixtureNoNgZone discardPeriodicTasks fakeAsync flush flushMicrotasks getTestBed inject InjectSetupWrapper MetadataOverride resetFakeAsyncZone TestBed TestBedStatic TestComponentRenderer TestModuleMetadata tick waitForAsync withModule
+ 
+==>TestBed
+==>ComponentFixture:
+
+	create a component using factory
+	
+
+==>inject
+
+
+
+==========================================================
+ 

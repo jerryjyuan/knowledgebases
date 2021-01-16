@@ -1,0 +1,127 @@
+
+==========================================================
+MSS:
+
+==>Pure Java JEE web applications:
+	EAR Files:
+		MSS EAR
+		LST EAR
+	+
+	Maven
+	+
+	MSSQL
+	
+	Compositions:
+		==>4-10 WAR files:
+		==>PSS-UI War
+		==>PSS-WS War
+		==>SEC-xxx WAR files
+			==>Main Example: SEC-CALC war
+		
+	==>UI:
+		MVC: 
+			V: JSF + XHTML
+			C: Controller
+				==>Service Tier: EJB jar: stateless session beans
+			M: BO/DO
+				==>ORM: EclipseLink
+				==>JPA
+		
+	==>PSS-UI WAR:
+		==>Call: SEC-CALC WAR file: same ear file and host/port
+
+	==>Deployment:
+		==>Common DMZ: Application Domain:
+					   ==>Application Domain is less secure than "Internal Domains: such as OCP: ROTN"
+					   ==>Application Domain: app servers + outsource teams and vendors
+		==>Apache + WebLogic Server
+		==>
+		
+		==>Security:
+			==>VPN: internal/external
+			==>TAM: control access to apps regardless of VPN
+			==>SSO:
+				TAM function as kind of SSO: 
+					but some TAMs cannot keep the sessions - depends
+				Some TAM require 2 times signon until you use another app url context, which is being optimized by Home Depot
+			==>DB Based user / team groups and roles: like MFUW
+			==>
+			==>Some tiers/domains have firewalls in between:
+				==>Such as: in front of DB servers/zones, etc.
+				==>
+
+	==>MSS:
+		==>Internal application: require VPN
+		==>TAM?:
+			==>MSS NonProd: has TAM: use TAM: probably with SSO: keep the session
+			==>MSS PROD: 	Not sure what is going on: because of this: ==>SSO: Yes: NO TAM in this scenario (assuming)
+		==>PROD: After SSO login:
+			==>It should go to Apache
+			==>Apache goes to WebLogic on the 2 servers
+			==>WebLogic Servers:
+				==>PSS-UI: process requests
+				==>Call SEC-CALC WAR file calculator RESTful APIs: on the same WebLogic host/post
+					==>What happened to scfalias???
+					==>Why needing AuthUtil to login to SCF Alias username/password?
+					==>Is this for securing the RESTful APIs?
+					==>
+					
+					==>SPARTA:	RESTful APIs: use similar AuthUtil and scfalias:
+						==>Maybe many of SPARTA RESTful APIs: also use: Jersey RESTful + JAX-RS RESTful APIs
+						   (MSS does the same)
+						==>These RESTful APIs: need security
+							==>They choose: Http Basic Authentication method
+							==>This Http Basic: need username/password
+							==>1) Build Client Util + Client Holder: create client and hold client for client modules to call
+							==>2) Fetch usernmae/password from Mac Vault to build Http Basic Authentication
+									==>Utilize Jersey RESTful client authentication feature with Http basic authentication method
+							==>3) So the scf alias config is on client side: to call Jersey RESTful APIs
+							
+							Client: Jersey RESTful API:
+								javax.ws.rs.client.ClientBuilder
+							Client Config:
+								org.glassfish.jersey.client.ClientConfig
+							Enable TLS/SSL context programmatically
+							Add scfalias name/pwd from MacVault
+								==>>This config is on client side's classpath configuration file: loaded as getResourceAsStream()
+							Finalize client: used to call Jersey RESTful APIs: the server side is like: https://... + Http Basic Authentication by the username/pwd						
+							
+					==>MSS SEC-CALC: does the same as SPARTA above
+					==>Jersey RESTful Server Side APIs: enabled with Http Basic Authentication feature, so client needs to send the username/password config to server
+
+					
+		
+	==>Public Internet / NonVPN: PROD
+		https://multifamily.freddiemac.com
+			==>SSO: No
+		https://www.freddiemac.com
+			==>SSO: No
+		https://multifamily4.freddiemac.com/multisuite-mfsys/invrpt/LLRReports.do
+		==>It goes to company proxy and firewall
+		==>Then it goes to TAM junction because this url is configured as TAM junction:
+			Access Manager for e-Business Login
+			==>It logins user via TAM
+		
+	==>VPN Only: PROD
+		https://www.fhlmc.com/mfsec_prod/securitization-ui/
+		==>Internal domain
+		==>SSO: Yes
+
+	==>Public Internet / NonVPN: NonPROD
+		https://np.fmrei.com	
+			==>SSO: No		
+		https://fbnp.fmrei.com/mmaps-uat-fac/MMAPS/m/
+			==>SSO: No
+				
+	==>VPN Only: NonPROD:
+		https://hftam.fhlmc.com
+		==>SSO: Yes		
+		
+	ISO Zone?
+	ROTN OCP
+	
+==========================================================
+
+
+
+==========================================================

@@ -1,0 +1,108 @@
+
+============================================================
+Angular UI - Material Design: In Action 1:
+============================================================
+The following 4 steps: ==>The basic and core Angular app steps:
+
+Pre-Configurations:
+	==>git: installation + git config
+	git config --global user.email "you@example.com"
+	git config --global user.name "Your Name"
+Step 1: Install NodeJS/NPM
+	==>npm: install:
+	==>Install to: C:\Program Files\nodejs and add to PATH
+Step 2: Install AngularCLI
+	npm install -g @angular/cli
+	npm uninstall -g @angular/cli
+	npm install -g @angular/cli@8.3.2
+	also installed nvm
+Step 3a: Existing app:
+	ng install
+Step 3b: Create a new app:
+	ng new app
+	npm install @angular/material @angular/cdk @angular/animations --save
+		==>animations: Some Angular Material components use animations so you need to add support for animations
+			src/app/app.module.ts
+			import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+			imports: [
+				BrowserModule, BrowserAnimationsModule
+			],
+		==>cdk: link Google’s material design to an Angular application
+		As of npm 5.0.0, installed modules are added as a dependency by default, so the --save option is no longer needed. The other save options still exist.
+		
+		Using Animations with Angular Material Components
+			The last thing is enabling animations. Some components rely on the Angular animations module for advanced transitions, so you need to install the @angular/animations module and include the BrowserAnimationsModule in your application module configuration.
+			npm install --save @angular/animations
+			
+Step 4: Build and Run:
+	ng serve
+	ng serve --port 4201
+	OR: npm start
+	Multiple CMD windows can be opened while one window with "ng serve" is running
+Step 5: add FeatureModules:
+	Add: Several Main Components: related to root module routing flows
+	ng g component xxx
+	==>New components automatically updated in app module
+	==>Update new components immediately in: app-routing.module.ts
+		==>So the components are configured
+		==>Also need to import these components into routing module
+Step 6: add FeatureModules:
+	ng add @angular/material
+		Choose a prebuilt theme name, or "custom" for a custom theme:
+		Add project dependencies to package.json
+		Add the Roboto font to your index.html
+		Add the Material Design icon font to your index.html
+		Add a few global CSS styles to:
+			Remove margins from body
+			Set height: 100% on html and body
+			Set Roboto as the default application font
+		Set up HammerJS for gesture recognition and if you want to set up browser animations for Angular Material - press Enter to use the default answers.
+		Some components (mat-slide-toggle, mat-slider, matTooltip) rely on HammerJS for gestures.
+			Gesture Support
+				npm install hammerjs --save
+			Complete installing HammerJS then import it on ‘main.ts’ file
+				import 'hammerjs';
+Step 7: Work on Material Design UI:
+	Add:
+		File: app.module.ts:
+			import { MatToolbarModule,
+			  MatIconModule,
+			  MatCardModule,
+			  MatButtonModule,
+			  MatProgressSpinnerModule } from '@angular/material';			  
+			Also add them into "imports" part
+
+
+Step  9: Advanced Coding Parts:
+
+	==>Mock Test a RESTful server:
+		npm install --save json-server 
+		npm install faker --save
+		
+	==>Create Service Layer:
+		ng g service api
+		
+		
+	==>Adding Error Handling
+
+
+	==>Adding Pagination
+
+
+	==>Build and Deploy to Firebase Platform
+
+
+
+
+	==>Mock tests: JSON data
+
+	RxJS  throwError()  and  catchError()
+
+	RxJS  retry()  and  takeUntil() operators
+
+	Firebase using the  ng deploy
+
+	Adding Pagination
+
+
+============================================================

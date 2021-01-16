@@ -1,0 +1,291 @@
+
+============================================================
+==>Step 5a:	Landing Page Design: ==>Layout etc.
+	==>Method 1:	app.component.html: enable page design using header/menu/sidenav/contents/footer
+	==>Method 2:	index.html: using router to lead to landing home component:
+					==>index.html: normal way: add: <app-root></app-root>
+					==>app.component.html: Use: <router-outlet></router-outlet> ==>This will delegate to routing module rendering
+					==>It delegates to routing module to point and render landing page
+					==>path: '' ==>redirectTo: 'main'
+					==>main.component.html: can add normal contents for the dashboard or landing page
+					==>Utilize main component to do the landing page design and layout
+						==>Sidenav is different from MD design: not included in the container
+						==>Sidenav becomes an independent side design section
+						==>Center: the Google Map:
+							==>
+						==>Right side: add a mat-drawer section
+					==>Header Module/Section:
+						==>Add Alerts Component: display notification messages and alerts
+
+	==>
+	
+	==>Method 7:	Home Page & Alert Component
+					https://jasonwatmore.com/post/2019/05/31/angular-7-tutorial-part-6-home-page-alert-component
+
+	==>How AppRoutingModule, RouterModule, Routes, Route: Works?
+			==>Router Design:
+				static => empty path one => ... => wildcard ones
+			==>Enable more advanced router parts:
+				==>
+				==>
+				==>Query Parameters and Fragments
+				==>Route Observables
+				==>Child (Nested) Routes
+				==>Outsourcing the Route Configurations
+				==>Pass static data to router
+				==>Retrieve router parameters
+				==>Pass dynamic parameters to links
+				==>Child routes
+				==>Location Strategies
+				==>Fix page reload issues
+				==>Router Guards: resolve guard, ...
+				
+		==>Point 1:	An application can have multiple: <router-outlet></router-outlet>
+					==>But only one <router-outlet></router-outlet> is in effect or in use when one view is rendered
+					==>The <router-outlet></router-outlet> in its own component's templateUrl is not in use
+						1) Example 1:	global url: "about-rubi" path leads to AboutRubiComponent path:
+										http://localhost:4200/about-rubi
+										the <router-outlet></router-outlet> inside this component template file is not in use
+						2) Exception:	if the routerLink is in use for the template file: the <router-outlet></router-outlet> can be placed in the same file
+						3) Question:	if the 2) is like this: "first-component.component.html":
+											<p>...</p>
+											<a routerLink="first-component">first component</a>
+											<p>...</p>
+											<router-outlet></router-outlet>
+											<p>...</p>
+											Router module is: path: 'first-component', component: FirstComponent
+											===>Does this look like a cyclic inclusion? - but maybe ok: just one single inclusion/repetition
+												==>It does include one time (even without the click on the <a anchor element)
+												profile.component.html:
+												<p>profile works!</p>
+												<a routerLink="/app-profile">Profile</a>
+												<router-outlet></router-outlet>												
+													profile works!
+													Profile
+													profile works!
+													Profile												
+											==>However, the link <a mostly would add more parameters or variations if using the same component template
+					==>The <router-outlet></router-outlet> is its immediate upper component stream's tree template (lowest one) is in use
+					==>index.html: cannot have <router-outlet></router-outlet>: index.html is almost always use <app-root> to start with
+					==>The highest component level to have it is: app.component.html
+		==>Point 2: <router-outlet></router-outlet>: mechanism analysis:
+					==>Point 1:	It is due to the nature of SPA application of being an Angular app: ==>Are all Angular apps are SPA? - not so sure
+								==>1) What does SPA mean with Angular app?
+										==>Angular app starts up and running: it doesn't want to request a new page to the SERVER side, 
+											and perform itself on client side only ==>$500 value ==>So it is called SPA app
+											==>In the web domain: SPA meaning 1: the entire one long page is displayed ==>This is the original main meaning
+												(so we do not have many links to do page flows: such as: Spring Boot has SPA doc and multiple-page doc)
+											==>Second meaning: Angular doesn't want to talk to the server to retrieve a new page: SPA app
+												==>ALl the page rendering is from the compile Angular JS code
+												==>The page rendering is display/hide some views: user moves between different views <= enabled by Router
+								==>2) Router: change the view via navigations
+											  ==>The changed views are displayed into: <router-outlet></router-outlet>
+											  ==>So the new view by the router is insert into this <router-outlet></router-outlet> area
+											  ==>So: we at least have to have one <router-outlet></router-outlet>? YES
+													==>Without this, it doesn't seem that the routing works
+													==>So the following url: http://localhost:4200/app-profile
+														==>It goes to http://localhost:4200/ ==>...
+											  ==>Without <router-outlet></router-outlet>: we can also do page flows: each time: it calls server to get a page
+		==>Point 3: Angular app code flow: analysis:
+					==>Angular is always starting with index.html: the first access page: other html pages are not accessible
+					==>index.html: always takes through: <app-root></app-root> path
+					==><router-outlet></router-outlet>: needs to start from app.component.html or below the component hierarchy
+		==>Point 4:	App Routing Module and Router mechanism: different from normal Angular Component concept and template/selector:
+					==>Component/template/selector: can always be generated via selector in other template pages:
+						==>Component/Selector are used: for embedding and including selector's html contents
+						==>The component can include its own component selector inside its own template file: but should not do it - repeating the template code
+					==>Routes might not be in effect is there is no "<router-outlet></router-outlet>" defined or something wrong
+						==>Router are used for SPA's view navigations and changes
+					==>They are both running inside Angular client side code (JS code) via these JS files
+					==>Most of the so-called page flows are the SPA's internal view changes by router:
+						Angular mostly run on the client side unless: querying server for a new page OR: RESTful APIs calls OR: integration links, etc.
+		
+		==>More Router Coding Parts:
+			Refer to Angular Document: "In-app navigation: routing to views"
+			==>ActivatedRoute and ParamMap:
+				==>this.route.queryParams.subscribe(params => {this.name=params['name']});
+			==>
+			==>Nested Routes
+			==>Access router parameters and fragments
+			==>Access link parameters array
+			==>Routing Strategy
+			==>HTML5 and baseUrl
+		
+		
+	MissionMap:
+		==>Mobile first
+		==>Support IE
+		==>Enable jQuery: ...
+		
+		==>What does Google Tag Manager do here?
+			GTM/Tags/GoogleAnalytics:
+				Javascript tracking codes (also known as Tags) on your website
+				Google Analytics tracking code is one of those tags.
+				Google Analytics is an analytics tool that provides reports. Google Tag Manager has no reporting features. 
+				It is used to send data from your website to other marketing/analytics tools (including GA). If you don't want to use Google Tag Manager, that's fine.
+			noscript: when not enabled with JS for browsers
+		==>Landing Page is rendered by: router => to home component: like default JSP welcome page or default index.jsp/html page etc.
+
+
+==>Step 5b:	Login Page: Login and Registration
+
+	==>Method 1:	SSO:
+					==>See RMT?
+					
+	==>Method 2:	Angular Way: Router Guards
+	
+					==>Enable Router Guards
+					
+					==>Login Form, Authentication Service & Route Guard
+						https://jasonwatmore.com/post/2019/05/17/angular-7-tutorial-part-4-login-form-authentication-service-route-guard
+					
+	
+	==>Method 3:	Spring Boot/Security/OAuth2
+					https://spring.io/guides/tutorials/spring-boot-oauth2/
+					https://github.com/spring-guides/tut-spring-boot-oauth2
+	
+	==>Method 4:	Spring + Angular + OAuth2: See Spring Guide Tutorial
+					https://spring.io/guides/tutorials/spring-security-and-angular-js/
+					https://github.com/spring-guides/tut-spring-security-and-angular-js
+
+
+	
+	
+	==>Method 7:	Registration Form & User Service
+						https://jasonwatmore.com/post/2019/05/22/angular-7-tutorial-part-5-registration-form-user-service
+		
+		
+	==>Method 8:	User Registration and Login Example & Tutorial
+						https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+					
+					JWT Authentication Example & Tutorial
+						https://jasonwatmore.com/post/2018/11/16/angular-7-jwt-authentication-example-tutorial
+						
+					Role Based Authorization Tutorial with Example
+						https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
+					
+==>Step 5c:	Component Styling:
+
+	Bootstrap + MD (for core-parts and data-display etc) + homegrown-fine-tuning (style.css or component.css): really good
+	
+		Section Design:
+			==>Higher levels: 	Bootstrap OR: MD
+			==>Inner Levels:	Use components
+								Use HTML code
+								Use <div>
+								Use MD selectors
+
+	==>Styling: homegrown:
+				1) use: style.css global stylings
+				2) 
+				
+	==>Styling: Bootstrap:
+				https://bootstrapdocs.com/
+				1) Use: for layout enablement
+				2) Use: enable section design ==>Use bootstrap's div and related selectors 
+					==>Define font sizes
+					==>Define section-based layout
+					==>
+				3) Use: for some features: great
+				
+				
+	==>Styling: angular MD, default theming, and global theming
+							where are Roboto fonts coming from? - default theming
+	
+	
+	==>Use: Componets to help/facilitate page layouts and design:
+		==>Use components to replace html sections...
+		==>Use warmer and vessel: not working: only works for Matt
+		==>
+	
+	Color Code:
+		by name:	White
+		by rgb:		rgb(255, 255, 255): mix red/green/blue with 100% into white...
+		by code:	#ffffff
+					(1-10-a-f): 00001111 =>f	=>15
+								11111111 =>ff 	=>255
+		by code-short-form: #fff: means: repeat into #fffff? => 255 255 255
+		by percentage:
+					hsl(0, 0%, 100%)
+					HTML HSL and HSLA Colors. HSL stands for hue, saturation, and lightness. 
+					HSLA color values are an extension of HSL with an Alpha channel (opacity)
+					
+					
+	==>Entire Page Design:
+	
+		==>Section: Header
+	
+		==>Section: Nav
+		
+		==>Section: Main-Contents:
+					==>Part 1: Google Map
+					==>Part 2: Right-Side Sub-Section:	maybe <mat-drawer> is an integral part of the content part...
+								==>Display the results
+	
+	==>Style sepcial parts:
+		==>Router links: enabled and style active router links
+		==>
+	
+	
+	==>Create new directives
+	
+	
+	==>How to design Footer?
+		==>Common and varied
+		==>Step 1: add several <div>
+		==>Step 2: add some global or local css (if only used for this component) classes
+		==>Use common HTML tags
+		
+	==>UI Design Points:
+	
+		==>The final UI looks easy and simple
+		
+		==>But when it is empty: it is hard or a far-away to do the design and implementation
+		
+			==>For example: when you look at the UI now, can you design and start implementation like those code modules?
+			
+					==>Take some page design processes
+					==>Take a lot of good use of MD and Bootstrap tags and selectors
+					==>Take some inner functionality and processing inside the page design
+					==>Take a lot of staged refactoring
+					==>Take a lot of consolidations
+					==>
+			
+			From Code ==> UI: easy to the streams
+			
+			From UI => Code: tough
+			
+			From Business Requirements => Code: Even tougher
+			
+			From Business Requirements => UI => Code: Toughest
+			
+			
+
+==>Step 6:	Features Modules:
+	==>main structures: features/<primary-feature-module>/<sub-feature-folder>
+	==>some structures: features/<feature-folder>
+	==>some structures: features/<feature-folder>/<sub-feature-folder>
+	==>Some feature-module: directly contains its own service files (not global files)
+	
+	==>Build up backbone of the main components:	Assigned to Tom Travis
+	==>Stage 1 POC demo:							Assigned to Tom and Kesava (Google Map display and calls)
+	
+	1) Design HomeComponent:
+		==>ng g component home
+		==>home.component.html:
+			==>Replicate the page design wireframes into this file
+			==>Convert the html code into MD selectors and components
+	2) Update style.css
+			==>Add some the page design wireframes' look and feel css into style.css as global look and feel
+	
+
+
+
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

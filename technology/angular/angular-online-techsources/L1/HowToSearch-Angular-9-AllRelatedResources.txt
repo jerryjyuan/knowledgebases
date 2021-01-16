@@ -1,0 +1,37 @@
+
+==============================================
+How to Search Angular: All Related Resources:
+
+==============================================
+
+==============================================
+Component - HTML:	Bootstrap CSS:
+
+	https://getbootstrap.com/docs/3.4/css/
+	https://getbootstrap.com/docs/4.1/layout/grid/
+	
+==============================================
+Component - HTML:	PrimeNg: CSS (+ other components + functions):
+
+	https://www.primefaces.org/primeng/showcase/#/setup
+	Example 1:
+		https://www.primefaces.org/primeng/showcase/#/progressbar
+
+	npm install primeng --save
+	npm install primeicons --save
+	
+==============================================
+Backend Test Module:
+	Creating A Fake Back-End Service
+		https://www.smashingmagazine.com/2018/11/a-complete-guide-to-routing-in-angular/
+		npm install --save angular-in-memory-web-api
+	
+==============================================
+
+
+
+==============================================
+
+
+
+==============================================

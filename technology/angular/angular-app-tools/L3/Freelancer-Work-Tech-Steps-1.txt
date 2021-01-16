@@ -1,0 +1,22 @@
+
+
+============================================================
+Freelancer Tech Work:
+
+==>Step 1:	Evaluations: tech/solutions
+			==>Quickly find out: it is an Axis2 Server SOAP APIs
+
+==>Step 2:	Solution Packages
+			==>Axis2 SOAP: WSDL ==>Ask for WSDL
+				==>WSDL file sent to you
+				==>Or: via the http://...?wsdl
+
+==>Step 3:	Enable fastPOC: ...
+
+
+============================================================
+
+
+
+============================================================
+

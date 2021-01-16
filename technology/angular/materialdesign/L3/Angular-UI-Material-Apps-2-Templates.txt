@@ -1,0 +1,98 @@
+
+=========================================================== 
+Angular UI:
+
+
+
+
+
+
+SASS/SCSS/LESS:
+	CSS world compiling: diff syntaxs:
+	No.1: SASS: Syntactically Awesome StyleSheets: Ruby based
+	SCSS:  “Sassy CSS” and is a superset of CSS3's syntax
+	LESS: JS based
+	.css => .sass / .scss / .less ==>compiled into .css by these 3 types of pre-processors 
+		(enable more features than Vanilla CSS like CSS3)
+		(make css more programmable)
+		==>mixins: templates: @include
+		==>@extend
+	===>Are the SASS / SCSS / LESS compilers included in Angular app?
+		===>Angular CLI has these needed compilers and functions
+			support for compiling Sass to css is built-in; you only have to add a new entry to the "styles" list in angular.json pointing to the theme file (e.g., unicorn-app-theme.scss).
+			===>Other tools are: gulp-sass or grunt-sass, node-sass, etc. - need to run compiling commands and then add the output files into index.html
+		===>Depends: if it is a bootstrap SASS lib/module, then bootstrap SASS will provide the compiler...
+		===>Bottom line: it is NOT the Angular UI app's responsibilities to compile it to CSS
+	
+
+====>Angular UI CSS Development:
+
+STEPS:
+
+Step 1:
+	- Enable Angular Material:
+		- ng add @angular/material
+			===>Add Angular Material
+			===>Add Angular CDK:
+				ng add @angular/cdk
+			===>Add Angular Animations
+Step 2:
+	- Generate Angular Components:
+		- Common Ways: Angular CLI
+			ng generate ...
+		- Generate Angular components from Schematics: https://material.angular.io/guide/schematics
+			Schematics -> Components
+
+
+Step 4:
+	Theme some components of MD library
+	===>Not using: 
+		@include angular-material-theme($candy-app-theme);
+		===>This only style: all material design module's components from material design library - using this local passed-in theme/arguments
+		===>Aka: all MD components will be impacted and customized - not function like their default behaviors when used in app code
+	@include mat-core-theme($candy-app-theme);	==>As core prerequisite
+	@include mat-button-theme($candy-app-theme);	===>This only style: buttons
+	@include mat-checkbox-theme($candy-app-theme);	===>This only style: checkboxes
+
+Step 5:	Style a specific app-component: if you don't want a component to use app-global styles
+	https://material.angular.io/guide/theming-your-components
+	
+	- Step 5-1:	Similar to Java xxxUtil.java: like: StringUtil.java:
+				Create a theme style file (.sass file): this can be reused in many places and many components
+				===>As a functional template to generate altered and customized theme from an input local theme
+				===>Just like a Utility class to take input local theme and generate/return a customized theme
+				1) Styles output
+					- Utilize Library Theme - Angular SDK's built-in theme
+					- Add mixins (templates) to accept the theme and output the styles you need in the mixins
+				2) Typography output
+					===>https://material.angular.io/guide/typography
+						- Define sets of fonts and types of CSS ... 
+					===>https://material.io/archive/guidelines/style/typography.html
+					===>https://github.com/angular/components/blob/master/src/material/core/typography/_typography.scss
+					- Utilize Library Theme - Angular SDK's built-in theme
+					- Add mixins (templates) to accept the theme and output the styles you need in the mixins
+				===>Then any application component can call the above util to generate a fixed customized them by passing a local theme - aka: some arguments
+	- Step 5-2:	Define local .css file as regular way for component:
+				- These css styles will be used for other styles in addition to the above theme-file
+	- Usage:
+		In one component: in their styleUrl .css file:
+			import Angular theming functions and call the above mixins to get a customized theme
+			==>@import '~@angular/material/theming';
+			...
+			==>// Include theme styles for Angular Material components.
+				@include angular-material-theme($theme);
+					==>The angular-material-theme mixin will output styles for all components in the library.
+					See all Angular Material Themes:
+					==>https://github.com/angular/components/blob/master/src/material/core/theming/_all-theme.scss
+				
+				// Include theme styles for your custom components.
+				@include candy-carousel-theme($theme);
+			==>AKA: we got 2 global styles:
+				1) Global: Angular Material theme - work as a mixin as well
+				2) Global: Customized defined theme: candy-carousel-theme
+			===>Then inside the same .css file, you can define any other local css tags and classes for this component
+
+Step 6:	Dynamic call and swap themes - via Angular functions
+
+
+===========================================================

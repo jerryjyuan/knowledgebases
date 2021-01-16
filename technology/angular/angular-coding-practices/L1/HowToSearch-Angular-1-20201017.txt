@@ -1,0 +1,161 @@
+
+
+==============================================
+How to Search Angular:
+
+	==>Enable Angular expert like Teradata JDBC scenarios of enabling JDBC Driver expert
+	==>Take Angular as your own project and team
+
+==>Doc:
+	https://angular.io/docs
+==>APIs:
+	https://angular.io/api
+	https://v8.material.angular.io/components/toolbar/api
+	==>Same Angular 8.x or 10.x: APIs - mostly no changes ==>Same Major version
+	https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fapp%2Ftoolbar-multirow-example.html
+	==>Every 6-month a new release: just like TomNolan/BobbAlex: they will collect all new APIs changes into next release, not with minor/bug-fix releases, ...
+==>Source Code:
+	https://github.com/angular/angular
+	How to: get the versions:
+		==>Select version from dropdown list:
+		https://github.com/angular/components/tree/8.2.x
+
+==>
+
+==============================================
+How to Search Angular Knowledge Bases:
+
+==>SemVer: package.json:
+	https://semver.org/
+	https://docs.npmjs.com/about-semantic-versioning
+
+==>Styling:
+	https://material.angular.io/guide/theming#using-a-pre-built-theme
+
+==>HTML4/5:
+	https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-hidden_attribute
+	https://www.tutorialrepublic.com/html-reference/html5-tags.php
+	https://www.go4expert.com/articles/html4-vs-html5-comparison-t30141/
+	https://www.quackit.com/html/tags/html_button_tag.cfm
+	https://www.quackit.com/html/html_4/tags/html_button_tag.cfm
+	https://html.com/attributes/button-type/
+	
+==>Bootstrap:
+	https://www.w3schools.com/bootstrap/bootstrap_buttons.asp
+	https://getbootstrap.com/docs/4.0/components/buttons/
+
+==>App Dev:
+	==>Consolidated Modules:
+		https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fapp%2Fmaterial-module.ts
+	==>Bazel:
+		https://blog.ninja-squad.com/2019/05/14/build-your-angular-application-with-bazel/
+		Example:
+		https://github.com/angular/components/blob/8.2.x/src/material/toolbar/BUILD.bazel
+		https://github.com/angular/components/blob/8.2.x/WORKSPACE
+		https://github.com/angular/components/blob/8.2.x/packages.bzl
+		https://github.com/angular/components/blob/8.2.x/.bazelrc
+		https://github.com/angular/components/blob/8.2.x/.bazelignore
+		https://github.com/angular/components/blob/8.2.x/.circleci/bazel.rc	
+		Example App:
+		https://blog.ninja-squad.com/2019/05/14/build-your-angular-application-with-bazel/
+		https://github.com/angular/angular-bazel-example
+	==>Gulp:
+		https://medium.com/hackernoon/building-angular-development-environment-with-gulp-230df2f2f6ca
+		
+==>Startup Example Apps:
+	https://code.tutsplus.com/tutorials/how-to-build-a-login-and-registration-ui-with-angular-and-material-design--cms-31794
+	
+==============================================
+How to Search Angular: Features:
+
+==>Router:
+	https://angular.io/guide/router
+
+	
+==============================================
+How to Search Angular: Material Design:
+
+==>Doc:
+	https://material.angular.io/
+==>MD Selectors/Components:
+	https://material.angular.io/components/categories
+	Versions: v8.x:
+		https://v8.material.angular.io/components/categories
+		==>How to match documents and source code?
+			==>The list on documents: match the source code's main container:
+				==>Summaries:
+					==>Each of them is: a "large" component:
+										==>with its own module: in this regard, larger than normal Angular component
+										==>with public-api.ts: similar to node_modules/* dependencies
+										==>with index.ts: ...
+										Why having both public-api.ts and index.ts?
+											==>Maybe suitable to be used for multiple integration/usage/client/app scenarios ==>Because this is MD API integration product
+										==>Its Module:
+											Similar to any other modules and also root module - but doesn't do root module's duties: bootstrapping
+										==>Its HTML:
+											<ng-content></ng-content>
+											<ng-content select="mat-toolbar-row"></ng-content>
+											==>What is ng-content? ==>TBD
+											==>As a container MD component, its HTML is limited, not a lot code
+					==>Each one: follow the same Angular component concept/structure 
+									+ same scenarios as node_module/* dependencyPackage 
+									+ additional-advanced-features-more-than-normal-component: such as: SCSS, 
+				==>Example 1: Toolbar: as a component:
+						   ==>https://github.com/angular/components/tree/8.2.x/src/material/toolbar
+						   ==>All the sub-parts under "Toolbar": are inside the above source code container:
+						   ==>The API document contents can be resembled inside source code
+						   ==>The same file: contains both @Component: MatToolbar, and @Directive: MatToolbarRow
+						   ==>Inter-component communication/data-flows: can be applied to @Directive as well:
+								==>Component: As a special Directive (sub-class of Directive) with a selector and a view: component.html
+								==>Directive: Directive doesn't have a view: no: xxx.html
+								==>But Directive can have a Selector:
+									==>This is normal: this selector for this kind of Directive in HTML pages is: just a tag shown: no underneath html code rendered (by xxx.html)
+						   ==>
+						   ==>Examples:
+								https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fapp%2Ftoolbar-multirow-example.ts
+								==>Build: as AngularCLI
+								==>Angular files: very flexible...: can contain many TS code, ...
+									==>Why?
+										==>Reason 1: TS code are flexible, ...
+										==>Reason 2: All TS code are compiled (packaged) into several main JS files, ..., big files, ..., not like Java's individual class files, ...
+													 ==>So TS files are very flexible to contain many class/parts contents, ...
+								==>Use: SCSS: style.scss
+								==>The MD UI HTML source code: very good examples to know how to use them in app
+								==>
+==>Source Code:
+	https://github.com/angular/components
+	https://github.com/angular/components/tree/master/src/material/form-field
+	How to: get the versions:
+		==>Select version from dropdown list:
+		https://github.com/angular/components/tree/8.2.x
+==>
+
+==============================================
+How to Search Angular: Angular Google Maps:
+
+
+
+
+
+==============================================
+How to Search Angular: UI Components:
+
+
+
+==============================================
+
+
+
+
+==============================================
+Angular Rich Set of Resources:
+
+	Angular Material UI component library
+
+
+
+==============================================
+
+
+
+

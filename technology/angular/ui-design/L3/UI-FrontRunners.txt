@@ -1,0 +1,23 @@
+
+
+Google:
+	Angular
+	...
+	
+Bootstrap:
+	CSS/JS
+
+Firefox:
+	MDN:
+	https://developer.mozilla.org/en-US/
+	https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers
+	==>Which is why Firefox Browser: become one of the most standardized web browsers
+	==>Recommendations:
+		==>Good Source: HTML KnowledgeBase
+		==>Search:		Some Web/HTML parts...
+						==>https://developer.mozilla.org/en-US/
+		
+Facebook:
+	ReactJS
+	
+	

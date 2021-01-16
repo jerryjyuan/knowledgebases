@@ -1,0 +1,21 @@
+
+
+============================================================
+Citibank: Profile Management
+	==>2018/10:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+Agile/UI-Team:
+	Angular
+	==>1) O8: worked on Angular and BitBucket Version Control
+	==>2) OneGirl: worked on common components team
+	
+	Jerry worked on some silly Subash's work (RTC/IBM/.../...) and some integration work: Susovan...
+	(integrated with some loan providers with the app replacing some existing providers)
+
+	I reviewed some Angular components and codebase for ProfileMgmt
+
+============================================================
+

@@ -1,0 +1,402 @@
+
+============================================================
+FM: MissionMap/RMT:
+	==>2019/09:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+Angular App: MissionMap/RMT:
+
+	==>...
+	==>...
+
+
+
+
+============================================================
+How to build up this app?
+
+(1) Services APIs app
+(2) Angular UI app
+(3) E2E test utility
+(4) DB module
+(5) DCU Module
+
+============================================================
+==>Angular UI App:
+
+==>Step 1: Design:
+	==>UI Wireframes/...
+
+==>Step 2:
+	==>Scaffolding: Assigned to Jerry
+	==>angular/cli:
+		==>package.json:
+			==>devDependencies:	==>this enables a local dev copy of AngularCLI: will override the global or non-dev one:
+				Dev:		npm install --save-dev <package-name>:	==>for dev: you can use any versions - so no need to uninstall or change global version
+				Non-Dev: 	npm install --save <package-name>
+				Global: 	npm install -g <package-name>
+				Questions: can we have multiple versions for global?
+		==>
+
+==>Step 3:
+	==>Maven Build
+	==>1) Some of the extra config is added
+	==>2) Add local repositories into app pom.xml: other ways: global settings.xml and/or .m2/settings.xml
+	==>3) maven-dependency-plugin: used to move node/npm tar.gz from configured "repositories" into: local app's nodejs/npm's download locations
+	==>4) site and site-deploy plugins are used - TBD
+	==>5) After maven run:
+		  ==>it generates the same files and contents as AngularCLI: "ng build"
+		  ==>Should be: ./dist ...
+	==>AngularCLI: ng serve: can do the same work
+
+==>Step 4:	Stylish Design:
+
+	==>Assigned to Jerry:
+		==>Manually downloaded jqeury.js and added it to index.html
+		==>npm install --save bootstrap
+
+	==>1) Install bootstrap CSS: 3+ ways:
+			Way 1: install: simple bootstrap css:
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save bootstrap
+					(@angular is Angular specials...)
+					==>This is not global because each project can do this
+					==>bootstrap is dependent upon jquery: Bootstrap depends on jQuery and Popper.js libraries
+						npm install --save jquery
+						==>Because jquery is like: JS's SpringFramework?
+					==>JS parts are optional for the project:
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",	==>This is method 1 way: can use method 2 as well in index.html
+								==>Is this jquery.js added by npm install or ng add? or manually added here to be configured via AngularCLI as globals...
+								==>YES: npm install --save jquery
+									+ jquery@3.5.1
+									added 1 package from 1 contributor, removed 1 package and audited 1469 packages in 17.57s
+								==>This installs jquery, but need to be:
+									Either manually added to scripts section in angular.json or into index.html									
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>Enterprise:
+					install from internal Jfrog factory repo
+				==>1) Method 1: angular.json:
+					updated with bootstrap: become global: so every component can use it: 3.4.1
+						"styles": [
+						  "./node_modules/bootstrap/dist/css/bootstrap.css",
+						  "src/styles.css"              
+						],
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>2) Method 2: update index.html: hardcoded css and js configurations:
+								==>RMT: use this method: for jquery.js (but css are in angular.json file) 
+										==>This jqeury can be manually downloaded from web as well
+										==>But it can use the above method 1 as well
+								<!doctype html>
+								<html lang="en">
+								<head>
+								  <meta charset="utf-8">
+								  <title>Angular Bootstrap 4 Examples</title>
+								  <base href="/">
+								  <meta name="viewport" content="width=device-width, initial-scale=1">
+								  <link rel="icon" type="image/x-icon" href="favicon.ico">
+								  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+								</head>
+								<body>
+								  <app-root></app-root>
+								  <script src="../node_modules/jquery/dist/jquery.js"></script>
+								  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
+								</body>
+								</html>				
+				==>Can mix method 1 and method 2 in the app
+				
+				Install more:
+					==>ng add @ng-bootstrap/schematics
+					difference between ng-bootstrap vs. ngx-bootstrapis that ngx-bootstrap uses separate modules for components to reduce the final app size
+					
+			Way 2: style.css
+				@import "~bootstrap/dist/css/bootstrap.css"
+
+			Angular can exclude jquery:
+				Angular it's better to avoid using libraries that make direct manipulation of the DOM (like jQuery) and let Angular handle that
+				By: using ng-bootstrap and ngx-bootstrap below.
+				
+			Way 3: Install advanced Bootstrap css: ng-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save @ng-bootstrap/ng-bootstrap
+				import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; ==>One single module
+				==>support for Bootstrap components and styles without any extra configurations. You also don't need jQuery since we are using ng-bootstrap	
+				==>Can use Angular global angular.json's css
+					"styles": [
+					  "styles.css",
+					  "../node_modules/bootstrap/dist/css/bootstrap.css"
+					],				
+					import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+					@NgModule({
+					  declarations: [/*...*/],
+					  imports: [/*...*/, NgbModule.forRoot()],
+					  /*...*/
+					})
+					export class AppModule {
+					}				
+			Way 4: Install advanced Bootstrap css: ngx-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				https://valor-software.com/ngx-bootstrap/#/getting-started
+				==>Make the app size smaller: because its uses separate modules for different components, and you can just import needed modules for needed 	
+					components ==>So final product is smaller.
+				==>Import each module and run below:
+				==>Can use both CDN bootstrap css and Angular global angular.json's css
+					1) <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+					2) 
+					   "styles": [  
+					   "../node_modules/bootstrap/dist/css/bootstrap.min.css",  
+					   "styles.css"  
+					   ],				
+					import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+					import { AlertModule } from 'ngx-bootstrap';
+
+					/*...*/
+
+					@NgModule({
+					   /*...*/
+					   imports: [BsDropdownModule.forRoot(),AlertModule.forRoot(), /*...*/ ],
+						/*...*/ 
+					})
+			
+	==>2) Enable normal global styles: style.css
+			==>use Angular 6+ features: ng add @angular/material:
+				==>It does A LOT good stuff
+				==>Style: it allows you to choose "default css" or sass/scss/...: this creates style.css
+				==>Style: it allows you to choose a default theme into: style.css:
+					==>Where is the default indigo-pink.css? ==>To find out: online or node_modules???? ==>possibly in local project node_modules' material folder...==>YES:
+						C:\Users\jerry\apps\angular\apps-cli\LNPCheckUIApp\node_modules\@angular\material\prebuilt-themes
+				==>Add package in good ways - compared with npm install...:
+					 new simpler and easier way to add package(s) without using the npm install command for installing the required dependencies or adding any configurations.
+					 ==>Add its related "dependencies" without the WARN like: npm install <package>
+						==>Also means: you may need to run multiple: npm install, but with ng add, you only run one "ng add"
+					 ==>Add core configurations for these package(s)
+						==>Update several files: package.json, etc..... - for this package...
+					 ==>Add all bundled ones together usting one ng add...: also their related core configurations:
+						Example: ng add command will install Angular Material, the Component Dev Kit (CDK), Angular Animations
+					 ==>Misc:
+						html, body { height: 100%; }
+						body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+						
+
+
+			==>Add global MD css selectors/stylings
+				==>Some look and feel: may come from UI designer or business analyst or product manager...
+			
+		==>2-c) Advanced: Enable global styles: less
+			https://jasonwatmore.com/post/2019/09/04/angular-webpack-how-to-add-global-css-styles-to-angular-with-webpack
+			npm i --save-dev css-loader less less-loader style-loader
+			/src/app/app.less
+			import './app.less';
+			==>webpack.config
+	
+	==>3) Each feature module's own stylish: .css
+
+==>Step 5:	Landing Page Design: ==>Layout etc.
+	==>Method 1:	app.component.html: enable page design using header/menu/sidenav/contents/footer
+	==>Method 2:	index.html
+					==><app-root></app-root>
+					==><outer-outlet></router-outlet>
+					==>It delegates to routing module to point and render landing page
+					==>path: '' ==>redirectTo: 'main'
+					==>Utilize main component to do the landing page design and layout
+						==>Sidenav is different from MD design: not included in the container
+						==>Sidenav becomes an independent side design section
+						==>Center: the Google Map:
+							==>
+						==>Right side: add a mat-drawer section
+
+==>Step 6:	Features Modules:
+	==>main structures: features/<primary-feature-module>/<sub-feature-folder>
+	==>some structures: features/<feature-folder>
+	==>some structures: features/<feature-folder>/<sub-feature-folder>
+	==>Some feature-module: directly contains its own service files (not global files)
+	
+	==>Build up backbone of the main components:	Assigned to Tom Travis
+	==>Stage 1 POC demo:							Assigned to Tom and Kesava (Google Map display and calls)
+	
+	1) Design HomeComponent:
+		==>ng g component home
+		==>home.component.html:
+			==>Replicate the page design wireframes into this file
+			==>Convert the html code into MD selectors and components
+	2) Update style.css
+			==>Add some the page design wireframes' look and feel css into style.css as global look and feel
+	
+
+==>Step 7:	Feature - Feature Module Development: Google API integration
+	==>How to integrate with Google MAP APIs
+		==>Enable: feature module: as main contents pane as google map
+		==>Enable CDK: to use additional Google material design functions and components
+	
+		==>Assigned to Kesava
+		
+	==>ng g component map
+	==>ng g component ...
+	==>Design map.component.html file:
+		==>
+	==>Design map.component.ts file:
+		==>
+
+==>Step 8:	Core Modules
+	==>This app doesn't separate services modules or place services into each feature module's service folders
+	==>The core modules serves as some main app (global) service function
+
+	==>App-Function: add app config function:		Assigned to Jerry
+	==>App-Function: add app cache function:		Assigned to Raghuram
+	==>App-Function: add app retry function:		Assigned to Kesava
+	==>App-Function: add app notification function:	Assigned to Sridhar
+	==>App-Function: add app level function:		Assigned to Kesava
+
+==>Step 9:	Shared Modules
+	==>
+
+	==>App-Core: add app model classes:				Assigned to Rubi
+	==>App-Core: add app util classes (pipe):		Assigned to Jerry
+
+
+==>Step 10: App Configurations:
+	==>environments folder and profile: config various config data
+
+==>Step 11: App Routing Flows and Page Flows:
+	==>Because this app is a main map app: no complicated routing or page flows.
+
+	==>App-Enhancement: add app routing strategies:		Assigned to Abishek
+	
+	
+==>Step 12: App Security Protocol:
+	==>SSO
+	==>Route guard / Auth Guard
+	==>HTTP Interceptors: JWT and Error interceptors
+	==>
+	
+==>Step 12:	E2E Tests and Integration tests
+	==>Assigned to Sudha and Rubi
+	
+	
+
+==>Misc:
+	==>#: href="#element-id"
+	==>#: http://.../#element-id"
+	==>#: href="#"
+	==>#: http://.../#"
+	==>#: refer to templateRef... like child component...
+			==>Kind of patten...
+			<div #gmap
+			
+	
+============================================================
+==>API Services App:
+	==>Assigned to Sridhar:
+
+		Design doc?
+		Requirements doc?
+		Scrum Master/Team in place?
+
+
+		App-Scaffolding
+			==>POC
+				==>Real App
+
+	(1) Stage: Scaffolding:
+		1) Spring Initializr: create Maven modules:
+					2.1.6.Release
+		2) Spring Boot...
+		3) 
+
+	IDE:
+		STS
+		Install: Cucumber Eclipse Plugin
+
+	(2) Stage: POC:
+		1) Modify pom.xml:
+			==>Add <properties> section
+			==>Add encoding and java version
+			==>${project.build.directory}
+
+		2) Create common packages
+
+		3) Add classes
+
+		4) Add Swagger: for POC demo
+
+			==>@Configuration:
+				1) Can create a config package for all @Configuration classes
+				2) 
+
+
+	(3) Stage: Real App / Productionization:
+		1) Modify pom.xml again:
+			==>Jacoco?:
+				Sonar code coverage
+				Generating reporting: jacoco.exec
+			==>cucumber-junit/spring/core/java: 1.2.4
+			==>selenium-java: 3.141.59
+			==>swagger: API docs: springfox-swagger2/swagger-ui: 2.9.2
+			==>gson: not jackson?
+			==>hsqldb: not h2
+			==>lombok
+			==>json/jsoup/opencsv
+			==>plugins: cucumber-reporting
+			==>profile: coverage: reporting stuff...
+
+		2) Focus on performance:
+			jmeter
+
+			Test data: json file
+
+		3) Features:
+			==>Main development processes are feature driven...
+
+			3 controllers
+
+			==>several APIs
+
+			==>
+
+		4) Test Modules:
+			==>Focus on test coverage much...
+			==>sonar/selenium/cucumber/junit/jmeter/mockito/...
+
+			==>To Do: see how cucumber tests are done...
+
+		To do:
+		==>Several annotations
+		==>Why adding @Configuration into @Repository...
+		==>
+
+
+
+	(4) Stage: Deployment:
+
+		Talk to Anak and Sudharma:	Deployment
+
+		Apache
+			Deepak: Configure Apache
+
+		DB:
+			Elizabeth:	Set up DB
+
+		
+
+
+============================================================
+
+
+
+
+
+
+============================================================
+==>
+
+
+============================================================
+

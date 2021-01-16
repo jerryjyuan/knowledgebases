@@ -1,0 +1,52 @@
+
+============================================================
+==>Step 15: Add new features:
+	==>
+	==>Especially add features to explore Nevada desert areas housing development capabilities and initiatives as one add-on mission/DTS
+	==>
+	==>
+	
+	==>ServiceWorker/PWA(ProgressiveWebApp):
+		Serve as caching and proxy
+		Page loading refresh with cached contents
+		...
+	==>Web Workers:
+		==>Enable background processing: send and receiving messages
+		==>ng generate web-worker app (or other module):	==>Generate scaffold: app.worker.ts
+		==>Not supported by SSR
+	==>Server-Side Rendering: SSR:
+		==>Angular Universal: is this a 1st-party integration?
+		==>
+		==>User: get tne landing page - without user event interactions - until the full page gets loaded: this is ok
+		==>	export { AppServerModule } from './app/app.server.module';
+			export { renderModule, renderModuleFactory } from '@angular/platform-server';
+		==>app.server.module.ts
+		import { ngExpressEngine } from '@nguniversal/express-engine';
+		Mechanism:
+			==>Node Express Server Engine: perform rendering and send final static contents to client
+			==>SEO + Suitable for non-JS platform + First-Page rendering quickly
+	
+	==>Build Reactive Applications: NgRx
+		==>State management: actions and reducers
+		==>Redux: Flux => Redux => Angular/RxJS
+		==>Store: controlled state container
+		
+	==>
+	
+	
+==>Step 17:	Add Angular Forms:
+
+	Template-Driven Forms Validation Example
+		https://jasonwatmore.com/post/2018/11/10/angular-7-template-driven-forms-validation-example
+		
+	Reactive Forms Validation Example
+		https://jasonwatmore.com/post/2018/11/07/angular-7-reactive-forms-validation-example
+	
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

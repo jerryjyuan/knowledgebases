@@ -1,0 +1,165 @@
+
+==============================================
+NPM:
+
+npm install -g @angular/cli@latest
+npm install -g @angular/cli@10.1.2
+
+npm install
+npm uninstall
+
+	When upgrading some packages, including @angular/cli, one good way is:
+		npm uninstall -g @angular/cli
+		npm install -g @angular/cli
+		
+		But: npm update - maybe useful:
+			C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>npm update -h
+			npm update [-g] [<pkg>...]
+			aliases: up, upgrade, udpate
+		
+npm list
+
+	C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>npm list @angular/cli
+	gmccheck-uiapp@0.0.0 C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng
+	`-- @angular/cli@10.0.1
+	C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>npm list -g @angular/cli
+	C:\Users\jerry\AppData\Roaming\npm
+	`-- @angular/cli@10.1.3
+
+npm run
+
+npm start/stop
+
+npm update
+	Example: Run ng update @angular/core@10 @angular/cli@10 which should bring you to version 10 of Angular.
+	
+npm version
+
+
+C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>npm --help
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, audit, bin, bugs, c, cache, ci, cit,
+    clean-install, clean-install-test, completion, config,
+    create, ddp, dedupe, deprecate, dist-tag, docs, doctor,
+    edit, explore, fund, get, help, help-search, hook, i, init,
+    install, install-ci-test, install-test, it, link, list, ln,
+    login, logout, ls, org, outdated, owner, pack, ping, prefix,
+    profile, prune, publish, rb, rebuild, repo, restart, root,
+    run, run-script, s, se, search, set, shrinkwrap, star,
+    stars, start, stop, t, team, test, token, tst, un,
+    uninstall, unpublish, unstar, up, update, v, version, view,
+    whoami
+
+npm <command> -h  quick help on <command>
+npm -l            display full usage info
+npm help <term>   search for help on <term>
+npm help npm      involved overview
+
+Specify configs in the ini-formatted file:
+    C:\Users\jerry\.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@6.14.5 C:\Users\jerry\Installs\nvm\v12.18.1\node_modules\npm
+
+C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>
+
+==============================================
+Upgrade: 9.1.3 to 10.2.4:
+
+
+C:\Users\jerry\wksp\angular\toh-pt6>ng update @angular/core@10 @angular/cli@10
+Your global Angular CLI version (10.1.3) is greater than your local
+version (9.1.13). The local Angular CLI version is used.
+
+To disable this warning use "ng config -g cli.warnings.versionMismatch false".
+The installed local Angular CLI version is older than the latest stable version.
+Installing a temporary version to perform the update.
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+Using package manager: 'npm'
+Collecting installed dependencies...
+Found 32 dependencies.
+Fetching dependency metadata from registry...
+    Updating package.json with dependency @angular-devkit/build-angular @ "0.1002.1" (was "0.901.13")...
+    Updating package.json with dependency @angular/cli @ "10.2.1" (was "9.1.13")...
+    Updating package.json with dependency @angular/compiler-cli @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/language-service @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency typescript @ "4.0.5" (was "3.8.3")...
+    Updating package.json with dependency @angular/animations @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/common @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/compiler @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/core @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/forms @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/platform-browser @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/platform-browser-dynamic @ "10.2.4" (was "9.1.13")...
+    Updating package.json with dependency @angular/router @ "10.2.4" (was "9.1.13")...
+  UPDATE package.json (1464 bytes)
+√ Packages installed successfully.
+** Executing migrations of package '@angular/cli' **
+
+> Update Browserslist configuration file name to '.browserslistrc' from deprecated 'browserslist'.
+  RENAME browserslist => .browserslistrc
+  Migration completed.
+
+> Update tslint to version 6 and adjust rules to maintain existing behavior.
+  UPDATE tslint.json (3349 bytes)
+  Migration completed.
+
+> Remove deprecated 'es5BrowserSupport' browser builder option.
+  The inclusion for ES5 polyfills will be determined from the browsers listed in the browserslist configuration.
+  Migration completed.
+
+> Replace deprecated and removed 'styleext' and 'spec' Angular schematic options with 'style' and 'skipTests', respectively.
+  Migration completed.
+
+> Remove deprecated options from 'angular.json' that are no longer present in v10.
+  Migration completed.
+
+> Add the tslint deprecation rule to tslint JSON configuration files.
+  Migration completed.
+
+> Update library projects to use tslib version 2 as a direct dependency.
+  Read more about this here: https://v10.angular.io/guide/migration-update-libraries-tslib
+  Migration completed.
+
+> Update workspace dependencies to match a new v10 project.
+  UPDATE package.json (1464 bytes)
+√ Packages installed successfully.
+  Migration completed.
+
+> Update 'module' and 'target' TypeScript compiler options.
+  Read more about this here: https://v10.angular.io/guide/migration-update-module-and-target-compiler-options
+  UPDATE tsconfig.json (543 bytes)
+  UPDATE e2e/tsconfig.json (217 bytes)
+  Migration completed.
+
+> Removing "Solution Style" TypeScript configuration file support.
+    Migration has already been executed.
+  Migration completed.
+
+** Executing migrations of package '@angular/core' **
+
+> Missing @Injectable and incomplete provider definition migration.
+  As of Angular 9, enforcement of @Injectable decorators for DI is a bit stricter and incomplete provider definitions behave differently.
+  Read more about this here: https://v9.angular.io/guide/migration-injectable
+  Migration completed.
+
+> ModuleWithProviders migration.
+  As of Angular 10, the ModuleWithProviders type requires a generic.
+  This migration adds the generic where it is missing.
+  Read more about this here: https://v10.angular.io/guide/migration-module-with-providers
+  Migration completed.
+
+> Undecorated classes with Angular features migration.
+  In version 10, classes that use Angular features and do not have an Angular decorator are no longer supported.
+  Read more about this here: https://v10.angular.io/guide/migration-undecorated-classes
+  Migration completed.
+  
+==============================================
+ 
+
+==============================================

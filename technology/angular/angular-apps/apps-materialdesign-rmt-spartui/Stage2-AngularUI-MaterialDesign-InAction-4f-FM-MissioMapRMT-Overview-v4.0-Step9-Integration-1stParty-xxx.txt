@@ -1,0 +1,43 @@
+
+============================================================
+==>Step 6:	Features Modules:
+	==>main structures: features/<primary-feature-module>/<sub-feature-folder>
+	==>some structures: features/<feature-folder>
+	==>some structures: features/<feature-folder>/<sub-feature-folder>
+	==>Some feature-module: directly contains its own service files (not global files)
+	
+	==>Build up backbone of the main components:	Assigned to Tom Travis
+	==>Stage 1 POC demo:							Assigned to Tom and Kesava (Google Map display and calls)
+	
+	1) Design HomeComponent:
+		==>ng g component home
+		==>home.component.html:
+			==>Replicate the page design wireframes into this file
+			==>Convert the html code into MD selectors and components
+	2) Update style.css
+			==>Add some the page design wireframes' look and feel css into style.css as global look and feel
+	
+
+
+==>Step 7:	Features - Integrations:
+
+	==>Step 7a:	Feature Integration - First-Party Integrations
+
+		==>
+						
+
+		==>
+						https://www.tutorialrepublic.com/html-reference/html-button-tag.php
+						
+		==>Step 7a-1:	Feature - Feature Module Development: Angular Material and Material-Design integration
+
+		==>Step 7a-2:	Feature - Feature Module Development: Bootstrap 3/4 integration
+						==>Playground:	https://www.codeply.com/go/kTGlK9Axdk/bootstrap-4-navbar-align-center
+		
+		
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

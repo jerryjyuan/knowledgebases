@@ -1,0 +1,271 @@
+
+============================================================
+==>Step 4:	Stylish Design:
+
+	==>Assigned to Jerry:
+		==>Manually downloaded jqeury.js and added it to index.html
+		==>npm install --save bootstrap
+		
+		==>MissionMap -		using Bootstrap
+							using angular MD, default theming, and global theming
+							where are Roboto fonts coming from? - default theming?
+
+	==>1) Install bootstrap CSS: 3+ ways:
+			Way 1: install: simple bootstrap css:
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save bootstrap
+					(@angular is Angular specials...)
+					==>This is not global because each project can do this
+					==>bootstrap is dependent upon jquery: Bootstrap depends on jQuery and Popper.js libraries
+						npm install --save jquery
+						==>Because jquery is like: JS's SpringFramework?
+						==>Bootstrap 4 use jQuery and Popper.js for JavaScript components (like modals, tooltips, popovers etc). 
+							Closable alerts
+							Buttons and checkboxes/radio buttons for toggling states
+							Carousel for slides, controls, and indicators
+							Collapse for toggling content
+							Dropdowns (also requires Popper.js for perfect positioning)
+							Modals (open and close)
+							Navbar (for collapsible menus)
+							Tooltips and popovers (also requires Popper.js for perfect positioning)
+							Scrollspy for scroll behavior and navigation updates
+							==>However, if you just use the CSS part of Bootstrap, you don't need them.
+							==>But: mostly you need both because many scenarios you will use Bootstrap JS parts... like button, ...
+					==>Bootstrap JS parts are optional for the project:
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",	==>This is method 1 way: can use method 2 as well in index.html
+								==>Is this jquery.js added by npm install or ng add? or manually added here to be configured via AngularCLI as globals...
+								==>YES: npm install --save jquery
+									+ jquery@3.5.1
+									added 1 package from 1 contributor, removed 1 package and audited 1469 packages in 17.57s
+								==>This installs jquery, but need to be:
+									Either manually added to scripts section in angular.json or into index.html									
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>Enterprise:
+					install from internal Jfrog factory repo
+				==>1) Method 1: angular.json:
+					updated with bootstrap: become global: so every component can use it: 3.4.1
+						"styles": [
+						  "./node_modules/bootstrap/dist/css/bootstrap.css",
+						  "src/styles.css"              
+						],
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>2) Method 2: update index.html: hardcoded css and js configurations:
+								==>RMT: use this method: for jquery.js (but css are in angular.json file) 
+										==>This jqeury can be manually downloaded from web as well
+										==>But it can use the above method 1 as well
+								<!doctype html>
+								<html lang="en">
+								<head>
+								  <meta charset="utf-8">
+								  <title>Angular Bootstrap 4 Examples</title>
+								  <base href="/">
+								  <meta name="viewport" content="width=device-width, initial-scale=1">
+								  <link rel="icon" type="image/x-icon" href="favicon.ico">
+								  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+								</head>
+								<body>
+								  <app-root></app-root>
+								  <script src="../node_modules/jquery/dist/jquery.js"></script>
+								  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
+								</body>
+								</html>				
+				==>Can mix method 1 and method 2 in the app
+				
+				Install more:
+					==>ng add @ng-bootstrap/schematics
+					difference between ng-bootstrap vs. ngx-bootstrap is that ngx-bootstrap uses separate modules for components to reduce the final app size
+					
+			Way 2: style.css
+				@import "~bootstrap/dist/css/bootstrap.css"
+				
+				==>Where to add style.css?
+					==>Way 1: AngularCLI: add it into: angular.json
+					==>Way 2: Add it into index.html
+					==>Way 3: Some common html/section/... have it and shared by all html code...
+					==>Way 4: Maven plugin add...:
+								==>front-maven-plugin: enable static/... in the final WAR file or file structures of maven run...
+
+			Angular can exclude jquery:
+				Angular it's better to avoid using libraries that make direct manipulation of the DOM (like jQuery) and let Angular handle that
+				By: using ng-bootstrap and ngx-bootstrap below.
+				
+			Way 3: Install advanced Bootstrap css: ng-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save @ng-bootstrap/ng-bootstrap
+				import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; ==>One single module
+				==>support for Bootstrap components and styles without any extra configurations. You also don't need jQuery since we are using ng-bootstrap	
+				==>Can use Angular global angular.json's css
+					"styles": [
+					  "styles.css",
+					  "../node_modules/bootstrap/dist/css/bootstrap.css"
+					],				
+					import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+					@NgModule({
+					  declarations: [/*...*/],
+					  imports: [/*...*/, NgbModule.forRoot()],
+					  /*...*/
+					})
+					export class AppModule {
+					}				
+			Way 4: Install advanced Bootstrap js/css: ngx-bootstrap
+				npm install ngx-bootstrap --save
+				https://www.techiediaries.com/angular-bootstrap/
+				https://valor-software.com/ngx-bootstrap/#/getting-started
+				==>Make the app size smaller: because its uses separate modules for different components, and you can just import needed modules for needed 	
+					components ==>So final product is smaller.
+				==>Import each module and run below:
+				==>Can use both CDN bootstrap css and Angular global angular.json's css
+					1) <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+					2) 
+					   "styles": [  
+					   "../node_modules/bootstrap/dist/css/bootstrap.min.css",  
+					   "styles.css"  
+					   ],				
+					import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+					import { AlertModule } from 'ngx-bootstrap';
+
+					/*...*/
+
+					@NgModule({
+					   /*...*/
+					   imports: [BsDropdownModule.forRoot(),AlertModule.forRoot(), /*...*/ ],
+						/*...*/ 
+					})
+			
+				Usage 1:	SPARTA-UI:
+							==>AngularCLI: not in use: pure maven builds: so no angular.json ==>also no: Way 1: method 1 and method 2; ==>Also no way 2: import into style.css
+							==>No Way 3
+							==>Pure Way 4:
+								==>>Use 1:	app.module.ts: import all the needed indiviudal modules from 'ngx-bootstrap'
+											All individual files: import individual parts from 'ngx-bootstrap'
+											Exception: xxx.spec.ts: has to import modules as well just like: app.module.ts
+											==>Mostly: you can see: JS part is also in use beyond bootstrap CSS part: ngx-bootstrap is mainly JS code and functions
+											==>Bootstrap css is still coming from: "../node_modules/bootstrap/dist/css/bootstrap.css"
+											==>Also some packages are installed due to dependencies scenarios: used by some other packages inside node_modules
+												==>TBD: is ng-bootstrap a dependency for ngx-bootstrap? - like javax depends upon java
+							==>Procedures:
+								==>Get to documentation:
+									https://valor-software.com/ngx-bootstrap/#/modals ==>Real documentation
+									https://valor-software.com/ngx-bootstrap/#/documentation
+									https://getbootstrap.com/docs/4.0/getting-started/introduction/
+								==>
+								
+								
+								
+								==>ng build:	normally: dist folder
+												SPARTA-UI: where to build to: maybe go to target folder: due to maven plugin's enablement... ==>Actually: in war file...
+												
+								==>SPARTA-UI: Stylishing:
+									==>
+									==>style.css: where included
+									==>bootstrap css: where included
+									==>jqeury.js: where included:
+										import * as $ from 'jquery';
+										==>Directly use jquery to work on component's view's HTML elements: only for one component
+									==>
+
+				==>Angular 9 - New Features? ==>Import submodule like below?
+					// RECOMMENDED
+					import { ModalModule } from 'ngx-bootstrap/modal';
+					==>Is that Angular 9 importing more sub-module based like above, similar to Material Design imports? - TBD...
+					==>Better pratice: should use submodule like above...
+					// NOT RECOMMENDED (Angular 9 doesn't support this kind of import)
+					import { ModalModule } from 'ngx-bootstrap';				
+			
+			Way 5: Use preprocessors: less/sass/scss: for bootstrap and/or other css...
+				TBD...
+				
+				How to enable preprocessors?
+					==>Way 1: AngularCLI: prompt you to enable...: angular.json...
+					==>Way 2: Manually add those into ...app...
+			
+	==>2) Enable normal global styles: style.css
+			==>use Angular 6+ features: ng add @angular/material:
+				==>It does A LOT good stuff
+				==>Style: it allows you to choose "default css" or sass/scss/...: this creates style.css
+				==>Style: it allows you to choose a default theme into: style.css:
+					==>Where is the default indigo-pink.css? ==>To find out: online or node_modules???? ==>possibly in local project node_modules' material folder...==>YES:
+						C:\Users\jerry\apps\angular\apps-cli\LNPCheckUIApp\node_modules\@angular\material\prebuilt-themes
+				==>Add package in good ways - compared with npm install...:
+					 new simpler and easier way to add package(s) without using the npm install command for installing the required dependencies or adding any configurations.
+					 ==>Add its related "dependencies" without the WARN like: npm install <package>
+						==>Also means: you may need to run multiple: npm install, but with ng add, you only run one "ng add"
+					 ==>Add core configurations for these package(s)
+						==>Update several files: package.json, etc..... - for this package...
+					 ==>Add all bundled ones together usting one ng add...: also their related core configurations:
+						Example: ng add command will install Angular Material, the Component Dev Kit (CDK), Angular Animations
+					 ==>Misc:
+						html, body { height: 100%; }
+						body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+						
+
+
+			==>Add global MD css selectors/stylings
+				==>Method 1:	BusinessAnalyst's Wireframe HTML Code (Photoshop/Macromedia)
+				==>Method 2:	Some look and feel: may come from UI designer or business analyst or product manager...
+				==>Method 3:	Developers use online UI tools to generate some UI design and related HTML code
+				==>Method 4:	
+				
+				
+				==>Method 8:	Misc:
+								==>Add Bootstrap CSS:
+								  ==>Add @Types @Fonts?
+								==>Add Google Fonts:
+								  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+								  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			
+			==>Angular + Webpack - How to add global CSS styles to Angular with webpack
+				https://jasonwatmore.com/post/2019/09/04/angular-webpack-how-to-add-global-css-styles-to-angular-with-webpack
+			
+		==>2-c) Advanced: Enable global styles: less
+			https://jasonwatmore.com/post/2019/09/04/angular-webpack-how-to-add-global-css-styles-to-angular-with-webpack
+			npm i --save-dev css-loader less less-loader style-loader
+			/src/app/app.less
+			import './app.less';
+			==>webpack.config
+	
+	==>3) Each feature module's own stylish: .css
+
+
+
+
+==>Enable SCSS: SASS
+
+	--style scss
+	
+	==>ng new my-app --style scss --routing false
+	
+	==>Manual ways: enable it
+		style.scss
+		==>Cannot coexist with style.css
+		==>Config:
+			  "schematics": {
+				"@schematics/angular:component": {
+				  "style": "scss"
+				}
+			  },		
+            "styles": [
+			  "src/styles.scss",
+			  "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+			
+	
+==>Enable LESS:
+	
+
+========================================================================================================================
+
+ERROR in multi ./src/styles.scss ./node_modules/@angular/material/prebuilt-themes/indigo-pink.css ./src/styles.css
+Module not found: Error: Can't resolve 'C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-backbone\poc-backbone-reference\ag-grid-angular\fundraiser-ui\src\main\ng\src\styles.scss' in 'C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-backbone\poc-backbone-reference\ag-grid-angular\fundraiser-ui\src\main\ng'
+
+========================================================================================================================
+========================================================================================================================
+
+

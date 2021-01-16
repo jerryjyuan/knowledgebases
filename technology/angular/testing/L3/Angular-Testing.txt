@@ -1,0 +1,164 @@
+
+==========================================================
+Sub Topic: Angular:	Testing
+
+==>Make it simple - because when you write tests, the APIs are simple
+
+==========================================================
+How to Search:
+
+Unit Testing:
+	Jasmine/Karma: default supported by AngularCLI
+	
+	Main API:
+		==>it
+		
+		
+	Main Practices:
+		==>Some Apps:
+			==>just test component gets created
+			==>
+		==>Some Apps:
+			==>add mock data test: testing service APIs
+			
+		==>
+		
+		
+	Why do we need to test Angular apps?
+	==>1) ng serve: already testing:
+				[Jerry]: No, it is like Java compiler, not a testing
+	==>2) then ng serve -o: is this good?
+				[Jerry]: Not enough at all, it is like L3 health check and landing page tests
+	==>3) then navigate the page flows: is this good?
+				[Jerry]: Not enough still, it is like L3 validation tests
+	==>4) My name is Raghuram, because I don't want to run some real services api tests, and also some APIs not available, so I added some mock data to simulate backend api calls
+				[Jerry]: This is a good testing, part of development tests, and no wonder you work for dev team
+						 By the way, is this main way to test backend service APIs during development time?
+						 [Raghuram]: I am not so sure, I only used this way and added some mock data, you can check with Kesava with other ways
+	==>5) I added some Angular tests to test some component creation via fixtures, is this good enough
+				[Jerry]: This is basic testing, where is your test coverage?, 
+						 also you need to create tests for every main functions in the components with mock data or intergation tests
+	==>6) Ok, I will check to see which test coverage tools to be used in Angular, but I don't really know Angular cares about test coverage due to its UI app natures
+				Nowadays, development integration tests are good testing
+				[Jerry]: Integration tests are good. However, why do you use one single test API it(), blah, blah, ..., there are a lot of other test APIs that you don't use at all.
+						 Why is it?
+	==>7) Like what you said, many APIs and libs etc. only up to 33% are core and being used in 67% apps,
+				and in our Angular world, it() function is the only main function in use mostly, and it accounts for 90% of Angular tests
+				This is called 1-for-90 scenario
+				[Jerry]: You are really learn from me very well, not like my other students like Rubi, a little dumb
+						 By the way, what does "Jasmine it()" mean?
+	==>8) into-testing?
+				[Jerry]: I would say: "integration testing"
+
+
+Integration Testing:
+	Protractor???: default supported by AngularCLI
+	
+	
+
+E2E Testing:
+	Protractor: default supported by AngularCLI
+	
+	
+==========================================================
+Unit Testing:
+
+
+==>Code Test Coverage:
+	https://angular.io/guide/testing-code-coverage
+
+	ng test --no-watch --code-coverage
+
+	angular.json: enabled as default run
+		"test": {
+		  "options": {
+			"codeCoverage": true
+		  }
+		}
+
+	karma.conf.js: add minimal percentage
+		coverageIstanbulReporter: {
+		  reports: [ 'html', 'lcovonly' ],
+		  fixWebpackSourcePaths: true,
+		  thresholds: {
+			statements: 80,
+			lines: 80,
+			branches: 80,
+			functions: 80
+		  }
+		}
+		
+==>Testing Services:
+
+	==>
+
+	==>Utilize "mock/spy": handle dependency services
+	
+		jasmine.Spy
+
+==========================================================
+Jasmine APIs:
+
+==>Big 5:
+
+	describe(description, specDefinitions):
+		https://jasmine.github.io/api/3.5/global.html#describe
+		==>Java: @Test or: @SpringBootTest or: @SpringRunner
+	beforeEach(functionopt, timeoutopt)
+		https://jasmine.github.io/api/3.5/global.html#beforeEach
+		==>Java: @Before or: @BeforeClass
+	it(description, testFunctionopt, timeoutopt)
+		==>Java: @Test
+	expect(actual) → {matchers}:
+		https://jasmine.github.io/api/3.5/global.html#expect
+		==>Java Assert
+	matchers:
+		https://jasmine.github.io/api/3.5/matchers.html
+		==>Java Assert + AssertJ + Hamcrest APIs
+	
+	import { TestBed, inject} from '@angular/core/testing';
+	
+	describe("", function() {
+		...
+		beforeEach(() => {});
+		it("", function() {});
+		it("", () => {
+			...
+			expect(...).toBe(...);
+		});
+		
+		it("",
+		inject( [xxx, ...],
+			(xxx: xxx) => {
+				...
+				expect(...).toBe(...);
+			}
+		)
+		);
+	});
+	
+
+	==>Utilize Angular "testing" modules in APIs document:
+		==>Many modules have "testing" packages
+			
+			HttpClientTestingModule
+
+		==>Add Feature Modules' test modules
+
+	==>Use mock data and mock services:
+		==>In Angular App: mock meanings have 2-fold:
+			==>1) Hardcoded JSON test data
+			==>2) Use Jasmine Spy: this is similar to Java Mockito
+
+==========================================================
+CI Testing:
+
+Circle CI
+
+
+Travis CI
+
+
+Chrome - CLI CI
+
+==========================================================

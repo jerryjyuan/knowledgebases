@@ -1,0 +1,26 @@
+
+=========================================================== 
+Layout:
+
+
+
+- Internal Components:
+
+
+- Angular Components or Ways:
+
+	- Grid Systems
+	
+		<NgContainer>
+	
+	- 
+
+- External Components or Ways:
+
+	- Grid Systems
+	
+	- 
+
+
+
+=========================================================== 

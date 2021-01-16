@@ -1,0 +1,129 @@
+
+=======================================
+
+
+=======================================
+Types:
+
+==>Positioning
+	==Layouting
+		BS4 Containers
+		BS4 Grid Basic
+		BS4 Flex
+		BS4 Cards
+		Bootstrap 4 Grid
+		BS4 Grid System
+		BS4 Stacked/Horizontal
+		BS4 Grid XSmall
+		BS4 Grid Small
+		BS4 Grid Medium
+		BS4 Grid Large
+		BS4 Grid XLarge
+		BS4 Grid Examples
+	==>Locating:
+		relative/absolute/...
+		margin/border/padding
+	==>Flowing
+
+==>Fonting:
+
+	BS4 Typography
+
+
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+	
+	
+
+==>Coloring
+	BS4 Colors
+
+==>Backgrounding
+
+==>RWDing:
+	==>Mostly enabled by using Bootstrap tags or other libs instead of designing your own CSS RWD frameworks
+
+==>Data Displaying
+	BS4 Tables
+	BS4 Images
+
+	Forms:
+		BS4 Forms
+		BS4 Inputs
+		BS4 Input Groups
+		BS4 Custom Forms
+
+==>Tooling
+	BS4 Buttons
+	BS4 Button Groups
+	BS4 Dropdowns
+	BS4 List Groups
+	BS4 Collapse
+	BS4 Badges
+	BS4 Progress Bars
+	BS4 Spinners
+	BS4 Tooltip
+	BS4 Popover
+	BS4 Toast
+	BS4 Scrollspy
+	BS4 Carousel
+	BS4 Jumbotron
+	BS4 Alerts
+
+==>Page Flowing
+	BS4 Navs
+	BS4 Navbar
+	BS4 Pagination
+
+
+==>Dialog/Modal:
+	BS4 Modal
+
+
+==>Animations:
+	Bootstrap 4 Ref
+	All Classes
+	JS Alert
+	JS Button
+	JS Carousel
+	JS Collapse
+	JS Dropdown
+	JS Modal
+	JS Popover
+	JS Scrollspy
+	JS Tab
+	JS Toasts
+	JS Tooltip
+
+==>Misc:
+	BS4 Utilities
+BS4 Icons
+BS4 Media Objects
+BS4 Filters
+
+
+Bootstrap 4 Theme
+BS4 Basic Template
+
+
+=======================================
+Enablement:
+
+==>Method 1: Stacking multiple right tags:
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+        
+==>
+
+=======================================
+
+
+=======================================
+
+
+
+
+
+        

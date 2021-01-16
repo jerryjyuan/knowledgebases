@@ -1,0 +1,53 @@
+
+==========================================================
+Angular Tools:
+
+
+
+- Development Tools:
+	- IDE:
+		- Common IDE: any Java IDE - ok: because Angular is JS and TS, so Java IDE ok
+		- Special IDE: special Angular IDEs: Visual Studio Code, WebStorm, and Sublime Text.
+
+
+- Build Tools:
+	- Angular Builds:
+		- Angular CLI:
+			JIT/AOT
+			...
+		- Other Build Tools
+			Bazel
+			...
+	- Java Build Bundle:
+		- Build Tool Bundles:
+			- Maven
+				- frontend-maven-plugin
+				- exec-maven-plugin
+			- Gradle
+			- Ant
+		- Framework Bundles:
+			- Spring Boot:
+				- frontend-maven-plugin
+	- 
+
+- 
+
+- Integration Tools:
+	- LS: "Language(ProgrammingLanguage/Coding)" Service:
+		- Provide tools for Angular language (coding sides) needs - not i18n or l10n
+		- Enabled and bundled with various editors
+		- Angular Language Services APIs:
+			https://github.com/angular/angular/blob/master/packages/language-service/src/types.ts
+		https://github.com/angular/vscode-ng-language-service/wiki/Design
+		https://microsoft.github.io/language-server-protocol/
+		===>Practical Usage:
+			- When you use any IDE, you can refer to LS and their doc for better IDE integration
+		===>tsserver:
+			- Different from STS's built-in server: pivotal tc server
+
+- Misc Tools:
+	Upgrades
+	
+
+
+==========================================================

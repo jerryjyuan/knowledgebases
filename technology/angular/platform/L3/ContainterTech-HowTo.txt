@@ -1,0 +1,74 @@
+
+=========================================================== 
+Container Tech:
+
+	Dockerization
+
+	Kubernetes:
+	
+	
+	Platforms:
+	
+		AWS
+		PCF
+		Azure
+		GCP
+		OCI
+		...
+		Openshift
+			PODs
+			...
+		...
+
+
+===========================================================
+Projects:
+
+==>Plum Lending:
+	==>Gitlab:	CI/CD/Pipelines:
+				==>Build up docker image
+				==>Push to dockerhub
+				==>Pull images from dockerhub
+				
+				
+				Gitlab Pipeline Config file: .yml file
+					==>Pipeline/CI/CD processes: checkin compiling/builds
+					==>Pipeline processes: daily/timed CI/CD
+					==>Pipelining:
+						==>Run .yml files: project configured with tese gitlab config files
+						==>...
+						==>Run maven builds (maven antrun?)
+						==>Build up docker images
+						==>Push to dockerhub
+						==>Run test instances:
+							==>Login to AWS
+							==>Create an instance and run docker process: pull/run docker: dockerfile
+								==>entryPoint
+							==>Finish runs
+							==>Log out from the instance
+
+==>Citibank???
+
+
+==>FM:
+	OpenShift: Serve as Kubernetes Platforms
+		==>PODs
+		==>kubectl? - not used for FM OpenShift
+			https://kubernetes.io/docs/reference/kubectl/overview/
+		==>Use dashboard
+		
+	maven antrun plugin:
+		==>...
+		
+		
+	Keys:
+		==>How openshift apps are deployed ==>Then you become familiar with FM docker builds
+		==>SPARTA apps
+		
+		
+		
+		
+	
+
+
+=========================================================== 

@@ -1,0 +1,181 @@
+
+============================================================
+FM: RMT - UI - Angular:
+	==>Natures:
+		==>Nature 1:	The largest Angular UI app that Jerry has worked on
+		==>Nature 2:	FM hired some good Angular developers:
+						(Fanny Mae and FM: utlized any advantages of housing markets or real estates?
+							==>Utilization: Governmental backbones: they both did and do: top 2 national governmental sponsored housing loan tycoons
+							==>Utilization: Money creates money:	they both did and do: real estates and loan businesses: belong to: money creating money areas
+							==>Utilization: Real Estate bubbles or cycles? - maybe not for sure:
+											==>Sometimes: they were in some tough situations due to housing market uprising: like 2005-2007
+											==>Are foreclosures/refinance benefiting/jeapardizing the small banks' loans and/or FMae/FMac? Depends
+							==>Utilization: Ripping off house owners or ...? If existing/any, then not directly by them - at most by small banks' loans
+											==>Are foreclosures/refinance benefiting/jeapardizing the small banks' loans and/or FMae/FMac? Depends
+							==>...
+		==>Nature 3:	Angular 4
+		==>Nature 4:	AngularCLI: 1.7 ==>it is ok - because we use: maven to do the builds + AngularCLI versions are not directly related to Angular versions?
+						==>12/17/2017: Contractors team worked on the app: started the initial work: 2 developers (plus some UI...) worked on it: e.g.: pipeline.components.ts
+										==>Total team developers: 4-6 guys
+						==>1/25/2018:	Contractors team worked on the app: 300 code line
+						==>3/12/2018:	Contractors team worked on the app: 500 code line
+						==>4/10/2018:	Contractors team worked on the app: 600 code line
+						==>6/12/2018:	Contractors team worked on the app: 740 code line: he finished his 6-month work
+										==>3-6 months: this app was delivered to PROD...
+						==>03/29/2019:	Contractors team worked on the app: ~740 code line: the 2nd developer finished his 16-month work
+						==>No more code changes: does a dev team still exist?
+		==>Nature 5:	Look and Feel: should be coming from product manager and business analysts' wireframes or mockup, or prototype
+						==>Based on MSS, but use deep-blue
+						==>
+						
+		
+	==>Challenges:
+		==>Application Size
+		==>Business Logic
+		==>
+
+	
+============================================================
+Topic:	Application:
+
+=>Build:
+	maven: similar for both local and OC container
+
+=>front-maven-plugin: 	install node/npm + npm install:
+						==>This is similar to mvnw, or gradlew: wrapper of the versions
+						==>So you can control how the apps are built with versions
+=>exec-maven-plugin:	prod/openshift:
+							ng build --prod
+						local:
+							ng build
+==>pom.xml:
+	==>Generate a war file:
+		==>But use war plugin to do configurations of web.xml contents to webapp instead of normal webapp module way
+	==>how to package ngapp contents:
+		==>ng build: generate /dist folder... - but where /dist folder goes? - manually deployed or packaged into weblogic war file?
+
+
+
+==>Design:
+	Shared
+	Dashboard
+	Inventory
+
+
+==>Utilization of Angular Open Source Libraries:
+	==>Bootstrap CSS/JS
+	==>Material Design???
+	==>RxJS
+	==>Angular Grid:
+		https://www.ag-grid.com/angular-grid/
+		https://www.ag-grid.com/angular-grid/?gclid=CjwKCAjw9vn4BRBaEiwAh0muDJpHwuXhY-CyNtBEFIm0MBeh_IzSDEYQpurg1bwy00iRovnvEC3LTRoCfJAQAvD_BwE
+	==>
+
+
+
+============================================================
+Topic:	Configurations:
+
+
+============================================================
+Topic:	Styling:
+
+==>style.css
+
+==>bootstrap css:
+	==>3.3.7
+	==>Find Doc:
+		==>Way 1:	https://www.w3schools.com/bootstrap/bootstrap_ver.asp
+					https://www.w3schools.com/bootstrap/default.asp
+		==>Way 2:	https://bootstrapdocs.com/
+					https://getbootstrap.com/docs/3.3/getting-started/
+					https://bootstrapdocs.com/v3.3.6/docs/css/
+					https://blog.getbootstrap.com/2016/07/25/bootstrap-3-3-7-released/
+		==>Way 3:	HTML Doc
+					https://www.tutorialrepublic.com/html-reference/html5-tags.php
+		==>Way 4:	Github:
+					https://github.com/twbs/bootstrap
+	==>
+	
+	==>CSS:
+		Link Mouse to Rat
+		==><link rel="mouse" href="rat.css">
+		==><script type="" src="">
+
+	==>Testing:
+		Online...
+		Local...
+		
+	==>Dev:
+		==>Wireframe... - existing html
+		==>Test Views...
+		==>
+		
+		==>Main Menu - Title part: mostly: use: href="#"
+		
+		<Section>: DIV or ...
+			<Section-Container>: DIV or ...
+				SubSection: DIV or ...
+					Building-Parts/Widgets/Components/...
+				SubSection
+				SubSection
+				SubSection
+			</Section-Container>
+		</Section>
+
+
+==>ngx-bootstrap:	RMT-UI:
+							==>AngularCLI: not in use: pure maven builds: so no angular.json ==>also no: Way 1: method 1 and method 2; ==>Also no way 2: import into style.css
+							==>No Way 3
+							==>Pure Way 4:
+								==>>Use 1:	app.module.ts: import all the needed indiviudal modules from 'ngx-bootstrap'
+											All individual files: import individual parts from 'ngx-bootstrap'
+											Exception: xxx.spec.ts: has to import modules as well just like: app.module.ts
+											==>Mostly: you can see: JS part is also in use beyond bootstrap CSS part: ngx-bootstrap is mainly JS code and functions
+											==>Bootstrap css is still coming from: "../node_modules/bootstrap/dist/css/bootstrap.css"
+											==>Also some packages are installed due to dependencies scenarios: used by some other packages inside node_modules
+												==>TBD: is ng-bootstrap a dependency for ngx-bootstrap? - like javax depends upon java
+							==>Procedures:
+								==>Get to documentation:
+									https://valor-software.com/ngx-bootstrap/#/modals ==>Real documentation
+									https://valor-software.com/ngx-bootstrap/#/documentation
+									https://getbootstrap.com/docs/4.0/getting-started/introduction/
+								==>
+								
+								
+								
+								==>ng build:	normally: dist folder
+												RMT-UI: where to build to: maybe go to target folder: due to maven plugin's enablement... ==>Actually: in war file...
+												
+								==>RMT-UI: Stylishing:
+									==>
+									==>style.css: where included
+									==>bootstrap css: where included
+									==>
+
+==>
+
+
+============================================================
+Topic:	Google Map:
+
+==>This is a native impl of Google Map: like AGM UI Component
+
+==>Google Map: display:
+	==>Just one single statement: it will display a google map
+		==>The google map: from @types/googlemaps
+	
+	==>Manipulation of Google Map:
+		==>Delegate to the global App Level Service APIs, instead of the component code
+		==>But the App Level API calls, still call map component functions
+		
+	==>Showing Results:
+	
+		==>Delegate to the global App Level Service APIs:
+			==>The App Level API calls, call results component functions to display the results
+			
+			
+
+============================================================
+============================================================
+============================================================

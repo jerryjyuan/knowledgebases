@@ -1,0 +1,39 @@
+
+
+Tree Shaking:
+	Tree shaking refers to a compiler option that removes code from the final bundle if the app doesn't reference that code.
+	
+	https://angular.io/guide/dependency-injection-providers#tree-shakable-providers
+	Creating tree-shakable providers	
+	Thus, services in the NgModule providers array or at component level are not tree-shakable.
+
+Optimizations:
+
+	==>Use: ECMAScript Modules instead of CommonJS modules:
+		==>CommonJS Modules:
+			==>If we import a CommonJS module from node_modules, your build toolchain will not be able to optimize it properly.
+		==>ES modules because they are more statically analyzable
+
+		==>Summaries:
+			==>avoid depending on CommonJS modules, and use ECMAScript module syntax in your entire application
+			==>even index.js could be ES Module: if some dependencies/imports are CommonJS modules: still increase the bundler sizes
+
+			==>Methods:
+				https://web.dev/commonjs-larger-bundles/
+				Use Rollup.js's node-resolve plugin and set the modulesOnly flag to specify that you want to depend only on ECMAScript modules.
+				Use the package is-esm to verify that an npm package uses ECMAScript modules.
+				If you're using Angular, by default you'll get a warning if you depend on non-tree-shakeable modules.
+					WARNING in C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng\src\main.ts depends on 'hammerjs'. CommonJS or AMD dependencies can cause optimization bailouts.
+					For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+			
+	==>Bundlers: webpack: reduce the sizes:
+		==>Use same namespaces:
+			all the functions are inside the same namespace. To prevent collisions, webpack renamed the subtract function in index.js to index_subtract.
+		==>
+	
+	==>Minifiers: reduce the sizes:
+		Remove the unused functions subtract and index_subtract
+		Remove all the comments and redundant whitespace
+		Inline the body of the add function in the console.log call
+
+

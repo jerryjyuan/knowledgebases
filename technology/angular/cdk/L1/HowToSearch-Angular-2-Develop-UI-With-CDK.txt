@@ -1,0 +1,41 @@
+
+==========================================================
+Sub Topic: Angular:	CDK
+
+
+==========================================================
+
+
+==========================================================
+
+<div class="example-box" cdkDragLockAxis="y" cdkDrag>
+  I can only be dragged up/down
+</div>
+
+<div class="example-box" cdkDragLockAxis="x" cdkDrag>
+  I can only be dragged left/right
+</div>
+
+
+
+@Directive({
+  selector: '[cdkDrag]',
+  exportAs: 'cdkDrag',
+  host: {
+    'class': 'cdk-drag',
+    '[class.cdk-drag-disabled]': 'disabled',
+    '[class.cdk-drag-dragging]': '_dragRef.isDragging()',
+  },
+  providers: [{provide: CDK_DRAG_PARENT, useExisting: CdkDrag}]
+})
+export class CdkDrag<T = any> implements AfterViewInit, OnChanges, OnDestroy {
+
+
+
+==========================================================
+
+
+==========================================================
+
+
+==========================================================

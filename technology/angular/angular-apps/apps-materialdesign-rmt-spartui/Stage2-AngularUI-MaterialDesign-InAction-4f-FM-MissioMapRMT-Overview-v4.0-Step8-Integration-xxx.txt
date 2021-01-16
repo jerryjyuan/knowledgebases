@@ -1,0 +1,444 @@
+
+============================================================
+HttpClient:
+
+	==>Angular Packages:
+		1st Level:
+			core / common
+		2nd Level:	
+			router / forms
+		3rd Level:	
+			==>platform-browser/platform-server/platform-browser-animations/platform-web-worker/platform-web-worker-animation
+		4th Level:
+			==>animation/element/service-worker/upgrade
+
+	==>API Parts List:
+		==>package/module
+		==>Decorator/Directive
+		==>class/interface/function/enum
+		==>const/pipe/type alias
+	
+	==>Tour of Heroes:
+		==>Native implementation
+		==>Services: not included into a standalone service folder
+		==>This example app: pretty simple - but still have some fine-grained features to absorb
+		
+	==>HttpClient: Integration with RESTful API Apps:
+
+		==>All Calls:	Ajax calls: this is from common Angular Design Considerations:
+						==>1) There is no need to do regular page refresh calls for Angular apps
+						==>2) Angular is a JS app: JS apps tend to use Ajax: jQuery ajax... ==>Because JS code is so easy to do Ajax compared with JSP/...
+						==>3) XHR is originated from JS...
+
+		==>Method 1:	HttpClient APIs: same thing as: Observable.subscribe()
+						==>HTTP GET Request Examples
+							https://jasonwatmore.com/post/2019/09/06/angular-http-get-request-examples
+							https://www.techiediaries.com/angular/angular-8-7-tutorial-example-rest-api-httpclient-get-ngfor/
+						==>HTTP POST Request Examples
+							https://jasonwatmore.com/post/2019/11/21/angular-http-post-request-examples
+						==>JSONP:
+							https://en.wikipedia.org/wiki/JSONP
+						==>RESTful Integrations:
+							https://vocon-it.com/2017/06/24/consuming-a-restful-web-service-with-angular/
+							https://github.com/oveits/consuming-a-restful-web-service-with-angular-vi
+							https://www.positronx.io/angular-7-httpclient-http-service/
+							
+		==>Method 2:	Promise:
+							https://codesource.io/using-promises-to-make-http-requests-in-angular/
+							https://dzone.com/articles/angular-observables-and-promises-how-to-use-them
+		
+		==>Method 3:	Subject? / RxJS?
+		
+		==>
+	
+		======>Angular Official Documentation Summaries: HttpClient
+			==>Setup:
+				==>Concepts:
+					==>
+					==>HttpClient Calls: the subscribe(): no call backs ==>With arguments: those are callbacks
+						==>Always subscribe() for all API calls: even Delete call
+					==>HttpClient Calls: APIs: can return a req: then multiple subscribes can be called on the req
+				==>Options: 6 types: each type can enable some sub-features of the HttpClient calls
+							==>These 6 types: use string unions instead of plain strings
+								==>AKA: the HttpClient calls expect: actual listed string types - not the generic "string" type
+							==>1) When the options are added to the call's arguments directly, it is ok
+							==>2) When the options are added to a const options variable, which is then passed to the call as argument:
+								  1) The generic "string" type is in use, which is incorrect
+								  2) The solution is: 'text' as const: so the specific 'text' string data type is in use
+							==>3) HttpHeaders: new or set
+							==>4) URL Parameters: new or set
+				==>Use: interface to handle the returned response: because the response is a place object, which cannot be converted into one class
+						==>So subcribe() call convert the plain object response (interface type) into fields assigned to results in component
+				==>Use: "Typed Response object":
+						get<call type parameter>
+						==>Mostly an interface: ==>Then can utilize RxJS's operator features to process the data:
+							==>1) map
+							==>2) Async Pipe
+						==>AKA: typed-data-object: e.g.: an interface object ==>Then easier to consume
+							==>Scenario 1: if typed as an interface: then access like data['field']
+							==>Scenario 2: if not typed - it is an Object: then access like (data as any).field
+				==>Use: Full Response:
+						==>This is one of the above 6 options
+						==>If typed response type is specified like get<Config>: it means: the Response's body is Config
+			==>Request Types:
+				Get
+				Post
+				Delete
+				Put
+				...
+				Jsonp:
+					==>Can be used when CORS is enabled, so across-domain requests can use JSONP to do calls
+			
+			==>Data Handling:
+			
+				==>
+			
+			
+			==>Handle Request Errors:
+				HttpClient Way: use RxJS (this is normal: Observable is from RxJS)
+					=======>Able to quickly check RxJS APIs and fields
+					http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html
+					https://devdocs.io/rxjs/					
+					==>HttpErrorResponse: ==>have an "error" object: encapsulate 2 types of errors:
+						1) Non-server error:	JS: eventError: network/client-side/etc.
+						2) Server error:		server response code: 404/500/etc.
+					==>HttpClient:			==>Can handle them + log them + return an ErrorObservable for further processing (like pipe(): retry / catchError)
+					==>RxJS: provider many operators: are operators the same or similar to methods? YES
+						==>catchError()
+						==>retry: such as: due to mobile calls...
+						==>...
+					==>Because Observable is from RxJS, so we use RxJS operators to do this handling
+						==>operator/method can be called with the name if zero-argument or common arguments?
+							==>Such as: this.handleError ==> instead of this.handleError(...)
+						==>
+					
+			
+				Observable?
+					==>
+				Promise: resolve/reject
+			
+			==>Modifications:
+				==>Headers
+				==>Parameters
+			
+			==>Utilize Interceptors:
+				==>Interceptors: simplify/replace the components' tasks: same interceptor(s) can be used for both request and response
+				==>API 1: Implement HttpInterceptor interface: intercept()
+				==>API 2: HttpHandler: the handle() API processing
+				==>Request Chains of Interceptors: reversed order of response chains of interceptors
+				==>Provides: AppModule: set up a barrel: gather all interceptors and add as a const variable
+				==>Provide in the same injectors as the HttpClient: root or the module/component level
+				==>Usage: Modify the request body + clone()
+				==>Usage: Add default headers for the request
+				==>Usage: Add authentication token (such as: from cookies) and add to the token to the subsequent outgoing request
+				==>Usage: Logging: use pipe/tap with next() to add extended logging to the response Observable
+				==>Usage: Caching: 1) Interrupt some normal flows and delegate to some caching interceptors for some requests
+				==>Usage: Emits multiple values: x-refresh: can check 
+				==>
+				
+				Advanced and complicated applications may use the interceptors
+				==>But it can simplify some components' work and methods and tasks
+				
+			==>Advanced Features:
+			
+				==>RxJS operators
+				==>Subject
+			
+				Those features:
+					==>1) Come from the 6 types of the HttpClient call's options arrays
+					==>2) Come from other call needs - including RxJS operators features and user event features
+			
+				==>Typed response:
+					==>Same as the above "typed-Data-Object"
+				
+				==>Return full response:
+					==>Same as the above "full response"
+				
+				==>report progress feature
+			
+				==>RxJS: debouncing
+						==>1) HTML: keyup event: send each user typed event to component's method call
+						==>2) Component method: call RxJS's 3 operators:
+								1) debouncing(500): 0.5 sec ==>If user has no input for 0.5 sec ==>We can extend this
+								2) wait for value changed
+								3) switchMap(): call backend search service: 
+				
+				==>XSRF Protection: see other App Security section
+	
+			==>Testing HTTP Requests: HttpClientTestingModule			
+	
+		Topic: SetUp - BaseUrl:
+			==>Angular use: <base="/"> to remove the need of the root url part
+			==>By environment:
+				providers: [
+					{ provide: "BASE_API_URL", useValue: environment.apiUrl }
+				]
+				export const environment = {
+				  production: false,
+				  apiUrl: "..."
+				}; 
+			==>@Inject BASE_URL from <base="/">
+				  main.ts:
+						export function getBaseUrl() {
+						  return document.getElementsByTagName('base')[0].href;
+						}
+						const providers = [
+						  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+						];					
+				  component.ts:
+				  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+					http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+					  this.forecasts = result;
+					}, error => console.error(error));
+				  }
+			==>Get from parent class:
+				export class BackendBaseService {
+				  baseURL: string = 'http://localhost:8080/myApp';
+				  constructor(){}
+				}			
+				@Injectable()
+				export class ItemsService extends BackendBaseService{
+				  constructor(private http: HttpClient){  
+					super();
+				  }
+				  public listAll(): Observable<any>{    
+					return this.http.get(`${this.baseURL}/api/items`);
+				  }
+				}				
+			==>Customized HttpClient:
+				@Injectable()
+				export class ApiHttpClient extends HttpClient {
+				  public baseUrl: string;
+				  public constructor(handler: HttpHandler) {
+					super(handler);
+					// Get base url from wherever you like, or provision ApiHttpClient in your AppComponent or some other high level
+					// component and set the baseUrl there.
+					this.baseUrl = '/api/';
+				  }
+				  public get(url: string, options?: Object): Observable<any> {
+					url = this.baseUrl + url;
+					return super.get(url, options);
+				  }
+				}			
+			==>Interceptor:
+				providers: [
+					{ provide: "BASE_API_URL", useValue: environment.apiUrl }
+				]			
+				@Injectable()
+				export class BaseUrlInterceptor implements HttpInterceptor {
+					constructor(
+						@Inject('BASE_API_URL') private baseUrl: string) {
+					}
+					intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+						const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
+						return next.handle(apiReq);
+					}
+				}	
+			==>Use: Create a proper injectable that implements HttpInterceptor
+				providers: [{
+					  provide: HTTP_INTERCEPTORS,
+					  useClass: APIInterceptor,
+					  multi: true,
+					}
+				  ]
+				import {Injectable} from '@angular/core';
+				import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+				import {Observable} from 'rxjs/Observable';
+
+				@Injectable()
+				export class APIInterceptor implements HttpInterceptor {
+				  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+					const apiReq = req.clone({ url: `your-api-url/${req.url}` });
+					return next.handle(apiReq);
+				  }
+				}		
+			==>extends BaseRequestOptions
+			
+			==>extends RequestOptions
+			
+				https://stackoverflow.com/questions/34516651/set-base-url-for-angular-2-http-requests/50387785
+				
+			
+		Topic: SetUp - Mock/Test Data
+			==>Method 1:	return this.http.get('assets/testdata.json');
+		
+		
+			==>Method 3:	Mock Backend Example for Backendless Development
+							https://jasonwatmore.com/post/2019/05/02/angular-7-mock-backend-example-for-backendless-development
+		
+		Topic: Direct Work on Observable: but if only working on HttpClient APIs, then no need
+			==>Imports:
+				import { Observable, throwError } from 'rxjs';
+				import { catchError, retry } from 'rxjs/operators';			
+				==>Observable: Manipulate or operate on Observable: then add RxJS
+				==>Observable: apply RxJS operators to an Observable to get a new tailored stream
+			==>
+		
+		Topic: Utilize jQuery
+			import * as $ from 'jquery';
+			$.ajax({
+				url: 'http://www.webservicex.net/globalweather.asmx?op=GetCitiesByCountry',
+				data: { CountryName: 'Spain' },
+				success: (data) => {
+					console.log('Hey, we got a success response', data);
+				},
+				error: (err) => {
+					console.error('We got an error :(', err);
+				}
+			});	
+			==>Don't use jQuery, Angular provides you with everything you need out of the box and it's faster and usually more powerful too
+	
+	==>HttpClient: Integration with SOAP API Apps:
+	
+		Summaries:
+			==>Angular SOAP integration solutions: more like: SOAPUI/Postman/Curl solutions instead of "Java JXB solutions"
+			==>They pass in: xml request and returned as: xml response: similar to SOAPUI...
+	
+		==>Method 1:
+			There is a way to consume SOAP services in Angular; no third party packages or libraries required. In a nutshell, you set the response type as text, construct an XML document out of the XML text, and (if desired) parse the XML document into JSON format
+			https://stackblitz.com/edit/angular-soap-test?file=src%2Fapp%2Fsoap.service.ts
+			
+			import { HttpClient } from '@angular/common/http';
+			import { map } from 'rxjs/operators';
+		
+		==>Method 2:
+			import {Page, Alert, NavController} from 'ionic/ionic';
+			import {Http} from 'angular2/http';
+	
+		==>Method 3:
+		
+		
+		
+		==>Advanced Usage:
+		
+			==>Asyn Impl:
+				One way to program asynchronously is to use callbacks
+		
+			==>JSONP:
+				https://codecraft.tv/courses/angular/http/jsonp-with-observables/
+				==>Why JSONP?
+				1) CORS
+				2) The endpoint API must support JSONP callback
+				3) The resource API returns the JSON response wrapped in a callback function
+				4) GET only
+				
+				
+			
+			==>Promise:
+				API: ES6 APIs
+				DOC:	https://codecraft.tv/courses/angular/es6-typescript/promises/
+				Editors/Runner:
+					https://plnkr.co/
+					https://stackblitz.com/angular/ldbamexeojd?file=src%2Fapp%2Frequest-cache.service.ts
+				
+				Promise: a kind of special callback... 
+					=> intead of a generic callback function... 
+					(It serves the same function as callbacks but has a nicer syntax and makes it easier to handle errors)
+					+ ...
+					==>var promise = new Promise((resolve, reject) => {});
+				Observable: apply RxJS operators to an Observable to get a new tailored stream + handle errors
+					http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html
+					https://devdocs.io/rxjs/
+				Subject: implements Observer interface + a Subject has state, it keeps a list of observers + it is an Observable
+				
+				Observable:
+					Observable is just a function that takes an observer and returns a function Observer: an object with next, error.
+					Observer allows to subscribe/unsubscribe to its data stream, emit next value to the observer, notify the observer about errors and inform the observer about the stream completion
+					Observer provides a function to handle next value,errors and end of stream(ui events,http responses,data with web sockets).
+					Works with multiple values over time
+					It is cancel-able/retry-able and supports operators such as map,filter,reduce etc.
+					Creating an Observable can be -Observable.create() - returns Observable that can invoke methods on -Observer  Observable.from() - converts an array or iterable into -Observable  Observable.fromEvent() - converts an event into Observable -Observable.fromPromise() - converts a Promise into Observable -Observable.range() - returns a sequence of integers in the speciﬁed range
+				Promise:
+					A promise represents a task that will finish in the future;
+					Promises become resolved by a value;
+					Promises get rejected by exceptions;
+					Not cancellable and it returns a single value
+					A promise expose a function (then)
+					-then returns a new promise;
+					-allows for the attachment of that will be executed based on state;
+					-handlers are guaranteed to execute in order attached;
+	
+				//
+				//Maintain states
+				//Always async
+				var promise = new Promise((resolve, reject) => {
+				  // do something once, possibly async
+				  // code inside the Promise constructor callback is getting executed synchronously
+
+				  if (/* everything turned out fine */) {
+					resolve("Stuff worked!");
+				  }
+				  else {
+					reject(Error("It broke"));
+				  }
+				});
+
+				//after the promise is resolved or rejected we can call .then or .catch method on it
+
+				promise.then((val) => console.log(val))      // logs the resolve argument
+					   .catch((val) => console.log(val));    // logs the reject argument
+					   
+				==>var promise = new Promise((resolve, reject) => {};	==>LambaExpr / Arrow-Function
+					==>Callback function:
+						function(resolve, reject){ //do something }	
+							(resolve, reject) => {}
+						function(){ xxx }	
+							() => {}
+				API: new / resolve() / then/catch / val/error
+				
+					var promise = new Promise((resolve, reject) => {reject('Promise Rejected')});
+					var promise = new Promise(function(resolve, reject) => {reject('Promise Rejected')});
+					promise.then((data OR: data: any)=>{}).catch((error)=>{});
+					promise.then(function(data)=>{}).catch(function(error)=>{});
+					promise.then((data)=>{},(error)=>{});
+					promise.then(data=>{},error=>{});
+					promise.then(function(data)=>{},function(error)=>{});
+					promise.then(data=>{resolve();},error=>{reject();});
+					promise.then(data=>{resolve(data);},error=>{reject(error);});
+					==>Similar to JDK8's functional interface: ...
+					
+					Pending: Initial state, neither fulfilled nor rejected
+					Fulfilled: onFulfilled() will be invoked, corresponds to resolve()
+					Rejected: onRejected() will be invoked, corresponds to reject()
+	
+			==>Observable into Promise:
+				Service APIs -> Observable -> Promise
+					const promise = this.httpClient.get(this.apiUrl).toPromise();
+				Service APIs -> Observable -> Pipe: this is useful: further process the observable
+				
+			==>Generations and Conversions:
+				Observable:
+					==>HttpClient APIs all return Observable
+					==>Use: generator ways: API: of(), ...
+					==>
+					
+				Promise
+					==>new
+					==>toPromise()
+					==>
+				
+				Subject:
+					==>?
+				
+			==>Observables and Promises:
+				==>Many times as a returned value for other routines and logic to use
+				
+				console.log(promise); 
+
+	==>Tiered-Services:
+	
+		==>Intermediate Services:
+			==>Interact with raw service tier to parse the raw data more into other domain objects and forms
+
+	   
+	==>Misc:
+		Topic: Ionic (mobile app framework): use Angular
+		
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

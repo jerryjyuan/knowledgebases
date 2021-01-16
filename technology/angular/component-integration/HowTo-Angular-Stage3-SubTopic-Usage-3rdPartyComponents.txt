@@ -1,0 +1,21 @@
+
+==========================================================
+Sub Topic: Angular:	Usage - 3rd Party Components
+
+
+==========================================================
+UI Components:
+
+
+(1) Ignite UI:
+
+https://www.infragistics.com/products/ignite-ui-angular?utm_source=Google&utm_medium=CPC&utm_campaign=IgniteUI-Angular-Search-Americas-US&utm_term=AngularDev&gclid=Cj0KCQjwzbv7BRDIARIsAM-A6-2GnYbUZlHeFkNg8BtL7TQ7h9kM0Gke-AjTvfyxicLKJ8jaTWcjhfgaApa4EALw_wcB
+
+
+https://www.infragistics.com/community/blogs/b/jason_beres/posts/ignite-ui-for-angular-10-1-0-release
+
+==========================================================
+Mixins:
+
+mixins to include a dark or light indigo theme: igx-indigo-light-theme and igx-indigo-dark-theme.
+

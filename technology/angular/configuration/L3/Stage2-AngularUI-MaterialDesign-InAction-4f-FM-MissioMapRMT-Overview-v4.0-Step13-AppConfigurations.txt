@@ -1,0 +1,58 @@
+
+============================================================
+==>Step 10: App Configurations:
+	==>Angular UI: standalone:	
+		==>Method 1:	environments folder and profile: config various config data
+							Example 1: RMT-UI: utilize environments entries to config Angular UI RESTful API url data?
+							environment.apiUrl
+		==>Method 2:	hardcoded:
+						private testUrl = 'https://jsonplaceholder.typicode.com/posts';
+		==>Method 3:	mock data:
+							==>Retrieve the config data from mock data
+							==>...
+							==>Can be used for config, mock test, UI design data, and test data, etc.
+							==>Mock data can be enabled as Observable: using "of", etc.
+		==>Method 4:	Simulate a data server:
+							==>npm install angular-in-memory-web-api --save
+							==>Check Angular Documentation and tutorials
+							==>Replaces the HttpClient module's HttpBackend. The replacement service simulates the behavior of a REST-like backend
+		==>Method 5a:	From application JSON data file:
+							Example 1: RMT-UI: utilize its own JSON data file to config Angular UI apps
+							Example 2: Angular official documentation: Angular official example: heroes app
+										assets/config.json
+										app/config/config.service.ts
+		==>Method 5b:	From application TEXT data file:
+							Example 1: Angular official documentation:
+										assets/data.txt
+										app/config/config.service.ts
+										OR:
+										app/download/download.service.ts
+										==>1) HttpClient: set up: responseType: 'text'
+										==>2) Directly assign the Observable<String> to component's data variable
+										==>3) Can do some pipe, map and/or tap (log)
+										
+										
+		==>Method 6:	...
+	==>Work with: Spring/SpringBoot:
+		==>Spring Boot:	application.properties file/yml:
+						==>Angular Service class: or dedicated config class: call .<same-context>/config API to retrieve from application.properties file
+							Example 1: Fedex DMT app Angular UI
+		==>Spring/SpringBoot: cmap: Work together with Spring and/or SpringBoot
+						==>Add config in some external files like cmp
+							Example 1: RMT - services APIs: utilize cml file as external config file
+		==>Spring Boot:	utilize its 10+ externalize config files to store config data
+		==>Spring Boot/Data: config server to store config data
+		==>Spring Boot: provide RESTful API to send the config to Angular UI and UI app stores it in persistence or session
+		==>Spring Boot: Provide mock data or simulation data via Spring Boot Mock or Spring Mock
+	==>
+
+
+		
+	
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

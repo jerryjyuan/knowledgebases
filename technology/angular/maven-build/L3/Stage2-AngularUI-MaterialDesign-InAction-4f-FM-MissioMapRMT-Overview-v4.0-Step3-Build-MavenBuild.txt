@@ -1,0 +1,255 @@
+
+============================================================
+Maven Builds:
+	==>Structures / Scaffolding Builds
+
+ng serve:
+	==>Can be used for POC mainly
+	==>Just copy these features into maven builds: simple
+
+============================================================
+==>Step 3:
+	==>Maven Build
+	==>1) Some of the extra config is added
+	==>2) Add local repositories into app pom.xml: other ways: global settings.xml and/or .m2/settings.xml
+	==>3) maven-dependency-plugin: used to move node/npm tar.gz from configured "repositories" into: local app's nodejs/npm's download locations
+	
+		==>CMS:
+				==>Pure AngularCLI app - no maven
+		==>SPARTA:
+				==>
+		==>RMT-UI:
+				==>Laptop:	node: 10.16.0 + npm: 6.9.0
+					==>NodeJS versions: might not change a lot: so NodeJS 5.0.0: works ok...
+				==>setup: .npmrc
+				==>
+		
+			==>mvn clean install:
+				==>Clean
+				==>Install:
+					==>Run: Global Plugin
+					==>Run: Profile: PROD: plugin
+				==>Maven Builds:
+					==>Default: local repo
+					==>Config: JFrog: settings.xml
+					==>Proxy: go to internet to download...: http proxy and npm proxy...
+				==>jar file: empty: because there are no source code from Java code:
+					==>Running Angular UI Using Maven:
+					PROS:
+						==>Use maven powerful plugins and many features
+						==>Together with other maven modules to build together using maven
+						==>Java guys' likes...
+						==>ng serve can also be used together
+					CONS:
+			==>App Maven: Global Plugin: maven-dependency-plugin: enabled as goal: copy
+				==>Download nodejs from configured repo (Local Repo first, or: JFrog artifactory) to local app's download directory:
+				==>but issues: downloaded is Linux version (originally from JFrog repo): because it could be used for prod/uat: linux platform
+					Why doing this download?
+					==>Initially download from JFrog repo (local repo after that): but the path is different from front-maven-plugin maven path:
+						repository\nodejs-npm\...
+						========>This would be one time download: from JFrog or local repo path to local app's temp DOWNLOAD path: if existing, then no download needed
+						
+						Seems like: there are 3 ways to pick up NODE/NPM from some "repo" into download folder: ==>One way to do NODE/NPM wrapper: like maven wrapper
+							1) Way 1: Internet: Repo
+							2) Way 2: JFrog repo: can be enabled as default
+							3) Way 3: Some existing Maven "Local Repo": 
+								.m2\repository\nodejs-npm\node-...\9.6.1\*.tar.gz
+								.m2\repository\nodejs-npm\npm\6.4.1\*.tgz
+							==>Which way to use: need to configure this maven-dependency-plugin: but the artifactItems in internet/JFrog/Local-Repo: same groupId/artifactId/version
+								==>If the same info, the same plugin config can be used to pull the Node/NPM into the download folder from one of the above 3 ways
+				==>NODE: 9.6.1
+				==>NPM: 6.4.1
+				Summaries:
+					==>this plugin: enable some versioned node and npm to be added to the default DOWNLOAD folder for front-maven-plugin to use
+					==>NODE:
+						The output directory: need to add: win-x64 or win-x86: frontend-maven-plugin needs this (by internal code enabled - not sure if can be configured)
+						such as: DOWNLOAD\v5.0.0\win-x86\
+						==>destFileName: need to be: node.exe: this is required for frontend-maven-plugin
+					==>NPM:
+						outputDirectory: DOWNLOAD\
+						destFileName: npm-6.4.1.tgz
+					==>This plugin seems to be needed - because frontend-maven-plugin is very stubborn unless provided with Rubi customized configurations
+			==>Profiles:
+				Jenkins:	front-maven-plugin: v 1.0 or other versions
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+									==>Into a specific folder: ${basedir}/DOWNLOAD
+
+									From Official Doc:
+										https://github.com/eirslett/frontend-maven-plugin
+
+										<plugin>
+											...
+											<configuration>
+												<!-- optional: where to download node from. Defaults to https://nodejs.org/dist/ -->
+												<nodeDownloadRoot>http://myproxy.example.org/nodejs/</nodeDownloadRoot>
+											<!-- optional: credentials to use from Maven settings to download node -->
+												<serverId>server001</serverId>
+												<!-- optional: where to download npm from. Defaults to https://registry.npmjs.org/npm/-/ -->
+												<npmDownloadRoot>https://myproxy.example.org/npm/</npmDownloadRoot>
+											</configuration>
+										</plugin>
+										
+										==>So this plugin can pick up the node/npm from anywhere
+											(like some dir, but not like maven repo paths... ==>if maven repo paths, etc: then use the above maven dependency plugin to help...)..., 
+											not just the DOWNLOAD folder...
+
+									==>Copy: NODE
+											<nodeDownloadRoot>file:///c:/some-dir/DOWNLOAD/</nodeDownloadRoot>
+											<nodeDownloadRoot>file:///c:/<app-dir or basedir>/DOWNLOAD/</nodeDownloadRoot>
+										from:	DOWNLOAD\v8.9.1\win-x64\node.exe
+												==>Why adding win-x64\node.exe? ==>By plugin code?
+										to: 	maven repo: github's eirslett's node\9.6.1\node-9.6.1-windows-x64.exe
+										Note:	front-maven-plugin will check if the maven repo: github's eirslett's node file exists or not, if existing, copy is skipped
+												==============>Set up formal maven repo artifacts to github paths
+												goal: install-node-and-npm:
+													this plugin will check system / global node version, if it is different from its specified version, it will install a local one
+														in target/node location from maven repo...
+													1) pick up the download path artifacts: based on platform: add: win-x64\node.exe:
+														and install them to maven repo: eirslette location: because it is a frontend-maven-plugin for eirslette domain
+													2) This plugin also copy: the installed files to: target/node location:
+														==>target location: is configured by the plugin: not by default
+										
+										Solutions:
+											==>Previously there was some workaround - but cannot reproduce it...
+											==>Manually copy files to avoid this wrong step: use skip way
+										
+									==>Copy: NPM
+											<npmDownloadRoot>file:///c:/some-dir/DOWNLOAD/</npmDownloadRoot>
+											<npmDownloadRoot>file:///c:/<app-dir or basedir>/DOWNLOAD/</npmDownloadRoot>									
+											from:	DOWNLOAD\npm-6.4.1.tgz
+											to: 	maven repo: github's eirslett's npm\6.4.1\npm-6.4.1.tgz
+											Note:	front-maven-plugin will check if the maven repo: github's eirslett's npm file exists or not, if existing, copy is skipped
+
+											Solutions:
+												==>Previously there was some workaround - but cannot reproduce it...
+												==>Manually copy files to avoid this wrong step: use skip way
+																					
+										==>Copy:
+											unpack the Maven Repo: github's eirslett's npm zip file (eirslett\npm\6.4.1\npm-6.4.1.tar.gz)
+											to:		app\target\node\node_modules, but renamed as npm
+													==>Installed npm locally
+													
+									==>After node.exe and npm installed to target/node folder: those nodeJS and npm are similar to any other local installed node/npm
+										==>So each time: mvn clean install: would recreate this: it is OK: just a tar file - not the entire node_modules download
+										==>Also you can do mvn install: ... this will keep target folder, but still run ng install (will keep existing packages) 
+											and ng build (will recreate the new dist files)
+										
+								npm install:
+									==>Use the app root folder the same as regular angular app root folder with angular.json inside that folder:
+										==>So node_modules and dist folders will be generated in this app root folder
+									==>Install: install all dependencies of the app into <app>/node_modules, not target folder
+									==>the subsequent: npm install: by front-maven-plugin: is using this nodejs/npm installation
+
+								npm build: ng build-prod
+									
+									==>You can try to test ng serve by adding a new execution for the plugin...
+								
+									Also: can go to the app folder, and run: ng serve to test-run the app
+								
+									The app is built in angular structure: frontend-maven-plugin hooks maven builds to run it: so both maven and AngularCLI work
+								
+								RMT-UI: do have angular.json...
+									==>But angulrCLI is installed locally, not in target/node global install
+									
+								App-Fundraiser:
+									==>NodeJS/NPM:
+										No need to download from JFrog: NodeJS/NPM: they require specific versions and want to enable a local install: but still no node/npm wrapper yet?
+										==>We use: global versions and global install: already existing
+										==>We also no need to install it to target as a local copy
+										==>NO: we still need this: <goal>install-node-and-npm</goal>: it is a preferred way:
+												==>C:\Users\jerry\wksp\fundraiser-ui\node\node.exe
+												==>C:\Users\jerry\wksp\fundraiser-ui\node\node_modules
+												Means:
+													The versions of Node and npm are downloaded from https://nodejs.org/dist, extracted and put into a node folder created in your installation directory . Node/npm will only be "installed" locally to your project. It will not be installed globally on the whole system (and it will not interfere with any Node/npm installations already present).
+												How does this local get used? - it is up to frontend-maven-plugin and its executions will use this one
+												
+												But: it actually moves to: working directory: after specifying the working directory:
+													C:\Users\jerry\wksp\fundraiser-ui\src\main\ng\node
+													
+										1) Exactly same thing but from default online repo:
+											[INFO] Downloading https://nodejs.org/dist/12.18.1/win-x64/node.exe to C:\Users\jerry\.m2\repository\com\github\eirslett\node\12.18.1\node-12.18.1-win-x64.exe
+											[ERROR] Failed to execute goal com.github.eirslett:frontend-maven-plugin:1.9.1:install-node-and-npm (install node and npm) on project fundraiser-ui: Could not download Node.js from: https://nodejs.org/dist/12.18.1/win-x64/node.exe: Got error code 404 from the server. -> [Help 1]
+											==>TO DO: now: workaround the same way as RMT-UI and SPARTA-UI
+												Workaround means: manually use the local NODE JS and place it into maven repo
+												NPM: has no problem because it doesn't add some prefix
+											[INFO] --- frontend-maven-plugin:1.9.1:install-node-and-npm (install node and npm) @ fundraiser-ui ---
+											[INFO] Installing node version 12.18.1
+											[WARNING] Node version does not start with naming convention 'v'.
+											[INFO] Copying node binary from C:\Users\jerry\.m2\repository\com\github\eirslett\node\12.18.1\node-12.18.1-win-x64.exe to C:\Users\jerry\wksp\fundraiser-ui\node\node.exe
+											[INFO] Installed node locally.
+											[INFO] Installing npm version 6.14.5
+											[INFO] Downloading https://registry.npmjs.org/npm/-/npm-6.14.5.tgz to C:\Users\jerry\.m2\repository\com\github\eirslett\npm\6.14.5\npm-6.14.5.tar.gz
+											[INFO] No proxies configured
+											[INFO] No proxy was configured, downloading directly
+											[INFO] Unpacking C:\Users\jerry\.m2\repository\com\github\eirslett\npm\6.14.5\npm-6.14.5.tar.gz into C:\Users\jerry\wksp\fundraiser-ui\node\node_modules
+											[INFO] Installed npm locally.
+											[INFO] 												
+									==>Silly Design: RMT-UI/SPARTA-UI: place local node/npm into target: ... maybe they have some design reasons...
+									
+									==>
+										[INFO] --- frontend-maven-plugin:1.9.1:npm (npm install) @ fundraiser-ui ---
+										[INFO] Running 'npm install' in C:\Users\jerry\wksp\fundraiser-ui\src\main\ng
+									==>
+										[INFO] --- frontend-maven-plugin:1.9.1:npm (npm/ng build) @ fundraiser-ui ---
+										[INFO] Running 'npm run-script build' in C:\Users\jerry\wksp\fundraiser-ui\src\main\ng		
+									
+									==>Deployment: Angular UI app:
+										==>Common Ways: copy the entire dist folder to the server, not the spring boot jar ...
+										==>You don't have to create a deployable spring boot jar file
+										==>
+								
+				Env...:		same:
+							except env based ng build-env
+				Local:		exec-maven-plugin: run: ng build-prod... (Assume the local env has node and npm install)
+		==>SPARTA-UI:
+			==>App Maven: Global Plugin: maven-dependency-plugin:
+				==>Download nodejs from configured repo (Local Repo first, or: JFrog artifactory) to local app's download directory:
+				==>but issues: downloaded is Linux version (originally from JFrog repo): because it could be used for prod/uat: linux platform
+					Why doing this download?
+					==>Initially download from JFrog repo (local repo after that): but the path is different from front-maven-plugin maven path:
+						repository\nodejs-npm\...
+				==>NODE: 8.9.1
+				==>NPM: 5.3.0
+			==>Profiles:
+				OpenShift:	front-maven-plugin
+							(==>How OpenShift Pods work on Sparta-UI)
+				
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+									==>Into a specific folder: ${basedir}/DOWNLOAD
+									
+									DOWNLOAD\v8.9.1\win-x64\node.exe
+									
+									==>install-and-npm failed: URI is not hierarchical
+									
+									==>Copy:
+										from:	DOWNLOAD\v8.9.1\win-x64\node.exe
+										to: 	maven repo: github's eirslett's node\9.6.1\node-8.9.1-windows-x64.exe
+									
+									==>Copy:
+										from:	maven repo: github's eirslett's node\8.9.1\node-8.9.1-windows-x64.exe
+										to:		app\target\node\node.exe
+									
+								npm install
+							exec-maven-plugin:
+								run: ng build-prod...
+				Env...:		N/A
+				Local:		front-maven-plugin
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+								npm install
+								npm install -g angular/cli
+							exec-maven-plugin:
+								run: ng build ...
+				
+				
+	==>4) site and site-deploy plugins are used - TBD
+	==>5) After maven run:
+		  ==>it generates the same files and contents as AngularCLI: "ng build"
+		  ==>Should be: ./dist ...
+	==>AngularCLI: ng serve: can do the same work
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

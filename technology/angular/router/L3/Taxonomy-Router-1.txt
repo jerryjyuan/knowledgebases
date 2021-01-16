@@ -1,0 +1,123 @@
+
+
+=============================================
+
+=============================================
+Router: Natures:
+
+==>Main Scenario: It belongs to "Level 4:	Feature UI components Level"
+==>Statement: 4 Players:
+	Router: module and package names
+	Routing
+	Route/Routes
+	==>
+	Router is doing "routing" the Route/Routes based on the path
+==>Router: a good example to show: how to search Angular APIs for advanced usage:
+	==>E.g.: Route detailed parameters: you cannot memorize all, so you need to do a quick lookup if you need to use many other params
+		==>But you should know: all of these params are not magic - they are all there in API doc for you to look up and use
+		https://angular.io/api/router/Route
+	==>But looking up APIs and actual usage is: mutually back and forth processes:
+		==>APIs -> Actual usage: too boring
+		==>Actual Usage Only: too magic... - "Where are those coming from? Tom Nolan invented it by himself?"
+		==>Mutually across-reference enables better usage and insights
+==>RouterModule:
+	==>Actually it is the same NgModule as any other Angular NgModule
+	==>It does the same thing as other NgModule
+	==>
+
+=============================================
+Router: Usage
+
+==>Usage 1: Combine into "Level 3: App UI components top level": app.module.ts
+
+==>Usage 2: Add into "Level 3: App UI components top level": but in different file: app-routing.module.ts
+
+==>Usage 3: Add into "Level 4:	Feature UI components Level": file: app-route/app-routing.module.ts
+
+==>Usage 4: Root Component Usage:
+
+==>Usage 5: Non-Root Component Usage:
+
+==>Usage 6: Angular Security: Route Guards
+
+==>Usage 7: Route Links
+
+=============================================
+Router and RouterModule:
+
+forRoot():
+
+forChild():
+	==>Point 1: no Router Service: 
+				Aka:
+					==>Those Router APIs/methods: not in use... - much less powerful feature and functions than forRoot()...
+	==>Point 2: lazy-loaded sub-modules
+
+=============================================
+Route Guard:
+
+
+
+=============================================
+Route Links:
+
+<a  mat-button  routerLink="/customer-list"  routerLinkActive="active">Customers</a>
+<a  mat-button  routerLink="/customer-create">Create Customer</a>
+<a  mat-button  routerLink="/login">Login</a>
+
+
+=============================================
+Router: with param:
+	https://angular.io/api/router/ActivatedRoute
+	
+	https://angular-2-training-book.rangle.io/routing/routeparams
+
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'product-list', pathMatch: 'full' },
+  { path: 'product-list', component: ProductList },
+  { path: 'product-details/:id', component: ProductDetails }
+];
+
+
+<a *ngFor="let product of products"
+  [routerLink]="['/product-details', product.id]">
+  {{ product.name }}
+</a>
+
+
+goToProductDetails(id) {
+  this.router.navigate(['/product-details', id]);
+}
+
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'product-details',
+  template: `
+    <div>
+      Showing product details for product: {{id}}
+    </div>
+  `,
+})
+export class LoanDetailsPage implements OnInit, OnDestroy {
+  id: number;
+  private sub: any;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+       this.id = +params['id']; // (+) converts string 'id' to a number
+
+       // In a real app: dispatch action to load the details here.
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+}
+

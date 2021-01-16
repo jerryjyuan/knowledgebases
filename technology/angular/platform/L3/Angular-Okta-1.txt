@@ -1,0 +1,141 @@
+
+============================================
+Okta:
+
+Taking pioneer-travel/tour is similar to take in-advance-tech in some conferences and tech sessions
+==>Do we need it every time?
+	==>I attended many tech conferences..., especially in year 2016, 2017, ...
+	Lance may be liking it, ...
+
+Angular Parts RoadMap:
+	==>NodeJS/NPM:
+		after installing @angular/cli, ng commands will be accessible..: because npm is reachable, so ng is too: see package.json
+	==>TypeScript
+	==>Transpiler
+	==>Angular SDK/API
+	==>AngularCLI
+
+AngularCLI:
+	workspace
+	Applications
+	
+Angular Installing:
+	npm
+	yarn
+	bower
+
+	Do we need to run:?
+		run npm install after adding it to your project
+		==>If it is empty node_modules, we need to run: "npm install"
+MD:
+	https://material.angular.io/guide/getting-started
+	==>Make it better on mobile phone apps
+	==>...
+	==>Why import { xxxModule } from '@angular/material'; works? - why you need to use '@angular/material/button'
+		==>Reason 1: use: ng add @angular/material	???
+		==>...
+	
+xxxComponent
+xxxService
+...
+==>Automatically created naming
+
+Angular HttpClient:
+	==>Can omit: http:
+		use: '//localhost: ...'
+
+============================================
+Spring Boot + Angular:
+
+	...
+	2.0 + 5.0
+	...
+	2.1 + 7.0
+	2.2 + 8.0
+	...
+
+============================================
+Enable Okta:
+
+https://developer.okta.com
+https://developer.okta.com/blog/2018/10/30/basic-crud-angular-and-node
+https://github.com/oktadeveloper/okta-angular-node-example
+
+==>OIDC: Similar to Auth2 providers: Google/Github:
+	==>Create an app: client id / issuer, etc.
+	==>Enable Spring Boot app as: resource server
+	==>Requests:
+		==>Add a http header: "Authorization": with access token
+		==>This can be added by many ways:
+			1) Way 1: by HttpInterceptor
+			2) ...
+	
+	==>Key 1:
+		import { OktaAuthService } from '@okta/okta-angular';
+	==>More:
+		const token = await this.oktaAuth.getAccessToken();
+
+
+	==>Generic: enable a generic http method
+		  private async request(method: string, url: string, data?: any) {
+			const token = await this.oktaAuth.getAccessToken();
+
+			console.log('request ' + JSON.stringify(data));
+			const result = this.http.request(method, url, {
+			  body: data,
+			  responseType: 'json',
+			  observe: 'body',
+			  headers: {
+				Authorization: `Bearer ${token}`
+			  }
+			});
+			return new Promise<any>((resolve, reject) => {
+			  result.subscribe(resolve as any, reject as any);
+			});
+		  }
+
+API:
+request(
+first: string | HttpRequest<any>, 
+url?: string, 
+options: {
+ body?: any; 
+ headers?: HttpHeaders | { [header: string]: string | string[]; }; 
+ observe?: HttpObserve; 
+ params?: HttpParams | { [param: string]: string | string[]; }; 
+ reportProgress?: boolean; 
+ responseType?: "arraybuffer" | ... 2 more ... | "json"; 
+ withCredentials?: boolean; 
+} = {}
+): Observable<any>
+		
+Analysis:
+	==>...
+	==>Arguments: use: JSON object:
+		===>Example: above: "options"
+		Details:
+			==>Syntax 1: use ? ==>like an optional argument
+			==>Syntax 2: use | ==>enable multiple scenarios
+			==>More:
+				==>Example 1: type inference: not enable a type
+				==>Example 2: array:	var1: any[] = [];
+				==>Example 3: an default JSON object:	var1: any = {};
+				==>Example 4: a typed wild object: Observable<T> OR: Observable<any>
+				==>Example 5: initialize the data:
+							  ==>PHP style: options: {...} = {}
+							  ==>
+		
+			==>Angular JSON object: similar to Java/etc JSON
+			==>but Angular JSON is more like:
+				name : <value>
+				==>name: not using quote string mostly, just a variable name, more like real POJO loyalty person
+				==><value>: 3 types:
+					==>type 1: plain value: any variable-enabled value
+					==>type 2: an JSON aray:
+								==>An array: a list of "Angular-values": those values are the same 3 types of these list here
+					==>type 3: another JSON object itself
+					==>type 4: a variable/object representing an JSON object
+				==>Why does Angular's JSON have some differences?
+					==>Try to better match the interface/class' fields and fields concepts...
+
+============================================

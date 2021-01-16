@@ -1,0 +1,75 @@
+
+===========================================================
+Java:	1995/1996
+
+Versions:
+	https://en.wikipedia.org/wiki/Java_version_history
+	1) History 1:	Until JDK 6
+		1996-2006:	1->6
+		==>every 2 years
+	2) History 2:	JDK 7
+		2011:	5 years
+	3) History 3:	JDK 8: LTS
+		2014:	3 years
+	4) History 4:	Oracle takes over
+			==>Starts: 2017-09:	Every 6-month a new version: JDK 9...
+			...
+			==>Starts: 2020-09:	Every 6-month a new version: JDK 15...
+
+===========================================================
+Angular:
+
+	Every 6-month - but could be delayed:
+
+	1:	Oct/2010
+	...
+	2:	Sept/2016
+	...
+	4:	Sept/2017???
+	...
+	6:	Sept/2018???
+	...
+	8:	May/2019
+	9:	Feb/2020: delayed
+	10:	06/2020
+	
+===========================================================
+JavaScript: History:
+
+	es2015 as esm2015
+
+	TS > JS > ECMAScript
+	
+	Java Script Concepts:
+		JavaScript is single-threaded, it has only one stack and one heap per process
+		JS Engine
+		Event Loop
+		Message Queue / Callback Queue
+		Web API
+		Callbacks
+		
+	Versions:
+		https://www.greycampus.com/blog/programming/java-script-versions
+		ES1 1997
+		ES2 1998
+		ES3 1999
+		ES4 Abandoned
+		ES5 2009:
+			ES5
+			ESM5
+			ES2009
+			ESM2009
+		ES6 2015
+			ES6
+			ESM6
+			ES2015
+			ESM2015
+			JavaScript modules
+				Published 18 June 2018 · Tagged with ECMAScript ES2015
+			https://v8.dev/features/modules#mjs
+		ES7 2016
+		ES8 2017
+		ES9 2018
+		
+
+===========================================================

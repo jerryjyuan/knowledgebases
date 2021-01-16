@@ -1,0 +1,140 @@
+
+============================================================
+SOAP: Server: Ready
+
+==>How do you generate a SOAP Client?
+
+	==>Step 1: Choose which SOAP framework you use: my experiences: choose the same SOAP framework that Server uses
+				 ==>Not sure how to choose a different SOAP framework on client side
+				 
+	==>Step 2: Based on which framework(s) SOAP server/client is in use: choose client implemnetation ways below:
+
+			   Methods:
+				   ==>Use schema.jar to work with SOAP Client: as a jar file
+				   ==>Use WSDL directly to work with SOAP Client:
+						==>Directly use WSDL locally on client side:
+							1) By Scripts or CLI Commands:
+								==>Axis2: wsdltojava
+								==>JAX-WS: wsimport
+								==>...
+							2) IDE/Maven-Plugins via: IDE menus or Maven pom.xml builds
+						==>Remotely use WSDL from server URL: like Spring SOAP Client + maven-jaxb2-plugin
+							maven pom.xml plugin
+							
+				   ==>Generate the client application/project:
+						==>Some IDE may have project type to generate a SOAP client project:
+							1) RAD/MSVS
+							2) Eclipse/STS????
+						==>Initializr: Spring SOAP Client - Spring Initializr
+						==>Build Tools/Plugins:
+							Maven: generate a new project
+	
+			   Scenarios:
+	
+				   1) JAX-WS Server + JAX-WS client:
+						==>Pure Java JDK ways
+						==>IDE: plugin - not so handy
+				   2) Axis2-Server + Axis2-Client:
+
+				   2b) Axis2-Server + Axis2-Client-WithPowerAuth:
+						https://developers.wultra.com/docs/2019.11/powerauth-server/Configuring-SOAP-Client-for-Axis2
+						http://localhost:8080/powerauth-java-server/soap/serviceV3.wsdl
+
+				   2c) Axis2-Server + Spring-SOAP-Client:?????????
+						==>Maybe NOT
+						Reasons:
+							==>Reason 1:	
+				   
+				   3) Apache-CXF-Server + Apache-CXF-Client
+						==>IDE: plugin - handy
+		
+				   3b) JAX-WS-Server + Apache-CXF-Client???
+						==>Works:
+							==>maven plugin: Maven CXF code-gen Plugin
+							2.1 Download the Archive. ...
+							2.2 Create the Client Project. ...
+							2.3 Copy the WSDL File. ...
+							2.4 Add the Maven CXF code-gen Plugin. ...
+							2.5 The Generated Client Application. ...
+							2.6 Import the Web Service Project. ...
+							2.7 Start the Web Service. ...
+							2.8 Run the Client Application.
+								
+				   4) Spring-SOAP-Server + Spring-SOAP-Client
+						==>maven plugin - handy: generate client schema domain classes
+						==>https://spring.io/guides/gs/consuming-web-service/
+	
+	
+				   5) Non-Java SOAP:
+						C#/NET: ...
+						https://success.outsystems.com/Documentation/11/Extensibility_and_Integration/SOAP/Consuming_SOAP_Web_Services/Configure_Web_Service_Authentication
+						https://success.outsystems.com/Documentation/11/Extensibility_and_Integration/SOAP/Consuming_SOAP_Web_Services/Use_Advanced_Extensibility/Example%3A_Authenticate_using_a_client_certificate
+
+
+============================================================
+Server Side:
+
+			   Scenarios:
+	
+				   1) JAX-WS Server + JAX-WS client:
+						==>Pure Java JDK ways
+						==>IDE: plugin - not so handy
+				   2) Axis2-Server + Axis2-Client:
+						 Staging:
+						 https://aniweb02.peerlessnetwork.com:8181/public/APIService?wsdl 
+						 https://aniweb02.peerlessnetwork.com:8181/animateapi/axis/APIService?wsdl 
+						 Production:
+						 https://animate.peerlessnetwork.com:8181/public/APIService?wsdl 
+						 https://animate.peerlessnetwork.com:8181/animateapi/axis/APIService?wsdl 
+ 		   
+				   3) Apache-CXF-Server + Apache-CXF-Client
+						==>IDE: plugin - handy
+		
+				   3b) JAX-WS-Server + Apache-CXF-Client
+								
+				   4) Spring-SOAP-Server + Spring-SOAP-Client:
+					  ==>Server Side:
+						https://spring.io/guides/gs/producing-web-service/
+						1) Use Spring Initializr: create project
+						2) pom.xml: include:
+									spring-ws-core: provide all Spring WS/SOAP APIs
+									wsdl4j:			used to generate WSDL from XSD file via XsdSchema bean:
+													==>This generation is special internally to Spring WS/SOAP
+													==>Different framework uses different ways internally
+													==>But the schema files may be standardized JAXB schema files...
+													==>These schema files are pulled into client side... works with the Spring-SOAP client if it is Axis2-Server?
+														Theoretically: should be ok...
+						3) Enable JAXB in SOAP Server Module:
+							==>1) Define XSD
+							==>2) Generate Schema classes on server side:
+									==>Common Ways: use server side maven plugin: jaxb2-maven-plugin
+													==>This plugin is different from client side (maven-jaxb2-plugin): 
+													   query WSDL and generate client side schema classes
+													==>Seem like: the classes are in some default location:
+														Generated classes are placed in the target/generated-sources/jaxb/ directory
+									==>The following XSD namespaces will be used as package names for the generated schema classes:
+										xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+											targetNamespace="http://spring.io/guides/gs-producing-web-service
+										import io.spring.guides.gs_producing_web_service.GetCountryRequest;
+										import io.spring.guides.gs_producing_web_service.GetCountryResponse;
+							==>3) WSDL:
+									==>The web service domain is defined in an XML schema file (XSD) that Spring-WS will automatically export as a WSDL.
+						4) Enable Spring Boot main class: common one
+						5) Enable Spring Spring Boot App @Configuration class: configure autoconfigured Spring WS beans
+							==>Similar to enable any Spring Boot project types' beans: 3 beans
+							@EnableWs
+								1) Bean 1: enable XsdSchema for XSD file
+								2) Bean 2: enable WSDL generation bean
+											==>This bean defines its url location below:
+											http://<host>:<port>/ws/countries.wsdl
+												==>wsdl11Definition.setLocationUri("/ws");
+												==>@Bean(name = "countries")
+								3) Bean 3: enable messageDispatcherServlet: handle SOAP messages:
+											Without that, Spring WS will not automatically detect Spring beans.
+											==>It is an additional bean on top of "DispatcherServlet" due to SOAP
+						6) Enable JAX-WS based @Endpoint class: this is the JAX-WS core, which is also part of Spring SOAP/WS
+								@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+								@ResponsePayload						
+						7) Enable Spring Boot Repository class: common one
+
+============================================================

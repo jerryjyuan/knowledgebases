@@ -1,0 +1,241 @@
+
+============================================================
+FM: Bro: MMAPs
+
+==>Not an Angular, but a very good UI application
+
+JS
+Google Map APIs
+...
+Services APIs/Calls
+...
+
+============================================================
+
+
+
+
+
+
+============================================================
+==>Design and Implementation Flows:
+
+==>Step 1: Design:
+	==>UI Wireframes/...
+
+==>Step 2:
+	==>Scaffolding: Assigned to Jerry
+	
+	Design Considerations:
+		Infrastruction Analysis: AD/TAM/Apache/WebLogic...
+		Application Analysis: 	 Java Web App + Google Map APIs 
+		Business Flows Analysis: 
+		Data Model Analysis:	 Data - monthly - fixed sets of data models and feeds
+	
+		Web Browser: IE, not Chrome
+		Mobile App browser: ... iPhone/Android
+		
+		IDE: create a web project type:
+			 (1) WebContents folder
+			 (2) Do use servlet
+			 (3) Use .war file
+			 (Not create a Java project type or Maven project type)
+		
+		Deployed onto WebLogic (as a .war file deployment): so need to create weblogic.xml
+	
+		Config: conventional Java app config: load properties and config the app
+		
+		Need XML Reader: JAXB: XSD: to load xml files and consume data
+	
+		Write a lot of hands-on code...
+		
+	
+	==>angular/cli:
+		==>package.json:
+			==>devDependencies:	==>this enables a local dev copy of AngularCLI: will override the global or non-dev one:
+				Dev:		npm install --save-dev <package-name>:	==>for dev: you can use any versions - so no need to uninstall or change global version
+				Non-Dev: 	npm install --save <package-name>
+				Global: 	npm install -g <package-name>
+				Questions: can we have multiple versions for global?
+		==>
+
+==>Step 3:
+	==>Maven Build
+	==>1) Some of the extra config is added
+	==>2) Add local repositories into app pom.xml: other ways: global settings.xml and/or .m2/settings.xml
+	==>3) maven-dependency-plugin: used to move node/npm tar.gz from configured "repositories" into: local app's nodejs/npm's download locations
+	==>4) site and site-deploy plugins are used - TBD
+	==>5) After maven run:
+		  ==>it generates the same files and contents as AngularCLI: "ng build"
+		  ==>Should be: ./dist ...
+	==>AngularCLI: ng serve: can do the same work
+
+==>Step 4:	Stylish Design:
+
+	==>Assigned to Jerry:
+		==>Manually downloaded jqeury.js and added it to index.html
+		==>npm install --save bootstrap
+
+	==>1) Install bootstrap CSS: 3+ ways:
+			Way 1: install: simple bootstrap css:
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save bootstrap
+					(@angular is Angular specials...)
+					==>This is not global because each project can do this
+					==>bootstrap is dependent upon jquery: Bootstrap depends on jQuery and Popper.js libraries
+						npm install --save jquery
+						==>Because jquery is like: JS's SpringFramework?
+					==>JS parts are optional for the project:
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",	==>This is method 1 way: can use method 2 as well in index.html
+								==>Is this jquery.js added by npm install or ng add? or manually added here to be configured via AngularCLI as globals...
+								==>YES: npm install --save jquery
+									+ jquery@3.5.1
+									added 1 package from 1 contributor, removed 1 package and audited 1469 packages in 17.57s
+								==>This installs jquery, but need to be:
+									Either manually added to scripts section in angular.json or into index.html									
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>Enterprise:
+					install from internal Jfrog factory repo
+				==>1) Method 1: angular.json:
+					updated with bootstrap: become global: so every component can use it: 3.4.1
+						"styles": [
+						  "./node_modules/bootstrap/dist/css/bootstrap.css",
+						  "src/styles.css"              
+						],
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>2) Method 2: update index.html: hardcoded css and js configurations:
+								==>RMT: use this method: for jquery.js (but css are in angular.json file) 
+										==>This jqeury can be manually downloaded from web as well
+										==>But it can use the above method 1 as well
+								<!doctype html>
+								<html lang="en">
+								<head>
+								  <meta charset="utf-8">
+								  <title>Angular Bootstrap 4 Examples</title>
+								  <base href="/">
+								  <meta name="viewport" content="width=device-width, initial-scale=1">
+								  <link rel="icon" type="image/x-icon" href="favicon.ico">
+								  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+								</head>
+								<body>
+								  <app-root></app-root>
+								  <script src="../node_modules/jquery/dist/jquery.js"></script>
+								  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
+								</body>
+								</html>				
+				==>Can mix method 1 and method 2 in the app
+				
+				Install more:
+					==>ng add @ng-bootstrap/schematics
+					difference between ng-bootstrap vs. ngx-bootstrapis that ngx-bootstrap uses separate modules for components to reduce the final app size
+					
+			Way 2: style.css
+				@import "~bootstrap/dist/css/bootstrap.css"
+
+			Angular can exclude jquery:
+				Angular it's better to avoid using libraries that make direct manipulation of the DOM (like jQuery) and let Angular handle that
+				By: using ng-bootstrap and ngx-bootstrap below.
+				
+			Way 3: Install advanced Bootstrap css: ng-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save @ng-bootstrap/ng-bootstrap
+				import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; ==>One single module
+				==>support for Bootstrap components and styles without any extra configurations. You also don't need jQuery since we are using ng-bootstrap	
+				==>Can use Angular global angular.json's css
+					"styles": [
+					  "styles.css",
+					  "../node_modules/bootstrap/dist/css/bootstrap.css"
+					],				
+					import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+					@NgModule({
+					  declarations: [/*...*/],
+					  imports: [/*...*/, NgbModule.forRoot()],
+					  /*...*/
+					})
+					export class AppModule {
+					}				
+			Way 4: Install advanced Bootstrap css: ngx-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				https://valor-software.com/ngx-bootstrap/#/getting-started
+				==>Make the app size smaller: because its uses separate modules for different components, and you can just import needed modules for needed 	
+					components ==>So final product is smaller.
+				==>Import each module and run below:
+				==>Can use both CDN bootstrap css and Angular global angular.json's css
+					1) <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+					2) 
+					   "styles": [  
+					   "../node_modules/bootstrap/dist/css/bootstrap.min.css",  
+					   "styles.css"  
+					   ],				
+					import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+					import { AlertModule } from 'ngx-bootstrap';
+
+					/*...*/
+
+					@NgModule({
+					   /*...*/
+					   imports: [BsDropdownModule.forRoot(),AlertModule.forRoot(), /*...*/ ],
+						/*...*/ 
+					})
+			
+	==>2) Enable normal global styles: style.css
+
+
+						
+
+
+			==>Add global MD css selectors
+				==>Some look and feel: may come from UI designer or business analyst or product manager...
+			
+			
+	==>3) Each feature module's own stylish: .css
+
+==>Step 5:	Landing Page Design: ==>Layout etc.
+	==>Method 1:	app.component.html: enable page design using header/menu/sidenav/contents/footer
+	==>Method 2:	index.html
+					==><app-root></app-root>
+					==><outer-outlet></router-outlet>
+					==>It delegates to routing module to point and render landing page
+					==>path: '' ==>redirectTo: 'main'
+					==>Utilize main component to do the landing page design and layout
+						==>Sidenav is different from MD design: not included in the container
+						==>Sidenav becomes an independent side design section
+						==>Center: the Google Map:
+							==>
+						==>Right side: add a mat-drawer section
+
+==>Step 6:	Features Modules:
+	==>main structures: features/<primary-feature-module>/<sub-feature-folder>
+	==>some structures: features/<feature-folder>
+	==>some structures: features/<feature-folder>/<sub-feature-folder>
+	==>Some feature-module: directly contains its own service files (not global files)
+	
+	Reports Module/Functions
+	
+	
+
+	
+
+
+	2) Update style.css
+			==>Add some the page design wireframes' look and feel css into style.css as global look and feel
+	
+
+==>Step 7:	Feature - Feature Module Development: Google API integration
+	==>How to integrate with Google MAP APIs
+		==>Enable: feature module: as main contents pane as google map
+		==>Enable CDK: to use additional Google material design functions and components
+
+
+		==>
+
+
+============================================================
+

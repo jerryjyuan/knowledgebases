@@ -1,0 +1,42 @@
+
+============================================================
+Angular UI - Material Design: In Action 1:
+
+============================================================
+POC 1: use exec-maven-plugin:
+
+<Level 2>
+
+exec-maven-plugin:
+	==>1) https://www.mojohaus.org/exec-maven-plugin/usage.html
+
+============================================================
+Differences between frontend-maven-plugin and exec-maven-plugin:
+
+==>exec-maven-plugin:
+	==>exec:
+		https://github.com/mojohaus/exec-maven-plugin/issues/79
+		https://javalibs.com/plugin/org.codehaus.mojo/exec-maven-plugin
+		==>maven
+		==>ng
+		==>Theoretically can do: npm, ... ==>So exec-maven-plugin can simulate frontend-maven-plugin mostly
+	==>java
+		==>Similate java commands
+			https://www.journaldev.com/33793/exec-maven-plugin-run-java-programs-maven-build
+			https://stackoverflow.com/questions/2472376/how-do-i-execute-a-program-using-maven
+			http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/
+			https://gist.github.com/andrewheald/793105/2f6eb39c286783d2d544fdc92ad0286d194dd185
+			https://sharing.luminis.eu/blog/performing-simple-tasks-with-maven-and-java/
+	PROS:
+		==>If some executables/commands are not a goal, then exec can help them run
+		==>Especially powerful for Java commands and simulations
+frontend-maven-plugin:
+	==>More frontend goals and simulations/functions
+	==>The commands are enabled as a goal
+
+
+============================================================
+
+
+
+============================================================

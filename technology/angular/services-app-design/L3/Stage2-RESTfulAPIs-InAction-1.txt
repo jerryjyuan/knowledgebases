@@ -1,0 +1,426 @@
+
+============================================================
+Spring/RESTfulAPIs: In Action 1:
+
+============================================================
+==>Simple RESTful APIs:
+	https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/reference/htmlsingle/
+	https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/
+	https://docs.spring.io/spring-framework/docs/current/javadoc-api/index.html?overview-summary.html
+	https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/RequestEntity.BodyBuilder.html
+	https://docs.spring.io/spring-framework/docs/current/javadoc-api/index.html?org/springframework/http/RequestEntity.html
+	https://www.baeldung.com/rest-template
+
+	==>Create a new project ways:
+	
+		Using curl on the command line
+		
+		Using Spring Boot CLI
+		
+		Using the Spring Initializr website
+		
+		Using Spring Tool Suite
+	
+	==>When needing to build up a customized URI: ServletUriComponentsBuilder/UriComponentsBuilder
+		==>Query strings
+		==>
+		
+==>Advanced RESTful APIs
+
+==>Integrated RESTful APIs:
+
+	How security protocol integrated:
+		==>No.1: depends upon how the RESTful API server design/implementation
+
+
+	==>HTTP Security Integrated:
+	
+		==>Basic:
+			==>Example 1: Bandwidth APIs
+			
+			https://www.baeldung.com/how-to-use-resttemplate-with-basic-authentication-in-spring#manual_auth
+		
+		==>Digest
+		
+		==>NTLM
+
+	==>Spring Security Integrated
+
+	==>SSL/TLS Integrated:
+
+	==>OAuth2 Integrated
+		 (1) Point 1: Both or Either of "Authentication and authorization": which is why OAuth2 can be used for both of them, or one of them needs'
+			 ==>And can be named as both of their names or one of their names: Authentication Server or Authorization Server
+			 ==>But mostly: it is called "Authorization Server", and with both authentication and authorization functions
+			 
+				==>Example 1: Inteliquent APIs
+		 (2) Point 2: Both authorization and resource server can be in the same app or 2 different apps
+				Example 1: Bandwidth APIs
+		 (3) Point 3: Provider 1: self-built: use Spring Boot to build up both of them
+		 (4) Point 4: Provider 2: use other providers: Google’s OAuth 2.0 authentication system for login
+				https://github.com/spring-guides/tut-spring-boot-oauth2/tree/master/two-providers
+		 (5) Point 5: Provider 3: use other providers: Github OAuth 2.0 authentication system for login
+				https://github.com/spring-guides/tut-spring-boot-oauth2/tree/master/two-providers
+				https://spring.io/guides/tutorials/spring-boot-oauth2/
+				
+				Many sites: use facebook/google/... to login:
+					1) Previously: 	use API key ways:
+									==>Babofoo: used Facebook and ...: generated API key to login...
+									==>They have local users table as well
+					2) Now:			Similar to OAuth2
+					
+									==>I am really sure these kinds of logins: OAuth2 mostly...
+										1) Client chooses: Github login to this site
+										2) Site: integrated with Github OAuth2 server
+										3) User: enter Github login: the site parse it: and then send to Github API...
+										4) Github returns a token in the request, and to the resource-server, which is this site
+										5) The site: let the user access (aka: logged in) and view the pages, etc.
+										6) When logged out: it sends to Github to log out or no need
+										7) Site could maintain a local user table - see below... - it is in sync with Github...
+										==>Pro: the user doesn't need to create a new login
+												==>User uses the Github login to create a new user,...
+												==>Next time the user can still use Github to login + "optional" its local username if enabled to login
+										
+		 
+		 (9) Many applications need to hold data about their users locally, even if authentication is delegated to an external provider.
+				https://github.com/spring-guides/tut-spring-boot-oauth2/tree/master/two-providers
+
+
+		  custom authentication
+
+		==>Examples: Use Github/Google as authentication servers with using an external OAuth 2.0 provider
+		
+		Google/FB hands over a secure 'token' representing that you actually logged in, and then hands over whatever information the app requests. 
+		Security - it's more secure, since the new site doesn't have any password, and if they're breached, you're not at risk.
+			==>NO: some personal website could store your initial entered password via "their page" when you click on the login button
+			==>However:
+				==>Google: actually perfectly safe and secure — provided you don't “log in with Google” when prompted. 
+							Your email address should be just that: an email address. It should be used only as a username to sign in with
+							==>As long as you don't provide google password or actually login as google account, and only provide email address
+							==>Then it is ok...
+			
+			Logic:
+				1) 2012-2013:
+					==>Babafoo work:
+						==>Integration with Facebook and Twitter via PHP code:
+							==>API key was in use (not OAuth2 token: possibly a pioneer of OAuth2 token ways)
+								==>User entered: data
+								==>App: delegate to Facebook/Twitter
+								==>Some Apps: 1) Save the password locally
+								==>Some Apps: 2) Not save the password locally - but they do save some tokens (the APIs key)?
+					==>Facebook WebSite:  
+						==>Facebook website: enabled an API key to help validation							  
+				
+				2) 2020:
+					==>More like: OAuth2 replacing previous ways: API-Keys
+					==>1) Not Safe:
+							==>Login is the site's page
+					==>2) Safe:
+							==>Site: prompt for Google login
+							==>You click "Google" login
+							==>It directs to Google site: login: ==>this is Google page - not the site page
+								==>So Google has the agreement/integration with other sites: it provides this page
+								==>The site also provides a return page
+							==>1) Sub-Method 1: the token is returned to the client
+												the client uses it in header and send to the site (resource server)
+												the site talks to Google to validate this token
+												After validation, the site allows the user to login into their site
+												==>In the Spring Guide app, this is not the scenario
+							==>2) Sub-Method 2: ==>In the Spring Guide app, this is the scenario
+												==>"login with GitHub". The link takes you not directly to GitHub, 
+													but to the local path that processes the authentication (and sends a redirect to GitHub). 
+													==>Because of the Spring Security OAuth2 APIs and Jar: spring-boot-starter-oauth2-client
+													==>With GitHub: <a href="/oauth2/authorization/github">click here</a>
+														==>This is the app's local path - not github path
+														==>"Spring Security OAuth2": uses this path and do internal processing: talk to github
+													Once you have authenticated, you get redirected back to the local app (by Github app's OAuth redirect URI:
+													like: http://localhost:8080/login/oauth2/code/github), where it now displays your name (assuming you have set up your permissions in GitHub to allow access to that data).
+												the token is directly delegated to the site with the return page of the site (resource server)
+												(not going through the client side)
+												==>The OAuth redirect URI is the path in the application that the end-user’s user-agent is redirected back to after they have authenticated with GitHub and have granted access to the application on the Authorize application page.
+												==>{baseUrl}/login/oauth2/code/{registrationId}
+												==>http://localhost:8080/login/oauth2/code/github
+												==>OAuth 2.0 enabled Client Application, and it uses the authorization code grant to obtain an access token from GitHub (the Authorization Server)
+												
+												The site (resource server) check the token (not check back with Google as authentication server): and allows the user to login:
+												==>Site: talk to Github for the 2nd time (not by the browser/another-app client side): using that token
+												==>It then uses the access token to ask GitHub for some personal details (only what you permitted it to do), including your login ID and your name. In this phase, GitHub is acting as a Resource Server, decoding the token that you send and checking if it gives the app permission to access the user’s details. If that process is successful, the app inserts the user details into the Spring Security context so that you are authenticated.
+												==>After the Github returns the 2nd-time talk's response to the site:
+													==>The site adds these user info into their Spring Security context via "Spring Security OAuth2" jar
+												
+												==>redirected to login with GitHub. If you do that, and accept any authorizations you are asked to make, you 	
+													will be redirected back to the local app, 
+													==>and the home page will be visible.
+														1) Home Page: index.html or welcome.html
+														2) When first launched: no Github login: so the page displayed as non-logged with login button
+														3) JS code: check its login status, so if logged in, it shows: logged in
+															<script type="text/javascript">
+																$.get("/user", function(data) {
+																	$("#user").html(data.name);
+																	$(".unauthenticated").hide()
+																	$(".authenticated").show()
+																});
+															</script>														
+															==>It is RESTful API call: it ("/user") uses the data inside Spring Security context 
+																						via "Spring Security OAuth2" jar
+							How to understand this? - check Spring Guide - app: github and google app
+							==>In above ways: the site doesn't save the password - because the login is the google page
+
+							<div>
+								With GitHub: <a href="/oauth2/authorization/github">click here</a>
+							</div>
+							<div>
+								With Google: <a href="/oauth2/authorization/google">click here</a>
+							</div>
+		
+		
+							The apps all work on localhost:8080 because they’ll use OAuth 2.0 clients registered with GitHub and Google for that address
+							To run them on a different host or port, you need to register your apps that way
+							
+							registration:
+							  github:
+								client-id: your-github-client-id
+								client-secret: your-github-client-secret
+							  google:
+								client-id: your-google-client-id
+								client-secret: your-google-client-secret
+								
+							==>Is Spring Security already enabled with those social media integration in APIs?
+								==>It is integrated with OAuth2 for sure
+								==>
+
+							
+							The apps all work on localhost:8080 because they’ll use OAuth 2.0 clients registered with GitHub and Google for that address. To run them on a different host or port, you need to register your apps that way.
+
+							To use GitHub’s OAuth 2.0 authentication system for login, you must first Add a new GitHub app.
+								https://github.com/settings/developers
+
+							Select "New OAuth App" and then the "Register a new OAuth application" page is presented. Enter an app name and description. Then, enter your app’s home page, which should be http://localhost:8080, in this case. Finally, indicate the Authorization callback URL as http://localhost:8080/login/oauth2/code/github and click Register Application.
+
+							The OAuth redirect URI is the path in the application that the end-user’s user-agent is redirected back to after they have authenticated with GitHub and have granted access to the application on the Authorize application page.
+
+							The default redirect URI template is {baseUrl}/login/oauth2/code/{registrationId}. The registrationId is a unique identifier for the ClientRegistration.
+
+							To use Google’s OAuth 2.0 authentication system for login, you must set up a project in the Google API Console to obtain OAuth 2.0 credentials.
+
+						How to Add a Local User Database:
+						
+							Many applications need to hold data about their users locally, even if authentication is delegated to an external provider. We don’t show the code here, but it is easy to do in two steps.
+
+							Choose a backend for your database, and set up some repositories (using Spring Data, say) for a custom User object that suits your needs and can be populated, fully or partially, from external authentication.
+							1) Method 1: save user name and token and other user info
+							2) Method 2: create a local app's login (login name, etc.) matching the social login token and username, but still no password saved
+											==>But can ask user to create a login profile password as well, so the user can use local profile and social login
+							The above are normal ways
+							==>Evil web site ways:
+								==>Pretend the social login page is the real social login page integrated (the page is really similar):
+									And user enters social media account login / password: the app saves them into their DB
+									==>And next time when users login, they will present the same social login page from their own app: and the user login works
+									==>But the app is not really integrated with the social media OAuth2 process
+									==>In this way, the app hacks the users' social media credentials
+									==>
+									
+							
+							Implement and expose OAuth2UserService to call the Authorization Server as well as your database. Your implementation can delegate to the default implementation, which will do the heavy lifting of calling the Authorization Server. Your implementation should return something that extends your custom User object and implements OAuth2User.
+
+							Hint: add a field in the User object to link to a unique identifier in the external provider (not the user’s name, but something that’s unique to the account in the external provider).
+
+
+				Summaries:
+							We have seen how to use Spring Boot and Spring Security to build apps in a number of styles with very little effort.
+							1) Reason 1: "Spring Security OAuth2" jar does lots of internal processing and code
+							2) Reason 2: Spring Boot does a lot of auto-config work
+							==>Summary 1: these simplified the code in SpringSecurity/SpringBoot ways for OAuth2
+							==>Summary 2: While it is common OAuth2 impl, but has some special points:
+											==>1) OAuth2 is core principle: different frameworks and apps implement a little bit differently
+											==>2) 
+							==>Summary 3: SSO in action... - still related to the "Spring Security OAuth2" jar
+							The main theme running through all of the samples is authentication using an external OAuth 2.0 provider.
+							
+							
+					Use your Google Account to sign in to other sites or apps
+					You can use your Google Account to sign in to third-party sites and apps. You won't have to remember individual usernames and passwords for each account.
+
+					Note: Google is not affiliated with third-party services that ask for authentication. Google simply provides sign-in technology to these sites.
+
+					Computer AndroidiPhone & iPad
+					Go to a site or open an app you trust.
+					On the sign in page, select Sign in with Google, Log in with Google, or Join with Google.
+					You should only grant permission if you trust the site or app. The app may also automatically sign you in the next time you use it.
+
+					Remove a site or app with access to your account
+					Open your Google Account. You might need to sign in.
+					Choose Security.
+					Scroll down to "Signing in to other sites" and choose Signing in with Google.
+					Choose the site or app you want to remove and then Remove Access.
+					Note: If you remove account access from a third-party site or app, it may retain information you provided from:
+
+					When you signed in with your Google Account
+					When you granted additional Google Account access to the app or site
+					Improved security for accounts connected to Google
+					Our security technology helps detect suspicious events to better protect your Google Account. With Cross-Account Protection, we can share security notifications about suspicious events with apps and sites you’ve connected to your Google Account. That way, third-party apps and sites can use Google’s suspicious event detection to help keep you safer online.
+
+
+	==>SAML Integrated
+	
+	==>Kerberos Integrated
+	
+	==>Misc:
+		Open Connection ID
+		OAuth0
+		...
+
+==>
+
+============================================================
+Swagger:
+	Doc:
+		https://swagger.io/tools/swagger-ui/
+	DEMO:
+		https://petstore.swagger.io/?_ga=2.3685488.1338290764.1595193424-681685770.1595193424
+	Best References:
+		https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+
+==>The following is Spring Boot usage: simple
+==>Step 1:	Add Swagger Dependency - use SpringFox impl
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+==>Step 2:	Spring Boot config class:
+			@Configuration
+			@EnableSwagger2: enable Docket bean
+==>Step 3:	The above enables the core SWAGGER Document for the RESTful APIs app: in response JSON format
+			http://localhost:8080/spring-security-rest/api/v2/api-docs
+==>Step 4:	Enable Swagger UI:
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+==>Step 5:	The above enables Swagger UI: like the above demo
+			http://localhost:8080/your-app-root/swagger-ui.html
+			http://localhost:8080/spring-security-rest/api/swagger-ui.html
+
+==>Step 6:	Intermediate Usage:
+			==>Non-Spring Boot Usage: Spring Framework:
+				==>Require additional configurations and beans
+			==>Non-Spring Boot Usage: Non-Spring Apps: use APIs to impl
+				import io.swagger.annotations.ApiModel;
+				import io.swagger.annotations.ApiModelProperty;
+				...
+			==>Customizations:
+				==>Spring Data REST: use the Spring Data Repo to enable REST API doc entries
+				==>Spring Bean validations
+				==>Plugin
+				==>Filtering API for Swagger’s Response:
+					==>So not all APIs will be written into Swagger doc/UI
+				==>Custom Information in configuration
+				==>Custom Methods Response Messages
+				
+==>Step 7:	Advanced Usage
+			==>OAuth2 Secure APIs:
+				==>Configure: SecurityConfiguration/SecurityContext/SecurityScheme
+				==>http://localhost:8082/spring-security-oauth-resource/swagger-ui.html
+			==>
+
+==>Usage:
+	==>App: Generate Swagger API documents
+	==>Document APIs in SwaggerHub
+	==>Usage in Cloud:
+		https://swagger.io/tools/swaggerhub/
+
+============================================================
+Bandwidth APIs:
+
+	https://dev.bandwidth.com/numbers/guides/searchForNumbers.html#top
+
+============================================================
+Inteliquent APIs:
+
+==>Spring Guide: Example App:
+	1) Spring Boot and OAuth2: 		As:	SSO:
+		==>To use Google’s OAuth 2.0 authentication system for login,
+		==>To use Github OAuth2 authentication
+		==>Also To use: Local User Database
+	2) Spring Security and Angular: As:	API gateway with OAuth2 authentication
+		==>OAuth2 client application:	Angular UI app
+										==>Complexities: SSO + Logout-Sessions + Cookies and HTTP Basic credentials
+		==>http.get('resource').subscribe(data => this.greeting = data);
+		==>In the same server deployment? /resource: call RESTful APIs
+		basic		
+		double
+		oauth2-logout
+		oauth2-vanilla
+		oauth2:
+			==>AuthorizationServer Call:	this.http.get('user').subscribe
+			==>ResourceServer Call:			this.http.get('resource').subscribe
+			==>UI Logout Call:				this.http.post('logout', {})
+			====>Same Server Host/Port...
+			1) No need to have service tier in Angular UI
+			2) No need to have a remote server instance
+			3) No need to have complicated db and login ...
+		proxy
+		single
+		spring-session
+		vanilla
+		
+		==>Use Angular UI as the OAuth2 client
+		==>We use Java app as OAuth2 client
+		
+	==>Authorization Server: (sometimes: )
+		external OAuth2 server
+		internal OAuth2 server
+	==>Resource Server:
+
+==>Worldpay Applications:
+	==>Provide a token... + ...
+	
+==>Citibank Applications:
+	==>OAuth2:	Provide a token + clientId + PSN-token + ...
+	==>JSessionID
+	==>...
+
+==>Fedex/DCT:
+	==>OAuth2???
+	
+==>Inteliquent APIs: 
+	==>Token APIs:		Authorization Server APIs:	As:	return a token
+	==>Resource APIs: 	Services APIs
+	
+	==>Client:
+		==>Do not need spring security:
+		http://localhost:8080/: so no need to create a login
+
+
+
+
+
+============================================================
+Project Delivery Stages:
+
+
+Stage 1: Just show or send some raw code: compilable:
+			==>To differentiate from any freelancer's coders: so they are talking to some right people like you: instead of Sudha, Abhishek, Jerry's girlfriend Rubi, ...
+Stage 2: Show some complete implement code - even cannot test them: show some shock and awe effects: so they think they are talking to Kesava and Raghuram, ..., if not Miro? 
+			(Miro was a good coder? maybe not... DAO is too out-of-dated) - who cannot code DAO? DAO is a coder's coding?
+			(Who really made you feel a good coder so far?
+				==>Tom? he didn't know about SOA and web services, ..., ..., ..., ...
+				==>Raghuram? - his lengthy Struts code..., oh, ...
+				==>Kesava? - his Message Services app needed a SWAT team ...
+				==>Citibanks guys? - looked at those 5000+ code lines in one file... - I know they had 200-300+ dynamically changing contractors....
+				==>Spring Framework team guys? - they work on the same code for months and months: ..., tweaking, fine-tuning, bit-by-bit-enhancing the JavaDocs for the classes, 
+						sewing-flowers, needling-the-clothes, ..., ..., carving the murals inside caves, ...
+						==>10 times slower than Jerry's code... now...
+Stage 3: POC: without his/her credentials/token/accountId
+Stage 4: POC: add their credentials
+Stage 5: Delivery of the app
+
+============================================================
+Becoming an IT Commentator/Advocate/...
+
+
+
+	
+	

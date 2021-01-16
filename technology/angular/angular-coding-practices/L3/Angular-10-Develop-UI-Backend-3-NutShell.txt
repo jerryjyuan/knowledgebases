@@ -1,0 +1,284 @@
+
+==========================================================
+Angular and Angular App: In a Nutshell:
+
+	C:\Users\jerry\wksp\fundraiser-ui\src\main\ng\dist\fundraiser-ui
+
+
+==>
+
+==========================================================
+NutShell: JavaSDcript:
+
+	The latest JavaScript version was 1.8. 5. (Identical to ECMAScript 5). ECMAScript was developed by ECMA International after the organization adopted JavaScript
+	
+	ECMAScript is a subset of JavaScript
+	JavaScript is basically ECMAScript at its core but builds upon it. Languages such as ActionScript, JavaScript, JScript all use ECMAScript as its core.
+	
+	Who owns *JavaScript? It was born at Netscape ( first called 'Mocha' ), so it is maintained by Mozilla, i.e... Netscape created The Mozilla Foundation, long ago, and the Mozilla suite of Firefox, Thunderbird, etc... is where Netscape Communicator went.
+	In September 1995, a Netscape programmer named Brandan Eich developed a new scripting language in just 10 days. It was originally named Mocha, but quickly became known as LiveScript and, later, JavaScript.
+	
+	Why is JavaScript so weird?
+		First, it is a scripting language, which means much of it is compiled at runtime and not before.
+
+	JavaScript code can fail silently due to syntactical slip-ups. It has happened to me several times, and tracking down the reason can be most exasperating. 7) Object prototypes do not scale well to large applications; it's a rather primitive and sloppy way to do object-oriented programming (but it's flexible!).
+	
+	The reason being that JavaScript is a very powerful language. ... Javascript runs on the browser, means it doesn't affect the server performance. 4. Since it doesn't run on the server, but on the browser, the process can be more event driven.
+	
+	JavaScript can be dangerous if the proper precautions aren't taken. It can be used to view or steal personal data without you even realizing that it's happening. And since JavaScript is so ubiquitous across the web, we're all vulnerable.
+	
+	Server-side JavaScript gained popularity because it allowed for the scalability needed in cloud computing and the back-end. ... 
+		Browsers have "engines" that can process JavaScript quickly, 
+			==>Which is why JS is one of the 3 types of techniques in front-end / browser:
+			==>Browser "Engines": compile JS code at runtime, actually JS an interpretive language, but does contain both compiling and interpreter processes when applicable
+				A rudimentary JavaScript engine contains a baseline compiler whose job is to compile JavaScript source code into an intermediate representation (IR) 
+					which is also called the bytecode and feeds this bytecode to the interpreter.
+				The interpreter takes this bytecode and converts to the machine code which is eventually run on the machine’s hardware (CPU).
+				
+				==>JavaScript is an interpreted language. This means we do not have to compile the JavaScript source code before sending it to the browser. 
+					An interpreter can take the raw JavaScript code and run it for you: do both compiling and interpreting...
+				
+				==>When you open a website in the browser, it uses a single JavaScript execution thread. 
+					That thread is responsible to handle everything, like scrolling the web page, printing something on the web page, listen to DOM events (like when the user clicks a button), 
+					and doing other things.
+			==>The browser has an embedded engine sometimes called a “JavaScript virtual machine”
+			==>The <script> tag contains JavaScript code which is automatically executed when the browser processes the tag.
+			==>If you disable JavaScript, you may be unable to use certain features on a website. In other cases, the website may even break completely, or you'll be stuck using an incredibly old version of the page. 
+				For example, Gmail offers a very basic plain HTML mode for people with JavaScript disabled.
+		
+		==>EcmaScript specification tells how JavaScript should be implemented by the browser so that a JavaScript program runs exactly the same in all the browsers, but it does not tell how JavaScript should run inside these browsers. It is up to the browser vendor to decide.
+			Every browser provides a JavaScript engine that runs the JavaScript code.
+		
+		==>In the initial days of Web, web browsers were used to display static pages. Normally these pages were noninteractive. To add some interaction, a new language was introduced in the Netscape browser back in 1995 by Brendan Eich. This new language was JavaScript (previously called the LiveScript) and it took 10 days for him to design it.
+			==>work inside a browser and provide API to work with DOM. But since many browsers tried to adopt it in their own way, it had to be standardized - ECMA International
+		
+		==>JavaScript is also a dynamically typed language, unlike C and C++. This means variables declared using var can store any type of data type like int, string, boolean and also complex data types like object and array.
+		
+		==>JavaScript trademark is owned by Oracle Corporation.
+				
+		==>JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called the JavaScript engine. 
+			JavaScript Engine ~== Java JVM
+			
+			Google’s V8 engine
+			SpiderMonkey engine for Firefox browser
+			Chakra engine for Internet Explorer
+			
+			V8 is one of the most popular JavaScript engines, perhaps because it is developed by Google. 
+			But the V8 engine is constantly evolving and becoming faster. 
+			Apart from Google Chrome, Chromium project, Electron.js, and server-side JavaScript runtime Node.js use the V8 engine.
+			Microsoft is planning to ship the Edge browser based on Chromium.
+
+		and this has encouraged more server-side usage.
+		Node. JS, or Node, is one of the most popular versions of server-side JavaScript.
+			On Server Side: "NodeJs ~== a special program ~== JavaScript Engine": similar to "Browser built-in JS engine"
+			==>Node.js uses Google’s V8 engine (it is also for Chrome browser JS engine) to provide JavaScript runtime and employes its own event loop using the libuv library (written in c). 
+				Node follows the same callback approach like Web APIs and works in a similar fashion as the browser.
+			==>Node.js is said to have as non-blocking event-driven asynchronous I/O architecture.
+		
+		https://medium.com/jspoint/how-javascript-works-in-browser-and-node-ab7d0d09ac2f#:~:text=When%20you%20open%20a%20website%20in%20the%20browser%2C%20it%20uses,)%2C%20and%20doing%20other%20things.
+		http://latentflip.com/loupe/?code=ZnVuY3Rpb24gcHJpbnRIZWxsbygpIHsNCiAgICBjb25zb2xlLmxvZygnSGVsbG8gZnJvbSBiYXonKTsNCn0NCg0KZnVuY3Rpb24gYmF6KCkgew0KICAgIHNldFRpbWVvdXQocHJpbnRIZWxsbywgMzAwMCk7DQp9DQoNCmZ1bmN0aW9uIGJhcigpIHsNCiAgICBiYXooKTsNCn0NCg0KZnVuY3Rpb24gZm9vKCkgew0KICAgIGJhcigpOw0KfQ0KDQpmb28oKTs%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
+		
+		==>As long as you have a JS engine, you can run JS code
+		
+		==>
+			When we run a JavaScript application, we do not need all the code at the application startup time. For example, if we have a function that is called on the user action, like a button click, that code can be parsed later.
+			Identifying things that need to be parsed immediately and generating machine code is the best strategy for faster application bootstrap.
+		==>
+			The lack of type system in JavaScript is what makes JavaScript engine produce less optimized machine code. Hence, based on already defined values, a JavaScript engine can guess the data types of the variables and generate better machine code.
+
+			Abstract Syntax Tree (AST) which is a tree-like structure of the code.
+			
+	TS > JS > ECMAScript
+	
+	Java Script Concepts:
+		JavaScript is single-threaded, it has only one stack and one heap per process
+		JS Engine
+		Event Loop
+		Message Queue / Callback Queue
+		Web API
+		Callbacks
+		
+	Versions:
+		https://www.greycampus.com/blog/programming/java-script-versions
+		ES1 1997
+		ES2 1998
+		ES3 1999
+		ES4 Abandoned
+		ES5 2009
+		ES6 2015
+		ES7 2016
+		ES8 2017
+		ES9 2018
+	
+==========================================================
+NutShell: NodeJS
+
+==>Why we have Angular?
+	1) Google is GMC-All-Combined-IT-Enterprise, just like Jerry being GMC-All-Combined-Technologist
+	2) Google is good at JS and JS-POC1, with the POC2 being Facebook MarkPOC2, and jQuery being POC3
+	3) NodeJS: being jumpstarted into this OOP and component enabled new app realm:
+		==>Usage 1: NodeJS roles: their JS runtime and engine, like: Java JDK and JVM
+		==>Usage 2: NodeJS: enable package.json: dependencies and package management - need help from NPM or YARN
+					JS packages are like: Java jar files
+					==>When building Angular app into xxx.js files using packages node_modules, just like JDK builds Java apps into .class and .jar files using JDK and lib jars
+					==>After build: Java does need some or many jars to be packaged, ...
+					==>But Angular is a little bit different: don't need most of node_modules packages any more, but might still need NodeJS's JS engine, which is the browser's JS engine?
+						==>So the compiled JS code for Angular running inside browser: do they have any NodeJS version issues when compared with brower JS runtime engine?
+						In other words, does the Angular NodeJS versions have compatible issues with runtime browser JS runtime engine or versions?
+							==>Mostly no worries - browser JS engine runtime should be very stable and big version accommodations, not like Java JRE, ...
+							==>But also depends: because JS does have different versions: see above, ...
+							Which is why Angular JS code has es5 or es2015? to accommodate some wider ranges fo versions?
+							I would say: in JS world, these JS versions do have some version compatibility, but not as difficult as JDK versions due to the changes of APIs
+								Java JDK APIs have much more changes across different versions while JS versions have much smaller changes
+		==>Usage 3: 
+
+==========================================================
+NutShell: NPM
+
+==========================================================
+NutShell: Angular and AngularCLI
+
+
+==>Angular:
+	==>Utilize Node.JS as the backend JS engine to develop JS code as an app from TS
+	==>After transpiling into JS code from TS, it delivers the front-end / client-side code as an app
+	
+	Like:
+		Backend JS processing / Dev ==> Create / deliver client-side Angular Code/App
+		
+		
+		
+
+==========================================================
+NutShell: Angular Apps
+
+==>Angular 8 brings a new differential loading feature. Now, ng build is building 2 versions of each JS bundle.
+==>There’s a new data structure in ES6 called a map. It has this concept wherein you can store data in the map by using a key, 
+	then can retrieve the data from the map by passing in the key. It should revolutionize the way that Javascript is
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FundraiserUi</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+<script src="runtime-es2015.js" type="module"></script>
+<script src="runtime-es5.js" nomodule defer></script>
+<script src="polyfills-es5.js" nomodule defer></script>
+<script src="polyfills-es2015.js" type="module"></script>
+<script src="styles-es2015.js" type="module"></script>
+<script src="styles-es5.js" nomodule defer></script>
+<script src="vendor-es2015.js" type="module"></script>
+<script src="vendor-es5.js" nomodule defer></script>
+<script src="main-es2015.js" type="module"></script>
+<script src="main-es5.js" nomodule defer></script>
+</body>
+</html>
+
+==>Angular doesn't bundle the JavaScript files into a single file
+==>But you can combine them into one single file:	
+concat-build.js:
+
+var concat = require('concat');
+const es5 = ['./dist/app/runtime-es5.js','./dist/app/polyfills-es5.js','./dist/app/main-es5.js'];
+const es2015= ['./dist/app/runtime-es2015.js','./dist/app/polyfills-es2015.js','./dist/app/main-es2015.js'];
+concat(es5, './dist/app/elements-es5.js');
+concat(es2015, './dist/app/elements-es2015.js');
+package.json:
+
+"scripts": {
+   "concat": "./concat-builds.js",
+   "build": "ng build --prod --output-hashing=none && npm run concat"
+}
+
+
+runtime.js
+polyfills.js
+styles.js
+vendor.js
+main.js
+
+es5 ~== es2009
+es2015 ~== ES6
+Maybe starting ES6, all JS versions use years:
+	ES5 (2009)
+	ES2015 (ES6)
+	(ES7) ES2016
+	(ES8) ES2017
+	(ES9) ES2018: latest one
+
+Angular team split the bundles depending upon how modules are loaded (not specifically on the JavaScript version)
+==>Web browsers that support modules will load the ES2015 versions instead of the ES5 versions, but both are recommended to be in the Htm
+==>It is recommended to provide both files as follows and the browser will load the appropriate version
+==>Older browsers will ignore the type="module" version, and newer browsers will skip the nomodule version
+==>Angular 8 brings a new differential loading feature. Now, ng build is building 2 versions of each JS bundle. A old ES5 syntax, and a new modern ES2015 version (JS module) optimized for recent version of browsers.
+==>Why 2 versions ? Because old browser will ignore ES2015 bundles, and just download and execute "old" ones. (marked as nomodule).
+You should consider to use ng serve in development mode, build will be optimized for that, less files will be generated (no more ES5 + ES2015). And ng build --prod for deployment.
+==>https://blog.angular.io/version-8-of-angular-smaller-bundles-cli-apis-and-alignment-with-the-ecosystem-af0261112a27
+	Version 8 of Angular — Smaller bundles, CLI APIs, and alignment with the ecosystem by Stephen Fluin
+==>If those bundles are generated, depends on your settings in tsconfig.json (as you mentioned) and the browserslist file.
+==>ng build --watch it is the same as for ng serve, only an ES2015 bundle is produced out of performance reasons and to make debugging easier.
+==>
+<script src="...-es5.js" nomodule></script>
+This will only be consumed by legacy browsers because of the 'nomodule' attriubte.
+<script src="...-es2015.js" type="module"></script>
+This will only be consumed by modern browsers because of the type="modlue" attribute
+
+==========================================================
+Bundlers:
+
+webpack
+Rollup
+closure
+
+
+==========================================================
+Compilers:
+
+ngtsc
+ngcc
+
+Ivy:
+https://angular.io/guide/ivy
+
+AOT
+	AoT creates the smallest builds with almost no loading time. And most important as the question here is about - you only need to ship a few files to production.
+	Angular compiler will not be shipped with the production builds as the templates are compiled "Ahead of Time". 
+JIT
+
+https://angular.io/docs/ts/latest/cookbook/aot-compiler.html
+
+
+
+
+Deployments:
+	https://angular.io/start/start-deployment
+	ng serve
+		ng build --watch
+		ng serve -o
+	ng build --prod
+	web servers:
+		deploy all the files from the dist folder in the HTTP server of your choice
+	platforms:
+		Several Platforms: Github: angular application on github using angular-cli-ghpages
+	
+==========================================================
+CLI:
+
+https://blog.mgechev.com/2019/02/06/5-angular-cli-features/
+five not very popular CLI features:
+
+Conditional polyfill serving
+Hidden source maps, consumable by error reporting services
+Searching in the Angular’s documentation using ng doc
+Profiling the build with Chrome’s trace event profiling tool
+Opening the browser when the development server starts
+
+==========================================================

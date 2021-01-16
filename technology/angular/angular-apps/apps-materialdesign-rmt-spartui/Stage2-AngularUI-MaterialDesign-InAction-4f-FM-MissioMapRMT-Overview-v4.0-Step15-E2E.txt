@@ -1,0 +1,35 @@
+
+============================================================
+==>Step 14:	E2E Tests and Integration/Unit tests
+	==>Assigned to Sudha and Rubi
+	
+	Unit Testing:
+		Angular API: TestBed
+		Karma
+		Jasmine
+		HttpClientTestingModule
+		
+		Custom/test component and fitting tests
+		Functional tests: component and services
+		Simulate Async Tasks
+		fakeAsync / tick
+		Isolated/Non-Isolated Tests
+		
+	E2E Tests:
+		...
+		
+	
+
+========================================================================================================================
+E2E:
+
+==>Test Components
+
+==>Test Services
+
+==>Test 
+
+========================================================================================================================
+========================================================================================================================
+
+

@@ -1,0 +1,313 @@
+
+==>Balanced:
+
+Someones:
+	You need to code a lot of CSS and HTML
+Someones:
+	You don't have to because:
+		We have Angular-SpringBoot: Material Design
+		We have many many UI Components in place: you can integrate...
+		...
+Someones:
+	You still need to code to some degree, even with many librarties/UI-Components/MD/...:
+		Integration
+		Styling
+		Business Screen look and feel
+		Utilization of BootStrap CSS
+		...
+
+Example 1: Google Map:
+	==>Native Coding
+	==>AGM component
+	==>Other Map Components
+	
+	
+==>Enablement 1:	Material Icons
+
+	==>Material Icons library:
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+	==>
+	
+	==>
+	
+*****************************************************************************************************
+==>Enablement 2:	
+	==>Angular Style:
+		ng new my-sassy-app --style=scss
+		ng set defaults.styleExt scss:	convert existing css into scss
+	
+	==>CSS
+	
+	==>LESS
+	
+	==>SCSS
+		==>SCSS
+		==>SASS
+		
+	==>Summaries:
+		==>Compilers: convert more complicated/sophisticated CSS into plain CSS
+		==>Sophiticated CSS: enable more capabilities and tags like @ and mixins, etc.
+		Sounds difficulty?
+			==>More tools come into help with SASS and LESS, ...
+			
+			Usage:
+				==>Create more mixins
+				==>Create mixed or customized theming
+				==>Some special integration needs: need scss...:
+					==>Such as: if you need to import other libraries' scss and sass, then you need to enable scss and sass in your app
+				
+				Otherwise, css is sufficient
+				
+				==>Application Developers are not lazy, they just tent to be core and simpler first, ..., starting from css, ...
+					unless there are some apps using sass or less already, ...
+					SPARTA/RMT: css...
+		CSS
+			==>SCSS:	==>Shortname: SS: "Sassy CSS"
+				==>Step 1: ng set defaults.styleExt scss
+							==>This enables the app to process scss files: update angular.json file	==>This is automated process done by ng commands
+								Is this just updating the angular.json file, this simple? - maybe more than this in some files, ...
+				==>Step 2: add: <project>/src/style.scss (replacing style.css)
+							==>We do NOT need 2 style files: style.scss and style.css
+								Because style.scss can do exactly the same as style.css after you enable the ng set...: because scss can process plain css as well
+								Then you can add more scss features in app like mixins
+				==>Step 3: do you need to change all components' .css files into .scss files? YES - do it
+								==>if we don't change these .css files, what happened? - maybe not working, I think because the app is processing .scss files now
+								==>very simple: just change the file extentions - that is it
+				===>So: if you want to start a new app as .css file, it is ok - and then you can easily change into scss using the above ways
+					==>and vice versa: if you start a new app with scss file, then you can change into .css easily using the above same ways
+						- except you have to remove all mixins that css cannot understand...
+						
+			==>SASS:
+				==>This is needing manual process to do the change
+				==>Why SASS? Syntactically Awesome SS ==>Syntactically Awesome "SCSS"
+					==>Can be: src/sass: contains:
+						styles.scss
+						_variables.scss: this needs to be imported manually
+						_mixins.scss: this needs to be imported manually
+				==>SASS: a type of SCSS: so use .scss ext: because it uses the style: "a newer: SCSS (Sassy CSS)"
+				================>If Angular CLI or app enables SCSS, it also enables SASS: I think
+				But: it uses some different (more complicated than SCSS way above) ways to work with many SASS like 3rd party SASS mixins and SASS files
+
+
+		Angular CSS Usage:
+		
+				One Concept - Similar to Ivy: Newer ones accommodate older ones / Complicated ones accommodate simpler ones
+					==>SCSS (SCSS/SASS) can accommodate CSS
+					==>Current/New Ivy can accommodate libraries' "View Engine" code
+					==>JDK 8 accommondates JDK 7, ...
+					==>...
+					
+					ag-grid: can work with both CSS and SCSS version apps:
+						C:\Users\jerry\wksp\GrandMasterCombinedUI\node_modules\ag-grid-community\dist\styles
+						
+						@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+						@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+						@import "../node_modules/ag-grid-community/dist/styles/ag-grid.scss";
+
+						@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+						@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+					
+					
+				Current Versions:
+					==>CSS => SCSS/SASS:
+						1) Just change angular.json: styles.css => styles.scss
+						2) This may be enough...: styles.scss extension will make use Angular SCSS support
+						3) If you want to code each component's .css files to enable SCSS/SASS syntaxes: then change their .css files into .scss files: is this simple? maybe
+						Summary:
+							==>1) Change whatever .css files into .scss files if you want to enable these styles.css and components' css files to be SCSS/SASS syntaxes
+							==>2) If these css files need to be integrated with 3rd party SASS like BootStrap SASS, then, you can also change these .css files into .scss files
+						Aka: the file extensions enable its features
+					
+				Older Versions:
+					
+					==>Usage: Normal CSS way - see above: I know how to use it
+					==>Usage: Normal SCSS way - see above: I know how to use it: this is also your own "SCSS" way: code your "own" SCSS files
+					==>Usage: Normal SASS way:
+								==>1) Usage 1: create your OWN SASS way: code your "own" SASS files
+													==>But you generally choose the newer SASS way: use .scss file extension: and Angular maybe prefer this way too
+													==>So you don't need to use older way: .sass files
+											   ==>Step 1: Create the above src/sass folder and those files: it is global SASS files
+											   ==>Step 2: Each of the components' css files are also: .scss files
+											   ==>Step 3: Angular enabled with scss, so they can understand and enable these SASS file contents
+											   ==>Step 4: Those variables and mixins: 
+																==>These are needed to be imported on both global and component level - if needed to be used:
+																	==>1) Global: these are used to complile SASS into CSS:
+																				  Yes, these final CSS will be available for all apps and components
+																				  But the SASS variables and mixins are NOT available globally to components' .scss files
+														  ==>If you need to use these variables into each component's .scss file:
+															 ==>Way 1: use relative paths: but not perfect due to future refactoring
+															 ==>Way 2: use: @import '~sass/variables';
+																			==>~ will look for src folder first and then also node_modules folder
+															 ==>Way 3: use includePaths config: so the paths are configured and these .scss files can be found
+															 
+					==>Usage: Integration Ways: use 3rd party CSS/SCSS/SASS files:
+					
+						==>Use Angular CLI default theming
+						
+						==>Use Angular Material Design Theming
+						
+						==>Use Bootstrap:
+							npm install --save bootstrap
+							==>1) Usage 1: Use Bootstrap CSS:
+									==> "styles": [
+											"../node_modules/.../.../bootstrap.css",
+											styles.scss
+										];
+									==>Bootstrap doesn't bother to have a SCSS way (maybe they have), instead Bootstrap uses: basic CSS and complicated SASS ways
+							==>2) Usage 2: Use Bootstrap SASS:
+									==>need to import Bootstrap SASS mixins
+									==>It can use exactly the above 3 ways to do imports
+									==>For the Way 3: 
+										"styles": [
+										  "styles.scss"
+										],
+										"stylePreprocessorOptions": {
+										  "includePaths": [
+											"../node_modules/bootstrap/scss"
+										  ]
+										},
+										The following can be used inside "styles.scss" and also the components' .scss files:
+										==>If some component's .scss file needs to use these, they have to do an import
+										==>If styles.scss file doesn't need these, styles.scss doesn't need to do an import: such as: styles.scss is not using any bootstrap SASS mixins
+										==>So: it styles.scss is not using these, can some components' .scss files use them?
+											YES, each component's .scss file can do their own imports: they are independent from styles.scss file
+												==>Only the "final" styles.css file is a global CSS file that each component will also use
+										@import 
+										  'functions',
+										  'variables',
+										  'mixins',
+										  'print',
+										  'reboot',
+										  'type';				
+							==>3) ...
+			
+			https://sass-lang.com/documentation
+			
+			# Convert Sass to SCSS
+			$ sass-convert style.sass style.scss
+
+			# Convert SCSS to Sass
+			$ sass-convert style.scss style.sass
+			
+			Sass (Syntactically Awesome StyleSheets) have two syntaxes:
+
+				==>a newer: SCSS (Sassy CSS)	==>Use this style in today's code
+			
+			and
+			
+				==>an older, original: indent syntax, which is the original Sass and is also called Sass.
+			
+			So they are both part of Sass preprocessor with two different possible syntaxes.
+
+			The most important difference between SCSS and original Sass:
+
+			SCSS:
+
+			Syntax is similar to CSS (so much that every regular valid CSS3 is also valid SCSS, but the relationship in the other direction obviously does not happen)
+
+			Uses braces {}
+
+			Uses semi-colons ;
+			Assignment sign is :
+			To create a mixin it uses the @mixin directive
+			To use mixin it precedes it with the @include directive
+			Files have the .scss extension.
+			Original Sass:
+
+			Syntax is similar to Ruby
+			No braces
+			No strict indentation
+			No semi-colons
+			Assignment sign is = instead of :
+			To create a mixin it uses the = sign
+			To use mixin it precedes it with the + sign
+			Files have the .sass extension.
+
+		==>Final HTML for sure refers to .css files - SCSS/SASS/LESS will convert into css files after compiling / interpreter...
+				
+		==>Can you add multiple styles.css? or styles.scss?
+			==>For style.css/scss: just one as convention, I think: because Angular CLI and code only expect one styles.xxx
+			
+			But other css files can be added:
+			
+			"styles": [
+				...
+				...
+			];
+*****************************************************************************************************
+		
+
+==>Angular JSON:
+
+	{
+		name: value,
+		...
+	};
+
+==>CSS:
+
+	.xxx {
+		name: value;
+		...
+	}
+	
+	==>When using px, using em, ...
+
+==>HTML
+	<selector name=value name=value ...>
+
+
+==>I am missing you:
+	==>Mostly: thinking about you, ...
+	==>The young ass is missing
+	==>The young ass abuser is missing
+	
+	Noun/Adj:
+		'ephemeral
+		'elephant
+		'...
+	
+	Verb:
+		e'ject...
+		...
+		
+==>To Abusers:
+	==>I cannot easily sue those abusers' social abuses
+	==>But I can fight againt those abusers
+	==>The main tools from Jerry: utilize god's powers and many other human historial rightenousnesses and justices against those social abusing and abusers
+
+==>+e:
+	==>From Spanish?
+	towne
+	finale
+	regionale
+	...
+	After: 1) Pronounce the same? 2) same meaning with variations? 3) Why doing this? just because please Rubi? 4) Or: just enable some meaning like being an event
+		   5) Formalize to be a noun 6) 
+==>+a
+	pica
+
+
+
+
+
+What are No.1 Web Experts?
+	==>Actually:
+		The companies as a whole:
+			Firefox web experts
+			Google, ...
+			...
+		The products themselves are web expert: formed scenarios from all knowledge and technologies and "raw" skillsets outcomes and condensations
+			formal formations of web technologies - become permanent assets, etc...
+		The standards
+		The documentations
+		The systems themselves are web experts:
+			==>DMZ, VPN, OCP, ISOzone, servers, ..., firewalls, 
+		
+	==>The engineers are not No.1: because they are just part of the above as one role, one team, one technique, ..., some actors, some performers, some thinkers, ...
+		==>Some engineers just know some, and common "raw" technologies, ....
+		
+		
+		

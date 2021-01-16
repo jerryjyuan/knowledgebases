@@ -1,0 +1,240 @@
+
+=======================================
+Angular Forms:
+
+HTML Forms + Angular Forms: Aspects:
+	==>Arrange UI Elements and Displays
+	==>Enter data
+	==>Validation
+	==>Submit data
+	==>Error Handling
+
+==>Angular Forms:
+	Wrap up HTML aspects
+	Add new form aspects
+	
+
+
+
+==>A big package: simulate and enable HTML forms into Angular APIs, and work together
+==>Work on top of HTML forms: help HTML forms do whatever form is doing, but with Angular components/directives/providers
+	==>Why needing to add Angular forms API?
+		1) Work together with Angular components
+		2) Add additional functionality
+		3) This is different from Angular app-components, these forms components are based on HTML forms like: wrappers, supporters, helpers, bundlers, etc. 
+			- not brand new Angulalr components
+		4) Similar to attribute components, etc.
+		5) Enable conventional HTML tags to become an component's html template, and it can be reused via the component in any other components
+		
+==>2 Types of Forms:
+	==>template forms:
+		==>Simple
+		==>Driven by template on the html side
+		==>Asynchronous
+		==>Usage:
+			1) Point 1: Template Forms: 3 main scenarios:
+						1) Scenario 1: Use <form> vs Use no <form>:
+										==><form> is optional: without form, it is a standalone control (Control: aka: an HTML element with data values (may require validations))
+										==>Traditionally: HTML form wraps up a list of HTML controls/elements to handle a series of data, and wrap them into some action, ...
+										==>Without a form, one single control handles its own data and behaviors
+										==>With and Without a form, both of the following binding scenarios can be used: so total is 4 combo-scenarios
+						2) Scenario 2: 2-way binding
+										<input [(ngModel)]="component-field-name" #ctrl="ngModel" required>
+										==>1) Look into NgModel source code: see what happens internally
+										==>2) Mostly: enabled 'component-field-name' to become:
+												@Input @Output component-field-name = new EventEmitter();	==>Why using its uppercase name? just enabled Angular syntax?
+										Notes:
+											==>For 2-way binding: it may not need a <form> because: 2-way binding can reflect the data flow on its own
+												==>And this 2-way data flow does the data submission/action function already like "submit (to component)"
+												==>Because it has already handled the data passing between HTML element and component, a <form> is not required
+												However:
+													1) You can still add a <form> do some additional or similar functions:
+														==>Usage 1: multiple controls => Then a form can wrap / group them:
+																	==>In Angular forms, FormGroup is the player in this regard
+														==>Usage 2: 
+													2) You can also still utilize <button <click)=... ...> to do additional data passing and functions
+													But for the same control/field, 2-way binding does its main work
+										Notes 2:
+											==>How to utilize 2-way binding in the real application and components?
+											1) In-Component: General user input: user input will be caught by component in normal way
+											2) Component-Out:
+												1) HTML UI actions:
+													<button (click)="setValue()">Set value</button>
+													==>Any other UI actions could alter component's internal field values, and then displayed on this control's UI field
+												2) Other components' actions:
+													==>Any other internal processing inside component (from other components/service/integration), could reset the value of this control
+													==>The control can be used as a display of notification messages, alerts, or status changes, etc.
+												3) ...
+						3) Scenario 3: One-way binding:
+										<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 			==>Can be optional
+											  <input name="first" ngModel required #first="ngModel">
+											  <input name="last" ngModel>
+											  ==>This one way binding: mostly from UI inputs into component
+											  ==>But this input value can be enabled to be available and displayed on the same HTML code by: #first="ngModel"
+											  ==>TODO: maybe it still "requires a form" to make the above values like first and last into the component: but still one-way binding
+						4) Scenario 4: ngModelGroup
+						
+						
+			2) Point 2: Hash # Usage:
+						Way 1: <component-name #f (component-event)="component-function(f)" component-attribute>
+								==>f refers to the Angular component instance
+									==>Many @Output and @Input can be used inside the above <component-name ...>
+						Way 2: <HTML-selector #f="Bound-Built-int-component-name" (ngSubmit)="onSubmit(f)" novalidate>
+								==>Example: <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+									==>Many @Output like "ngSubmit" and @Input can be used inside the above <form ...>
+									==>All the native attributes of the HTML-selector can be added as well: like novalidate, etc.
+						==>Many of the component/directive/...'s attributes like @Input or @Output can be inherited from its parents' parts?
+						==>#f="ngForm": same syntax nature as #first="ngModel" below
+			2) Point 3:	<input name="first" ngModel required #first="ngModel">
+						Summaries 1: <input>: HTML native selector
+							==>attribute-directive(component as well?): <Native-selector [native-selector-attribute-name]=... ...
+							==>attribute-directive(component as well?): <Native-selector angular-attribute-name(use defaults probably) or [angular-attribute-name]=<some-value> ...
+								==>Equal to or similar to: @Input (==>@Input utilize or reuse the attribute directive syntax like: [...]=...)
+									Example 1: <input name="first" ngModel required #first="ngModel">
+											==>Internal Code: @Input('ngModel') model: any			==>Tracks the value bound to this directive.
+								==>Multiple Forms' Angular directives can be added to the same HTML-selector
+									(aka: an HTML-selector can be affiliated or decorated by multiple Angular directives)
+									Example 1: <input> HTML selector is decorated (a directive is a decorator) by: directive NgModel and directive RequiredValidator in the above example
+											   ==>So both of these directives' @Input are added to <input>:
+											   @Input('ngModel') model: any
+											   @Input() required: boolean | string
+											   ==>When adding @Input, no-value (use default internally): it doesn't need square brackets like []: for native HTML selector like <input>
+																	  <form ngNativeValidate>...</form>:
+																			(TODO: find where is ngNativeValidate belonging to in source code or document)
+																	  with some-value: then still use: []?
+																	  (Take <form> as an example: <form [ngFormOptions]="{updateOn: 'blur'}">)
+																	  (<input> should be similar...)
+							==>attribute-directive(component as well?): <angular-selector [angular-attribute-name]=... ...
+						Summaries 2: 
+							Template variable references
+							Identifier	Usage
+							ngModel		#myTemplateVar="ngModel"	
+							==>This need is not common for many other parts: because NgModel refers to a form's element like FormContol element, it may be used in other places in html
+			3) Point 4: <input name="last" ngModel>:
+						==>Scenarios are elaborated above
+			4) Point 5: Use "#var":	"var" can be used on the same html template to refer to the HTMl element, and its values
+						==>Scenarios are elaborated above
+			5) Point 6: Enable Angular attributes: novalidate, required, etc?
+						==>Scenarios are elaborated above
+			6) Point 7: Angular handling some native HTML's elements and behaviors:
+						==>Because native-HTML elements are enabled and incorporated with Angular components/directives, etc. like NgForm/NgModel, etc.
+							==>So some of its elements' behaviors and functions could be linked or delegated to Angular parts
+							Example 1: <button>Submit</button>
+										==>When user clicks on this button, normally it goes to <form>'s action attribute, etc., or JS' code, 
+										==>But here it could be handled by Angular parts' like: @Output event: (ngSubmit)="onSubmit(f)"
+											==>Angular NgForm handles it - because this form is enabled or treated as an NgForm: by: #f="ngForm" (ngSubmit)=...
+											==>So NgForm's @Output event handles it submit
+			7) Point 8: Additional Controls:
+						==>Select Control: Similar to <input>
+						==>Radio Button: Similar to <input>
+						==>
+										
+		==>Use Cases:
+			==>1) standalone control
+			==>2) form
+			==>
+
+	==>reactive forms
+		https://github.com/angular/angular/tree/10.2.1/packages/forms/src/directives
+		==>Synchronous
+		==>Controlled via components (FormControl and FormArrays, etc.) and typescript
+		==>Can create complicated forms by: 1) Form Group 2) Nested Form Arrays
+		==>ngModel: should not be used in reactive forms, together with formControl:
+			==>Example 1: "ngModel with reactive forms":
+						<input [formControl]="control" [(ngModel)]="value">
+						==>It seems like the actual ngModel directive is being used, 
+							but in fact it's an input/output property named ngModel on the reactive form directive that approximates some, but not all, of the directive's behavior.
+						==>It still supported, but the support will be removed
+							  /** @deprecated as of v6 */
+							  @Input('ngModel') model: any;
+							  /** @deprecated as of v6 */
+							  @Output('ngModelChange') update = new EventEmitter();							
+						==>
+						==>Using template-driven forms:
+						   <input [(ngModel)]="value">:
+						   1) NgModel: @Input('ngModel') model: any
+						   2) @Output('ngModelChange') update: EventEmitter: weird: different name
+						   ==>The above event "ngModelChange" will be emitted by the directive: FormControlDirective's viewToModelUpdate() method
+			==>Example 2: "Cannot assign to template variables":
+						<option *ngFor="let optionName of options" [(value)]="optionName"></option>
+						==>This will be ignored
+						==>Angular simply ignores two-way bindings to template variables. 
+						Starting in version 8, attempting to write to template variables is deprecated. In a future version, we will throw to indicate that the write is not supported.
+		==>
+		
+			Official Name: "attribute directive" ==>angular-attribute-name:
+							==>Attribute Directive is actually the "selector" part of the real "Directive"
+							Such as: [formControl] is the selector of the FormControlDirective:
+									 ==>Internally: there is for sure a statement: @Input('formControl') form: FormControl
+		
+			1) Point 1:	==>attribute-directive(component as well?): <Native-selector angular-attribute-name(use defaults probably) or [angular-attribute-name]=<some-value> ...
+							==><Native-selector angular-attribute-name(use defaults probably):
+								(Mostly it is an Angular directive: NgModel: a directive)
+								Like: ngModel
+								Example: <input ... ngModel
+									==>When this syntax (ngModel) as an Angular directive to work on an HTML selector like <form>, it enables: template Form on this <form>
+									@Input('ngModel') model: any
+							==><Native-selector [angular-attribute-name]=<some-value> ...
+								(Mostly it is an Angular directive: NgModel: a directive, but FormControl (a class) is spawned from NgModel: so FormControl is like a directive)
+								Like: formControl:
+								Example: <input [formControl]="control">
+									==>When this syntax (formControl) as an Angular directive to work on an HTML selector like <form>, it enables: Reactive Form on this <form>
+									Where is formControl defined in Angular document or code?
+										From the Directive: FormControlDirective
+									==>It is a class FormControl's instance generated from NgModel: so internally its name "formControl" is defined when an instance is created
+										(this name is by default enabled inside Angular code to bind control to the HTML element)
+									==>This instance name "formControl" functions as a directive attribute to the HTML selector like <input>
+									==>It is assigned with a value: which is the component's field name
+			2) Point 2:	==>Using FormControl instead of NgForm and NgModel, it doesn't have NgModel's @Output events "ngSubmit" (maybe some ways it can utilize...)
+							==>So FormControl submit ways could vary:
+								1) Utilize elements' event handlers: like <button (click)=...
+								2) ...Some easy or complicated ways: enabled flexible ways to deal with data and functions
+									but the data are easy to pass between HTML and components: because formControl is linked to the control inside components
+								3) ...
+								
+						==>FormControl validations/validators: enabled via FormControl as a class
+							==>control: FormControl = new FormControl('value', Validators.minLength(2));
+							(However, template forms: NgModel: utilize validators in template ways and attribute ways, etc.)
+						==>FormGroup:
+							==><form [formGroup]="form" (ngSubmit)="onSubmit()">
+			3) Point 3: Additional Controls:
+						==>Select Control: Similar to <input>
+						==>Radio Button: Similar to <input>
+			4) Point 4: Nested FormGroups:
+						==>FormGroup { FormGroup }
+						==>formGroupName
+			5) Point 5: Nested FormGroup/FormArray:
+						==>FormGroup { FormArray }
+						==>formArrayName
+			6) Point 6: FormBuilder:
+						==>FormGroup
+						==>FormBuilder
+						==>fb.group()
+						==>fb.control()
+						
+						Overall: Template-Forms and Reactive-Forms: their actions are not going to <form action="get/post-url...">
+							==>Their form actions tend to delegate to its component's internal code to do processing: 
+								because components can do all kinds of these actions plus a lot of more functionality: 
+								1) Global services 2) API services 3) passing data across components, etc. 4) Launch dialogs, notifications, validations, etc.
+							==>Their form's main functions: data input/output, display, etc. are fulfilled, so action parts can be done solely by components
+								==>As long as the form actions or functionality go to components ==>These are Angular ways to handle UI/HTML and forms, etc.
+							==>Form validations are solely NgForm and Angular forms functionality enabled
+		
+=======================================
+NgModule and Parts (Decorator/Directive/...):
+
+==>HTML:
+	==>HTML doesn't have an "import" statement, so they don't need an "import"
+	==>It automatically imports all parts from that module - while components need to do an explict import
+	==>But both HTML and components require an import of their needed parts' NgModule: such as: into the AppModule
+	
+	Points:
+		==>Point 1: Why do Angular enable some ways to use these features and APIs in HTML and/or components?
+					==>These are mostly called: "Syntaxes": enable Angular features and incorporations into DOM and HTML code
+		==>Point 2: Angular adds 
+	
+
+=======================================
+
+
+=======================================

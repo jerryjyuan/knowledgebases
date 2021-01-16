@@ -1,0 +1,591 @@
+
+==========================================================
+Apps:
+
+==>SPARTA-UI: largest Angular UI app I have worked on:
+	==>
+	==>Angular component file: reached 3500 code lines
+
+==>Enterprise/Complicated Apps:
+	==>More Business Logic
+	==>More Tech Features Enabled:
+		==>HttpEvent
+		==>HttpHandler
+		==>HttpInterceptor
+		==>...
+	==>More focused on:
+		==>Utilizing 3rd-party UI components + combine app-specific HTML 
+
+==========================================================
+Angular App: 5 Level structures:
+
+	==>Level 1:	Project
+	==>Level 2: Application
+	==>Level 3: App UI components top level
+	==>Level 4:	Feature UI components Level
+				==>app-routing.module.ts
+				==>
+	==>Level 5:	Sub-Feature UI components Level
+	
+	==>Level 6: Special sub-components
+	
+==========================================================
+UI:
+
+==>RMT:
+	==>UI Design:
+		1 Section:
+			==>Main Contents Section: enabled as <router-outlet>
+		==>Derive into 1 + 3 sections:
+			1: main menu:
+				==>How to keep this main menu if not using <router-outlet> in sub-pages...
+			3: 	Left Pane
+				Main Pane
+				Right Pane
+				
+	==>UI Pages:
+		==>Dashboards
+		+
+		==>NavBars + Menus:
+			==>Drive to next main contents pages
+	==>UI Features:			
+		==>Utilize Bootstrap CSS?
+		==>Utilize 3rd-party UI components:
+			==>google maps
+			==>
+		==>Utilize MD
+	==>Page: Landing Page:
+		app.component.html: 
+		==>RMT: main holder
+		
+		
+==>SPARTA:
+	==>UI Design:
+		2 Sections:
+			==>1) NavBar Section
+			==>2) Main Contents Section: enabled as <router-outlet>
+	==>UI Pages:
+		==>Dashboards
+		+
+		==>NavBars + Menus:
+			==>Drive to next main contents pages: by <router-outlet>
+
+	==>UI Features:
+		==>Utilize Bootstrap CSS?
+		==>Utilize 3rd-party UI components:
+			==>ag-grid
+			==>
+		==>No MD
+	
+	==>Page: Landing Page:
+		app.component.html: 
+		==>SPARTA: add some nav-bar
+		
+	==>UI Module: Routing Modules
+		
+	==>UI Module: UI Components Modules:
+		Menus/NavBars:
+			==>UI Design/Flows Drives
+		Dashboards
+		Business Flows UI
+		Admin UI
+	
+	==>UI Module: Business Models Components Modules:
+		==>CSS: can be enabled as MD selectors and/or Bootstrap CSS: "strongly promoted"
+		==>But I would say: some of their components css files: from wireframes/mockups/poc/templates/...: business teams define the look and feel, ...: deep-blue tones
+			#e6e6e6
+			RGB:
+			==>White: ffffff
+			==>Black: 000000
+			e6? - compare with ff: ==>256: 1111=>f 11111111=ff
+			11100110=2^7=>128 + 64 + 32 + 4 + 2 => 230...? e is larger... ==>deep-R-deep-G-deep-B: ...
+			> 50% of ff
+			==>The higher, the closer to white fffff, and lighter
+			
+	==>UI Module: Shared Modules
+
+==>
+
+==========================================================
+UI Modules:
+
+==>
+
+==>SPARTA:
+
+	==>Level-5-Sub-Feature Components:
+		==>Candidates:	A big section inside some UI page: 1) A component tag can encapsulate all these HTML code 2) added with great functions from the component
+		==>Sub-feature components are used inside its top-feature component
+		==>
+
+	==>Dialog:	ngx-bootstrap/modal
+		1) HTML Modal
+		2) Bootstrap Modal
+			==>This requires revies of this lib: much easier
+		3) ngx-bootstrap modal:
+			==>This requires revies of this lib:
+			1) This lib is more encapsulated and wrapped than BS and HTML modal
+			2) Usage 1: import {BsModalService, BsModelRef} from '../ngx-bootstrap/modal'
+						==>The modal display is enabled by BsModalService.show(XXXModalComponent) ==>This is similar to MD Dialog:
+						1) Refer to a BsModalRef: this is declared as class local variable instead of a constructor argument
+						2) BsModalRef: has many variables: such as: "content": refer to the compoent's contents: including variables
+			3) Modal Designs:
+				==>Design 1: One Base Component + Several Modals:
+							 ==>Each Modal is: a modal component to do some functions: create/update/delete/...
+				==>
+		4) MD dialog:
+			==>API doc and their basic / core usage... - some formats
+		5) 
+		
+		
+	==>Special Tags/Selectors:
+		==><p-tabView>
+			<p-tabPanel>
+		==>
+	
+==========================================================
+Angular Design Patterns: Internal:
+
+==>EventEmitter Design Pattern:
+
+	==>1) Conventional Way: Angular Doc: Child => Parent or: 3-tier pattern
+			==>Capture user events
+			==>Capture child component's processing events: CRUD, ...
+	==>2) 
+
+
+
+==========================================================
+Angular Design Patterns: External and Integrations
+
+	
+
+==========================================================
+App Config:
+
+==>Method 1: See below: RMT UI: 
+				==>app.json: mostly due to Google Maps needs
+==>Method 2: Utilize maven Spring Boot application.properties:
+			 ==>Example 1: Fedex DMT UI
+					       ==>Enable a local API path: .../config: this API path in Spring Boot module to point to config data enabled by Spring Boot and application.properties
+==>Method 3: use: environment.ts and environment.<env>.ts
+			 PROS: simple
+
+==>Method 4: use: module/tier specific env file:
+			 Example: SPARTA UI: backend service tier: EnvInfo.ts
+					  PROS:
+						==>Many APIs + very stable API integrations: so hardcoded is ok
+						==>Closer to the service tier, so configurations are not needed to be scattered into other modules
+
+
+
+
+==>Config: Environment:
+
+	==>Enable normal Angular environments
+	==>Utilization:
+		==>Refer to different environment's data
+		
+		==>Same as Spring Boot:
+				Spring Boot:
+					application.properties:
+						==>always in use as default
+						==>Define other overriding profiles
+				Angular:
+					environment.ts:
+						==>always in use as default: so always import this default one
+							import { environment } from './../environments/environment';
+						==>Way 1: Enable other env:
+							production: true/false
+								export const environment = {
+								  production: true,
+								  apiUrl: 'http://my-prod-url'
+								};								
+							==>This is the default way: to enable PROD env
+							==>You can refer to this variable to check its true or false: environment.production
+						==>Way 2: enable other env: with AngularCLI: angular.json file
+							you may not set up: "production: true"
+							But: you can still run your builds against prod or staging, etc. by:
+								==>ng build --prod/--staging/...
+								==>ng build --configuration=production/staging/...
+								==>And: use: "fileReplacements": refer to Angular Doc with this
+									==>This way: can enable multiple env via angular.json file
+			==>Overriding Mechanism
+			==>...
+
+==========================================================
+App Security:
+
+==>RMT:
+
+
+==>SPARTA:
+	==>Router Guard:
+
+	==>
+
+==========================================================
+App Exception Handling:
+
+
+==>RMT:
+
+	==>Global Notification Service
+	
+
+==>SPARTA:
+	==>
+	
+	==>Global Exception Handling Component
+	
+	
+
+	
+==========================================================
+Backend: Services:
+
+==>RMT:
+	==>Global Service:
+		==>Set up results and pass data across different sections/modules/components
+		
+	
+	==>
+
+==>SPARTA:
+	==>Global API Service:
+	
+		
+	
+	==>Http Config Service:
+		==>Enable Service backend APIs as JSON and utilize environment.ts to configure endpoints and URLs: aka: hardcoded
+	
+	==>Cache Service
+		==>Http Cache Service:
+			==>Create an interface (same as abstract class in Angular)
+			==>Use Java-smilar HashMap ways to save as cache:
+				private cache={};
+				==>In Angular: an array is like Java's HashMap
+			==>Enabled a regular global service injectable
+		==>Cache Evict Service
+		
+		==>Cache Interceptor Service
+		
+		==>LocalStorageService:
+			localStorage:	Local storage, or localStorage, or DOM storage or web storage
+			
+		==>SessionStorageService:
+			sessionStorage
+		
+		
+	==>User Prefence Service
+	
+	==>Summary Service
+	
+	==>Business-Model Services:
+		==>Loan
+		==>Deal
+		==>Coded-Value
+		==>Prty
+		==>
+		
+		Summaries:
+			==>Mostly function as the portal to backend and other service apps via Angular HttpClient Calls
+			
+			return this.http.post(endpoint-url, {json-data-payload}).map((xxx: xxx-type) => xxx.json());
+			{json-data-payload}:
+				headers pair
+				payload pair
+			
+	==>In order to facilitate HttpClient calls:
+		1) Enable: EnvInfo object
+		2) 
+
+==========================================================
+Backend: APIs + Data:
+
+==>Non-RESTful API integration:
+	==>1) Use default app data:
+			C:\Users\jerry\wksp\fundraiser-ui\src\main\ng\src\assets\app.json
+			==>App config/settings data:
+				==>Example 1: as one of main app configuration ways
+				==>Example 2: as special needs like Google Map initial/default loading data
+			==>Default data
+			==>App-specific data
+			==>Pre-load data
+	==>2) Use mock data for backend integration testing
+	==>3) 
+
+	Usage:
+		import data from '../../assets/app.json';
+		==>"data" is like a variable enabled to point to the JSON data in the app.json file
+		
+==>RESTful API integration:
+
+
+==>Data:
+
+	==>SPARTA:
+		==>Fixed Domain Data
+		==>Use mock data: as UI data
+
+
+==========================================================
+==========================================================
+==========================================================
+Code Debugging:
+
+==>Method 1: ng serve
+==>Method 2: console.log() or alert(): very annoying debugging methods...
+==>Method 3: simpler ways:
+			 ==>Comment out some code blocks...
+==>Method 4: For any integrations or components:
+			 ==>1) You can always start a new small AngularCLI to try out some new or complicated UI components
+			 ==>2) 
+			 
+==>Method 5: Browser Developer Tools
+				Debugging in a browser console
+				Console Debugging
+				==>Open Chrome, press Ctrl+Shift+j and it opens the JavaScript console where you can write and test your code.
+				
+				==>Augury
+					Augury is a Chrome and Firefox DevTools extension that can be used to visualize, debug and profile Angular applications.
+
+==>Method 6: 
+
+
+==>Method 9: When writing Angular code, can you write basic-bug-free code in the first place?
+
+==>Method: IDE:
+	VSC:
+		Angular CLI application, create a debug configuration in VS Code, install the Debugger for Chrome extension, then run in debug mode.
+		https://digitalocean.com/community/tutorials/how-to-debug-angular-cli-applications-in-visual-studio-code
+
+==>https://indepth.dev/everything-you-need-to-know-about-debugging-angular-applications/
+   https://www.telerik.com/blogs/tips-for-debugging-your-angular-applications
+	Debugging using Bundlers: like webpack:
+		This approach works if you’re not using Angular-CLI, since it uses Webpack to bundle everything into one big file. You can also find the function in this file, but I recommend debugging with a simple setup without any bundler
+	
+	Debugger
+		Using the debugger statement in any area in your codebase will cause the application to break at the point where the statement is set. This is useful for viewing the current call stack of your application before the breakpoint was set.
+
+	import {enableProdMode} from '@angular/core';
+		enableProdMode();
+
+	Exploring available debugging information using ng.probe
+	
+	Profiler
+	
+	Using debugging tools#
+		Angular also provides some debugging tools. Do not confuse them with the debugging information you get through ng.probe. These debugging tools are independent of the mode in which Angular runs. They can be enabled both in development and production mode by calling enableDebugTools function that is exported from the platform-browser module. This function takes a ComponentRef and uses it to get hold of the ApplicationRef. You can enable debugging tools either inside your code:
+
+	Triggering digest cycle manually#
+		If you have debugging tools enabled, you can simply run:
+		ng.profiler.timeChangeDetection();
+
+	Tap:
+		RxJS has introduced the tap operator, previously named do (renamed due to naming conflicts with the JavaScript keyword). It can be placed between piped operators to transparently perform side effects like logging the values piped through it.
+
+==>Similar to Java:
+	Display data on HTML page:
+		<li *ngFor="let item of items; let i = index">
+			<span>{{i}}</span>
+		</li>
+
+==========================================================
+IDE:
+
+VSC:
+	https://code.visualstudio.com/docs/nodejs/angular-tutorial
+	
+==========================================================
+==========================================================
+==========================================================
+Angular Tips:
+
+==>use "this" everywhere
+==>Angular uses a lot of type inference
+==>Angular test code: not complicated and so important
+	==>Mostly creation test
+==>constructor: 
+	mostly use: private arguments
+	mostly used as: initiate local variables and data fields
+	initiate some code logic: use ngOnXXX()
+==>Angular Class:
+	==>Functions: mostly "package local"
+
+==>Arguments: use: JSON object
+	==>Angular JSON object: similar to Java/etc JSON
+	==>but Angular JSON is more like:
+		name : <value>
+		==>name: not using quote string mostly, just a variable name, more like real POJO loyalty person
+		==><value>: 3 types:
+			==>type 1: plain value: any variable-enabled value
+			==>type 2: an JSON aray:
+						==>An array: a list of "Angular-values": those values are the same 3 types of these list here
+			==>type 3: another JSON object itself
+		==>Why does Angular's JSON have some differences?
+			==>Try to better match the interface/class' fields and fields concepts...
+
+==========================================================
+Ability: write basic-bug-free code in the first place
+
+==>Point 1: Focus is the key
+==>Point 2: Become Mr Summarizer:
+			==>Summarize all core syntaxes
+==>Point 3: Become Mr Syntax:
+			==>Practice syntaxes all the time
+
+**************************
+Mr Summarizer / Mr Syntax:
+**************************
+
+==>Angular Code:
+	==>1) Typescript:
+			==>A superset of JavaScript Code
+			==>EMCA5/6(2015/2016)/ES5/6
+			==>Due to being transpiled into JS from TS: so many contents can be combined into some same file: Angular compiler will compile all of them into final 5-6 JS files
+	==>2) Very similar to OOP Code: Java
+	==>3) Borrower More:
+			==>Swift
+			==>PHP
+			==>...
+	==>4) Add its own specials
+	
+==>APIs:
+	Types: 11
+		==>Containers:					Packages/NgModule
+		==>Main Angular UI Parts:		Decorator/Directive
+		==>Main Angular-OOP Parts:		Class/Interface/Function/
+		==>Utility Parts:				Pipe/Constant/Enum/Type-Alias
+	Packages: 9
+		==>Core Parts:					Core/Common
+		==>UI/Browser Parts:			Platform-Browser/Animations/Elements/Forms
+		==>3-Tier Parts:				Router/Service-Workers/Upgrade
+
+==>Code Syntaxes:
+
+	==>OOP + Java:
+		______________________________________________________________________________
+		Java							Angular
+			public class					export class
+			class							class
+			
+			private							private
+			protected						protected
+			public							public
+			<package-default>				<package-local>
+											readonly
+			const							const
+			
+			interface						interface
+			
+			Enum							Enum
+			
+			primitives						same?
+			
+			this							this
+			
+			quotes strings					quotes string: Angular: like: "single quote"
+			
+			
+			getXXX()						get
+			
+			
+			
+			Object							any
+			Object[]						any[]
+				= new Object[num]				= []
+			
+			JSON Object						{}
+											==>Data elements can be accessed via: var["xxx"]
+			
+			HashMap?						Use JSON object: {}
+			
+			Libs/APIs:
+			
+			JSON							Angular: use JS's Json APIs?
+
+
+											==>Arguments: use: JSON object
+												==>Angular JSON object: similar to Java/etc JSON
+												==>but Angular JSON is more like:
+													name : <value>
+													==>name: not using quote string mostly, just a variable name, more like real POJO loyalty person
+													==><value>: 3 types:
+														==>type 1: plain value: any variable-enabled value
+														==>type 2: an JSON aray:
+																	==>An array: a list of "Angular-values": those values are the same 3 types of these list here
+														==>type 3: another JSON object itself	
+														==>type 4: use a variable representing JSON object
+		______________________________________________________________________________
+	==>OOP + JS
+		______________________________________________________________________________
+		
+		
+											Almost all JS code: can be directly used
+											
+												Objects use the array operator [] to access keys, (e.g. obj[“myKey”] = myData), 
+													and uses the condensed dot notation (obj.myKey = myData) in order to both set and get object values.
+												ES6:
+													map.set(“myKey”,”myData”), map.get(“myKey”)
+													
+		______________________________________________________________________________
+		
+	==>OOP + PHP
+		______________________________________________________________________________
+
+		
+			PHP-style lambda expression		Angular lambda expression
+				Arrow function					Arrow function
+				
+			Default values in arguments		Default values in arguments
+			
+			
+		______________________________________________________________________________
+		
+	==>OOP + Swift
+		______________________________________________________________________________
+
+
+			let								let
+		______________________________________________________________________________
+
+
+	==>Component-Based / OOP + Angular APIs:
+		______________________________________________________________________________
+
+
+		APIs:
+		
+		
+		Features:
+		
+			==>ViewChild:
+				==>5 Main Usages
+				==>Usage 1: @Directive and @Component
+					==>Can be any @Directive and @Component
+		
+		Features:
+			==>Data: from Parent to Child: 3 ways:
+					 ==>@Input variable way
+					 ==>@Input get
+					 ==>Init...
+
+			==>Data: from Child to Parent: 5 ways
+					 ==>@Output as an EventEmitter
+					 ==>Local Reference
+					 ==>@ViewChild
+					 ==>
+					 ==>Via a Service / Shared Service
+
+		______________________________________________________________________________
+
+
+
+
+==>Docs:
+
+
+
+
+==========================================================

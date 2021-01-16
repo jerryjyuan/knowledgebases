@@ -1,0 +1,209 @@
+
+==========================================================
+Angular Docs:
+
+- DevEnv Setup
+
+- Dev - Main Features	===>"Fundamentals" section
+
+- Dev - Advanced Features and Integrations ==>"Techniques" section
+
+- Dev - Build Apps + Release Processes
+
+- Dev - Configurations and Customizations
+
+- Dev - Main Tools - Angular CLI
+
+- Dev - Main UI Parts
+
+- Angular APIs
+
+==========================================================
+
+Scope 1:	Kickstart:
+			30 minutes:	
+			- Quick Rambling Through - Enable some simple app and dev flows
+
+Scope 2:	Handle technical interviews
+			2 hours
+
+Scope 3:	Handle Final Exam
+			3 days
+			===>Example 1:	Chinamen's Angular Class final exam
+			===>Example 2:	Real cavemen - drill into it and become a master
+							- Seems like not for Abhishek - he is not a caveman
+			===>Example 3:	Evolved Masters
+							- Peter Yellow
+							- Nanley
+							- ...
+			
+			===>Many ones: do not bother to do this way:
+				- Reason 1:	Longer/Edurable time windows:
+							Because it is like 3 continuous days work types... - at least
+				- Reason 2: Many ones don't think they need this way...
+				- ...
+				- Reason 9:	[Jerry]:
+							- Like everything else: it got pros and cons
+							- ...
+							- Pros:
+							- Cons:
+								- Bridges and Gaps:
+									After it is done: you may be able to attend Angular Global TV Contest in CBS
+									- Yes: You can almost answer every single question of Angular...
+									- But: when coming to real app DEV, you may still fall short...
+										- Then you may still need to spend time in bridging the (significant) gaps between these and the app dev...
+								- Disassociations:
+									- Those knowledges and pieces become disassociated with each other
+										and disassociated from the app impl and many other pieces
+										===>One of the main issues: lose momenta to create or sense many insights and also strong cohesions
+										===>Another issue: lost centric and focal points and importances...
+										===>Lack scenarios to go think about how to use them
+								- Integrations and Cross-Domains:
+									- Jerry has huge cross-domains ..., so someone becoming a main master like this:
+										- They could miss integrations and also cross-domains parts
+								- 
+								
+Scope 4:	Section-by-section mountain-topping
+			(Example 1: mountain-topping on Angular Injector Systems)
+			+
+			Possible inter-section mountain-hiking
+
+
+Scope 5:	Etched Dev Insights
+
+==========================================================
+Technical RampingUp:
+
+- Practical: Applications in Action - System/Design Assessments
+
+- Practical: Applications in Action - Feature Enhancement Assessments
+
+- Practical: Applications in Action - problem solving and bug fixing
+
+- Practical: Applications in Action - problem solving
+
+- Angular Documentations - Entire Documentations - Insights
+
+- Angular Documentations - Entire Documentations - Digestions
+
+- Angular Documentations - Entire Documentations - Read through
+
+- Angular Documentations - Only Peeking Through the section parts without code snippets
+
+- Angular Documentations - Jumping through key points
+
+- Angular Documentations - Only Peeking Through the code snippets
+
+- Online - Googling key technical pieces
+
+- Utilize: Applications in Action - gain technical insights and usage
+
+- Review Technical Diagrams
+
+- Review Design Diagrams / Architectural Diagrams
+
+==========================================================
+Etched Dev Insights:
+
+
+===>App Structures:
+
+	- Self-Structures:
+		- 1) Use: Decorator/Directive/Component annotation to define who it is	===>This actually goes to coding level
+					@NgModule({
+					  imports: [ BrowserModule, ReactiveFormsModule ],
+					  declarations: [ AppComponent, DynamicFormComponent, DynamicFormQuestionComponent ],
+					  bootstrap: [ AppComponent ]
+					})
+					===>This is an example: define this file is: a NgModule using @NgModule decorator
+						===>When defining who it is: it also adds: its attributes into the definitions
+						===>NgModule: Taking NgModule as an example: It is like Java "Package"
+							===>Control access and scenarios for all included components, etc.
+							===>1) Add imports: to explicit show: this module enables these imports - for MODULES
+												(not only the file level's imports - file-level imports: it is a generic importing from the classpaths or whatever env)
+												===>These MODULE imports can be made available for all its included parts - like components, etc.
+							===>2) Add declarations: to explicit declare components
+							Overall:
+								===>these explicit parts: are actually like: Java coding to have these initializations: but included into its annotation way
+								===>Also: it is a design feature for Angular framework to enable annotation coding way
+		- 
+
+	- imports:
+		- File-Level Imports: Make these Angular parts imported into this file: similar to Java's imports
+	
+	- export:
+		export class AppModule {}
+		===>Similar to Java modifier: public class AppModule {}
+			===>Nature: just make this file/module/component/...: public
+
+
+
+
+===>How to Use Angular built-in functions?
+
+	- Angular APIs have many functions
+	- Example: platformBrowserDynamic().bootstrapModule(AppModule);
+
+	- 
+	
+	
+	
+
+===>Similarities:
+	- JS:
+		- They are brothers
+		- 
+		- 
+	- OOP:
+		- 
+		- 
+		- Shortened form further:
+			- this.type = options['type'] || '';
+			- 
+		- 
+	- Java:
+		- Generics/Wildcard
+		- 
+
+
+
+	- -PHP:
+		- Argument default value:
+			method()
+			method(argName : Type)
+			method(argName : Type = <default-value>): PHP style
+				Example 1:
+					method(arg1 : Type = <default-value>)
+					method(arg1 : String = "")
+					method(arg1 : <JSON-String> = {})
+					Example 1:
+						method/constructor(options: {} = {}) {}
+						method/constructor(options: {
+							      value?: T,
+							      key?: string,
+							      label?: string,
+							      required?: boolean,
+							      order?: number,
+							      controlType?: string
+							    } = {}) {}
+		- Annotations default value?
+			Annotation()
+			Annotation(Argument/Type/Expression?):
+				Example 1:
+					Annotation(<JSON-String>):
+					@NgModule({
+					  imports: [ BrowserModule, ReactiveFormsModule ],
+					  declarations: [ AppComponent, DynamicFormComponent, DynamicFormQuestionComponent ],
+					  bootstrap: [ AppComponent ]
+					})
+		
+	- Swift:
+		- let
+		- typeName : Type
+		- 
+		
+	- Scala?
+		
+		
+
+==========================================================

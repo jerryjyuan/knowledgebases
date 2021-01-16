@@ -1,0 +1,71 @@
+
+==========================================================
+Sub Topic: Angular:	Material Design
+
+
+==========================================================
+Development Methodology: Level 1: Basic
+
+==>Install AngularCLI
+	npm install -g @angular/cli
+==>Install MD
+	ng add @angular/material
+==>Create Components
+	ng g component LoginComponent
+==>Styling: default themes:
+	style.css:
+		@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+==>Enable UI in components' HTML:
+	==>UI Header: can be enabled as mat-toolbar selector
+	
+==>Configure components' customized CSS
+==>Create components' functions/methods inside components:
+	==>Enable Modules
+	==>
+
+==========================================================
+Development Methodology: Level 2: 
+
+==========================================================
+Development Methodology: Level 3: 
+
+==========================================================
+Development Methodology: Level 4: 
+
+==========================================================
+Development Methodology: Level 5: 
+
+
+==========================================================
+MD: UI Design:
+
+
+==>Styling
+==>Layout
+	==>Header
+	==>Menus
+	==>Containers/Sections:
+		==>Contents
+	==>Footer
+
+==========================================================
+MD:
+
+	all the components have predefined style
+
+
+==>Seems like: MD coding needs some more document lookup and API lookup than Spring Boot...
+
+==>Some of the MD components/selectors: are directly working together with native DOM elements as their "attirbute binding"
+
+==========================================================
+How to styling:
+
+==>MD
+==>Bootstrap
+==>Default Themes:
+	The beauty of Angular Material is that it comes with pre-built themes, so you can easily bootstrap the look and feel of your application by simply plugging in some simple snippets of code to your app
+==>Customized themese and mixins
+==>
+
+==========================================================

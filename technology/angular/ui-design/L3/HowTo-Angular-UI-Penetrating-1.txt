@@ -1,0 +1,177 @@
+
+==========================================================
+
+
+
+==========================================================
+UI - Penetrating:
+
+==>Why HTML so stable?
+	==>Because:
+		1) It is the base of base
+		2) Many browers are based on it, if changed too much, then, ...
+		3) Because many websites and pages are based on it: millions of ...: if changed too much, then, ...
+		4) With its being base, many features can be enabled without changing itself
+		5) ...
+		
+==>How to enable it?
+	==>It is a set of standards of internet passing and display (part of web standards and protocols)
+	==>It is up to browsers etc to parse and display them:
+		==>Browsers etc understand them completely
+
+==>Why HTML5 coming to play?
+	==>HTML 4 is not so powerful, and also some new features from some browsers and internet and web need them
+
+==>How to empower HTML/HTML5?
+	==>Method 1: Browsers come as the main players: as houses and ...
+	==>Method 2: Its brothers come to help:
+				 ==>CSS: style them
+				 ==>JS:
+					animate
+					dynamic
+					enrich:
+						==>add new attributes:
+							bootstrap adds new atributes, etc.
+						==>
+					...
+					...
+					
+==>HTML:
+	==>tags/selectors:
+		==>built-in
+		==>added:
+			==>Tag Library:: JSTL and .tld
+				==>JSP
+				==>Struts
+				==>...
+				==>JSF????
+				Summaries: Server-side tagging: return pure HTML code to client browsers
+			==>JavaScript Frameworks: ???
+				==>
+			==>Common UI Frameworks:
+				==>Angular: add new tags/selectors to HTML:
+					1) Aka: Components: new selectors are interpreted by Angular components
+					2) 				
+					3) Aka: Angular built-in template/html tags: they are interpreted by Angular APIs and built-in features:
+						Examples: <ng-template>
+						...
+			==>Common UI Components: add new tags/selectors to HTML:
+				==>ag-grid
+				==>...
+			==>
+	==>attributes:
+		==>built-in:
+			==>Normal HTML attributes
+			==>Normal HTML events from events loop
+		==>added:
+			==>JavaScript Frameworks:
+				==>bootstrap: JS add new attributes to HTML tags/selectors: enabled by bootstrap JS (which has dependencies on jQuery JS)
+				==>
+			==>Common UI Frameworks:
+				==>Angular: add new attributes to HTML tags/selectors:
+					1) 
+					2) HTML normal attributes:
+						==>But interpreted, reused or overloaded by Angular frameworks internally using Angular components' features and component-processing
+						Examples:
+							==>hash tag: # when used with Angular selector/component
+							...
+					2) main Angular functional attributes:
+						*ngIf
+						*ngFor
+						*ngSwitch
+					3) Angular's attribute selectors (from Angular "attribute components"):
+						==>These attributes are the same names as HTML attributes, but valued from Angular attribute selectors/components
+					4) Angular @Input
+						==>These attributes are similar to HTML normal-attributes, but names are from Angular's @Input
+					5) Angular @Output as Angular enabled events from events loop
+						==>These attributes are similar to HTML normal-events, but names are from Angular's @Output
+			==>Common UI Components:
+				==>AG-Grid: add new attributes to HTML tags./selectors
+				==>Those UI components are similar to Angular built-in components (reflected from Angular APIs) and app-components
+				...
+			==>
+
+==========================================================
+Stacked Styling:
+
+
+==>
+
+==>Bootstrap CSS:
+	==>Stacking and combinations:
+		==>Method 1: puppeting and fooling: 
+					 ==>These main stacking are enabled by bootstrap CSS on its own
+					 ==>The documents categorize the stacking based on bootstrap framework CSS design
+					 ==>These combo are more enabled on its own patterns and categories - no need to change across-categories
+		==>Method 2: There are some combo are cross-categories and work together
+		==>Method 3: Add your own insights and changes:
+					 ==>Customized theming
+					 ==>Add your CSS contents...
+					 ==>
+					 
+					 But: CSS all are mostly working together, overriding is not recommended: I feel the mess...
+							==>1) Same categories work together: layout works together with layout parts, ...
+							==>2) Cross-categories are collaborating together or combining together, ...
+							
+							Overriding each other could cause some messes, ...
+							==>e.g: padding override the other padding?
+							==>...
+		==>...
+	==>
+
+
+==>All CSS come into play together
+	==>Global
+	==>Libraries and frameworks
+	==>App
+	==>Components
+	==>Local
+
+
+==========================================================
+Angular Components:
+
+	Smart Components vs Presentational Components
+
+	Container vs Presentational Components
+
+Service Layers:
+
+	store? / use Redux? / use plain RxJs? / NgRx Store
+		https://blog.angular-university.io/angular-2-redux-ngrx-rxjs/
+		
+	
+Forms:
+
+	https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/
+		Template Driven Forms, or the Angular 1 way
+		Reactive Forms, or the new Functional Reactive way
+			==>Reactive Forms (or Model Driven)
+	
+
+Angular OnPush Change Detection and Component Design:
+
+	https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
+	
+	zone.js
+	
+Data Display:
+	
+	Ag-Grid:
+		https://www.ag-grid.com/angular-grid/
+	
+	
+Libraries:
+
+	Lodash:
+		https://lodash.com/
+		Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc.
+
+
+==========================================================
+
+
+==========================================================
+
+
+==========================================================

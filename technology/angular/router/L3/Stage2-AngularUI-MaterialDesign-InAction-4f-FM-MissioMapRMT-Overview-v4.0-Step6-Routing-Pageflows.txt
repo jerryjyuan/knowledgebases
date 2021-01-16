@@ -1,0 +1,19 @@
+
+============================================================
+==>Step 11: App Routing Flows and Page Flows:
+	==>Because this app is a main map app: no complicated routing or page flows.
+
+	==>App-Enhancement: add app routing strategies:		Assigned to Abishek
+	
+	
+	==>Add Routing & Multiple Pages:
+		https://jasonwatmore.com/post/2019/04/29/angular-7-tutorial-part-3-add-routing-multiple-pages
+		
+	
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

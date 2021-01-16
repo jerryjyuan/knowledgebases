@@ -1,0 +1,30 @@
+
+
+- Data Binding:
+	===>Data Binding All About:
+		- <Angular UI - HTML Template>: 1) Get Data: 	from component or expressions: []
+										2) Input Data:	from User events: ()
+		- Get Data: it can be applied to any applicable parts of this HTML element:
+			- HTML Element: Any valid HTML elements + Angular Component Selectors + App-Customized-Component Selectors
+			- Data: Component's data or expressions + Or: Hardcoded and/or interpolated expressions (not from underlying components)
+		- Input Data: depends upon which HTML elements: mostly <button>, etc.
+	- 
+	- 
+
+
+- # Binding Syntaxes:
+
+	===>Example 1: HTML5 Tag: video
+			- Enable a local variable: so its internal HTML components or parts can refer to this video element (other DOM's html elements should be able to use it as well...)
+
+			<video #movieplayer ...>
+			<button (click)="movieplayer.play()">
+			</video>	
+			Creates a local variable movieplayer that provides access to the video element instance in data-binding and event-binding expressions in the current template.
+
+	===>Example 2:	xxx-yyy-tool-Angular-UI:
+			Dialog Window - display configuration mapping
+			- Use: modal: - it uses # to refer to the modal variable
+			
+	===>
+	

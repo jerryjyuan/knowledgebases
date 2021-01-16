@@ -1,0 +1,73 @@
+
+Keys - Java:
+  - On needy basis - not a library
+
+- 
+- 
+- IO:
+
+  - Scanner:
+    - Naming:   Scanning data pieces as "tokens" from sources: File/String/System.in/...
+    - Tokens:
+      - Key 1: as "String"
+      - Key 2: regex mapping to some methods
+    - Aspects:
+      Pattern: Delimiter
+      Radix
+      Locale
+    - Methods:
+      - (internal) Converters: nextXXX(): default - String / hasNextXXX()
+      - reset(): reset: delimiter/radix(10)/locale
+
+- JDK8:
+  - CompletableFuture: vs Future
+  	- ExceptionHandling(get errors) / Chained Futures / Manual Completion / Enable non-blocking and callback methods
+  - 
+
+- Security:
+	- Security Protocols: SSL -> TLS
+		https://en.wikipedia.org/wiki/Transport_Layer_Security#cite_ref-ciphers_16-2
+		- HTTPS: TLS: Worldpay: the repositories? mvn build/run: talking to internal or remote HTTPS repositories: 	"TLSv1", "TLSv1.1", "TLSv1.2" + SSLv3 and SSLv2Hello
+		- enable specific TLS protocols on the client
+		- Tomcat Settings: sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2"
+		- ciphers = "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+                      TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,
+                      TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA"
+        - TLS is backwards-compatible
+        - TLS is usually implemented on top of Transport Layer protocols, encrypting all of the protocol-related data of protocols such as HTTP, FTP, SMTP, NNTP and XMPP
+        - TLS has been used primarily with reliable transport protocols such as the Transmission Control Protocol (TCP). However, it has also been implemented with datagram-oriented transport protocols, such as the User Datagram Protocol (UDP) and the Datagram Congestion Control Protocol (DCCP)
+        - Client Methods:
+	        - java -Djdk.tls.client.protocols=TLSv1.2 <Main class or the Jar file to run>
+	        - SSLSocket/SSLContext/HttpsURLConnection
+	    - Java 8:
+			Add "TLSv1" to jdk.tls.disabledAlgorithms in %JAVA_HOME%/jre/lib/security/java.security
+			Add -Dhttps.protocols="TLSv1.1,TLSv1.2" to your Java options
+	- App Security
+	- Web Security:
+		SSL
+		HTTP Authentication Protocol:
+			- Basic/Digest/NTLM
+
+- JCE: Encryption/Decryption: Cryptographic
+	DSA/RSA
+	SHA-1
+	Hashing
+
+- Encoding/Decoding
+
+- Open Source Software Licenses:
+	GNU GPL (General Public License) / L(linked)GPL
+		 “GNU's Not Unix!”: "guh-noo/gnew/glue" - pronunciation
+		 GNU is an operating system which is 100% free software
+		 GNU's design is Unix-like, but differs from Unix by being free software and containing no Unix code. The GNU project includes an operating system kernel, GNU Hurd, which was the original focus of the Free Software Foundation (FSF)
+		 GNU is a longstanding project begun in 1984 to develop a free operating system
+		 The GNU system contains all of the official GNU software packages (which are listed below), and also includes non-GNU free software, notably TeX and the X Window System.
+		 A large antelope of the genus Connochaetes, native to Africa having curved horns
+		 It is a UNIX like computer operating system, but unlike UNIX, it is free software and contains no UNIX code.
+		 The combination of GNU and Linux is the GNU/Linux operating system, now used by millions and sometimes incorrectly called simply “Linux”
+		 GNU with Linux added
+		 UNICS stands for UNiplexed Information and Computing System, is a popular operating system developed at Bell Labs in the early 1970s
+	BSD licenses
+	Apache License 2.0 licensed
+	MIT license
+	Affero General Public License (Affero GPL and informally Affero License)

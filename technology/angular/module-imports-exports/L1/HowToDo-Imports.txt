@@ -1,0 +1,55 @@
+
+==========================================================
+How To Do: Angular Imports
+
+==>import { xxx, yyy } from '@angular/core';
+
+==>import { xxx } from '../dashboard/dashboard.component';
+	==>From: dashboard.component.ts file
+
+==>import { xxx, yyy } from '@ngx-cache/...';
+
+==>import { ReplaySubject } from 'rxjs';
+	==>Analysis:
+		Why are there 2 versions? rxjs generates/supports 2 versions: esm5 and esm2015
+	1) It goes to:
+		C:\Users\jerry\wksp\GrandMasterCombinedUI\node_modules\rxjs: default to: index.ts or index.d.ts
+		==>Don't know which one first yet
+		==>index.ts: ==>main
+			var ReplaySubject_1 = require("./internal/ReplaySubject");
+			exports.ReplaySubject = ReplaySubject_1.ReplaySubject;		
+		==>index.d.ts: ==>typings
+			export { ReplaySubject } from './internal/ReplaySubject';
+			==>It should go to this:
+				1) tsconfig.app.json:
+				  "include": [
+					"src/**/*.d.ts"
+				  ]
+				2) tsconfig.base.json:
+				    "target": "es2015",	==>This is important for the below scenario 2)
+  
+	2) Actually it may directly go to:
+		C:\Users\jerry\wksp\GrandMasterCombinedUI\node_modules\rxjs\_esm2015: index.js:
+		==>export { ReplaySubject } from './internal/ReplaySubject';
+		==>index.js exports for you by pulling the folder file: ./internal/ReplaySubject.js
+  
+	3) This is similar to: hammerjs?, etc.
+
+	4) The following are 2 distributable builds for rxjs:
+		1) ESM5: older version
+			C:\Users\jerry\wksp\GrandMasterCombinedUI\node_modules\rxjs\_esm5: index.js
+			export { ReplaySubject } from './internal/ReplaySubject';
+			var ReplaySubject = ...
+		2) ESM2015: newer version
+			C:\Users\jerry\wksp\GrandMasterCombinedUI\node_modules\rxjs\_esm2015: index.js
+			export class ReplaySubject extends Subject {
+			
+	5) Unknown Scenarios:
+		rxjs-compat
+		
+==>
+	
+==========================================================
+
+
+==========================================================

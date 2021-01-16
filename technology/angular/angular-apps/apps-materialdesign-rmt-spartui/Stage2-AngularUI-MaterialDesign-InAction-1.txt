@@ -1,0 +1,476 @@
+
+============================================================
+Angular UI - Material Design: In Action 1:
+============================================================
+
+	==>Method 1: AngularCLI UI
+
+	==>Method 2: Together with Spring Boot: maven-frontend-plugin
+
+	==>Method 3: Together with Spring Boot: maven-exec-plugin
+
+	==>Method 4: Using Spring Boot / MVC: Thymeleaf/...:
+
+Angular Service: HttpClient: RESTful APIs config methods:
+	==>Method 1:	Use Spring Boot application.properties
+	==>Method 2:	Use Angular JSON data files
+	==>Method 3:	Use hardcoded data?
+	==>Method 4:	Use Angular environments folder
+
+============================================================
+Currently: Worked on 5 apps
+
+============================================================
+UI Design: mockup and wireframe:
+	https://www.callcentric.com/lnp/15103319221
+	
+============================================================
+The following 4 steps: ==>The basic and core Angular app steps:
+
+Some Pre-Configurations:
+	==>git: installation + git config
+	==>npm: install:
+				==>Install to: C:\Program Files\nodejs
+				==>First let admin user uninstall nodejs 5.0 first
+				==>In some companies: need admin to add its install location to PATH
+					==>PATH: If not being added into PATH, it should be ok still running as long as using its full path? I think so
+					==>Install-Loc: Installed locally in your home-dir, should be still OK (but JDK has to be installed on default path using admin...)
+					
+				Windows Installations: could have many ways:
+					==>Prev: install Node.js v5 into C drive: by admin or push...==>So Windows registry has it like JDK...
+						==>So it shows up: Control Panel: Uninstall Programs panel...
+						==>OR: another reason could be due to: it was installed originally by some admin: so it gotta use its login and ...
+					But Windows installer has multiple ways sometimes...
+					JDK: does go to system registry...
+			==>Anyways: it is installed locally and added to PATH
+				==>When running: npm install -g: it goes to the install-loc's node_modules
+				
+				==>
+				
+					
+			+ config: with enterprise systems:
+			==>Some Companies: only do "software center" software installations - no internet downloads
+			==>
+			==><home>/.npmrc
+				==>Used for NPM and NodeJS
+					registry=.../repo
+					strict-ssl=false
+					_auth=...
+					email=...
+					always-auth=true
+
+
+
+Step 1: Install NodeJS/NPM
+	==>See above for NodeJS and NPM install
+
+==>AngularCLI: global
+	==>This will install Angular CLI at global level inside NodeJS install locations: same as NPM
+	
+==>Create a new app:
+	ng new app
+	==>For a new app: you need to do individual package install: npm install @angular/...
+		==>This will update package.json file with the installed package, etc.
+		
+==>For existing app:
+	==>If node_modules is not there - like source code checkout
+	==>run: npm install
+		==>It will read package-lock.json and install all needed packages into node_modules for this app
+	
+==>The below procedures are for a new app:
+
+==>Add 3 libs: Not global:
+	==>Because these are only used for that app:
+			==>animations: Some Angular Material components use animations so you need to add support for animations
+				[Template]: src/app/app.module.ts
+				import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+				imports: [
+					BrowserModule, BrowserAnimationsModule
+				],
+			==>cdk: link Google’s material design to an Angular application
+
+	npm install @angular/material @angular/cdk @angular/animations --save
+	
+	As of npm 5.0.0, installed modules are added as a dependency by default, so the --save option is no longer needed. The other save options still exist.
+
+	npm install my_dep --save
+	or
+	npm install my_dep -S
+	or
+	npm install my_dep -s?????
+
+	Why: do these install as non-global?
+	
+	
+
+C:\Users\jerry\apps\angular>npm install -g @angular/material
+npm WARN @angular/material@10.0.1 requires a peer of @angular/animations@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+npm WARN @angular/material@10.0.1 requires a peer of @angular/cdk@10.0.1 but none is installed. You must install peer dependencies yourself.
+npm WARN @angular/material@10.0.1 requires a peer of @angular/core@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+npm WARN @angular/material@10.0.1 requires a peer of @angular/common@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+npm WARN @angular/material@10.0.1 requires a peer of @angular/forms@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+
++ @angular/material@10.0.1
+added 2 packages from 1 contributor in 1.987s
+
+C:\Users\jerry\apps\angular>
+
+C:\Users\jerry\apps\angular>npm install -g @angular/cdk
+npm WARN @angular/cdk@10.0.1 requires a peer of @angular/core@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+npm WARN @angular/cdk@10.0.1 requires a peer of @angular/common@^10.0.0 || ^11.0.0-0 but none is installed. You must install peer dependencies yourself.
+
++ @angular/cdk@10.0.1
+added 3 packages from 2 contributors in 1.071s
+
+C:\Users\jerry\apps\angular>
+
+C:\Users\jerry\apps\angular>npm install -g @angular/animations
+npm WARN @angular/animations@10.0.2 requires a peer of @angular/core@10.0.2 but none is installed. You must install peer dependencies yourself.
+
++ @angular/animations@10.0.2
+added 2 packages from 2 contributors in 0.405s
+
+C:\Users\jerry\apps\angular>
+
+==>Create a new project:
+	ng new xxx
+
+==>
+	ng serve
+	ng serve --port 4201
+	OR: npm start
+	
+	Multiple CMD windows can be opened while one window with "ng serve" is running
+
+============================================================
+Step 2: add FeatureModules:
+	Several Main Components: related to routing flows
+	ng g component xxx
+
+	==>New components automatically updated in app module
+
+	==>Update new components immediately in: app-routing.module.ts
+		==>So the components are configured
+		==>Also need to import these components into routing module
+	
+============================================================
+Step 3: add material to the project:
+	Best Doc:	https://tudip.com/blog-post/how-to-install-angular-material/
+
+	ng add @angular/material
+	
+https://material.angular.io/guide/getting-started
+
+Use the Angular CLI's install schematic to set up your Angular Material project by running the following command:
+
+ng add @angular/material
+	==>So it will add 3 of them?
+	
+The ng add command will install Angular Material, the Component Dev Kit (CDK), Angular Animations and ask you the following questions to determine which features to include:
+
+Choose a prebuilt theme name, or "custom" for a custom theme:
+
+You can choose from prebuilt material design themes or set up an extensible custom theme.
+
+Set up browser animations for Angular Material:
+
+Importing the BrowserAnimationsModule into your application enables Angular's animation system. Declining this will disable most of Angular Material's animations.
+
+The ng add command will additionally perform the following configurations:
+	Add project dependencies to package.json
+	Add the Roboto font to your index.html
+	Add the Material Design icon font to your index.html
+	Add a few global CSS styles to:
+		Remove margins from body
+		Set height: 100% on html and body
+		Set Roboto as the default application font
+	==>Summary:
+		Using the Angular CLI ng the add command will update your Angular project with the correct dependencies, perform configuration changes and execute initialization code.
+
+C:\Users\jerry\apps\angular\apps-cli\LNPCheckUIApp>ng add @angular/material
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink        [ Preview: https://material.angular.io?theme=indigo-pink ]
+? Set up global Angular Material typography styles? No
+? Set up browser animations for Angular Material? Yes
+UPDATE package.json (1330 bytes)
+√ Packages installed successfully.
+UPDATE src/app/app.module.ts (584 bytes)
+UPDATE angular.json (3860 bytes)
+UPDATE src/index.html (493 bytes)
+UPDATE src/styles.css (181 bytes)
+
+More Config: during the command: ng add @angular/material
+	==>Choose one theme
+	==>set up HammerJS for gesture recognition and if you want to set up browser animations for Angular Material - press Enter to use the default answers.
+
+============================================================
+Step 4: Work on Material Design UI:
+
+(1) change AngularCLI version:
+	npm uninstall -g @angular/cli
+	npm install -g @angular/cli@8.3.2
+	also installed nvm
+
+(2) File: app.module.ts:
+
+	import { MatToolbarModule,
+	  MatIconModule,
+	  MatCardModule,
+	  MatButtonModule,
+	  MatProgressSpinnerModule } from '@angular/material';
+	  
+	Also add them into "imports" part
+
+==>The app.component.html: start working
+
+==>More Customizations:
+
+	Gesture Support
+		Some components (mat-slide-toggle, mat-slider, matTooltip) rely on HammerJS for gestures.
+		In order to urge the complete feature-set of those elements, HammerJS should be loaded into the appliance.
+			npm install hammerjs --save
+		Complete installing HammerJS then import it on ‘main.ts’ file
+			import 'hammerjs';
+
+============================================================
+
+
+============================================================
+============================================================
+Advanced Steps:
+
+==>
+
+==>Mock Test a RESTful server:
+	npm install --save json-server 
+	npm install faker --save
+	
+==>Create Service Layer:
+	ng g service api
+	
+	
+==>Adding Error Handling
+
+
+==>Adding Pagination
+
+
+==>Build and Deploy to Firebase Platform
+
+
+
+
+============================================================
+Questions/Points:
+
+==>What main differences among various Angular versions: 2.x through 8/9/10...: with Material Design versions and selectors
+
+==>Angular cannot run offline?
+
+
+
+============================================================
+============================================================
+============================================================
+In Action: Real App 1:
+
+
+
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+============================================================
+==>Best: follow a guide or a good example
+
+	==>At least practice 3 Angular Material Design example apps
+	
+==>Best Docs:
+	https://tudip.com/blog-post/how-to-install-angular-material/
+	
+	
+	
+
+==>Enable an example: to show Material Design in action
+	http://localhost:4200/
+	
+==>Add some material design selectors:
+	1) Layout
+	2) 
+
+Apps:
+	https://www.freecodecamp.org/news/angular-8-tutorial-in-easy-steps/
+
+
+============================================================
+Angular Scenarios:
+
+==>Mock tests: JSON data
+
+RxJS  throwError()  and  catchError()
+
+RxJS  retry()  and  takeUntil() operators
+
+Firebase using the  ng deploy
+
+Adding Pagination
+
+
+
+
+
+
+
+C:\Users\jerry\apps\angular\apps-cli\ExampleApps>ng new example-app1
+? Would you like to add Angular routing? Yes
+? Which stylesheet format would you like to use? CSS
+CREATE example-app1/angular.json (3614 bytes)
+CREATE example-app1/package.json (1262 bytes)
+CREATE example-app1/README.md (1029 bytes)
+CREATE example-app1/tsconfig.base.json (458 bytes)
+CREATE example-app1/tsconfig.json (475 bytes)
+CREATE example-app1/tslint.json (3184 bytes)
+CREATE example-app1/.editorconfig (274 bytes)
+CREATE example-app1/.gitignore (631 bytes)
+CREATE example-app1/.browserslistrc (648 bytes)
+CREATE example-app1/karma.conf.js (1024 bytes)
+CREATE example-app1/tsconfig.app.json (292 bytes)
+CREATE example-app1/tsconfig.spec.json (338 bytes)
+CREATE example-app1/src/favicon.ico (948 bytes)
+CREATE example-app1/src/index.html (297 bytes)
+CREATE example-app1/src/main.ts (372 bytes)
+CREATE example-app1/src/polyfills.ts (2835 bytes)
+CREATE example-app1/src/styles.css (80 bytes)
+CREATE example-app1/src/test.ts (753 bytes)
+CREATE example-app1/src/assets/.gitkeep (0 bytes)
+CREATE example-app1/src/environments/environment.prod.ts (51 bytes)
+CREATE example-app1/src/environments/environment.ts (662 bytes)
+CREATE example-app1/src/app/app-routing.module.ts (246 bytes)
+CREATE example-app1/src/app/app.module.ts (393 bytes)
+CREATE example-app1/src/app/app.component.html (25757 bytes)
+CREATE example-app1/src/app/app.component.spec.ts (1077 bytes)
+CREATE example-app1/src/app/app.component.ts (216 bytes)
+CREATE example-app1/src/app/app.component.css (0 bytes)
+CREATE example-app1/e2e/protractor.conf.js (869 bytes)
+CREATE example-app1/e2e/tsconfig.json (299 bytes)
+CREATE example-app1/e2e/src/app.e2e-spec.ts (645 bytes)
+CREATE example-app1/e2e/src/app.po.ts (301 bytes)
+√ Packages installed successfully.
+warning: LF will be replaced by CRLF in .browserslistrc.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .editorconfig.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .gitignore.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in angular.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in e2e/protractor.conf.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in e2e/src/app.e2e-spec.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in e2e/src/app.po.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in e2e/tsconfig.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in karma.conf.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in package-lock.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in package.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/app-routing.module.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/app.component.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/app.component.spec.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/app.component.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/app/app.module.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/environments/environment.prod.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/environments/environment.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/index.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/main.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/polyfills.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/styles.css.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/test.ts.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in tsconfig.app.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in tsconfig.base.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in tsconfig.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in tsconfig.spec.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in tslint.json.
+The file will have its original line endings in your working directory
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'jerry@LAPTOP-QBIJ71IQ.(none)')
+
+C:\Users\jerry\apps\angular\apps-cli\ExampleApps>ng g component home
+The generate command requires to be run in an Angular project, but a project definition could not be found.
+
+C:\Users\jerry\apps\angular\apps-cli\ExampleApps>
+
+
+C:\Users\jerry\apps\angular\apps-cli\ExampleApps\example-app1>ng add @angular/material
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink        [ Preview: https://material.angular.io
+?theme=indigo-pink ]
+? Set up HammerJS for gesture recognition? Yes
+? Set up browser animations for Angular Material? Yes
+UPDATE package.json (1376 bytes)
+npm WARN karma-jasmine-html-reporter@1.5.4 requires a peer of jasmine-core@>=3.5 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\watchpack-chokidar2\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\karma\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\@angular\compiler-cli\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\webpack-dev-server\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 3 packages from 4 contributors and audited 1295 packages in 11.255s
+
+37 packages are looking for funding
+  run `npm fund` for details
+
+found 254 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+UPDATE src/main.ts (391 bytes)
+UPDATE src/app/app.module.ts (727 bytes)
+UPDATE angular.json (3808 bytes)
+UPDATE src/index.html (491 bytes)
+UPDATE src/styles.css (181 bytes)

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://rxjs-dev.firebaseapp.com/guide/overview -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>RxJS - Introduction</title>
+  <!--<base href="/">--><base href=".">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="https://rxjs-dev.firebaseapp.com/assets/images/favicons/favicon.ico">
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-32x32.png"-->
+        <!--sizes="32x32">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-194x194.png"-->
+        <!--sizes="194x194">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-96x96.png"-->
+        <!--sizes="96x96">-->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicons/favicon-16x16.png"-->
+        <!--sizes="16x16">-->
+  <!--<link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+  <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicons/apple-touch-icon-144x144.png">-->
+
+  <!-- NOTE: These need to be kept in sync with `ngsw-config.json`. -->
+  <link href="./RxJS - Introduction_files/icon" rel="stylesheet">
+  <link href="./RxJS - Introduction_files/css" rel="stylesheet">
+  <link href="./RxJS - Introduction_files/font-awesome.min.css" rel="stylesheet">
+  <!-- -->
+
+  <link rel="manifest" href="https://rxjs-dev.firebaseapp.com/pwa-manifest.json">
+  <meta name="theme-color" content="#d81b60">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+
+  <script async="" src="./RxJS - Introduction_files/analytics.js.download"></script><script>
+    // Dynamically, pre-emptively, add `noindex`, which will be removed when the doc is ready and valid
+    var tag = document.createElement('meta'); tag.name = 'googlebot'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+    tag = document.createElement('meta'); tag.name = 'robots'; tag.content = 'noindex';
+    document.head.appendChild(tag);
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  // Note this is a customised version of the GA tracking snippet
+  // See the comments below for more info
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;
+  ~i.name.indexOf('NG_DEFER_BOOTSTRAP')|| // only load library if not running e2e tests
+  m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  </script>
+  <!-- End Google Analytics -->
+
+  <script>
+    // Report fatal errors to Google Analytics
+    window.onerror = function() {
+      ga('send', 'exception', {exDescription: formatError.apply(null, arguments), exFatal: true});
+
+      function formatError(msg, url, line, col, e) {
+        var stack;
+        msg = msg.replace(/^Error: /, '');
+        if (e) {
+          stack = e.stack
+              // strip the leading "Error: " from the stack trace
+              .replace(/^Error: /, '')
+              // strip the message from the stack trace, if present
+              .replace(msg + '\n', '')
+              // strip leading spaces
+              .replace(/^ +/gm, '')
+              // strip all leading "at " for each frame
+              .replace(/^at /gm, '')
+              // replace long urls with just the last segment: `filename:line:column`
+              .replace(/(?: \(|@)http.+\/([^/)]+)\)?(?:\n|$)/gm, '@$1\n')
+              // replace "eval code" in Edge
+              .replace(/ *\(eval code(:\d+:\d+)\)(?:\n|$)/gm, '@???$1\n')
+        } else {
+          line = line || '?';
+          col = col || '?';
+          stack = url + ':' + line + ':' + col;
+        }
+        return (msg + '\n' + stack).substr(0, 150);
+      }
+    };
+  </script>
+
+  <script>
+    if (window.document.documentMode) {
+      // polyfill IE11 in a blocking way
+      var s = document.createElement('script');
+      s.src = 'generated/ie-polyfills.min.js';
+      document.head.appendChild(s);
+    } else if (!Object.assign) {
+      // polyfill other non-evergreen browsers in a blocking way
+      var polyfillUrl = "https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find&flags=gated&unknown=polyfill";
+
+      // send a blocking XHR to fetch the polyfill
+      // then append it to the document so that its eval-ed synchronously
+      // this is required because the method used for IE is not reliable with other non-evergreen browsers
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        var code = this.responseText;
+        s.appendChild(document.createTextNode(code));
+        document.head.appendChild(s);
+      });
+      xhr.open("GET", polyfillUrl, false);
+      xhr.send();
+    }
+  </script>
+
+  <script>
+    //load CE polyfill
+    //HACK: webpack's html plugin mangles the document.write calls if we don't trick it.
+
+    //load the ES5 shim for browsers with native CE support
+    function loadCustomElementsShim(){
+      document.write('<scri' + 'pt src="assets/js/native-shim.js"><' + '/script>');
+    }
+
+    //load the full custom elements polyfill for browsers without support
+    function loadCustomElementsPolyfill(){
+      document.write('<scri' + 'pt src="assets/js/custom-elements.min.js"><' + '/script>');
+    }
+    //detect if we have native CE support
+    if(!window.customElements){
+      loadCustomElementsPolyfill();
+    }
+    else {
+      loadCustomElementsShim();
+    }
+  </script><script src="./RxJS - Introduction_files/native-shim.js.download"></script>
+
+<link rel="stylesheet" href="./RxJS - Introduction_files/styles.ed062bead85c40ac60b2.css"><style>@media (-ms-high-contrast:active){.mat-toolbar{outline:solid 1px}}.mat-toolbar-row,.mat-toolbar-single-row{display:flex;box-sizing:border-box;padding:0 16px;width:100%;flex-direction:row;align-items:center;white-space:nowrap}.mat-toolbar-multiple-rows{display:flex;box-sizing:border-box;flex-direction:column;width:100%}.mat-toolbar-multiple-rows{min-height:64px}.mat-toolbar-row,.mat-toolbar-single-row{height:64px}@media (max-width:599px){.mat-toolbar-multiple-rows{min-height:56px}.mat-toolbar-row,.mat-toolbar-single-row{height:56px}}</style><style>.mat-icon{background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1,1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style><style>.mat-button .mat-button-focus-overlay,.mat-icon-button .mat-button-focus-overlay{opacity:0}.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:.04}@media (hover:none){.mat-button:hover .mat-button-focus-overlay,.mat-stroked-button:hover .mat-button-focus-overlay{opacity:0}}.mat-button,.mat-flat-button,.mat-icon-button,.mat-stroked-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-button[disabled],.mat-flat-button[disabled],.mat-icon-button[disabled],.mat-stroked-button[disabled]{cursor:default}.mat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-button.cdk-program-focused .mat-button-focus-overlay,.mat-flat-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-flat-button.cdk-program-focused .mat-button-focus-overlay,.mat-icon-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-icon-button.cdk-program-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-stroked-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-button::-moz-focus-inner,.mat-flat-button::-moz-focus-inner,.mat-icon-button::-moz-focus-inner,.mat-stroked-button::-moz-focus-inner{border:0}.mat-raised-button{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1)}.mat-raised-button::-moz-focus-inner{border:0}.mat-raised-button[disabled]{cursor:default}.mat-raised-button.cdk-keyboard-focused .mat-button-focus-overlay,.mat-raised-button.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-raised-button::-moz-focus-inner{border:0}._mat-animation-noopable.mat-raised-button{transition:none;animation:none}.mat-stroked-button{border:1px solid currentColor;padding:0 15px;line-height:34px}.mat-stroked-button .mat-button-focus-overlay,.mat-stroked-button .mat-button-ripple.mat-ripple{top:-1px;left:-1px;right:-1px;bottom:-1px}.mat-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:56px;height:56px;padding:0;flex-shrink:0}.mat-fab::-moz-focus-inner{border:0}.mat-fab[disabled]{cursor:default}.mat-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-fab{transition:none;animation:none}.mat-fab .mat-button-wrapper{padding:16px 0;display:inline-block;line-height:24px}.mat-mini-fab{box-sizing:border-box;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;-webkit-tap-highlight-color:transparent;display:inline-block;white-space:nowrap;text-decoration:none;vertical-align:baseline;text-align:center;margin:0;min-width:64px;line-height:36px;padding:0 16px;border-radius:4px;overflow:visible;transform:translate3d(0,0,0);transition:background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);min-width:0;border-radius:50%;width:40px;height:40px;padding:0;flex-shrink:0}.mat-mini-fab::-moz-focus-inner{border:0}.mat-mini-fab[disabled]{cursor:default}.mat-mini-fab.cdk-keyboard-focused .mat-button-focus-overlay,.mat-mini-fab.cdk-program-focused .mat-button-focus-overlay{opacity:.12}.mat-mini-fab::-moz-focus-inner{border:0}._mat-animation-noopable.mat-mini-fab{transition:none;animation:none}.mat-mini-fab .mat-button-wrapper{padding:8px 0;display:inline-block;line-height:24px}.mat-icon-button{padding:0;min-width:0;width:40px;height:40px;flex-shrink:0;line-height:40px;border-radius:50%}.mat-icon-button .mat-icon,.mat-icon-button i{line-height:24px}.mat-button-focus-overlay,.mat-button-ripple.mat-ripple{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;border-radius:inherit}.mat-button-ripple.mat-ripple:not(:empty){transform:translateZ(0)}.mat-button-focus-overlay{opacity:0;transition:opacity .2s cubic-bezier(.35,0,.25,1),background-color .2s cubic-bezier(.35,0,.25,1)}._mat-animation-noopable .mat-button-focus-overlay{transition:none}@media (-ms-high-contrast:active){.mat-button-focus-overlay{background-color:#fff}}@media (-ms-high-contrast:black-on-white){.mat-button-focus-overlay{background-color:#000}}.mat-button-ripple-round{border-radius:50%;z-index:1}.mat-button .mat-button-wrapper>*,.mat-fab .mat-button-wrapper>*,.mat-flat-button .mat-button-wrapper>*,.mat-icon-button .mat-button-wrapper>*,.mat-mini-fab .mat-button-wrapper>*,.mat-raised-button .mat-button-wrapper>*,.mat-stroked-button .mat-button-wrapper>*{vertical-align:middle}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button{display:block;font-size:inherit;width:2.5em;height:2.5em}@media (-ms-high-contrast:active){.mat-button,.mat-fab,.mat-flat-button,.mat-icon-button,.mat-mini-fab,.mat-raised-button{outline:solid 1px}}</style><style>.mat-drawer-container{position:relative;z-index:1;box-sizing:border-box;-webkit-overflow-scrolling:touch;display:block;overflow:hidden}.mat-drawer-container[fullscreen]{top:0;left:0;right:0;bottom:0;position:absolute}.mat-drawer-container[fullscreen].mat-drawer-opened{overflow:hidden}.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side{z-index:3}.mat-drawer-container.ng-animate-disabled .mat-drawer-backdrop,.mat-drawer-container.ng-animate-disabled .mat-drawer-content,.ng-animate-disabled .mat-drawer-container .mat-drawer-backdrop,.ng-animate-disabled .mat-drawer-container .mat-drawer-content{transition:none}.mat-drawer-backdrop{top:0;left:0;right:0;bottom:0;position:absolute;display:block;z-index:3;visibility:hidden}.mat-drawer-backdrop.mat-drawer-shown{visibility:visible}.mat-drawer-transition .mat-drawer-backdrop{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:background-color,visibility}@media (-ms-high-contrast:active){.mat-drawer-backdrop{opacity:.5}}.mat-drawer-content{position:relative;z-index:1;display:block;height:100%;overflow:auto}.mat-drawer-transition .mat-drawer-content{transition-duration:.4s;transition-timing-function:cubic-bezier(.25,.8,.25,1);transition-property:transform,margin-left,margin-right}.mat-drawer{position:relative;z-index:4;display:block;position:absolute;top:0;bottom:0;z-index:3;outline:0;box-sizing:border-box;overflow-y:auto;transform:translate3d(-100%,0,0)}@media (-ms-high-contrast:active){.mat-drawer,[dir=rtl] .mat-drawer.mat-drawer-end{border-right:solid 1px currentColor}}@media (-ms-high-contrast:active){.mat-drawer.mat-drawer-end,[dir=rtl] .mat-drawer{border-left:solid 1px currentColor;border-right:none}}.mat-drawer.mat-drawer-side{z-index:2}.mat-drawer.mat-drawer-end{right:0;transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer{transform:translate3d(100%,0,0)}[dir=rtl] .mat-drawer.mat-drawer-end{left:0;right:auto;transform:translate3d(-100%,0,0)}.mat-drawer-inner-container{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch}.mat-sidenav-fixed{position:fixed}</style><script charset="utf-8" src="./RxJS - Introduction_files/17-es2015.ac0ef64ee9152a94ed6a.js.download"></script><script charset="utf-8" src="./RxJS - Introduction_files/2-es2015.4bfd0144ba4334eb1944.js.download"></script><script charset="utf-8" src="./RxJS - Introduction_files/10-es2015.ce9c57dfb56979dbe79c.js.download"></script><script charset="utf-8" src="./RxJS - Introduction_files/18-es2015.dd3c96af3ae1c8ebc276.js.download"></script><meta name="twitter:title" content="RxJS - Introduction"><meta name="twitter:card" content="summary"><meta property="og:title" content="RxJS - Introduction"><meta property="og:type" content="article"></head>
+<body>
+
+  <aio-shell ng-version="8.0.0" class="mode-stable sidenav-open page-guide-overview folder-guide view-TopBar view-SideNav aio-notification-hide"><div id="top-of-page"></div><!----><mat-toolbar class="app-toolbar no-print mat-toolbar mat-primary mat-toolbar-multiple-rows" color="primary"><mat-toolbar-row class="notification-container mat-toolbar-row"><aio-notification expirationdate="2018-07-01" notificationid="angular-v6-announcement" class="ng-tns-c2-0 ng-trigger ng-trigger-hideAnimation" style="height: 0px;"><span class="content"><a href="https://blog.angular.io/version-6-0-0-of-angular-now-available-cc56b0efa7a4"><mat-icon aria-label="Announcement" class="icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="insert_comment" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon><span class="message">Version 6 of Angular Now Available!</span><span class="action-button">Learn More</span></a></span><button class="close-button mat-icon-button" aria-label="Close" mat-icon-button=""><span class="mat-button-wrapper"><mat-icon aria-label="Dismiss notification" class="mat-icon notranslate ng-tns-c2-0 mat-icon-no-color" role="img" svgicon="close" aria-hidden="true"><svg fill="#ffffff" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div><div class="mat-button-focus-overlay"></div></button></aio-notification></mat-toolbar-row><mat-toolbar-row class="mat-toolbar-row"><button class="hamburger mat-button" mat-button="" title="Docs menu"><span class="mat-button-wrapper"><mat-icon class="mat-icon notranslate mat-icon-no-color" role="img" svgicon="menu" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></mat-icon></span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button><a class="nav-link home" href="https://rxjs-dev.firebaseapp.com/"><!----><img alt="Home" height="40" src="./RxJS - Introduction_files/logo.png" title="Home" width="150" class="ng-star-inserted"><!----></a><!----><aio-top-menu class="ng-star-inserted"><ul role="navigation"><!----><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="Overview">Overview</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/api" title="Reference">Reference</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration">Migration</a></li><li class="ng-star-inserted"><a class="nav-link" href="https://rxjs-dev.firebaseapp.com/team" title="Team">Team</a></li></ul></aio-top-menu><aio-search-box class="search-container"><input aria-label="search" placeholder="Search" type="search"></aio-search-box><div class="toolbar-external-icons-container"><a href="https://github.com/ReactiveX/rxjs" target="_blank" title="GitHub"><img alt="View on GitHub" src="./RxJS - Introduction_files/github-icon.svg"></a></div></mat-toolbar-row></mat-toolbar><!----><mat-sidenav-container class="sidenav-container mat-drawer-container mat-sidenav-container mat-drawer-transition has-floating-toc"><!----><div class="mat-drawer-backdrop ng-star-inserted"></div><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><mat-sidenav class="sidenav mat-drawer mat-sidenav ng-tns-c6-1 ng-trigger ng-trigger-transform mat-drawer-side ng-star-inserted" tabindex="-1" style="transform: none; visibility: visible;"><div class="mat-drawer-inner-container"><!----><aio-nav-menu><!----><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><a class="vertical-menu-item heading level-1 expanded selected ng-star-inserted" href="https://rxjs-dev.firebaseapp.com/guide/overview" title="RxJS Overview"> Overview <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></a><!----><div class="heading-children level-1 expanded selected"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observable" title="Observables."> Observables </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/observer" title="Observer."> Observer </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/operators" title="Operators."> Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/subscription" title="Subscription."> Subscription </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/subject" title="Subjects."> Subjects </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/scheduler" title="Scheduler."> Scheduler </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-2 collapsed ng-star-inserted" type="button" title="Testing." aria-pressed="false"> Testing <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-2 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/marble-testing" title="Marble Testing."> Marble Testing </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-3 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/testing/internal-marble-tests" title="Contribute tests to RxJS."> Contribute tests to RxJS </a></div><!----></aio-nav-item></div></div></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/installation" title="Installation"> Installation </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/api" title="RxJS Reference"> Reference </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/operator-decision-tree" title="Operator Decision Tree"> Operator Decision Tree </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><!----><div class="ng-star-inserted"><!----><!----><button class="vertical-menu-item heading level-1 collapsed ng-star-inserted" type="button" title="About Version 6." aria-pressed="false"> About Version 6 <mat-icon class="rotating-icon mat-icon notranslate mat-icon-no-color" role="img" svgicon="keyboard_arrow_right" aria-hidden="true"><svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path></svg></mat-icon></button><div class="heading-children level-1 collapsed"><!----><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/migration" title="Migration."> Migration </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/guide/v6/pipeable-operators" title="Pipeable Operators."> Pipeable Operators </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-2 collapsed" href="https://rxjs-dev.firebaseapp.com/api/deprecations" title="List of Deprecations"> Deprecations </a></div><!----></aio-nav-item></div></div></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/resources" title="External Resources"> External Resources </a></div><!----></aio-nav-item><aio-nav-item class="ng-star-inserted"><!----><div class="ng-star-inserted"><a class="vertical-menu-item level-1 collapsed" href="https://rxjs-dev.firebaseapp.com/code-of-conduct" title="Code of Conduct"> Code of Conduct </a></div><!----></aio-nav-item></aio-nav-menu></div></mat-sidenav><div class="cdk-visually-hidden cdk-focus-trap-anchor" aria-hidden="true"></div><!----><mat-sidenav-content cdkscrollable="" class="mat-drawer-content mat-sidenav-content ng-star-inserted" style="margin-left: 260px;"><section class="sidenav-content" role="main" id="guide-overview"><aio-mode-banner><!----></aio-mode-banner><aio-doc-viewer class=""><div style="opacity: 1;">
+<div class="content">
+<h1 id="introduction">Introduction</h1><aio-toc class="embedded" ng-version="8.0.0"><!----><div class="toc-inner no-print collapsed ng-star-inserted"><!----><div class="toc-heading embedded ng-star-inserted"> Contents </div><!----><ul class="toc-list embedded"><!----><!----><!----><!----><!----><!----><li title="First examples" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#first-examples">First examples</a></li><!----><!----><!----><li title="Purity" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#purity">Purity</a></li><!----><!----><!----><li title="Flow" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#flow">Flow</a></li><!----><!----><!----><li title="Values" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#values">Values</a></li><!----></ul><!----></div></aio-toc>
+<p>RxJS is a library for composing asynchronous and event-based programs by using observable sequences. It provides one core type, the <a href="https://rxjs-dev.firebaseapp.com/guide/observable">Observable</a>, satellite types (Observer, Schedulers, Subjects) and operators inspired by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/1.6">Array#extras</a> (map, filter, reduce, every, etc) to allow handling asynchronous events as collections.</p>
+<p><span class="informal">Think of RxJS as Lodash for events.</span></p>
+<p>ReactiveX combines the <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer pattern</a> with the <a href="https://en.wikipedia.org/wiki/Iterator_pattern">Iterator pattern</a> and <a href="http://martinfowler.com/articles/collection-pipeline/#NestedOperatorExpressions">functional programming with collections</a> to fill the need for an ideal way of managing sequences of events.</p>
+<p>The essential concepts in RxJS which solve async event management are:</p>
+<ul>
+<li><strong>Observable:</strong> represents the idea of an invokable collection of future values or events.</li>
+<li><strong>Observer:</strong> is a collection of callbacks that knows how to listen to values delivered by the Observable.</li>
+<li><strong>Subscription:</strong> represents the execution of an Observable, is primarily useful for cancelling the execution.</li>
+<li><strong>Operators:</strong> are pure functions that enable a functional programming style of dealing with collections with operations like <code>map</code>, <code>filter</code>, <code>concat</code>, <code>reduce</code>, etc.</li>
+<li><strong>Subject:</strong> is the equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers.</li>
+<li><strong>Schedulers:</strong> are centralized dispatchers to control concurrency, allowing us to coordinate when computation happens on e.g. <code>setTimeout</code> or <code>requestAnimationFrame</code> or others.</li>
+</ul>
+<h2 id="first-examples">First examples</h2>
+<p>Normally you register event listeners.</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+document.addEventListener('click', () =&gt; console.log('Clicked!'));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="pln">document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Clicked!'</span><span class="pun">));</span></code>
+    </pre></aio-code></code-example>
+<p>Using RxJS you create an observable instead.</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { fromEvent } from 'rxjs';
+
+fromEvent(document, 'click').subscribe(() =&gt; console.log('Clicked!'));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> fromEvent </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+
+fromEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">'click'</span><span class="pun">).</span><span class="pln">subscribe</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Clicked!'</span><span class="pun">));</span></code>
+    </pre></aio-code></code-example>
+<h3 id="purity">Purity</h3>
+<p>What makes RxJS powerful is its ability to produce values using pure functions. That means your code is less prone to errors.</p>
+<p>Normally you would create an impure function, where other
+pieces of your code can mess up your state.</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+let count = 0;
+document.addEventListener('click', () =&gt; console.log(`Clicked ${++count} times`));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">let</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="typ">Clicked</span><span class="pln"> $</span><span class="pun">{++</span><span class="pln">count</span><span class="pun">}</span><span class="pln"> times</span><span class="pun">`));</span></code>
+    </pre></aio-code></code-example>
+<p>Using RxJS you isolate the state.</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { fromEvent } from 'rxjs';
+import { scan } from 'rxjs/operators';
+
+fromEvent(document, 'click')
+  .pipe(scan(count =&gt; count + 1, 0))
+  .subscribe(count =&gt; console.log(`Clicked ${count} times`));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> fromEvent </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> scan </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+fromEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">'click'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">scan</span><span class="pun">(</span><span class="pln">count </span><span class="pun">=&gt;</span><span class="pln"> count </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">))</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">(</span><span class="pln">count </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="typ">Clicked</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">count</span><span class="pun">}</span><span class="pln"> times</span><span class="pun">`));</span></code>
+    </pre></aio-code></code-example>
+<p>The <strong>scan</strong> operator works just like <strong>reduce</strong> for arrays. It takes a value which is exposed to a callback. The returned value of the callback will then become the next value exposed the next time the callback runs.</p>
+<h3 id="flow">Flow</h3>
+<p>RxJS has a whole range of operators that helps you control how the events flow through your observables.</p>
+<p>This is how you would allow at most one click per second, with plain JavaScript:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+let count = 0;
+let rate = 1000;
+let lastClick = Date.now() - rate;
+document.addEventListener('click', () =&gt; {
+  if (Date.now() - lastClick &gt;= rate) {
+    console.log(`Clicked ${++count} times`);
+    lastClick = Date.now();
+  }
+});
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">let</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">let</span><span class="pln"> rate </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">let</span><span class="pln"> lastClick </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> rate</span><span class="pun">;</span><span class="pln">
+document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> lastClick </span><span class="pun">&gt;=</span><span class="pln"> rate</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="typ">Clicked</span><span class="pln"> $</span><span class="pun">{++</span><span class="pln">count</span><span class="pun">}</span><span class="pln"> times</span><span class="pun">`);</span><span class="pln">
+    lastClick </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code>
+    </pre></aio-code></code-example>
+<p>With RxJS:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { fromEvent } from 'rxjs';
+import { throttleTime, scan } from 'rxjs/operators';
+
+fromEvent(document, 'click')
+  .pipe(
+    throttleTime(1000),
+    scan(count =&gt; count + 1, 0)
+  )
+  .subscribe(count =&gt; console.log(`Clicked ${count} times`));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> fromEvent </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> throttleTime</span><span class="pun">,</span><span class="pln"> scan </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+fromEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">'click'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">
+    throttleTime</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">),</span><span class="pln">
+    scan</span><span class="pun">(</span><span class="pln">count </span><span class="pun">=&gt;</span><span class="pln"> count </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">(</span><span class="pln">count </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(`</span><span class="typ">Clicked</span><span class="pln"> $</span><span class="pun">{</span><span class="pln">count</span><span class="pun">}</span><span class="pln"> times</span><span class="pun">`));</span></code>
+    </pre></aio-code></code-example>
+<p>Other flow control operators are <a href="https://rxjs-dev.firebaseapp.com/api/operators/filter"><strong>filter</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/delay"><strong>delay</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/debounceTime"><strong>debounceTime</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/take"><strong>take</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/takeUntil"><strong>takeUntil</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/distinct"><strong>distinct</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged"><strong>distinctUntilChanged</strong></a> etc.</p>
+<h3 id="values">Values</h3>
+<p>You can transform the values passed through your observables.</p>
+<p>Here's how you can add the current mouse x position for every click, in plain JavaScript:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+let count = 0;
+const rate = 1000;
+let lastClick = Date.now() - rate;
+document.addEventListener('click', event =&gt; {
+  if (Date.now() - lastClick &gt;= rate) {
+    count += event.clientX;
+    console.log(count);
+    lastClick = Date.now();
+  }
+});
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">let</span><span class="pln"> count </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">const</span><span class="pln"> rate </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">let</span><span class="pln"> lastClick </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> rate</span><span class="pun">;</span><span class="pln">
+document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'click'</span><span class="pun">,</span><span class="pln"> event </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> lastClick </span><span class="pun">&gt;=</span><span class="pln"> rate</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    count </span><span class="pun">+=</span><span class="pln"> event</span><span class="pun">.</span><span class="pln">clientX</span><span class="pun">;</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">count</span><span class="pun">);</span><span class="pln">
+    lastClick </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code>
+    </pre></aio-code></code-example>
+<p>With RxJS:</p>
+<code-example language="ts" ng-version="8.0.0"><div style="display: none">
+import { fromEvent } from 'rxjs';
+import { throttleTime, map, scan } from 'rxjs/operators';
+
+fromEvent(document, 'click')
+  .pipe(
+    throttleTime(1000),
+    map(event =&gt; event.clientX),
+    scan((count, clientX) =&gt; count + clientX, 0)
+  )
+  .subscribe(count =&gt; console.log(count));
+</div><!----><aio-code><pre class="prettyprint lang-ts">      <!----><button class="material-icons copy-button no-print ng-star-inserted" title="Copy code snippet" aria-label="">
+        <span aria-hidden="true">content_copy</span>
+      </button>
+      <!----><button class="material-icons edit-button no-print ng-star-inserted" title="Edit in StackBlitz" aria-label="">
+        <span aria-hidden="true">open_in_new</span>
+      </button>
+      <code class="animated fadeIn"><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> fromEvent </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs'</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">import</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> throttleTime</span><span class="pun">,</span><span class="pln"> map</span><span class="pun">,</span><span class="pln"> scan </span><span class="pun">}</span><span class="pln"> from </span><span class="str">'rxjs/operators'</span><span class="pun">;</span><span class="pln">
+
+fromEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">'click'</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">pipe</span><span class="pun">(</span><span class="pln">
+    throttleTime</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">),</span><span class="pln">
+    map</span><span class="pun">(</span><span class="pln">event </span><span class="pun">=&gt;</span><span class="pln"> event</span><span class="pun">.</span><span class="pln">clientX</span><span class="pun">),</span><span class="pln">
+    scan</span><span class="pun">((</span><span class="pln">count</span><span class="pun">,</span><span class="pln"> clientX</span><span class="pun">)</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> count </span><span class="pun">+</span><span class="pln"> clientX</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">)</span><span class="pln">
+  </span><span class="pun">.</span><span class="pln">subscribe</span><span class="pun">(</span><span class="pln">count </span><span class="pun">=&gt;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">count</span><span class="pun">));</span></code>
+    </pre></aio-code></code-example>
+<p>Other value producing operators are <a href="https://rxjs-dev.firebaseapp.com/api/operators/pluck"><strong>pluck</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/pairwise"><strong>pairwise</strong></a>, <a href="https://rxjs-dev.firebaseapp.com/api/operators/sample"><strong>sample</strong></a> etc.</p>
+
+</div>
+<!-- links to this doc:
+-->
+<!-- links from this doc:
+ - ../api/operators/debounceTime
+ - ../api/operators/delay
+ - ../api/operators/distinct
+ - ../api/operators/distinctUntilChanged
+ - ../api/operators/filter
+ - ../api/operators/pairwise
+ - ../api/operators/pluck
+ - ../api/operators/sample
+ - ../api/operators/take
+ - ../api/operators/takeUntil
+ - ./guide/observable
+ - http://martinfowler.com/articles/collection-pipeline/#NestedOperatorExpressions
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/1.6
+ - https://en.wikipedia.org/wiki/Iterator_pattern
+ - https://en.wikipedia.org/wiki/Observer_pattern
+--></div></aio-doc-viewer><aio-dt><!----></aio-dt></section></mat-sidenav-content></mat-sidenav-container><!----><div class="toc-container no-print ng-star-inserted"><aio-lazy-ce selector="aio-toc"><aio-toc ng-version="8.0.0"><!----><div class="toc-inner no-print collapsed ng-star-inserted"><!----><!----><ul class="toc-list"><!----><!----><!----><li title="Introduction" class="h1 ng-star-inserted active"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#introduction">Introduction</a></li><!----><!----><!----><li title="First examples" class="h2 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#first-examples">First examples</a></li><!----><!----><!----><li title="Purity" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#purity">Purity</a></li><!----><!----><!----><li title="Flow" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#flow">Flow</a></li><!----><!----><!----><li title="Values" class="h3 ng-star-inserted"><a href="https://rxjs-dev.firebaseapp.com/guide/overview#values">Values</a></li><!----></ul><!----></div></aio-toc></aio-lazy-ce></div></aio-shell>
+
+  <noscript>
+    <div class="background-sky hero"></div>
+    <section id="intro">
+      <div class="hero-logo">
+        <img src="assets/images/favicons/favicon-192x192.png" width="250" height="250" alt="RxJS logo">
+      </div>
+      <div class="headline-container">
+        <h2 class="hero-headline">RxJS</h2>
+        <span class="hero-subheadline">Reactive Extensions Library for JavaScript</span>
+      </div>
+    </section>
+    <h2 style="color: red; text-align: center;">
+      <b><i>This website requires JavaScript.</i></b>
+    </h2>
+  </noscript>
+  <script src="./RxJS - Introduction_files/rxjs.umd.min.js.download" async=""></script>
+  <script src="./RxJS - Introduction_files/devtools-welcome.js.download"></script>
+<script src="./RxJS - Introduction_files/runtime-es2015.0f4e217eb07993c03e55.js.download" type="module"></script><script src="./RxJS - Introduction_files/polyfills-es2015.6f82c5b100e7eb2e837a.js.download" type="module"></script><script src="./RxJS - Introduction_files/runtime-es5.81550ebf6333e570f677.js.download" nomodule=""></script><script src="./RxJS - Introduction_files/polyfills-es5.141dc20dd7f1b2d25976.js.download" nomodule=""></script><script src="./RxJS - Introduction_files/main-es2015.7199f632fe5a9a1ccbcb.js.download" type="module"></script><script src="./RxJS - Introduction_files/main-es5.598fd983caf0db9756f2.js.download" nomodule=""></script>
+
+<div class="cdk-live-announcer-element cdk-visually-hidden" aria-atomic="true" aria-live="polite"></div></body></html>

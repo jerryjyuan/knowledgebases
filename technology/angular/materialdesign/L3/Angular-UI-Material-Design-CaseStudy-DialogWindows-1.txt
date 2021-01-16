@@ -1,0 +1,24 @@
+
+=========================================================== 
+Angular UI - Material Design - Case Study:
+
+Points:
+- >=50% Angular UI Applications: Use Material Design
+- xxx-yyy-tool-Angular-UI: choose Material Design as UI framework, so we stick to MD
+
+Case Study:
+	- Way 1:	MatDialog:	this should work...
+							https://material.angular.io/components/dialog/overview
+	- Way 2:	MDialog
+	- Way 3:	Use Material Design's Modal Way: this is the way the UI guys choose
+				- Could be "Bootstrap’s modal component"
+
+	Misc:
+				Bootstrap Modals
+				
+
+===========================================================
+xxx-yyy-tool-Angular-UI:
+	- No special / unique scenarios from Common Angular aspects
+	
+===========================================================

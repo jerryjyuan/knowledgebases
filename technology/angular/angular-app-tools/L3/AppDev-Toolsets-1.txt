@@ -1,0 +1,274 @@
+
+==========================================
+App-ToolSets:
+
+
+==========================================
+Common Laptop Skills:
+
+User:
+	Environmental Vairables: are placed after the system environmental variables
+	
+System:
+	Environmental Variables
+
+
+==========================================
+Common Linux Skills:
+
+==========================================
+Toolsets: Java-Spring-SpringBoot-RESTful-APIs:
+
+=>IDE:
+	Eclipse/STS/IntelliJIDEA
+
+=>Initializer:
+	https://start.spring.io/
+	
+=>Scaffolding:
+
+=>DEV
+
+=>Testing:
+
+	SOAPUI:
+		==>Project1
+			==>Request1
+			==>Request2
+			==>Request3
+		==>Notes:
+			==>Can export/import project file
+			
+	Postman:
+		==>A little bit more complicated than SOAPUI + more config
+		==>Worldpay team: like it more than SOAPUI
+			==>Good for their SOAP APIs testing
+		==>Project1???
+			==>Request1
+			==>Request2
+			==>Request3
+		==>Notes:
+			==>Can export/import project file
+
+	Curl:
+		PROS:
+			==>Faster testing on RESTful APIs
+		==>Cygwin: installed
+		==>Installed
+		==>
+
+=>Deployment:
+	==>Use embedded Tomcat
+	==>Try out: Undertow/Jetty from Spring Boot
+
+==========================================
+Toolsets: Java-Spring-SpringBoot-SOAP-APIs:
+
+
+
+
+==>Always-In-Place:
+	==>Enable WSDL Request XML: formats
+	==>
+	
+
+==========================================
+Toolsets: Java-Spring-SpringBoot-: Angular
+
+
+
+==========================================
+Toolsets: AngularCLI: Angular
+
+==>Wireframe Tools:
+	Online:
+		https://www.mockflow.com/
+	Downloaded
+
+==>Templating:
+	Online
+	Downloaded
+
+
+==>
+
+
+==>Knowledge Tools:
+	==>
+	==>MD
+	
+	
+	==>Bootstrap CSS:
+		https://getbootstrap.com/docs/4.5/components/forms/
+		
+		node_modules\bootstrap
+		https://getbootstrap.com/docs/4.5/getting-started/introduction/
+		All Classes:
+		https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp
+		1) npm install --save bootstrap
+		2) MaxCDN:
+				<!-- Latest compiled and minified CSS -->
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+				<!-- jQuery library -->
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+				<!-- Popper JS -->
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+				<!-- Latest compiled JavaScript -->
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>		
+		3) Server/Client Hosted:
+				Download Bootstrap 4 from getbootstrap.com
+				<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+				<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+				<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js">
+	
+		Mobile-First:
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+				
+	==>Default Theming: 4 types
+		./node_modules/@angular/material/prebuilt-themes/indigo-pink.css
+		
+		
+		
+		
+	==>
+	
+	
+
+
+==========================================
+
+
+==========================================
+
+
+==========================================
+
+
+==========================================
+
+
+==========================================
+Some Tech Core Refreshers:
+
+Windows:
+	"which java"
+	netstat:
+		netstat -ano
+		netstat -ano | findstr "9096"
+	find which port in use and kill the process
+	(1) 
+		Open the command prompt as the current user or as Administrator.
+		Type tasklist to see the list of running processes and their PIDs. ...
+		To kill a process by its PID, type the command: taskkill /F /PID pid_number.
+		To kill a process by its name, type the command taskkill /IM "process name" /F.
+	(2)
+		Press Ctrl+Shift+Esc on the keyboard.
+		Go to the Processes tab.
+		Right-click the header of the table and select PID in the context menu
+	(3)
+		Open a CMD window in Administrator mode by navigating to Start > Run > type cmd > right-click Command Prompt, then select Run as administrator.
+		Use the netstat command lists all the active ports. ...
+		To kill this process (the /f is force): taskkill /pid 18264 /
+	(4) netstat -ano
+		netstat -ano | findstr "PID: 2592"
+		
+		taskkill /F /pid 18264
+	
+Spring MVC Github Examples:
+	==>PROS:
+		==>Very good examples and summaries
+	==>CONS:
+		==>Maybe outdated due to some new versions
+		==>Too complete scopes compared with Spring-Boot-focused-RESTful-APIs
+	
+	
+==========================================
+C:\Windows\System32>curl --help
+Usage: curl [options...] <url>
+
+	examples:
+		curl -H <header/@file> --request GET --url http://www.xxx/
+		curl -d C:\data\data.xml -H <header/@file> --request POST --url http://www.xxx/
+		
+		Theoretically: CURL can similate many GET/POST/... calls using more complicated options...
+
+curl
+     --basic         Use HTTP Basic Authentication
+ -K, --config <file> Read config from a file
+ -d, --data <data>   HTTP POST data
+     --data-binary <data> HTTP POST binary data
+     --digest        Use HTTP Digest Authentication
+ -F, --form <name=content> Specify HTTP multipart POST data
+     --form-string <name=string> Specify HTTP multipart POST data
+ -G, --get           Put the post data in the URL and use GET
+ -H, --header <header/@file> Pass custom header(s) to server
+     --key <key>     Private key file name
+     --key-type <type> Private key file type (DER/PEM/ENG)
+     --krb <level>   Enable Kerberos with security <level>
+     --oauth2-bearer <token> OAuth 2 Bearer Token
+ -o, --output <file> Write to file instead of stdout
+     --pass <phrase> Pass phrase for the private key
+     --proxy-basic   Use Basic authentication on the proxy
+     --proxy-ciphers <list> SSL ciphers to use for proxy
+     --proxy-digest  Use Digest authentication on the proxy
+     --proxy-header <header/@file> Pass custom header(s) to proxy
+     --proxy-negotiate Use HTTP Negotiate (SPNEGO) authentication on the proxy
+     --proxy-ntlm    Use NTLM authentication on the proxy
+     --proxy-pass <phrase> Pass phrase for the private key for HTTPS proxy
+     --proxy-tlsauthtype <type> TLS authentication type for HTTPS proxy
+     --proxy-tlspassword <string> TLS password for HTTPS proxy
+     --proxy-tlsuser <name> TLS username for HTTPS proxy
+     --proxy-tlsv1   Use TLSv1 for HTTPS proxy
+ -p, --proxytunnel   Operate through a HTTP proxy tunnel (using CONNECT)
+     --pubkey <key>  SSH Public key file name
+ -e, --referer <URL> Referrer URL
+ -X, --request <command> Specify request command to use
+     --sasl-ir       Enable initial response in SASL authentication
+ -s, --silent        Silent mode
+     --ssl           Try SSL/TLS
+     --ssl-reqd      Require SSL/TLS
+ -2, --sslv2         Use SSLv2
+ -3, --sslv3         Use SSLv3
+     --stderr        Where to redirect stderr
+     --tlsauthtype <type> TLS authentication type
+     --tlspassword   TLS password
+     --tlsuser <name> TLS user name
+ -1, --tlsv1         Use TLSv1.0 or greater
+     --tlsv1.0       Use TLSv1.0
+     --tlsv1.1       Use TLSv1.1
+     --tlsv1.2       Use TLSv1.2
+     --tlsv1.3       Use TLSv1.3
+     --trace <file>  Write a debug trace to FILE
+     --trace-time    Add time stamps to trace/verbose output
+ -T, --upload-file <file> Transfer local FILE to destination
+     --url <url>     URL to work with
+ -u, --user <user:password> Server user and password
+ -v, --verbose       Make the operation more talkative
+ -V, --version       Show version number and quit
+ -w, --write-out <format> Use output FORMAT after completion
+ 
+ 
+$ curl -X POST localhost:8080/api/employees -d "{\"firstName\": \"Bilbo\", \"lastName\": \"Baggins\", \"description\": \"burglar\"}" -H "Content-Type:application/json"
+{
+  "firstName" : "Bilbo",
+  "lastName" : "Baggins",
+  "description" : "burglar",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/employees/2"
+    }
+  }
+}
+
+==========================================
+Common Linux Commands Highlights-Again: TBD:
+
+
+==========================================
+
+
+==========================================
+
+
+==========================================

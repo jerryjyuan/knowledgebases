@@ -1,0 +1,30 @@
+
+=========================================================== 
+Components:
+
+- Official names
+
+	- Some: Directives (modify DOM elements: it is directive)
+	
+	- I would say: Components
+
+- mat-XXX
+
+- 
+=========================================================== 
+Components:
+
+- App Added
+- 3rd Party Supplied
+- Schematix created
+- CDK created?
+
+=========================================================== 
+https://material.angular.io/components/list/overview
+
+https://material.io/develop/web/components/lists/
+
+
+
+
+=========================================================== 

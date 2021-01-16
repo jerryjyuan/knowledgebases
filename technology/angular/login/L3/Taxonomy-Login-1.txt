@@ -1,0 +1,119 @@
+
+
+=============================================
+
+=============================================
+Login:
+
+
+	
+	
+
+=============================================
+Login: Usage
+
+==>Usage 1: Use Angular Security Features:
+			==>Web Security:	XSS/CSRF/CORS/...
+			==>Http Basic/Digest/NTLM/
+			==>Angular: Router Guards:
+						Example 1:	FM - SPARTA: Router Guards
+			
+
+==>Usage 2:	Implement App-Specific Login Page:
+			==>Sub-Usage 1:	Utilize Angular Forms and FormControls
+							Login Form, Authentication Service & Route Guard
+								https://jasonwatmore.com/post/2019/05/17/angular-7-tutorial-part-4-login-form-authentication-service-route-guard
+							Registration Form & User Service
+								https://jasonwatmore.com/post/2019/05/22/angular-7-tutorial-part-5-registration-form-user-service
+							User Registration and Login Example & Tutorial
+								https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+							====>This is the most common app-enabled login: talking to backend service: User Service APIs
+					
+==>Usage 3:	Social Plugin Enabled Authentication and Login:
+	==>Google
+	==>Github
+	==>LinkedIn
+	==>Facebook
+	==>...
+
+==>Usage 4:	Platform Enabled Authentication and Login:
+	1) Firebase Authentication:
+		==>Incorporate Google Login features
+		Firebase Platform: Incorporated with Google login feature (One main reason is: Firebase is from Google)
+	2) Okta Platform Authentication:
+		==>Okta integrated Spring Boot / Spring Security: OIDC
+			Okta Spring Boot Starter
+			==>Similar to SpringBoot/Security's OAuth2 integration with providers as Google/Github OAuth2 token providers
+		==>
+		
+	3) 
+	
+	9) Misc:
+		==>...
+		==>Google App Engine
+		==>
+	
+==>Usage 4:	Integration Enabled Security and Login:
+	1) Spring Boot and Maven Plugin
+		==>Utilize the above Spring Boot features while Angular dist code is packaged into normal Spring Boot static web folder
+		Spring Boot/Security/OAuth2
+			https://spring.io/guides/tutorials/spring-boot-oauth2/
+			https://github.com/spring-guides/tut-spring-boot-oauth2
+		Spring + Angular + OAuth2: See Spring Guide Tutorial
+			https://spring.io/guides/tutorials/spring-security-and-angular-js/
+			https://github.com/spring-guides/tut-spring-security-and-angular-js
+	
+	2) OAuth 2:
+		==>Firebase - see above: Utilize Google Provider as OAuth2 Auth Server
+		==>JWT Authentication Example & Tutorial
+			https://jasonwatmore.com/post/2018/11/16/angular-7-jwt-authentication-example-tutorial
+		==>Role Based Authorization Tutorial with Example
+			https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
+
+==>Usage 5:	Enterprise Systems:
+	==>Method 1:	SSO:
+					==>AD/Windows/LDAP:				Example:	FM
+													==>RMT: SSO sign on
+					==>LDAP/DevLDAP/SubLDAP:		Example:	BNY Mellon
+					   SiteMinder?
+					
+
+	
+	
+	==>Method 3:	
+	
+	==>Method 4:	
+
+
+	
+	
+	==>Method 7:	
+		
+		
+	==>Method 8:	
+					
+					
+						
+					
+=============================================
+Advanced Angular Security and Login Features:
+
+==>Multi-Factor Authentication
+
+==>Protect API Endpoints: such as: backend service APIs
+
+	==>Enable common Http/Web Security:
+		==>Spring Boot: enable @CorsOrigin to ensure same original resource endpoints for Angular UI client
+		==>
+	==>Enable common RESTful API security
+	==>Add enterprise security systems:
+		==>Enable internal TAM juntions between Angular UI and backend RESTful APIs
+		==>Enable internal proxy/firewall between Angular UI and backend RESTful APIs: but this is not common: it is mostly used for between DB-clients and DB-Servers
+	==>
+
+
+=============================================
+
+
+
+=============================================

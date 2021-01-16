@@ -1,0 +1,90 @@
+
+==============================================
+SPARTA: Overall:
+
+SPARTA: 
+==>Also called as: SAS
+
+==============================================
+App Layers:
+
+
+==============================================
+Services Layers:
+
+==>These services: different from MSS Services: SPARTA and MSS are 2 different apps - but sharing the same MSSQL DBs...
+==>5-7+ modules/components
+
+==============================================
+AutoSys Jobs:
+
+==>Facilitate data migrations and syncup
+
+==============================================
+Architectures/Systems:
+
+SignOn:
+	SSO
+	Common Login
+	Personal AD or username login
+	...
+
+==============================================
+Platforms:
+
+==>RH OpenShift Cloud/Container Structures:
+	==>Both Cloud and Container
+	==>Use:
+		PODs:	Service Tiers
+				==>Each POD is: a service
+				==>Work with Deployment instances
+		Clusters
+		Applications
+		
+		Commands:
+			oc login
+			oc project xxx
+			oc get pods
+			oc logs xxx.log | more
+			oc --help
+			oc status | grep docker
+			kubectl get pod <pod_name>
+			terminal
+			
+	==>SPARTA:
+		==>Jenkins Pipeline: packages(wars)/images/dependency jars (from JFrog) ==>Build docker images
+		==>DEV/SIT/UAT
+		==>No Selenium and integration tests
+		-->
+		===>Deploy app images to OC:
+			Docker Images Layers
+				App
+				WebLogic Base
+				WebLogic
+				JDK
+				RHEL
+==>Docker:
+
+	==>Development:
+		==>Create docker hub account
+		==>Localize Docker Env
+		==>Build and push/pull images from docker hub
+		==>https://play.freco.me/course/12
+		==>https://docs.docker.com/get-started
+		
+		Docker:
+			Why Kubernetes?
+			==>Solr needs Zookeeper...
+			==>Docker Swarms/Orchestration (PODs.../Clusters/)
+			==>...
+			1) OpenShift: Container/Pods(services)/.../Clusters/Applications(docker)
+	
+	==>SPARTA - Docker:
+		==>OCP: OpenShift Container Platform
+		==>ROTN: Redhat-Openshift-Container
+	
+
+
+
+
+==============================================

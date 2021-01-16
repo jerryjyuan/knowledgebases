@@ -1,0 +1,20 @@
+
+=========================================================== 
+Angular UI: Login:
+
+
+- Enable backend RESTful APIs - login/logout
+- Enable Angular UI App's service module' API integration - call RESTful APIs
+- Angular Components - invoke login():
+	login() will call Angule UI service module
+
+	- Enable currentUser / currentUserValue in LocalStorage
+	
+	- After login validation, router passes to main dash-board component
+
+Examples:
+	https://jasonwatmore.com/post/2019/06/10/angular-8-user-registration-and-login-example-tutorial
+	
+	
+
+===========================================================

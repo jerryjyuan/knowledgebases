@@ -1,0 +1,321 @@
+
+==============================================
+Java Tech - Hierachies:
+
+
+	==>RCA / RSA
+	
+
+
+
+	==>3G(GrandGrandGrand)Parents:	Web tech / Internet
+
+		==>Internet Tech:
+			WWW
+			URL/URI
+			Network Hardwares and Systems: FiberOptics/Cables/USB/RF/.../Firewalls/Gateways/DataCenters/CloudCenters/CDN/MCDN/CMS/DMS
+			Servers/SunSolaris/HPUX/SuseUnix/AIX/...
+			ServerLess
+			Laptops
+			VPN: enabled security online access...
+				Cisco
+				xxxShield? ==>...
+			VMware/VirtualMachines/VirtualBox/Virtual-Desktops(NP-VDI/Citrix)
+				Citrix: Virtual management of applications and contents: digital workspaces
+				Online IDE/Editors/...
+			==>How does internet work
+			==>How does http web url work
+			==>How does website domain address work and managed
+		==>Web Tech:
+			Web 2.0
+			Networks:	LAN/WAN/WiFi/VPN/RSA + Mobile(TDMA/CDMA/GSM/UMPS/Symbian/Blackberry/iOS/Android/) + Network protocols + IoT + ...
+		==>Web Programming:
+			HTML/HTML5
+			CSS/CSS3
+			JS
+		==>Web Security Ecosystems:
+			Web Security:
+				SSL:
+					Commercialized/vendorized SSL managements and auto-administrations: eTrust?
+						eTrust: a shortname for Entrust? - in SSL certificate domain? RSA domain?
+					...
+					SSL Certificates:
+						eTrust: domain validations
+				Web Security Protocols
+					Kerberos?
+			Enterprise Security:
+				Mechanism Domains:
+					RSA? - RSA for VPN:
+						EnTrust
+						Soft/Hard/Laptop-installed types
+						...
+				Server Domains:
+					Firewalls/Proxy
+				System Domains:
+					Windows AD/LDAP/Sub-Domain LDAPs
+				Cloud Platform / Vendor Domains:
+					IBM-DataPower
+					IBM-Tivoli: TAM groups
+			Server Security:
+				Apache/IIS/IBMHttpServer
+				Tomcat/
+				WebLogic/WebSphere/JBoss/ColdFusion/Glassfish
+			App Security:
+				SpringFramework Security
+				OAuth2/JWT/.../ACL/.../Roles/...
+			Database Security:
+				Roles/Permissions/...
+		==>SSL/TLS Ecosystems:		
+			==>SSL/TLS:	Not only just Java associated + it is web associated + some non-web associated + also probably linked to some app types like SOA/WebServices calls (client -> MF/CICS web services)
+					==>Secure Socket Layer / Transport Layer Security:
+						==>...
+						1) Java Web Apps: using HTTPS
+							==>Java Web Apps: deployed on internet + mainly accept HTTP/HTTPS requests
+							==>HTTP/HTTPS requests: from client browsers (browsers: mostly send HTTP/HTTPS)
+							==>HTTP/HTTPS requests: from client Java/Other Apps: use: Apache HttpClient, etc. ==>These requests do similar as browsers sending...
+						2) Java Web Apps: using WS
+							==>Java Web Apps: deployed on internet + could accept both HTTP/HTTPS and/or WS requests
+							==>HTTP/HTTPS requests: see above
+							==>WS requests: from client browsers (browsers: can send WS as well: ws://...)
+							==>WS requests: from client Java/Other Apps: ==>These requests do similar as browsers sending WS...
+							======>Are the server apps are similar to Spring Boot WebSocket server applications?
+							======>WS Requests: can enable longer time and endurable connections from client -> server
+							======>Such as: chatting, trading, ... apps
+						3) Web Apps: using HTTPS: similar but non-Java apps
+						4) Web Apps: using WS:	  similar but non-Java apps
+						5) Java Non-Web Apps: using Socket:
+							======>Because socket is not sending over HTTP (which is called WS)
+							======>Example 1:	Teradata JDBC driver - connects to Teradata DB: using normal socket connection
+										==>Because Teradata DB is not deployed on web/HTTP portfolios
+										==>Did Tom add SSL to Teradata JDBC driver, or did we need?
+							======>Example 2:	IADT Desk Client -> MF/CICS Web Services Apps:
+										==>It is not using web/http because CICS apps - should be in non-web scenarios
+										==>So IADT client sends socket connection to CICS apps
+										==>But socket communications can be secured, which is like SSL
+											==>But this enabling might be different or varied from common browser->Tomcat...
+											==>IADT client might add it to the Socket Factory connection calls (or 2 trips as well?)
+											==>Anyways, it also just tried to establish a secure or SSL connection
+											==>These communication ways could vary due to vendors/impl/design/APIs etc.
+											Example 1: Gmail: requires both sender and recipient to establish TLS
+											...
+						6) Non-Java Non-Web Apps: using Socket: similar but non-Java apps
+					==>Common Web SSL Certificates: common for all web applications and websites
+						==>EV: Extended Validation SSL Certificate: domain+organization+countryId+ ...: more trustful (maybe JDK jks's trusted key store is similar to this)
+							- So clients might be more trustful when conducting credit card or security information transactions with this website/server
+						==>OV: Show organizational info as well
+						==>DV: Domain Validated SSL Certificate: so clients could be doubtful: ... (locked padlock)
+					==>Java-Scenarios Web SSL certificates: Examples:
+						==>Java related JKS is part of the common web SSL certificates (EV/OV/DV)
+						==>Tomcat: server.xml: linked to JRE jks: this jks contains
+							1) Trusted Key Stores: common JDK/JRE installations should have these common ones
+								==>So Tomcat server.xml utilizes some of the trusted key stores in JRE to do SSL
+								==>Because it is some common trusted one, so most clients will trust it
+							2) Company-Enabled Key Stores:
+								==>Tomcat: They need to add them to JRE JKS
+							3) Website-Enabled Key Stores
+								==>Tomcat: They need to add them to JRE JKS
+								(but the client browser etc might be doubtful about non-trusted SSL certificate...)
+							==>Tomcat can use customized name/location/etc JKS by creating a new one and link to server.xml (by the JKS file location)
+							==>Why Tomcat uses that JRE .jks file? because it is some trusted SSL certificates installed in that jks, so server.xml links it to enable SSL
+								(internally Tomcat source code picks up this jks via server.xml, and send one certificate to the client browser like the SSL Trip 1)
+								==>This meets the above common HTTPS/SSL processing mechanism
+						==>Other non-Tomcat scenarios might use different / their own ways to store/link and serve the SSL certificate to the client
+						==>The entire key is: 
+							How does the SSL enabled server (not necessarily Java or Tomcat) return a SSL certificate to the client request during "Trip 1"
+							and let client agree with it (send back an encrypted key to server) and start Trip 2...
+						==>Also it is the SSL enabled server side to send this certificate to establish an SSL session
+							Would client side ever send the SSL copy to the server during trip 1 to establish it?
+			==>Point 1:	Client(mostly browsers - due to http/https / it can be a server too or tool: like IADT Desktop)-on-internet sends request/access to this server
+			==>Point 2:	HTTP: generally speaking naturally enabled - no special configurations on the server
+			==>Point 3:	But server wants to enable HTTPS access to the server: adding SSL certificates to server sides
+					1) Step 1:	Server enables its HTTPS settings: so clients can send HTTPS url requests
+							==>Tomcat: has a port: 9443 
+							   (web server 443 https: like Apache - AJP13 via 8009 to Tomcat at 9443)
+							==>server.xml: enable this port to take HTTPS request
+					2) 
+					2) NW:		IADT Desktop: ...key stores...:
+							==>Client: not a browser / it is AWT/Swing desktop client application
+							==>Server: MF/CICS Web Services Applications
+							==>Need:   Enable an SSL call: Java HTTPS calls
+							==>HOW?	   1) client: send a call using Java code: via Socket with SSL/TLS connection
+								   2) Server: Web Service end points: expect an SSL socket request
+
+							==>So how to enable an SS(ocket)L(ayer)/TLS(Transport Layer) connection: scenarios could VARY:
+								1) Scenario 1:	WebBrowser -> Typical-Web-Server-Like-Tomcat: mechanims are listed above - 2 trips
+										==>SSL: client-server domain: but server: online web server
+										==>Belongs to HTTPS
+								2) Scenario 2:	S(ecure)SH(shell): SSL connection on shell / linux connection: or similar
+										==>Use the common protocol: public/private keys:
+										==>SSH: client-server domain: but server: Linux/Unix shell
+										==>Belongs to SSH - maybe different HTTPS
+										More: sftp/scp/...
+								3) Scenario 3:	Socket communications and WS communcations
+								4) ...
+							
+			==>Point 4:	Why is SSL Certificate needed?
+					1) Function 1:	Enable the core nature of SSL: establish an SSL "session" between client and server
+					2) Processing:	Enable Rubi to be the processor of this processing under the master-slave methodology
+							==>Step 1: Trip 1: client sends a request to the SSL enabled server
+							==>Step 2: server returns the response page with a copy of SSL certificate
+									(which is why the client browser can right click somewhere close
+										to the address bar and download this copy)
+									==>Tomcat: the JKS SSL certificates are common ones: so most of the browsers trust it
+							==>Step 3: Trip 2: client checks it and see if it trusts this SSL certificate (sometimes browser pops up a warning): if so, respond back
+							==>Step 4: SSL enabled server sends back (2nd trip) to client with a signed ack to start the SSL session: also the encrypted contents
+							==>
+			Data Encryption: Cipher/Crypotography/Encryption/Decryption
+			Data Encoding?
+			...		
+			==>Web SSL Solutions
+			==>Enterprise System SSL Solutions
+			==>Java SSL Solutions:
+				jre/security/jks stores: key stores:
+				==>Common industry or Java Oracle enabled key store's certifcates
+			==>Application Servers SSL Solutions:
+				Tomcat - enable SSL:
+					==>server.xml: refer to some local JDK/JRE's jks store ==>After that it allows client SSL connections
+				...
+			==>App SSL Solutions
+
+	==>2G(GrandGrand)Parents:	Java and JavaJDK + Web Browsers
+		==>2GParents: talk to web tech domains and establish Java web programming portfolios and ecosystems:
+				==>
+				==>Web Java Apps:
+					.war/.jar/.ear/...: web.xml, ...
+				==>Web / App servers - Java standardizations
+		==>Sun Microsystem->Oracle:
+			OracleJDK
+			OpenJDK: starting from JDK11: separate OpenJDK and OracleJDK(provide Oracle long-time support):
+				OpenJDK: GNU GPL (General Public License) open-source license
+				JDK 11: no JRE: Oracle\JavaPath
+					==>Can use jlink to create a custom image
+				==>OpenJDK is similar to OracleJDK from JDK11 onward (OracleJDK: Oracle Support + some good responses and JVM performances)
+				==>OpenJDK: every 6 months / OracleJDK: every 3 years
+				==>2 IDEs (Android Studio and IntelliJ IDEA) + many Linux use: OpenJDK
+				==>Refer to Baeldung.com for some good comparisons
+			=====>JDK 14: 03/2020 ==>Every 3 years
+			==>JDK 9/11/12
+			==>JDK 8
+				==>JDK8 or JDK11: popular app builds
+			AdoptOpenJDK: community version
+			IBM JDK
+			...
+			Linux version JDKs?
+
+		GA Release
+		LTS Release: long-time support release
+
+		JSR:	Java Specification Requests: responsible for many new Java features
+		JCP	Java Community Process
+		JEP:	JDK Release Process
+
+		==>Web Browsers:
+
+			- Chrome: not support NPAPI: for Applets
+				  ==>But ok with Web Start applications
+				  chrome://plugins/
+			- 
+
+	==>GrandParents: 5.2.6.RELEASE
+		Official Docs:
+			https://spring.io/projects
+			https://docs.spring.io/spring-framework/docs/
+				==>CAN SEARCH ALL VERSIONS: Reference Documentations + JavaDoc APIs
+			https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/
+		JavaDoc APIs:
+			https://docs.spring.io/spring-framework/docs/current/javadoc-api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/spring-framework-reference/
+		Github:
+			https://github.com/spring-projects/
+			https://github.com/spring-projects/spring-framework
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+			https://spring.io/guides
+						
+	==>Parents: 2.2.6.RELEASE
+		Official Docs:
+			https://docs.spring.io/spring-boot/docs/
+				==>CAN SEARCH ALL VERSIONS: Reference Documentations + JavaDoc APIs
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		JavaDoc APIs:
+			https://docs.spring.io/spring-boot/docs/current/api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		Github:
+			https://github.com/spring-projects/spring-boot
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+		
+		==>Spring Boot + Spring Batch:
+			==>spring-boot-starter-batch: same version
+				==>could include slightly different version of Spring-Batch-Core
+					(Such as: newest 2.2.6.RELEASE vs second newest 4.2.1.RELEASE)
+					
+
+		==>Special Example: Spring Boot: 2.2.6.RELEASE and Spring-Batch: 4.2.2.RELEASE:
+			Hierarchy:
+				spring-boot-starter-parent: x.x.x.RELEASE
+				spring-boot-starters (spring-boot-starter)
+					==>spring-boot-starter-xxx (should be the same as x.x.x.RELEASE)
+						==>individual JARS: spring-yyy:
+						   1) spring-boot-dependencies: or the table in the end of the Spring Boot documentations
+						   		==>These jars' versions vary: depends how Spring Boot support them
+						   2) PART 1: not overridable by using the property-name in "spring-boot-dependencies"
+						   			  ==>Use: the above starter-way to directly declare with its own version in pom.xml
+						   3) PART 2: overridable by using the property-name in "spring-boot-dependencies"
+						   			  ==>However, if not using "spring-boot-starter-parent", then have to use "import" way
+
+
+		==>Spring Boot Applications:
+			==>Web Mode Apps:
+				RESTful APIs
+				SOAP APIs
+				Spring Batch
+				...
+			==>Non-Web Mode Apps
+			==>HATOES
+			==>WebSocket
+			==>Reactive Apps
+			==>
+			==>Many Many More: check springinitializr.io
+
+	==>Spring Batch:
+		Official Docs:
+			https://spring.io/projects/spring-batch
+			https://docs.spring.io/spring-batch/docs/
+			https://docs.spring.io/spring-batch/docs/current/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/
+			PDF:
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/reference/pdf/spring-batch-reference.pdf
+		JavaDoc APIs:
+			https://docs.spring.io/spring-batch/docs/current/api/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-batch/docs/current/reference/
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		Github:
+			https://github.com/spring-projects/spring-batch
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+			...
+		Samples:
+			https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples#composite-itemwriter-sample
+					
+==============================================
+Application Buildup:
+
+- Scenario 1:	Like a house buildup
+		==>Backbone/Module/Scaffolding/Modules/Frames/...
+			==>But still enable ...: layout/enabling/optimize these backbones...
+		==>This/These processes(es): also involve/include: innovation/invention/creativities...: this could be an important step: "backbone innovations"
+		==>Could be between architectures and detailed impl, or cross through them, or part of them, ...
+		==>
+
+- Scenario 2:	Utilization of Platforms/Tools/Frameworks...
+
+- Scenario 3:	
+
+
+
+==============================================

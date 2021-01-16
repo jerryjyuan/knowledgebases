@@ -1,0 +1,69 @@
+
+==============================================
+Topic:
+
+(1) .min.js is s minified version of the js code. 
+	.min.js is minified code, and is still executable
+	
+(2) And the corresponding .map.js file allows to map to the original not minified version. 
+	.map.js shows correlation between source code and transpiled code, so that the browser will allow you to debug using the source code, and is not executable.
+	.map.js file allows to map to the original not minified version.
+
+	If you make changes in the unminified file (TS), the only way they propagate to the minified file is by running the minifier - it has nothing to do with the map file (except for the fact that the minifier will generate a new map in the process). The map file is used on the clientside for debugging purposes, not to propagate changes.
+	
+	==>
+		The .map files are for js and css (and now ts too) files that have been minified. They are called SourceMaps
+		It will allow you to see the original version of the code. 
+	
+	Source Code:
+		.ts files: unminified source files
+		==>Compiling: Transpiled Code:
+			==>Generate: main.js
+			==>Generate: main.js.map:
+				==>Contain some of the raw TS file codes: not exactly the same ts files, but contents are similar
+				==>client browser: do some debugging: the debugger will access to this main.js.map file, so the debugging is closer to original TS code: such as: displays, classes, etc.
+		==>Use main.js:
+			index.html: <script src="main.js" defer></script>
+		==>Use minified version of main.min.js:
+			index.html: <script src="main.min.js" defer></script>
+			==>Run minifier: main.js => main.min.js + main.min.js.map
+			==>In production, you would use the minified version: main.min.js
+			==>In NonProd, use full version main.js
+		==>
+		
+		a source map is a JSON file that contains all the necessary information to map the transpiled code back to the original sources.
+		
+		Same for CSS files. Once you take a SASS or LESS file and compile it to CSS, it looks nothing like its original form. If you enable sourcemaps, then you can see the original state of the file, instead of the modified state.
+	
+	
+		How source map files are created? by listing the build tools I know that can create source maps.
+			Grunt: using plugin grunt-contrib-uglify
+			Gulp: using plugin gulp-uglify
+			Google closure: using parameter --create_source_map
+
+		Just to add to how to use map files. I use chrome for ubuntu and if I go to sources and click on a file, if there is a map file a message comes up telling me that I can view the original file and how to do it.
+
+			For the Angular files that I worked with today I click
+			Ctrl-P and a list of original files comes up in a small window.
+
+		Don't link your js.map file in your index.html file (no need for that)
+	
+		TypeScript transpiles your code into something that will work in a browser, as browsers don't run TypeScript. The map files point that code (in the browser) to the actual source files that are written in TS. That makes it easier to figure out at what line in the actual source things are going wrong.
+		
+	==>Open dev-tools, navigate to Sources tab, You will see sources folder, where un-minified applications files are kept.
+	
+	
+	ng build --watch --source-map=true/false
+	
+	ng build --prod -sm true/false
+	
+==============================================
+
+The Goal of Angular CLI
+The Angular CLI creates, manages, builds and test your Angular projects. It's built on top of the Angular DevKit.
+
+The Goal of DevKit
+DevKit's goal is to provide a large set of libraries that can be used to manage, develop, deploy and analyze your code.
+
+
+==============================================

@@ -1,0 +1,39 @@
+
+==========================================================
+Sub Topic: Angular:	UI: Bootstrap: APIs:
+
+==========================================================
+Bootstrap CSS:
+
+	==>Documents:
+		==>https://getbootstrap.com/docs/4.5/getting-started/introduction/
+	==>Source
+	==>Examples:
+		==>file:///C:/Users/jerry/wksp/GrandMasterCombinedUI/src/assets/bootstrap-4.5.3-examples/grid/index.html
+	==>Features:
+		==>Layout:
+			==>Default: Grid Systems
+	==>
+
+
+Usage Methods:
+	==>Method 1: Currently better:
+				==>Step 1: go online to search:	https://getbootstrap.com/docs/4.5/components/buttons/: PROS: it shows both examples and look/feel ==>So no need to test
+						   ==>This is the best way to use bootstrap
+				==>Step 2: Get some additional documents:
+						   ==>file:///C:/Users/jerry/wksp/Docs/bootstrap-4.5.3/bootstrap-4.5.3/site/docs/4.5/utilities/clearfix.md
+						   ==>file:///C:/Users/jerry/wksp/Docs/bootstrap-4.5.3-examples/bootstrap-4.5.3-examples/blog/index.html
+	==>
+	
+==========================================================
+
+	https://valor-software.com/ngx-bootstrap/
+	
+
+==========================================================
+
+
+==========================================================
+
+
+==========================================================

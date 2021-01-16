@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://medium.com/media/4575351e2c56f136e597c7489b3e24fe -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Modal component: app.component.ts – Medium</title><meta name="description" content="You can&#39;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session."><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./a6fe9899dbe3e5c2b7b7f2c87bb746cf.js.download" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-27358812d17d7bcf3a9f15cbd179399a.css"><div id="gist99571358" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-app-component-ts" class="file my-2">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-typescript  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-app-component-ts-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-app-component-ts-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-kos">{</span> <span class="pl-smi">Component</span> <span class="pl-kos">}</span> <span class="pl-k">from</span> <span class="pl-s">'@angular/core'</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-app-component-ts-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-app-component-ts-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-kos">{</span> <span class="pl-smi">MatDialog</span><span class="pl-kos">,</span> <span class="pl-smi">MatDialogConfig</span> <span class="pl-kos">}</span> <span class="pl-k">from</span> <span class="pl-s">'@angular/material/dialog'</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-app-component-ts-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-kos">{</span> <span class="pl-smi">ModalComponent</span> <span class="pl-kos">}</span> <span class="pl-k">from</span> <span class="pl-s">'./modal/modal.component'</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-app-component-ts-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-app-component-ts-LC6" class="blob-code blob-code-inner js-file-line">@<span class="pl-smi">Component</span><span class="pl-kos">(</span><span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-app-component-ts-LC7" class="blob-code blob-code-inner js-file-line">  <span class="pl-c1">selector</span>: <span class="pl-s">'app-root'</span><span class="pl-kos">,</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-app-component-ts-LC8" class="blob-code blob-code-inner js-file-line">  <span class="pl-c1">templateUrl</span>: <span class="pl-s">'./app.component.html'</span><span class="pl-kos">,</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-app-component-ts-LC9" class="blob-code blob-code-inner js-file-line">  <span class="pl-c1">styleUrls</span>: <span class="pl-kos">[</span><span class="pl-s">'./app.component.css'</span><span class="pl-kos">]</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-app-component-ts-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">}</span><span class="pl-kos">)</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-app-component-ts-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-app-component-ts-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">export</span> <span class="pl-k">class</span> <span class="pl-smi">AppComponent</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-app-component-ts-LC13" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">constructor</span><span class="pl-kos">(</span><span class="pl-k">public</span> <span class="pl-s1">matDialog</span>: <span class="pl-smi">MatDialog</span><span class="pl-kos">)</span> <span class="pl-kos">{</span> <span class="pl-kos">}</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-app-component-ts-LC14" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-app-component-ts-LC15" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">openModal</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-app-component-ts-LC16" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">const</span> <span class="pl-s1">dialogConfig</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">MatDialogConfig</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-app-component-ts-LC17" class="blob-code blob-code-inner js-file-line">    <span class="pl-c">// The user can't close the dialog by clicking outside its body</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-app-component-ts-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">dialogConfig</span><span class="pl-kos">.</span><span class="pl-c1">disableClose</span> <span class="pl-c1">=</span> <span class="pl-c1">true</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-app-component-ts-LC19" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">dialogConfig</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c1">=</span> <span class="pl-s">"modal-component"</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-app-component-ts-LC20" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">dialogConfig</span><span class="pl-kos">.</span><span class="pl-c1">height</span> <span class="pl-c1">=</span> <span class="pl-s">"350px"</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-app-component-ts-LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">dialogConfig</span><span class="pl-kos">.</span><span class="pl-c1">width</span> <span class="pl-c1">=</span> <span class="pl-s">"600px"</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-app-component-ts-LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-c">// https://material.angular.io/components/dialog/overview</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-app-component-ts-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">const</span> <span class="pl-s1">modalDialog</span> <span class="pl-c1">=</span> <span class="pl-smi">this</span><span class="pl-kos">.</span><span class="pl-c1">matDialog</span><span class="pl-kos">.</span><span class="pl-en">open</span><span class="pl-kos">(</span><span class="pl-smi">ModalComponent</span><span class="pl-kos">,</span> <span class="pl-s1">dialogConfig</span><span class="pl-kos">)</span><span class="pl-kos">;</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-app-component-ts-LC24" class="blob-code blob-code-inner js-file-line">  <span class="pl-kos">}</span></td>
+      </tr>
+      <tr>
+        <td id="file-app-component-ts-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-app-component-ts-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-kos">}</span></td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/Ze1598/a6fe9899dbe3e5c2b7b7f2c87bb746cf/raw/82787f8e1ad72edc047df43a935417b555792854/app.component.ts" style="float:right">view raw</a>
+        <a href="https://gist.github.com/Ze1598/a6fe9899dbe3e5c2b7b7f2c87bb746cf#file-app-component-ts">app.component.ts</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200; if (document) {document.domain = document.domain;}function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height);var elements = document.getElementsByClassName("gist-data"); for (var i = 0; i < elements.length; i++) {elements[i].style.overflow = "visible"}resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.location && window.location.hash === "#amp=1" && window.parent && window.parent.postMessage) {window.parent.postMessage({sentinel: "amp", type: "embed-size", height: height}, "*");}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {try {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);} catch(error) {console.log('maybeResize error: ', error)}}maybeResize();</script></body></html>

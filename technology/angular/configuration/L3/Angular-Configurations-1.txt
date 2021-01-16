@@ -1,0 +1,23 @@
+
+
+==>Rename:
+	==>Method 1: Manual changes:
+		==>For all names except the project/application names:
+			==>1) Create a new component and remove old component, and conduct a migration
+			==>2) Manual change the older names into new names: unless too many:
+					==>Search and Replace (excluding node_modules): work to some degree - because the names in apps don't go to node_modules except the project/application names
+		==>For project/application (and workspace name) names:
+			==>Unsure how to alter the names in node_modules for these names
+	==>Method 2: Use npm package: angular-rename:
+		==>Not approved to be working yet
+	==>Method 3: IDE: "Rename (Reference)" menu or commands
+		==>This is safer than using global search and replace?
+	==>Method 4: Using global search and replace
+	
+==>Rename Components:
+
+	$ npm install angular-rename --save-dev
+	$ angular-rename OldNameComponent NewNameComponent
+	
+	
+	

@@ -1,0 +1,162 @@
+
+=========================================================== 
+Aspects:
+
+Spring Boot and Angular have one of the best industry-standardized documentation sites
+	- So no need to make self-notes...
+
+Levels: Angular
+	Level 1:	
+	Level 2:	
+	Level 3:	Jerry Yuan
+	Level 5:	DMT-AngularUI Module Design/Impl/App
+				(Almost everything in this module is included and a subset of Angular-Doc)
+	Level 6:	
+	Level 7:	
+	Level 8:	Angular-Doc
+	Level 9:	?
+
+
+Levels: Spring Boot
+	Level 1:	
+	Level 2:	
+	Level 3:	
+	Level 6:	DMT-Backend RESTful-APIs Design/Impl/App
+				Jerry Yuan
+	Level 7:	Spring-Boot-Doc
+	Level 8:	
+	Level 9:	?
+
+
+
+- APIs
+- Themes
+- Libs:
+	- Material Design:
+		- CDK
+		- Components
+- Dependencies
+	- Angular - like JS - can import any dependencies - enable various features
+	- npm install --save hammerjs
+	- src/main.ts:
+		import 'hammerjs';
+- Thematics vs Components:
+	- Similar: XSD vs. Java Code
+	- Thematics: like template
+	ng generate @angular/material:tree <component-name>
+- Fonts:
+	Google Fonts
+		https://fonts.google.com/
+	Roboto Fonts
+		===>https://material.io/archive/guidelines/style/typography.html
+	Material Icon font
+- Global Styles:
+	App-Level:
+		Fonts
+
+===========================================================
+Coding Parts:
+
+- Main:
+	- Standardized:
+		Basically Angular tries to standardize modules and apps and APIs:
+		- So its apps also try to use standardized ways
+	- Auto and Simplified
+		Maybe Angular tries to move toward Spring Boot ways - simplified and automated...
+	- 
+
+
+- Angular Doc:
+	- 
+	- Forms
+	- NgModule Efficiency and mastering
+	- Integrations:
+		- Data: service integration + asynchronous processing 
+		- Observables and Promises
+		- 
+	- DI
+	- Router and Routing
+	- Animations
+	- Structures: CLI + SpringBoot/Maven + other ways
+	- Building: various build tools and methods
+	- Deployment
+	- 
+
+- General Key Parts:
+	- One class file: can contain multiple interfaces, components, classes, etc.
+	- 
+
+
+- DI:
+	- 
+	- Usage 1:	DI - inject items via constructor's arguments
+	- Usage 2:	Unit test - add and enable/override mock class and test cases
+	- 
+
+
+	- ModuleInjector:
+		- @Injectable() vs. @NgModule():
+			- Enable an customized one provider: overrider @Injectable() default one
+			- 
+
+	- ElementInjector:
+		- Element Level:	DOM element + app-component's level: providers...
+					- provider: belong to ElementInjector
+					- Example: service injected
+		- For both @Directive and @Component: because both can work on an element - even the same element
+
+	- Rules:
+		- Component's ElementInjector -> Parent component tree's ElementInjector(s)
+		- Then: ModuleInjector tree
+
+
+- Component: parent-child communications:
+	- @Input and @Output
+	- 
+	- @ContentXXX
+	- 
+	- @ViewXXX
+	- 
+	- 
+
+- Routing:	===>DONE - routing is very simple
+	- Client DMT Router modules: very straightforward
+		- Design 1: App level: use a forRoot() to enable highest level routing
+		- Design 2: Sub-module level: use forChild() to add sub-modules' routers
+	- 
+
+- Security:
+	- Common Security Protocols
+		SAML
+	- Common Security Modules:
+		OAuth2
+	- APIs: guards	===>DONE
+	- 
+
+- Features/Functions - Case Studies:
+	- Concepts:
+		Host: Page / HTML DOM / TemplateURL =>Host: DOM? - the page... this current component as the host
+
+	- @HostListener('click', ['$event']) onClick(e) {...}
+		===>Component class: add one click mapping for the event defined to this component's method
+			===>So no need to add event into html template...
+		===>Can also be done via:
+			html: <.... (click)=onClick() ...>
+	- 
+
+@Input() myProperty;	
+Declares an input property that you can update via property binding (example: <my-cmp [myProperty]="someExpression">).
+
+@Output() myEvent = new EventEmitter();	
+Declares an output property that fires events that you can subscribe to with an event binding (example: <my-cmp (myEvent)="doSomething()">).
+
+- Define a button component: 
+	NewButtonComponent
+		templateUrl: ===>Create a myEvent ... as output
+- Define another component:
+	<newButton ... (myEvent)="doSomething()" ...>
+		- this event "myEvent" is emitted by this newButtonComponent
+		- so it can be subscribed and process some action... - when clicked
+
+
+=========================================================== 

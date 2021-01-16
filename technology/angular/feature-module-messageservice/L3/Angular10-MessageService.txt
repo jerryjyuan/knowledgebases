@@ -1,0 +1,127 @@
+
+=====================================================
+Angular 10:
+		Angular 10 Component Communication: Angular 10 Message Service
+		Communicating Between Components with Observable & Subject
+		https://jasonwatmore.com/post/2020/07/06/angular-10-communicating-between-components-with-observable-subject
+		==>Observable.subscribe() and Subject.next():
+			 subscribe to new messages in any component with onMessage()
+		==>The subject next method is used to send messages to an observable which are then sent (send messages from any component with the sendMessage(message: string)) 
+			to all angular components that are subscribers (a.k.a. observers) of that observable.
+			==>clear messages from any component with the clearMessages()
+			
+=====================================================
+Step 1:	Create a MessageService:
+
+		ng n service services/MessageService
+		
+		Implementation:
+			==>Enable: Subject
+			==>Subject.next()
+					The subject next method is used to send messages to an observable which are then sent to all angular components that are subscribers (a.k.a. observers) of that observable.
+						==>this.messageService.sendMessage('Message from Home Component to App Component!');
+							==>send messages to an observable
+						==>this.subscription = this.messageService.onMessage().subscribe()
+							==>1) are subscribers (a.k.a. observers) of that observable.
+							==>2) Another component can become a subscriber as well like the above one
+							==>3) ...
+		Why Angular 10.0.2 and RxJS 6.6.0?
+			==>1) These 2 calls are enabled and also interact together by Angular 10 and RxJS 6.6
+			==>2) Their internal code: enables these logic:
+					this.subject.next({ text: message });
+					this.subject.next();
+			==>...
+			So it is Angular 10 feature (the internal code, not MessageService class itself)
+			But: app still needs to add the class: MessageService
+			
+		==>Usage 1: Can be used some component SenderComponent/Observable:
+					==>Call: sendMessage(message: string)
+					==>Call: clear messages
+		
+		==>Usage 2: Can be used some component SubscriberComponents/Observers:
+					==>subscribe to new messages in any component with onMessage()
+					==>Call: onMessage()
+					Local Storage: messages: any[] = [];
+					As a subscriber/observer: subscription: Subscription;
+
+Step 2: Add Message Service
+
+	import {Observable, Subject} from 'rxjs';
+	
+	@Injectable({providerIn: 'root'})
+	export class MessageService {
+	
+		//Declare Subject
+		
+		//Add sendMessage(): this is for the components that become Observables:
+				==>every component can become an Observable as long as they call this method()
+				==>By sending message to MessageService: other Observers can subscribe to receive messages
+		sendMessage(message: String) {
+			this.subject.next({ text : message});
+		}
+		
+		//Add clearMessage(): similar to sendMessage(): but send an empty message
+		clearMessages() {
+			this.subject.next();
+		}
+		
+		//Add onMessage(): this is for the components that become Observers, which subscribes to an Observable
+		onMessage: Observable<any> {
+			return this.subject.asObervable();
+		}
+	}
+
+
+Step 3: Add the component(s): become Observables / Sender Components: can be more than 1 component
+
+	import {Component} from '@angular/core';
+	import {MessageService} from '../services/message-service';
+	
+	@Component({
+		templateUrl: 'sender1.component.html'
+	})
+	export class SenderComponent1 {
+	
+		constructor(private messageService: MessageService) {}
+		
+		sendMessage(): void {
+			this.messageService.sendMessage("SenderComponent1");
+		}
+		
+		clearMessage(): void {
+			this.messageService.clearMessages();
+		}
+	}
+	
+	
+Step 4: Add the component(s): become Observers / Subscriber Components: can be more than 1 component
+
+	==>Who would become observers in the app?
+		1) No.1 Candidate: App.Component: it provides a global messages array for every sub-component to send message to, ..., can be shared across app globally
+
+	import {Component} from '@angular/core';
+	import {Subscription} from 'rxjs';
+	import {MessageService} from '../services/message-service';
+	
+	@Component({
+	})
+	export class SubscriberComponent1 implements OnDestroy {
+		
+		messages: any[] = [];
+		subscription: Subscription;
+		
+		constructor(private messageService: MessageService) {
+			this.subscription = this.messageService.onMessage().subscribe((message) -> {
+				if (message}
+					messages.push(message);
+				else 
+					this.messages = [];
+			});
+		}
+		
+		ngOnDestroy() {
+			this.subScription.unsubscribe();
+		}
+	}
+	
+=====================================================

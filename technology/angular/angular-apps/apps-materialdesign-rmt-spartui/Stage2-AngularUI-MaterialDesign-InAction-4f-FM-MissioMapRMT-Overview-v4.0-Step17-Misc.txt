@@ -1,0 +1,525 @@
+
+============================================================
+==>Step 19:	Migrations:
+	==>Upgrade Versions:
+		ng upgrade
+		
+	==>Migrating to an Angular CLI Project:
+		https://jasonwatmore.com/post/2019/06/13/angular-7-tutorial-part-7-migrating-to-an-angular-cli-project
+	
+
+============================================================
+UI Topics:
+
+Topics: Usage Apps/Examples:
+		https://github.com/oveits/consuming-a-restful-web-service-with-angular-vi
+		https://github.com/codecraft-tv/angular-course/tree/current/11.HTTP/3.http-with-promises/code/
+		https://jasonwatmore.com/post/2019/11/21/angular-http-post-request-examples
+		https://jasonwatmore.com/post/2019/11/04/angular-8-router-animation-tutorial-example
+		
+
+Topic: Dialog Windows: Modals/Popups/...
+
+Topic: Paginations
+
+Topic: Loading Indicator	
+		https://codecraft.tv/courses/angular/http/http-with-promises/
+
+
+
+============================================================
+Angular Coding Tips:
+
+==>Use "let": local variables and *ngFor
+
+==>Use: Type inference: 
+
+==>Use: backtick
+		let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+
+==>Use: readonly as modifier
+
+	constructor(private readonly cache: CacheService, ...) {}
+
+==>Misc:
+	==>#: href="#element-id"
+	==>#: http://.../#element-id"
+	==>#: href="#"
+	==>#: http://.../#"
+	==>#: refer to templateRef... like child component...
+			==>Kind of patten...
+			<div #gmap
+			
+	
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+==>API Services App: "RMT-Services":
+	==>Assigned to Sridhar:
+
+		Design doc?
+		Requirements doc?
+		Scrum Master/Team in place?
+
+
+		App-Scaffolding
+			==>POC
+				==>Real App
+
+	(1) Stage: Scaffolding:
+		1) Spring Initializr: create Maven modules:
+					2.1.6.Release
+		2) Spring Boot...
+		3) 
+
+	IDE:
+		STS
+		Install: Cucumber Eclipse Plugin
+
+	(2) Stage: POC:
+		1) Modify pom.xml:
+			==>Add <properties> section
+			==>Add encoding and java version
+			==>${project.build.directory}
+
+		2) Create common packages
+
+		3) Add classes
+
+		4) Add Swagger: for POC demo
+
+			==>@Configuration:
+				1) Can create a config package for all @Configuration classes
+				2) 
+
+
+	(3) Stage: Real App / Productionization:
+		1) Modify pom.xml again:
+			==>Jacoco?:
+				Sonar code coverage
+				Generating reporting: jacoco.exec
+			==>cucumber-junit/spring/core/java: 1.2.4
+			==>selenium-java: 3.141.59
+			==>swagger: API docs: springfox-swagger2/swagger-ui: 2.9.2
+			==>gson: not jackson?
+			==>hsqldb: not h2
+			==>lombok
+			==>json/jsoup/opencsv
+			==>plugins: cucumber-reporting
+			==>profile: coverage: reporting stuff...
+
+		2) Focus on performance:
+			jmeter
+
+			Test data: json file
+
+		3) Features:
+			==>Main development processes are feature driven...
+
+			3 controllers:
+				==>Mapping with the RMT UI's 3 feature needs
+
+			==>several APIs
+
+			==>
+
+		4) Test Modules:
+			==>Focus on test coverage much...
+			==>sonar/selenium/cucumber/junit/jmeter/mockito/...
+
+			==>To Do: see how cucumber tests are done...
+
+		To do:
+		==>Several annotations
+		==>Why adding @Configuration into @Repository...
+			==>This is one way to use "Spring Data Repository with more capabilities":
+				==>Beyond the built-in repository in the Spring Data APIs
+				==>But still enabled as @Repository
+				==>This is beyond the built-in repository and JdbcTemplate ways, native queries, etc.
+				==>It is something like: enable your own customized repository classes replacing the existing Spring Data repository classes
+			==>The actual implementation: a combo of repository impl and JdbcTemplate and some native queries
+		==>
+
+
+
+	(4) Stage: Deployment:
+
+		Talk to Anak and Sudharma:	Deployment
+
+		Apache
+			Deepak: Configure Apache
+
+		DB:
+			Elizabeth:	Set up DB
+
+	//////////////////////////
+	APIs:
+	//////////////////////////
+	Methods:
+		FastPOC				(not so practical: FastApp)
+		FastScenarioCoding	(not fast-memorizing-coding)
+			==>Scenario-Driven
+			==>Method-Driven
+			==>Insight-Driven
+			==>Step-Driven
+			==>...
+		
+		
+	==>BuildLess Coding
+	==>DeploymentLess Coding
+	==>RunLess Coding
+	
+	==>Become an expert in coding without processing actual development like DMT, WorldPay projects, etc...
+	==>Become a superb developer with developmentless and without actual-development processes
+	
+	
+	==>How to develop this RESTful API app:
+	
+		Steps 1:	Business Requirements and API Interface Documents
+			Step 1:	Business Requirements Documentations
+			Step 2: Application API Interface Documents
+			Step 3:	Optional: Application Functional Documentations
+			Step 4:	Optional: Data Model Analysis: DB/tables/...
+			Step 5: Optional: Application Integration Documentations
+		Steps 2:	Scaffolding:
+			Step 1: Sketch the app/package/description names, etc. + Framework/BuildTool selections + Versions
+			Step 2:	IDE: setup build environment
+			Step 3:	https://start.spring.io/
+					==>Web/SpringDataJPA/Actuator/HSQLDB/Test/
+					==>To Do: 5-min refresh Spring Boot Starters
+			Step 4:	Run a maven build quickly: to build the scaffolding app
+			Step 5:	Check in the scaffolding code into GIT Repo + set up .gitignore file + create dev branch
+		Steps 3:	Iteration 1:	Create POC 1: demo
+			Step 1:	Controllers
+			
+					Enable CORS
+					
+					//APIs: arguments: pathvariables, data, parachuting-common data from the request/session, ...headers/params/
+					https://github.com/spring-projects/spring-mvc-showcase/blob/master/src/main/java/org/springframework/samples/mvc/fileupload/FileUploadController.java
+					(1) Methods 1: Return Values:
+						Direct use common data for Entity's body:
+						
+						(1) No.1 Way: return ResponseEntity
+						//Return ResponseEntity:
+						//Multiple Forms:
+							//Multiple Constructors: Body, Headers, Status
+							//Multiple generator methods: ok(), ...
+							//
+						(2) No.2: Return: @ResponseBody
+							public @ResponseBody String getXXX() {
+								return ""; //this is the Json String like: "{a: \"a\"; b: \"b\"}"
+								//This string goes to HttpResponse's entity's body
+								//In client side: it will be deserialized into JSON String and parsed into a JSON object by Jackson...
+								
+								//1) Use Spring Boot Jackson: just return an object: ==>@ResponseBody: then it will be converted into JSON string
+								//2) Use: Explicit way: ResponseEntity.ok(jsonString); //can be converted from GSON, ..., ...
+							}
+						(3) No.3: Return a string:
+							==>Basically it will go to Entity's body: but use all default settings
+							
+						(4) No.4: Return other beans: JavaBean ==>This will go to Body: ...@XmlRootElement ==>I think this JavaBean class: needs: toString()
+									==>Actually the Entity's body is the toString() result... ==>Still a string
+									
+						(5) No.5: Return some special object types that can be converted into entity's body as a String or a JSON String?
+						
+								Feed/Channel/...
+								MultiValueMap<String, String>
+								
+						All the above data are all going to the Entity's body field, as a string or JSON String?
+						
+					(2) Methods 2: Arguments: Add Adjustments as method arguments:
+									==>Request Data
+									==>JavaBeans
+									==>Cookies
+									==>...
+									==>Headers
+									==>WebRequest request, Model model
+									==>@RequestParam MultipartFile file, Model model
+					
+					(3) Methods 3: Annotations: Add enhancements via annotations, etc.
+						
+						==>@ModelAttributes
+						
+						==>
+						
+						
+					Simple Testing:
+						http://localhost:8080/bandwidthapi/Bandwidth/CheckNumber/accountId/number
+					
+					
+			
+			Step 2:	Mock Data
+			
+			Step 3: Exception Package: "Under control"
+					==>AOP: @ControllerAdvice and @ExceptionHandler
+					==>Can Add: ExceptionController to handler exceptions as global and also integration enabled ways
+					==>Advanced Usage: use: @RestControllerAdvice
+					
+			Step 4: Log Package:
+					==>Utilize Spring Boot default: slf4j + logback
+					==>Add a customized Log util class: for performance logging
+						==>Record performance testing time periods and start time, etc.
+			
+			==>Launch a demo version for POC 1: Controllers - without real DB data
+		
+		Steps 4:	Iteration 2:	DB Design and Enablement
+		
+			==>Models
+			
+			==>Repository
+			
+			==>...
+			
+		
+		
+		
+		Steps 5:	Iteration 3:	Excel?
+		
+		
+		Steps 6:	Iteration 4:	Add Test Modules:
+					This app is very much test centric:
+					
+					JUnit
+					Mockito
+					Cucumber
+					Selenium
+					Sonar
+					JMeter
+					...
+		
+		Steps 9:	Testing:
+					==>Maven Run: cmap file exists
+					==>DB connections: password
+					==>
+		
+	
+	
+	
+	
+	
+	Points:
+		==>Interface + Class
+		
+	Build:
+	
+	Run/Deployment:
+		cmap: external config file: in place
+			config data added: including DB url etc
+		maven spring boot run:
+			entityManagerFactoryBuilder: bean: failed: invalid transaction isolation value: TRANSACTION_READ_UNCOMMITTED=
+	
+	==>Layer APIs:
+	
+	==>Property APIs: 
+	
+	
+	==>Renter APIs:
+		used internally?
+	
+	==>App Config:
+		==>Spring Boot:	application.properties file/yml:
+						==>Angular Service class: or dedicated config class: call .<same-context>/config API to retrieve from application.properties file
+							Example 1: Fedex DMT app Angular UI
+		==>Spring/SpringBoot: cmap: Work together with Spring and/or SpringBoot
+						==>Add config in some external files like cmp
+							Example 1: RMT - services APIs: utilize cml file as external config file	
+		
+
+	//////////////////////////
+	Deployment:
+	//////////////////////////
+	DB?
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+==>Angular API Documentation:
+	How to understand and use it better?
+	
+	
+get(url: string, options: 
+		{ 
+			headers?: HttpHeaders | 
+				{ [header: string]: string | string[]; }; 
+			observe?: 
+				HttpObserve; 
+			params?: 
+				HttpParams | 
+				{ [param: string]: string | string[]; }; 
+			reportProgress?: boolean; 
+			responseType?: "arraybuffer" | ... 2 more ... | "json"; 
+			withCredentials?: boolean;
+		}
+			= {}
+   ): Observable<any>
+
+{ [param: string]: string | string[]; } ==>Should be: 1 and 2a
+	==>JSON String
+	Example Data 1: one data item
+		==>{"param": "value1"}
+	OR:
+	Example Data 2a: multiple data items like: ==>Should be this
+		==>{"param1": "value1"; "param2": "value2"; "param3": "value3"}
+	OR:
+	Example Data 2b: like: ==>Should not be this
+		==>{"param": ["value1", "value2", "value3"]}
+
+
+============================================================
+Observable:
+
+	apiCall.subscribe(angular-lamba-expr1, angular-lamba-expr2, ...);
+	apiCall.subscribe(angular-arrow-function1, angular-arrow-function2, ...);
+
+this.soapService.getJsonData().subscribe((data) => {
+      console.warn('Json data received:', data);
+      this.jsonData = data;
+    },
+    (err) => {
+      console.warn('Erroneous! Err:', err);
+    });
+	
+============================================================
+
+
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+@Injectable()
+export class SoapService 
+{
+  // subject: Subject<any> = new Subject();
+
+  constructor(private http: HttpClient) { }
+
+  getSoapData()
+  {
+    return this.http.get('assets/testdata.xml', {responseType: 'text'})
+      .pipe(
+        map((xmlString: string)=>{
+          const asJson = this.xmlStringToJson(xmlString);
+          return asJson;
+        }),
+        catchError((err)=> {
+          console.warn('INT ERR:', err);
+          return err;     
+        })
+      );
+  }
+  // TOCO: In practice, may want to use an HttpInterceptor:
+  //       https://angular.io/guide/http#intercepting-requests-and-responses
+  //       https://blog.angularindepth.com/the-new-angular-httpclient-api-9e5c85fe3361
+
+  xmlStringToJson(xml: string)
+  {
+    // Convert the XML string to an XML Document.
+    const oParser = new DOMParser();
+    const oDOM = oParser.parseFromString(xml, "application/xml");
+    // Convert the XML Document to a JSON Object.
+    return this.xmlToJson(oDOM);
+  }
+
+  /**
+   * REF: https://davidwalsh.name/convert-xml-json
+   */
+  xmlToJson(xml)
+  {
+    // Create the return object
+    var obj = {};
+
+    if (xml.nodeType == 1) { // element
+      // do attributes
+      if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+        for (var j = 0; j < xml.attributes.length; j++) {
+          var attribute = xml.attributes.item(j);
+          obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+        }
+      }
+    } else if (xml.nodeType == 3) { // text
+      obj = xml.nodeValue;
+    }
+
+    // do children
+    if (xml.hasChildNodes()) {
+      for(var i = 0; i < xml.childNodes.length; i++) {
+        var item = xml.childNodes.item(i);
+        var nodeName = item.nodeName;
+        if (typeof(obj[nodeName]) == "undefined") {
+          obj[nodeName] = this.xmlToJson(item);
+        } else {
+          if (typeof(obj[nodeName].push) == "undefined") {
+            var old = obj[nodeName];
+            obj[nodeName] = [];
+            obj[nodeName].push(old);
+          }
+          obj[nodeName].push(this.xmlToJson(item));
+        }
+      }
+    }
+    return obj;
+  }
+
+  getJsonData()
+  {
+    return this.http.get('assets/testdata.json');
+
+    /*
+    Proper practice: 
+    this.http.get('./testdata.json')
+    .subscribe((data) => {
+      this.subject.next(data);
+    },
+    (err) => {
+      console.warn('Erroneous! Error:', err);
+    });
+    */
+  }
+}
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+package.json:
+
+
+@angular/common
+Common angular directives including NgIf, NgClass, NgForOf and pipes including AsyncPipe, UpperCasePipe, LowerCasePipe. Also includes the Angular HttpClient in the @angular/common/http subfolder.
+Docs: https://angular.io/api/common
+@angular/compiler
+Angular template compiler, used by @angular/platform-browser-dynamic to convert templates to JavaScript code that can run in the browser.
+@angular/core
+As the name suggests, these are the core services, utilities and functionality required by all Angular applications.
+Docs: https://angular.io/api/core
+@angular/forms
+Includes providers and directives for building both template-driven and reactive forms.
+Docs: https://angular.io/api/forms
+@angular/platform-browser
+Includes core functionality for running Angular applications in different supported browsers.
+Docs: https://angular.io/api/platform-browser
+@angular/platform-browser-dynamic
+Includes providers and methods to compile, bootstrap and run Angular apps dynamically in the browser using JIT compilation.
+Docs: https://angular.io/api/platform-browser-dynamic
+@angular/router
+Implements routing features which enable navigation between different routes (url paths) in an Angular application and mapping routes to different components.
+Docs: https://angular.io/guide/router
+core-js
+A collection of polyfills that add support for features required by Angular that aren’t natively supported yet in several browsers.
+Docs: https://github.com/zloirock/core-js
+rxjs
+Reactive Extensions Library for JavaScript, including an implementation of Observables which are returned by many Angular APIs and used throughout the Angular framework for handling asynchronous events.
+Docs: https://angular.io/guide/rx-library
+zone.js
+Implements Zones for JavaScript, used by Angular for running change detection processes when native js operations raise events.
+Docs: https://github.com/angular/zone.js/
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

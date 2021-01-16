@@ -1,0 +1,60 @@
+
+============================================================
+
+		
+	==>Step 7c:	Feature Integration - Third-Party Integrations
+		
+		==>Step 7c-1:	Feature - Feature Module Development: Google API integration
+			==>How to integrate with Google MAP APIs
+				==>Enable: feature module: as main contents pane as google map
+				==>Enable CDK: to use additional Google material design functions and components
+			
+				==>Assigned to Kesava
+				
+			==>ng g component map
+			==>ng g component ...
+			==>Design map.component.html file:
+				==>
+			==>Design map.component.ts file:
+				==>
+				
+				
+			==>Feature Module: Address Search
+				ng g component search-addresses
+			==>Feature Module: Geoareas Search
+				ng g component search-areas
+			==>Feature Module: Properties Search
+				ng g component search-properties
+				
+			==>Feature Module: Selection Feature
+			
+			==>Feature Module: Exporting
+				ng g component excel
+			
+			==>Feature Module: Results
+			
+			
+			
+			
+			
+			Component Design:
+			
+				==>ngOnInit(): initialize some code and processing when @Directive or component initialized
+				==>constructor: assign class member with data by arguments mainly or only - no other init code is added here
+				==>
+				
+		
+
+
+========================================================================================================================
+Charts:
+	https://www.syncfusion.com/angular-ui-components/angular-charts
+	
+Scheduler:
+	https://www.syncfusion.com/angular-ui-components/angular-scheduler
+	
+	
+========================================================================================================================
+========================================================================================================================
+
+

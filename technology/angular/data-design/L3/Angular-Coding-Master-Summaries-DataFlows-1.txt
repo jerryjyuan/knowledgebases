@@ -1,0 +1,131 @@
+
+=====================================================
+
+=====================================================
+Angular - Data Flows: Type 1:	User Events
+
+	==>Component vs. User events
+
+==>It means: on a page: user does various keyboard events as input: such as: clicks
+==>Page: take it as an event and add some data into the component's method's arguments or just call some methods
+==>
+
+<AnyDOM-Selector/Element (event)="componentMethodCall(...)" ... ...>
+
+=====================================================
+Angular - Data Flows: Type 2:	Display component data to HTML page as output
+
+	==>Component vs. HTML display
+
+==>{{}} interpolation
+
+=====================================================
+Angular - Data Flows: Type 3:	Form Submit - similar to normal HTML form submissions
+
+	==>Component vs. HTML form and form control
+
+==>It means: two-way binding still existing in Angular 2+ or 8+
+			 ==>Some articles said: Angule 2+ doesn't have 2-way binding any more... - not true
+			    [Baeldung]: What I mean was: no 2-way binding any more except "form control" scenarios: Like Romania with WWII and WARSAW Pact
+				[Jerry]: Then your article should be clearer..., are you also working on Angular?
+						 So: form can have it using [(ngModel)], but other scenarios like <component-selector [(ngModel)]="areaCode" ... =>Cannot do it?
+				[Baeldung]: I am actually more like Frenchman, do you think so? Welcome to Paris
+				[Jerry]:    I like Paris a lot and London, Berlin, and sometimes I like creeks a lot... crooked creeks...
+==>Required:
+	import { FormsModule } from '@angular/forms';
+	Treat it as a form and form control: but you don't need <form ...></form>
+
+<input #npa type="text" name="npa" value="" size=3 maxlength=3 class="sform" [(ngModel)]="areaCode">
+	==>This can display the component initial value and also add user entered value into the component, which is called: 2-way binding and "left/right sources"
+<button class="but_lookup" (click)="lookup()">Look Up</button>
+
+areaCode: string = '';
+==>Cannot be private: private only means inside component
+
+=====================================================
+Angular - Data Flows: Type 4:	Attribute Binding
+
+	==>Component vs. HTML Selector/element's attributes
+	
+
+=====================================================
+Angular - Data Flows: Type 5:	@Input Binding:
+
+	==>Component vs. Parent Component...
+
+==>This enables: extensive capabilities for data inputs - especially from parent component to child component
+
+Use: @Input
+
+
+	
+	
+=====================================================
+Angular - Data Flows: Type 6:	Inter-component communications and data passing:
+
+==>Parent to Child:
+	3 Ways:
+		==>@Input + field
+		==>@Input + Setter
+		==>Init lifecycle Hook method: ngOnChanges()
+
+==>Child to Parent:
+	4 ways:
+		==>Emitter: @Output
+		==>ViewChild
+		==>TemplateRef
+		==>Shared Service
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================
+
+=====================================================

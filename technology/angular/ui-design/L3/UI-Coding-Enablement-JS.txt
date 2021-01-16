@@ -1,0 +1,41 @@
+
+Angular ==>Use jQuery:
+
+
+	==>Why do we need to use it?
+		==>PROS:
+			==>Utilize some functions of jQuery
+			==>Some benefits: access DOM elements by jQeury methods
+		==>CONS:
+			==>Not in sync with OOP? and/or Component driven development?
+
+			Angular it's better to avoid using libraries that make direct manipulation of the DOM (like jQuery) and let Angular handle that.
+				
+	==>
+		npm install jquery --save
+		
+		"scripts" :["./node_modules/jquery/dist/jquery.min.js"]
+		
+		Components:
+			import * from jquery
+			
+		Code Example:
+
+			ngOnInit() { 
+				$(‘button’).click(function() { 
+					alert(‘GeeksForGeeks’); 
+				}); 
+			} 
+			
+			ngOnInit(){ 
+			$(document).ready(function(){ 
+						$("button").click(function(){ 
+							var div=$("div"); 
+							div.animate({left:'100px'}, "slow"); 
+							div.animate({fontSize:'5em'}, "slow"); 
+						}); 
+					}); 
+			} 
+
+		
+	

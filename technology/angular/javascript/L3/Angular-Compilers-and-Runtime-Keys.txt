@@ -1,0 +1,18 @@
+
+
+*******************************
+Keys: Working with NPM Publish:
+*******************************
+==>Refer to the  official doc:
+	https://angular.io/guide/creating-libraries#publishing-your-library
+==>Highlights:
+	==>publishing your libraries using the View Engine compiler ensures that they can be transparently consumed by both View Engine and Ivy apps
+==>When you install a library package, the mapping is in the node_modules folder. When you build your own library, it has to find the mapping in your tsconfig paths.
+==>Generating a library with the Angular CLI automatically adds its path to the tsconfig file.
+==>You can rebuild your library whenever you make changes to it, but this extra step takes time. Incremental builds functionality improves the library-development experience. Every time a file is changed a partial build is performed that emits the amended files.
+==>Incremental builds can be run as a background process in your dev environment.
+	ng build lib --watch
+==>The build system for apps, @angular-devkit/build-angular, is based on webpack
+==>The build system for libraries is based on ng-packagr
+*************************
+

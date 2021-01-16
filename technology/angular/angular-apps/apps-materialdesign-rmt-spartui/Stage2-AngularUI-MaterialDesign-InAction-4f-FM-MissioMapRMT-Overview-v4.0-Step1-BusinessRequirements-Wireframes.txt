@@ -1,0 +1,2827 @@
+
+============================================================
+FM: MissionMap/RMT:
+	==>2019/09:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+Angular App: MissionMap/RMT:
+
+	==>...
+	==>...
+
+
+
+
+============================================================
+How to build up this app?
+
+(1) Services APIs app
+(2) Angular UI app
+(3) E2E test utility
+(4) DB module
+(5) DCU Module
+
+============================================================
+==>Angular UI App: RMT-UI:
+
+==>Step 1: Design:
+	==>UI Wireframes/...
+		Unknown initial product-manager/business-analysts documents and wireframes...
+
+==>Step 2:
+	==>Scaffolding: Assigned to Jerry
+	==>angular/cli:
+		==>package.json:
+			==>devDependencies:	==>this enables a local dev copy of AngularCLI: will override the global or non-dev one:
+				Dev:		npm install --save-dev <package-name>:	==>for dev: you can use any versions - so no need to uninstall or change global version
+				Non-Dev: 	npm install --save <package-name>
+				Global: 	npm install -g <package-name>
+				Questions: can we have multiple versions for global?
+		==>
+
+==>Step 3:
+	==>Maven Build
+	==>1) Some of the extra config is added
+	==>2) Add local repositories into app pom.xml: other ways: global settings.xml and/or .m2/settings.xml
+	==>3) maven-dependency-plugin: used to move node/npm tar.gz from configured "repositories" into: local app's nodejs/npm's download locations
+	
+		==>RMT-UI:
+			==>mvn clean install:
+				==>Clean
+				==>Install:
+					==>Run: Global Plugin
+					==>Run: Profile: PROD: plugin
+				==>Maven Builds:
+					==>Default: local repo
+					==>Config: JFrog: settings.xml
+					==>Proxy: go to internet to download...: http proxy and npm proxy...
+				==>jar file: empty: because there are no source code from Java code:
+					==>Running Angular UI Using Maven:
+					PROS:
+						==>Use maven powerful plugins and many features
+						==>Together with other maven modules to build together using maven
+						==>Java guys' likes...
+						==>ng serve can also be used together
+					CONS:
+			==>App Maven: Global Plugin: maven-dependency-plugin:
+				==>Download nodejs from configured repo (Local Repo first, or: JFrog artifactory) to local app's download directory:
+				==>but issues: downloaded is Linux version (originally from JFrog repo): because it could be used for prod/uat: linux platform
+					Why doing this download?
+					==>Initially download from JFrog repo (local repo after that): but the path is different from front-maven-plugin maven path:
+						repository\nodejs-npm\...
+						========>This would be one time download: from JFrog or local repo path to local app's temp DOWNLOAD path: if existing, then no download needed
+				==>NODE: 9.6.1
+				==>NPM: 6.4.1
+			==>Profiles:
+				Jenkins:	front-maven-plugin:
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+									==>Into a specific folder: ${basedir}/DOWNLOAD
+
+									==>Copy:
+										from:	DOWNLOAD\v8.9.1\win-x64\node.exe
+												==>Why adding win-x64\node.exe? ==>By plugin code?
+										to: 	maven repo: github's eirslett's node\9.6.1\node-9.6.1-windows-x64.exe
+										Note:	front-maven-plugin will check if the maven repo: github's eirslett's node file exists or not, if existing, copy is skipped
+												==============>Set up formal maven repo artifacts to github paths
+												goal: install-node-and-npm:
+													this plugin will check system / global node version, if it is different from its specified version, it will install a local one
+														in target/node location from maven repo...
+													1) pick up the download path artifacts: based on platform: add: win-x64\node.exe:
+														and install them to maven repo: eirslette location: because it is a frontend-maven-plugin for eirslette domain
+													2) This plugin also copy: the installed files to: target/node location:
+														==>target location: is configured by the plugin: not by default
+										
+										Solutions:
+											==>Previously there was some workaround - but cannot reproduce it...
+											==>Manually copy files to avoid this wrong step: use skip way
+										
+									==>Copy:
+											from:	DOWNLOAD\npm-6.4.1.tgz
+											to: 	maven repo: github's eirslett's npm\6.4.1\npm-6.4.1.tgz
+											Note:	front-maven-plugin will check if the maven repo: github's eirslett's npm file exists or not, if existing, copy is skipped
+
+											Solutions:
+												==>Previously there was some workaround - but cannot reproduce it...
+												==>Manually copy files to avoid this wrong step: use skip way
+																					
+										==>Copy:
+											unpack the Maven Repo: github's eirslett's npm zip file (eirslett\npm\6.4.1\npm-6.4.1.tar.gz)
+											to:		app\target\node\node_modules, but renamed as npm
+													==>Installed npm locally
+													
+									==>After node.exe and npm installed to target/node folder: those nodeJS and npm are similar to any other local installed node/npm
+										==>So each time: mvn clean install: would recreate this: it is OK: just a tar file - not the entire node_modules download
+										==>Also you can do mvn install: ... this will keep target folder, but still run ng install (will keep existing packages) 
+											and ng build (will recreate the new dist files)
+										
+								npm install:
+									==>Use the app root folder the same as regular angular app root folder with angular.json inside that folder:
+										==>So node_modules and dist folders will be generated in this app root folder
+									==>Install: install all dependencies of the app into <app>/node_modules, not target folder
+									==>the subsequent: npm install: by front-maven-plugin: is using this nodejs/npm installation
+
+								npm build: ng build-prod
+									
+									==>You can try to test ng serve by adding a new execution for the plugin...
+								
+									Also: can go to the app folder, and run: ng serve to test-run the app
+								
+									The app is built in angular structure: frontend-maven-plugin hooks maven builds to run it: so both maven and AngularCLI work
+								
+								RMT-UI: do have angular.json...
+									==>But angulrCLI is installed locally, not in target/node global install
+									
+								App-Fundraiser:
+									==>NodeJS/NPM:
+										No need to download from JFrog: NodeJS/NPM: they require specific versions and want to enable a local install: but still no node/npm wrapper yet?
+										==>We use: global versions and global install: already existing
+										==>We also no need to install it to target as a local copy
+										==>NO: we still need this: <goal>install-node-and-npm</goal>: it is a preferred way:
+												==>C:\Users\jerry\wksp\fundraiser-ui\node\node.exe
+												==>C:\Users\jerry\wksp\fundraiser-ui\node\node_modules
+												Means:
+													The versions of Node and npm are downloaded from https://nodejs.org/dist, extracted and put into a node folder created in your installation directory . Node/npm will only be "installed" locally to your project. It will not be installed globally on the whole system (and it will not interfere with any Node/npm installations already present).
+												How does this local get used? - it is up to frontend-maven-plugin and its executions will use this one
+												
+												But: it actually moves to: working directory: after specifying the working directory:
+													C:\Users\jerry\wksp\fundraiser-ui\src\main\ng\node
+													
+										1) Exactly same thing but from default online repo:
+											[INFO] Downloading https://nodejs.org/dist/12.18.1/win-x64/node.exe to C:\Users\jerry\.m2\repository\com\github\eirslett\node\12.18.1\node-12.18.1-win-x64.exe
+											[ERROR] Failed to execute goal com.github.eirslett:frontend-maven-plugin:1.9.1:install-node-and-npm (install node and npm) on project fundraiser-ui: Could not download Node.js from: https://nodejs.org/dist/12.18.1/win-x64/node.exe: Got error code 404 from the server. -> [Help 1]
+											==>TO DO: now: workaround the same way as RMT-UI and SPARTA-UI
+												Workaround means: manually use the local NODE JS and place it into maven repo
+												NPM: has no problem because it doesn't add some prefix
+											[INFO] --- frontend-maven-plugin:1.9.1:install-node-and-npm (install node and npm) @ fundraiser-ui ---
+											[INFO] Installing node version 12.18.1
+											[WARNING] Node version does not start with naming convention 'v'.
+											[INFO] Copying node binary from C:\Users\jerry\.m2\repository\com\github\eirslett\node\12.18.1\node-12.18.1-win-x64.exe to C:\Users\jerry\wksp\fundraiser-ui\node\node.exe
+											[INFO] Installed node locally.
+											[INFO] Installing npm version 6.14.5
+											[INFO] Downloading https://registry.npmjs.org/npm/-/npm-6.14.5.tgz to C:\Users\jerry\.m2\repository\com\github\eirslett\npm\6.14.5\npm-6.14.5.tar.gz
+											[INFO] No proxies configured
+											[INFO] No proxy was configured, downloading directly
+											[INFO] Unpacking C:\Users\jerry\.m2\repository\com\github\eirslett\npm\6.14.5\npm-6.14.5.tar.gz into C:\Users\jerry\wksp\fundraiser-ui\node\node_modules
+											[INFO] Installed npm locally.
+											[INFO] 												
+									==>Silly Design: RMT-UI/SPARTA-UI: place local node/npm into target: ... maybe they have some design reasons...
+									
+									==>
+										[INFO] --- frontend-maven-plugin:1.9.1:npm (npm install) @ fundraiser-ui ---
+										[INFO] Running 'npm install' in C:\Users\jerry\wksp\fundraiser-ui\src\main\ng
+									==>
+										[INFO] --- frontend-maven-plugin:1.9.1:npm (npm/ng build) @ fundraiser-ui ---
+										[INFO] Running 'npm run-script build' in C:\Users\jerry\wksp\fundraiser-ui\src\main\ng		
+									
+									==>Deployment: Angular UI app:
+										==>Common Ways: copy the entire dist folder to the server, not the spring boot jar ...
+										==>You don't have to create a deployable spring boot jar file
+										==>
+								
+				Env...:		same:
+							except env based ng build-env
+				Local:		exec-maven-plugin: run: ng build-prod... (Assume the local env has node and npm install)
+		==>SPARTA-UI:
+			==>App Maven: Global Plugin: maven-dependency-plugin:
+				==>Download nodejs from configured repo (Local Repo first, or: JFrog artifactory) to local app's download directory:
+				==>but issues: downloaded is Linux version (originally from JFrog repo): because it could be used for prod/uat: linux platform
+					Why doing this download?
+					==>Initially download from JFrog repo (local repo after that): but the path is different from front-maven-plugin maven path:
+						repository\nodejs-npm\...
+				==>NODE: 8.9.1
+				==>NPM: 5.3.0
+			==>Profiles:
+				OpenShift:	front-maven-plugin
+							(==>How OpenShift Pods work on Sparta-UI)
+				
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+									==>Into a specific folder: ${basedir}/DOWNLOAD
+									
+									DOWNLOAD\v8.9.1\win-x64\node.exe
+									
+									==>install-and-npm failed: URI is not hierarchical
+									
+									==>Copy:
+										from:	DOWNLOAD\v8.9.1\win-x64\node.exe
+										to: 	maven repo: github's eirslett's node\9.6.1\node-8.9.1-windows-x64.exe
+									
+									==>Copy:
+										from:	maven repo: github's eirslett's node\8.9.1\node-8.9.1-windows-x64.exe
+										to:		app\target\node\node.exe
+									
+								npm install
+							exec-maven-plugin:
+								run: ng build-prod...
+				Env...:		N/A
+				Local:		front-maven-plugin
+								download node and npm: to app's download directory: from plugin configured default registry: such as: NPM online registry, or JFrog repo
+								npm install
+								npm install -g angular/cli
+							exec-maven-plugin:
+								run: ng build ...
+				
+				
+	==>4) site and site-deploy plugins are used - TBD
+	==>5) After maven run:
+		  ==>it generates the same files and contents as AngularCLI: "ng build"
+		  ==>Should be: ./dist ...
+	==>AngularCLI: ng serve: can do the same work
+
+==>Step 4:	Stylish Design:
+
+	==>Assigned to Jerry:
+		==>Manually downloaded jqeury.js and added it to index.html
+		==>npm install --save bootstrap
+		
+		==>MissionMap -		using Bootstrap
+							using angular MD, default theming, and global theming
+							where are Roboto fonts coming from? - default theming?
+
+	==>1) Install bootstrap CSS: 3+ ways:
+			Way 1: install: simple bootstrap css:
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save bootstrap
+					(@angular is Angular specials...)
+					==>This is not global because each project can do this
+					==>bootstrap is dependent upon jquery: Bootstrap depends on jQuery and Popper.js libraries
+						npm install --save jquery
+						==>Because jquery is like: JS's SpringFramework?
+						==>Bootstrap 4 use jQuery and Popper.js for JavaScript components (like modals, tooltips, popovers etc). 
+							Closable alerts
+							Buttons and checkboxes/radio buttons for toggling states
+							Carousel for slides, controls, and indicators
+							Collapse for toggling content
+							Dropdowns (also requires Popper.js for perfect positioning)
+							Modals (open and close)
+							Navbar (for collapsible menus)
+							Tooltips and popovers (also requires Popper.js for perfect positioning)
+							Scrollspy for scroll behavior and navigation updates
+							==>However, if you just use the CSS part of Bootstrap, you don't need them.
+							==>But: mostly you need both because many scenarios you will use Bootstrap JS parts... like button, ...
+					==>Bootstrap JS parts are optional for the project:
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",	==>This is method 1 way: can use method 2 as well in index.html
+								==>Is this jquery.js added by npm install or ng add? or manually added here to be configured via AngularCLI as globals...
+								==>YES: npm install --save jquery
+									+ jquery@3.5.1
+									added 1 package from 1 contributor, removed 1 package and audited 1469 packages in 17.57s
+								==>This installs jquery, but need to be:
+									Either manually added to scripts section in angular.json or into index.html									
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>Enterprise:
+					install from internal Jfrog factory repo
+				==>1) Method 1: angular.json:
+					updated with bootstrap: become global: so every component can use it: 3.4.1
+						"styles": [
+						  "./node_modules/bootstrap/dist/css/bootstrap.css",
+						  "src/styles.css"              
+						],
+						"scripts": [
+						  "./node_modules/jquery/dist/jquery.js",
+						  "./node_modules/bootstrap/dist/js/bootstrap.js"
+						]					
+				==>2) Method 2: update index.html: hardcoded css and js configurations:
+								==>RMT: use this method: for jquery.js (but css are in angular.json file) 
+										==>This jqeury can be manually downloaded from web as well
+										==>But it can use the above method 1 as well
+								<!doctype html>
+								<html lang="en">
+								<head>
+								  <meta charset="utf-8">
+								  <title>Angular Bootstrap 4 Examples</title>
+								  <base href="/">
+								  <meta name="viewport" content="width=device-width, initial-scale=1">
+								  <link rel="icon" type="image/x-icon" href="favicon.ico">
+								  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+								</head>
+								<body>
+								  <app-root></app-root>
+								  <script src="../node_modules/jquery/dist/jquery.js"></script>
+								  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
+								</body>
+								</html>				
+				==>Can mix method 1 and method 2 in the app
+				
+				Install more:
+					==>ng add @ng-bootstrap/schematics
+					difference between ng-bootstrap vs. ngx-bootstrap is that ngx-bootstrap uses separate modules for components to reduce the final app size
+					
+			Way 2: style.css
+				@import "~bootstrap/dist/css/bootstrap.css"
+				
+				==>Where to add style.css?
+					==>Way 1: AngularCLI: add it into: angular.json
+					==>Way 2: Add it into index.html
+					==>Way 3: Some common html/section/... have it and shared by all html code...
+					==>Way 4: Maven plugin add...:
+								==>front-maven-plugin: enable static/... in the final WAR file or file structures of maven run...
+
+			Angular can exclude jquery:
+				Angular it's better to avoid using libraries that make direct manipulation of the DOM (like jQuery) and let Angular handle that
+				By: using ng-bootstrap and ngx-bootstrap below.
+				
+			Way 3: Install advanced Bootstrap css: ng-bootstrap
+				https://www.techiediaries.com/angular-bootstrap/
+				npm install --save @ng-bootstrap/ng-bootstrap
+				import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; ==>One single module
+				==>support for Bootstrap components and styles without any extra configurations. You also don't need jQuery since we are using ng-bootstrap	
+				==>Can use Angular global angular.json's css
+					"styles": [
+					  "styles.css",
+					  "../node_modules/bootstrap/dist/css/bootstrap.css"
+					],				
+					import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+					@NgModule({
+					  declarations: [/*...*/],
+					  imports: [/*...*/, NgbModule.forRoot()],
+					  /*...*/
+					})
+					export class AppModule {
+					}				
+			Way 4: Install advanced Bootstrap js/css: ngx-bootstrap
+				npm install ngx-bootstrap --save
+				https://www.techiediaries.com/angular-bootstrap/
+				https://valor-software.com/ngx-bootstrap/#/getting-started
+				==>Make the app size smaller: because its uses separate modules for different components, and you can just import needed modules for needed 	
+					components ==>So final product is smaller.
+				==>Import each module and run below:
+				==>Can use both CDN bootstrap css and Angular global angular.json's css
+					1) <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+					2) 
+					   "styles": [  
+					   "../node_modules/bootstrap/dist/css/bootstrap.min.css",  
+					   "styles.css"  
+					   ],				
+					import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+					import { AlertModule } from 'ngx-bootstrap';
+
+					/*...*/
+
+					@NgModule({
+					   /*...*/
+					   imports: [BsDropdownModule.forRoot(),AlertModule.forRoot(), /*...*/ ],
+						/*...*/ 
+					})
+			
+				Usage 1:	SPARTA-UI:
+							==>AngularCLI: not in use: pure maven builds: so no angular.json ==>also no: Way 1: method 1 and method 2; ==>Also no way 2: import into style.css
+							==>No Way 3
+							==>Pure Way 4:
+								==>>Use 1:	app.module.ts: import all the needed indiviudal modules from 'ngx-bootstrap'
+											All individual files: import individual parts from 'ngx-bootstrap'
+											Exception: xxx.spec.ts: has to import modules as well just like: app.module.ts
+											==>Mostly: you can see: JS part is also in use beyond bootstrap CSS part: ngx-bootstrap is mainly JS code and functions
+											==>Bootstrap css is still coming from: "../node_modules/bootstrap/dist/css/bootstrap.css"
+											==>Also some packages are installed due to dependencies scenarios: used by some other packages inside node_modules
+												==>TBD: is ng-bootstrap a dependency for ngx-bootstrap? - like javax depends upon java
+							==>Procedures:
+								==>Get to documentation:
+									https://valor-software.com/ngx-bootstrap/#/modals ==>Real documentation
+									https://valor-software.com/ngx-bootstrap/#/documentation
+									https://getbootstrap.com/docs/4.0/getting-started/introduction/
+								==>
+								
+								
+								
+								==>ng build:	normally: dist folder
+												SPARTA-UI: where to build to: maybe go to target folder: due to maven plugin's enablement... ==>Actually: in war file...
+												
+								==>SPARTA-UI: Stylishing:
+									==>
+									==>style.css: where included
+									==>bootstrap css: where included
+									==>jqeury.js: where included:
+										import * as $ from 'jquery';
+										==>Directly use jquery to work on component's view's HTML elements: only for one component
+									==>
+
+				==>Angular 9 - New Features? ==>Import submodule like below?
+					// RECOMMENDED
+					import { ModalModule } from 'ngx-bootstrap/modal';
+					==>Is that Angular 9 importing more sub-module based like above, similar to Material Design imports? - TBD...
+					==>Better pratice: should use submodule like above...
+					// NOT RECOMMENDED (Angular 9 doesn't support this kind of import)
+					import { ModalModule } from 'ngx-bootstrap';				
+			
+			Way 5: Use preprocessors: less/sass/scss: for bootstrap and/or other css...
+				TBD...
+				
+				How to enable preprocessors?
+					==>Way 1: AngularCLI: prompt you to enable...: angular.json...
+					==>Way 2: Manually add those into ...app...
+			
+	==>2) Enable normal global styles: style.css
+			==>use Angular 6+ features: ng add @angular/material:
+				==>It does A LOT good stuff
+				==>Style: it allows you to choose "default css" or sass/scss/...: this creates style.css
+				==>Style: it allows you to choose a default theme into: style.css:
+					==>Where is the default indigo-pink.css? ==>To find out: online or node_modules???? ==>possibly in local project node_modules' material folder...==>YES:
+						C:\Users\jerry\apps\angular\apps-cli\LNPCheckUIApp\node_modules\@angular\material\prebuilt-themes
+				==>Add package in good ways - compared with npm install...:
+					 new simpler and easier way to add package(s) without using the npm install command for installing the required dependencies or adding any configurations.
+					 ==>Add its related "dependencies" without the WARN like: npm install <package>
+						==>Also means: you may need to run multiple: npm install, but with ng add, you only run one "ng add"
+					 ==>Add core configurations for these package(s)
+						==>Update several files: package.json, etc..... - for this package...
+					 ==>Add all bundled ones together usting one ng add...: also their related core configurations:
+						Example: ng add command will install Angular Material, the Component Dev Kit (CDK), Angular Animations
+					 ==>Misc:
+						html, body { height: 100%; }
+						body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+						
+
+
+			==>Add global MD css selectors/stylings
+				==>Method 1:	BusinessAnalyst's Wireframe HTML Code (Photoshop/Macromedia)
+				==>Method 2:	Some look and feel: may come from UI designer or business analyst or product manager...
+				==>Method 3:	Developers use online UI tools to generate some UI design and related HTML code
+				==>Method 4:	
+				
+				
+				==>Method 8:	Misc:
+								==>Add Bootstrap CSS:
+								  ==>Add @Types @Fonts?
+								==>Add Google Fonts:
+								  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+								  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			
+			==>Angular + Webpack - How to add global CSS styles to Angular with webpack
+				https://jasonwatmore.com/post/2019/09/04/angular-webpack-how-to-add-global-css-styles-to-angular-with-webpack
+			
+		==>2-c) Advanced: Enable global styles: less
+			https://jasonwatmore.com/post/2019/09/04/angular-webpack-how-to-add-global-css-styles-to-angular-with-webpack
+			npm i --save-dev css-loader less less-loader style-loader
+			/src/app/app.less
+			import './app.less';
+			==>webpack.config
+	
+	==>3) Each feature module's own stylish: .css
+
+==>Step 5a:	Landing Page Design: ==>Layout etc.
+	==>Method 1:	app.component.html: enable page design using header/menu/sidenav/contents/footer
+	==>Method 2:	index.html: using router to lead to landing home component:
+					==>index.html: normal way: add: <app-root></app-root>
+					==>app.component.html: Use: <router-outlet></router-outlet> ==>This will delegate to routing module rendering
+					==>It delegates to routing module to point and render landing page
+					==>path: '' ==>redirectTo: 'main'
+					==>main.component.html: can add normal contents for the dashboard or landing page
+					==>Utilize main component to do the landing page design and layout
+						==>Sidenav is different from MD design: not included in the container
+						==>Sidenav becomes an independent side design section
+						==>Center: the Google Map:
+							==>
+						==>Right side: add a mat-drawer section
+					==>Header Module/Section:
+						==>Add Alerts Component: display notification messages and alerts
+
+	==>
+	
+	==>Method 7:	Home Page & Alert Component
+					https://jasonwatmore.com/post/2019/05/31/angular-7-tutorial-part-6-home-page-alert-component
+
+	==>How AppRoutingModule, RouterModule, Routes, Route: Works?
+			==>Router Design:
+				static => empty path one => ... => wildcard ones
+			==>Enable more advanced router parts:
+				==>
+				==>
+				==>Query Parameters and Fragments
+				==>Route Observables
+				==>Child (Nested) Routes
+				==>Outsourcing the Route Configurations
+				==>Pass static data to router
+				==>Retrieve router parameters
+				==>Pass dynamic parameters to links
+				==>Child routes
+				==>Location Strategies
+				==>Fix page reload issues
+				==>Router Guards: resolve guard, ...
+				
+		==>Point 1:	An application can have multiple: <router-outlet></router-outlet>
+					==>But only one <router-outlet></router-outlet> is in effect or in use when one view is rendered
+					==>The <router-outlet></router-outlet> in its own component's templateUrl is not in use
+						1) Example 1:	global url: "about-rubi" path leads to AboutRubiComponent path:
+										http://localhost:4200/about-rubi
+										the <router-outlet></router-outlet> inside this component template file is not in use
+						2) Exception:	if the routerLink is in use for the template file: the <router-outlet></router-outlet> can be placed in the same file
+						3) Question:	if the 2) is like this: "first-component.component.html":
+											<p>...</p>
+											<a routerLink="first-component">first component</a>
+											<p>...</p>
+											<router-outlet></router-outlet>
+											<p>...</p>
+											Router module is: path: 'first-component', component: FirstComponent
+											===>Does this look like a cyclic inclusion? - but maybe ok: just one single inclusion/repetition
+												==>It does include one time (even without the click on the <a anchor element)
+												profile.component.html:
+												<p>profile works!</p>
+												<a routerLink="/app-profile">Profile</a>
+												<router-outlet></router-outlet>												
+													profile works!
+													Profile
+													profile works!
+													Profile												
+											==>However, the link <a mostly would add more parameters or variations if using the same component template
+					==>The <router-outlet></router-outlet> is its immediate upper component stream's tree template (lowest one) is in use
+					==>index.html: cannot have <router-outlet></router-outlet>: index.html is almost always use <app-root> to start with
+					==>The highest component level to have it is: app.component.html
+		==>Point 2: <router-outlet></router-outlet>: mechanism analysis:
+					==>Point 1:	It is due to the nature of SPA application of being an Angular app: ==>Are all Angular apps are SPA? - not so sure
+								==>1) What does SPA mean with Angular app?
+										==>Angular app starts up and running: it doesn't want to request a new page to the SERVER side, 
+											and perform itself on client side only ==>$500 value ==>So it is called SPA app
+											==>In the web domain: SPA meaning 1: the entire one long page is displayed ==>This is the original main meaning
+												(so we do not have many links to do page flows: such as: Spring Boot has SPA doc and multiple-page doc)
+											==>Second meaning: Angular doesn't want to talk to the server to retrieve a new page: SPA app
+												==>ALl the page rendering is from the compile Angular JS code
+												==>The page rendering is display/hide some views: user moves between different views <= enabled by Router
+								==>2) Router: change the view via navigations
+											  ==>The changed views are displayed into: <router-outlet></router-outlet>
+											  ==>So the new view by the router is insert into this <router-outlet></router-outlet> area
+											  ==>So: we at least have to have one <router-outlet></router-outlet>? YES
+													==>Without this, it doesn't seem that the routing works
+													==>So the following url: http://localhost:4200/app-profile
+														==>It goes to http://localhost:4200/ ==>...
+											  ==>Without <router-outlet></router-outlet>: we can also do page flows: each time: it calls server to get a page
+		==>Point 3: Angular app code flow: analysis:
+					==>Angular is always starting with index.html: the first access page: other html pages are not accessible
+					==>index.html: always takes through: <app-root></app-root> path
+					==><router-outlet></router-outlet>: needs to start from app.component.html or below the component hierarchy
+		==>Point 4:	App Routing Module and Router mechanism: different from normal Angular Component concept and template/selector:
+					==>Component/template/selector: can always be generated via selector in other template pages:
+						==>Component/Selector are used: for embedding and including selector's html contents
+						==>The component can include its own component selector inside its own template file: but should not do it - repeating the template code
+					==>Routes might not be in effect is there is no "<router-outlet></router-outlet>" defined or something wrong
+						==>Router are used for SPA's view navigations and changes
+					==>They are both running inside Angular client side code (JS code) via these JS files
+					==>Most of the so-called page flows are the SPA's internal view changes by router:
+						Angular mostly run on the client side unless: querying server for a new page OR: RESTful APIs calls OR: integration links, etc.
+		
+		==>More Router Coding Parts:
+			Refer to Angular Document: "In-app navigation: routing to views"
+			==>ActivatedRoute and ParamMap:
+				==>this.route.queryParams.subscribe(params => {this.name=params['name']});
+			==>
+			==>Nested Routes
+			==>Access router parameters and fragments
+			==>Access link parameters array
+			==>Routing Strategy
+			==>HTML5 and baseUrl
+		
+		
+	MissionMap:
+		==>Mobile first
+		==>Support IE
+		==>Enable jQuery: ...
+		
+		==>What does Google Tag Manager do here?
+			GTM/Tags/GoogleAnalytics:
+				Javascript tracking codes (also known as Tags) on your website
+				Google Analytics tracking code is one of those tags.
+				Google Analytics is an analytics tool that provides reports. Google Tag Manager has no reporting features. 
+				It is used to send data from your website to other marketing/analytics tools (including GA). If you don't want to use Google Tag Manager, that's fine.
+			noscript: when not enabled with JS for browsers
+		==>Landing Page is rendered by: router => to home component: like default JSP welcome page or default index.jsp/html page etc.
+
+
+==>Step 5b:	Login Page: Login and Registration
+
+	==>Method 1:	SSO:
+					==>See RMT?
+					
+	==>Method 2:	Angular Way: Router Guards
+	
+					==>Enable Router Guards
+					
+					==>Login Form, Authentication Service & Route Guard
+						https://jasonwatmore.com/post/2019/05/17/angular-7-tutorial-part-4-login-form-authentication-service-route-guard
+					
+	
+	==>Method 3:	Spring Boot/Security/OAuth2
+					https://spring.io/guides/tutorials/spring-boot-oauth2/
+					https://github.com/spring-guides/tut-spring-boot-oauth2
+	
+	==>Method 4:	Spring + Angular + OAuth2: See Spring Guide Tutorial
+					https://spring.io/guides/tutorials/spring-security-and-angular-js/
+					https://github.com/spring-guides/tut-spring-security-and-angular-js
+
+
+	
+	
+	==>Method 7:	Registration Form & User Service
+						https://jasonwatmore.com/post/2019/05/22/angular-7-tutorial-part-5-registration-form-user-service
+		
+		
+	==>Method 8:	User Registration and Login Example & Tutorial
+						https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+					
+					JWT Authentication Example & Tutorial
+						https://jasonwatmore.com/post/2018/11/16/angular-7-jwt-authentication-example-tutorial
+						
+					Role Based Authorization Tutorial with Example
+						https://jasonwatmore.com/post/2018/11/22/angular-7-role-based-authorization-tutorial-with-example
+					
+==>Step 5c:	Component Styling:
+
+	Bootstrap + MD (for core-parts and data-display etc) + homegrown-fine-tuning (style.css or component.css): really good
+	
+		Section Design:
+			==>Higher levels: 	Bootstrap OR: MD
+			==>Inner Levels:	Use components
+								Use HTML code
+								Use <div>
+								Use MD selectors
+
+	==>Styling: homegrown:
+				1) use: style.css global stylings
+				2) 
+				
+	==>Styling: Bootstrap:
+				https://bootstrapdocs.com/
+				1) Use: for layout enablement
+				2) Use: enable section design ==>Use bootstrap's div and related selectors 
+					==>Define font sizes
+					==>Define section-based layout
+					==>
+				3) Use: for some features: great
+				
+				
+	==>Styling: angular MD, default theming, and global theming
+							where are Roboto fonts coming from? - default theming
+	
+	
+	==>Use: Componets to help/facilitate page layouts and design:
+		==>Use components to replace html sections...
+		==>Use warmer and vessel: not working: only works for Matt
+		==>
+	
+	Color Code:
+		by name:	White
+		by rgb:		rgb(255, 255, 255): mix red/green/blue with 100% into white...
+		by code:	#ffffff
+					(1-10-a-f): 00001111 =>f	=>15
+								11111111 =>ff 	=>255
+		by code-short-form: #fff: means: repeat into #fffff? => 255 255 255
+		by percentage:
+					hsl(0, 0%, 100%)
+					HTML HSL and HSLA Colors. HSL stands for hue, saturation, and lightness. 
+					HSLA color values are an extension of HSL with an Alpha channel (opacity)
+					
+					
+	==>Entire Page Design:
+	
+		==>Section: Header
+	
+		==>Section: Nav
+		
+		==>Section: Main-Contents:
+					==>Part 1: Google Map
+					==>Part 2: Right-Side Sub-Section:	maybe <mat-drawer> is an integral part of the content part...
+								==>Display the results
+	
+	==>Style sepcial parts:
+		==>Router links: enabled and style active router links
+		==>
+	
+	
+	==>Create new directives
+	
+	
+	==>How to design Footer?
+		==>Common and varied
+		==>Step 1: add several <div>
+		==>Step 2: add some global or local css (if only used for this component) classes
+		==>Use common HTML tags
+		
+	==>UI Design Points:
+	
+		==>The final UI looks easy and simple
+		
+		==>But when it is empty: it is hard or a far-away to do the design and implementation
+		
+			==>For example: when you look at the UI now, can you design and start implementation like those code modules?
+			
+					==>Take some page design processes
+					==>Take a lot of good use of MD and Bootstrap tags and selectors
+					==>Take some inner functionality and processing inside the page design
+					==>Take a lot of staged refactoring
+					==>Take a lot of consolidations
+					==>
+			
+			From Code ==> UI: easy to the streams
+			
+			From UI => Code: tough
+			
+			From Business Requirements => Code: Even tougher
+			
+			From Business Requirements => UI => Code: Toughest
+			
+			
+
+==>Step 6:	Features Modules:
+	==>main structures: features/<primary-feature-module>/<sub-feature-folder>
+	==>some structures: features/<feature-folder>
+	==>some structures: features/<feature-folder>/<sub-feature-folder>
+	==>Some feature-module: directly contains its own service files (not global files)
+	
+	==>Build up backbone of the main components:	Assigned to Tom Travis
+	==>Stage 1 POC demo:							Assigned to Tom and Kesava (Google Map display and calls)
+	
+	1) Design HomeComponent:
+		==>ng g component home
+		==>home.component.html:
+			==>Replicate the page design wireframes into this file
+			==>Convert the html code into MD selectors and components
+	2) Update style.css
+			==>Add some the page design wireframes' look and feel css into style.css as global look and feel
+	
+
+
+==>Step 7:	Features - Integrations:
+
+	==>Step 7a:	Feature Integration - First-Party Integrations
+
+		==>
+						
+
+		==>
+						https://www.tutorialrepublic.com/html-reference/html-button-tag.php
+						
+		==>Step 7a-1:	Feature - Feature Module Development: Angular Material and Material-Design integration
+
+		==>Step 7a-2:	Feature - Feature Module Development: Bootstrap 3/4 integration
+						==>Playground:	https://www.codeply.com/go/kTGlK9Axdk/bootstrap-4-navbar-align-center
+		
+		
+	==>Step 7b:	Feature Integration - Second-Party Integrations
+
+		==>Step 7b-1:	Feature - Feature Module Development: Data Table integration:
+						
+						==>ag-grid:
+							https://github.com/ag-grid/ag-grid
+							https://github.com/ag-grid/ag-grid/blob/master/grid-packages/ag-grid-angular/projects/ag-grid-angular/src/lib/ag-grid-angular.component.ts
+							Summaries:
+								1) A pure child-component: but very comploicated one
+								2) Utilize much more features and APIs than a normal application component
+								3) Utilize: many @Input (286) and @Output (82) data fields: due to configurations and settings, and multiple functions
+											Also define many application events:
+											@Output() public gridReady: EventEmitter<any> = new EventEmitter<any>();
+							How to Develop:
+								==>1) Settings and Configurations: Use: @Input
+								==>2) Display and Backend API calls: Use @Output
+								==>3) Functionality:	Use AG-GRID APIs
+														Example 1:	https://www.ag-grid.com/javascript-grid-export/
+								==>5) Development Procedures:
+										==>In-Advance Summarizing and Categorizations
+										==>Create 1-3 POC apps
+										==>When working on apps: Check the component documents: there are 286 config features and 82 event emitter features
+										==>
+								
+Layout & Styling
+Styling Rows
+Styling Cells
+Themes
+Grid Size
+Custom Icons
+Printing
+
+Client-Side Data
+Overview
+Accessing Data
+Updating Data
+Single Row / Cell,  Transactions,  High Frequency
+Immutable Data
+Context
+
+Server-Side Data
+Row Models
+Server-Side Row Model
+Infinite Row Model
+Viewport Row Model
+								
+import {
+    AfterViewInit,
+    Component,
+    ComponentFactoryResolver,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    ViewContainerRef,
+    ViewEncapsulation
+} from "@angular/core";
+
+import {
+    ColDef,
+    ColumnApi,
+    ComponentUtil,
+    Events,
+    Grid,
+    GridApi,
+    GridOptions,
+    GridOptionsWrapper,
+    GridParams,
+    Module,
+    Promise,
+    _
+} from "ag-grid-community";
+
+import { AngularFrameworkOverrides } from "./angularFrameworkOverrides";
+import { AngularFrameworkComponentWrapper } from "./angularFrameworkComponentWrapper";
+import { AgGridColumn } from "./ag-grid-column.component";
+
+@Component({
+    selector: 'ag-grid-angular',
+    template: '',
+    providers: [
+        AngularFrameworkOverrides,
+        AngularFrameworkComponentWrapper
+    ],
+    // tell angular we don't want view encapsulation, we don't want a shadow root
+    encapsulation: ViewEncapsulation.None
+})
+export class AgGridAngular implements AfterViewInit {
+    // not intended for user to interact with. so putting _ in so if user gets reference
+    // to this object, they kind'a know it's not part of the agreed interface
+    private _nativeElement: any;
+    private _initialised = false;
+    private _destroyed = false;
+
+    private gridParams: GridParams;
+
+    // in order to ensure firing of gridReady is deterministic
+    private _fullyReady: Promise<boolean> = Promise.resolve(true);
+
+    // making these public, so they are accessible to people using the ng2 component references
+    public api: GridApi;
+    public columnApi: ColumnApi;
+
+    @ContentChildren(AgGridColumn) public columns: QueryList<AgGridColumn>;
+
+    constructor(elementDef: ElementRef,
+        private viewContainerRef: ViewContainerRef,
+        private angularFrameworkOverrides: AngularFrameworkOverrides,
+        private frameworkComponentWrapper: AngularFrameworkComponentWrapper,
+        private _componentFactoryResolver: ComponentFactoryResolver) {
+        this._nativeElement = elementDef.nativeElement;
+
+        this.frameworkComponentWrapper.setViewContainerRef(this.viewContainerRef);
+        this.frameworkComponentWrapper.setComponentFactoryResolver(this._componentFactoryResolver);
+    }
+
+    ngAfterViewInit(): void {
+        this.checkForDeprecatedEvents();
+
+        this.gridOptions = ComponentUtil.copyAttributesToGridOptions(this.gridOptions, this, true);
+
+        this.gridParams = {
+            globalEventListener: this.globalEventListener.bind(this),
+            frameworkOverrides: this.angularFrameworkOverrides,
+            providedBeanInstances: {
+                frameworkComponentWrapper: this.frameworkComponentWrapper
+            },
+            modules: (this.modules || []) as any
+        };
+
+        if (this.columns && this.columns.length > 0) {
+            this.gridOptions.columnDefs = this.columns
+                .map((column: AgGridColumn): ColDef => {
+                    return column.toColDef();
+                });
+        }
+
+        new Grid(this._nativeElement, this.gridOptions, this.gridParams);
+
+        if (this.gridOptions.api) {
+            this.api = this.gridOptions.api;
+        }
+
+        if (this.gridOptions.columnApi) {
+            this.columnApi = this.gridOptions.columnApi;
+        }
+
+        this._initialised = true;
+
+        // sometimes, especially in large client apps gridReady can fire before ngAfterViewInit
+        // this ties these together so that gridReady will always fire after agGridAngular's ngAfterViewInit
+        // the actual containing component's ngAfterViewInit will fire just after agGridAngular's
+        this._fullyReady.resolveNow(null, resolve => resolve);
+    }
+
+    public ngOnChanges(changes: any): void {
+        if (this._initialised) {
+            ComponentUtil.processOnChange(changes, this.gridOptions, this.api, this.columnApi);
+        }
+    }
+
+    public ngOnDestroy(): void {
+        if (this._initialised) {
+            // need to do this before the destroy, so we know not to emit any events
+            // while tearing down the grid.
+            this._destroyed = true;
+            if (this.api) {
+                this.api.destroy();
+            }
+        }
+    }
+
+    private checkForDeprecatedEvents() {
+        _.iterateObject<any>(Events, (key, eventName) => {
+            if (this[eventName] && (<EventEmitter<any>>this[eventName]).observers.length > 0) {
+                GridOptionsWrapper.checkEventDeprecation(eventName);
+            }
+        });
+    }
+
+    private globalEventListener(eventType: string, event: any): void {
+        // if we are tearing down, don't emit angular events, as this causes
+        // problems with the angular router
+        if (this._destroyed) {
+            return;
+        }
+
+        // generically look up the eventType
+        let emitter = <EventEmitter<any>>(<any>this)[eventType];
+        if (emitter) {
+            if (eventType === 'gridReady') {
+                // if the user is listening for gridReady, wait for ngAfterViewInit to fire first, then emit the
+                // gridReady event
+                this._fullyReady.then((result => {
+                    emitter.emit(event);
+                }));
+            } else {
+                emitter.emit(event);
+            }
+        } else {
+            console.log('ag-Grid-angular: could not find EventEmitter: ' + eventType);
+        }
+    }
+
+    @Input() public gridOptions: GridOptions;
+    @Input() public modules: Module[];
+
+    // @START@
+    @Input() public slaveGrids : any = undefined;
+    @Input() public alignedGrids : any = undefined;
+    @Input() public rowData : any = undefined;
+    @Input() public columnDefs : any = undefined;
+    @Input() public excelStyles : any = undefined;
+    @Input() public pinnedTopRowData : any = undefined;
+    @Input() public pinnedBottomRowData : any = undefined;
+    @Input() public components : any = undefined;
+    @Input() public frameworkComponents : any = undefined;
+    @Input() public rowStyle : any = undefined;
+    @Input() public context : any = undefined;
+    @Input() public autoGroupColumnDef : any = undefined;
+    @Input() public groupColumnDef : any = undefined;
+    @Input() public localeText : any = undefined;
+    @Input() public icons : any = undefined;
+    @Input() public datasource : any = undefined;
+    @Input() public serverSideDatasource : any = undefined;
+    @Input() public viewportDatasource : any = undefined;
+    @Input() public groupRowRendererParams : any = undefined;
+    @Input() public aggFuncs : any = undefined;
+    @Input() public fullWidthCellRendererParams : any = undefined;
+    @Input() public defaultColGroupDef : any = undefined;
+    @Input() public defaultColDef : any = undefined;
+    @Input() public defaultExportParams : any = undefined;
+    @Input() public columnTypes : any = undefined;
+    @Input() public rowClassRules : any = undefined;
+    @Input() public detailGridOptions : any = undefined;
+    @Input() public detailCellRendererParams : any = undefined;
+    @Input() public loadingCellRendererParams : any = undefined;
+    @Input() public loadingOverlayComponentParams : any = undefined;
+    @Input() public noRowsOverlayComponentParams : any = undefined;
+    @Input() public popupParent : any = undefined;
+    @Input() public colResizeDefault : any = undefined;
+    @Input() public reduxStore : any = undefined;
+    @Input() public statusBar : any = undefined;
+    @Input() public sideBar : any = undefined;
+    @Input() public sortingOrder : any = undefined;
+    @Input() public rowClass : any = undefined;
+    @Input() public rowSelection : any = undefined;
+    @Input() public overlayLoadingTemplate : any = undefined;
+    @Input() public overlayNoRowsTemplate : any = undefined;
+    @Input() public quickFilterText : any = undefined;
+    @Input() public rowModelType : any = undefined;
+    @Input() public editType : any = undefined;
+    @Input() public domLayout : any = undefined;
+    @Input() public clipboardDeliminator : any = undefined;
+    @Input() public rowGroupPanelShow : any = undefined;
+    @Input() public multiSortKey : any = undefined;
+    @Input() public pivotColumnGroupTotals : any = undefined;
+    @Input() public pivotRowTotals : any = undefined;
+    @Input() public pivotPanelShow : any = undefined;
+    @Input() public rowHeight : any = undefined;
+    @Input() public detailRowHeight : any = undefined;
+    @Input() public rowBuffer : any = undefined;
+    @Input() public colWidth : any = undefined;
+    @Input() public headerHeight : any = undefined;
+    @Input() public groupHeaderHeight : any = undefined;
+    @Input() public floatingFiltersHeight : any = undefined;
+    @Input() public pivotHeaderHeight : any = undefined;
+    @Input() public pivotGroupHeaderHeight : any = undefined;
+    @Input() public groupDefaultExpanded : any = undefined;
+    @Input() public minColWidth : any = undefined;
+    @Input() public maxColWidth : any = undefined;
+    @Input() public viewportRowModelPageSize : any = undefined;
+    @Input() public viewportRowModelBufferSize : any = undefined;
+    @Input() public autoSizePadding : any = undefined;
+    @Input() public maxBlocksInCache : any = undefined;
+    @Input() public maxConcurrentDatasourceRequests : any = undefined;
+    @Input() public tooltipShowDelay : any = undefined;
+    @Input() public cacheOverflowSize : any = undefined;
+    @Input() public paginationPageSize : any = undefined;
+    @Input() public cacheBlockSize : any = undefined;
+    @Input() public infiniteInitialRowCount : any = undefined;
+    @Input() public scrollbarWidth : any = undefined;
+    @Input() public paginationStartPage : any = undefined;
+    @Input() public infiniteBlockSize : any = undefined;
+    @Input() public batchUpdateWaitMillis : any = undefined;
+    @Input() public asyncTransactionWaitMillis : any = undefined;
+    @Input() public blockLoadDebounceMillis : any = undefined;
+    @Input() public keepDetailRowsCount : any = undefined;
+    @Input() public undoRedoCellEditingLimit : any = undefined;
+    @Input() public cellFlashDelay : any = undefined;
+    @Input() public cellFadeDelay : any = undefined;
+    @Input() public localeTextFunc : any = undefined;
+    @Input() public groupRowInnerRenderer : any = undefined;
+    @Input() public groupRowInnerRendererFramework : any = undefined;
+    @Input() public dateComponent : any = undefined;
+    @Input() public dateComponentFramework : any = undefined;
+    @Input() public groupRowRenderer : any = undefined;
+    @Input() public groupRowRendererFramework : any = undefined;
+    @Input() public isExternalFilterPresent : any = undefined;
+    @Input() public getRowHeight : any = undefined;
+    @Input() public doesExternalFilterPass : any = undefined;
+    @Input() public getRowClass : any = undefined;
+    @Input() public getRowStyle : any = undefined;
+    @Input() public getRowClassRules : any = undefined;
+    @Input() public traverseNode : any = undefined;
+    @Input() public getContextMenuItems : any = undefined;
+    @Input() public getMainMenuItems : any = undefined;
+    @Input() public processRowPostCreate : any = undefined;
+    @Input() public processCellForClipboard : any = undefined;
+    @Input() public getNodeChildDetails : any = undefined;
+    @Input() public groupRowAggNodes : any = undefined;
+    @Input() public getRowNodeId : any = undefined;
+    @Input() public isFullWidthCell : any = undefined;
+    @Input() public fullWidthCellRenderer : any = undefined;
+    @Input() public fullWidthCellRendererFramework : any = undefined;
+    @Input() public doesDataFlower : any = undefined;
+    @Input() public processSecondaryColDef : any = undefined;
+    @Input() public processSecondaryColGroupDef : any = undefined;
+    @Input() public getBusinessKeyForNode : any = undefined;
+    @Input() public sendToClipboard : any = undefined;
+    @Input() public navigateToNextCell : any = undefined;
+    @Input() public tabToNextCell : any = undefined;
+    @Input() public getDetailRowData : any = undefined;
+    @Input() public processCellFromClipboard : any = undefined;
+    @Input() public getDocument : any = undefined;
+    @Input() public postProcessPopup : any = undefined;
+    @Input() public getChildCount : any = undefined;
+    @Input() public getDataPath : any = undefined;
+    @Input() public loadingCellRenderer : any = undefined;
+    @Input() public loadingCellRendererFramework : any = undefined;
+    @Input() public loadingOverlayComponent : any = undefined;
+    @Input() public loadingOverlayComponentFramework : any = undefined;
+    @Input() public noRowsOverlayComponent : any = undefined;
+    @Input() public noRowsOverlayComponentFramework : any = undefined;
+    @Input() public detailCellRenderer : any = undefined;
+    @Input() public detailCellRendererFramework : any = undefined;
+    @Input() public defaultGroupSortComparator : any = undefined;
+    @Input() public isRowMaster : any = undefined;
+    @Input() public isRowSelectable : any = undefined;
+    @Input() public postSort : any = undefined;
+    @Input() public processHeaderForClipboard : any = undefined;
+    @Input() public paginationNumberFormatter : any = undefined;
+    @Input() public processDataFromClipboard : any = undefined;
+    @Input() public getServerSideGroupKey : any = undefined;
+    @Input() public isServerSideGroup : any = undefined;
+    @Input() public suppressKeyboardEvent : any = undefined;
+    @Input() public createChartContainer : any = undefined;
+    @Input() public processChartOptions : any = undefined;
+    @Input() public getChartToolbarItems : any = undefined;
+    @Input() public fillOperation : any = undefined;
+    @Input() public toolPanelSuppressRowGroups : any = undefined;
+    @Input() public toolPanelSuppressValues : any = undefined;
+    @Input() public toolPanelSuppressPivots : any = undefined;
+    @Input() public toolPanelSuppressPivotMode : any = undefined;
+    @Input() public toolPanelSuppressSideButtons : any = undefined;
+    @Input() public toolPanelSuppressColumnFilter : any = undefined;
+    @Input() public toolPanelSuppressColumnSelectAll : any = undefined;
+    @Input() public toolPanelSuppressColumnExpandAll : any = undefined;
+    @Input() public suppressMakeColumnVisibleAfterUnGroup : any = undefined;
+    @Input() public suppressRowClickSelection : any = undefined;
+    @Input() public suppressCellSelection : any = undefined;
+    @Input() public suppressHorizontalScroll : any = undefined;
+    @Input() public alwaysShowVerticalScroll : any = undefined;
+    @Input() public debug : any = undefined;
+    @Input() public enableBrowserTooltips : any = undefined;
+    @Input() public enableColResize : any = undefined;
+    @Input() public enableCellExpressions : any = undefined;
+    @Input() public enableSorting : any = undefined;
+    @Input() public enableServerSideSorting : any = undefined;
+    @Input() public enableFilter : any = undefined;
+    @Input() public enableServerSideFilter : any = undefined;
+    @Input() public angularCompileRows : any = undefined;
+    @Input() public angularCompileFilters : any = undefined;
+    @Input() public angularCompileHeaders : any = undefined;
+    @Input() public groupSuppressAutoColumn : any = undefined;
+    @Input() public groupSelectsChildren : any = undefined;
+    @Input() public groupIncludeFooter : any = undefined;
+    @Input() public groupIncludeTotalFooter : any = undefined;
+    @Input() public groupUseEntireRow : any = undefined;
+    @Input() public groupSuppressRow : any = undefined;
+    @Input() public groupSuppressBlankHeader : any = undefined;
+    @Input() public forPrint : any = undefined;
+    @Input() public suppressMenuHide : any = undefined;
+    @Input() public rowDeselection : any = undefined;
+    @Input() public unSortIcon : any = undefined;
+    @Input() public suppressMultiSort : any = undefined;
+    @Input() public singleClickEdit : any = undefined;
+    @Input() public suppressLoadingOverlay : any = undefined;
+    @Input() public suppressNoRowsOverlay : any = undefined;
+    @Input() public suppressAutoSize : any = undefined;
+    @Input() public skipHeaderOnAutoSize : any = undefined;
+    @Input() public suppressParentsInRowNodes : any = undefined;
+    @Input() public showToolPanel : any = undefined;
+    @Input() public suppressColumnMoveAnimation : any = undefined;
+    @Input() public suppressMovableColumns : any = undefined;
+    @Input() public suppressFieldDotNotation : any = undefined;
+    @Input() public enableRangeSelection : any = undefined;
+    @Input() public enableRangeHandle : any = undefined;
+    @Input() public enableFillHandle : any = undefined;
+    @Input() public suppressClearOnFillReduction : any = undefined;
+    @Input() public deltaSort : any = undefined;
+    @Input() public suppressTouch : any = undefined;
+    @Input() public suppressAsyncEvents : any = undefined;
+    @Input() public allowContextMenuWithControlKey : any = undefined;
+    @Input() public suppressContextMenu : any = undefined;
+    @Input() public suppressMenuFilterPanel : any = undefined;
+    @Input() public suppressMenuMainPanel : any = undefined;
+    @Input() public suppressMenuColumnPanel : any = undefined;
+    @Input() public rememberGroupStateWhenNewData : any = undefined;
+    @Input() public enableCellChangeFlash : any = undefined;
+    @Input() public suppressDragLeaveHidesColumns : any = undefined;
+    @Input() public suppressMiddleClickScrolls : any = undefined;
+    @Input() public suppressPreventDefaultOnMouseWheel : any = undefined;
+    @Input() public suppressUseColIdForGroups : any = undefined;
+    @Input() public suppressCopyRowsToClipboard : any = undefined;
+    @Input() public copyHeadersToClipboard : any = undefined;
+    @Input() public pivotMode : any = undefined;
+    @Input() public suppressAggFuncInHeader : any = undefined;
+    @Input() public suppressColumnVirtualisation : any = undefined;
+    @Input() public suppressAggAtRootLevel : any = undefined;
+    @Input() public suppressFocusAfterRefresh : any = undefined;
+    @Input() public functionsPassive : any = undefined;
+    @Input() public functionsReadOnly : any = undefined;
+    @Input() public animateRows : any = undefined;
+    @Input() public groupSelectsFiltered : any = undefined;
+    @Input() public groupRemoveSingleChildren : any = undefined;
+    @Input() public groupRemoveLowestSingleChildren : any = undefined;
+    @Input() public enableRtl : any = undefined;
+    @Input() public suppressClickEdit : any = undefined;
+    @Input() public rowDragManaged : any = undefined;
+    @Input() public suppressRowDrag : any = undefined;
+    @Input() public suppressMoveWhenRowDragging : any = undefined;
+    @Input() public enableMultiRowDragging : any = undefined;
+    @Input() public enableGroupEdit : any = undefined;
+    @Input() public embedFullWidthRows : any = undefined;
+    @Input() public deprecatedEmbedFullWidthRows : any = undefined;
+    @Input() public suppressTabbing : any = undefined;
+    @Input() public suppressPaginationPanel : any = undefined;
+    @Input() public floatingFilter : any = undefined;
+    @Input() public groupHideOpenParents : any = undefined;
+    @Input() public groupMultiAutoColumn : any = undefined;
+    @Input() public pagination : any = undefined;
+    @Input() public stopEditingWhenGridLosesFocus : any = undefined;
+    @Input() public paginationAutoPageSize : any = undefined;
+    @Input() public suppressScrollOnNewData : any = undefined;
+    @Input() public purgeClosedRowNodes : any = undefined;
+    @Input() public cacheQuickFilter : any = undefined;
+    @Input() public deltaRowDataMode : any = undefined;
+    @Input() public ensureDomOrder : any = undefined;
+    @Input() public accentedSort : any = undefined;
+    @Input() public pivotTotals : any = undefined;
+    @Input() public suppressChangeDetection : any = undefined;
+    @Input() public valueCache : any = undefined;
+    @Input() public valueCacheNeverExpires : any = undefined;
+    @Input() public aggregateOnlyChangedColumns : any = undefined;
+    @Input() public suppressAnimationFrame : any = undefined;
+    @Input() public suppressExcelExport : any = undefined;
+    @Input() public suppressCsvExport : any = undefined;
+    @Input() public treeData : any = undefined;
+    @Input() public masterDetail : any = undefined;
+    @Input() public suppressMultiRangeSelection : any = undefined;
+    @Input() public enterMovesDownAfterEdit : any = undefined;
+    @Input() public enterMovesDown : any = undefined;
+    @Input() public suppressPropertyNamesCheck : any = undefined;
+    @Input() public rowMultiSelectWithClick : any = undefined;
+    @Input() public contractColumnSelection : any = undefined;
+    @Input() public suppressEnterpriseResetOnNewColumns : any = undefined;
+    @Input() public enableOldSetFilterModel : any = undefined;
+    @Input() public suppressRowHoverHighlight : any = undefined;
+    @Input() public gridAutoHeight : any = undefined;
+    @Input() public suppressRowTransform : any = undefined;
+    @Input() public suppressClipboardPaste : any = undefined;
+    @Input() public suppressLastEmptyLineOnPaste : any = undefined;
+    @Input() public serverSideSortingAlwaysResets : any = undefined;
+    @Input() public reactNext : any = undefined;
+    @Input() public suppressSetColumnStateEvents : any = undefined;
+    @Input() public enableCharts : any = undefined;
+    @Input() public deltaColumnMode : any = undefined;
+    @Input() public suppressMaintainUnsortedOrder : any = undefined;
+    @Input() public enableCellTextSelection : any = undefined;
+    @Input() public suppressBrowserResizeObserver : any = undefined;
+    @Input() public suppressMaxRenderedRowRestriction : any = undefined;
+    @Input() public excludeChildrenWhenTreeDataFiltering : any = undefined;
+    @Input() public tooltipMouseTrack : any = undefined;
+    @Input() public keepDetailRows : any = undefined;
+    @Input() public paginateChildRows : any = undefined;
+    @Input() public preventDefaultOnContextMenu : any = undefined;
+    @Input() public undoRedoCellEditing : any = undefined;
+    @Input() public allowDragFromColumnsToolPanel : any = undefined;
+    @Input() public immutableData : any = undefined;
+    @Input() public immutableColumns : any = undefined;
+    @Input() public pivotSuppressAutoColumn : any = undefined;
+
+
+
+
+
+
+
+
+
+
+    @Output() public columnEverythingChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public newColumnsLoaded: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotModeChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnRowGroupChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public expandOrCollapseAll: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnMoved: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnVisible: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPinned: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnGroupOpened: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnResized: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public displayedColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public virtualColumnsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowGroupOpened: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDataChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDataUpdated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pinnedRowDataChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rangeSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartCreated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartRangeSelectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartOptionsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public chartDestroyed: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public toolPanelVisibleChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public modelUpdated: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pasteStart: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public pasteEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public fillStart: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public fillEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellDoubleClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseDown: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellContextMenu: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowValueChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellFocused: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowSelected: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public selectionChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellKeyDown: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellKeyPress: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseOver: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellMouseOut: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public filterChanged: EventEmitter<any> = new EventEmitter<any>();
+	
+	
+    @Output() public filterModified: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public filterOpened: EventEmitter<any> = new EventEmitter<any>();
+	
+	
+    @Output() public sortChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public virtualRowRemoved: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDoubleClicked: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridReady: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public gridSizeChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public viewportChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public firstDataRendered: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public dragStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public dragStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public checkboxChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowEditingStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowEditingStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellEditingStarted: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cellEditingStopped: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public bodyScroll: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public animationQueueEmpty: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public heightScaleChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public paginationChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public componentStateChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public bodyHeightChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public displayedColumnsWidthChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public scrollVisibilityChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnHoverChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public flashCells: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragEnter: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragMove: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragLeave: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public rowDragEnd: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public popupToFront: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnRowGroupChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnPivotChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnValueChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public columnAggFuncChangeRequest: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public keyboardFocus: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public mouseFocus: EventEmitter<any> = new EventEmitter<any>();
+
+						==>
+						==>
+		
+		==>
+		
+		
+	==>Step 7c:	Feature Integration - Third-Party Integrations
+		
+		==>Step 7c-1:	Feature - Feature Module Development: Google API integration
+			==>How to integrate with Google MAP APIs
+				==>Enable: feature module: as main contents pane as google map
+				==>Enable CDK: to use additional Google material design functions and components
+			
+				==>Assigned to Kesava
+				
+			==>ng g component map
+			==>ng g component ...
+			==>Design map.component.html file:
+				==>
+			==>Design map.component.ts file:
+				==>
+				
+				
+			==>Feature Module: Address Search
+				ng g component search-addresses
+			==>Feature Module: Geoareas Search
+				ng g component search-areas
+			==>Feature Module: Properties Search
+				ng g component search-properties
+				
+			==>Feature Module: Selection Feature
+			
+			==>Feature Module: Exporting
+				ng g component excel
+			
+			==>Feature Module: Results
+			
+			
+			
+			
+			
+			Component Design:
+			
+				==>ngOnInit(): initialize some code and processing when @Directive or component initialized
+				==>constructor: assign class member with data by arguments mainly or only - no other init code is added here
+				==>
+				
+		
+
+==>Step 8:	Core Modules
+	==>This app doesn't separate services modules or place services into each feature module's service folders
+	==>The core modules serves as some main app (global) service function
+
+	==>App-Function: add app config function:		Assigned to Jerry
+	==>App-Function: add app cache function:		Assigned to Raghuram
+	==>App-Function: add app retry function:		Assigned to Kesava
+	==>App-Function: add app notification function:	Assigned to Sridhar
+	==>App-Function: add app level function:		Assigned to Kesava
+	
+	==>Services: stored as core modules
+	
+		==>Method 1:	Core Modules
+		
+		
+		==>Method 2:	Services Folders
+		
+						Global Services:
+							==>Use a Service for Parent-Child-Component Communication
+							==>Use a Service for Cross-Component Communication
+								==>Data transfer services
+						Utility Services:
+							==>Enable logging service
+							==>Enable collection or list/set services
+						Fake Auth Service
+		
+		==>Method 3:	Service Classes aside components within "Feature Modules"
+		
+		
+		==>Method 4:	Utils Classes
+		
+		
+		Services Modules and Class Design:
+		
+			==>
+			
+			==>DI:
+				==>Some use cases worth the review of the Angular documentation sections: ==>POCs don't need these advanced scenarios
+				
+				injectors hierarchy systems:
+				
+				==>1) Element Injector:
+					Component level: service providers
+					
+				==>2) Module Injector:
+					null injector
+					plaform injector / module injector
+					root injector
+					==>Root injector => child injectors
+
+				Dependencies Resolution Rules:
+					1) Element (DOM elements - including components) Injectors: ==>Search from the component up to its topest ancestor component
+						@Optional @Self @SkipSelf @Host
+					2) Module Injectors:  ==>Search from the component module up to the top module tree
+					
+				1) global DI:
+					@Injectable({
+						provideIn: "root"
+					})
+				2) providers: ...
+				   viewProviders: ...
+					==>Usage 1:	There are various kinds of providers: refer to the Angular documentations
+					==>Usage 2:	Services can have other services as dependencies and injection into the constructors
+					==>Usage 3:	Test components can use providers to inject the test parts
+				3) constructor injection
+					==>Core
+					==>Misc:
+						@Inject()
+						@Optional()
+						
+				4) Inject services into services
+				
+			==>
+		
+
+	*********************************************************************************************************
+	*********************************************************************************************************
+	*********************************************************************************************************
+	
+	/////////////////////////////////
+	Design/Impl Cycles: for this app:
+	/////////////////////////////////
+	
+		UI Stabilization Parts...
+			==>Confidence about UI stabilization
+			==>Remove / minimize any difficulties or roadblockers of UI design and display
+			==>Ease the subsequent component functionality processes as well
+			
+			Good:
+				How to use mock data to do some good UI
+				How to add mock data...: mock data are not just for testing, also for UI...
+				How ...
+			
+			UI Design:
+				Data Enabled UI Design
+				Business Flows
+				
+			Summaries:
+			
+				==>Step 1:	Choose a layout
+					==>Header + SideNav + Main-Contents:
+						==>
+						==>Method 2:	Utilize router module + components
+						==>
+					==>...
+					==>...
+			
+				==>Step 2:	Design a layout:
+					Page Layout Design: Many Layouts and UI insights and practices
+					
+					==>MD:
+						==>
+						
+					==>Bootstrap4:
+						==>For layout: 	mainly: Bootstrap Grid Systems:
+										==>Point 1: This is the core part from BT for layout: because of it, 
+													so many developers use it because they have read this principle
+										==>Point 2: It is pinned for: Mobile-first + RWD: pure responsive design: which is also one of the "Grid" meanings
+										==>Point 3: Why do developers always try to use this like col-*-*? ==>because it is always better to use RWD like Grid
+													==>Similar to: Angular always Ajax calls with HttpClient...
+										==>Point 4: 1) Way 1: col-*-* 2) Way 2: auto-layout by BT default - based on how many columns to percentagized
+										==>
+					...
+				==>Step 3:	Section Design:
+	
+					==>MD: Containers
+	
+						==>
+						<mat-drawer-container>
+							<mat-drawer-contents>
+							<mat-drawer>
+							<mat-drawer>
+						
+						
+						
+				
+					==>BS4:	Containers
+					
+						==>
+				
+				
+				==>Step 4:	Sub-Section Design:
+				
+					==>Tabs:
+						<mat-card>
+						<mat-card>
+					
+					==>
+					
+				==>Step 5:	Enable Smoothies between Sub-Sections:
+				
+				
+				
+				==>Step 6:	Feature-based Design:
+					
+					==>Buttons:
+						HTML:
+							==><input>
+							==><button>	https://www.tutorialrepublic.com/html-reference/html-button-tag.php
+						BT4:
+							==>Most of the BT4: class styling...
+						MD
+				
+					==>Modals:
+						==>MD Way: there are a couple of variations
+							==>
+						==>BT4 Way:
+							==>Way 1: Bootstrap native ways: Modal.js:
+								Utilize its own Collapse.js and button and related attributes data-* to implement modal by BT4 way
+							==>Way 2: ngx-bootstrap:
+								==>https://valor-software.com/ngx-bootstrap/#/modals
+								
+								==>Way 2:	Good-over-night work strategy 1:
+												Keypoints: 1) Enable 3+ hour sleep 2) No coffee before this 3+ sleep time 3) Use alarms 4) Add coffee after this 3+ sleep time
+											==>start working at 6pm
+											==>not drinking coffee at all
+											==>9pm/10am: you are real tired: then immediately go to sleep: for 3 hours: how to wake up? - alarms wake you up...
+											==>Around: 2/3am: Continue: drinking "coffee" with no medicines added
+											==>8am: drink another cup of coffee to start good second day schedules
+								
+							==>Way 3: ng-bootstrap?
+							==>...
+						==>Mozilla Way (MDN/Firefox): https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+						
+						==>HTML/CSS/JS Way: native ways
+							https://www.w3schools.com/howto/howto_css_modals.asp:
+								==>Point 1: native HTML way (all or many frmwk are wrappers on this...)
+								==>Point 2: how to stick out:
+											1) JS: Events: action on button: use common HTML's events to add actions to button, etc.
+											2) JS: "block/none": appear/disappear
+											3) CSS: When "block": z-index + div ==>Sit on top of the main page: popup
+								==>Point 3: Steps:
+											1) Step 1: write HTML
+											2) Step 2: 
+								==>
+							
+					==>Dialogs
+					
+					==>Misc:
+						Custom Modal Window / Dialog Box:
+							https://jasonwatmore.com/post/2019/04/16/angular-7-custom-modal-window-dialog-box
+					
+			
+			
+			UI Parts: more complicated and advanced than DMT app
+				==>Landing Page:
+					Angular UI router enabled =>Home Component
+				==>Home Component:
+					==>html: use: standardized-3-Section design: Header + Side-Nav + Main-Contents
+
+				==>Section-1: Header Section:
+							  ==>Component: "app-header"
+							  ==>Can enable multiple sub-sections
+							  ==>This MissionMap: enable 3 sub-sections:
+									1) Main banner and logo section
+									2) Main header-menu section:
+										==>Menu links: environment settings
+										==>Data Items: from JSON data for the app
+										==>
+									3) AlertMessage section:
+										==>Use: global service: NotificationService - with this component: notify and display alert messages
+										==>Use: MD's MatSnackBar to enable notification service and displays:
+												The alerts message section should be toggled: so using this snackbar is good
+										==>Use: Design 3 templates and snackbars: main, info, and error
+										==>UI: use <ng-template> to design this message section
+										==>
+							  
+				==>Section-2: Side-Nav:
+				
+					==>Side Menu Contents 1: DTS Layer: "Duty to Serve Layers"
+											 ==>Component: "app-dts-layer"
+				
+					==>Side Menu Contents 2: Search Areas Data/List/Checkboxes: "Other Geographic Layers"
+											 ==>Component: "app-geographic-areas"
+					
+					==>Side Menu Contents 3: Search Property:	With "Search" functionality: go to "property search results" on the right side sub-section
+											 ==>Component: "app-propertysearch"
+				
+				==>Section-3: Main Contents:
+					==>Use MD's drawer container: enable 2 sub-sections: mat-drawe-container <= "sidenav" category
+						https://v8.material.angular.io/components/sidenav/api
+						==>Sub-Section-1: Google Map API map section
+							==>Designed by: mat-drawer-contents:
+								==>Enabled: "Search-Address" functionality
+								==>Google-Search: Component <"app-search">
+								
+								==>Map Contents: 
+								
+						==>Sub-Section-2: Right side results section
+							==>Designed by: mat-drawer
+							==>Enabled: Component <"app-results">
+								==>2 tabs: mat-tab-group / 2 mat-tab sections
+								==>Each sub-folder: sub-feature: the results from the 3 main functional services
+								==>Each Tab Section:
+									==>1) ng-template
+									==>2) Component: "app-xxx-results"
+													  ==>Quick Start Results: 
+														 ==>mat-card
+														 ==>mat-card-content
+													  ==>property search results:
+													  ==>address search results:
+													  ==>Selected Results: For functionality: "Selected Point Feature"
+															==>This feature: help the usage with "selecting point(s) on map"
+															==>UI: mat-card selector sections
+															==>
+				
+					==>To Do: check those containers and contents and drawers with data display and processing
+					
+	
+	/////////////////////////////////
+	Functional Flows: for this app:
+	/////////////////////////////////
+		
+			not: page flows
+			not: call flows: Java... 
+			not: module flows or ...
+			not: data flows...
+		
+		
+			==>Core Services:
+				==>App"Level"Service:
+					Means: Application-Level services
+					==>Glue various components
+					==>Conduct application-specific and scoped services and data processing
+					==>
+					
+					
+	/////////////////////////////////
+	Build and Deployment:
+	/////////////////////////////////	
+	
+	ng serve: works
+	ng build: works
+	ng build --c=production
+	ng build --prod="true"
+	
+	
+	*********************************************************************************************************
+	*********************************************************************************************************
+	*********************************************************************************************************
+		
+	==>HttpClient: Integration with RESTful API Apps:
+
+		==>All Calls:	Ajax calls: this is from common Angular Design Considerations:
+						==>1) There is no need to do regular page refresh calls for Angular apps
+						==>2) Angular is a JS app: JS apps tend to use Ajax: jQuery ajax... ==>Because JS code is so easy to do Ajax compared with JSP/...
+						==>3) XHR is originated from JS...
+
+		==>Method 1:	HttpClient APIs: same thing as: Observable.subscribe()
+						==>HTTP GET Request Examples
+							https://jasonwatmore.com/post/2019/09/06/angular-http-get-request-examples
+							https://www.techiediaries.com/angular/angular-8-7-tutorial-example-rest-api-httpclient-get-ngfor/
+						==>HTTP POST Request Examples
+							https://jasonwatmore.com/post/2019/11/21/angular-http-post-request-examples
+						==>JSONP:
+							https://en.wikipedia.org/wiki/JSONP
+						==>RESTful Integrations:
+							https://vocon-it.com/2017/06/24/consuming-a-restful-web-service-with-angular/
+							https://github.com/oveits/consuming-a-restful-web-service-with-angular-vi
+							https://www.positronx.io/angular-7-httpclient-http-service/
+							
+		==>Method 2:	Promise:
+							https://codesource.io/using-promises-to-make-http-requests-in-angular/
+							https://dzone.com/articles/angular-observables-and-promises-how-to-use-them
+		
+		==>Method 3:	Subject? / RxJS?
+		
+		==>
+	
+		======>Angular Official Documentation Summaries: HttpClient
+			==>Setup:
+				==>Concepts:
+					==>
+					==>HttpClient Calls: the subscribe(): no call backs ==>With arguments: those are callbacks
+						==>Always subscribe() for all API calls: even Delete call
+					==>HttpClient Calls: APIs: can return a req: then multiple subscribes can be called on the req
+				==>Options: 6 types: each type can enable some sub-features of the HttpClient calls
+							==>These 6 types: use string unions instead of plain strings
+								==>AKA: the HttpClient calls expect: actual listed string types - not the generic "string" type
+							==>1) When the options are added to the call's arguments directly, it is ok
+							==>2) When the options are added to a const options variable, which is then passed to the call as argument:
+								  1) The generic "string" type is in use, which is incorrect
+								  2) The solution is: 'text' as const: so the specific 'text' string data type is in use
+							==>3) HttpHeaders: new or set
+							==>4) URL Parameters: new or set
+				==>Use: interface to handle the returned response: because the response is a place object, which cannot be converted into one class
+						==>So subcribe() call convert the plain object response (interface type) into fields assigned to results in component
+				==>Use: "Typed Response object":
+						get<call type parameter>
+						==>Mostly an interface: ==>Then can utilize RxJS's operator features to process the data:
+							==>1) map
+							==>2) Async Pipe
+						==>AKA: typed-data-object: e.g.: an interface object ==>Then easier to consume
+							==>Scenario 1: if typed as an interface: then access like data['field']
+							==>Scenario 2: if not typed - it is an Object: then access like (data as any).field
+				==>Use: Full Response:
+						==>This is one of the above 6 options
+						==>If typed response type is specified like get<Config>: it means: the Response's body is Config
+			==>Request Types:
+				Get
+				Post
+				Delete
+				Put
+				...
+				Jsonp:
+					==>Can be used when CORS is enabled, so across-domain requests can use JSONP to do calls
+			
+			==>Data Handling:
+			
+				==>
+			
+			
+			==>Handle Request Errors:
+				HttpClient Way: use RxJS (this is normal: Observable is from RxJS)
+					=======>Able to quickly check RxJS APIs and fields
+					http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html
+					https://devdocs.io/rxjs/					
+					==>HttpErrorResponse: ==>have an "error" object: encapsulate 2 types of errors:
+						1) Non-server error:	JS: eventError: network/client-side/etc.
+						2) Server error:		server response code: 404/500/etc.
+					==>HttpClient:			==>Can handle them + log them + return an ErrorObservable for further processing (like pipe(): retry / catchError)
+					==>RxJS: provider many operators: are operators the same or similar to methods? YES
+						==>catchError()
+						==>retry: such as: due to mobile calls...
+						==>...
+					==>Because Observable is from RxJS, so we use RxJS operators to do this handling
+						==>operator/method can be called with the name if zero-argument or common arguments?
+							==>Such as: this.handleError ==> instead of this.handleError(...)
+						==>
+					
+			
+				Observable?
+					==>
+				Promise: resolve/reject
+			
+			==>Modifications:
+				==>Headers
+				==>Parameters
+			
+			==>Utilize Interceptors:
+				==>Interceptors: simplify/replace the components' tasks: same interceptor(s) can be used for both request and response
+				==>API 1: Implement HttpInterceptor interface: intercept()
+				==>API 2: HttpHandler: the handle() API processing
+				==>Request Chains of Interceptors: reversed order of response chains of interceptors
+				==>Provides: AppModule: set up a barrel: gather all interceptors and add as a const variable
+				==>Provide in the same injectors as the HttpClient: root or the module/component level
+				==>Usage: Modify the request body + clone()
+				==>Usage: Add default headers for the request
+				==>Usage: Add authentication token (such as: from cookies) and add to the token to the subsequent outgoing request
+				==>Usage: Logging: use pipe/tap with next() to add extended logging to the response Observable
+				==>Usage: Caching: 1) Interrupt some normal flows and delegate to some caching interceptors for some requests
+				==>Usage: Emits multiple values: x-refresh: can check 
+				==>
+				
+				Advanced and complicated applications may use the interceptors
+				==>But it can simplify some components' work and methods and tasks
+				
+			==>Advanced Features:
+			
+				==>RxJS operators
+				==>Subject
+			
+				Those features:
+					==>1) Come from the 6 types of the HttpClient call's options arrays
+					==>2) Come from other call needs - including RxJS operators features and user event features
+			
+				==>Typed response:
+					==>Same as the above "typed-Data-Object"
+				
+				==>Return full response:
+					==>Same as the above "full response"
+				
+				==>report progress feature
+			
+				==>RxJS: debouncing
+						==>1) HTML: keyup event: send each user typed event to component's method call
+						==>2) Component method: call RxJS's 3 operators:
+								1) debouncing(500): 0.5 sec ==>If user has no input for 0.5 sec ==>We can extend this
+								2) wait for value changed
+								3) switchMap(): call backend search service: 
+				
+				==>XSRF Protection: see other App Security section
+	
+			==>Testing HTTP Requests: HttpClientTestingModule			
+	
+		Topic: SetUp - BaseUrl:
+			==>Angular use: <base="/"> to remove the need of the root url part
+			==>By environment:
+				providers: [
+					{ provide: "BASE_API_URL", useValue: environment.apiUrl }
+				]
+				export const environment = {
+				  production: false,
+				  apiUrl: "..."
+				}; 
+			==>@Inject BASE_URL from <base="/">
+				  main.ts:
+						export function getBaseUrl() {
+						  return document.getElementsByTagName('base')[0].href;
+						}
+						const providers = [
+						  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+						];					
+				  component.ts:
+				  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+					http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+					  this.forecasts = result;
+					}, error => console.error(error));
+				  }
+			==>Get from parent class:
+				export class BackendBaseService {
+				  baseURL: string = 'http://localhost:8080/myApp';
+				  constructor(){}
+				}			
+				@Injectable()
+				export class ItemsService extends BackendBaseService{
+				  constructor(private http: HttpClient){  
+					super();
+				  }
+				  public listAll(): Observable<any>{    
+					return this.http.get(`${this.baseURL}/api/items`);
+				  }
+				}				
+			==>Customized HttpClient:
+				@Injectable()
+				export class ApiHttpClient extends HttpClient {
+				  public baseUrl: string;
+				  public constructor(handler: HttpHandler) {
+					super(handler);
+					// Get base url from wherever you like, or provision ApiHttpClient in your AppComponent or some other high level
+					// component and set the baseUrl there.
+					this.baseUrl = '/api/';
+				  }
+				  public get(url: string, options?: Object): Observable<any> {
+					url = this.baseUrl + url;
+					return super.get(url, options);
+				  }
+				}			
+			==>Interceptor:
+				providers: [
+					{ provide: "BASE_API_URL", useValue: environment.apiUrl }
+				]			
+				@Injectable()
+				export class BaseUrlInterceptor implements HttpInterceptor {
+					constructor(
+						@Inject('BASE_API_URL') private baseUrl: string) {
+					}
+					intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+						const apiReq = request.clone({ url: `${this.baseUrl}/${request.url}` });
+						return next.handle(apiReq);
+					}
+				}	
+			==>Use: Create a proper injectable that implements HttpInterceptor
+				providers: [{
+					  provide: HTTP_INTERCEPTORS,
+					  useClass: APIInterceptor,
+					  multi: true,
+					}
+				  ]
+				import {Injectable} from '@angular/core';
+				import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+				import {Observable} from 'rxjs/Observable';
+
+				@Injectable()
+				export class APIInterceptor implements HttpInterceptor {
+				  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+					const apiReq = req.clone({ url: `your-api-url/${req.url}` });
+					return next.handle(apiReq);
+				  }
+				}		
+			==>extends BaseRequestOptions
+			
+			==>extends RequestOptions
+			
+				https://stackoverflow.com/questions/34516651/set-base-url-for-angular-2-http-requests/50387785
+				
+			
+		Topic: SetUp - Mock/Test Data
+			==>Method 1:	return this.http.get('assets/testdata.json');
+		
+		
+			==>Method 3:	Mock Backend Example for Backendless Development
+							https://jasonwatmore.com/post/2019/05/02/angular-7-mock-backend-example-for-backendless-development
+		
+		Topic: Direct Work on Observable: but if only working on HttpClient APIs, then no need
+			==>Imports:
+				import { Observable, throwError } from 'rxjs';
+				import { catchError, retry } from 'rxjs/operators';			
+				==>Observable: Manipulate or operate on Observable: then add RxJS
+				==>Observable: apply RxJS operators to an Observable to get a new tailored stream
+			==>
+		
+		Topic: Utilize jQuery
+			import * as $ from 'jquery';
+			$.ajax({
+				url: 'http://www.webservicex.net/globalweather.asmx?op=GetCitiesByCountry',
+				data: { CountryName: 'Spain' },
+				success: (data) => {
+					console.log('Hey, we got a success response', data);
+				},
+				error: (err) => {
+					console.error('We got an error :(', err);
+				}
+			});	
+			==>Don't use jQuery, Angular provides you with everything you need out of the box and it's faster and usually more powerful too
+	
+	==>HttpClient: Integration with SOAP API Apps:
+	
+		Summaries:
+			==>Angular SOAP integration solutions: more like: SOAPUI/Postman/Curl solutions instead of "Java JXB solutions"
+			==>They pass in: xml request and returned as: xml response: similar to SOAPUI...
+	
+		==>Method 1:
+			There is a way to consume SOAP services in Angular; no third party packages or libraries required. In a nutshell, you set the response type as text, construct an XML document out of the XML text, and (if desired) parse the XML document into JSON format
+			https://stackblitz.com/edit/angular-soap-test?file=src%2Fapp%2Fsoap.service.ts
+			
+			import { HttpClient } from '@angular/common/http';
+			import { map } from 'rxjs/operators';
+		
+		==>Method 2:
+			import {Page, Alert, NavController} from 'ionic/ionic';
+			import {Http} from 'angular2/http';
+	
+		==>Method 3:
+		
+		
+		
+		==>Advanced Usage:
+		
+			==>Asyn Impl:
+				One way to program asynchronously is to use callbacks
+		
+			==>JSONP:
+				https://codecraft.tv/courses/angular/http/jsonp-with-observables/
+				==>Why JSONP?
+				1) CORS
+				2) The endpoint API must support JSONP callback
+				3) The resource API returns the JSON response wrapped in a callback function
+				4) GET only
+				
+				
+			
+			==>Promise:
+				API: ES6 APIs
+				DOC:	https://codecraft.tv/courses/angular/es6-typescript/promises/
+				Editors/Runner:
+					https://plnkr.co/
+					https://stackblitz.com/angular/ldbamexeojd?file=src%2Fapp%2Frequest-cache.service.ts
+				
+				Promise: a kind of special callback... 
+					=> intead of a generic callback function... 
+					(It serves the same function as callbacks but has a nicer syntax and makes it easier to handle errors)
+					+ ...
+					==>var promise = new Promise((resolve, reject) => {});
+				Observable: apply RxJS operators to an Observable to get a new tailored stream + handle errors
+					http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html
+					https://devdocs.io/rxjs/
+				Subject: implements Observer interface + a Subject has state, it keeps a list of observers + it is an Observable
+				
+				Observable:
+					Observable is just a function that takes an observer and returns a function Observer: an object with next, error.
+					Observer allows to subscribe/unsubscribe to its data stream, emit next value to the observer, notify the observer about errors and inform the observer about the stream completion
+					Observer provides a function to handle next value,errors and end of stream(ui events,http responses,data with web sockets).
+					Works with multiple values over time
+					It is cancel-able/retry-able and supports operators such as map,filter,reduce etc.
+					Creating an Observable can be -Observable.create() - returns Observable that can invoke methods on -Observer  Observable.from() - converts an array or iterable into -Observable  Observable.fromEvent() - converts an event into Observable -Observable.fromPromise() - converts a Promise into Observable -Observable.range() - returns a sequence of integers in the speciﬁed range
+				Promise:
+					A promise represents a task that will finish in the future;
+					Promises become resolved by a value;
+					Promises get rejected by exceptions;
+					Not cancellable and it returns a single value
+					A promise expose a function (then)
+					-then returns a new promise;
+					-allows for the attachment of that will be executed based on state;
+					-handlers are guaranteed to execute in order attached;
+	
+				//
+				//Maintain states
+				//Always async
+				var promise = new Promise((resolve, reject) => {
+				  // do something once, possibly async
+				  // code inside the Promise constructor callback is getting executed synchronously
+
+				  if (/* everything turned out fine */) {
+					resolve("Stuff worked!");
+				  }
+				  else {
+					reject(Error("It broke"));
+				  }
+				});
+
+				//after the promise is resolved or rejected we can call .then or .catch method on it
+
+				promise.then((val) => console.log(val))      // logs the resolve argument
+					   .catch((val) => console.log(val));    // logs the reject argument
+					   
+				==>var promise = new Promise((resolve, reject) => {};	==>LambaExpr / Arrow-Function
+					==>Callback function:
+						function(resolve, reject){ //do something }	
+							(resolve, reject) => {}
+						function(){ xxx }	
+							() => {}
+				API: new / resolve() / then/catch / val/error
+				
+					var promise = new Promise((resolve, reject) => {reject('Promise Rejected')});
+					var promise = new Promise(function(resolve, reject) => {reject('Promise Rejected')});
+					promise.then((data OR: data: any)=>{}).catch((error)=>{});
+					promise.then(function(data)=>{}).catch(function(error)=>{});
+					promise.then((data)=>{},(error)=>{});
+					promise.then(data=>{},error=>{});
+					promise.then(function(data)=>{},function(error)=>{});
+					promise.then(data=>{resolve();},error=>{reject();});
+					promise.then(data=>{resolve(data);},error=>{reject(error);});
+					==>Similar to JDK8's functional interface: ...
+					
+					Pending: Initial state, neither fulfilled nor rejected
+					Fulfilled: onFulfilled() will be invoked, corresponds to resolve()
+					Rejected: onRejected() will be invoked, corresponds to reject()
+	
+			==>Observable into Promise:
+				Service APIs -> Observable -> Promise
+					const promise = this.httpClient.get(this.apiUrl).toPromise();
+				Service APIs -> Observable -> Pipe: this is useful: further process the observable
+				
+			==>Generations and Conversions:
+				Observable:
+					==>HttpClient APIs all return Observable
+					==>Use: generator ways: API: of(), ...
+					==>
+					
+				Promise
+					==>new
+					==>toPromise()
+					==>
+				
+				Subject:
+					==>?
+				
+			==>Observables and Promises:
+				==>Many times as a returned value for other routines and logic to use
+				
+				console.log(promise); 
+
+	==>Tiered-Services:
+	
+		==>Intermediate Services:
+			==>Interact with raw service tier to parse the raw data more into other domain objects and forms
+
+	   
+	==>Misc:
+		Topic: Ionic (mobile app framework): use Angular
+		
+
+==>Step 9:	Shared Modules
+	==>
+
+	==>Shared Services: using RxJS: Subjects, etc.
+
+	==>App-Core: add app model classes:				Assigned to Rubi
+	==>App-Core: add app util classes (pipe):		Assigned to Jerry
+
+
+==>Step 10: App Configurations:
+	==>Angular UI: standalone:	
+		==>Method 1:	environments folder and profile: config various config data
+							Example 1: RMT-UI: utilize environments entries to config Angular UI RESTful API url data?
+							environment.apiUrl
+		==>Method 2:	hardcoded:
+						private testUrl = 'https://jsonplaceholder.typicode.com/posts';
+		==>Method 3:	mock data:
+							==>Retrieve the config data from mock data
+							==>...
+							==>Can be used for config, mock test, UI design data, and test data, etc.
+							==>Mock data can be enabled as Observable: using "of", etc.
+		==>Method 4:	Simulate a data server:
+							==>npm install angular-in-memory-web-api --save
+							==>Check Angular Documentation and tutorials
+							==>Replaces the HttpClient module's HttpBackend. The replacement service simulates the behavior of a REST-like backend
+		==>Method 5a:	From application JSON data file:
+							Example 1: RMT-UI: utilize its own JSON data file to config Angular UI apps
+							Example 2: Angular official documentation: Angular official example: heroes app
+										assets/config.json
+										app/config/config.service.ts
+		==>Method 5b:	From application TEXT data file:
+							Example 1: Angular official documentation:
+										assets/data.txt
+										app/config/config.service.ts
+										OR:
+										app/download/download.service.ts
+										==>1) HttpClient: set up: responseType: 'text'
+										==>2) Directly assign the Observable<String> to component's data variable
+										==>3) Can do some pipe, map and/or tap (log)
+										
+										
+		==>Method 6:	...
+	==>Work with: Spring/SpringBoot:
+		==>Spring Boot:	application.properties file/yml:
+						==>Angular Service class: or dedicated config class: call .<same-context>/config API to retrieve from application.properties file
+							Example 1: Fedex DMT app Angular UI
+		==>Spring/SpringBoot: cmap: Work together with Spring and/or SpringBoot
+						==>Add config in some external files like cmp
+							Example 1: RMT - services APIs: utilize cml file as external config file
+		==>Spring Boot:	utilize its 10+ externalize config files to store config data
+		==>Spring Boot/Data: config server to store config data
+		==>Spring Boot: provide RESTful API to send the config to Angular UI and UI app stores it in persistence or session
+		==>Spring Boot: Provide mock data or simulation data via Spring Boot Mock or Spring Mock
+	==>
+
+==>Step 11: App Routing Flows and Page Flows:
+	==>Because this app is a main map app: no complicated routing or page flows.
+
+	==>App-Enhancement: add app routing strategies:		Assigned to Abishek
+	
+	
+	==>Add Routing & Multiple Pages:
+		https://jasonwatmore.com/post/2019/04/29/angular-7-tutorial-part-3-add-routing-multiple-pages
+		
+	
+==>Step 12: App Security Protocol:
+	==>SSO:
+		==>This is the scenario for RMT app: SSO via TAM/AD/...
+	==>Route guard / Auth Guard
+	==>HTTP Interceptors: JWT and Error interceptors
+	==>
+	==>Spring Security and Angular:
+		==>See "https://spring.io/guides/tutorials/spring-security-and-angular-js/"
+	==>
+	
+	==>Coding Practices:
+		==>Angualar: mostly address web level security (XSS/CSRF/CORS), not application level security
+		==>
+		==>XSS:
+			==>1) Method 1: prevent injection:
+				Main Parts: avoid inject code from "Resource URLs" like <script>code into Angular DOM structures/elements: XSS security issues
+				==>Angular does santinization by removing <script> part
+				==>4 Parts (Security Contexts): HTML(innerHTML)/CSS(style)/URL(<a href>)/Resources-URL(3rd-party)
+			==>2) Method 2: Component Template Files: ==>Not concatenate user inputs into template code: such as from component code
+				==>Use: Offline template compiler: template injection: especially for production deployment
+				==>Do not do dynamic template generation
+				==>Exception: build dynamic form in some safe way:
+					==>One type of form and form control
+					1) Use reative form
+					2) Create data model to represent form-control and controls
+					3) Enable form-groups for data + Supply data via services
+					4) Enable component for this form: dynamically create the form + enable display via selector
+					5) Enable validation for the inputs
+			==>3) Method 3: Use templateUrl and templateRef mainly instead of direct usage of DOM elements
+				  Also use Angular Sanitinizer APIs to do sanitizations when needed - especially for untrusted values
+			==>4) Method 4: Enable web server returned header: content-security-policy headers
+			==>5) Practical Ways:
+					==>Angular can:	1) certify some values to be trustable by using santinizer APIs - like FM CHG's bypass
+									2) convert user inputs into trusted values by conversion via some methods in the controller class/code
+		==>CSRF:
+			==>Common Web Tech:
+				==>Browser: same origin policy: only the code from the client domain/browser can:
+												1) access the cookies for that site on client browser
+												2) set the authentication token in the cookies (during the page load or the first GET request) to the request header from the subsequent client browser request
+												3) XSRF/CSRF evil code cannot access to this cookies code and token
+				==>Server/Site: send this randomly generated authentication token into the response to client and stored in their cookies
+				==>The cookies are JS readable
+				==>Then server/site: can validate this token with their side to validate the request from the client
+				==>Evilness-5-Scenario code: cannot access to the cookies/authentication, so CSRF can be prevented - especially againt evil CCP's CSRF
+					==>Example 1: Evil ChinaCCP performs: CSRF to dictate/discriminate/demonize/retaliate/abuse Jerry from evil-CCPers instead of others
+					==>5-Evil-Scenarios:	Dictator/Discriminator/Demonizer/Retaliator/Abuser
+					==>5-Evil-CSRF-Scenarios: CSRF-ed networks' Dictator/Discriminator/Demonizer/Retaliator/Abuser via "networks"
+				==>CSRF demonstrations in abusers and CCP domains...
+			==>Angular Ways: can do the similar ways as the above web ways
+				==>Special Example: HttpClient
+					==>Client (HttpClient API): does the 50% work: send a request => An interceptor does the work: access the cookies and set the X-XSRF-TOKEN in request header
+					==>Angular Server: should do another 50% work: set token and validate the token
+						==>If server does not take the default X-XSRF-TOKEN name, then client HttpClient can use XSRF option APIs to set customized names
+		===>XSSI:
+			==>Named: JSON Vuklnerability: attackers adds <script> ... and make it executable on JSON APIs ...
+			==>Server: prevent it by: adding: ')}], \n' to make it non-executable
+			==>Client: HttpClient: Strip them out before parsing the server JSON API response
+	==>injection
+	
+	==>interceptor
+	
+	==>
+	
+	
+==>Step 14:	E2E Tests and Integration/Unit tests
+	==>Assigned to Sudha and Rubi
+	
+	Unit Testing:
+		Angular API: TestBed
+		Karma
+		Jasmine
+		HttpClientTestingModule
+		
+		Custom/test component and fitting tests
+		Functional tests: component and services
+		Simulate Async Tasks
+		fakeAsync / tick
+		Isolated/Non-Isolated Tests
+		
+	E2E Tests:
+		...
+		
+	
+==>Step 15: Add new features:
+	==>
+	==>Especially add features to explore Nevada desert areas housing development capabilities and initiatives as one add-on mission/DTS
+	==>
+	==>
+	
+	==>ServiceWorker/PWA(ProgressiveWebApp):
+		Serve as caching and proxy
+		Page loading refresh with cached contents
+		...
+	==>Web Workers:
+		==>Enable background processing: send and receiving messages
+		==>ng generate web-worker app (or other module):	==>Generate scaffold: app.worker.ts
+		==>Not supported by SSR
+	==>Server-Side Rendering: SSR:
+		==>Angular Universal: is this a 1st-party integration?
+		==>
+		==>User: get tne landing page - without user event interactions - until the full page gets loaded: this is ok
+		==>	export { AppServerModule } from './app/app.server.module';
+			export { renderModule, renderModuleFactory } from '@angular/platform-server';
+		==>app.server.module.ts
+		import { ngExpressEngine } from '@nguniversal/express-engine';
+		Mechanism:
+			==>Node Express Server Engine: perform rendering and send final static contents to client
+			==>SEO + Suitable for non-JS platform + First-Page rendering quickly
+	
+	==>Build Reactive Applications: NgRx
+		==>State management: actions and reducers
+		==>Redux: Flux => Redux => Angular/RxJS
+		==>Store: controlled state container
+		
+	==>
+	
+	
+==>Step 17:	Add Angular Forms:
+
+	Template-Driven Forms Validation Example
+		https://jasonwatmore.com/post/2018/11/10/angular-7-template-driven-forms-validation-example
+		
+	Reactive Forms Validation Example
+		https://jasonwatmore.com/post/2018/11/07/angular-7-reactive-forms-validation-example
+	
+
+==>Step 19:	Migrations:
+	==>Upgrade Versions:
+		ng upgrade
+		
+	==>Migrating to an Angular CLI Project:
+		https://jasonwatmore.com/post/2019/06/13/angular-7-tutorial-part-7-migrating-to-an-angular-cli-project
+	
+
+============================================================
+UI Topics:
+
+Topics: Usage Apps/Examples:
+		https://github.com/oveits/consuming-a-restful-web-service-with-angular-vi
+		https://github.com/codecraft-tv/angular-course/tree/current/11.HTTP/3.http-with-promises/code/
+		https://jasonwatmore.com/post/2019/11/21/angular-http-post-request-examples
+		https://jasonwatmore.com/post/2019/11/04/angular-8-router-animation-tutorial-example
+		
+
+Topic: Dialog Windows: Modals/Popups/...
+
+Topic: Paginations
+
+Topic: Loading Indicator	
+		https://codecraft.tv/courses/angular/http/http-with-promises/
+
+
+
+============================================================
+Angular Coding Tips:
+
+==>Use "let": local variables and *ngFor
+
+==>Use: Type inference: 
+
+==>Use: backtick
+		let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+
+==>Use: readonly as modifier
+
+	constructor(private readonly cache: CacheService, ...) {}
+
+==>Misc:
+	==>#: href="#element-id"
+	==>#: http://.../#element-id"
+	==>#: href="#"
+	==>#: http://.../#"
+	==>#: refer to templateRef... like child component...
+			==>Kind of patten...
+			<div #gmap
+			
+	
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+==>API Services App: "RMT-Services":
+	==>Assigned to Sridhar:
+
+		Design doc?
+		Requirements doc?
+		Scrum Master/Team in place?
+
+
+		App-Scaffolding
+			==>POC
+				==>Real App
+
+	(1) Stage: Scaffolding:
+		1) Spring Initializr: create Maven modules:
+					2.1.6.Release
+		2) Spring Boot...
+		3) 
+
+	IDE:
+		STS
+		Install: Cucumber Eclipse Plugin
+
+	(2) Stage: POC:
+		1) Modify pom.xml:
+			==>Add <properties> section
+			==>Add encoding and java version
+			==>${project.build.directory}
+
+		2) Create common packages
+
+		3) Add classes
+
+		4) Add Swagger: for POC demo
+
+			==>@Configuration:
+				1) Can create a config package for all @Configuration classes
+				2) 
+
+
+	(3) Stage: Real App / Productionization:
+		1) Modify pom.xml again:
+			==>Jacoco?:
+				Sonar code coverage
+				Generating reporting: jacoco.exec
+			==>cucumber-junit/spring/core/java: 1.2.4
+			==>selenium-java: 3.141.59
+			==>swagger: API docs: springfox-swagger2/swagger-ui: 2.9.2
+			==>gson: not jackson?
+			==>hsqldb: not h2
+			==>lombok
+			==>json/jsoup/opencsv
+			==>plugins: cucumber-reporting
+			==>profile: coverage: reporting stuff...
+
+		2) Focus on performance:
+			jmeter
+
+			Test data: json file
+
+		3) Features:
+			==>Main development processes are feature driven...
+
+			3 controllers:
+				==>Mapping with the RMT UI's 3 feature needs
+
+			==>several APIs
+
+			==>
+
+		4) Test Modules:
+			==>Focus on test coverage much...
+			==>sonar/selenium/cucumber/junit/jmeter/mockito/...
+
+			==>To Do: see how cucumber tests are done...
+
+		To do:
+		==>Several annotations
+		==>Why adding @Configuration into @Repository...
+			==>This is one way to use "Spring Data Repository with more capabilities":
+				==>Beyond the built-in repository in the Spring Data APIs
+				==>But still enabled as @Repository
+				==>This is beyond the built-in repository and JdbcTemplate ways, native queries, etc.
+				==>It is something like: enable your own customized repository classes replacing the existing Spring Data repository classes
+			==>The actual implementation: a combo of repository impl and JdbcTemplate and some native queries
+		==>
+
+
+
+	(4) Stage: Deployment:
+
+		Talk to Anak and Sudharma:	Deployment
+
+		Apache
+			Deepak: Configure Apache
+
+		DB:
+			Elizabeth:	Set up DB
+
+	//////////////////////////
+	APIs:
+	//////////////////////////
+	Methods:
+		FastPOC				(not so practical: FastApp)
+		FastScenarioCoding	(not fast-memorizing-coding)
+			==>Scenario-Driven
+			==>Method-Driven
+			==>Insight-Driven
+			==>Step-Driven
+			==>...
+		
+		
+	==>BuildLess Coding
+	==>DeploymentLess Coding
+	==>RunLess Coding
+	
+	==>Become an expert in coding without processing actual development like DMT, WorldPay projects, etc...
+	==>Become a superb developer with developmentless and without actual-development processes
+	
+	
+	==>How to develop this RESTful API app:
+	
+		Steps 1:	Business Requirements and API Interface Documents
+			Step 1:	Business Requirements Documentations
+			Step 2: Application API Interface Documents
+			Step 3:	Optional: Application Functional Documentations
+			Step 4:	Optional: Data Model Analysis: DB/tables/...
+			Step 5: Optional: Application Integration Documentations
+		Steps 2:	Scaffolding:
+			Step 1: Sketch the app/package/description names, etc. + Framework/BuildTool selections + Versions
+			Step 2:	IDE: setup build environment
+			Step 3:	https://start.spring.io/
+					==>Web/SpringDataJPA/Actuator/HSQLDB/Test/
+					==>To Do: 5-min refresh Spring Boot Starters
+			Step 4:	Run a maven build quickly: to build the scaffolding app
+			Step 5:	Check in the scaffolding code into GIT Repo + set up .gitignore file + create dev branch
+		Steps 3:	Iteration 1:	Create POC 1: demo
+			Step 1:	Controllers
+			
+					Enable CORS
+					
+					//APIs: arguments: pathvariables, data, parachuting-common data from the request/session, ...headers/params/
+					https://github.com/spring-projects/spring-mvc-showcase/blob/master/src/main/java/org/springframework/samples/mvc/fileupload/FileUploadController.java
+					(1) Methods 1: Return Values:
+						Direct use common data for Entity's body:
+						
+						(1) No.1 Way: return ResponseEntity
+						//Return ResponseEntity:
+						//Multiple Forms:
+							//Multiple Constructors: Body, Headers, Status
+							//Multiple generator methods: ok(), ...
+							//
+						(2) No.2: Return: @ResponseBody
+							public @ResponseBody String getXXX() {
+								return ""; //this is the Json String like: "{a: \"a\"; b: \"b\"}"
+								//This string goes to HttpResponse's entity's body
+								//In client side: it will be deserialized into JSON String and parsed into a JSON object by Jackson...
+								
+								//1) Use Spring Boot Jackson: just return an object: ==>@ResponseBody: then it will be converted into JSON string
+								//2) Use: Explicit way: ResponseEntity.ok(jsonString); //can be converted from GSON, ..., ...
+							}
+						(3) No.3: Return a string:
+							==>Basically it will go to Entity's body: but use all default settings
+							
+						(4) No.4: Return other beans: JavaBean ==>This will go to Body: ...@XmlRootElement ==>I think this JavaBean class: needs: toString()
+									==>Actually the Entity's body is the toString() result... ==>Still a string
+									
+						(5) No.5: Return some special object types that can be converted into entity's body as a String or a JSON String?
+						
+								Feed/Channel/...
+								MultiValueMap<String, String>
+								
+						All the above data are all going to the Entity's body field, as a string or JSON String?
+						
+					(2) Methods 2: Arguments: Add Adjustments as method arguments:
+									==>Request Data
+									==>JavaBeans
+									==>Cookies
+									==>...
+									==>Headers
+									==>WebRequest request, Model model
+									==>@RequestParam MultipartFile file, Model model
+					
+					(3) Methods 3: Annotations: Add enhancements via annotations, etc.
+						
+						==>@ModelAttributes
+						
+						==>
+						
+						
+					Simple Testing:
+						http://localhost:8080/bandwidthapi/Bandwidth/CheckNumber/accountId/number
+					
+					
+			
+			Step 2:	Mock Data
+			
+			Step 3: Exception Package: "Under control"
+					==>AOP: @ControllerAdvice and @ExceptionHandler
+					==>Can Add: ExceptionController to handler exceptions as global and also integration enabled ways
+					==>Advanced Usage: use: @RestControllerAdvice
+					
+			Step 4: Log Package:
+					==>Utilize Spring Boot default: slf4j + logback
+					==>Add a customized Log util class: for performance logging
+						==>Record performance testing time periods and start time, etc.
+			
+			==>Launch a demo version for POC 1: Controllers - without real DB data
+		
+		Steps 4:	Iteration 2:	DB Design and Enablement
+		
+			==>Models
+			
+			==>Repository
+			
+			==>...
+			
+		
+		
+		
+		Steps 5:	Iteration 3:	Excel?
+		
+		
+		Steps 6:	Iteration 4:	Add Test Modules:
+					This app is very much test centric:
+					
+					JUnit
+					Mockito
+					Cucumber
+					Selenium
+					Sonar
+					JMeter
+					...
+		
+		Steps 9:	Testing:
+					==>Maven Run: cmap file exists
+					==>DB connections: password
+					==>
+		
+	
+	
+	
+	
+	
+	Points:
+		==>Interface + Class
+		
+	Build:
+	
+	Run/Deployment:
+		cmap: external config file: in place
+			config data added: including DB url etc
+		maven spring boot run:
+			entityManagerFactoryBuilder: bean: failed: invalid transaction isolation value: TRANSACTION_READ_UNCOMMITTED=
+	
+	==>Layer APIs:
+	
+	==>Property APIs: 
+	
+	
+	==>Renter APIs:
+		used internally?
+	
+	==>App Config:
+		==>Spring Boot:	application.properties file/yml:
+						==>Angular Service class: or dedicated config class: call .<same-context>/config API to retrieve from application.properties file
+							Example 1: Fedex DMT app Angular UI
+		==>Spring/SpringBoot: cmap: Work together with Spring and/or SpringBoot
+						==>Add config in some external files like cmp
+							Example 1: RMT - services APIs: utilize cml file as external config file	
+		
+
+	//////////////////////////
+	Deployment:
+	//////////////////////////
+	DB?
+
+
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+==>Angular API Documentation:
+	How to understand and use it better?
+	
+	
+get(url: string, options: 
+		{ 
+			headers?: HttpHeaders | 
+				{ [header: string]: string | string[]; }; 
+			observe?: 
+				HttpObserve; 
+			params?: 
+				HttpParams | 
+				{ [param: string]: string | string[]; }; 
+			reportProgress?: boolean; 
+			responseType?: "arraybuffer" | ... 2 more ... | "json"; 
+			withCredentials?: boolean;
+		}
+			= {}
+   ): Observable<any>
+
+{ [param: string]: string | string[]; } ==>Should be: 1 and 2a
+	==>JSON String
+	Example Data 1: one data item
+		==>{"param": "value1"}
+	OR:
+	Example Data 2a: multiple data items like: ==>Should be this
+		==>{"param1": "value1"; "param2": "value2"; "param3": "value3"}
+	OR:
+	Example Data 2b: like: ==>Should not be this
+		==>{"param": ["value1", "value2", "value3"]}
+
+
+============================================================
+Observable:
+
+	apiCall.subscribe(angular-lamba-expr1, angular-lamba-expr2, ...);
+	apiCall.subscribe(angular-arrow-function1, angular-arrow-function2, ...);
+
+this.soapService.getJsonData().subscribe((data) => {
+      console.warn('Json data received:', data);
+      this.jsonData = data;
+    },
+    (err) => {
+      console.warn('Erroneous! Err:', err);
+    });
+	
+============================================================
+
+
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+@Injectable()
+export class SoapService 
+{
+  // subject: Subject<any> = new Subject();
+
+  constructor(private http: HttpClient) { }
+
+  getSoapData()
+  {
+    return this.http.get('assets/testdata.xml', {responseType: 'text'})
+      .pipe(
+        map((xmlString: string)=>{
+          const asJson = this.xmlStringToJson(xmlString);
+          return asJson;
+        }),
+        catchError((err)=> {
+          console.warn('INT ERR:', err);
+          return err;     
+        })
+      );
+  }
+  // TOCO: In practice, may want to use an HttpInterceptor:
+  //       https://angular.io/guide/http#intercepting-requests-and-responses
+  //       https://blog.angularindepth.com/the-new-angular-httpclient-api-9e5c85fe3361
+
+  xmlStringToJson(xml: string)
+  {
+    // Convert the XML string to an XML Document.
+    const oParser = new DOMParser();
+    const oDOM = oParser.parseFromString(xml, "application/xml");
+    // Convert the XML Document to a JSON Object.
+    return this.xmlToJson(oDOM);
+  }
+
+  /**
+   * REF: https://davidwalsh.name/convert-xml-json
+   */
+  xmlToJson(xml)
+  {
+    // Create the return object
+    var obj = {};
+
+    if (xml.nodeType == 1) { // element
+      // do attributes
+      if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+        for (var j = 0; j < xml.attributes.length; j++) {
+          var attribute = xml.attributes.item(j);
+          obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+        }
+      }
+    } else if (xml.nodeType == 3) { // text
+      obj = xml.nodeValue;
+    }
+
+    // do children
+    if (xml.hasChildNodes()) {
+      for(var i = 0; i < xml.childNodes.length; i++) {
+        var item = xml.childNodes.item(i);
+        var nodeName = item.nodeName;
+        if (typeof(obj[nodeName]) == "undefined") {
+          obj[nodeName] = this.xmlToJson(item);
+        } else {
+          if (typeof(obj[nodeName].push) == "undefined") {
+            var old = obj[nodeName];
+            obj[nodeName] = [];
+            obj[nodeName].push(old);
+          }
+          obj[nodeName].push(this.xmlToJson(item));
+        }
+      }
+    }
+    return obj;
+  }
+
+  getJsonData()
+  {
+    return this.http.get('assets/testdata.json');
+
+    /*
+    Proper practice: 
+    this.http.get('./testdata.json')
+    .subscribe((data) => {
+      this.subject.next(data);
+    },
+    (err) => {
+      console.warn('Erroneous! Error:', err);
+    });
+    */
+  }
+}
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+package.json:
+
+
+@angular/common
+Common angular directives including NgIf, NgClass, NgForOf and pipes including AsyncPipe, UpperCasePipe, LowerCasePipe. Also includes the Angular HttpClient in the @angular/common/http subfolder.
+Docs: https://angular.io/api/common
+@angular/compiler
+Angular template compiler, used by @angular/platform-browser-dynamic to convert templates to JavaScript code that can run in the browser.
+@angular/core
+As the name suggests, these are the core services, utilities and functionality required by all Angular applications.
+Docs: https://angular.io/api/core
+@angular/forms
+Includes providers and directives for building both template-driven and reactive forms.
+Docs: https://angular.io/api/forms
+@angular/platform-browser
+Includes core functionality for running Angular applications in different supported browsers.
+Docs: https://angular.io/api/platform-browser
+@angular/platform-browser-dynamic
+Includes providers and methods to compile, bootstrap and run Angular apps dynamically in the browser using JIT compilation.
+Docs: https://angular.io/api/platform-browser-dynamic
+@angular/router
+Implements routing features which enable navigation between different routes (url paths) in an Angular application and mapping routes to different components.
+Docs: https://angular.io/guide/router
+core-js
+A collection of polyfills that add support for features required by Angular that aren’t natively supported yet in several browsers.
+Docs: https://github.com/zloirock/core-js
+rxjs
+Reactive Extensions Library for JavaScript, including an implementation of Observables which are returned by many Angular APIs and used throughout the Angular framework for handling asynchronous events.
+Docs: https://angular.io/guide/rx-library
+zone.js
+Implements Zones for JavaScript, used by Angular for running change detection processes when native js operations raise events.
+Docs: https://github.com/angular/zone.js/
+
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+

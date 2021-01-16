@@ -1,0 +1,44 @@
+
+============================================================
+Fedex: DMT tool:
+	==>2019/09:
+	
+==>Angular: 1.x: 2010
+==>Angular: 2.x: 2016/09
+
+DMT:
+	==>1) A real Angular app that I started delving into very much'
+	
+	==>Stages: 2-3 weeks stages for DMT UI team:
+		==>2 Angular developers in India
+		==>1 Tester in India
+	
+	==>App:
+		==>Login: not integrated: due to security architectures ongoing + DMT has 4 sub-teams so it belongs to DMT architectures and overall guys work
+		==>Use: maven-frontend-plugin: work together with Spring Boot
+		==>Added AngularCLI
+		
+	==>My Work:
+		==>EnvSetup: OK: the apps are running and I was able to check out/in the code...
+		==>I was able to run maven-frontend-plugin app and also AngularCLI ng serve...
+		==>I understood DMT and Dock Configurations as well (I even toured Fedex facility)
+		==>Issues:
+			==>No enough hours...
+			==>Mixed tasks: architectures work + DMT-1 work
+				==>Architecture Work: DMT importer/exporter: servers and shell scripts:
+							==>I actually finished some modules for importer and exporter:
+								import the Dock config data from many servers and add them to DB for developers to use for testing and dev processes
+				==>DB
+				==>DMT-1:	I chimed into UI Angular work: assigned by myself into it
+							==>base: missed and didn't pay attention to: so AngularCLI didn't start up right:
+									 ==>But they didn't add "base" right - I just didn't pay attention to it
+							==>Component Impl:
+									 ==>Add some components
+							==>Dialog Windows:
+									 ==>Showed some dialog windows: but not completely matching the UI wireframes from Diana as Agile/ProductManager
+		==>I made some progress on DMT work because Nationwide work was easy and Syed was easy on me too...
+			I did focus on DMT work quite a bit at that time, ...
+			But...
+
+============================================================
+

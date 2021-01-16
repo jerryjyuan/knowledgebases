@@ -1,0 +1,234 @@
+
+===========================================================  
+
+===========================================================  
+Key/KeyStore Types:
+
+	Contexts:
+		- IT/Web/App Security:
+			- key stores are one main way
+			- many protocols/vendors/uses could be involved
+	KeyStores - domains:
+		...
+		Web key store
+		Java Keystore Store: jks
+			- could exist in varied forms
+		...
+		
+		Notes:
+			I know: there could be some unknowns (or forgetting or inaccuracies): but no need to explore/refresh... 
+				 	===>One main principle:	by-example:	Usage-of-33%-JDK-APIs-in-apps ===>Do you need to explore/remember/fresh/accurate all JDK APIs at all times?
+				 	===>2nd points:
+				 		- Others:		Pay more attention: the keys - (even not connected flows or explanations about some tech points)
+				 		- Yourself:		Practical usage: are you able to use these skills in main scenarios? - yes, you can
+		
+	KeyStore Provider/Vendor:
+		...
+		SUN
+		...
+
+	Keystores - Types:
+		- Trusted Stores
+			CA
+			Verisign
+			Symantec
+			...
+		- Internal Key Stores
+			Company internal provider
+			...
+
+		How does this key and key store really work?
+			- It is like many internal design and impl
+			- For example how JDK API works internally?
+			- It is good to know and know all, but may not be necessary 
+				- some confusions could overwhelm you the entire day
+				- and then you become an expert, and then never use them in the next 12 month apps and projects
+
+	
+	
+	
+	
+	Common Usage Examples:
+		- Tomcat Server:
+			- Enable HTTPS to access Tomcat Server provided url and pages
+			- Its design:
+				- SSL/TLS:
+					- Follow standardized SSL/TLS intrinsic nature to enable Tomcat server scenario
+					- Industrial standards: use Key Store and Key
+				- It is Java app server
+					- So uses Java Key Store and Java keys
+					- So it uses JDK on the server side:
+						- JDK: uses the Java JDK/JRE ways: store keys into JDK/JRE locations
+					- So Tomcat configures its server config to refer to JDK and these keys stored
+					- Processing:
+						https://tomcat-server/app
+						===>Tomcat server.xml: have a config to JDK/JRE keys and validate the keys: it is standardized SSL Java key
+						===>In this Tomcat is enabled with SSL/TLS and able to process these client browser requests
+				- <jdk>\bin\keytool -genkey -alias tomcat -keyalg RSA -keystore <keystore>\keystore
+				- Configure server.xml:
+					refer to this keystore
+		- 
+
+
+
+		- NW - XXXX:
+			- HttpsURLConnection:
+				===>Just establish a HTTPS session
+				===>Configure it with a JKS key
+	
+	
+	
+	
+		Client-Server:
+			- 1) http and https
+				- https uses: a key to be enabled
+				- https: can access this key via many ways
+					- Normal client:	WEB/Web-Browser-as-client
+						- Example 1:	WebBrowser->Tomcat:
+													===>Tomcat: enable this key via server.xml + JDK/JRE config-with-some-key(s)
+														1) Question 1: Tomcat enables the key: does browser also enable some key on Firefox/Chrome?
+																	   - Or: web browser naturally enabled with HTTPs on their side - by common browser designed features? maybe - due to its openness
+																	   - I think: mainly pass on these SSL duties to server side: let server enable/validate them...
+													===>However, special setup (outside the scope of this document) is necessary to run Tomcat on port numbers lower than 1024 on many operating systems:
+														===>Which is why it generally uses: 9443 (not 443)
+						- Example 2:	WebBrowser->OtherServers-EnabledServices:
+					- Normal client:	WEB/Java-client - as HTTP/HTTPs client
+						- Example 1:	JavaPrograms-as-Client->Tomcat
+						- Example 2:	JavaPrograms-as-client->OtherServers-EnabledServices:
+										Example 1:	NW-XXXX->OtherServers-EnabledServices: Web Services - SOAP
+													- Enable HTTPS connection to "5-8 web service providers" + "mainframe-CICS web service - via this way?"														
+													- It does add the key to the connection
+													- 1) SOAP: "5-8 web service providers": for sure: - not the CICS Mainframe web services intergation
+														 ===>These web service calls do use: xxxx.jks to be added to the Http URL connections that are used for these SOAP calls
+														 - Directly use HTTPS and Java SOAP / JAX-WS APIs to build up connections to endpoint using WSDL
+														 - SOAP APIs: Security:
+														 	- No.1: SOAP security provider (not https)
+														 	- No.2: ...
+														 	- No.3: Use this way: involve HTTPS and key
+														 - RESTful APIs: security
+														 	- No.1: Server-Level: HTTPS:
+														 			- How?
+														 				- No.1: rely upon its server platform to implement HTTPS: such as: Tomcat
+														 	- No.2: App+Integration Level: OAuth2 + JWT + ...
+														 	- No.3: App-Level: SAML
+														 	- ...
+													- 2) "mainframe-CICS web service - via this way?": xxxx to mainframe's web services:
+														- Use SSL Socket connection - directory use SSL socket connections - are they using Https together?
+														- SSL Socket connections: can be used alone - not necessarily with https
+														- This doesn't seem to use the xxxx.jks to do encryption: due to internal communications...
+														===>In the app, it is using generic SSL Socket communications to call Mainframe web services APIs
+															==>Java Code: send socket connection with the JKS certificate to Mainframe CICS WebService APIs
+															
+															Summaries: how various scenarios use TLS/SSL and certificates: could have many ways...
+																Tomcat
+																Socket: Java (with JKS) -> Mainframe Web Service APIs:
+																	==>This proves: sometimes: it is from client side to send the JKS to server APIs...
+																		1) Java talks to CICS APIs: using SSL enabled socket
+																		2) It initializes the JKS for SSL handshaking
+																		3) Different from: browser to SSL-Tomcat-Server (this is Tomcat sending JKS certificate)
+																Browser...
+																Web certificates...
+																JKS
+			- 2) ...				
+			
+			
+			- 5) SSH?
+				 - Public/private key pairs
+				 
+			- 9) ...
+			
+
+===========================================================  
+Resources:
+
+http://thesecuritybuddy.com
+
+===========================================================  
+TLS/SSL:
+
+- HTTPS: Server: Tomcat
+
+- HTTPS: Web Service Calls: RSA
+		 - xxx.jks
+		   keytool -genkey -alias server -keyalg RSA -keysize 2048 -keystore xxx.jks
+		   keytool -certreq -alias server -file xxx.csr -keystore xxx.jks
+ 
+		 - This jks needs to be generated by some group... and add it into app to use... - due to expiration and valid from...
+
+===========================================================  
+RSA:
+
+- Usage 1:	VPN
+			- RSA Token
+			- Entrust
+- Usage 2:  ...
+
+- Usage 3:  Java Code Signer: jks
+			- After signed: the jar size - become larger
+			- Impl: build.xml / Ant build: <signjar ...>
+			- SHA256
+			===>Procedures:
+				- 1) It is managed by internal company RSA or security team to generate the jks
+				- 2) RSA team can create CSR file using internal signed entity/provider, or internal team does this via some vendor delegator/companies
+				- 3) After CSR is generated, and also JKS created - with expiration date
+				- 4) Code Signer JKS is used to sign jars per signjar lib - maybe more secure or encrypted
+- 
+- 
+=========================================================== 
+Concepts:
+
+root CA: Certificate Authortities - Certificates List: cacerts
+- have different versions - cacerts are from JDK/JRE installations
+
+Client - Server:
+- Client: JRE/JDK: has to be able to do handshake with SSL-Server:
+			- JRE/JDK: trusted key stores: like cacerts: have to import the server-provided certificate...
+			- Generally ok
+			- 1) Server changes the version of certificate or different certificate: then client side cannot do handshake: because the new certificate on server side is not in client JRE/JDK's trusted list
+				 ===>Do an import
+				 	 1) Open server url: click green sign and download the current server side certificate in PEM format
+				 	 2) Then do a regular keystore import, or create a new keystore that import this new certificate]
+				 	 3) Default one: cacerts file
+				 	 4) Different one: -Djavax.net.ssl.trustedStore=..., password=...
+		
+	==>Why client side (browser) needs to install it?
+		==>1) Scenario 1: So the client side needs to install the server side jks? to meet the need for "trusted list"?
+							==>For all SSL communication, client side / browser need to install? - at least not for the client side JRE JKS,...
+							==>The SSL communication just allows client to accept the server certificate...
+		==>2) Scenario 2: The client side - actually means: local-dev and install the jks for local tomcat to use?
+							==>So MissonMap: install JKS locally: more like enable local dev and tomcat?
+		==>Summaries: It is scenario 2: install the similar JKS certificate from remote/production/... site (Tomcat)
+										==>And import it into local JRE for local Tomcat to use (similar to remote server)
+										==>So you can do local dev/testing
+										(The way to get this jks certificate is clicking the lock icon of the website...and download it to local laptop
+											==>This is part of SSL communication 2 trips...)
+		
+					 
+- Automatic Ways:
+	- Utilize tools or Java programs to do so:
+	- installCert.java:
+		java installCert localhost 443
+		===>Similar to the above browser way: query the SSL server 443, and it will be sent with a server side certificate
+		===>This program will create a new keystore if not existing
+		===>The program then prompts you to save it or not: if yes, it will update the keystore, if not, the keystore stays the same
+	- And then the client programs can use this keystore to talk to the server on port 443
+	
+- Client Programs:
+	- Web Browsers: it serves as a client and use the client side JRE(JDK) - which has the server certificate imported
+	- Web Service Clients: another client:
+		- use local client side cacerts to talk to web service server side
+	- Apps:
+		- Jenkins as client side to talk to other server apps with SSL
+		- xxxx desktop app - talk to any other web service apps: SSL Https Connections: the connection will add this .jks to the client
+- 
+
+
+=========================================================== 
+
+
+
+
+
+
+
+ 

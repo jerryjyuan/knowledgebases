@@ -1,0 +1,100 @@
+
+=================================================
+Angular - Coding:
+
+- 
+
+
+
+- Maven - Angular:
+
+	- Migrate from Angular 1.x or coexist
+
+	- Use: exec-maven-plugin
+
+	- Run Tomcat:
+		- mvn -am -pl xxx-app tomcat7:run -Dmaven.tomcat.port=8080
+		
+		
+	- 
+
+=================================================
+Application  Design:
+
+
+- Use SSO: Siteminder + Spring LDAP
+- Use: Security Login Servlet: Servlet Filter
+- 
+
+- Security Modules - Design:
+
+	- Siteminder/LDAP:
+
+	- Admin/User Groups:
+		Web Security Roles
+
+	- TLS/SSL:
+	
+	- Capabilities:
+	
+	- POST:
+
+
+- AngularJS 1.x
+
+- Angular 4:
+
+
+=================================================
+Postman: usage:
+
+	- Login: POST request: add JSON payload/contents as body
+	- Send GET or POST request:
+		- Configure Cookies: add a new cookie with JSESSIONID - retrieved from login request
+
+
+=================================================
+Angular 4 App Design:
+
+- Generated with standard way: Angular-CLI
+
+- src/:
+	assets
+	environments
+	js
+	
+- src/app:
+
+	- <main-feature-module> level
+		- <sub-feature-module> level
+			- <HTML-Element> level
+				= detail
+				= result
+				= action
+				= fields
+				= ...
+	
+				===>.css/.html:
+					- not using material design
+					- use: style.css + other .css files
+	
+				===>Component Dialogs:
+					- using material dialog
+					
+	- 
+	
+	
+Testing:
+	Angular Testing
+	
+Logging:
+	console.log
+	
+	
+
+
+
+
+
+
+=================================================

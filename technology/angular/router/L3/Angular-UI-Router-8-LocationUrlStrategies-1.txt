@@ -1,0 +1,28 @@
+
+=========================================================== 
+Angular UI - Router: Location Strategies
+
+- Defaults:	all about HTML5 browsers
+			===>Support html5 styles + avoid sending to server - when enable local history urls, etc.
+	PathLocationStrategy and HTML5 browser URL styles 
+	- but:
+	  need:
+		1) Method 1: Optimal:	<base href="/">
+								- The browser uses the <base href> value to prefix relative URLs when referencing CSS files, scripts, and images.
+								- If not:  the browser may not be able to load resources (images, CSS, scripts) when "deep linking" into the app
+		2) Method 2: Use: [APP_BASE_HREF][] value
+		3) Method 3: Add rootUrls
+	- Reason 1: Use "the above html5 style":to enable HTML5 history.pushState: so the in-app url is pretty
+	- Reason 2: Performance: It is also a requirement later during the app impl: "Rendering critical pages on the server"
+				This option is only available if application URLs look like normal web URLs without hashes (#) in the middle.
+	- 
+
+	Old Ways:
+		- Also want to avoid sending to server - but need to use older way: #
+		- So need:
+			HashLocationStrategy
+			Cons:
+				- The in-app url is not pretty: due to "#"
+				  ===>So current Angular doesn't like it - but able to support it
+
+===========================================================

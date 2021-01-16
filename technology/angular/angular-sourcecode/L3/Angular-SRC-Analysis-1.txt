@@ -1,0 +1,30 @@
+
+=========================================================== 
+Angular - SRC:
+
+- Angular Source Code: built in Angular
+
+=========================================================== 
+Angular Material:
+
+- https://github.com/angular/components/tree/master/src/material
+- Just like another App: but very special:
+	- Its components: not named: xxx.component.ts
+	- 
+	
+- Types:
+	- Components:
+		mat-dialog
+		
+	- DOM Elements' Attributes:
+		mat-button:
+		===>It declares the HTML element "Button" as a component
+		===>
+			@Component({
+			  moduleId: module.id,
+			  selector: `button[mat-button], button[mat-raised-button], button[mat-icon-button],
+			             button[mat-fab], button[mat-mini-fab], button[mat-stroked-button],
+			             button[mat-flat-button]`,
+
+
+=========================================================== 

@@ -1,0 +1,77 @@
+
+============================================================
+Angular - Security:
+
+==>Angular Provided:
+	https://www.grapecity.com/blogs/developers-guide-to-angular-security-and-authentication
+	==>Router/Guards
+	==>XSS/CSRF/CORS: why important for Angular? - because Angular is UI/frontend app
+	==>Sanitization
+
+==>Service APIs:
+
+	==>Login => Backend RESTful API - UserServices
+
+	==>Enabled OAuth2:
+		JWT:
+			https://blog.angular-university.io/angular-jwt-authentication/
+			JSON Web Tokens to secure your method calls:
+			https://auth0.com/resources/ebooks/jwt-handbook
+			JSON web tokens, are a very easy way to use signed access tokens in your OAuth 2 implementation
+			The token gets invalidated when it expires, and the expiry time is defined when you create the token.
+			==>The Angular Authentication Process Outline
+				When the user creates an account, the authentication server creates a new token and returns it to back to the client-side application.
+				The token payload assigns something unique to the user (like a userId) and additional details that include the expiry time.
+				The frontend stores this token somewhere - preferably in a cookie and appends the token into the header for all the requests it make.
+				The server validates the token and if the token is valid, the user is able to access the requested resource.
+				When the token expires, the server decodes and checks whether the payload matches the data in the database. If yes, a new token is generated.
+			RS256 and JWKS:
+				https://auth0.com/docs/tokens/json-web-tokens/json-web-key-sets
+				https://auth0.com/blog/brute-forcing-hs256-is-possible-the-importance-of-using-strong-keys-to-sign-jwts/
+				use of RS256 for signing your JWTs
+				two algorithms are supported for signing JSON Web Tokens (JWTs): RS256 and HS256. HS256 is the default for clients and RS256 is the default for APIs
+		
+		Providers:
+			Google
+			Github
+			2 social identity providers (like Twitter and Facebook)
+		OAuth0: OAuth2:
+			==>It provides many OAuth2 services
+				npm install --save auth0-js
+				<script src="https://cdn.auth0.com/js/auth0/8.12.3/auth0.min.js"></script>
+				This is the key:
+					import { AuthService } from './auth/auth.service';
+			==>Resources:
+				https://auth0.com/authenticate/angular2/microsoft-account/
+			==>It provides many Non-OAuth2 services
+				https://auth0.com/authenticate/angular2/saml/
+			==>
+			Summaries:
+				https://blog.angular-university.io/angular-jwt-authentication/
+				==>OAuth0 and provides provide direct (CLIENT-SIDE) authentication services to Angular Code - instead of going through backend RESTful/Java APIs, etc.
+					https://auth0.com/docs/rules#what-can-i-use-rules-for-
+				==>server code will be in Node / Typescript
+				==>Where to store a JWT Session Token?
+					Cookies vs Local Storage
+		
+	==>Angular Service Tier:
+		==>Build User Service and Security Classes: securityObject
+		==>Mostly talk to backend Web API to obtain user security info and access
+		
+		
+
+==>Platform Enabled:
+	==>Firebase
+	==>
+
+
+==>Common Web Security:
+
+
+	==>Content Security Policy
+	
+	==>Web Attacks
+
+
+
+============================================================

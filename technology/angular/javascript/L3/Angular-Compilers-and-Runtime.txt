@@ -1,0 +1,33 @@
+
+
+*************************
+Working with NPM Publish:
+*************************
+==>Refer to the  official doc:
+	https://angular.io/guide/creating-libraries#publishing-your-library
+==>Highlights:
+	==>publishing your libraries using the View Engine compiler ensures that they can be transparently consumed by both View Engine and Ivy apps
+==>When you install a library package, the mapping is in the node_modules folder. When you build your own library, it has to find the mapping in your tsconfig paths.
+==>Generating a library with the Angular CLI automatically adds its path to the tsconfig file.
+==>You can rebuild your library whenever you make changes to it, but this extra step takes time. Incremental builds functionality improves the library-development experience. Every time a file is changed a partial build is performed that emits the amended files.
+==>Incremental builds can be run as a background process in your dev environment.
+	ng build lib --watch
+==>The build system for apps, @angular-devkit/build-angular, is based on webpack
+==>The build system for libraries is based on ng-packagr
+*************************
+
+Angular 9:
+
+	Ivy is the code name for Angular's next-generation compilation and rendering pipeline. 
+
+Pre-Angular-9:
+
+	Older compiler and runtime, known as View Engine
+
+Angular compatibility compiler (ngcc)
+
+Angular Libraries:	Packages
+
+For now, it is not recommended to publish Ivy libraries to NPM because Ivy generated code is not backward compatible with View Engine, so apps using View Engine will not be able to consume them. Furthermore, the internal Ivy instructions are not yet stable, which can potentially break consumers using a different Angular version from the one used to build the library.
+
+When a published library is used in an Ivy app, the Angular CLI will automatically convert it to Ivy using a tool known as the Angular compatibility compiler (ngcc). Thus, publishing your libraries using the View Engine compiler ensures that they can be transparently consumed by both View Engine and Ivy apps.

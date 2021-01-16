@@ -1,0 +1,15 @@
+
+==========================================================
+Angular UI: Multithreads and Cache:
+
+
+==>Why UI each time calls server for data?
+	==>Data volumes?
+	==>
+
+==>Multithreading?
+
+==>When UI calls server and waiting, and make another call?
+
+
+==========================================================

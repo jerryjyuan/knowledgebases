@@ -1,0 +1,118 @@
+
+==============================================
+Angular:
+
+==>Angular and JavaScript Family:
+	==>Web Standards:	implemented by Internet, W3 Consortium and 5 Main Browsers
+	==>JavaScript Core/JDK:	ECMAScript 5/6 (2015/2016)
+				  Standalone JVM:	NodeJS: JS JVM
+									open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser
+				  Browser JVM:		Web Browser + JS running env (no need to have NodeJS)
+				  Web/App-Server JVM:	NodeJS backend/server application: serve backend/server JS code
+	==>JavaScript SpringFramework:	jQuery
+	==>JavaScript JEE:				Bootstrap
+	==>
+	==>JavaScript WebStandards/web.xml:			NodeJS
+	==>JavaScript SpringBoot:					Angular
+	==>JavaScript WebServices/SOA/RESTful/SOAP:	ReactJS
+	==>
+
+==>How to Search versions and code and docs?
+
+	==>ECMAScript:
+		https://nodejs.org/en/docs/es6/
+		
+	==>TypeScript:
+		https://www.typescriptlang.org/docs/handbook/basic-types.html
+
+	==>NodeJS:
+		https://nodejs.org/en/
+		https://nodejs.org/dist/latest-v12.x/docs/api/
+		node [options] [V8 options] [script.js | -e "script" | - ] [arguments]
+		
+		Usage:
+		==>1) Use for running JS script files:
+			This functionality allows you execute JavaScript commands from the command line. With Node installed, you can launch the REPL by running the node command in a terminal and pressing Enter/Return. You are now in an interactive JavaScript environment and can run any valid JavaScript code such as 4 + 5
+			==>similar to Java JVM CLI... java/javac
+		==>2) Node.js allows you to run JavaScript on the server: this is original usage, but now expanded to client JS run: like Angular/ReactJS/etc
+		==>3) Enabled as a console:
+			Node.js comes with virtual environment called REPL (aka Node shell). REPL stands for Read-Eval-Print-Loop. It is a quick and easy way to test simple Node.js/JavaScript code
+			
+		Versions:
+			==>NodeJS: versions: similar to JDK versions? - YES: JVM/JSVM...
+				==>But one difference: NodeJS can have local JSVM:	Does JDK/JVM use local version? - not so familiar... - we can have multiple JDK installed
+				==>NodeJS: can use local install versions - based on paths
+			==>Managment: NVM
+			==>What are the main differences?
+				==>Similar to JDK version differences like JDK 8 vs JDK 11?
+					==>Some differences: but not that major...
+				==>
+		
+	==>NPM:
+		install itself:
+		npm install -g npm@latest
+		npm cache clean -force: do we need?
+		
+		Multiple Versions:
+			==>Can be configured
+			==>Managment: NVM
+			==>What are the main differences?
+				==>Similar to JDK version differences like JDK 8 vs JDK 11?
+					==>Some differences: but not that major...
+				==>	
+	==>Angular:
+		Official Docs:
+			https://angular.io/docs
+		JavaDoc APIs:
+			https://angular.io/api
+		Reference Documentations:		
+			
+		Github:
+			https://github.com/angular
+				==>CAN SEARCH ALL Angular related repos
+			https://github.com/angular/angular-cli
+			
+		Guides:
+			
+		Samples:
+		
+		Commands:
+			npm install
+			(do we need to delete package-lock.json? - or just override it?)
+		
+		Versions:
+			Angular CLI: like maven/gradle as build tools/env? - YES - but have some more than maven/gradle...
+			Multiple Versions?
+				==>Can have local versions into the project (global AngularCLI: like global Maven/Gradle?)
+				==>Can have dev-dependencies versions...
+				==>What are the main differences?
+					==>Similar to JDK version differences like JDK 8 vs JDK 11?
+						==>Some differences: but not that major... except Angular 1 vs 2+
+					==>
+			Wrapper? like maven/gradle wrappers?
+				==>Similar to Local/dev AngularCLI
+			
+		Angular 1.x?
+			angular-cli.json
+			
+	==>Angular Material Design:
+		https://material.angular.io/
+		https://v8.material.angular.io/
+	
+	==>Bootstrap 4:
+		https://www.w3schools.com/bootstrap4/
+		
+	==>
+		
+	
+
+
+
+
+
+
+
+
+
+					
+==============================================
