@@ -1,0 +1,97 @@
+
+#Web: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Browsers List:
+
+1. Web
+	https://developer.mozilla.org/en-US/docs/Web
+
+	Chrome: Blink
+	Edge
+	Firefox: Gecko
+	IE: Trident (also known as MSHTML) is a proprietary browser engine
+	Opera: Presto
+	Safari: WebKit is the web browser engine used by Safari, Mail, App Store, and many other apps on macOS, iOS, and Linux.
+
+2. Mobile:
+
+	Chrome:		Chrome Android
+	Edge
+	Firefox: 	Firefox Android
+	IE
+	Opera:		Opera Android
+	Safari:						iOS Safari
+	
+	WebView Android
+	Samsung Internet
+
+3. Internet: Jungle World as well
+
+	Browsers
+	User Interactions
+	Handshaking: multiple rounds of requests/responses - with multiple headers and configurations
+	App Server Support
+	App Support
+	
+	https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web
+	
+	Example: CORS
+		https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+		https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+		https://developer.mozilla.org/en-US/docs/Glossary/origin
+			Rich set of resources		
+		https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+		Preflight example
+			==>User browser logins/accesses to the first site: http://www.example.com
+			==>The first site http://www.example.com needs to call/access to a second site for data: service.example.com:
+				==>This first-to-second request: mostly from RESTful APIs or other scenarios (such as: Angular UI to its backend RESTful APIs)
+				==>But: browsers restrict cross-origin HTTP requests initiated from scripts
+			==>Then browser will send this to 2nd site with Origin: first site: to check CORS (preflight) and initiate request
+		
+		When performing certain types of cross-domain Ajax requests, modern browsers that support CORS will initiate an extra "preflight" request to determine whether they have permission to perform the action. Cross-origin requests are preflighted this way because they may have implications to user data.
+		
+		OPTIONS /
+		Host: service.example.com
+		Origin: http://www.example.com
+		Access-Control-Request-Method: PUT
+		
+		If service.example.com is willing to accept the action, it may respond with the following headers:
+		
+		Access-Control-Allow-Origin: http://www.example.com
+		Access-Control-Allow-Methods: PUT, DELETE
+		
+		The browser will then make the actual request. If service.example.com does not accept cross-site requests from this origin then it will respond with error to the OPTIONS request and the browser will not make the actual request.
+
+		==>When responding to a credentialed requests request, the server must specify an origin in the value of the Access-Control-Allow-Origin header, instead of specifying the "*" wildcard.
+		
+4. Misc:
+	==>Web App Paths:
+		==>Depends up server implementations: Apache/...: Configurations
+		==>Factor 1: paths are similar to server directories: . or .. do the similar cd command
+	==><base>:	https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+				The base URL to be used throughout the document for relative URLs. Absolute and relative URLs are allowed.
+				The HTML <base> element specifies the base URL to use for all relative URLs in a document. There can be only one <base> element in a document.
+				If multiple <base> elements are used, only the first href and first target are obeyed — all others are ignored.
+				1) <base href="/">: it impacts: all relative URLs in a document
+									==>All Angular Code from <app-root>: are relative urls ==>It will impact: <app-root></app-root>
+										==>Angular code exists in a non-root path: <fund-raiser-app> + all are relative paths (one proof is: imports are using ../ relative paths)
+										==>Using absolute path: / 	==>This enables angular code: http://<server:port>/Angular-path-code OR: http://<domain>/Angular-path-code
+				 													==>So all Angular Code don't show up
+				 						==>It starts with: http://localhost/fund-raiser-app/index.html, but cannot show its angular code:
+											http://localhost/fund-raiser-app/Angular-path-code
+					==>It can run: http://localhost:4200/index.html (ng serve) and http://localhost:4200/Angular-path-code
+				2) <base href="./">: it impacts: all relative URLs in a document
+									==>All Angular Code from <app-root>: are relative urls ==>It will be ok: <app-root></app-root>
+										==>Angular code exists in a non-root path: <fund-raiser-app> + all are relative paths (one proof is: imports are using ../ relative paths)
+										==>Using relative path: ./ 	
+											==>Relative to the current index.html: http://localhost/fund-raiser-app/index.html
+											==>When launching ./fund-raiser-app/index.html, the Angular code is ok from this relative path: http://localhost/fund-raiser-app/Angular-path-code
+										==>It starts with: http://localhost/fund-raiser-app/index.html, and then shows its angular code
+					==>It can run: http://localhost:4200/index.html (ng serve) and http://localhost:4200/Angular-path-code
+	==><meta>
+	==>Open Graph Protocol: https://ogp.me/
+	

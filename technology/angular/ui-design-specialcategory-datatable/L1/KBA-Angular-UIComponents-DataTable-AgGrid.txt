@@ -1,0 +1,29 @@
+
+#Angular UI Components - DataTable - AgGrid: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable AG-GRID
+
+1. 
+2. 
+3. 
+
+##To Exemplify AG-GRID Usage:
+
+1. SPARTA UI
+2. Dependencies:
+	ag-grid 14.2.0
+	ag-grid-angular 14.2.0
+	ag-grid-enterprise 14.2.0
+	primeng: 4.3.0
+3. import { AgGridModule } from '@ag-grid-angular/main';
+
+5. Selector: <ag-grid-angular #agGrid>
+	==>#agGrid: refer to the AgGrid component as Template Variable
+
+7. 
+
+9. 

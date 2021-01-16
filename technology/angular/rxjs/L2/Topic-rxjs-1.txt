@@ -1,0 +1,60 @@
+
+# 
+
+# Observable
+	import { Observable, of } from 'rxjs';
+	
+	Summaries:
+		==>Can be a stream of ..., a chained of ...
+		==>Handle errors
+		==>Can subscribe and also unsubscribe
+
+# Subject
+	https://rxjs-dev.firebaseapp.com/api/index/class/Subject
+
+	Summaries:
+		==>A subject is also an Observable
+		==>
+
+# Promise
+
+	Summaries:
+		==>From ECMAScript 6 APIs?
+			https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+		==>It is a single value
+		==>No error handling?
+		==>Cannot subscribe
+		==>
+
+# Operators:
+	import { catchError, map, tap } from 'rxjs/operators';
+	
+	Summaries:
+		==>Angular arrow function is similar to Java8's Lamba expression
+			==>Similarity:
+			==>Difference: Angular uses equal-sign
+		==>Angular operator and OperatorFunction are similar to Java8's functional interface
+			==>Angular doesn't have 4 types of functional interface: Supplier/Consumer/Function/Predicate
+			==>Angular doesn't have parity like 2 (bi-xxx)
+				==>So Angular is mainly doing one argument: so there are no different types, and mostly just simplified as one type: T
+				==>So Angular calls its operator as function, function as operator
+					interface OperatorFunction<T, R> extends UnaryFunction, Observable> {}
+					==>mixed usage
+					==>So there is no BinaryOperator, only Unary...: taking one single argument
+			==>
+		==>
+
+
+
+
+
+# Design Patterns:
+
+## Master-Detail Design Pattern
+
+##
+
+# Misc:
+	As far as JavaScript is concerned, $ and _ are just ordinary letters of the alphabet. 
+	
+	

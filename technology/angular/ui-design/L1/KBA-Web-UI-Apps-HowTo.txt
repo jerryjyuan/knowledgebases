@@ -1,0 +1,94 @@
+
+#Web - UI - Apps - HowTo: KBA (practical-guide-keys) Guide
+
+#Goals:
+	Summarize Main Web UI Apps - Ecosystems
+#Procedure:
+	These summaries: require navigation into some of the links below to explore the apps' design and code implementation modules
+##UI Apps:
+
+1. Type 1: Web UI Apps:
+	Apache/VSC-LiveServer/...
+	==>Type: HTML/CSS
+	==>Type: HTML/CSS/JavaScript
+	==>Type: HTML5
+	RWD:
+		1) Method 1: default/common: shrunk down to fit
+		2) Method 2: <meta viewport> + media queries:
+			https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag
+			https://experienceleague.adobe.com/docs/target/using/experiences/vec/mobile-viewports.html?lang=en#task_CC3144BF5BA54034996E1D3DB0BC1A35
+		3) Method 3: Use BT and libraries' RWD features	
+	Examples:
+		https://dev.to/nghiemthu/build-a-modern-website-from-scratch-full-tutorial-1-hour-free-1io
+
+2. Type 2: JavaScript UI Apps
+	LiteServer/.../Apache/IIS
+	==>Angular/ReactJS
+		Client-Side AALogin:
+			1) Session-based Authentication: client: Cookie(sessioId) == server: (sessionId stored in DB/Mem/...): But: not working with Mobile/Native apps that don't have cookies
+			2) Token-based Authentication: JWT
+				https://bezkoder.com/jwt-json-web-token/ (https://tools.ietf.org/html/rfc7519) (https://en.wikipedia.org/wiki/JSON_Web_Token#Standard_fields)
+				(Server Side: JWT can be implemented in varied ways on Server side: JS, Java, OAuth2, Social Media, ..., so JWT can have multiple scenarios)
+				(Client Side: Send login (username/password/etc) ==>Receive a Server-returned JWT token ==>Add it to Client Request Header to continue requests)
+				==>Web Protocol: HTTPS encryption: prevent Man-in-the-middle attack: get JWT
+				==>Client: Send JWT token: Header, Payload, Signature) only encode & hash data, not encrypt data
+					==>Client Side: Store JWT token:
+						Browser: Local Storage
+						IOS: Keychain (https://developer.apple.com/documentation/security/keychain_services)
+						Android: SharedPreferences (https://developer.android.com/reference/android/content/SharedPreferences)
+				==>Server: save/store JWT token + store Secret String (unique for every Application and must be stored securely in the server side: DB...)
+				==>Server: HashAlgorithm-UsingClientJWTSignature(validated Payload)+SecretString == Server's Signature
+					==>const JWT = encodedHeader + "." + encodedPayload + "." + signature[base64urlEncode(Hash(encodedHeader + "." + encodedPayload, secret))];
+					Server: HashAlgorithm: HS256 is HMAC-SHA256 – the algorithm which uses Secret Key
+							==>JavaSpringBootOAuth2: could generate JWT by AuthorizationServer instead of ResourceServer
+				==>Angular: https://bezkoder.com/angular-11-jwt-auth/
+		StateManagement:
+			Redux: maintains the state of an entire application in a single immutable state tree (object), which can't be changed directly. When something changes, a new object is created (using actions and reducers)
+			1) Ngrx/Store: https://ngrx.io/guide/store (implementation of the Redux pattern using the well-known RxJS observables of Angular 2) 
+			2) Ngrx/Effects (allows the application to communicate with the outside world by triggering side effects)
+			Angular: https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
+					 https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage?course=building-react-applications-with-idiomatic-redux
+	==>
+	==>Type: MEAN
+		ODM (Object Document Mapping)	NodeJS+Express as Backend	Angular as Frontend
+	==>Type: MERN: Mongo/Express/React/Node
+		https://bezkoder.com/react-node-mongodb-auth/
+	==>Type: Pure Client-JS + NodeJS
+		Functional Programming
+		
+3. Type 3: Java UI Apps
+	Apache/Jetty/Undertow/tcServer/Tomcat/JBoss/WebLogic/WebSphere/Glassfish/SAPJRun/ColdFusion/
+	==>3-Tier/MVC Java UI Apps
+		Web/MidTier/Persistence(ORM) Tier
+		SpringBoot
+		SpringSecurity/OAuth2/JWT/:
+			https://bezkoder.com/spring-boot-jwt-mysql-spring-security-architecture
+			https://bezkoder.com/spring-boot-jwt-authentication/
+	==>Type: AWT/JavaSwing/JavaFlex
+	==>
+
+4. Type 4: PHP UI Apps
+	Apache
+	==>3+ CMS
+	==>10+ MVC Frameworks
+	==>LAMP/WAMP/XAMPP/...
+
+5. Type 5: MS-Tech UI Apps:
+	IIS / VS-2015/2017/VSC
+	==>Type: Desktop: VisualBasic:
+		==>VB/VBNET//VBNET 5/6
+	==>Type: Desktop: VisualC++
+	==>Type: (Obsolete): Desktop: VisualJ++
+	==>Type: Web: ASP/ASP.NET/ASPNET Core 2.0/ASPNET Core 3.0
+	==>Type: Web: NET/NET Core 2.0/NETCore 3.0: C# (WebAPI/MVCRazor/EntityFramework/ADO) + ASP/VB
+	==>Type: Web: NET/NET Core 2.0/NETCore 3.0: C# (WebAPI/MVCRazor/EntityFramework/ADO) + Angular2+
+
+6. Type 6: Python UI Apps
+
+7. Type 7: Ruby UI Apps
+
+8. Type 8: GUI UI Apps:
+	==>Oracle Forms: UI Apps
+		URM (UI Relational Mapping)
+	==>
+	==>

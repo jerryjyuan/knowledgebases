@@ -1,0 +1,23 @@
+
+#Angular - DOM - Integration: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Design and Enable Angular with DOM:
+
+1. Angular Bootstrapping
+	==>Bootstrapping Mechanisms and Manual Bootstrapping Implementation:
+		https://medium.com/learnwithrahul/ways-of-bootstrapping-angular-applications-d379f594f604
+		==>Usage: when the component to bootstrap the application is defined by the server during run-time. How can you bootstrap the application later when you get this information about the component ?
+		==>declare “@NgModule.bootstrap” components or add a “ngDoBootstrap” method
+		==>entryComponents:    [ AppComponent ]
+		==>ng add @angular/elements
+2. Angular and DOM:
+	Mapping Angular functionality to the corresponding native HTML equivalents
+		Angular: const AppElement = createCustomElement(AppComponent, { injector: this.injector });
+		DOM: browsers’ native customElements.definefunctionality: customElements.define('my-app', AppElement);
+	
+3. 
+	

@@ -1,0 +1,16 @@
+
+#Angular UI Components - Map - AGM: KBA (practical-guide-keys) Guide
+
+#Goals:
+1. 
+
+#Procedure:
+
+##AGM:
+
+1. AGM:
+	https://angular-maps.com/guides/getting-started/
+	https://angular-maps.com/api-docs/agm-core/
+	
+2. Set up AGM:
+	https://dev.to/devpato/setup-google-maps-with-agm-in-angular-app-33em

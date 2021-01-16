@@ -1,0 +1,57 @@
+
+#==============================================================
+Http Module:
+
+HttpClient is a new API that came with 4.3
+
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+ imports: [
+   BrowserModule,
+   HttpClientModule
+ ],
+ ...
+
+class MyService() {
+    constructor(http: HttpClient) {...}
+
+#==============================================================
+
+export const environment = {
+  production: false,
+  baseAPIUrl: 'http://localhost:4200/assets/data.json'
+};
+http.get(`${environment.baseAPIUrl}`);
+
+#=============================================================='
+Topic:
+
+        Interceptors allow middleware logic to be inserted into the pipeline
+        Immutable request/response objects
+        Progress events for both request upload and response download
+
+#==============================================================
+@angular/common/http
+
+ this.http.get(url)
+      .subscribe((data: GithubUser) => {
+        // Data extraction from the HTTP response is already done
+        // Display the result
+        console.log('TJ user data', data);
+      });
+
+Note: You no longer have to extract the returned data explicitly; by default, if the data you get back is type of JSON, then you don't have to do anything extra.
+
+But, if you need to parse any other type of response like text or blob, then make sure you add the responseType in the request. Like so:
+Making the GET HTTP request with responseType option:
+
+ this.http.get(url, {responseType: 'blob'})
+      .subscribe((data) => {
+        // Data extraction from the HTTP response is already done
+        // Display the result
+        console.log('TJ user data', data);
+      });
+
+
+#==============================================================

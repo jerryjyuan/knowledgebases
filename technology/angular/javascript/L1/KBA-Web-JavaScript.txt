@@ -1,0 +1,14 @@
+
+#Web - JavaScript: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##
+
+1. Main Resources:
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+	
+2. 

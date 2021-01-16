@@ -1,0 +1,81 @@
+
+#==============================================================
+##How To Read Local JSON Files In Angular
+
+==>JSON files: by local access: OK
+==>InMemoryDbService: OK
+==>HttpClient Calls: Not Working:
+	==>
+	==>
+	==>https://api.nytimes.com/svc/topstories/v2/{section}.json?api-key=<API_KEY>
+	   https://api.nytimes.com/svc/topstories/v2/world.json?api-key=i7JyMmts8acZn29AfGiytrzxEHE8yxZZ
+
+#==============================================================
+##Angular 10.2.4:
+
+src/app/toh/hero.service.ts:37:8 - error TS2339: Property 'map' does not exist on type 'Observable<Hero[]>'.
+	.map((resp: any) => {resp.json.heroes})
+
+==>Why?
+https://rxjs-dev.firebaseapp.com/api/index/class/Observable
+
+
+export interface Post {
+  title: string;
+  content: string;
+}
+data.json:
+	{title: "Simulating HTTP Requests", content: "This is off the hook!!"}
+
+Call:
+	const post$:Observable<Post> = http.get<Post>('/assets/data.json');
+
+#==============================================================
+##Reading local JSON files in Angular 2+ versions
+
+We need to use Http from “@angular/http” to import JSON files in Angular version 4.3 below and Angular 2 +.
+
+import { Component, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+@Injectable()
+export class ReadingJsonService{
+
+private _jsonURL = 'assets/SampleJson.json';
+
+constructor(private http: Http) {
+ var object;
+ this.getJSON().subscribe(data => object=data, error => console.log(error));
+}
+
+public getJSON(): Observable<any> {
+  return this.http.get(_jsonURL)
+   .map((response:any) => response.json())
+   .catch((error:any) => console.log(error));
+
+}
+}
+
+#==============================================================
+##Reading local JSON files in Offline Angular Applications
+
+Angular Http will not work if the application goes offline
+
+==>add a new file json-typings.d.ts in app folder along with index.html file
+
+app/json-typings.d.ts
+
+declare module "*.json" {
+  const value: any;
+  export default value;
+}
+
+And then we can import JSON files just like latest versions of Angular
+
+import * as SampleJson from "../../assets/SampleJson.json";
+
+#==============================================================

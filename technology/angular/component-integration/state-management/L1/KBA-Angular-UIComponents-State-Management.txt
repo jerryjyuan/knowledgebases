@@ -1,0 +1,26 @@
+
+#Angular UI Components - State Management: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable State Management
+
+1. 
+2. 
+3. 
+
+##
+
+NgRx
+
+Angular Effects
+	https://ngfx.io/
+
+	https://dev.to/stupidawesome/exploring-the-angular-effects-api-2gol
+	
+	https://dev.to/stupidawesome/reactive-adventures-in-angular-introducing-angular-effects-1epf
+	
+	
+	

@@ -1,0 +1,45 @@
+
+#Web - CSS: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##
+
+1. Main Resources:
+	https://developer.mozilla.org/en-US/docs/Web/CSS
+	https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+	
+2. 
+
+3. Terminology:
+	https://vsellis.com/understanding-dpi-resolution-and-print-vs-web-images/#:~:text=DPI%3A%20Dot's%20per%20inch.,density%20of%20a%20digital%20image.
+	Resolution:
+		Resolution is the measure of pixels in the display, usually expressed in measurements of width x height. For example a monitor that is 1920 x 1080 is 1920 pixels across and 1080 pixels down.
+		A monitor set to 1024 x 768 will show a 1024 pixel wide by 800-pixel tall image as a full-screen image
+		digital camera with higher megapixels takes better pictures than one with lower (lenses and other factors being equal) because it gives you more resolution to capture more detail
+		1366x768 ==>Mean pixels on the screen
+		...
+		800x600
+	PPI:
+		Pixels per inch. Most commonly used to describe the pixel density of a screen (computer monitor, smartphone, etc…) but can also refer to the pixel density of a digital image
+		19" monitor set to 1024×768 will show 70ppi (pixels per inch)
+		19" monitor set to 1280×1024 will have a resolution of 87ppi which means you fit more on the screen and get more detail, but everything looks smaller
+	DPI:
+		Dot’s per inch. The number of dots in a printed inch. The more dot’s the higher the quality of the print (more sharpness and detail)
+		Higher DPI means higher resolution
+		DPI doesn’t equate to digital it’s a print measure (300dpi is standard, sometimes 150 is acceptable but never lower)
+		Image Files:
+			image files with higher resolution (more dpi) will also have a bigger file size because they contain more data.
+			300dpi to 72dpi: same image quality with 1/4 size ==>But going into same width/heighth: less dots so less quality/resolution
+		Monitor:
+			DPI of a computer screen?
+				72dpi is standard for the web
+				Dpi, which refers to dots per inch, is a key concept to using computer graphics. Your PC doubtlessly uses a resolution of 96 dpi on the monitor.
+		Printer:
+			300 dpi mean?
+				Print resolution is measured in dots per inch (or “DPI”) which means the number of dots of ink per inch that a printer deposits on a piece of paper. So, 300 DPI means that a printer will output 300 tiny dots of ink to fill every inch of the print. 300 DPI is the standard print resolution for high resolution output.
+			600x600 DPI has 600 dots per inch in both directions. In a 1-bit system (black or white) 600x600 DPI os very good quality. For a full color system, 600x600 DPI is mediocre.
+			4800x1200 DPI?
+				Print Quality: The print quality is determined by the DPI (dots per inch). Most printers come with either 1200 by 1200 DPI, 2400 by 1200 DPI. 1200 X 1200 means in one square inch, there are 1200 dots across (width) and 1200 dots down (length). Some new printers boast 4800 X 1200 DPI.

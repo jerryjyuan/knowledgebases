@@ -1,0 +1,99 @@
+
+#Angular Forms: KBA (practical-guide-keys) Guide
+
+#Goals:
+1. Refresh: Enable immediate technical enablement refresh by just checking this KBA
+2. Connection: Channel between all technical knowledge bases and POC-code (pre-code passage)
+3. Similarity: keys (can be regarded as: practical-guide-keys)
+4. Benefits:
+	4.1: more than keywords: keywords-alone may not serve "immediate refresh" scenarios
+	4.2: no need to review all technical knowledge bases: gain technical refresh
+	4.3: no need to read all detailed or expanded technical notes: gain technical refresh
+		 (this makes a different scenario from ongoing-crowded notes)
+	4.4: focus on "keys/my-own-keys" so technical understanding-detours/reasonings can be minimized or resolved by this KBA
+	     (aka: remove the re-processing of technical understanding-detours/reasonings)
+	     (also: remove the needs of exploring any extensive or more-than-primary-route research when doing POC-coding because this KBA could add some these bigger-scoped research/testing if any/applicable/needed)
+	     (real POC-coding should go straight to primary-route design/coding + go straight with this KBA due to its time-consuming and distracting natures)
+	     	   (if any of the bigger-scoped research/testing is needed, it should be here with KBA)
+	4.5: next steps from this KBA: would be 1) starting POC-coding 2) plus some direct references of needed api/official-doc
+	4.6: to minimize KBA size (max: 100 lines), for variants, create a variant of same category KBA as a new KBA file with variant name
+
+#Procedure:
+
+##To Add Template Form: With using HTML <form>
+
+1. Enable the HTML <form> to be an Angular Form (as child component of enclosing parent component): <form #f="ngForm" + being used in HTML: {{ f.value | json }}
+   (ngForm is a directive as exportAs 'ngForm': this is an example usage for hash sign to refer to a directive (child component))
+   (Template variable: ngForm:	#f="ngForm")
+   ==>multiple selectors can be enabled: form, ng-form, [ngForm] ==><form> is already enabled as an Angular form
+   ==>Angular Forms: doesn't have @Input('ngForm'): so no need to attribute: [ngForm]
+   ==>Angular Forms: <form xyz #f="ngForm" (ngSubmit)="onSubmit(f1)" novalidate>: xyz does nothing / it is ignored
+   ==>Angular Forms: <form [xyz] #f="ngForm" (ngSubmit)="onSubmit(f1)" novalidate>: will complain xyz is not a property/attribute
+   Hash: <component-name #f (component-event)="component-function(f)" component-attribute>
+   Hash: <HTML-selector #f="Bound-Built-into-directive/component-name" (ngSubmit)="onSubmit(f)">
+2. Enable each HTML <form> field (can be <input> or more) as an Angular Form field: <input name="first" ngModel>
+   (ngModel is a directive as exportAs 'ngModel')
+   ==>one selector is enabled: [ngModel]: <input name="first" ngModel>: ngModel is the attribute directive
+      (Attribute Directive is actually the "selector" part of the real "Directive")
+   ==>Angular NgModel: do have @Input('ngModel'): so can have an attribute: [ngModel]
+   					   For any @Input, no-value assigned: then use default internally: [ngModel]; if [ngModel]="componentFieldName": componentFieldName is the component's field name
+   					   ==>It still supported, but the support will be removed: /** @deprecated as of v6 */
+   					   ==>
+   ==>Angular NgModel: ngModel and [ngModel] are different: ngModel is the attribute directive and [ngModel] is the attribute to the HTML selector element
+   ==>Angular NgModel: ngModel and [ngModel] are same: ngModel is supported and [ngModel] is also enabled by "@Input"
+   ==>Angular NgModel: <input name="first" ngModel1>: ngModel1 does nothing but it will disable this field to be a valid Angular Form's field
+   ==>Angular NgModel: <input name="first" [ngModel1]>: will complain ngModel1 is not a property/attribute
+   ==>Angular NgModel: <input name="first" ngModel> and <input name="first" [ngModel]>: the same enabling its field to be an Angular form field 
+   					   Still valid and enabled: <input name="last" ngModel1 [ngModel] #last1="ngModel">  
+   					   							<input name="last" ngModel1="test" [ngModel] #last1="ngModel">
+   Variant: Enable some HTML <form> field as a 2-way binding Angular Form field: <input [(ngModel)]="nameInComponentField">
+   				==>2-way binding utilize: @Output('ngModelChange') update = new EventEmitter();	/** @deprecated as of v6 */
+   				==>it's an input/output property named ngModel
+   			1. Scenario 1: All fields are 2-way bindings: No need to add HTML <form> to do submit (2-way bindings assign the values to component's fields) + no need to have an attribute: name="first"
+   						   (Actually HTML <form> conflicts with 2-way binding if the field doesn't have a name: not working together and not recognizing its field)
+   						   		<input [(ngModel)]="nameInComponentField">
+   						   (But if the field has a name, then HTML <form> treats this field as a normal field: <input name="first" [(ngModel)]="nameInComponentField">)
+   						   		(But at the same time: this 2-way binding field still functions as 2-way binding)
+   						   		(To display the field name from Submitting: onSubmit(f: NgForm) { console.log("submit: " + JSON.stringify(f.value)); }
+   			2. Scenario 2: If some fields are not 2-way bindings: then need an HTML <form> + "submit"
+   						   (Usage: some fields need to be updated into component immediately + a submit will include them as well: better to have good descriptions of the field)
+3. Enable field to be used inside component's HTML template file: <input name="last" ngModel #last1="ngModel"> + {{ last1.value }} + {{ last1.valid }}
+   (Template variable: ngModel: #last1="ngModel")
+4. Add normal HTML <form> attributes (novalidate/required): <form #f1="ngForm" (ngSubmit)="onSubmit(f1)" novalidate> + <input name="first" ngModel required #first1="ngModel">
+5. Add normal HTML <form> user-clicking button: <button>Submit</button> OR: <button>AnyButtonName</button> OR: <button (click)="display()">xyz</button>
+   (Based on testing: any button click (regardless of the button names or attributes) will do a HTML submit to (ngSubmit)="onSubmit(f1)")
+6. Enable parent component to take the role of HTML <form> action handler (from submit): (ngSubmit)="onSubmit(f)"
+   (ngSubmit): it is child component NgForm's @Output EventEmitter: and it emits the value to parent component's onSubmit()
+7. Usage Variants: without (ngSubmit)="onSubmit(f): the form data are used inside HTML selectors and other JS calls instead of this form submission
+8. TBD: Enable FormGroup: multiple controls
+	<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	ngModelGroup
+
+##To Add Template Form: Without using HTML <form>
+
+1. Main Use Case: 2-way binding (2-way binding does the role of submitting values, so no need to add HTML <form> to do submit)
+				  (Each field functions independently on its own data passing between the HTML's field and the component's field)
+				  (Without 2-way binding, this is useless)
+2. TBD
+
+##To Add Reactive Form:
+
+1. Enable the HTML <form> to be an Angular Form (as child component of enclosing parent component)
+2. Enable each HTML <form> field (can be <input> or more) as an Angular Form field: <input [formControl]="componentFieldNameForControl">
+   (formControl is the directive FormControlDirective's selector name as exportAs 'formControl'): Internally: there is for sure a statement: @Input('formControl') form: FormControl
+   [formControl] is the counterpart in Reactive Form as the same as [ngModel] in Template Form
+3. Form Submit: FormControl submit ways could vary:
+	Utilize elements' event handlers: like <button (click)=...
+	Some easy or complicated ways: enabled flexible ways to deal with data and functions
+		but the data are easy to pass between HTML and components: because formControl is linked to the control inside components
+4. [(ngModel)] Usage: with reactive forms: should not be used together: <input [formControl]="control" [(ngModel)]="value">
+					  ==>it's an input/output property named ngModel on the reactive form directive that approximates some, but not all, of the directive's behavior
+					  	 The above event 2-way binding's "ngModelChange" will be emitted by the directive: FormControlDirective's viewToModelUpdate() method
+					  ==>"Cannot assign to template variables": <option *ngFor="let optionName of options" [(value)]="optionName"></option>: This will be ignored: Angular simply ignores two-way bindings to template variables
+							Starting in version 8, attempting to write to template variables is deprecated. In a future version, we will throw to indicate that the write is not supported.
+5. FormGroup
+6. Nested FormGroups: FormGroup { FormGroup } and formGroupName
+7. Nested FormGroup/FormArray: FormGroup { FormArray } and formArrayName
+8. FormBuilder: fb.group() and fb.control()
+9. FormControl validations/validators: enabled via FormControl as a class
+	FormControl = new FormControl('value', Validators.minLength(2));

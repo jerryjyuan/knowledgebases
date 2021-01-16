@@ -1,0 +1,24 @@
+#Angular Data Enablement: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Data: list of data enablement scenarios
+
+1. JavaScript Web Storage: Angular is client-side app, so can use Browser/DOM's ways (Browser is like Angular's JVM)
+2. Mock Data
+3. Local Data
+4. Remote Data: RESTful APIs, Database, Server Integration, Cloud Platform
+5. 
+
+##To Add Constant Data:
+
+1. Add Constants File
+	==>export class XxxConstant }
+		static XXX_YYY = 750;
+	}
+	Usage:
+		import { XxxConstant } from '../../xxx-constant';
+		let varVal = XxxConstant.XXX_YYY;
+2. 

@@ -1,0 +1,15 @@
+
+#JavaScript - Modules: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##
+
+1. Modules:
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+	https://v8.dev/features/modules#mjs
+	https://hacks.mozilla.org/2015/08/es6-in-depth-modules/
+	
+2. 

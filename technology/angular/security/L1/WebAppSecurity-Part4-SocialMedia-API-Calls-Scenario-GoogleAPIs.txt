@@ -1,0 +1,495 @@
+
+============================================================
+WebAppSecurity-Part3: SocialMedia:	API-Calls:	APIKey:
+
+==>API_KEY:
+	==>It was a older concept with Social Media integration
+	==>But it is still the current concept with Social Media integration: such as: Social Media API Calls
+
+==>Concepts:
+	==>Social Media Integration:
+		1) Type 1: Social Media Account Login/UserAccessData integration:
+					==>Mostly use: OAuth2
+		2) Type 2: Social Media API Call Integration
+					==>Mostly use: API_KEY (and/or OAuth2)
+		3) Type 3: ...
+	==>Vendor API Call Integration:
+		1) Type 1: Social Media API Call Integration
+		2) Type 2: Any other Online Vendor API Call Integration:
+				   ==>Example 1: New York Times Catalog API Integration: News / Top Stories / ...
+
+============================================================
+Resources:
+
+OAuth2:
+	https://developers.google.com/oauthplayground/
+
+Google API - OAuth2:	
+	https://developers.google.com/identity/protocols/oauth2/
+	https://developers.google.com/identity/protocols/oauth2/web-server
+	
+	Scopes: for APIs accesses/...
+	https://developers.google.com/identity/protocols/oauth2/scopes
+
+============================================================
+============================================================
+============================================================
+API Call Integration:
+
+	==>Each vendor is different
+
+Google API Call - Integration:
+
+==>It is different from: Google Account Login/UserAccessData integration (OAuth2 mostly)
+==>Google API Call integration is mostly use: API_KEY
+
+==>Google API Integration: Characteristics:
+1) Google APIs: have much more API integrations than almost any or most of the other vendors - due to its big products domains and diverse/unified and consolidated platforms
+2) Google APIs: integration is streamlined with its Google API Console
+				https://developers.google.com/identity/protocols/oauth2/
+				==>Mostly enabled as 3 main approaches:
+					1) API_KEY:
+						https://cloud.google.com/docs/authentication/api-keys?hl=en&visit_id=637458832394825672-1999386100&rd=1
+					2) OAuth2
+					3) Service Accounts
+						service account, which is an account that belongs to your application instead of to an individual end-user. 
+							Your application calls Google APIs on behalf of the service account, and user consent is not required
+							==>Google APIs such as the Prediction API and Google Cloud Storage can act on behalf of your application without accessing user information. 
+							In these situations your application needs to prove its own identity to the API, but no user consent is necessary.
+							For these types of server-to-server interactions you need a service account, which is an account that belongs to your application instead of to an individual end-user.
+						==>Need a JWT creation to request token <= require Java lib to create it
+						But: In non-service-account scenarios, your application calls Google APIs on behalf of end-users, and user consent is sometimes required.
+					4) Misc...
+				==>Among these 3 main approaches:
+					==>It also enabled as: different client application types
+					==>...
+					
+				==>The authorization sequence begins when your application redirects a browser to a Google URL: with the parameters like scopes/accesses
+					==>Google handles the user authentication, session selection, and user consent.
+					==>Return: authorization code, which the application can exchange for an access token and a refresh token: send another request for token
+						Reference: https://developers.google.com/identity/protocols/oauth2/web-server#httprest_3
+						==>https://oauth2.example.com/auth?code=4/P7q7W91a-oMsCeLvIaQm6bTrgtp7
+						==>Call:
+							To exchange an authorization code for an access token, call the https://oauth2.googleapis.com/token endpoint and set the following parameters
+						==>Google responds to this request by returning a JSON object that contains a short-lived access token and a refresh token. Note that the refresh token is only returned if your application set the access_type parameter to offline in the initial request to Google's authorization server.
+					==>The application should store the refresh token for future use and use the access token to access a Google API. Once the access token expires, the application uses the refresh token to obtain a new one.
+				==>user consent:
+					Some requests require an authentication step where the user logs in with their Google account. After logging in, the user is asked whether they are willing to grant one or more permissions that your application is requesting. This process is called user consent.
+				==>Incremental Authorization
+				==>Access tokens have limited lifetimes. If your application needs access to a Google API beyond the lifetime of a single access token, it can obtain a refresh token. A refresh token allows your application to obtain new access tokens.
+3) Internally:
+	==>I would assume: most of the Google APIs: integrated with OAuth2 or some types of ... - even enabled as API_KEY, ...
+		(Or: at least easy to understand the API portfolios...)
+4) Google APIs: mostly provide various services to:
+	1) Applications as "Client Applications":
+		Such as:
+			==>Web Applications
+			==>Desktop Applications
+			==>Device Applications (mobile/...)
+			==>...
+		==>Type 1: Google-Client-Applications to Request "Google APIs Services - via Google APIs":
+			==>Type 1-1: Applications (without Users representation/login) as its own needs to access Google APIs
+			==>Type 1-2: Applications to access Google APIs on behalf of Users (Users click/initiate these accesses by login/using the "Applications")
+		==>Type 2: Google-Client-Applications to Request "Google Account as Authorization Protection via Google AOuth2 Provider"
+		==>More...
+	2) Users (such as browser users, desktop users, device users) as "Users with a Google Account" or "Users without a Google Account" through "Client Applications"
+		==>Users click/initiate the "Google APIs" accesses by login/using the "Applications"
+		==>Users don't need to click/initiate the "Google APIs" accesses but only logging into the "Applications" via: Google User Account / UserData
+			==>These are the typical "Social Media Account Login" usage (but there is no "SocialMedia/Google Service API accesses": such as Google Map APIs and Google Book APIs)
+		Type 1: Users with a Google/Twitter/... Account:
+				==>User: Settings: Authorized/Connected Apps / Sessions
+		Type 2: Users without a Google Account
+	3) ...
+
+============================================================
+Google API Call - Integration: Procedures:
+
+==>Login to Google API Console
+	https://console.developers.google.com/apis/dashboard
+	https://console.cloud.google.com/apis/dashboard
+	
+	https://console.cloud.google.com/apis/dashboard?project=savvy-factor-301302
+	https://console.developers.google.com/apis/dashboard?project=savvy-factor-301302
+
+==>Dashboard:
+
+	Create a new project (Aka: Application, Client-Application, ...):
+		==>Type 1: Google-Client-Applications to Request "Google APIs Services - via Google APIs"
+					==>Procedures: see below summaries as part of the illustrations
+		==>Type 2: Google-Client-Applications to Request "Google Account as Authorization Protection via Google AOuth2 Provider"
+					==>Not sure completely about how yet:
+						1) Method 1: Check normal procedures via some Google documents
+						2) Method 2: Check Spring-Guide below and summarize its enabling procedures
+									 1) https://spring.io/guides/tutorials/spring-boot-oauth2/
+									 2) https://spring.io/guides/tutorials/spring-security-and-angular-js/
+		==>Type 3: Combined Solutions of the above Type 1 and Type 2 together:
+					==>Procedures: below summaries are actually a combined solutions for Google Book API integration - including both "API calls" and "OAuth2 provider"
+	
+		Notes:
+			Some server-to-server calls to Google APIs without user consent or info needs: service accounts
+	
+	Type 3: Combined Solutions of the above Type 1 and Type 2 together: (see new understanding section below as well)
+			==>So this client application can be enabled both: Google Book API integration client + Google AOuth2 Provider client
+			==>Then this client application only needs: one single client_id and secret for both integration needs (Web Application needs secret as well)
+				==>(1) Section: "API Keys": Even more fancy: this client application can be added with more Google Service APIs integration by simply:
+					"Enable APIs and Services" button and processing
+						To enable an API for your project:
+							Open the API Library in the Google API Console.
+							If prompted, select a project, or create a new one.
+							The API Library lists all available APIs, grouped by product family and popularity. If the API you want to enable isn't visible in the list, use search to find it, or click View All in the product family it belongs to.
+							Select the API you want to enable, then click the Enable button.
+							If prompted, enable billing.
+								==>Some Google APIs: maybe free (Google Map APIs: not free, need subscription)
+							If prompted, read and accept the API's Terms of Service.
+							==>This will enable Google Book APIs to this project: SpringBootApp					
+					1) This same client application: can enable: "Google Book API", "Google Map API", "Google Cloud API", ...
+						==>So Inside its dashboard section: multiple API_KEYs can be created to access these different Google Service APIs, ...
+						==>>This is normal: because one application can call different Google APIs to request services
+						a) API_KEY: can be configured in various ways:
+									==>Restrictions: 
+										==>Restriction Scenario 1: Google API Types:
+											1) Can be used for any APIs
+											2) Can be configured for some APIs or one API only: so multiple API_KEYs can be created to enable scoped usage
+												==>This application can call Google MAP API using its specific API_KEY, and can have different API_KEY for all API integrations
+										==>Restriction Scenario 2: Application-Level Restrictions: (Such as: Security Considerations and Other Needs):
+											1) An application restriction controls which websites, IP addresses, or applications can use your API key. You can set one application restriction per key.
+											2) Only one type restriction is used for one API_KEY
+									==>Restriction Benefits:
+										==>Production Mode: should enable restrictions
+										==>Restrictions help prevent unauthorized use and quota theft:
+											1) Other websites/scenarios are unable to use it
+											2) Quota are monitored and controlled: especially for production and subscriptions: like Google Map APIs
+												(Non-production: may not need to restrict: should be free quota? depends... test-mode doesn't need subscription/quota and free?)
+									==>Usage:
+										Example: JavaScript in index.html file <script = ...> as the client-application:
+												 https://... googleapi.com/...&key=<API_KEY>&...
+						b) 
+				==>(2) this client application's OAuth2 Section: "OAuth 2.0 Client IDs":
+					==>This is actually the "Google Account" Login/UserDataAccess part
+					1) This Application is integrated with Google Console as a client application as "Google OAuth2 resource server" while Google OAuth2 as "Authorization Server"
+						(Concept "Client" 1: Browser/User/... are Client(s) to this application)
+						(Concept "Client" 2: This application (resource server) is a client to the Google API Console (Authorization Server/OAuth2.0 endpoints))
+						a) This application will accept User Google Account login as one login approach:
+							==>Simple and same OAuth2 logic as "https://spring.io/guides/tutorials/spring-boot-oauth2/"
+						b) This application will be able to access to User Google account user data via multiple permissions:
+							==>Via: Multiple scope parameters and "incremental authorizations", etc.
+							==>OAuth 2.0 allows users to share specific data with an application while keeping their usernames, passwords, and other information private. 
+							   For example, an application can use OAuth 2.0 to obtain permission from users to store files in their Google Drives.
+					2) JavaScript as the client application: only Client_Id needed, no secret needed
+					3) Web Application as the client application: need both Client_Id and Secret
+					4) Summaries:
+						==>
+						==>
+						==>Authorized Redirect URIs:
+							Users will be redirected to this path after they have authenticated with Google. The path will be appended with the authorization code for access, and must have a protocol. It can’t contain URL fragments, relative paths, or wildcards, and can’t be a public IP address.
+							==>These are the actual "Protected Contents" as the OAuth2's Resource Server:
+								==>Similar to "https://spring.io/guides/tutorials/spring-boot-oauth2/"
+							==>These redirect URIs are automated: so Users from browser are redirected here to access "protected resources" after "having authenticated with Google" taking Google as "Authorization Server"
+								==>Only question is: why is it mentioning "Authorization Code" instead of "Access Token"?
+									1) Check the documentation: authorization code can be used to request the access token
+										==>Why so complicated?
+										==>Each vendor has its ways to implement OAuth2...
+										==>
+										
+	Type 3: Combined Solutions of the above Type 1 and Type 2 together: New Understanding:
+	
+			==>Some Google (Service) APIs: need API_KEY only
+			==>Some Google (Service) APIs: may need both API_KEY and OAuth 2.0
+											1) 
+											==>Just understand it in this way: a Google (Service) API: maybe also a resource server / client to Google OAuth 2.0 provider (Authorization Server)
+											==>Just like another OAuth 2.0 layer
+											2) Or:
+												Some Google (Service) APIs: need to access logged-in Users' private/shared data/spaces
+												
+											==>Create authorization credentials
+												Any application that uses OAuth 2.0 to access Google APIs must have authorization credentials
+												that identify the application to Google's OAuth 2.0 server. 			
+												Your applications can then use the credentials to access APIs that you have enabled for that project.	
+				==>Example 1: Google Book APIs:
+					==>Private Data:
+						==>Whenever your application requests private user data, it must send an OAuth 2.0 token along with the request.
+						   Your web application first sends a client ID and a client secret to obtain a token. 
+						   When your application needs access to user data, it asks Google for a particular scope of access
+						   https://www.googleapis.com/auth/books
+						   User approves: short-lived access token
+						   Or: refresh tokens: may sto working due to: 50 fresh token per OAuth Client ID
+								The user has revoked your app's access.
+								The refresh token has not been used for six months.
+								The user changed passwords and the refresh token contains Gmail scopes.
+								The user account has exceeded a maximum number of granted (live) refresh tokens.	
+								==>The application should store the refresh token for future use and use the access token to access a Google API. 
+								   Once the access token expires, the application uses the refresh token to obtain a new one.					   	
+					==>They are also integrated with API_KEY:
+						==>Public data: no authorization needed
+						==>The key identifies your project and provides API access, quota, and reports
+						==>This is required if no OAuth2 token added
+						You can restrict the key before using it in production by clicking Restrict key and selecting one of the Restrictions.											
+					1) Use: https://github.com/googleapis/google-api-java-client#Books_API
+					2) Use: https://www.googleapis.com/auth/books + token(+scope parameters)/API_KEY
+						Scopes:
+							https://developers.google.com/identity/protocols/oauth2/scopes	
+							
+		==>Scenario 1: Client Application(s) to Integrate with Google (Service) APIs: "Without the context of browser/... Users involved":
+			Without the context of browser/... Users involved:
+				1) The client application can integrate with Google (Service) APIs: request "Public data" via API_KEY (without authorized scenarios like OAuth 2.0 client ids, etc.)
+					==>Example 1: This client application can integrate with "Google Book API" to get public data via its own API_KEY
+								  (Google BOOK APIs need to identify this API_KEY via restrictions if any, and related quota if any)
+					==>Example 2: This client application can integrate with "Google Map API" to get public data via its own Google Map API API_KEY
+								  (Google Map APIs need to identify this API_KEY via restrictions if any, and related quota if any)
+				2) The client application can use its own Google account as private / shared data: this client application's own Google account is the same as any logged-in Users' Google account
+					==>Either can be used as a test-mode
+					==>Or: as one of the Google account like normal logged-in Users' Google account
+				
+				3) Google API Client Libraries: can be used in this integration
+
+		==>Scenario 2: Client Application(s) to Integrate with Google (Service) APIs: "With the context of browser/... Users involved"
+			==>User Login to this application via "Google Account / OAuth 2.0":
+				==>No username/password are provided to this application (user credentials are not saved in this application): So: it is not called "User Authentication"
+				==>But it authorizes/allows/permits the application to do something for the user (roles/permissions/...): so it is called "User Authorization"
+					==>"This OAuth 2.0 flow is specifically for user authorization"
+					==>These authorizations allow this application to access Google (service) APIs with the Users' contexts: their contents with these API integrations
+						==>Example 1: This application integrates with "Google Cloud API": then this application accesses this logged-in User's cloud spaces (got permissions from this logged-in User: obtain permission from users to store files in their Google Drives)
+									  ==>A properly authorized (related to the logged-in Users' private data/share specific data) web server application can access an API while the user interacts with the application
+									  ==>A properly authorized (related to the logged-in Users' private data) web server application can access an API after the user has left the application:
+									  	 ==>The permissions stay with this application: after user leaves the application or logged out:
+									  	 	1) access_token: with expiration (before expiration)
+									  	 	2) refresh token
+									  	 	3) ...
+									  	 	==>Exceptions: shot-lived access_token ==>TBD
+									  	 ==>These implementations can vary per social media vendors:
+									  	 	1) Google API Console
+									  	 	2) Twitter:
+									  	 		==>Logged-in Users: can view and configure and revoke them: Settings => Security and account access => Apps and Sessions => Connected Apps
+									  	 	3) Facebook
+									  	 	4) Github
+									  	 ==>These permissions are enabled by vendors like Google/Twitter/...:
+									  	 	It is designed for applications that can store confidential information and maintain state: "Connected Apps"
+						==>Example 2: This application integrates with "Google Book API": then this application accesses this logged-in User's Book Repository spaces (got permissions from this logged-in User) ==>This needs OAuth Client ID to get Authorization from Logged-in User(s)
+									  ==>But this application can also query/call "Google Book API" to retrieve public Book Repository spaces: ==>This only needs API_KEY
+									     (This has nothing to do with the logged-in User(s): it is this client application's usage and quota if quota is enabled...)
+									     (Even Google Book APIs need to identify/restrict(restrictions) this client application by API_KEY and related quota... if applicable)
+						==>Example 3: This application integrates with "Google Map API": via API_KEY
+									  ==>If a User logged in via Google Account
+									  ==>Does this user's Google account quota is being used, or it is purely this application's API_KEY quota (via subscription and billing)?
+									  	 Question 1: Does this application accesses this logged-in User's Google Map API Repository spaces or private shared data?
+									  	 Question 2: Or: Google Map API integration is purely with this client application API_KEY, has nothing to do with OAuth2 and User's logged-in scenario like Google Book API's shared data permissions?
+
+				==>Implementation Approaches:
+					1) Google API Client Libraries: can be used in this integration
+					2) Direct integration via: Google OAuth 2.0 endpoints
+					
+		==>Scenario 3: Client Application(s) Not Integrated with Google (Service) APIs - but only enabled User Login/UserDataAccess: "With the context of browser/... Users involved"
+				==>This may be solely related to User Google Account Login
+				==>But in this regard, it may still involve much more than just login due to:
+					==>This client application enables: multiple scope parameters to request permissions for multiple scenarios - as long as the logged-in authorizes all of them
+					==>These authorizations can stay even after the logged-in User leaves the application or logged out - same as above
+
+				Concept: "OAuth consent screen":
+				Concept: "authorized domains":
+					The domains of the URIs you add below will be automatically added to your OAuth consent screen as authorized domains.
+					==>"OAuth consent screen" is a UI screen that Google provides to the User when User does the login/authorize (actually authorize)
+						==>Client Application: can only configure the client-app and its related "OAuth 2.0 Client Id: it cannot control this "OAuth consent screen"
+						==>So User can trust the displayed info on configured "OAuth consent screen"
+					==>"authorized domains": these configured here in Google API Console
+					
+				Scenario: "Authorized JavaScript Origins": For use with requests from a browser
+					The HTTP origins that host your web application. This value can't contain wildcards or paths. 
+					If you use a port other than 80, you must specify it. For example: https://example.com:8080
+					==>The HTTP origins that host your web application.
+						==>So Google OAuth endpoints can do validation and restrictions
+					==>This value can't contain wildcards or paths.
+						==>So Google OAuth endpoints can do accurate and valid validation and restrictions
+					==>Authorized JavaScript Origins:
+						==>Cannot have redirect URI like a web server?
+						==>Reason: For use with requests from a browser: Browser cannot have a redirect URI
+					==>Multiple Authorized JavaScript Origins: can be specified
+				Scenario: "Authorized redirect URIs": For use with requests from a web server
+					Users will be redirected to this path after they have authenticated with Google. 
+					The path will be appended with the authorization code for access, and must have a protocol. 
+					It can’t contain URL fragments, relative paths, or wildcards, and can’t be a public IP address.
+					==>redirected to this path: so these paths are called: "protected paths", which is why the application needs Google authentication/authorization
+						==>Why "redirect": so the user side (browser or another app) doesn't need to issue/initiate a redirect after google authentication, and it is automated in code flow
+					==>The path will be appended with the authorization code for access:
+						==>???
+						==>Multiple or another round-trip call to Google to retrieve access_token using authorization code?
+						==>auth_uri: https://accounts.google.com/o/oauth2/auth
+						==>token_uri: https://oauth2.googleapis.com/token
+					==>must have a protocol: 
+						==>so Google endpoints can know how to do redirect
+					==>can’t contain URL fragments, relative paths, or wildcards: 
+						==>Authorized contents should be reachable and specific path resources
+					==>can’t be a public IP address: 
+						==>otherwise, it doesn't need so-called "Authorization or permissions"
+					==>Local test-mode / NonProd Mode: can use: http://localhost:8080
+					==>Usage 1: The redirect URIs are the endpoints to which the OAuth 2.0 server can do redirect as "protected resource paths"?
+					==>Usage 2: The redirect URIs are the endpoints to which the OAuth 2.0 server can send responses.
+					==>Multiple Redirect URIs: can be specified:
+						==>One of them can be used in some integration when applicable:
+						Example 1:
+														 https://accounts.google.com/o/oauth2/v2/auth?
+														 scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly&
+														 access_type=offline&
+														 include_granted_scopes=true&
+														 response_type=code&
+														 state=state_parameter_passthrough_value&
+														 redirect_uri=https%3A//oauth2.example.com/code&
+														 client_id=client_id					
+					==>We recommend that you design your app's auth endpoints so that your application does not expose authorization codes to other resources on the page.???
+					==>After creating your credentials, download the client_secret.json file from the API Console. 
+					   Securely store the file in a location that only your application can access.
+					   ==>Application can read this file and obtain the data in integration code
+
+		==>Discussions 1: Google API Client Libraries:
+				==>These libraries are bundled: so they can do more than these endpoints integration, including some authorization processes
+				==>The Google APIs client libraries can handle some of the authorization process for you. They are available for a variety of programming languages; check the page with libraries and samples for more details.
+					https://developers.google.com/books/docs/v1/libraries
+					
+					https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-books/v1/1.31.0
+					https://github.com/googleapis/google-api-java-client-services#supported-google-apis
+					https://github.com/googleapis/google-api-java-client#hg%2Fbooks-cmdline-sample				
+					
+		==>Discussions 2: When integrating with some Google (Service) APIs:
+				==>OAuth2 Client IDs and API_KEY do work together sometimes (due to private shared data) - while the Service API calls mostly use API_KEY (due to its public service data scenarios: such as: Book repo contents, Google Map API service data, etc.)
+										
+
+	==>Main Procedure Summaries:
+		==>Everything related to the procedures is: configure and enable "this application" with all Google API integration needs
+	
+		Open/Enable APIs and Services: search/choose: Google Book APIs ==>Enable the "Client Application" to integrate with Google Book APIs
+		
+		On this new project page: create credentials:
+		
+			Examples:
+				==>OAuth2 Client ID
+					Applications that use languages and frameworks like PHP, Java, Python, Ruby, and .NET must specify authorized redirect URIs.
+					https://console.developers.google.com/apis/api/books.googleapis.com/credentials?folder=&organizationId=&project=savvy-factor-301302
+					https://console.developers.google.com/apis/credentials?project=savvy-factor-301302
+						883388552906-6cqf77ehr03nv5blnqq74mdc4iou3p67.apps.googleusercontent.com					
+						ZQC_4Yoffs__nFiV-abwV6we	
+				==>An application can have multiple OAuth Client IDs
+		
+				==>API_KEY:
+					AIzaSyBDfgPowa5HlCO7aL8-5TZRP2sYGIl32jw					
+				==>An application can have multiple API_KEYs
+
+	==>Code: integration with Google Book APIs:
+		 
+		==>Integration:
+				https://developers.google.com/books/docs/v1/getting_started?csw=1
+				https://developers.google.com/books/docs/v1/using
+			
+				https://developers.google.com/books/docs/v1/getting_started?csw=1#REST
+				API:
+					https://developers.google.com/books/docs/v1/reference/?apix=true
+					
+				https://www.googleapis.com/apiName/apiVersion/resourcePath?parameters
+				https://www.googleapis.com/books/v1/{collectionName}/resourceID?parameters
+								
+					https://www.googleapis.com/books/v1/volumes
+					https://www.googleapis.com/books/v1/volumes/volumeId
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves/shelf
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves/shelf/volumes
+				
+				https://www.googleapis.com/books/v1/volumes?q=search+terms
+
+				Parameters: Similar or same as: used on the Google Books site
+					https://books.google.com/
+					https://books.google.com/ebooks?id=buc0AAAAMAAJ&dq=holmes&as_brr=4&source=webstore_bookcard
+					
+				GET https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
+				POST https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/clearVolumes?key=yourAPIKey
+				
+				Integration with Google Book APIs: Search APIs:
+					https://developers.google.com/books/docs/v1/reference/volumes
+					https://developers.google.com/books/docs/v1/reference/volumes#resource
+					https://developers.google.com/books/docs/v1/reference/volumes/list#resource_volumes
+
+============================================================
+Google API Scenario: Google Cloud Platform:
+	https://console.cloud.google.com/home/dashboard?project=myfirebase-93401
+		
+	client-id: 605726331431-ju57ins6ng8m8tertlk4i1is4o1s7vi5.apps.googleusercontent.com
+	
+	client-secret: Phd_zx8V70W_0ztBCpitBhsE
+		a JavaScript application does not require a secret, but a web server application does
+
+	https://support.google.com/cloud/answer/6158849#zippy=%2Cpublic-and-internal-applications%2Cauthorized-domains%2Cservice-accounts%2Cnative-applications%2Cweb-applications
+	
+		Setting up OAuth 2.0
+		To use OAuth 2.0 in your application, you need an OAuth 2.0 client ID, which your application uses when requesting an OAuth 2.0 access token.
+		
+		To create an OAuth 2.0 client ID in the console:
+		
+		Go to the Google Cloud Platform Console.
+		From the projects list, select a project or create a new one.
+		If the APIs & services page isn't already open, open the console left side menu and select APIs & services.
+		On the left, click Credentials.
+		Click New Credentials, then select OAuth client ID.
+		Note: If you're unsure whether OAuth 2.0 is appropriate for your project, select Help me choose and follow the instructions to pick the right credentials.
+		
+		Select the appropriate application type for your project and enter any additional information required. Application types are described in more detail in the following sections.
+		If this is your first time creating a client ID, you can also configure your consent screen by clicking Consent Screen. (The following procedure explains how to set up the Consent screen.) You won't be prompted to configure the consent screen after you do it the first time.
+		Click Create client ID
+		To delete a client ID, go to the Credentials page, check the box next to the ID, and then click Delete.
+		
+		User consent
+		Public and internal applications
+		A public application allows access to users outside of your organization (@your-organization.com).
+		Access can be from consumer accounts, like @gmail.com, or other organizations, like @partner-organization.com.
+		Public applications need to go through verification as detailed above.
+		An internal application will only allow access to users from your organization (@your-organization.com).
+		For more information about setting up organizations and organization access, see the GCP Organizations documentation.
+		
+		Authorized domains
+		To protect you and your users, Google restricts your OAuth 2.0 application to using Authorized Domains. If you have verified the domain with Google, you can use any Top Private Domain as an Authorized Domain.
+		
+		After you add an Authorized Domain, you can use any of its subdomains or pages, and any other associated country codes.
+		
+		Add your Authorized Domains before you add your redirect or origin URIs, your homepage URL, your terms of service URL, or your privacy policy URL.
+		
+		Service accounts, web applications, and native applications
+		For information about setting up service accounts, web applications, or device-native applications, see the following topics.
+		
+		Service accounts
+		A service account is used in an application that calls APIs on behalf of an application that does not access user information. This type of application needs to prove its own identity, but it does not need a user to authorize requests.
+		
+		For example, if your project employs server-to-server interactions such as those between a web application and Google Cloud Storage, then you need a private key and other service account credentials. To generate these credentials, or to view the email address and public keys that you've already generated, do the following:
+		
+		Open the Google Cloud Platform Console Credentials page.
+		If it's not already selected, select the project that you're creating credentials for.
+		To set up a new service account, click New credentials and then select Service account key.
+		Choose the service account to use for the key.
+		Choose whether to download the service account's public/private key as a standard P12 file, or as a JSON file that can be loaded by a Google API client library.
+		Your new public/private key pair is generated and downloaded to your machine; it serves as the only copy of this key. You are responsible for storing it securely.
+		
+		Your project needs the private key when requesting an OAuth 2.0 access token in server-to-server interactions. Google does not keep a copy of this private key, and this screen is the only place to obtain this particular private key. When you click Download private key, the PKCS #12-formatted private key is downloaded to your local machine. As the screen indicates, you must securely store this key yourself.
+		
+		The name of the downloaded private key is the key's thumbprint. When inspecting the key on your computer, or using the key in your application, you need to provide the password notasecret. Note that while the password for all Google-issued private keys is the same (notasecret), each key is cryptographically unique.
+		
+		You can generate multiple public-private key pairs for a single service account. This makes it easier to update credentials or roll them over without application downtime. However, you cannot delete a key pair if it is the only one created for that service account.
+		
+		Use the email address when granting the service account access to supported Google APIs.
+		
+		For more details, see the OAuth 2.0 Service Accounts documentation.
+		
+		Note: When you use a service account, you are subject to the Terms of Service for each product, both as an end user and as a developer.
+		
+		Web applications
+		A web application is accessed by web browsers over a network.
+		
+		Applications that use client-side JavaScript to access Google APIs must specify authorized JavaScript origins. The origins identify the domains from which your application can send API requests.
+		
+		Applications that access Google APIs from a server (often using languages and frameworks like Node.js, Java, .NET, and Python) must specify authorized redirect URIs. The redirect URIs are the endpoints of your application server to which the OAuth 2.0 server can send responses.
+		Native applications
+		If your application is going to be installed on a device or computer (such as a system running Android, iOS, Universal Windows Platform, Chrome, or any desktop OS), you can use Google's OAuth 2.0 Mobile and desktop apps flow. If your application runs on devices with limited input capabilities, such as smart TVs, you can use Google’s OAuth 2.0 TV and limited-input device flow.
+		
+		Android
+		iOS
+		Universal Windows Platform (UWP)
+		Chrome apps
+		TVs & limited-input devices
+		Desktop apps
+
+============================================================
+

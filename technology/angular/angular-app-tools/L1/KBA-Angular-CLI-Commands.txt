@@ -1,0 +1,94 @@
+
+#Angular - CLI - Commands: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Angular CLI - Commands:
+
+1. Angular CLI Command - generate:
+	ng generate <schematic> --help
+	==>app-shell:	ng generate app-shell --help: Generates an app shell for running a server-side version of an app.
+	==>application: ng generate application --help
+	==>class
+		ng g class clicommands/classes/class1:
+			CREATE src/app/clicommands/classes/class1.spec.ts (154 bytes)
+			CREATE src/app/clicommands/classes/class1.ts (24 bytes)		
+	==>component
+		ng g c clicommands/components/component1:
+			CREATE src/app/clicommands/components/component1/component1.component.html (25 bytes)
+			CREATE src/app/clicommands/components/component1/component1.component.spec.ts (656 bytes)
+			CREATE src/app/clicommands/components/component1/component1.component.ts (291 bytes)
+			CREATE src/app/clicommands/components/component1/component1.component.css (0 bytes)
+			UPDATE src/app/clicommands/clicommands.module.ts (300 bytes)		
+	==>directive
+		ng g directive clicommands/directives/directive1:
+			CREATE src/app/clicommands/directives/directive1.directive.spec.ts (240 bytes)
+			CREATE src/app/clicommands/directives/directive1.directive.ts (149 bytes)
+			UPDATE src/app/clicommands/clicommands.module.ts (394 bytes)		
+	==>enum
+		ng g enum clicommands/enums/enum1:
+			CREATE src/app/clicommands/enums/enum1.enum.ts
+	==>guard
+		ng g guard clicommands/guards/guard1:
+			? Which interfaces would you like to implement? CanActivate
+			CREATE src/app/clicommands/guards/guard1.guard.spec.ts (341 bytes)
+			CREATE src/app/clicommands/guards/guard1.guard.ts (458 bytes)	
+		ng g guard clicommands/guards/guard2:
+			? Which interfaces would you like to implement? CanActivateChild
+			CREATE src/app/clicommands/guards/guard2.guard.spec.ts (341 bytes)
+			CREATE src/app/clicommands/guards/guard2.guard.ts (473 bytes)	
+		ng g guard clicommands/guards/guard3:
+			? Which interfaces would you like to implement? CanDeactivate
+			CREATE src/app/clicommands/guards/guard3.guard.spec.ts (341 bytes)
+			CREATE src/app/clicommands/guards/guard3.guard.ts (549 bytes)	
+		ng g guard clicommands/guards/guard4:
+			? Which interfaces would you like to implement? CanLoad
+			CREATE src/app/clicommands/guards/guard4.guard.spec.ts (341 bytes)
+			CREATE src/app/clicommands/guards/guard4.guard.ts (412 bytes)					
+	==>interceptor
+		ng g interceptor clicommands/interceptors/interceptor1:
+			CREATE src/app/clicommands/interceptors/interceptor1.interceptor.spec.ts (452 bytes)
+			CREATE src/app/clicommands/interceptors/interceptor1.interceptor.ts (417 bytes)		
+	==>interface
+		ng g interface clicommands/interfaces/interface1:
+			CREATE src/app/clicommands/interfaces/interface1.ts
+	==>library
+		ng g library clicommands/libraries/library1:
+		==>Library is a project:
+		Project name "clicommands/libraries/library1" is not valid. New project names must start with a letter, and must contain only alphanumeric characters or dashes. When adding a dash the segment after the dash must also start with a letter.
+			clicommands/libraries/library1
+	==>module
+		ng g module clicommands:
+			CREATE src/app/clicommands/clicommands.module.ts
+	==>pipe
+		ng g pipe clicommands/pipes/pipe1:
+			CREATE src/app/clicommands/pipes/pipe1.pipe.spec.ts (183 bytes)
+			CREATE src/app/clicommands/pipes/pipe1.pipe.ts (215 bytes)
+			UPDATE src/app/clicommands/clicommands.module.ts (453 bytes)		
+	==>resolver
+		ng g resolver clicommands/resolvers/resolver1:
+			An unhandled exception occurred: Schematic "resolver" not found in collection "@schematics/angular".
+			See "C:\Users\jerry\AppData\Local\Temp\ng-ummdee\angular-errors.log" for further details.		
+	==>service
+		ng g s clicommands/services/service1:
+			CREATE src/app/clicommands/services/service1.service.spec.ts (367 bytes)
+			CREATE src/app/clicommands/services/service1.service.ts (137 bytes)		
+	==>service-worker
+		ng g service-worker --help
+		ng g service-worker clicommands/service-workers/service-worker1:
+		Pass this schematic to the "run" command to create a service worker
+		C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>ng g service-worker --defaults clicommands/service-workers/service-worker1
+		Unknown option: 'clicommands/service-workers/service-worker1'
+		C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>ng g service-worker --defaults
+		ERROR! ngsw-config.json already exists.
+		The Schematic workflow failed. See above.		
+	==>web-worker
+		ng g web-worker --help
+		ng g web-worker clicommands/web-workers/web-worker1:
+			CREATE src/app/clicommands/web-workers/web-worker1.worker.ts (157 bytes)
+			UPDATE tsconfig.json (634 bytes)
+
+2. 
+

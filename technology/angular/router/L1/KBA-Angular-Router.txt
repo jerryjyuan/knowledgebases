@@ -1,0 +1,100 @@
+#Angular - Router: KBA (practical-guide-keys) Guide
+
+#Goals:
+#Procedure:
+##Angular Router:
+1. Angular CLI Application:
+	==><base href="/"> in the <head> of your index.html file ==>This assumes that the app folder is the application root, and uses "/".
+	==>Summaries: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base + https://angular.io/guide/deployment (describe: "The base tag"))
+		==>Angular is mostly a SPA: so the originating page/url is index.html	==>PROD: <base href="/my/app/"> (https://angular.io/api/common/APP_BASE_HREF)
+		==>All <router-outlet> is display a view of a component: all should be based on index.html SPA
+		==>Angular application may have some different logic/mechanism due to components in terms of <base>
+				==>In Angular: <base href="/">: means: application root, and uses "/"
+			But: we can use the following simple logic:
+			1) Angular CLI: should use <base href="/">
+				==>Why does its refresh work? - ng serve can make it work naturally
+			2) Deployment of /dist files: (if not the root-place) should use: 1) <base href="/<app-name>/"> or <base href="./">
+				==>Why does its refresh not work? ==>Need to configure Apache
+				1) Method 1: Proved (also refer to "rewrite rule": https://angular.io/guide/deployment: Server configuration)
+					<Directory C:/xampp/htdocs>
+					    Options Indexes FollowSymLinks
+					    RewriteEngine On
+					    RewriteBase /fund-raiser-app
+					    RewriteRule ^index\.html$ - [L]
+					    RewriteCond %{REQUEST_FILENAME} !-f
+					    RewriteCond %{REQUEST_FILENAME} !-d
+					    RewriteRule . /fund-raiser-app/index.html [L]
+					</Directory>				
+				2) Method 2: <script>document.write('<base href="' + document.location + '" />');</script>
+				3) Method 3:
+					 /etc/apache2/sites-enabled/000-default.conf
+					 httpd.conf
+					 <Location "/my-app">FallbackResource /my-app/index.html
+				4) More:
+					sudo a2enmod rewrite
+					httpd.conf:
+						<Directory /var/www/>
+						        Options Indexes FollowSymLinks
+						        AllowOverride All
+						        Require all granted
+						</Directory>
+					src/.htaccess:
+					  RewriteEngine On
+					      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+					      RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+					      RewriteRule ^ - [L]
+					  RewriteRule ^ /index.html					
+					angular.json: add .htaccess into assets array: angular will copy it to your dist folder when you do a production build
+3. navigate:
+	==>1) path is static, can be the literal URL string
+		==>It is more like "changing into a new path/component": all the same below:
+		this.router.navigate(['/dashboard']);
+		this.router.navigate(['dashboard']);
+		this.router.navigate(['./dashboard']);
+	==>2) dynamic path, pass an array of path segments, followed by the parameters for each segment. 
+	      The fragments are applied to the current URL or the one provided in the relativeTo property of the options object, if supplied
+		An array that the router interprets as a routing instruction. You can pass the array as an argument to the Router.navigate method		
+		router.navigate(['team', 33, 'user', 11], {relativeTo: route});
+		// Navigate without updating the URL, overriding the default behavior
+		router.navigate(['team', 33, 'user', 11], {relativeTo: route, skipLocationChange: true});
+	==>Examples: Relative Route: https://angular.io/guide/router#link-parameters-array
+	  	Method 1: <a routerLink="../second-component">Relative Route to second component</a> (In addition to ../, you can use ./ or no leading slash to specify the current level)
+	  	Method 2: this.router.navigate(['items'], { relativeTo: this.route }); this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
+4. RouterLink: Directive ==>Used as an attribute inside a clickable HTML element
+	An array that the router interprets as a routing instruction. You can bind that array to a RouterLink
+	  <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+	  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+		==>1) With "/": It is more like "changing into a new path/component"
+		==>2) Without "/": It is more like adding a sublink part to the current URL
+	==>this.route.paramMap.pipe(switchMap(params => {this.selectedId = Number(params.get('id'));})); const heroId = this.route.snapshot.paramMap.get('id'); (https://angular.io/guide/router)
+5. ActivatedRoute: Service ==>route specific information such as route parameters, static data, resolve data, global query params, and the global fragment
+6. RouterLinkActive: Directive ==>Used as an attribute inside an HTML element
+7. RouterOutlet: Directive ==>(Router) display the view
+8. Router: ==>Displays the application component for the active URL
+9. Router Guards: resolve data + lazy loading + loadChildren + Children: https://angular.io/guide/router-tutorial-toh#resolve-guard
+	See below examples: loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+	The Router also supports custom preloading strategies for fine control over which modules to preload and when (https://angular.io/guide/router-tutorial-toh#custom-preloading)
+10. Displaying multiple routes in named outlets: Each named outlet has its own set of routes with their own components. (https://angular.io/guide/router-tutorial-toh)
+    Secondary route navigation: merging routes during navigation: http://.../crisis-center(popup:compose)
+    	You can add many more outlets and routes, at the top level and in nested levels, creating a navigation tree with many branches and the router will generate the URLs to go with it.
+    	You can tell the router to navigate an entire tree at once by filling out the outlets object and then pass that object inside a link parameters array to the router.navigate method
+11. Routes: Example: https://stackblitz.com/edit/angular-ijvgxk-6kfie3?file=src%2Findex.html
+	const appRoutes: Routes = [
+	  {
+	    path: 'compose',
+	    component: ComposeMessageComponent,
+	    outlet: 'popup'
+	  },
+	  {
+	    path: 'admin',
+	    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+	    canLoad: [AuthGuard]
+	  },
+	  {
+	    path: 'crisis-center',
+	    loadChildren: () => import('./crisis-center/crisis-center.module').then(m => m.CrisisCenterModule),
+	    data: { preload: true }
+	  },
+	  { path: '',   redirectTo: '/superheroes', pathMatch: 'full' },
+	  { path: '**', component: PageNotFoundComponent }
+	];

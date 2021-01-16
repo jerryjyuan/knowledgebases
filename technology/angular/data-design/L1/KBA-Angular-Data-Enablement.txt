@@ -1,0 +1,91 @@
+
+#Angular Data Enablement: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Data: list of data enablement scenarios
+
+1. JavaScript Web Storage: Angular is client-side app, so can use Browser/DOM's ways (Browser is like Angular's JVM)
+2. Mock Data
+3. Local Data
+4. Remote Data: RESTful APIs, Database, Server Integration, Cloud Platform
+5. 
+
+##To Add JavaScript Web Storage:
+
+1. Add DOM Window's SessionStorage: SessionStorage is per tab/window: so by default it is enabled by browsers (part of DOM property)
+	https://www.w3schools.com/jsref/prop_win_sessionstorage.asp (https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
+	Storage object: https://developer.mozilla.org/en-US/docs/Web/API/Storage
+2. Save data into sessionStorage (read-only): sessionStorage.setItem("key", "value");
+3. Read data from sessionStorage: var lastname = sessionStorage.getItem("key");
+4. Remove data from sessionStorage: sessionStorage: sessionStorage.removeItem("key");
+5. Remove all data from sessionStorage: sessionStorage.clear();
+6. Usage 1: Code web pages to display the same page fields' texts after user refreshing it or accidentally refreshing it:
+	==>Base: (Page Session) Data: survives over page reloads and restores: SessionStorage is ok, but fields need to handle (add)
+	==>myStorage = window.sessionStorage;
+	let keys = Object.keys(sessionStorage); for(let key of keys) {  console.log(`${key}: ${sessionStorage.getItem(key)}`);}
+	if (typeof(Storage) !== "undefined") {} else {}
+	==>Check and get it from SessionStorage:
+		let field = document.getElementById("field");
+		if (sessionStorage.getItem("autosave")) {
+		  // Restore the contents of the text field
+		  field.value = sessionStorage.getItem("autosave");
+		}
+	==>Save it:
+		field.addEventListener("change", function() {
+		  // And save the results into the session storage object
+		  sessionStorage.setItem("autosave", field.value);
+		});	
+7. Usage 2: if (sessionStorage/localStorage.clickcount) {sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+8. Usage 3: Only used within the same tab: aka: same SessionStorage (tab closes: SessionStorage closes)
+	==>Multiple (previous as well) pages (same tab) can exist inside the same SessionStorage: so can restore previous page data
+	==>This concept is similar to Java's user request's session: pass data across pages
+9. Use LocalStorage (read-only): never expires + same as SessionStorage: https://www.w3schools.com/jsref/prop_win_localstorage.asp
+10. Debugging: Chrome -> EachTab -> DeveloperTool -> Application -> Session Storage: based on each-page-session: 
+	==>Any security issues? other site-page accesses to another site-page-item? ==>No main concerns: because it is the user's local browser
+11. Refer to Official Reference Document: https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
+
+##To Add Mock Data:
+	See other KBA
+
+##To Use Domain Data / Calls via CORS: (inter-app / inter-domain API/data calls)
+
+1. Browser <-> Server Domain / App:
+	https://enable-cors.org/server.html
+	https://www.html5rocks.com/static/images/cors_server_flowchart.png
+	==>Origin: Definition: scheme://host:port/  (initiating/requesting domain)
+	==>Browser initiates a request to a server site/domain/origin:
+		1) The client/user browser is also an origin
+		2) Client-Origin to Server-Origin Scenarios:
+			==>Scenario 1: public internet => company/site-WebServer/Apache: this server portal: should be enabled as "open" or CORS-"Access-Control-Allow-Origin: *"
+							==>It delegates to Tomcat/WebLogic: Enterprise internal app servers: protected by VPN/SSO/TAM/Ping/keyChains
+							==>So these protected servers don't need explicit CORS protections
+							==>User logins: access to the server/apps' resources: protected by VPN and Login
+							==>If some specific apps like one Spring Boot app: allow one its own Angular app to access to it, then this app adds @CORS to enable the Angular app only
+		3) So CORS is what it refers to: origin security policy enabled: but most of internet client browsers have no issues to many sites due to the above scenarios
+		4) Browsers: CORS is supported by many browsers: means: browsers can set up "Origin header" + Send OPTIONS and preflight requests and know what it is doing
+		5) App Servers: support CORS: means: understand and implement CORS request and headers and set up CORS response etc.
+			==>At least, I think that most of web servers should support CORS requests/responses: because they need to deal with browsers' CORS requests
+				==>But internal app servers may not deal with it while web servers deal with it
+			==>If web servers don't deal with it: then internet client browsers cannot interact with them
+	==>Multiple rounds of handshaking: including preflight request (Access-Control-Request-Method: inquiring)
+	==>Request: Origin header + OPTIONS request
+
+2. Server serves resources(js/css/html/images/APIs/data/files/...)/pages/documents: Access-Control-Allow-Origin (ACAO) header
+	Access-Control-Allow-Origin: *
+		==>doesn't allow the use of credentials
+		==>No Login Needed
+		==>No Credentials Needed: login/cookies/etc (cookies is part of credentials)
+	Access-Control-Allow-Origin: <origin>
+	Vary: Origin	==>if server has a list of allowed origin: then it provides this showing <origin> is one of them instead of single allowed origin
+		==>Serve credentialed request
+	Access-Control-Allow-Origin: "null" header: schemes: data:// file://
+		==>Serve some data requests or hostile document
+
+##To Add Local Data:
+	See other KBA
+
+##To Add Remote Data:
+	See other KBA

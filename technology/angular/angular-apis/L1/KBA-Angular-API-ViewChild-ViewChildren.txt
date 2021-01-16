@@ -1,0 +1,30 @@
+
+#Angular API - ViewChild - ViewChildren: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable ViewChild:
+
+1. Add supported selectors:
+	==>Any class with the @Component or @Directive decorator:
+		==>Scenario 1: Angular Components
+		==>Scenario 2: MD Components:
+					   @ViewChild(MatTable) table: MatTable<MdsTableItem>;
+		==>Scenario 3: App Created/Customized Components
+	==>A template reference variable as a string (e.g. query <my-component #cmp></my-component> with @ViewChild('cmp'))
+	==>Any provider defined in the child component tree of the current component (e.g. @ViewChild(SomeService) someService: SomeService)
+	==>Any provider defined through a string token (e.g. @ViewChild('someToken') someTokenVal: any)
+	==>A TemplateRef (e.g. query <ng-template></ng-template> with @ViewChild(TemplateRef) template;)
+
+2. Example Usage 1: MatTable as a child component
+	==>Parent HTML File:
+		As a child component but utilizing "enabled html selector" as its selector in parent html template file:
+			<table mat-table class="full-width-table" matSort aria-label="Elements">
+	==>Parent Component File:
+		Access to this child component:
+			@ViewChild(MatTable) table: MatTable<MdsTableItem>;
+		Assign data to this child component: via DataSource object
+			this.table.dataSource = this.dataSource;
+

@@ -1,0 +1,24 @@
+
+#Angular - App Types: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Angular App Types:
+
+1. Angular - SPA
+
+2. Angular - SSR
+
+3. Angular PWA: Progressive Web Application
+	https://dev.to/devpato/how-to-create-a-pwa-with-javascript-4jlh
+	Adding a service worker to an Angular application is one of the steps for turning an application into a Progressive Web App (also known as a PWA). At its simplest, a service worker is a script that runs in the web browser and manages caching for an application.
+		manifest. webmanifest file.
+		Different size of icons in src/assets/icons folder.
+		Service Worker — ngsw-worker. json.	
+	https://www.smashingmagazine.com/2018/09/pwa-angular-6/
+
+4. Angular - Web Worker
+
+5. 

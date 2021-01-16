@@ -1,0 +1,64 @@
+
+#Angular - Security: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Angular Security:
+
+1. Angular app: client side app
+	https://dev.to/devpato/javascript-security-1moc
+	==>XSS/CSRF/CORS
+
+2. XSS
+
+	sanitize-html:
+	https://www.npmjs.com/package/sanitize-html
+		npm install sanitize-html
+		Import the module:
+			// In ES modules
+			import sanitizeHtml from 'sanitize-html';
+			// Or in CommonJS
+			const sanitizeHtml = require('sanitize-html');
+		Use it in your JavaScript app:
+			const dirty = 'some really tacky HTML';
+			const clean = sanitizeHtml(dirty);
+	npm install --save @types/sanitize-html
+	https://www.npmjs.com/package/@types/sanitize-html
+3. Cross Site Request Forgery aka CSRF
+
+	Can CSRF be prevented? Yes.
+	
+	There are 3 techniques to prevent CSRF attacks.
+		1. Using the same site cookies method: This is a newly developed attribute that can be added to your cookies to instruct the browser not to allow third-party usage for specific cookies. This attribute is set by the server while at the same time setting the cookie itself.
+		2. Challenge Response: As an additional layer of protection, you can require a challenge response from a user when a form is submitted. Some examples of challenge responses include:
+			-CAPTCHA validation (very popular)
+			-Asking again for Authentication of password or some personal information
+			-Issue a one-time token
+			Note: For applications in need of high security, both tokens and challenge-response should be used to ensure security.
+		3.Anti CSRF token: When a user submits information, interacts with the site, or does anything else that generates a cookie, the anti-CSRF token should also be included with the cookie request. This request then gets run through a verification process wherein the authenticity or even existence of this token is verified before processing the request. If the token is missing or incorrect, the request can be rejected.	
+
+
+5. OAuth0/OAuth2:
+
+	==>JWT
+	
+	==>Social Media:
+		Github:
+			Authorizing OAuth Apps
+			https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/authorizing-oauth-apps
+			https://docs.github.com/en/free-pro-team@latest/developers/apps/scopes-for-oauth-apps
+			Reviewing your authorized integrations
+			https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/reviewing-your-authorized-integrations
+			Example:
+			https://github.com/login/oauth/authorize?response_type=code&client_id=efee9c8bf9a54dbcf9ea&redirect_uri=https%3A%2F%2Fdevchallenges-1234.firebaseapp.com%2F__%2Fauth%2Fhandler&state=AMbdmDmGmdFDz7hM66FtmGJKszsr2QPOmcZ2J_TwGqCx6UpCb3JDUUHU54-IINIr4GYMvG-OjGozExaaBTl6DpaWrN-uz6XmSSncR7RVJo-vc_gNsgBRwftgh07iUJn4WtUi81W0JSAdMXEk_r3_OL9F12mYURvrwmADh043-u82Qb17Et--3g5jnQA5p8atJGP2k7OQKZWyA9G6Tpv0gN3LjHRZx7Ejb8ZvuzTjBaEVri15WZU9gL3K6Ws5o1YNWkTWRmdkI4Mb-5ll9UvzmfPSjPRA1Cd0Ny5xj5qgmFi6lWlVdFn8pgkhvcmYymZimCiyecs_kmHlhCfmafd7&scope=user%3Aemail&context_uri=https%3A%2F%2Fdevchallenges.io
+			action="/login/oauth/authorize"
+			<button data-octo-click="oauth_application_authorization" data-octo-dimensions="marketplace_listing_id:,came_from_marketplace:false,paid_marketplace_plan_purchased:false" data-ga-click="Oauth, oauth application authorized, oauth_application_id:1283203; listing_id:; came_from_integrations_directory:false; came_from_marketplace:false; paid_marketplace_plan_purchased:false; marketplace_listing_id:" type="submit" name="authorize" value="1" id="js-oauth-authorize-btn" class="btn btn-primary width-full ws-normal" disabled>Authorize nghiemthu</button>
+			https://devchallenges-1234.firebaseapp.com
+           
+           
+           
+	
+	
+	

@@ -1,0 +1,305 @@
+
+#Web - App Security: KBA (practical-guide-keys) Guide
+
+#Goals:
+#Procedure:
+##Browsers List:
+
+1. Web Security:
+	==>Enterprise - Security:
+		Zones/
+		Datacenters
+		Networks/VPN/...
+		Vendors Tools:
+			SSO/AD(LAN/LDAP)/TAM/PingIP/
+		Extended Scopes:
+			IAM/MacVault/OSSA/.../ACLs/Roles/
+	==>System - Security:
+		Windows/Linux/VDI/...
+	==>Network - Security:
+		Domain Network / Private Network / Public Network
+		Firewalls
+		Filters
+		Routers
+	==>Platform - Security:
+		Cloud Security
+		Container Security
+		Windows Security
+		...
+	==>Server - Security:
+		Web Servers: Apache/...
+		Application Servers: Tomcat/WebLogic/...
+	==>Client-Side Security:
+		Cookie
+		Two-factor authentication
+		Captcha
+		Identify images containing some materials
+		Flip a pig/animal
+		Code:
+			Text message / Email / ...
+		iPhone:
+			Display a 6-digit code
+		Authenticator App: code
+
+2. Web - App Security:
+
+	==>Web App Security Protocols:
+		Http Basic/Digest/NTLM/Negotiate
+			Basic: Prompts the user for a username and password to authenticate the user against the Windows Active Directory
+				   As the user ID and password are passed over the network as clear text (it is base64 encoded, but base64 is a reversible encoding), the basic authentication scheme is not secure. HTTPS/TLS should be used with basic authentication.
+			Digest: The password is not sent clear to the server
+				   Encryption is a two-way function; what is encrypted can be decrypted with the proper key
+				   by default uses MD5 as the default algorithm
+				   https://tools.ietf.org/html/rfc7616
+				   https://stackoverflow.com/questions/2384230/what-is-digest-authentication
+			NTLM: Uses an encrypted challenge/response that includes a hash of the password
+				   NTLMv2, the client adds additional parameters to the server's challenge such as the client nonce, server nonce, timestamp and username
+				   Hashing performs a one-way transformation on a password, turning the password into another String, called the hashed password. “One-way” means that it is practically impossible to go the other way - to turn the hashed password back into the original password.
+		Negotiate/Kerberos:	Microsoft Kerberos security package adds greater security than NTLM to systems on a network
+			Kerberos is a computer network security protocol that authenticates service requests between two or more trusted hosts across an untrusted network, like the internet. It uses secret-key cryptography and a trusted third party for authenticating client-server applications and verifying users' identities.
+	
+	==>OAuth:
+		==>No need to pass password: 
+			OAuth doesn't share password data but instead uses authorization tokens to prove an identity between consumers and service providers. OAuth is an authentication protocol that allows you to approve one application interacting with another on your behalf without giving away your password.
+		OAuth0/.../OAuth2/...
+	==>SIP: Session Initiation Protocol
+		SIP Authentication is done with an authentication username and authentication realm. The server challenges the user with a realm and a “nonce” If the user has a username within this realm, it calculates a response based on a number of data, including a “secret”
+		==>SIP protocol uses the Digest Authentication scheme
+		Nonce value is sent to the SIP client. The client is expected to generate a response to the nonce value sent in this message. ... The SIP client uses MD5 to compute the response from username, password, method and the received nonce value
+	==>SAML...
+	==>...
+	
+	==>Apps - Java:
+		==>Framework-Scope Security:
+			Spring Security
+			...
+		==>
+		
+	==>Apps - Angular:
+		==>Because Angular is mostly client-side application, so its web app security is mostly on browser-side: XSS/CSRF/CORS
+		==>...
+	
+3. Web - App Security - Scopes:
+	
+	==>Scopes:
+		==>Scope 1: Entire Web Domains -- if using 3rd-party with Authentication/Authorization:
+					Players: 3 Players
+						==>Player-Requester: PlayerR
+						==>Player-Authentication/Authorization: PlayerAA
+						==>Player-ResourcesProvider: PlayerRP
+					Players: Examples:
+						==>PlayerP:
+							==>Example: Web Application: Web Browser
+										==>Client as browser: never needs: create-an-app + app's client-id/secret
+											==>Because it is impossible for this scenario
+											==>But browser user needs to have a user-account in PlayerAA
+										Notes:
+											==>Many times: it refers to a "user"
+							==>Example: Web Application: Web Applications on some servers
+										==>Sometimes: this app needs: user-account on PlayerAA + create-an-app + app's client-id/secret
+										   (An app: meaning 1: PlayerAA support AA to this application: can be PlayerR or PlayerRP)
+										   (An app: meaning 2: PlayerAA support AA to this application - enabled multiple scopes/apps...
+										   					   So the same user-account can enable multiple AA for multiple apps)
+							==>Example: Web/Device Application: Desktop Applications on some servers/windows
+							==>Example: Web/Device Application: mobile apps
+						==>PlayerAA:
+							==>AA: OAuth2:
+									==>Example: JWT - online AA provider
+									==>Example: Access token - online AA provider
+									==>Example: Access token / JWT - social media providers - enabled with OAuth2:
+												==>Google/Facebook/Twitter/Github/...
+							==>AA: API Key (older ways (before OAuth2) but still existing with some scenarios)
+									==>Example: API Keys - online AA provider
+									==>Example: API Keys - social media providers:
+												==>Google/Facebook/Twitter/Github/...
+							==>AA: Service Accounts
+									==>Example: Service Accounts - social media providers:
+												==>Google/Facebook/Twitter/Github/...
+							==>AA: ...
+						==>PlayerRP:
+							Summaries:
+								==>1) Its apps need to be integrated with PlayerAA:
+										==>They can delegate to PlayerAA - when PlayerR sends request but without a token
+										==>They can delegate to PlayerAA - when PlayerR sends request but showing a link - directed by index page or some other ways (social media: options)
+										==>They can check/validate with PlayerAA - when PlayerR sends request with an access token (including JWT/etc.)
+								==>2) PlayerRP can save the tokens/user(entered)-credentials - for needed scenarios
+								==>3) Mostly: PlayerRP: needs: user-account on PlayerAA + create-an-app + app's client-id/secret
+									  					(Similar aspects as above PlayerR)
+								==>5) Integration with PlayerAA:
+										==>Example: Google as PlayerAA:
+											1) External: need to submit/verify an app: sometimes...
+													     ==>To protect you and your users, Google only allows apps using OAuth to use Authorized Domains. + ... more conditions
+											2) Google APIs as PlayerRP:
+														 ==>Can use both OAuth2 and API key ways:
+														 	==>
+								==>...
+								==>9) Some tricky parts on PlayerRP:
+									1) Depends how PlayerRP implements OAuth2
+										==>PlayerRP: doesn't integrate with social media for real and it is a fake integration:
+													 ==>So it displays a login page with its own URL: prompts you to enter login/password
+													 ==>Then it saves your login/password into its own database/file-system
+													 	==>Basically steal your social media login credentials
+													 	==>And doesn't do any authentication with social media providers
+													 ==>How can users tell it is a fake integration?
+													 	==>Basically: based on the url in browser address bar
+													 	==>It has to be the social media OAuth2 login url
+													 		1) It is social media provider's OAuth2 app's url enabled for this app: known url...
+													 			==>The page should come from social media created app page - can be configured by integration user's app
+													 		2) It cannot be the PlayerRP's own app url
+													 		3) So if user sees the login pages are not social media pages, do not enter any username and password...
+										==>PlayerRP: integrate with social media for real and it is a real integration
+												==>You’ll be routed to a SocialMedia/Twitter website asking you to authorize the app to use your account
+												==>Example 1: Twitter: Before you enter your username and password, check that the page is secure by verifying the URL starts with https://twitter.com
+															 (In this way, the integrated app cannot fake it, and cannot steal the user's login username/password)
+															 If you wish to grant a third-party app access to your account, we recommend that you only do so using Twitter’s OAuth method. OAuth is a secure connection method and doesn’t require you to give your Twitter username and password to the third party.
+											Example 1: Github app url:
+														https://github.com/login/oauth/authorize?
+															client_id=d7251d40ac9298bdd9fe&
+															redirect_uri=https%3A%2F%2Fdev.to%2Fusers%2Fauth%2Fgithub%2Fcallback&
+															response_type=code&
+															scope=user%3Aemail&
+															state=c362a04e7a3d2057629d37c4d2eaf5cb7c8de19c3c8415ce
+														DEV by thepracticaldev
+														wants to access your jerryjyuanicloud account
+														Personal user data
+															==>Most likely: they see some additional (limited) profile data with this github account (readonly)
+															(Should be part of the validation response data from Github)
+														Email addresses (read-only)
+														This application will be able to read your private email addresses. ==>The email address name? or access to email contents?
+															==>Most likely:
+																==>know/see your email address(es) associated with this github account login (for sure: they cannot access your email contents - because they don't know the email login...)
+																==>They see the associated email address with this github account
+															(Should be part of the validation response data from Github)
+														Authorizing will redirect to
+														https://dev.to
+															==>Means: after github OAuth2 AA: it redirects to this integrated app - this is very typical OAuth integration
+																		==>User doesn't need to do any user events
+														Summaries:
+															1) Scenario 1: PlayerAA's OAuth2 one-time token:
+																==>Maybe still safe for users: no username/password saved to this app's systems (only get the token and authenticated)
+																==>Those accesses to user data and email addresses:
+																	==>Based on github app's design/impl: they could enable multiple scopes for different app's integrations
+																	==>these scoped data or info can be made available to integrated apps by:
+																		1) Returned the validation response data when PlayerRP sends validation with PlayerAA using the token
+																		2) Added some user data into the integrated app's profile pages on github side: depends
+																		3) PlayerRP sends the token to request more user data other than the validation response: depend upon how Github API enablement
+															2) Scenario 2: enabled/granted permissions:
+																(Because in real world and also changed implementation of OAuth2 etc, many integration of app with providers could exist: such as: 
+																	==>one-time token
+																	==>granted permissions
+																	==>more: ...)
+																	(main reasons: enabled by some PlayerAA providers due to the current world enriched integration needs)
+																	Why do PlayerAA provide much more capabilities than simple one-time token to integrated apps PlayerRP?
+																		1) Reason 1: Our internet become more diverse and more functions needed - especially social media PlayerAA
+																		2) Reason 2: Some use cases come up:
+																					 ==>Use case 1: the PlayerRP app is the PlayerR's own user account: totally the same user account family: so sometimes the integration should be able to do many updates or data feeds ==>This should be one of the main needs for bigger permission scopes
+																					 				==>So Social Media PlayerAA or other PlayerAA should enable these permissions (instead of simple one-time token function)
+																					 ==>Use case 2: the playerRP app is part of big family of the user account: such as: Some user's Spring Boot app as PlayerR to access to Google Book APIs as PlayerRP via Google account/API as PlayerAA
+																					 ==>Use case 3: some users as PlayerR allow the PlayerRP to modify or update its account info (plus notification or data feeds from the account, etc.) due to some continuous integration after login or offline processes
+																					 ==>...
+																		==>If some apps as PlayerRP wants to integrate these increased permissions via these login:
+																			1) Most of the social media/PlayerAA app login page: will display the permissions on their login page: to warn the users of the permission scopes: so these alerts are important to the login user
+																					==>These permission scopes listed are not controlled by the app and should not be hidden to the user: it is the PlahyerAA's app login default display
+																			2) So user can view these permission scope by this app to that PlayerAA
+																					==>Example: Github:
+																						https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/authorizing-oauth-apps
+																						When an OAuth App wants to identify you by your GitHub account, you'll see a page with the app's developer contact information and a list of the specific data that's being requested.
+																			3) PlayerAA cannot limit or prohibit the PlayerRP's enabled scopes - generally speaking - but they can display these permissions
+																			==>So the user should take serious evaluations to these displayed permissions
+																				==>If you don't agree with these permissions, do not use the PlayerAA login: instead you can create a registration user account on this app
+																==>Integrated apps will be able to perform various permissions and actions with your account: not just a one-time token
+																==>Review the various permissions you are granting to the app
+																	==>You can review and revoke access for apps connected to your account at any time by visiting the Apps and sessions section of your account settings
+											Example 2: Twitter app url:
+														https://api.twitter.com/oauth/authenticate?oauth_token=DYw-4AAAAAAAa8cGAAABdumvRu4
+														This application will be able to:
+														See Tweets from your timeline (including protected Tweets) as well as your Lists and collections.
+														See your Twitter profile information and account settings.
+														See accounts you follow, mute, and block.
+														See your email address.		
+														https://help.twitter.com/en/managing-your-account/connect-or-revoke-access-to-third-party-apps
+														==>Depending on its permissions, an authorized app may be able to obtain information from and use your account in various ways, such as reading your Tweets, seeing who you follow, updating your profile, posting Tweets on your behalf, accessing your Direct Messages, or seeing your email address. You can learn more about the specific access in the App permissions section below
+														==>We do not share your Twitter password with apps. Remember that when you authorize an app to access your Twitter account or take actions on your behalf, the app may use, store, and share your information in accordance with its own business practices. While app developers agree to abide by our rules and guidelines, we strongly recommend that you review an app’s terms and privacy policy before you authorize the app to access your account.
+														"Has access to your email address": what does it mean? 1) Know / see your email address 2) Able to login to email address?
+											Example 3: Google APIs:
+														(https://developers.google.com/identity/protocols/oauth2/web-server#php_5)
+														auth_uri: https://accounts.google.com/o/oauth2/auth
+														token_uri: https://oauth2.googleapis.com/token
+														https://accounts.google.com/o/oauth2/v2/auth?
+														 scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly&
+														 access_type=offline&
+														 include_granted_scopes=true&
+														 response_type=code&
+														 state=state_parameter_passthrough_value&
+														 redirect_uri=https%3A//oauth2.example.com/code&
+														 client_id=client_id											
+											==>Can these real-integrations still save the user's password?
+												==>Because the social media app login page disallows PlayerRP to save password on their own app...: 
+													==>PlayerRP's app has no control: either the username/password + any cookies at that time + ...
+												==>But PlayerRP's app can save:
+													==>1) user's access-token / JWT etc. (because user sends in the tokens from PlayerAA)
+															==>But generally speaking: PlayerRP can use the token:
+																1) Validate with PlayerAA: this is what OAuth2 means
+																2) But cannot: use token to retrieve the user's account data? depends:
+																	1) Depends PlayerRP's integration scopes with the app in social media/provider
+																	2) 
+													==>2) Also some of the validation response data from Github
+									2) ...
+							==>Example: Web Application: Web Applications on some servers
+							==>Example: Web Application: from vendors:
+														 ==>Google APIs (various APIs as resources providers)
+														 ==>...
+							==>...
+					==>Scope...
+		
+		==>Scope 2: 
+		
+		==>Example 1: Google Case Study 1:
+					  ==>PlayerR: Some Web Application: Spring Boot app
+					  ==>PlayerAA: Google API Console:
+					  				https://console.developers.google.com/apis/dashboard?project=myfirebase-93401
+					  				==>3 Ways: API Keys / OAuth2 / Service Accounts
+					  				==>Can serve its own Google APIs as resource providers
+					  				==>Possibly can serve many other external integrated resource providers as integrated apps as well
+					  				==>Enabled Scopes:
+					  				==>
+					  ==>PlayerRP: Some Google APIs: Google Book Search APIs: Provide resources like Google Books... / Volumes / ...
+		
+		==>Example 2: Twitter:
+					  https://twitter.com/settings/connected_apps
+					  https://help.twitter.com/en/managing-your-account/connect-or-revoke-access-to-third-party-apps
+
+
+		==>Social Media / PlayerAA: Login:
+			==>Point 1: Currently: PlayerAA (such as Social Media login): enable more integrated app's functions than just one-time token and authentication function
+			==>Point 2: PlayerAA: Before you enter your username and password, check that the page is secure by verifying the URL starts with https://twitter.com
+						1) Verify the login url it directs: make sure it is the authentic social media / PlayerAA's real OAuth login url: mostly it starts: https://www.company.com: should be ok
+							==>Google APIs
+							==>Facebook
+							==>Twitter:
+								https://twitter.com/...
+		   					    https://help.twitter.com/en/managing-your-account/connect-or-revoke-access-to-third-party-apps
+							==>Github
+							==>...							
+						2) If unsure: you can have one option:
+							==>Directly navigate to the social media / PlayerAA's login page to login
+							==>If the integrated app is using real OAuth integration, the above direct login will automatically enable the PlayerRP app's login:
+								==>Example: If you are unsure about whether a login page for a third-party app is using OAuth, go directly to twitter.com and enter your credentials there, and then navigate back to the app. If the app is using OAuth, the app should not require you to enter your username and password again. 
+								==>Not sure why from OAuth2 logic: TBD
+			==>Point 3: So the user should take serious evaluations to these displayed permissions
+						==>If you don't agree with these permissions, do not use the PlayerAA login: instead you can create a registration user account on this app
+						Example 1: Github: https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/authorizing-oauth-apps
+							When an OAuth App wants to identify you by your GitHub account, you'll see a page with the app's developer contact information and a list of the specific data that's being requested.
+			==>Point 4: You can review and revoke the "connected apps (permissions)" and "sessions":
+						==>Google APIs
+						==>Facebook
+						==>Twitter:
+							https://twitter.com/settings/connected_apps
+	   					    https://help.twitter.com/en/managing-your-account/connect-or-revoke-access-to-third-party-apps
+						==>Github
+							https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/authorizing-oauth-apps
+							https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/reviewing-your-authorized-integrations
+							https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/about-oauth-app-access-restrictions
+						==>...
+
+		

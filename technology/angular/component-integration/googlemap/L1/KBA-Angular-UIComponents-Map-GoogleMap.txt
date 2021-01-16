@@ -1,0 +1,11 @@
+
+#Angular UI Components - Map - GoogleMap: KBA (practical-guide-keys) Guide
+
+#Goals:
+1. 
+
+#Procedure:
+
+##To Add Purely Google Maps API
+
+1. 

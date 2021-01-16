@@ -1,0 +1,40 @@
+
+#Web - Sessions and Caches: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Web Sessions and Caches: Server Side
+
+1. Java Applications:
+	==>HTTP Request/Response headers: Cache Control / Cookies / ...
+	==>Java Sessions
+	==>JSP Scopes: Application/Session/Page/Request
+		==>Cookies
+		==>Hidden fields
+		==>URL Rewriting: http://tutorialspoint.com/file.htm;sessionid=12345
+		==>Session
+	==>Spring Framework Scopes: Beans: GlobalSession/Session/Request/Prototype/Singleton
+	==>Java Caches: HashMap / Spring Cache / 3rd Party Cache Providers / Cloud-Cache / Cache-Server / ConfigurationManagement
+2. 
+
+##To Enable Web Sessions and Caches: Client Side
+
+1. Client Browser: SessionStorage:
+	https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
+	==>Open Window/tab: create a SessionStorage: host whatever page(s) are opened into this window/tab via Page Session (with page data/object)
+	==>(Page Session) Data: stored in sessionStorage is specific to the protocol of the page: http and https: different
+	==>(Page Session) Data: survives over page reloads and restores
+	==>(Page Session) Data: 2 bytes / char + integer keys are automatically converted to strings
+	==>New tab: new page session: with top-level browsing context + That page session is valid only for that particular tab
+		==>Multiple tabs/windows with the same URL: creates sessionStorage for each
+	
+##To Enable Web Sessions and Caches: Mid-Tier/Layer Side
+
+1. Apache Kafka
+
+2. Config Server: 
+
+3. 
+

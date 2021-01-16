@@ -1,0 +1,50 @@
+
+#==============================================================
+Angular: Coding Dilemmas:
+
+	==>If you know it is pronounced as:
+		"ai" as one of the 2 options then you know it can be 1 "l"
+		"e" as only option then you know it is 2 "m"
+		==>It is all about long or short vowel's pronunciation
+		
+##Dilemma 1: Brain: blanks
+	==>When starting writing code from scratch without templates or some guides
+	Solutions:
+		==>Enable more POCs
+
+##Dilemma 2: Try to write common code: not working
+	==>Example 1: Local / mock data retrieval
+				  ==>Root Cause 1: Configurations: not enabled or configured
+				  				   tsconfig,json
+				  ==>Root Cause 2: Angular versions
+	==>Example 2: HttpClient calls
+				  ==>Root Cause 1: Unsure yet: TBD
+				  ==>Root Cause 2: Angular versions
+	==>Example 3: Some common expressions
+				  ==>Root Cause 1: unfamiliar
+				  ==>Root Cause 2: Overloaded API versions: such as: HttpClient get: have 10+ overloaded versions
+				  	
+	Solutions:
+		==>Enable more POCs
+		==>Enable more code snippets from others' coding practices and Angular APIs
+
+##Dilemma 3: Try to write some common structures: not working
+
+	Solutions:
+		==>Enable more POCs
+
+
+##Dilemma 9: Angular Versions and APIs: incompatible
+
+	Solutions:
+		==>Know more about Angular APIs and source code
+
+#==============================================================
+
+
+#=============================================================='
+
+#==============================================================
+
+
+#==============================================================

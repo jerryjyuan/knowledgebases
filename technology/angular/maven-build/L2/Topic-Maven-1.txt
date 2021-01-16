@@ -1,0 +1,113 @@
+
+# http://maven.apache.org/
+
+# Properties:
+	http://maven.apache.org/examples/injecting-properties-via-settings.html
+
+# Plugins API:
+	http://maven.apache.org/guides/plugin/guide-java-plugin-development.html
+	http://maven.apache.org/developers/mojo-api-specification.html
+	https://maven.apache.org/ref/3.6.3/maven-plugin-api/apidocs/index.html
+	http://maven.apache.org/guides/mini/guide-configuring-plugins.html
+	
+# Plugins:
+	http://maven.apache.org/plugins/index.html
+	==>Including maven itself built-in goals/plugins
+	
+## Build: Core
+
+## Build: Packaging
+	Packaging:
+		source
+			http://maven.apache.org/plugins/maven-source-plugin/
+			1) Function 1: mainly handle source files (src/main/java, src/test/java, ...) parts
+			2) Function 2: but can manipulate contents of many kinds of files: due to its special functions
+		resources
+			http://maven.apache.org/plugins/maven-resources-plugin/
+			1) Function 1: mainly handle resources (src/main/resources, src/test/resources, ...) parts
+			2) Function 2: but can manipulate contents of many kinds of files: due to its special functions
+			==>Can do 2 files: filtered and non-filtered: http://maven.apache.org/plugins/maven-resources-plugin/examples/filter.html
+			==>Maybe good: for Angular integrations
+		dependency
+			http://maven.apache.org/plugins/maven-dependency-plugin/
+			1) Function 1: mainly handle dependency (jars, libs, ...) parts
+			2) Function 2: but can manipulate contents of many kinds of files: due to its special functions
+						   ==>Example: copy-dependencies: is just very simple function it has
+			
+	Releasing:
+		Assemble: default + customized capabilities
+			http://maven.apache.org/plugins/maven-assembly-plugin/
+			1) Function 1: Mostly do the "packaging" deliverable
+			2) Function 2: limited: manipulate contents of files
+		Release: release: default + customized capabilities
+			http://maven.apache.org/maven-release/maven-release-plugin/
+			1) Function 1: Release a "packaging" deliverable
+			2) Function 2: manipulate contents of all kinds of files: because it is in the final stage of the build cycle: releasing
+		Shade: add a Uber style
+			http://maven.apache.org/plugins/maven-shade-plugin/
+			1) Function 1: Uber jar
+			2) Function 2: manipulate contents of all kinds of files: because it is in the final stage of the build cycle: releasing
+
+## Build: Tools
+
+## Reporting:
+
+## Vendors/Misc:
+
+## Plugins: Summaries:
+	==>Almost all Maven goals are plugins
+	==>Concepts: phase/goals/executions+configurations+...(Maven Plugins APIs)
+	==>Prefix
+	==>Core of Maven phases/runs: built-in + defaultValues: which is why all of the structures design (by default)
+	==>However, all of these can be customized via all of the above plugins (including IDE's plugins, etc. - IDE has maven plugin support)
+	==>Multiple plugins can do the same or similar functions
+	==>Different plugins could share the same or similar parameter names, etc. - because they are from common plugin APIs like Parameter class
+		Most of the plugins' versions should start as 3.x if with Maven 3.x
+	==>Plugins can be bundled to one or more phases of the lifecycle phases - so it is very flexible depending upon the needs
+		http://maven.apache.org/ref/3.6.3/maven-core/lifecycles.html
+		(All the default plugins/goals are bundled to some specific phases by default)
+			==>But you can still use one of them to do customizations:
+			   Example 1: use default one "maven-dependency-plugin" to do: 1) different usage 2) bundle to different phase (prepare-package)
+			   			  ==>But the existing default one still functions and valid even added with a customized one
+			   			  Example: http://maven.apache.org/plugins/maven-dependency-plugin/copy-dependencies-mojo.html
+		(Complexities: in terms of later-on-phases invoke which previous-phases: refer to that phase's document):
+			1) 3 lifecycles
+			2) Within each lifecyle: later-on phases execute all its previous phases by default
+	==>Plugin Parts: based on Plugins APIs:
+		==>Part 1: Plugin's global parts: groupId, artifactId, version, packaging, dependencies, ...,
+										  + main APIs: execution, configuration, ...
+										  	(Some APIs: setExecutions(), ...)
+										  	(Some APIs: Phase/Executions: setConfiguration(), ...)
+										  ==>Most global parts are in Plugin class: org.apache.maven.model.Plugin
+										  https://maven.apache.org/ref/3.6.3/maven-plugin-api/apidocs/index.html
+		==>Part 2: Plugin's goals: through execution APIs and sections
+		==>Part 3: Plugin's parameters: ...
+	==>Usage 1: use default ones mainly: POC etc or simple projects
+	==>Usage 2: use additions of some needed plugins: for medium-sized applications
+	==>Usage 3: To do customizations: 1) Only when needed 2) Very complicated/large-sized projects
+	==>Usage 4: To create your own plugins: Mostly for framework development - may not be needed for application developers
+
+## Plugins: Usage Procedures:
+	==>1) Define Categories:
+			==>Use Case 1: use different locations: resources, etc. ==>Use resources plugin
+			==>Use Case 2: use non-default names: these are mostly coming from "parameters": Parameter class should have it
+	==>2) When Needed: Refer to Maven Documents: see above plugin reference documents
+			==>Pro 1: accuracy: especially parameters' names
+			==>Pro 2: extended functions: beyond most core parameters or parts
+			==>Con 1: all of the parameters: may not be displayed or shown as associations of which APIs/goals/global-parts
+											 or: some parameters can be used within multiple APIs/goals/global-parts
+					  ==>Method 1: All parameters: mostly under <configuration> section
+					  				http://maven.apache.org/guides/mini/guide-configuring-plugins.html
+					  ==>Method 2: Check the above plugin's home page - which contains all resources plus main examples
+					  ==>Method 3: Check Plugin Common APIs doc: refer to their getter and setter: it is related to its associated parameters
+					  				https://maven.apache.org/ref/3.6.3/maven-plugin-api/apidocs/index.htm
+	==>3) Use Common Sense Definitions
+			Plugins' common API enabled parts: executions/configuration
+			==>but strongly refer to the above official plugin documents for parameters
+			==>If unfamilar with which plugin to choose, refer to the above 6 common plugins or the plugins document page
+	==>4) ...
+
+##
+
+
+

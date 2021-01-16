@@ -1,0 +1,15 @@
+
+#Web - Browser Developer Tools: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Browsers:
+
+1. Chrome
+	https://dev.to/devpato/javascript-security-1moc
+	
+2. IE/Edge:
+
+3. Firefox

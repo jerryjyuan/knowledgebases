@@ -1,0 +1,269 @@
+
+============================================================
+Google APIs Console:
+
+============================================================
+OAuth2:
+
+	https://developers.google.com/oauthplayground/
+	
+	https://developers.google.com/identity/protocols/oauth2/
+	https://developers.google.com/identity/protocols/oauth2/web-server
+	
+============================================================
+Google Cloud Platform:
+	https://console.cloud.google.com/home/dashboard?project=myfirebase-93401
+		
+	client-id: 605726331431-ju57ins6ng8m8tertlk4i1is4o1s7vi5.apps.googleusercontent.com
+	
+	client-secret: Phd_zx8V70W_0ztBCpitBhsE
+		a JavaScript application does not require a secret, but a web server application does
+
+============================================================
+Google Book APIs:
+
+https://developers.google.com/books/docs/v1/getting_started
+
+	https://developers.google.com/books
+	https://developers.google.com/books/docs/v1/reference/?apix=true
+	
+Books API
+Google
+
+The Google Books API allows clients to access the Google Books repository.
+
+
+==>Procedures:
+	Create a new project
+	Open/Enable APIs and Services: search/choose: Google Book APIs
+	On this new project page: create credentials
+		==>OAuth2 Client ID
+		
+		https://console.developers.google.com/apis/api/books.googleapis.com/credentials?folder=&organizationId=&project=savvy-factor-301302
+		
+		https://console.developers.google.com/apis/credentials?project=savvy-factor-301302
+		
+			883388552906-6cqf77ehr03nv5blnqq74mdc4iou3p67.apps.googleusercontent.com
+			
+			ZQC_4Yoffs__nFiV-abwV6we
+
+
+	Use this key in your application by passing it with the key=API_KEY parameter.
+	
+		AIzaSyBDfgPowa5HlCO7aL8-5TZRP2sYGIl32jw
+		
+		 Restrict your key to prevent unauthorized use in production.
+		 
+		 
+
+==>Integration:
+	https://developers.google.com/books/docs/v1/using
+
+==>Authorized JavaScript origins
+For use with requests from a browser
+
+==>Authorized redirect URIs 
+For use with requests from a web server
+
+
+==>Using OAuth 2.0 for Web Server Applications:
+	https://developers.google.com/identity/protocols/oauth2/web-server
+	==>PlayerR: both this application + representing-User
+	==>PlayerAA: Google Account / representing-User Account:
+				 + Scopes parameters
+	==>PlayerRP: Google APIs: like: Google Book APIs
+	
+Types: Web Application(s):
+	Type: ClientApp -> (AuthorizationServer) -> ResourcesServer/App
+	Type: ...
+	Type: ...
+	Type: ClientApp (Spring Boot App) -> (AuthorizationServer: Google User Account) -> ResourcesServer/App: Google Book APIs
+	Type: ClientApp (Browser/JS App) -> (AuthorizationServer: Google User Account) -> ResourcesServer/App: Google Book APIs
+	Type: ...
+	
+==>Example: Build a Spring Boot app to access Google Book API:
+
+	==>1) API Console: Add a new/this project to API Console:
+	
+		Create a new project: SpringBootApp
+		Enable APIs for your project
+			Any application that calls Google APIs needs to enable those APIs in the API Console.
+			To enable an API for your project:
+				Open the API Library in the Google API Console.
+				If prompted, select a project, or create a new one.
+				The API Library lists all available APIs, grouped by product family and popularity. If the API you want to enable isn't visible in the list, use search to find it, or click View All in the product family it belongs to.
+				Select the API you want to enable, then click the Enable button.
+				If prompted, enable billing.
+					==>Some Google APIs: maybe free
+				If prompted, read and accept the API's Terms of Service.
+				==>This will enable Google Book APIs to this project: SpringBootApp
+
+		Create authorization credentials
+			Any application that uses OAuth 2.0 to access Google APIs must have authorization credentials 
+			that identify the application to Google's OAuth 2.0 server. 
+			The following steps explain how to create credentials for your project. 
+				Your applications can then use the credentials to access APIs that you have enabled for that project.
+		
+		Open the project, and then: Go to the Credentials page.
+			Click Create credentials > OAuth client ID.
+			Select the Web application application type.
+			Fill in the form and click Create. Applications that use languages and frameworks like PHP, Java, Python, Ruby, and .NET must specify authorized redirect URIs. 
+				The redirect URIs are the endpoints to which the OAuth 2.0 server can send responses.
+			For testing, you can specify URIs that refer to the local machine, such as http://localhost:8080. 
+				With that in mind, please note that all of the examples in this document use http://localhost:8080 as the redirect URI.
+			
+			We recommend that you design your app's auth endpoints so that your application does not expose authorization codes to other resources on the page.
+			
+			After creating your credentials, download the client_secret.json file from the API Console. Securely store the file in a location that only your application can access.
+
+		==>Then: this app: "SpringBootApp": finish its integration with Google API Console as: an app (project) with its client_id and secret
+	
+	==>2) Google APIs:
+			==>Google Book APIs: similar to many other Google APIs
+			
+			1) Call Authorization Requests:
+			
+				==>Call Google Book APIs: must have a token or an API key in the request
+				==>PlayerRP: already integrated with PlayerAA: Google OAuth2
+					==>Private Data:
+						==>Whenever your application requests private user data, it must send an OAuth 2.0 token along with the request.
+						   Your web application first sends a client ID and a client secret to obtain a token. 
+						   When your application needs access to user data, it asks Google for a particular scope of access
+						   https://www.googleapis.com/auth/books
+						   User approves: short-lived access token
+						   Or: refresh tokens
+				==>They are also integrated with API_KEY:
+					==>Public data: no authorization
+					==>The key identifies your project and provides API access, quota, and reports
+					==>This is required if no OAuth2 token added
+					You can restrict the key before using it in production by clicking Restrict key and selecting one of the Restrictions.
+
+				1) Use: https://github.com/googleapis/google-api-java-client#Books_API
+				2) Use: https://www.googleapis.com/auth/books + token(+scope parameters)/API_KEY
+				
+				Scopes:
+					https://developers.google.com/identity/protocols/oauth2/scopes
+							
+			2) SpringBootApp - calls Google Book APIs:
+				https://developers.google.com/books/docs/v1/using
+			
+				https://developers.google.com/books/docs/v1/getting_started?csw=1
+				
+				https://developers.google.com/books/docs/v1/getting_started?csw=1#REST
+				API:
+					https://developers.google.com/books/docs/v1/reference/?apix=true
+					
+				https://www.googleapis.com/apiName/apiVersion/resourcePath?parameters
+				https://www.googleapis.com/books/v1/{collectionName}/resourceID?parameters
+								
+					https://www.googleapis.com/books/v1/volumes
+					https://www.googleapis.com/books/v1/volumes/volumeId
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves/shelf
+					https://www.googleapis.com/books/v1/mylibrary/bookshelves/shelf/volumes
+				
+				https://www.googleapis.com/books/v1/volumes?q=search+terms
+
+				Parameters: Similar or same as: used on the Google Books site
+					https://books.google.com/
+					https://books.google.com/ebooks?id=buc0AAAAMAAJ&dq=holmes&as_brr=4&source=webstore_bookcard
+					
+				GET https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
+				POST https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/clearVolumes?key=yourAPIKey
+
+			3) SpringBootApp: combined and mixed:				
+				The Google APIs client libraries can handle some of the authorization process for you. They are available for a variety of programming languages; check the page with libraries and samples for more details.
+				https://developers.google.com/books/docs/v1/libraries
+				
+				https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-books/v1/1.31.0
+				https://github.com/googleapis/google-api-java-client-services#supported-google-apis
+				https://github.com/googleapis/google-api-java-client#hg%2Fbooks-cmdline-sample
+			
+	==>3) SpringBootApp:
+	
+		==>User Consent Screen: grant permissions/scopes
+		
+		
+		
+============================================================
+Google Cloud Platform:
+
+https://support.google.com/cloud/answer/6158849#zippy=%2Cpublic-and-internal-applications%2Cauthorized-domains%2Cservice-accounts%2Cnative-applications%2Cweb-applications
+
+Setting up OAuth 2.0
+To use OAuth 2.0 in your application, you need an OAuth 2.0 client ID, which your application uses when requesting an OAuth 2.0 access token.
+
+To create an OAuth 2.0 client ID in the console:
+
+Go to the Google Cloud Platform Console.
+From the projects list, select a project or create a new one.
+If the APIs & services page isn't already open, open the console left side menu and select APIs & services.
+On the left, click Credentials.
+Click New Credentials, then select OAuth client ID.
+Note: If you're unsure whether OAuth 2.0 is appropriate for your project, select Help me choose and follow the instructions to pick the right credentials.
+
+Select the appropriate application type for your project and enter any additional information required. Application types are described in more detail in the following sections.
+If this is your first time creating a client ID, you can also configure your consent screen by clicking Consent Screen. (The following procedure explains how to set up the Consent screen.) You won't be prompted to configure the consent screen after you do it the first time.
+Click Create client ID
+To delete a client ID, go to the Credentials page, check the box next to the ID, and then click Delete.
+
+User consent
+Public and internal applications
+A public application allows access to users outside of your organization (@your-organization.com).
+Access can be from consumer accounts, like @gmail.com, or other organizations, like @partner-organization.com.
+Public applications need to go through verification as detailed above.
+An internal application will only allow access to users from your organization (@your-organization.com).
+For more information about setting up organizations and organization access, see the GCP Organizations documentation.
+
+Authorized domains
+To protect you and your users, Google restricts your OAuth 2.0 application to using Authorized Domains. If you have verified the domain with Google, you can use any Top Private Domain as an Authorized Domain.
+
+After you add an Authorized Domain, you can use any of its subdomains or pages, and any other associated country codes.
+
+Add your Authorized Domains before you add your redirect or origin URIs, your homepage URL, your terms of service URL, or your privacy policy URL.
+
+Service accounts, web applications, and native applications
+For information about setting up service accounts, web applications, or device-native applications, see the following topics.
+
+Service accounts
+A service account is used in an application that calls APIs on behalf of an application that does not access user information. This type of application needs to prove its own identity, but it does not need a user to authorize requests.
+
+For example, if your project employs server-to-server interactions such as those between a web application and Google Cloud Storage, then you need a private key and other service account credentials. To generate these credentials, or to view the email address and public keys that you've already generated, do the following:
+
+Open the Google Cloud Platform Console Credentials page.
+If it's not already selected, select the project that you're creating credentials for.
+To set up a new service account, click New credentials and then select Service account key.
+Choose the service account to use for the key.
+Choose whether to download the service account's public/private key as a standard P12 file, or as a JSON file that can be loaded by a Google API client library.
+Your new public/private key pair is generated and downloaded to your machine; it serves as the only copy of this key. You are responsible for storing it securely.
+
+Your project needs the private key when requesting an OAuth 2.0 access token in server-to-server interactions. Google does not keep a copy of this private key, and this screen is the only place to obtain this particular private key. When you click Download private key, the PKCS #12-formatted private key is downloaded to your local machine. As the screen indicates, you must securely store this key yourself.
+
+The name of the downloaded private key is the key's thumbprint. When inspecting the key on your computer, or using the key in your application, you need to provide the password notasecret. Note that while the password for all Google-issued private keys is the same (notasecret), each key is cryptographically unique.
+
+You can generate multiple public-private key pairs for a single service account. This makes it easier to update credentials or roll them over without application downtime. However, you cannot delete a key pair if it is the only one created for that service account.
+
+Use the email address when granting the service account access to supported Google APIs.
+
+For more details, see the OAuth 2.0 Service Accounts documentation.
+
+Note: When you use a service account, you are subject to the Terms of Service for each product, both as an end user and as a developer.
+
+Web applications
+A web application is accessed by web browsers over a network.
+
+Applications that use client-side JavaScript to access Google APIs must specify authorized JavaScript origins. The origins identify the domains from which your application can send API requests.
+
+Applications that access Google APIs from a server (often using languages and frameworks like Node.js, Java, .NET, and Python) must specify authorized redirect URIs. The redirect URIs are the endpoints of your application server to which the OAuth 2.0 server can send responses.
+Native applications
+If your application is going to be installed on a device or computer (such as a system running Android, iOS, Universal Windows Platform, Chrome, or any desktop OS), you can use Google's OAuth 2.0 Mobile and desktop apps flow. If your application runs on devices with limited input capabilities, such as smart TVs, you can use Google’s OAuth 2.0 TV and limited-input device flow.
+
+Android
+iOS
+Universal Windows Platform (UWP)
+Chrome apps
+TVs & limited-input devices
+Desktop apps
+
+============================================================
+

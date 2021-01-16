@@ -1,0 +1,20 @@
+
+#Angular API - Input - Output: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Input:
+
+1. Add @Input:
+	==>Usage 1: @Input() abc: Parent -> Child: It is from HTML template's Parent component HTML's syntax: [abc]
+	==>Usage 2: @Input('xyz') abc: Parent -> Child: It is from HTML template's Parent component HTML's syntax: [xyz]
+	==>Usage 3: Child component can directly assign its own value/data inside the child component class file
+	==>Usage 4: Parent component can assign its value/data via @ViewChild(Child) child: Child; this.child.abc = <value> 
+	
+##To Enable Output:
+
+1. Add @Output:
+	==>
+

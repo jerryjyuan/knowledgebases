@@ -1,0 +1,23 @@
+
+#JavaScript - Web Requests: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##
+
+1. Web Requests: XHR
+	- 
+	- XHR: GET/POST/...
+	
+2. Web Requests: jQuery - ajax:
+	- Wrapper on XHR
+
+3. Web Requests: ajax:
+	- NET/C#/ASP/...: ajax
+
+4. Web Requests: Angular - HttpClient
+	- ajax calls
+
+5. 

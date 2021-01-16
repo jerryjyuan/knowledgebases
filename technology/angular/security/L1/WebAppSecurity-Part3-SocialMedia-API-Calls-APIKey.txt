@@ -1,0 +1,21 @@
+
+============================================================
+WebAppSecurity-Part3: SocialMedia:	API-Calls:	APIKey:
+
+==>API_KEY:
+	==>It was a older concept with Social Media integration
+	==>But it is still the current concept with Social Media integration: such as: Social Media API Calls
+
+==>Concepts:
+	==>Social Media Integration:
+		1) Type 1: Social Media Login/UserAccessData integration
+		2) Type 2: Social Media API Call Integration
+		3) Type 3: ...
+	==>Vendor API Call Integration:
+		1) Type 1: Social Media API Call Integration
+		2) Type 2: Any other Online Vendor API Call Integration:
+				   ==>Example 1: New York Times Catalog API Integration: News / Top Stories / ...
+
+============================================================
+
+============================================================

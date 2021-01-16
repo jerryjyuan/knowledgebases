@@ -1,0 +1,77 @@
+
+============================================================
+WebAppSecurity-Part3: SocialMedia:	API-Calls:	APIKey:
+
+==>API_KEY:
+	==>It was a older concept with Social Media integration
+	==>But it is still the current concept with Social Media integration: such as: Social Media API Calls
+
+==>Concepts:
+	==>Social Media Integration:
+		1) Type 1: Social Media Account Login/UserAccessData integration:
+					==>Mostly use: OAuth2
+		2) Type 2: Social Media API Call Integration
+					==>Mostly use: API_KEY (and/or OAuth2)
+		3) Type 3: ...
+	==>Vendor API Call Integration:
+		1) Type 1: Social Media API Call Integration
+		2) Type 2: Any other Online Vendor API Call Integration:
+				   ==>Example 1: New York Times Catalog API Integration: News / Top Stories / ...
+
+============================================================
+
+============================================================
+Other Social Media API Call - Integration: Procedures: Facebook
+
+==>Login to API Console
+
+Following steps to create Facebook APP:
+	Log in to your Facebook account.
+	Go to https://developers.facebook.com/ click on My Apps and press Create App.
+	Set the Display Name of your application.
+	Enter the Contact Email.
+	Navigate to Facebook Login and press the Set up button.
+	Select Web from the displayed platforms.
+
+==>Dashboard:
+
+============================================================
+Other Social Media API Call - Integration: Procedures: Twitter
+
+==>Login to API Console
+	
+	https://developer.twitter.com/en/portal/register/welcome
+	
+	Twitter OAuth2 and Authorization and integration.
+
+	The integration will enable applications to login and authorize Twitter resources and shared data from the users with the applications. The application can also use Twitter APIs.
+
+==>Dashboard:
+
+
+	https://api.twitter.com/oauth/authenticate?oauth_token=DYw-4AAAAAAAa8cGAAABdumvRu4
+	
+	https://twitter.com/settings/connected_apps
+	https://help.twitter.com/en/managing-your-account/connect-or-revoke-access-to-third-party-apps
+	   					    
+============================================================
+Other Social Media API Call - Integration: Procedures: Github
+
+==>Login to API Console
+
+	Settings ==>Developer settings
+
+==>Dashboard:
+
+	https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/authorizing-oauth-apps
+	https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/reviewing-your-authorized-integrations
+	https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/about-oauth-app-access-restrictions
+
+	https://github.com/login/oauth/authorize?
+		client_id=d7251d40ac9298bdd9fe&
+		redirect_uri=https%3A%2F%2Fdev.to%2Fusers%2Fauth%2Fgithub%2Fcallback&
+		response_type=code&
+		scope=user%3Aemail&
+		state=c362a04e7a3d2057629d37c4d2eaf5cb7c8de19c3c8415ce
+								
+============================================================

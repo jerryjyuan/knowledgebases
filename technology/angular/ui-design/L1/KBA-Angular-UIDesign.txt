@@ -1,0 +1,78 @@
+
+#Angular UIDesign: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##UI Design:
+
+1. UI Design:
+	Examples:
+		https://dev.to/nghiemthu/build-a-modern-website-from-scratch-full-tutorial-1-hour-free-1io
+		
+	==>Level 0a: Starter: Design + Images + ...
+				 ==>Starter: can be fixed templates, or customized ones for specific UI apps, or dynamic enabled ones
+				 1) Fixed templates: some website companies have fixed templates/starters
+				 2) Starter include:
+				 	==>Figma design: has the sections and also related images scenarios
+				 	==>Figma design: also has primary colors, etc. (from site look and feel design)
+				 	images/favicons/avatars: many images should be pre-enabled before working on coding: this saves time and interruptions when coding
+				 	core html templates/fixed-sections
+	==>Level 0b: Page-Level + Responsiveness + ...
+	Work on section by section:
+		1) Method 1: Starting from HTML5 tags: such as: <section></section>
+		2) Method 2: Complete one section: comment it out, then work on next section
+		3) Method 3: Inside each section: Work on text/image/etc first =>Create CSS class names for each section/div/element, then create CSS classes for these elements
+					 Each field should have its own CSS class name (can utilize global var css names for common or primary values)
+					 CSS file should have global / common CSS var for global values/css variables
+		4) Method 4: For elements/fields, group related fields into: div div-header, div-details, etc.
+		5) Method 5: When adding CSS classes, incorporate responsive design into css: utilize @media for various viewports/widths: one 1fr, two 1fr, three 1fr, etc.
+					 display: grid
+					 grid-fixed-columns: repeat(3, 1fr);
+		6) Method 6: After testing the page, check cross-browser compatibility with other browsers
+	==>Level 1: Section
+	==>Level 2: Container/box/sub-section:
+					==>Width: can reduce using width: xxxpx instead of 100%
+	==>Level 3: Data elements/Fields
+	==>Level 4: Added Effects/Features: Animations, Transitions, etc
+				Animations:
+					Navigation With Transition
+						hover: before/after
+						fill: ...
+						transition: fill... 
+					...
+					gradient...
+					border-radius + box-shadow + ...
+					<script> window.onscroll= ()=> {}</script>
+				Added Data Complexities: Date input Safari, Default Date input value
+				Data Validations and Constraints
+	VSC: button.xxx + right pane display (maybe another display window aligned up) + autocomplete/code-assist
+	Google icons w3schools
+		https://www.w3schools.com/icons/google_icons_intro.asp
+	Google Fonts:	
+		https://fonts.google.com/
+		==>Can choose some fonts for the pages and body: font-family: poppins (search: pop/play)
+
+2. UI Design Tool: Figma: (Jackma/Pigma/...: ma: MA/MIT/Harvard/... - not a horse/mother/... - not a deer either)
+	https://www.figma.com/
+	Starter:
+		Free
+		for up to 2 editors and 3 projects
+		3 projects:
+			FundRaiserApp: 1) General/Universal fund raiser needs 2) Public scenarios: Hayward stadium 3) Personal scenarios: Book sales fund raisers, etc.
+		30-day version history
+		Up to 2 editors
+		Unlimited cloud storage
+	Drag sketch files and can be converted into Figma
+	
+
+3. DevChallenges:
+	https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv
+	jerryjyuan
+	https://dev.to
+	(jerryjyuanicloud)
+
+
+5. 
+

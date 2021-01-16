@@ -1,0 +1,28 @@
+
+#Angular UIDesign - MD: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Search MD Components - Selectors / APIs / Examples:
+
+1. Selectors:
+2. APIs:
+	==>Primary document/APIs:	These can be done via the same URL: API tab
+	==>Secondary document/APIs: Can go to Github Source Code and doc
+	==>Some smaller APIs / components: are inside some primary components or main menu items/category
+3. Usage:
+	==>
+	==>Usage 2: POC/Prototyping
+		https://blog.angular.io/prototyping-with-angular-a83fbf0533ef
+		Use: Improve search experience in Greentea, Google’s internal CRM
+		Use: Material autocomplete component to read from the database with AngularFire
+	==>
+	==>Angular V7:
+		https://blog.angular.io/version-7-of-angular-cli-prompts-virtual-scroll-drag-and-drop-and-more-c594e22e7b8c
+		Version 7 of Angular — CLI Prompts, Virtual Scroll, Drag and Drop and more
+
+4. Examples:
+	==>Google Analytics: https://analytics.google.com/analytics/web/#/report-home/a54516992w87479473p92320289
+	==>

@@ -1,0 +1,100 @@
+
+#Angular - Deployment: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Deployment:
+
+1. Build: Compiler and Bundler: ngc (compiler/collector/metadata-expression/.metadata.ts/.d.ts/arrow-functions/lambda-functions/public(decorators/data-bind-variables))
+	ng build (npm run build / npm build / ng build --watch): https://angular.io/guide/aot-compiler
+		Angular Ivy Compiler, ngtsc, ngcc, ngc, aot, jit, tsc https://angular.io/guide/angular-compiler-options
+		Ivy's compiler - consists of ngtsc and ngcc
+		ngc - AOT compiler
+		ngtsc - is a wrapper around tsc
+		ngcc - is compatbility compiler to compile pre-Ivy libs
+		tsc - is a typescript compiler
+		Referred this link, to understand architecture of Ivy https://github.com/angular/angular/blob/master/packages/compiler/design/architecture.md
+		This link for AOT compiler, https://github.com/angular/angular/blob/5b31a0a2942c50059cac4c7ccb92047a50473347/aio/content/guide/aot-compiler.md
+			Does the AOT compiler and ngtsc(as part of Ivy) both performs this - "converts your Angular HTML and TypeScript code into efficient JavaScript code" ?
+			When Ivy + AOT compilation, what are the functionalities of ngtsc and AOT compiler(ngc)?		
+		Ahead-of-Time (AOT), which compiles your app and libraries at build time. This is the default since Angular 9
+		There's no need to download the Angular compiler if the app is already compiled. The compiler is roughly half of Angular itself
+		The Angular compiler extracts the metadata once and generates a factory for TypicalComponent
+	Babel is a JavaScript compiler: https://babeljs.io/
+	Webpack: https://webpack.github.io/
+	JIT: the original TS code downloaded to client browser + Angular compiler downloaded (half-size): client browser does the compiling/transpiling into JS code and run it
+	AOT: client downloaded the JS code directly and run it (without the need of downloading a compiler)
+2. Build: @Angular/Bazel: https://blog.angular.io/try-bazels-opt-in-preview-in-angular-cli-b9430bd00e82
+	It is faster, incremental builds using Bazel
+	The introduction of the Angular Ivy compiler enables new ways to use Bazel in a faster and more efficient manner
+	Bazel builder for Angular CLI has been deprecated in version 10
+	https://github.com/angular/angular/blob/master/packages/bazel/src/schematics/README.md
+	https://github.com/bazelbuild/bazel-buildfarm: remote cache and execution systems
+	https://blog.angular.io/introducing-cli-builders-d012d4489f1b: CLI Builder
+	Testing: Jest / Cypress
+	https://github.com/bazelbuild/rules_nodejs/tree/master/examples/angular_bazel_architect: Angular Bazel Architect
+	both production and development the Angular CLI will use Ahead-of-Time compilation
+	https://blog.angular.io/try-bazels-opt-in-preview-in-angular-cli-b9430bd00e82
+	npm install -g @angular/bazel
+	ng new my-app --collection=@angular/bazel
+	ng build produces a production build by default, so no need to specify the --prod flag
+	The CLI will output the production assets under the directory dist/bin/src/prodapp
+	The first production build may take a little longer than expected, until Bazel populates its cache
+3. Build: Nx and Angular CLI
+	https://nx.dev/latest/angular/getting-started/nx-and-cli
+4. Dev Servers:
+	Lite Server: https://github.com/johnpapa/lite-server
+	Automatic deployment with the CLI: ng deploy	https://angular.io/guide/deployment
+	1) ng add @angular/fire ng deploy
+	2) Github Pages: ng build --prod --output-path docs --base-href /<github-repo-project_name>/
+	3) Server Configurations:
+		Rewrite Rules:  configured to return index.html: https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/
+			==>But clicking a link in an email, entering it in the browser address bar, or merely refreshing the browser while on the hero detail page — all of these actions are handled by the browser itself, outside the running application. The browser makes a direct request to the server for that URL, bypassing the router.
+5. Angular Testing
+	Angular Schematics: Unit Testing
+	https://blog.angular.io/angular-schematics-unit-testing-3a0a9aaab186
+	ESLint
+	https://eslint.org/docs/user-guide/getting-started
+	https://github.com/eslint/espree
+	https://github.com/typescript-eslint/tslint-to-eslint-config
+	https://github.com/typescript-eslint/typescript-eslint
+	https://github.com/typescript-eslint/tslint-to-eslint-config/blob/main/docs/Development.md
+	
+6. Angular Bug Report:
+	https://github.com/angular/angular/issues/new?template=1-bug-report.md
+	
+7. Platform: Hosted Deployment:
+	Firebase Hosting to deploy the prototype to a publicly accessible URL
+		https://firebase.google.com/docs/hosting/
+		hosted prototype is that you can let your users interact with the prototype on their own while you observe their screen
+	More Hosting Platforms:
+		Top 5 free HOSTING sites with Instructions
+		Firebase / Netlify / Render / Surge / Vercel
+		https://blogs.devchallenges.io/posts/tJ26U8MhZTPgBSRSwpqr
+	Github Pages: https://pages.github.com/		https://www.npmjs.com/package/angular-cli-ghpages
+		https://dev.to/nghiemthu/build-a-modern-website-from-scratch-full-tutorial-1-hour-free-1io
+		=>Create local repo + commit the site files + push remote to Github repo + Github/Repo/Settings tab/Github Pages/save/master + Github shows the pages (in 10 min)
+		https://guides.github.com/features/pages
+		Deployment: fund-raiser-app: ==>not displayed (make a copy of docs/index.html and name it docs/404.html): https://<user_name>.github.io/<project_name>/
+		==>Server Configurations: Github Pages: you can't directly configure the GitHub Pages server, but you can add a 404 page. Copy index.html into 404.html. It will still be served as the 404 response, but the browser will process that page and load the app properly. It's also a good idea to serve from docs/ on master and to create a .nojekyll file.
+		https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm
+		https://github.com/isaacs/github/issues/408
+		https://www.bennadel.com/blog/3181-including-node-modules-and-vendors-folders-in-your-github-pages-site.htm
+		https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch
+	Plunker
+		https://plnkr.co/
+	IDE: VSC + Live Server
+		https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+		https://github.com/ritwickdey/vscode-live-server
+	Local Web Servers:
+		ng build: 27MB
+		ng build --prod: tree-shaking/optimization: 3.82MB
+		Apache: XAMPP: localhost:80:	Deployment: fund-raiser-app: ==>not displayed
+		Apache: WampServer(has some env-packages issues - PHP not up): localhost:81:	Deployment: fund-raiser-app: ==>not displayed
+		==>Why does Apache not working in bringing up Angular app like "ng serve"?
+		==>1) Change index.html into: <base href="./">: then works ==>Why? because <base href="/"> means: localhost/index.html ==>root-path + index.html
+		==>2) ng build --prod --base-href ./
+		==>3) "baseHref": "./"
+		==>4) <script>document.write('');</script>???

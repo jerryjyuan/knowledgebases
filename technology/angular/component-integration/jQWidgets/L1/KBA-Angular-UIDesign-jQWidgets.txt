@@ -1,0 +1,16 @@
+
+#Angular UIDesign - jQWidgets: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##jQWidgets:
+
+1. KnowledgeBase
+	https://www.jqwidgets.com/angular/?gclid=CjwKCAiAt9z-BRBCEiwA_bWv-MU6yFWHt6-bUrKsF75YZMmKkyTlIuop3-S1ZBUL7XiCrPg-TqYT6RoCawkQAvD_BwE
+
+2. How to Use it
+
+
+

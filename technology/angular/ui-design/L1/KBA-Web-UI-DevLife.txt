@@ -1,0 +1,60 @@
+
+#Web - UI DevLife: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##DevLife Scenario 1: Devchallenges.io:
+	Resources:
+		https://dev.to/nghiemthu/build-a-modern-website-from-scratch-full-tutorial-1-hour-free-1io
+	Sites:
+		https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv (jerryjyuan)
+		https://dev.to (jerryjyuanicloud)
+		https://www.figma.com/
+
+##DevLife Scenario 2: Codepen.io:
+
+	https://codepen.io/jerryjyuan/pen/BaLxpRy
+	
+##DevLife Scenario 3: :
+
+	https://stackblitz.com/@jerryjyuangithub
+
+
+##DevLife - Previous Endeavors:
+1. World-Top-Level-Education/Technology Background:
+	Jerry holds:
+		No.1 Middle School rank
+		No.3 High School rank (No.1 High School Graduation Exam rank)
+		a bachelor's degree from NJU (Free admission to NJU)
+		3 master's degrees from NJU, USU, UTA 
+		3 doctoral program work toward a PhD at USU, UTA, GCU
+	25-year education
+	17-year IT and 12-year Java
+2. 2018: Online Coding Tests - Expert
+3. 2020: Stay Updated - IT Java current hot tech top 3: SpringBoot/Angular/AWS
+4. 2021: Stay Ahead - IT Tech Self-Work Types: any?
+
+##DevLife - Laptop WebServer Tests:
+
+1. Angular: ng serve
+
+2. Apache: XAMPP: http://localhost:80/
+	C:\xampp\htdocs
+	http://localhost/devchallengesio/fullstack/image-uploader/dragdrop1.html
+
+	FullStack:
+		Frontend
+		Backend:
+			==>XAMPP: PHP
+			==>NodeJs?
+			==>SpringBoot Standalone Jar
+
+3. Apache: WampServer: Not in use
+
+##DevLife - Resources:
+
+Icons: 
+	https://www.w3schools.com/icons/google_icons_intro.asp
+Fonts:

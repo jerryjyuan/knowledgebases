@@ -1,0 +1,3251 @@
+
+============================================================
+WebAppSecurity-Part3: SocialMedia:	API-Calls:	APIKey:
+
+==>API_KEY:
+	==>It was a older concept with Social Media integration
+	==>But it is still the current concept with Social Media integration: such as: Social Media API Calls
+
+==>Concepts:
+	==>Social Media Integration:
+		1) Type 1: Social Media Account Login/UserAccessData integration:
+					==>Mostly use: OAuth2
+		2) Type 2: Social Media API Call Integration
+					==>Mostly use: API_KEY (and/or OAuth2)
+		3) Type 3: ...
+	==>Vendor API Call Integration:
+		1) Type 1: Social Media API Call Integration
+		2) Type 2: Any other Online Vendor API Call Integration:
+				   ==>Example 1: New York Times Catalog API Integration: News / Top Stories / ...
+
+============================================================
+Various Online Vendor API Call - Integration:
+==>Example 1: New York Times Catalog API Integration: News / Top Stories / ...
+
+https://developer.nytimes.com/
+	jerryjyuanusa@gmail.com/nrml (API key created)
+
+https://api.nytimes.com/svc/topstories/v2/{section}.json?api-key=<API_KEY>
+
+https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=yourkey
+https://api.nytimes.com/svc/topstories/v2/home.json?api-key=yourkey
+https://api.nytimes.com/svc/topstories/v2/science.json?api-key=yourkey
+https://api.nytimes.com/svc/topstories/v2/us.json?api-key=yourkey
+https://api.nytimes.com/svc/topstories/v2/world.json?api-key=yourkey
+
+https://api.nytimes.com/svc/topstories/v2/world.json?api-key=i7JyMmts8acZn29AfGiytrzxEHE8yxZZ
+
+curl --get ...
+
+Method	Endpoint	Description
+GET	/{section}.json	
+The Top Stories API returns an array of articles currently on the specified section.
+
+https://developer.nytimes.com/docs/top-stories-product/1/types/Article
+
+NYTimesTopStories
+APP_ID: 8595c1e3-fb3a-426a-903a-fc390e977c47
+API_KEY: i7JyMmts8acZn29AfGiytrzxEHE8yxZZ
+secret:	ors9TRlCx1vCvaGG
+
+Response Types
+200: 
+An array of articles.
+
+Body
+application/json
+object
+
+status	
+string
+
+copyright	
+string
+
+section	
+string
+
+last_updated	
+string
+
+num_results	
+integer
+
+results	
+array
+
+401: 
+Unauthorized request. Make sure api-key is set.
+
+429: 
+Too many requests. You reached your per minute or per day rate limit.
+
+Authentication Requirements
+API Key Authentication
+
+Key location: query
+Parameter name: api-key
+
+============================================================
+
+{
+   "status":"OK",
+   "copyright":"Copyright (c) 2021 The New York Times Company. All Rights Reserved.",
+   "section":"World News",
+   "last_updated":"2021-01-12T19:40:22-05:00",
+   "num_results":38,
+   "results":[
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"ΓÇÿI Could Just VanishΓÇÖ: In Kabul, Pocket Notes to Prevent Anonymous Death",
+         "abstract":"As violence engulfs them, some Afghans carry notes with their names, blood types and relativesΓÇÖ phone numbers in case they are killed or severely wounded.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/afghanistan-attacks-pocket-notes.html",
+         "uri":"nyt://article/4922361a-cd8f-5d4a-820a-2b83c1aa411f",
+         "byline":"By David Zucchino and Fatima Faizi",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:52:38-05:00",
+         "created_date":"2021-01-12T10:17:09-05:00",
+         "published_date":"2021-01-12T10:17:09-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Terrorism",
+            "Civilian Casualties",
+            "Afghanistan War (2001- )",
+            "Targeted Killings"
+         ],
+         "org_facet":[
+            "Islamic State in Iraq and Syria (ISIS)"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Afghanistan",
+            "Kabul (Afghanistan)"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12afghannotes-span/12afghannotes-span-superJumbo-v2.jpg",
+               "format":"superJumbo",
+               "height":1024,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"For some young people, the pocket note has become an essential element of daily life ΓÇö an identity marker ensuring that they will not die an anonymous death.",
+               "copyright":"Kiana Hayeri for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12afghannotes-span/12afghannotes-span-thumbStandard-v2.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"For some young people, the pocket note has become an essential element of daily life ΓÇö an identity marker ensuring that they will not die an anonymous death.",
+               "copyright":"Kiana Hayeri for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12afghannotes-span/12afghannotes-span-thumbLarge-v2.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"For some young people, the pocket note has become an essential element of daily life ΓÇö an identity marker ensuring that they will not die an anonymous death.",
+               "copyright":"Kiana Hayeri for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12afghannotes-span/12afghannotes-span-mediumThreeByTwo210-v3.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"For some young people, the pocket note has become an essential element of daily life ΓÇö an identity marker ensuring that they will not die an anonymous death.",
+               "copyright":"Kiana Hayeri for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12afghannotes-span/12afghannotes-span-articleInline-v2.jpg",
+               "format":"Normal",
+               "height":95,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"For some young people, the pocket note has become an essential element of daily life ΓÇö an identity marker ensuring that they will not die an anonymous death.",
+               "copyright":"Kiana Hayeri for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/2LhHcy8"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"Vaccine Skepticism Helped Put Them in Power. Can They Inoculate Italy?",
+         "abstract":"The Five Star MovementΓÇÖs long history of sowing doubt about vaccines may have made ItalyΓÇÖs mass inoculation program that much harder. The irony is not lost on Italians.",
+         "url":"https://www.nytimes.com/2021/01/12/world/europe/five-star-italy-vaccines.html",
+         "uri":"nyt://article/4041b894-c5dd-5845-9428-b8db9c3b43b9",
+         "byline":"By Jason Horowitz",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T17:46:45-05:00",
+         "created_date":"2021-01-12T11:25:04-05:00",
+         "published_date":"2021-01-12T11:25:04-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Politics and Government",
+            "Vaccination and Immunization",
+            "Nursing Homes",
+            "Elder Care",
+            "Epidemics",
+            "Social Media",
+            "Computers and the Internet",
+            "Coronavirus (2019-nCoV)"
+         ],
+         "org_facet":[
+            "Five Star Movement (Italy)"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Italy"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12VIRUS-ITALY-ANTIVAX1/merlin_181698135_8ac826ed-d8c1-4b34-856b-62f6b4570826-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Vaccinations underway at a hospital in Piacenza, Italy, last month.",
+               "copyright":"Alessandro Grassani for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12VIRUS-ITALY-ANTIVAX1/merlin_181698135_8ac826ed-d8c1-4b34-856b-62f6b4570826-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Vaccinations underway at a hospital in Piacenza, Italy, last month.",
+               "copyright":"Alessandro Grassani for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12VIRUS-ITALY-ANTIVAX1/merlin_181698135_8ac826ed-d8c1-4b34-856b-62f6b4570826-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Vaccinations underway at a hospital in Piacenza, Italy, last month.",
+               "copyright":"Alessandro Grassani for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12VIRUS-ITALY-ANTIVAX1/merlin_181698135_8ac826ed-d8c1-4b34-856b-62f6b4570826-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Vaccinations underway at a hospital in Piacenza, Italy, last month.",
+               "copyright":"Alessandro Grassani for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12VIRUS-ITALY-ANTIVAX1/merlin_181698135_8ac826ed-d8c1-4b34-856b-62f6b4570826-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Vaccinations underway at a hospital in Piacenza, Italy, last month.",
+               "copyright":"Alessandro Grassani for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3si8vsu"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"The Korean War Emptied the Town. Those Who Rebuilt It May Now Be Rewarded",
+         "abstract":"Hundreds of destitute families moved to a town bordering North Korea after the war. Six decades later, their dream of owning the land they helped cultivate may finally come true.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/korea-war-farmers-land-border.html",
+         "uri":"nyt://article/954f8f0d-17a2-55be-8dfa-a82f47b26588",
+         "byline":"By Choe Sang-Hun",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T17:46:48-05:00",
+         "created_date":"2021-01-12T12:05:46-05:00",
+         "published_date":"2021-01-12T12:05:46-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Korean War",
+            "Agriculture and Farming",
+            "Land Use Policies",
+            "Mines, Explosive",
+            "Defense and Military Forces",
+            "Politics and Government",
+            "Explosions (Accidental)"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "North Korea",
+            "South Korea"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/07/world/00skorea-dispatch-1/merlin_181687737_24981523-3d0f-4d41-8d0b-d67c5796bb8a-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Han Gi-taek on farmland in Haean, South Korea, in December. His family was among the first group of people to be relocated to the border territory after the war.",
+               "copyright":"Jean Chung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/07/world/00skorea-dispatch-1/00skorea-dispatch-1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Han Gi-taek on farmland in Haean, South Korea, in December. His family was among the first group of people to be relocated to the border territory after the war.",
+               "copyright":"Jean Chung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/07/world/00skorea-dispatch-1/00skorea-dispatch-1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Han Gi-taek on farmland in Haean, South Korea, in December. His family was among the first group of people to be relocated to the border territory after the war.",
+               "copyright":"Jean Chung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/07/world/00skorea-dispatch-1/00skorea-dispatch-1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Han Gi-taek on farmland in Haean, South Korea, in December. His family was among the first group of people to be relocated to the border territory after the war.",
+               "copyright":"Jean Chung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/07/world/00skorea-dispatch-1/merlin_181687737_24981523-3d0f-4d41-8d0b-d67c5796bb8a-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Han Gi-taek on farmland in Haean, South Korea, in December. His family was among the first group of people to be relocated to the border territory after the war.",
+               "copyright":"Jean Chung for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3oDUgfw"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"Report Gives Glimpse into Horrors of IrelandΓÇÖs Mother and Baby Homes",
+         "abstract":"A government commission found high death rates, unethical vaccine trials and traumatic living conditions at 18 homes that housed unwed mothers up until the 1990s.",
+         "url":"https://www.nytimes.com/2021/01/12/world/europe/ireland-mother-baby-home-report.html",
+         "uri":"nyt://article/ca983b03-0aa2-5d93-b55d-98cb02999d53",
+         "byline":"By Megan Specia",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T18:41:36-05:00",
+         "created_date":"2021-01-12T10:37:09-05:00",
+         "published_date":"2021-01-12T10:37:09-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Adoptions"
+         ],
+         "org_facet":[
+            "Bon Secours Sisters",
+            "Roman Catholic Church"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Ireland",
+            "Tuam (Ireland)"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2017/03/04/world/12ireland-homes1/04Ireland-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1364,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A local amateur historian in the town of Tuam in County Galway worked to document the deaths of children and infants at a mother and baby home there. Today, there is a shrine to those children at the site of the home.",
+               "copyright":"Paulo Nunes dos Santos for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2017/03/04/world/12ireland-homes1/04Ireland-thumbStandard-v2.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A local amateur historian in the town of Tuam in County Galway worked to document the deaths of children and infants at a mother and baby home there. Today, there is a shrine to those children at the site of the home.",
+               "copyright":"Paulo Nunes dos Santos for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2017/03/04/world/12ireland-homes1/04Ireland-thumbLarge-v2.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A local amateur historian in the town of Tuam in County Galway worked to document the deaths of children and infants at a mother and baby home there. Today, there is a shrine to those children at the site of the home.",
+               "copyright":"Paulo Nunes dos Santos for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2017/03/04/world/12ireland-homes1/04Ireland-mediumThreeByTwo210-v2.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A local amateur historian in the town of Tuam in County Galway worked to document the deaths of children and infants at a mother and baby home there. Today, there is a shrine to those children at the site of the home.",
+               "copyright":"Paulo Nunes dos Santos for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2017/03/04/world/12ireland-homes1/04Ireland-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A local amateur historian in the town of Tuam in County Galway worked to document the deaths of children and infants at a mother and baby home there. Today, there is a shrine to those children at the site of the home.",
+               "copyright":"Paulo Nunes dos Santos for The New York Times"
+            }
+         ],
+         "short_url":""
+      },
+      {
+         "section":"world",
+         "subsection":"americas",
+         "title":"Cuba, Though Angered by Terror Designation, Is Looking Past Trump",
+         "abstract":"The U.S. decision was made in ΓÇ£the death throes of a failed and corrupt administration,ΓÇ¥ CubaΓÇÖs president said. For Cubans, the change in administrations in Washington canΓÇÖt come soon enough.",
+         "url":"https://www.nytimes.com/2021/01/12/world/americas/cuba-terrorism-trump-biden.html",
+         "uri":"nyt://article/754d2fc9-1b55-5feb-a55d-c5ccb69c4c0e",
+         "byline":"By Ed Augustin and Kirk Semple",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T21:34:48-05:00",
+         "created_date":"2021-01-12T19:32:32-05:00",
+         "published_date":"2021-01-12T19:32:32-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "United States International Relations",
+            "Embargoes and Sanctions",
+            "International Trade and World Market",
+            "Economic Conditions and Trends"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            "Diaz-Canel Bermudez, Miguel",
+            "Trump, Donald J"
+         ],
+         "geo_facet":[
+            "Cuba"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12cuba2/merlin_182251413_122d49fa-8fb2-4ad4-b265-cf1f1d50a31d-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1333,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Havana on Tuesday. Cubans are already looking past the Trump administration.",
+               "copyright":"Yamil Lage/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12cuba2/12cuba2-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Havana on Tuesday. Cubans are already looking past the Trump administration.",
+               "copyright":"Yamil Lage/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12cuba2/12cuba2-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Havana on Tuesday. Cubans are already looking past the Trump administration.",
+               "copyright":"Yamil Lage/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12cuba2/12cuba2-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Havana on Tuesday. Cubans are already looking past the Trump administration.",
+               "copyright":"Yamil Lage/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12cuba2/merlin_182251413_122d49fa-8fb2-4ad4-b265-cf1f1d50a31d-articleInline.jpg",
+               "format":"Normal",
+               "height":124,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Havana on Tuesday. Cubans are already looking past the Trump administration.",
+               "copyright":"Yamil Lage/Agence France-Presse ΓÇö Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/2XwZ0HY"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"With Hospitals Nearly Overwhelmed, Britain Faces Harder Days",
+         "abstract":"As a more contagious variant of the coronavirus tears through the country, and as people resist new restrictions, hospitals are struggling to cope with a surge in patients.",
+         "url":"https://www.nytimes.com/2021/01/12/world/europe/britain-hospitals-coronavirus.html",
+         "uri":"nyt://article/a26d56d6-4b74-51a0-8e42-599a586ca675",
+         "byline":"By Marc Santora",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T20:56:55-05:00",
+         "created_date":"2021-01-12T15:11:04-05:00",
+         "published_date":"2021-01-12T15:11:04-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Deaths (Fatalities)",
+            "Coronavirus (2019-nCoV)"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            "Johnson, Boris"
+         ],
+         "geo_facet":[
+            "London (England)",
+            "England"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12uk-virus1/merlin_182246091_06123cad-77e3-49f7-9730-6ec3ad155214-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Ambulance crews transported a patient into City Hospital in Birmingham, England, on Tuesday.",
+               "copyright":"Jacob King/Press Association, via Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12uk-virus1/12uk-virus1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Ambulance crews transported a patient into City Hospital in Birmingham, England, on Tuesday.",
+               "copyright":"Jacob King/Press Association, via Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12uk-virus1/12uk-virus1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Ambulance crews transported a patient into City Hospital in Birmingham, England, on Tuesday.",
+               "copyright":"Jacob King/Press Association, via Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12uk-virus1/merlin_182246091_06123cad-77e3-49f7-9730-6ec3ad155214-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Ambulance crews transported a patient into City Hospital in Birmingham, England, on Tuesday.",
+               "copyright":"Jacob King/Press Association, via Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12uk-virus1/merlin_182246091_06123cad-77e3-49f7-9730-6ec3ad155214-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Ambulance crews transported a patient into City Hospital in Birmingham, England, on Tuesday.",
+               "copyright":"Jacob King/Press Association, via Associated Press"
+            }
+         ],
+         "short_url":"https://nyti.ms/2XC8Acq"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"Angst in Senegal After Its ΓÇÿBest StudentΓÇÖ Goes Missing in Paris",
+         "abstract":"Diary Sow, a 20-year-old enrolled in an elite French school, had won top academic prizes in Senegal, where many take pride in her success and now worry about her disappearance.",
+         "url":"https://www.nytimes.com/2021/01/12/world/europe/diary-sow-missing-france-senegal.html",
+         "uri":"nyt://article/0044c9e9-8784-5e39-a571-13c69ef4b428",
+         "byline":"By Aurelien Breeden",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T18:24:46-05:00",
+         "created_date":"2021-01-12T13:55:14-05:00",
+         "published_date":"2021-01-12T13:55:14-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Social Media",
+            "Missing Persons"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Paris (France)",
+            "France",
+            "Senegal"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12france-senegal-student/merlin_182248773_7e57824c-c81c-4d82-8039-d70948c364ac-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Posters depicting the missing Senegalese student, Diary Sow, 20, outside the Lyc├⌐e Louis-le-Grand in Paris on Tuesday.",
+               "copyright":"Michel Euler/Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12france-senegal-student/12france-senegal-student-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Posters depicting the missing Senegalese student, Diary Sow, 20, outside the Lyc├⌐e Louis-le-Grand in Paris on Tuesday.",
+               "copyright":"Michel Euler/Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12france-senegal-student/12france-senegal-student-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Posters depicting the missing Senegalese student, Diary Sow, 20, outside the Lyc├⌐e Louis-le-Grand in Paris on Tuesday.",
+               "copyright":"Michel Euler/Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12france-senegal-student/merlin_182248773_7e57824c-c81c-4d82-8039-d70948c364ac-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Posters depicting the missing Senegalese student, Diary Sow, 20, outside the Lyc├⌐e Louis-le-Grand in Paris on Tuesday.",
+               "copyright":"Michel Euler/Associated Press"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12france-senegal-student/merlin_182248773_7e57824c-c81c-4d82-8039-d70948c364ac-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Posters depicting the missing Senegalese student, Diary Sow, 20, outside the Lyc├⌐e Louis-le-Grand in Paris on Tuesday.",
+               "copyright":"Michel Euler/Associated Press"
+            }
+         ],
+         "short_url":"https://nyti.ms/2Lin7I0"
+      },
+      {
+         "section":"us",
+         "subsection":"politics",
+         "title":"Pompeo Says Iran Is New Base for Al Qaeda, but Offers Little Proof",
+         "abstract":"Secretary of State Mike PompeoΓÇÖs statements were tempered by some U.S. officials, who said there was little new intelligence to suggest that Iran was an active headquarters for the terrorist group.",
+         "url":"https://www.nytimes.com/2021/01/12/us/politics/pompeo-iran-qaeda-terror.html",
+         "uri":"nyt://article/02159e9a-8bee-564f-b1be-4465d470076e",
+         "byline":"By Lara Jakes, Eric Schmitt and Julian E. Barnes",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T18:58:17-05:00",
+         "created_date":"2021-01-12T15:24:16-05:00",
+         "published_date":"2021-01-12T15:24:16-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "United States Politics and Government",
+            "United States International Relations",
+            "Terrorism",
+            "Espionage and Intelligence Services"
+         ],
+         "org_facet":[
+            "State Department",
+            "Al Qaeda",
+            "Central Intelligence Agency"
+         ],
+         "per_facet":[
+            "Pompeo, Mike",
+            "Abdullah, Abdullah Ahmed (Abu Muhammad al-Masri)",
+            "Trump, Donald J"
+         ],
+         "geo_facet":[
+            "Iran",
+            "Afghanistan"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12dc-pompeo-terror/merlin_182251533_727dba3f-c36f-4000-9306-ff44601a5fea-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Secretary of State Mike Pompeo speaking at the National Press Club in Washington on Tuesday.",
+               "copyright":"Pool photo by Andrew Harnik"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12dc-pompeo-terror/12dc-pompeo-terror-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Secretary of State Mike Pompeo speaking at the National Press Club in Washington on Tuesday.",
+               "copyright":"Pool photo by Andrew Harnik"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12dc-pompeo-terror/12dc-pompeo-terror-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Secretary of State Mike Pompeo speaking at the National Press Club in Washington on Tuesday.",
+               "copyright":"Pool photo by Andrew Harnik"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12dc-pompeo-terror/merlin_182251533_727dba3f-c36f-4000-9306-ff44601a5fea-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Secretary of State Mike Pompeo speaking at the National Press Club in Washington on Tuesday.",
+               "copyright":"Pool photo by Andrew Harnik"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12dc-pompeo-terror/merlin_182251533_727dba3f-c36f-4000-9306-ff44601a5fea-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Secretary of State Mike Pompeo speaking at the National Press Club in Washington on Tuesday.",
+               "copyright":"Pool photo by Andrew Harnik"
+            }
+         ],
+         "short_url":"https://nyti.ms/35Clv2q"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"Indian Farmers Vow to Continue Protest, Unappeased by Court Ruling",
+         "abstract":"Farmers declared the temporary halt of market-oriented agriculture laws a ΓÇ£trickΓÇ¥ to ease the pressure they have been putting on the government of Narendra Modi.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/india-farmers-protest-court-law.html",
+         "uri":"nyt://article/f7669cb5-541e-5923-94ea-bd04ad6a18c2",
+         "byline":"By Mujib Mashal and Hari Kumar",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T13:11:18-05:00",
+         "created_date":"2021-01-12T05:11:56-05:00",
+         "published_date":"2021-01-12T05:11:56-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Agriculture and Farming",
+            "Politics and Government",
+            "Relocation of Business",
+            "Demonstrations, Protests and Riots",
+            "Decisions and Verdicts"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "India"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12india-farmers-1/merlin_182077914_acd3eb4e-c02f-496f-b5d1-c81fe646b3f8-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1367,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Farmers protesting on New DelhiΓÇÖs border with the village of Singhu last week.",
+               "copyright":"Saumya Khandelwal for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12india-farmers-1/12india-farmers-1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Farmers protesting on New DelhiΓÇÖs border with the village of Singhu last week.",
+               "copyright":"Saumya Khandelwal for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12india-farmers-1/12india-farmers-1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Farmers protesting on New DelhiΓÇÖs border with the village of Singhu last week.",
+               "copyright":"Saumya Khandelwal for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12india-farmers-1/12india-farmers-1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Farmers protesting on New DelhiΓÇÖs border with the village of Singhu last week.",
+               "copyright":"Saumya Khandelwal for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12india-farmers-1/merlin_182077914_acd3eb4e-c02f-496f-b5d1-c81fe646b3f8-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Farmers protesting on New DelhiΓÇÖs border with the village of Singhu last week.",
+               "copyright":"Saumya Khandelwal for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3bwWKbW"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"A Ham Sandwich Is Contraband in the Brave New Post-Brexit World",
+         "abstract":"Dutch officials seized packed lunches from truck drivers entering the European Union from Britain under import rules that came into effect at the start of this year.",
+         "url":"https://www.nytimes.com/2021/01/12/world/europe/brexit-sandwich-netherlands.html",
+         "uri":"nyt://article/edb7cb50-fc09-550e-a76b-2cc1d7e87f8c",
+         "byline":"By Thomas Erdbrink",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T13:08:37-05:00",
+         "created_date":"2021-01-12T10:39:19-05:00",
+         "published_date":"2021-01-12T10:39:19-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Regulation and Deregulation of Industry",
+            "Great Britain Withdrawal from EU (Brexit)"
+         ],
+         "org_facet":[
+            "European Union"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Great Britain",
+            "Europe",
+            "Netherlands"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Brexit-sandwich1/merlin_182086356_4b11da1d-9f6f-4d83-8f22-caddf5cb3e00-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A Dutch customs officer checking a┬ácar coming off the ferry from Britain in Hoek van Holland, the Netherlands.",
+               "copyright":"Sander Koning/ANP, via Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Brexit-sandwich1/12Brexit-sandwich1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A Dutch customs officer checking a┬ácar coming off the ferry from Britain in Hoek van Holland, the Netherlands.",
+               "copyright":"Sander Koning/ANP, via Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Brexit-sandwich1/12Brexit-sandwich1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A Dutch customs officer checking a┬ácar coming off the ferry from Britain in Hoek van Holland, the Netherlands.",
+               "copyright":"Sander Koning/ANP, via Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Brexit-sandwich1/merlin_182086356_4b11da1d-9f6f-4d83-8f22-caddf5cb3e00-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A Dutch customs officer checking a┬ácar coming off the ferry from Britain in Hoek van Holland, the Netherlands.",
+               "copyright":"Sander Koning/ANP, via Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Brexit-sandwich1/merlin_182086356_4b11da1d-9f6f-4d83-8f22-caddf5cb3e00-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A Dutch customs officer checking a┬ácar coming off the ferry from Britain in Hoek van Holland, the Netherlands.",
+               "copyright":"Sander Koning/ANP, via Agence France-Presse ΓÇö Getty Images"
+            }
+         ],
+         "short_url":""
+      },
+      {
+         "section":"business",
+         "subsection":"",
+         "title":"Sheldon Adelson, Billionaire Donor to G.O.P. and Israel, Is Dead at 87",
+         "abstract":"Mr. Adelson drew a cornucopia of cash from his empire of casinos and resort hotels and poured money into right-wing causes.",
+         "url":"https://www.nytimes.com/2021/01/12/business/sheldon-adelson-dead.html",
+         "uri":"nyt://article/25e7c752-9f72-5bff-a6c9-346ef12fc0d8",
+         "byline":"By Robert D. McFadden",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T20:56:58-05:00",
+         "created_date":"2021-01-12T08:18:28-05:00",
+         "published_date":"2021-01-12T08:18:28-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Deaths (Obituaries)"
+         ],
+         "org_facet":[
+            "Republican Party",
+            "Venetian Resort Hotel Casino",
+            "Sands Hotel and Casino",
+            "Las Vegas Review-Journal"
+         ],
+         "per_facet":[
+            "Adelson, Sheldon G"
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/obituaries/00adelson1/00adelson1-superJumbo-v2.jpg",
+               "format":"superJumbo",
+               "height":2048,
+               "width":1401,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Sheldon G. Adelson in 2002 in Hong Kong. He built a casino empire that stretched from Las Vegas to Asia. He used his billions to support the Republican Party and right-wing causes in Israel.",
+               "copyright":"Bobby Yip/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/obituaries/00adelson1/00adelson1-thumbStandard-v2.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Sheldon G. Adelson in 2002 in Hong Kong. He built a casino empire that stretched from Las Vegas to Asia. He used his billions to support the Republican Party and right-wing causes in Israel.",
+               "copyright":"Bobby Yip/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/obituaries/00adelson1/00adelson1-thumbLarge-v2.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Sheldon G. Adelson in 2002 in Hong Kong. He built a casino empire that stretched from Las Vegas to Asia. He used his billions to support the Republican Party and right-wing causes in Israel.",
+               "copyright":"Bobby Yip/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/obituaries/00adelson1/00adelson1-mediumThreeByTwo210-v2.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Sheldon G. Adelson in 2002 in Hong Kong. He built a casino empire that stretched from Las Vegas to Asia. He used his billions to support the Republican Party and right-wing causes in Israel.",
+               "copyright":"Bobby Yip/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/obituaries/00adelson1/00adelson1-articleInline-v2.jpg",
+               "format":"Normal",
+               "height":278,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Sheldon G. Adelson in 2002 in Hong Kong. He built a casino empire that stretched from Las Vegas to Asia. He used his billions to support the Republican Party and right-wing causes in Israel.",
+               "copyright":"Bobby Yip/Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/2LoST61"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"Data Recorder Recovered From Indonesian Plane Crash",
+         "abstract":"The recovery of the so-called black box will help officials understand why Sriwijaya Air Flight 182 plummeted into the Java Sea on Saturday.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/indonesia-plane-crash-black-box.html",
+         "uri":"nyt://article/f20e8ad9-b07a-5bc7-8d58-2018a3333ecd",
+         "byline":"By Richard C. Paddock and Muktita Suhartono",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T15:10:52-05:00",
+         "created_date":"2021-01-12T06:52:05-05:00",
+         "published_date":"2021-01-12T06:52:05-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Sriwijaya Air Flight 182",
+            "Aviation Accidents, Safety and Disasters",
+            "Recording Equipment"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Indonesia"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Indonesia-plane-sub/merlin_182246427_d5df50bc-85e8-44f6-92bf-df1bc1808308-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The flight data recorder was displayed by safety investigators in Jakarta, Indonesia, on Tuesday.",
+               "copyright":"Ulet Ifansasti for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Indonesia-plane-sub/merlin_182246427_d5df50bc-85e8-44f6-92bf-df1bc1808308-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The flight data recorder was displayed by safety investigators in Jakarta, Indonesia, on Tuesday.",
+               "copyright":"Ulet Ifansasti for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Indonesia-plane-sub/merlin_182246427_d5df50bc-85e8-44f6-92bf-df1bc1808308-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The flight data recorder was displayed by safety investigators in Jakarta, Indonesia, on Tuesday.",
+               "copyright":"Ulet Ifansasti for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Indonesia-plane-sub/merlin_182246427_d5df50bc-85e8-44f6-92bf-df1bc1808308-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The flight data recorder was displayed by safety investigators in Jakarta, Indonesia, on Tuesday.",
+               "copyright":"Ulet Ifansasti for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12Indonesia-plane-sub/merlin_182246427_d5df50bc-85e8-44f6-92bf-df1bc1808308-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The flight data recorder was displayed by safety investigators in Jakarta, Indonesia, on Tuesday.",
+               "copyright":"Ulet Ifansasti for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3nwcCOc"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"SeoulΓÇÖs Advice to Pregnant Women: Cook, Clean and Stay Attractive",
+         "abstract":"The guidelines, published on a government website, have drawn a backlash from people who called them symbolic of anachronistic views in a patriarchal country.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/korea-pregnant-women-advice-seoul.html",
+         "uri":"nyt://article/7a9a2845-94f3-56f8-ab48-64145896e02f",
+         "byline":"By Livia Albeck-Ripka and Youmi Kim",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T17:52:38-05:00",
+         "created_date":"2021-01-12T06:24:48-05:00",
+         "published_date":"2021-01-12T06:24:48-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Women and Girls",
+            "Pregnancy and Childbirth",
+            "Discrimination"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Seoul (South Korea)"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12skorea-pregnancy-1/merlin_148725468_a1000409-7684-4654-bf5d-dc2d053febb0-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Parents attending to their newborn in Seoul, South Korea, in 2018. South KoreaΓÇÖs birth rate is the lowest in the world.",
+               "copyright":"Kim Hong-Ji/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12skorea-pregnancy-1/12skorea-pregnancy-1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Parents attending to their newborn in Seoul, South Korea, in 2018. South KoreaΓÇÖs birth rate is the lowest in the world.",
+               "copyright":"Kim Hong-Ji/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12skorea-pregnancy-1/12skorea-pregnancy-1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Parents attending to their newborn in Seoul, South Korea, in 2018. South KoreaΓÇÖs birth rate is the lowest in the world.",
+               "copyright":"Kim Hong-Ji/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12skorea-pregnancy-1/12skorea-pregnancy-1-mediumThreeByTwo210-v2.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Parents attending to their newborn in Seoul, South Korea, in 2018. South KoreaΓÇÖs birth rate is the lowest in the world.",
+               "copyright":"Kim Hong-Ji/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12skorea-pregnancy-1/merlin_148725468_a1000409-7684-4654-bf5d-dc2d053febb0-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Parents attending to their newborn in Seoul, South Korea, in 2018. South KoreaΓÇÖs birth rate is the lowest in the world.",
+               "copyright":"Kim Hong-Ji/Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/3idlYNS"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"Slouch or Slack Off, This ΓÇÿSmartΓÇÖ Office Chair Cushion Will Record It",
+         "abstract":"A Chinese tech company designed a way to track employeesΓÇÖ health, but sensors were also monitoring when they were away from their desks, setting off a debate about privacy and surveillance.",
+         "url":"https://www.nytimes.com/2021/01/12/world/asia/china-office-cushion-surveillance.html",
+         "uri":"nyt://article/3eb91f13-9a8f-5555-83fa-768bea0de00e",
+         "byline":"By Tiffany May and Amy Chang Chien",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T21:28:29-05:00",
+         "created_date":"2021-01-12T04:43:24-05:00",
+         "published_date":"2021-01-12T04:43:24-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Workplace Environment",
+            "Chairs",
+            "Research",
+            "Science and Technology"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "China"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/world/12china-cushion-print/merlin_182237394_1dfb1d55-e95f-4f98-aae8-cc4a3286aa08-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1536,
+               "width":1299,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A \u0026ldquo;smart cushion\u0026rdquo; designed by a Chinese technology company contains sensors that monitor the heart rate and tally the minutes spent at work stations.",
+               "copyright":"Health Boost IoT Technology Company"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/world/12china-cushion-print/12china-cushion-1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A \u0026ldquo;smart cushion\u0026rdquo; designed by a Chinese technology company contains sensors that monitor the heart rate and tally the minutes spent at work stations.",
+               "copyright":"Health Boost IoT Technology Company"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/world/12china-cushion-print/12china-cushion-1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A \u0026ldquo;smart cushion\u0026rdquo; designed by a Chinese technology company contains sensors that monitor the heart rate and tally the minutes spent at work stations.",
+               "copyright":"Health Boost IoT Technology Company"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/world/12china-cushion-print/12china-cushion-1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A \u0026ldquo;smart cushion\u0026rdquo; designed by a Chinese technology company contains sensors that monitor the heart rate and tally the minutes spent at work stations.",
+               "copyright":"Health Boost IoT Technology Company"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/world/12china-cushion-print/merlin_182237394_1dfb1d55-e95f-4f98-aae8-cc4a3286aa08-articleInline.jpg",
+               "format":"Normal",
+               "height":225,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A \u0026ldquo;smart cushion\u0026rdquo; designed by a Chinese technology company contains sensors that monitor the heart rate and tally the minutes spent at work stations.",
+               "copyright":"Health Boost IoT Technology Company"
+            }
+         ],
+         "short_url":"https://nyti.ms/3shJ8XW"
+      },
+      {
+         "section":"health",
+         "subsection":"",
+         "title":"U.S. to Require Negative Virus Tests From International Air Passengers",
+         "abstract":"Before they board planes to the U.S., passengers will have to produce proof that they are not infected or have recently recovered.",
+         "url":"https://www.nytimes.com/2021/01/12/health/us-to-require-negative-virus-tests-from-international-air-passengers.html",
+         "uri":"nyt://article/0070dd2e-d16b-5df7-a1fa-2b4d3ba6c8c7",
+         "byline":"By Apoorva Mandavilli",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T18:11:48-05:00",
+         "created_date":"2021-01-12T18:07:49-05:00",
+         "published_date":"2021-01-12T18:07:49-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "your-feed-science",
+            "Coronavirus (2019-nCoV)",
+            "Tests (Medical)",
+            "Airlines and Airplanes",
+            "Vaccination and Immunization"
+         ],
+         "org_facet":[
+            "Centers for Disease Control and Prevention"
+         ],
+         "per_facet":[
+            "Redfield, Robert R"
+         ],
+         "geo_facet":[
+            "United States"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-testingtravel2/merlin_181576473_28d3341d-e2f7-4141-9b4f-31f2ba5d0015-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1300,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Travelers arriving at Terminal 4 at J.F.K. International Airport in New York last month.",
+               "copyright":"Kena Betancur/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-testingtravel2/12virus-briefing-testingtravel2-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Travelers arriving at Terminal 4 at J.F.K. International Airport in New York last month.",
+               "copyright":"Kena Betancur/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-testingtravel2/12virus-briefing-testingtravel2-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Travelers arriving at Terminal 4 at J.F.K. International Airport in New York last month.",
+               "copyright":"Kena Betancur/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-testingtravel2/12virus-briefing-testingtravel2-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Travelers arriving at Terminal 4 at J.F.K. International Airport in New York last month.",
+               "copyright":"Kena Betancur/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-testingtravel2/merlin_181576473_28d3341d-e2f7-4141-9b4f-31f2ba5d0015-articleInline.jpg",
+               "format":"Normal",
+               "height":121,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Travelers arriving at Terminal 4 at J.F.K. International Airport in New York last month.",
+               "copyright":"Kena Betancur/Agence France-Presse ΓÇö Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/35CIKtc"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"Imposing strict measures faster could have saved tens of thousands of lives in Europe, a C.D.C. report says.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/coronavirus-strict-measures-europe.html",
+         "uri":"nyt://article/f3d79bea-a1e8-53bb-8479-56ae1b5c5a6f",
+         "byline":"By Gina Kolata",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T17:52:46-05:00",
+         "created_date":"2021-01-12T17:46:28-05:00",
+         "published_date":"2021-01-12T17:46:28-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-restrictions1/12virus-briefing-restrictions1-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coffins holding the bodies of people killed by the coronavirus were stored in preparation for burial or incineration in an underground parking lot at a funeral home in Barcelona in April.",
+               "copyright":"Samuel Aranda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-restrictions1/12virus-briefing-restrictions1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coffins holding the bodies of people killed by the coronavirus were stored in preparation for burial or incineration in an underground parking lot at a funeral home in Barcelona in April.",
+               "copyright":"Samuel Aranda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-restrictions1/12virus-briefing-restrictions1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coffins holding the bodies of people killed by the coronavirus were stored in preparation for burial or incineration in an underground parking lot at a funeral home in Barcelona in April.",
+               "copyright":"Samuel Aranda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-restrictions1/12virus-briefing-restrictions1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coffins holding the bodies of people killed by the coronavirus were stored in preparation for burial or incineration in an underground parking lot at a funeral home in Barcelona in April.",
+               "copyright":"Samuel Aranda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-restrictions1/12virus-briefing-restrictions1-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coffins holding the bodies of people killed by the coronavirus were stored in preparation for burial or incineration in an underground parking lot at a funeral home in Barcelona in April.",
+               "copyright":"Samuel Aranda for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/39uzEjx"
+      },
+      {
+         "section":"briefing",
+         "subsection":"",
+         "title":"Your Wednesday Briefing",
+         "abstract":"The renminbi is strengthening.",
+         "url":"https://www.nytimes.com/2021/01/12/briefing/china-currency-virus-variant-japan-impeachment.html",
+         "uri":"nyt://article/59876fcf-2819-5de6-84d7-12b98b939aca",
+         "byline":"By Melina Delkic",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T14:31:43-05:00",
+         "created_date":"2021-01-12T14:16:36-05:00",
+         "published_date":"2021-01-12T14:16:36-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/13ambriefing-asia-PROMO/merlin_158986941_2e43a149-dd4d-429a-9b6b-6de361fd619f-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The renminbi has surged in strength in recent months against the American dollar and other major currencies.",
+               "copyright":"Jeenah Moon for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/13ambriefing-asia-PROMO/13ambriefing-asia-CHINA2-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The renminbi has surged in strength in recent months against the American dollar and other major currencies.",
+               "copyright":"Jeenah Moon for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/13ambriefing-asia-PROMO/13ambriefing-asia-CHINA2-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The renminbi has surged in strength in recent months against the American dollar and other major currencies.",
+               "copyright":"Jeenah Moon for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/13ambriefing-asia-PROMO/merlin_158986941_2e43a149-dd4d-429a-9b6b-6de361fd619f-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The renminbi has surged in strength in recent months against the American dollar and other major currencies.",
+               "copyright":"Jeenah Moon for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/13ambriefing-asia-PROMO/merlin_158986941_2e43a149-dd4d-429a-9b6b-6de361fd619f-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The renminbi has surged in strength in recent months against the American dollar and other major currencies.",
+               "copyright":"Jeenah Moon for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3slq4bp"
+      },
+      {
+         "section":"health",
+         "subsection":"",
+         "title":"One Mask Is Good. Would Two Be Better?",
+         "abstract":"Health experts double down on their advice for slowing the spread of the coronavirus.",
+         "url":"https://www.nytimes.com/2021/01/12/health/coronavirus-masks-transmission.html",
+         "uri":"nyt://article/70a71146-64b5-5cd4-bedd-16faf36908b9",
+         "byline":"By Katherine J. Wu",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T15:11:37-05:00",
+         "created_date":"2021-01-12T12:51:38-05:00",
+         "published_date":"2021-01-12T12:51:38-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "your-feed-science",
+            "Protective Clothing and Gear",
+            "Masks",
+            "Coronavirus (2019-nCoV)",
+            "your-feed-health"
+         ],
+         "org_facet":[
+            "Centers for Disease Control and Prevention"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/science/12VIRUS-MASKS1/12VIRUS-MASKS1-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A double-mask wearer in New York City in April.",
+               "copyright":"Kena Betancur/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/science/12VIRUS-MASKS1/12VIRUS-MASKS1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A double-mask wearer in New York City in April.",
+               "copyright":"Kena Betancur/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/science/12VIRUS-MASKS1/12VIRUS-MASKS1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A double-mask wearer in New York City in April.",
+               "copyright":"Kena Betancur/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/science/12VIRUS-MASKS1/12VIRUS-MASKS1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A double-mask wearer in New York City in April.",
+               "copyright":"Kena Betancur/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/science/12VIRUS-MASKS1/12VIRUS-MASKS1-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A double-mask wearer in New York City in April.",
+               "copyright":"Kena Betancur/Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/3shsVSD"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"MalaysiaΓÇÖs king declares a virus emergency, and other news from around the world.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/malaysias-king-declares-a-virus-emergency-and-other-news-from-around-the-world.html",
+         "uri":"nyt://article/0f903ac9-2de8-521b-a935-80de64a51920",
+         "byline":"By Richard C. Paddock and Christopher F. Schuetze",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:21:48-05:00",
+         "created_date":"2021-01-12T08:29:09-05:00",
+         "published_date":"2021-01-12T08:29:09-05:00",
+         "material_type_facet":"",
+         "kicker":"Global roundup",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-malaysia1/merlin_182208387_473886e3-97a5-40f8-ae5b-a54070d3e85f-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coronavirus testing at a clinic outside Kuala Lumpur, Malaysia, on Monday.",
+               "copyright":"Fazry Ismail/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-malaysia1/12virus-briefing-malaysia1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coronavirus testing at a clinic outside Kuala Lumpur, Malaysia, on Monday.",
+               "copyright":"Fazry Ismail/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-malaysia1/12virus-briefing-malaysia1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coronavirus testing at a clinic outside Kuala Lumpur, Malaysia, on Monday.",
+               "copyright":"Fazry Ismail/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-malaysia1/merlin_182208387_473886e3-97a5-40f8-ae5b-a54070d3e85f-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coronavirus testing at a clinic outside Kuala Lumpur, Malaysia, on Monday.",
+               "copyright":"Fazry Ismail/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-malaysia1/merlin_182208387_473886e3-97a5-40f8-ae5b-a54070d3e85f-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Coronavirus testing at a clinic outside Kuala Lumpur, Malaysia, on Monday.",
+               "copyright":"Fazry Ismail/EPA, via Shutterstock"
+            }
+         ],
+         "short_url":"https://nyti.ms/2N0WO9B"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"ΓÇÿThe challenge ahead is enormousΓÇÖ: Joe BidenΓÇÖs pick for C.D.C. director looks ahead.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/the-challenge-ahead-is-enormous-joe-bidens-pick-for-cdc-director-looks-ahead.html",
+         "uri":"nyt://article/e2e2d85e-42e2-5105-a048-28ffb21cd347",
+         "byline":"",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:21:27-05:00",
+         "created_date":"2021-01-12T06:50:26-05:00",
+         "published_date":"2021-01-12T06:50:26-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-Walensky/merlin_180991323_4f4de4a8-0166-4a6a-930a-eecc140d43d5-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Dr. Rochelle P. Walensky is President-elect Joseph R. Biden Jr.ΓÇÖs nominee to lead the Centers for Disease Control and Prevention.",
+               "copyright":"Hilary Swift for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-Walensky/12virus-briefing-Walensky-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Dr. Rochelle P. Walensky is President-elect Joseph R. Biden Jr.ΓÇÖs nominee to lead the Centers for Disease Control and Prevention.",
+               "copyright":"Hilary Swift for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-Walensky/12virus-briefing-Walensky-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Dr. Rochelle P. Walensky is President-elect Joseph R. Biden Jr.ΓÇÖs nominee to lead the Centers for Disease Control and Prevention.",
+               "copyright":"Hilary Swift for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-Walensky/merlin_180991323_4f4de4a8-0166-4a6a-930a-eecc140d43d5-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Dr. Rochelle P. Walensky is President-elect Joseph R. Biden Jr.ΓÇÖs nominee to lead the Centers for Disease Control and Prevention.",
+               "copyright":"Hilary Swift for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-Walensky/merlin_180991323_4f4de4a8-0166-4a6a-930a-eecc140d43d5-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Dr. Rochelle P. Walensky is President-elect Joseph R. Biden Jr.ΓÇÖs nominee to lead the Centers for Disease Control and Prevention.",
+               "copyright":"Hilary Swift for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/35AX19Y"
+      },
+      {
+         "section":"briefing",
+         "subsection":"",
+         "title":"A Corporate Backlash",
+         "abstract":"And what else you need to know today.",
+         "url":"https://www.nytimes.com/2021/01/12/briefing/trump-mob-impeachment-gorillas-san-diego-zoo.html",
+         "uri":"nyt://article/4bba0572-d4e2-5d57-b73a-9e68f8ec6ac6",
+         "byline":"By David Leonhardt",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T12:58:36-05:00",
+         "created_date":"2021-01-12T06:35:24-05:00",
+         "published_date":"2021-01-12T06:35:24-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/multimedia/12AMBRIEFING-promo/12AMBRIEFING-lede-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"House Minority Leader Kevin McCarthy, center, after the Capitol riot on Wednesday.",
+               "copyright":"Win Mcnamee/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/multimedia/12AMBRIEFING-promo/12AMBRIEFING-promo-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"House Minority Leader Kevin McCarthy, center, after the Capitol riot on Wednesday.",
+               "copyright":"Win Mcnamee/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/multimedia/12AMBRIEFING-promo/12AMBRIEFING-promo-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"House Minority Leader Kevin McCarthy, center, after the Capitol riot on Wednesday.",
+               "copyright":"Win Mcnamee/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/multimedia/12AMBRIEFING-promo/12AMBRIEFING-promo-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"House Minority Leader Kevin McCarthy, center, after the Capitol riot on Wednesday.",
+               "copyright":"Win Mcnamee/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/multimedia/12AMBRIEFING-promo/12AMBRIEFING-lede-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"House Minority Leader Kevin McCarthy, center, after the Capitol riot on Wednesday.",
+               "copyright":"Win Mcnamee/Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/2MYv0mj"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"The pandemic cut U.S. emissions more than 10 percent. The effects may not last.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/the-pandemic-cut-us-emissions-more-than-10-percent-the-effects-may-not-last.html",
+         "uri":"nyt://article/ee3c98af-f76c-5484-99e4-ccc8f778b769",
+         "byline":"By Brad Plumer",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:21:13-05:00",
+         "created_date":"2021-01-12T06:06:02-05:00",
+         "published_date":"2021-01-12T06:06:02-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/climate/12virus-briefing-2020-emissions-1/merlin_171767799_b4aa8c03-0bd9-49e5-bad4-96df17e19f57-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Transportation emissions dropped sharply in 2020 as millions of people stopped driving to work and lockdowns were in place.",
+               "copyright":"Lucy Nicholson/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/climate/12virus-briefing-2020-emissions-1/merlin_171767799_b4aa8c03-0bd9-49e5-bad4-96df17e19f57-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Transportation emissions dropped sharply in 2020 as millions of people stopped driving to work and lockdowns were in place.",
+               "copyright":"Lucy Nicholson/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/climate/12virus-briefing-2020-emissions-1/merlin_171767799_b4aa8c03-0bd9-49e5-bad4-96df17e19f57-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Transportation emissions dropped sharply in 2020 as millions of people stopped driving to work and lockdowns were in place.",
+               "copyright":"Lucy Nicholson/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/climate/12virus-briefing-2020-emissions-1/merlin_171767799_b4aa8c03-0bd9-49e5-bad4-96df17e19f57-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Transportation emissions dropped sharply in 2020 as millions of people stopped driving to work and lockdowns were in place.",
+               "copyright":"Lucy Nicholson/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/climate/12virus-briefing-2020-emissions-1/merlin_171767799_b4aa8c03-0bd9-49e5-bad4-96df17e19f57-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Transportation emissions dropped sharply in 2020 as millions of people stopped driving to work and lockdowns were in place.",
+               "copyright":"Lucy Nicholson/Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/3qdi8Xz"
+      },
+      {
+         "section":"travel",
+         "subsection":"",
+         "title":"How to Pretend YouΓÇÖre in Tunis Tonight",
+         "abstract":"The Tunisian capital beckons with white-sand beaches, the medina, cafe districts and Roman ruins that speak to its place in history. Luckily, there are ways to capture its spirit at home.",
+         "url":"https://www.nytimes.com/2021/01/12/travel/tunis-tunisia-vacation-at-home.html",
+         "uri":"nyt://article/53abccac-5f13-51b0-8e0b-4cfd479c2cbb",
+         "byline":"By Sebastian Modak",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T18:42:57-05:00",
+         "created_date":"2021-01-12T05:00:19-05:00",
+         "published_date":"2021-01-12T05:00:19-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Art",
+            "Food",
+            "Travel and Vacations",
+            "Music",
+            "Beaches"
+         ],
+         "org_facet":[
+            "National Bardo Museum (Tunis, Tunisia)"
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Tunis (Tunisia)",
+            "Sidi Bou Said (Tunisia)",
+            "Tunisia"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/12aroundworld-tunis1/merlin_163012563_fd2f50a6-2e76-4a30-b1ce-46e01e751d2d-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Panorama La Medina, a rooftop cafe in Tunis, offers some of the best views of the old city.",
+               "copyright":"Sebastian Modak/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/12aroundworld-tunis1/12aroundworld-tunis1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Panorama La Medina, a rooftop cafe in Tunis, offers some of the best views of the old city.",
+               "copyright":"Sebastian Modak/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/12aroundworld-tunis1/12aroundworld-tunis1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Panorama La Medina, a rooftop cafe in Tunis, offers some of the best views of the old city.",
+               "copyright":"Sebastian Modak/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/12aroundworld-tunis1/merlin_163012563_fd2f50a6-2e76-4a30-b1ce-46e01e751d2d-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Panorama La Medina, a rooftop cafe in Tunis, offers some of the best views of the old city.",
+               "copyright":"Sebastian Modak/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/13/multimedia/12aroundworld-tunis1/merlin_163012563_fd2f50a6-2e76-4a30-b1ce-46e01e751d2d-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Panorama La Medina, a rooftop cafe in Tunis, offers some of the best views of the old city.",
+               "copyright":"Sebastian Modak/The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3qpwkgz"
+      },
+      {
+         "section":"us",
+         "subsection":"",
+         "title":"Three lawmakers test positive after being in lockdown at the Capitol.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/us/pramila-jayapal-covid-capitol.html",
+         "uri":"nyt://article/0084a60c-2cbb-52d7-b2ca-3474e5ac286b",
+         "byline":"By Tracey Tully, Katherine J. Wu, Apoorva Mandavilli and Emily Cochrane",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:20:53-05:00",
+         "created_date":"2021-01-12T04:58:38-05:00",
+         "published_date":"2021-01-12T04:58:38-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12virus-briefing-lawmakers-test-positive3/12virus-briefing-lawmakers-test-positive3-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Representative Brad Schneider, Democrat of Illinois, speaking in Washington last year.",
+               "copyright":"Samuel Corum/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12virus-briefing-lawmakers-test-positive3/12virus-briefing-lawmakers-test-positive3-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Representative Brad Schneider, Democrat of Illinois, speaking in Washington last year.",
+               "copyright":"Samuel Corum/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12virus-briefing-lawmakers-test-positive3/12virus-briefing-lawmakers-test-positive3-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Representative Brad Schneider, Democrat of Illinois, speaking in Washington last year.",
+               "copyright":"Samuel Corum/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12virus-briefing-lawmakers-test-positive3/12virus-briefing-lawmakers-test-positive3-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Representative Brad Schneider, Democrat of Illinois, speaking in Washington last year.",
+               "copyright":"Samuel Corum/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/politics/12virus-briefing-lawmakers-test-positive3/12virus-briefing-lawmakers-test-positive3-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Representative Brad Schneider, Democrat of Illinois, speaking in Washington last year.",
+               "copyright":"Samuel Corum/Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/3ss4Qsv"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"Facing a deluge of cases, California turns baseball stadiums into vaccination sites.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/facing-a-deluge-of-cases-california-turns-baseball-stadiums-into-vaccination-sites.html",
+         "uri":"nyt://article/8c3c386e-de27-5ab0-91a2-83ffad45d730",
+         "byline":"By Jill Cowan and Bryan Pietsch",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:22:12-05:00",
+         "created_date":"2021-01-12T04:58:38-05:00",
+         "published_date":"2021-01-12T04:58:38-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential",
+            "Coronavirus (2019-nCoV)"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-california/merlin_182104800_c895442b-ec17-4d2d-8523-018b32ee9be8-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A coronavirus testing site in a shopping center parking lot in southern Los Angeles last week.",
+               "copyright":"Philip Cheung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-california/12virus-briefing-california-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A coronavirus testing site in a shopping center parking lot in southern Los Angeles last week.",
+               "copyright":"Philip Cheung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-california/12virus-briefing-california-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A coronavirus testing site in a shopping center parking lot in southern Los Angeles last week.",
+               "copyright":"Philip Cheung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-california/merlin_182104800_c895442b-ec17-4d2d-8523-018b32ee9be8-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A coronavirus testing site in a shopping center parking lot in southern Los Angeles last week.",
+               "copyright":"Philip Cheung for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12virus-briefing-california/merlin_182104800_c895442b-ec17-4d2d-8523-018b32ee9be8-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A coronavirus testing site in a shopping center parking lot in southern Los Angeles last week.",
+               "copyright":"Philip Cheung for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3byKV55"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"HereΓÇÖs what to know about the South African and U.K. virus variants.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/covid-19-variant-south-africa-uk.html",
+         "uri":"nyt://article/6ba9e3a9-e8b2-50ad-85e5-ac96b5c11948",
+         "byline":"By Katherine J. Wu",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:01:28-05:00",
+         "created_date":"2021-01-12T04:58:37-05:00",
+         "published_date":"2021-01-12T04:58:37-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-london-01/merlin_181997613_b429c4f1-9ef0-426a-b0cd-25ff6763d143-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"London last week. A coronavirus variant that emerged in Britain has been found in about 50 countries.",
+               "copyright":"Andrew Testa for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-london-01/merlin_181997613_b429c4f1-9ef0-426a-b0cd-25ff6763d143-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"London last week. A coronavirus variant that emerged in Britain has been found in about 50 countries.",
+               "copyright":"Andrew Testa for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-london-01/merlin_181997613_b429c4f1-9ef0-426a-b0cd-25ff6763d143-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"London last week. A coronavirus variant that emerged in Britain has been found in about 50 countries.",
+               "copyright":"Andrew Testa for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-london-01/merlin_181997613_b429c4f1-9ef0-426a-b0cd-25ff6763d143-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"London last week. A coronavirus variant that emerged in Britain has been found in about 50 countries.",
+               "copyright":"Andrew Testa for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/world/12virus-briefing-london-01/merlin_181997613_b429c4f1-9ef0-426a-b0cd-25ff6763d143-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"London last week. A coronavirus variant that emerged in Britain has been found in about 50 countries.",
+               "copyright":"Andrew Testa for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/2XzsULx"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"Gorillas at a San Diego Zoo park tested positive for the coronavirus.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/12/world/gorillas-at-a-san-diego-zoo-park-tested-positive-for-the-coronavirus.html",
+         "uri":"nyt://article/987638e1-6a74-5950-a46c-248a7b40a763",
+         "byline":"By Azi Paybarah",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T19:19:10-05:00",
+         "created_date":"2021-01-12T04:58:35-05:00",
+         "published_date":"2021-01-12T04:58:35-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/multimedia/11xp-gorillas-image/merlin_182228343_644fede6-b890-4264-b6e5-8b8684eccd6f-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The infected animals are expected to make a full recovery, officials said.",
+               "copyright":"Ken Bohn/San Diego Zoo Global/Via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/multimedia/11xp-gorillas-image/merlin_182228343_644fede6-b890-4264-b6e5-8b8684eccd6f-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The infected animals are expected to make a full recovery, officials said.",
+               "copyright":"Ken Bohn/San Diego Zoo Global/Via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/multimedia/11xp-gorillas-image/merlin_182228343_644fede6-b890-4264-b6e5-8b8684eccd6f-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The infected animals are expected to make a full recovery, officials said.",
+               "copyright":"Ken Bohn/San Diego Zoo Global/Via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/multimedia/11xp-gorillas-image/merlin_182228343_644fede6-b890-4264-b6e5-8b8684eccd6f-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The infected animals are expected to make a full recovery, officials said.",
+               "copyright":"Ken Bohn/San Diego Zoo Global/Via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/multimedia/11xp-gorillas-image/merlin_182228343_644fede6-b890-4264-b6e5-8b8684eccd6f-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The infected animals are expected to make a full recovery, officials said.",
+               "copyright":"Ken Bohn/San Diego Zoo Global/Via Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/35AGkvh"
+      },
+      {
+         "section":"science",
+         "subsection":"",
+         "title":"Making Sense of the ΓÇÿMobΓÇÖ Mentality",
+         "abstract":"Why do some mass gatherings turn violent? Experts in crowd behavior say thereΓÇÖs still much to learn.",
+         "url":"https://www.nytimes.com/2021/01/12/science/crowds-mob-psychology.html",
+         "uri":"nyt://article/2addda24-d6aa-5de8-858d-89244875aedd",
+         "byline":"By Benedict Carey",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T12:31:04-05:00",
+         "created_date":"2021-01-12T02:30:11-05:00",
+         "published_date":"2021-01-12T02:30:11-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Demonstrations, Protests and Riots",
+            "Storming of the US Capitol (Jan, 2021)",
+            "Sociology",
+            "Capitol Building (Washington, DC)",
+            "Civil Rights and Liberties",
+            "Civil Rights Movement (1954-68)"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/science/12SCI-MOB1/merlin_182075397_03c6eb2a-a600-468c-a551-a3fa4e42dad8-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"ΓÇ£Crowds do not act with one irrational mind,ΓÇ¥ said one sociologist. ΓÇ£There are many groups, doing different things, for different reasons. That is crucial to understanding how they ultimately behave.ΓÇ¥",
+               "copyright":"Thomas P. Costello/Usa Today, via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/science/12SCI-MOB1/12SCI-MOB1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"ΓÇ£Crowds do not act with one irrational mind,ΓÇ¥ said one sociologist. ΓÇ£There are many groups, doing different things, for different reasons. That is crucial to understanding how they ultimately behave.ΓÇ¥",
+               "copyright":"Thomas P. Costello/Usa Today, via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/science/12SCI-MOB1/12SCI-MOB1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"ΓÇ£Crowds do not act with one irrational mind,ΓÇ¥ said one sociologist. ΓÇ£There are many groups, doing different things, for different reasons. That is crucial to understanding how they ultimately behave.ΓÇ¥",
+               "copyright":"Thomas P. Costello/Usa Today, via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/science/12SCI-MOB1/12SCI-MOB1-mediumThreeByTwo210-v2.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"ΓÇ£Crowds do not act with one irrational mind,ΓÇ¥ said one sociologist. ΓÇ£There are many groups, doing different things, for different reasons. That is crucial to understanding how they ultimately behave.ΓÇ¥",
+               "copyright":"Thomas P. Costello/Usa Today, via Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/science/12SCI-MOB1/merlin_182075397_03c6eb2a-a600-468c-a551-a3fa4e42dad8-articleInline.jpg",
+               "format":"Normal",
+               "height":124,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"ΓÇ£Crowds do not act with one irrational mind,ΓÇ¥ said one sociologist. ΓÇ£There are many groups, doing different things, for different reasons. That is crucial to understanding how they ultimately behave.ΓÇ¥",
+               "copyright":"Thomas P. Costello/Usa Today, via Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/2LgkVAM"
+      },
+      {
+         "section":"briefing",
+         "subsection":"",
+         "title":"Your Tuesday Briefing",
+         "abstract":"An impeachment charge against Trump.",
+         "url":"https://www.nytimes.com/2021/01/11/briefing/impeachment-coronavirus-kashmir.html",
+         "uri":"nyt://article/cff1f28a-15fe-5b44-ad51-353fe598ffe7",
+         "byline":"By Natasha Frost",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T01:25:14-05:00",
+         "created_date":"2021-01-11T22:13:27-05:00",
+         "published_date":"2021-01-11T22:13:27-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12AMBRIEFING-europe-lede-promo/12AMBRIEFING-IMPEACH-TEAR-copy-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"",
+               "copyright":""
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12AMBRIEFING-europe-lede-promo/12AMBRIEFING-IMPEACH-TEAR-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"",
+               "copyright":""
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12AMBRIEFING-europe-lede-promo/12AMBRIEFING-IMPEACH-TEAR-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"",
+               "copyright":""
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12AMBRIEFING-europe-lede-promo/12AMBRIEFING-IMPEACH-TEAR-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"",
+               "copyright":""
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/12/us/12AMBRIEFING-europe-lede-promo/12AMBRIEFING-IMPEACH-TEAR-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"",
+               "copyright":""
+            }
+         ],
+         "short_url":"https://nyti.ms/2K4iqka"
+      },
+      {
+         "section":"us",
+         "subsection":"politics",
+         "title":"U.S. Rush to Declare Houthis Terrorists Threatens to Halt Aid to Yemen",
+         "abstract":"The Trump administration did not wait to put in place legal protections for aid workers, a lapse that officials said could halt shipments of food, medicine, gasoline and other assistance.",
+         "url":"https://www.nytimes.com/2021/01/11/us/politics/trump-pompeo-houthis-yemen.html",
+         "uri":"nyt://article/3844854a-8204-5f4e-b8af-11092d3f4d47",
+         "byline":"By Lara Jakes and Ben Hubbard",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T07:27:50-05:00",
+         "created_date":"2021-01-11T19:40:22-05:00",
+         "published_date":"2021-01-11T19:40:22-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "United States International Relations",
+            "United States Politics and Government",
+            "Human Rights and Human Rights Violations",
+            "Humanitarian Aid",
+            "Embargoes and Sanctions",
+            "Terrorism"
+         ],
+         "org_facet":[
+            "Houthis",
+            "State Department"
+         ],
+         "per_facet":[
+            "Pompeo, Mike",
+            "Trump, Donald J"
+         ],
+         "geo_facet":[
+            "Yemen"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-houthis/11dc-houthis-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Yemenis getting food aid provided by a local relief group at a grain warehouse in Sana, the capital.",
+               "copyright":"Yahya Arhab/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-houthis/11dc-houthis-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Yemenis getting food aid provided by a local relief group at a grain warehouse in Sana, the capital.",
+               "copyright":"Yahya Arhab/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-houthis/11dc-houthis-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Yemenis getting food aid provided by a local relief group at a grain warehouse in Sana, the capital.",
+               "copyright":"Yahya Arhab/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-houthis/11dc-houthis-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Yemenis getting food aid provided by a local relief group at a grain warehouse in Sana, the capital.",
+               "copyright":"Yahya Arhab/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-houthis/11dc-houthis-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Yemenis getting food aid provided by a local relief group at a grain warehouse in Sana, the capital.",
+               "copyright":"Yahya Arhab/EPA, via Shutterstock"
+            }
+         ],
+         "short_url":"https://nyti.ms/2XviJb5"
+      },
+      {
+         "section":"us",
+         "subsection":"politics",
+         "title":"Pompeo Returns Cuba to Terrorism Sponsor List, Constraining BidenΓÇÖs Plans",
+         "abstract":"In announcing the move, Secretary of State Mike Pompeo cited CubaΓÇÖs hosting of American fugitives and Colombian rebels and its support for VenezuelaΓÇÖs authoritarian leader.",
+         "url":"https://www.nytimes.com/2021/01/11/us/politics/cuba-terrorism-trump-pompeo.html",
+         "uri":"nyt://article/cb8a8562-6efb-5ecf-a338-a9bf247920b7",
+         "byline":"By Michael Crowley, Ed Augustin and Kirk Semple",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T07:59:45-05:00",
+         "created_date":"2021-01-11T18:46:28-05:00",
+         "published_date":"2021-01-11T18:46:28-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "United States International Relations",
+            "United States Politics and Government",
+            "Embargoes and Sanctions",
+            "Terrorism"
+         ],
+         "org_facet":[
+            "State Department"
+         ],
+         "per_facet":[
+            "Pompeo, Mike",
+            "Trump, Donald J",
+            "Biden, Joseph R Jr",
+            "Obama, Barack"
+         ],
+         "geo_facet":[
+            "Cuba"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-diplo/merlin_181018974_b395938a-a5e7-40c5-a691-6aac8da7244a-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The statement by Secretary of State Mike Pompeo cited CubaΓÇÖs refusal to extradite 10 leaders of ColombiaΓÇÖs National Liberation Army, who have been living Havana since 2017.",
+               "copyright":"Jessica Mcgowan/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-diplo/11dc-diplo-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The statement by Secretary of State Mike Pompeo cited CubaΓÇÖs refusal to extradite 10 leaders of ColombiaΓÇÖs National Liberation Army, who have been living Havana since 2017.",
+               "copyright":"Jessica Mcgowan/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-diplo/11dc-diplo-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The statement by Secretary of State Mike Pompeo cited CubaΓÇÖs refusal to extradite 10 leaders of ColombiaΓÇÖs National Liberation Army, who have been living Havana since 2017.",
+               "copyright":"Jessica Mcgowan/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-diplo/merlin_181018974_b395938a-a5e7-40c5-a691-6aac8da7244a-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The statement by Secretary of State Mike Pompeo cited CubaΓÇÖs refusal to extradite 10 leaders of ColombiaΓÇÖs National Liberation Army, who have been living Havana since 2017.",
+               "copyright":"Jessica Mcgowan/Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-diplo/merlin_181018974_b395938a-a5e7-40c5-a691-6aac8da7244a-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"The statement by Secretary of State Mike Pompeo cited CubaΓÇÖs refusal to extradite 10 leaders of ColombiaΓÇÖs National Liberation Army, who have been living Havana since 2017.",
+               "copyright":"Jessica Mcgowan/Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/2K5cqYu"
+      },
+      {
+         "section":"us",
+         "subsection":"politics",
+         "title":"U.S. Imposes Sanctions on Ukrainians Linked to Giuliani for Election Disinformation",
+         "abstract":"The Treasury Department accused seven Ukrainians of working with a Russian agent ΓÇ£to spread misleading and unsubstantiated allegationsΓÇ¥ about President-elect Joseph R. Biden Jr.",
+         "url":"https://www.nytimes.com/2021/01/11/us/politics/sanctions-giuliani-trump-ukraine-election-disinformation.html",
+         "uri":"nyt://article/d44c2f07-3d56-5bac-9c9e-7a61ee0ea2a1",
+         "byline":"By Kenneth P. Vogel and Pranshu Verma",
+         "item_type":"Article",
+         "updated_date":"2021-01-11T23:13:17-05:00",
+         "created_date":"2021-01-11T15:32:00-05:00",
+         "published_date":"2021-01-11T15:32:00-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Embargoes and Sanctions",
+            "Presidential Election of 2020",
+            "Trump-Ukraine Whistle-Blower Complaint and Impeachment Inquiry",
+            "United States International Relations",
+            "United States Politics and Government",
+            "Rumors and Misinformation",
+            "Politics and Government"
+         ],
+         "org_facet":[
+            "Treasury Department"
+         ],
+         "per_facet":[
+            "Giuliani, Rudolph W",
+            "Trump, Donald J",
+            "Biden, Joseph R Jr",
+            "Biden, Hunter",
+            "Telizhenko, Andrii",
+            "Kulyk, Konstiantyn H"
+         ],
+         "geo_facet":[
+            "Ukraine",
+            "Russia"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-sanctionso/merlin_180211251_7d2d571c-bfba-4e23-bfd5-9fbc2e31cd46-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"During the 2020 campaign, Rudolph W. Giuliani arranged meetings with Ukrainians claiming to have damaging information about the Bidens.",
+               "copyright":"Erin Schaff/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-sanctionso/11dc-sanctionso-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"During the 2020 campaign, Rudolph W. Giuliani arranged meetings with Ukrainians claiming to have damaging information about the Bidens.",
+               "copyright":"Erin Schaff/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-sanctionso/11dc-sanctionso-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"During the 2020 campaign, Rudolph W. Giuliani arranged meetings with Ukrainians claiming to have damaging information about the Bidens.",
+               "copyright":"Erin Schaff/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-sanctionso/merlin_180211251_7d2d571c-bfba-4e23-bfd5-9fbc2e31cd46-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"During the 2020 campaign, Rudolph W. Giuliani arranged meetings with Ukrainians claiming to have damaging information about the Bidens.",
+               "copyright":"Erin Schaff/The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11dc-sanctionso/merlin_180211251_7d2d571c-bfba-4e23-bfd5-9fbc2e31cd46-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"During the 2020 campaign, Rudolph W. Giuliani arranged meetings with Ukrainians claiming to have damaging information about the Bidens.",
+               "copyright":"Erin Schaff/The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3ifztN7"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"The Palestinian Authority authorizes use of RussiaΓÇÖs Sputnik V vaccine.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/11/world/the-palestinian-authority-authorizes-use-of-russias-sputnik-v-vaccine.html",
+         "uri":"nyt://article/a3706240-3fdd-578d-a586-ba7dc9ac6a55",
+         "byline":"By Adam Rasgon",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T05:40:24-05:00",
+         "created_date":"2021-01-11T15:12:03-05:00",
+         "published_date":"2021-01-11T15:12:03-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11virus-briefing-palestinians1/11virus-briefing-palestinians1-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A medical worker filling a syringe with the Sputnik V vaccine at a clinic in Rostov-On-Don, Russia, last month.",
+               "copyright":"Sergey Pivovarov/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11virus-briefing-palestinians1/11virus-briefing-palestinians1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A medical worker filling a syringe with the Sputnik V vaccine at a clinic in Rostov-On-Don, Russia, last month.",
+               "copyright":"Sergey Pivovarov/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11virus-briefing-palestinians1/11virus-briefing-palestinians1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A medical worker filling a syringe with the Sputnik V vaccine at a clinic in Rostov-On-Don, Russia, last month.",
+               "copyright":"Sergey Pivovarov/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11virus-briefing-palestinians1/11virus-briefing-palestinians1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A medical worker filling a syringe with the Sputnik V vaccine at a clinic in Rostov-On-Don, Russia, last month.",
+               "copyright":"Sergey Pivovarov/Reuters"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11virus-briefing-palestinians1/11virus-briefing-palestinians1-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"A medical worker filling a syringe with the Sputnik V vaccine at a clinic in Rostov-On-Don, Russia, last month.",
+               "copyright":"Sergey Pivovarov/Reuters"
+            }
+         ],
+         "short_url":"https://nyti.ms/3i2t4V8"
+      },
+      {
+         "section":"world",
+         "subsection":"",
+         "title":"Washington has another problem: The coronavirus is surging in the capital.",
+         "abstract":"",
+         "url":"https://www.nytimes.com/2021/01/11/world/washington-has-another-problem-the-coronavirus-is-surging-in-the-capital.html",
+         "uri":"nyt://article/7075b21b-8cf8-5086-b085-34da7bbcdabb",
+         "byline":"By Julie Bosman and Mitch Smith",
+         "item_type":"Article",
+         "updated_date":"2021-01-11T19:47:21-05:00",
+         "created_date":"2021-01-11T15:11:03-05:00",
+         "published_date":"2021-01-11T15:11:03-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "internal-essential"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/11virus-briefing-DC1/11virus-briefing-DC1-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1366,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Outside GrubbΓÇÖs Pharmacy on Capitol Hill, workers in a temporary building offered rapid Covid-19 testing last month.┬á",
+               "copyright":"Shawn Thew/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/11virus-briefing-DC1/11virus-briefing-DC1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Outside GrubbΓÇÖs Pharmacy on Capitol Hill, workers in a temporary building offered rapid Covid-19 testing last month.┬á",
+               "copyright":"Shawn Thew/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/11virus-briefing-DC1/11virus-briefing-DC1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Outside GrubbΓÇÖs Pharmacy on Capitol Hill, workers in a temporary building offered rapid Covid-19 testing last month.┬á",
+               "copyright":"Shawn Thew/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/11virus-briefing-DC1/11virus-briefing-DC1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Outside GrubbΓÇÖs Pharmacy on Capitol Hill, workers in a temporary building offered rapid Covid-19 testing last month.┬á",
+               "copyright":"Shawn Thew/EPA, via Shutterstock"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/11virus-briefing-DC1/11virus-briefing-DC1-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Outside GrubbΓÇÖs Pharmacy on Capitol Hill, workers in a temporary building offered rapid Covid-19 testing last month.┬á",
+               "copyright":"Shawn Thew/EPA, via Shutterstock"
+            }
+         ],
+         "short_url":"https://nyti.ms/3nBZKGn"
+      },
+      {
+         "section":"briefing",
+         "subsection":"",
+         "title":"Your Tuesday Briefing",
+         "abstract":"TrumpΓÇÖs second impeachment.",
+         "url":"https://www.nytimes.com/2021/01/11/briefing/trump-impeachment-indonesia-vaccine-boeing.html",
+         "uri":"nyt://article/60e3867e-91e5-5985-a020-4ab8abaf1c32",
+         "byline":"By Melina Delkic",
+         "item_type":"Article",
+         "updated_date":"2021-01-11T15:14:59-05:00",
+         "created_date":"2021-01-11T14:51:40-05:00",
+         "published_date":"2021-01-11T14:51:40-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11transition-briefing-security-copy/merlin_182212503_2898a95b-c79b-4121-bae8-401a44290e1d-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1365,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"National Guard troops arriving at the Capitol on Monday. Security has been ramped up after an attack by a pro-Trump mob.",
+               "copyright":"Anna Moneymaker for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11transition-briefing-security-copy/11transition-briefing-security-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"National Guard troops arriving at the Capitol on Monday. Security has been ramped up after an attack by a pro-Trump mob.",
+               "copyright":"Anna Moneymaker for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11transition-briefing-security-copy/11transition-briefing-security-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"National Guard troops arriving at the Capitol on Monday. Security has been ramped up after an attack by a pro-Trump mob.",
+               "copyright":"Anna Moneymaker for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11transition-briefing-security-copy/merlin_182212503_2898a95b-c79b-4121-bae8-401a44290e1d-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"National Guard troops arriving at the Capitol on Monday. Security has been ramped up after an attack by a pro-Trump mob.",
+               "copyright":"Anna Moneymaker for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/us/politics/11transition-briefing-security-copy/merlin_182212503_2898a95b-c79b-4121-bae8-401a44290e1d-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"National Guard troops arriving at the Capitol on Monday. Security has been ramped up after an attack by a pro-Trump mob.",
+               "copyright":"Anna Moneymaker for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3i1LQfx"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"Group Takes Legal Action Over Lack of Abortion Services in Northern Ireland",
+         "abstract":"A human rights group says the governmentΓÇÖs inaction has left a health care void in a country where the procedure was legalized in 2019, but remains largely unavailable.",
+         "url":"https://www.nytimes.com/2021/01/11/world/europe/northern-ireland-abortion.html",
+         "uri":"nyt://article/2bab9540-c12a-51b0-84bb-db15a086d630",
+         "byline":"By Megan Specia",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T17:03:05-05:00",
+         "created_date":"2021-01-11T13:20:35-05:00",
+         "published_date":"2021-01-11T13:20:35-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Law and Legislation",
+            "Abortion",
+            "Human Rights and Human Rights Violations"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Great Britain",
+            "Northern Ireland"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11nireland-abortion/merlin_163070319_74f010d3-470d-4c3c-aaa1-35c082e032d9-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1367,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Alliance For Choice activists in Belfast in 2019.┬áAbortion was legalized in Northern Ireland in October of that year.",
+               "copyright":"Mary Turner for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11nireland-abortion/11nireland-abortion-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Alliance For Choice activists in Belfast in 2019.┬áAbortion was legalized in Northern Ireland in October of that year.",
+               "copyright":"Mary Turner for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11nireland-abortion/11nireland-abortion-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Alliance For Choice activists in Belfast in 2019.┬áAbortion was legalized in Northern Ireland in October of that year.",
+               "copyright":"Mary Turner for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11nireland-abortion/11nireland-abortion-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Alliance For Choice activists in Belfast in 2019.┬áAbortion was legalized in Northern Ireland in October of that year.",
+               "copyright":"Mary Turner for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11nireland-abortion/merlin_163070319_74f010d3-470d-4c3c-aaa1-35c082e032d9-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Alliance For Choice activists in Belfast in 2019.┬áAbortion was legalized in Northern Ireland in October of that year.",
+               "copyright":"Mary Turner for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/2LDqNns"
+      },
+      {
+         "section":"world",
+         "subsection":"asia",
+         "title":"In KashmirΓÇÖs Stillness, Hopes Wither and Houseboats Sink",
+         "abstract":"The turbulent region has long weathered violence and political strife, but IndiaΓÇÖs security crackdown and the coronavirus have brought life in the tourist-dependent region to a near halt.",
+         "url":"https://www.nytimes.com/2021/01/11/world/asia/kashmir-india-tourism.html",
+         "uri":"nyt://article/1e3ef067-bb60-52f9-adae-0d1128609080",
+         "byline":"By Emily Schmall",
+         "item_type":"Article",
+         "updated_date":"2021-01-12T13:06:15-05:00",
+         "created_date":"2021-01-11T13:14:30-05:00",
+         "published_date":"2021-01-11T13:14:30-05:00",
+         "material_type_facet":"",
+         "kicker":"India Dispatch",
+         "des_facet":[
+            "Coronavirus (2019-nCoV)",
+            "Quarantine (Life and Culture)",
+            "Defense and Military Forces",
+            "Economic Conditions and Trends"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            "Modi, Narendra"
+         ],
+         "geo_facet":[
+            "Kashmir and Jammu (India)",
+            "Dal Lake (Jammu and Kashmir)",
+            "India",
+            "Pakistan",
+            "Srinagar (Jammu and Kashmir)"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11kashmir-dispatch-1/merlin_181911309_4f0103ac-8380-477f-be50-e85d320cb7ef-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1367,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Boat owners near the shore of Dal Lake, normally a popular tourist destination in Kashmir. Conflict over KashmirΓÇÖs autonomy, as well as lockdowns to curb the spread of the coronavirus, have badly affected tourism in the region.",
+               "copyright":"Showkat Nanda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11kashmir-dispatch-1/11kashmir-dispatch-1-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Boat owners near the shore of Dal Lake, normally a popular tourist destination in Kashmir. Conflict over KashmirΓÇÖs autonomy, as well as lockdowns to curb the spread of the coronavirus, have badly affected tourism in the region.",
+               "copyright":"Showkat Nanda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11kashmir-dispatch-1/11kashmir-dispatch-1-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Boat owners near the shore of Dal Lake, normally a popular tourist destination in Kashmir. Conflict over KashmirΓÇÖs autonomy, as well as lockdowns to curb the spread of the coronavirus, have badly affected tourism in the region.",
+               "copyright":"Showkat Nanda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11kashmir-dispatch-1/11kashmir-dispatch-1-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Boat owners near the shore of Dal Lake, normally a popular tourist destination in Kashmir. Conflict over KashmirΓÇÖs autonomy, as well as lockdowns to curb the spread of the coronavirus, have badly affected tourism in the region.",
+               "copyright":"Showkat Nanda for The New York Times"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11kashmir-dispatch-1/merlin_181911309_4f0103ac-8380-477f-be50-e85d320cb7ef-articleInline.jpg",
+               "format":"Normal",
+               "height":127,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Boat owners near the shore of Dal Lake, normally a popular tourist destination in Kashmir. Conflict over KashmirΓÇÖs autonomy, as well as lockdowns to curb the spread of the coronavirus, have badly affected tourism in the region.",
+               "copyright":"Showkat Nanda for The New York Times"
+            }
+         ],
+         "short_url":"https://nyti.ms/3boGJom"
+      },
+      {
+         "section":"world",
+         "subsection":"europe",
+         "title":"Madrid Is Buried Under Heaviest Snowfall in 50 Years",
+         "abstract":"At least three people have died after Storm Filomena wreaked havoc across Spain and blanketed the capital in more than a foot and a half of snow, paralyzing it for days.",
+         "url":"https://www.nytimes.com/2021/01/11/world/europe/spain-snow-storm-filomena.html",
+         "uri":"nyt://article/41da9deb-1ca0-597d-af63-bca1b46c4147",
+         "byline":"By Anna Schaverien",
+         "item_type":"Article",
+         "updated_date":"2021-01-11T23:08:45-05:00",
+         "created_date":"2021-01-11T12:32:33-05:00",
+         "published_date":"2021-01-11T12:32:33-05:00",
+         "material_type_facet":"",
+         "kicker":"",
+         "des_facet":[
+            "Snow and Snowstorms",
+            "Weather",
+            "Deaths (Fatalities)"
+         ],
+         "org_facet":[
+            
+         ],
+         "per_facet":[
+            
+         ],
+         "geo_facet":[
+            "Madrid (Spain)",
+            "Spain"
+         ],
+         "multimedia":[
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11spain-5/merlin_182144166_05c5e206-33df-4753-af16-fbd21aaf3a8e-superJumbo.jpg",
+               "format":"superJumbo",
+               "height":1363,
+               "width":2048,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Madrid on Saturday. The city has not seen this much snow since 1971, SpainΓÇÖs national weather agency said.",
+               "copyright":"Gabriel Bouys/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11spain-5/11spain-5-thumbStandard.jpg",
+               "format":"Standard Thumbnail",
+               "height":75,
+               "width":75,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Madrid on Saturday. The city has not seen this much snow since 1971, SpainΓÇÖs national weather agency said.",
+               "copyright":"Gabriel Bouys/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11spain-5/11spain-5-thumbLarge.jpg",
+               "format":"thumbLarge",
+               "height":150,
+               "width":150,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Madrid on Saturday. The city has not seen this much snow since 1971, SpainΓÇÖs national weather agency said.",
+               "copyright":"Gabriel Bouys/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11spain-5/11spain-5-mediumThreeByTwo210.jpg",
+               "format":"mediumThreeByTwo210",
+               "height":140,
+               "width":210,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Madrid on Saturday. The city has not seen this much snow since 1971, SpainΓÇÖs national weather agency said.",
+               "copyright":"Gabriel Bouys/Agence France-Presse ΓÇö Getty Images"
+            },
+            {
+               "url":"https://static01.nyt.com/images/2021/01/11/world/11spain-5/merlin_182144166_05c5e206-33df-4753-af16-fbd21aaf3a8e-articleInline.jpg",
+               "format":"Normal",
+               "height":126,
+               "width":190,
+               "type":"image",
+               "subtype":"photo",
+               "caption":"Madrid on Saturday. The city has not seen this much snow since 1971, SpainΓÇÖs national weather agency said.",
+               "copyright":"Gabriel Bouys/Agence France-Presse ΓÇö Getty Images"
+            }
+         ],
+         "short_url":"https://nyti.ms/3se0cOs"
+      }
+   ]
+}

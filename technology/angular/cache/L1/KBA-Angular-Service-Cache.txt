@@ -1,0 +1,25 @@
+
+#Angular Service - Cache: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Enable Service - Cache:
+
+	ngx-cache
+
+	https://dev.to/maurogarcia_19/client-side-caching-with-angular-2i6l
+
+## Angular Cache / Evict:
+	https://angular.io/guide/service-worker-config
+	In the meantime, the user's browser decides to evict lazy-chunk.<lazy-hash-1>.js from its cache. Browsers may decide to evict specific (or all) resources from a cache in order to reclaim disk space.
+	
+	
+##
+
+LocalStorage
+
+private cache = {};
+const cacheResponse = this.cache[req.urlWithParams] || null;
+

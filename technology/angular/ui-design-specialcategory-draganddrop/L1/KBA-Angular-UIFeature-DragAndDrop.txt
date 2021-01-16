@@ -1,0 +1,89 @@
+
+#Angular -UIFeature - Drag and Drop: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Angular UI - Drag and Drop + File Upload:
+
+1. HTML:
+	Concepts:
+		Drag an item/data: get an HTML element
+		Drop: append the item/data with the destination element
+
+
+	Design:
+		==>1) Events:
+				==>1) Identify HTML events involved
+				==>2) Associate each of the events with the user mouse/keyboard processes
+		==>2) HTML Elements:
+				==>1) Define/Add HTML elements
+				==>2) Add each of the HTML events into each of the HTML elements:
+					  HTML's attributes on<event>="js-function(event)" <-> map each <event>
+					  (on<event> is the representation of the events, and argument uses: "event" as the name
+					  target is the associated HTML element with specific event
+				==>3) Extract the event handling code into JS file
+
+		Events have some associated APIs:
+			preventDefault(): some events have default behaviors
+			dataTransfer...
+
+		Drag-And-Drop Events
+			https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#Drag_Events
+			eight events the browser fires related to drag and drop: drag, dragend, dragenter, dragexit, dragleave, dragover, dragstart, and drop. We won’t be going over all of them because drag, dragend, dragexit, and dragstart are all fired on the element that is being dragged
+
+	Examples:
+		https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+		
+		https://www.codegrepper.com/code-examples/html/drag+and+drop+file+upload+w3schools
+		
+		https://w3schools.invisionzone.com/topic/55440-dropzone-file-upload-with-drop-click/
+		
+		https://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
+		https://www.sitepoint.com/html5-file-drag-and-drop/
+		https://blogs.sitepointstatic.com/examples/tech/filedrag/1/index.html
+		https://www.w3.org/TR/file-upload/
+
+		
+	Mechanism/DesignLogic:
+		1) Drag-and-Drop: Utilize events: ondrop... =>handleDrop =>handleFiles =>Utilize XHR calls to submit form data
+		2) Select Files to Upload: =>input =>onchange=>handleFiles =>Utilize XHR calls to submit form data
+	
+
+	https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
+	Procedure for Drag and Drop:
+		Step 1: Make an object draggable. First set the draggable attribute to true for that element to be draggable <img draggable = “true”> Then, specify what should happen when the element is dragged. ...
+		Step 2: Dropping the Object. The ondragover event specifies where the dragged data can be dropped.
+
+	How to Use HTML5 File Drag and Drop
+		enable file dragging and dropping onto a web page element.
+		analyze dropped files in JavaScript.
+		load and parse files on the client.
+		asynchronously upload files to the server using XMLHttpRequest2.
+		show a graphical progress bar while the upload occurs.
+
+
+2. Bootstrap 4:
+
+	https://mdbootstrap.com/docs/standard/plugins/drag-and-drop/
+	https://jsfiddle.net/djibe89/d2fvqpke/
+
+3. jQuery:
+
+
+4. Angular:
+
+5. Angular - MD:
+
+	http://localhost:4200/mds-drag-and-drop
+
+6. Angular - CDK:
+
+	http://localhost:4200/cdk-drag-and-drop
+
+7. PHP
+
+8. Java
+
+9. ...
