@@ -1,0 +1,69 @@
+
+========================================================
+Example Apps: Guide:
+
+========================================================
+Angular 10:
+	https://jasonwatmore.com/post/2020/09/01/angular-master-details-crud-example
+
+Angular - Master Details CRUD Example
+
+Tutorial built with Angular 10.0.14
+
+Other versions available:
+
+Angular: Angular 11
+React: React Hook Form, Formik
+This tutorial shows how to build a basic Angular CRUD application with master and detail views for listing, adding, editing and deleting records from a JSON API. The records in the example app are user records, but the same CRUD pattern and code structure could be used to manage any type of data e.g. products, services, articles etc.
+
+The example app includes a basic home page and users section, the default page in the users section displays a list of all users and includes buttons to add, edit and delete users. The add and edit buttons navigate to a page containing a form for creating and updating user records, and the delete button executes a function within the user list component to delete a user record. The add and edit forms are both implemented with the same add/edit component which behaves differently depending on which mode it is in ("add mode" vs "edit mode").
+
+The example project is available on GitHub at https://github.com/cornflourblue/angular-master-details-crud-example.
+
+Here it is in action: (See on StackBlitz at https://stackblitz.com/edit/angular-master-details-crud-example)
+
+
+Running the Angular CRUD Example Locally
+Install NodeJS and NPM from https://nodejs.org.
+Download or clone the Angular project source code from https://github.com/cornflourblue/angular-master-details-crud-example
+Install all required npm packages by running npm install or npm i from the command line in the project root folder (where the package.json is located).
+Start the app by running npm start from the command line in the project root folder, this will compile the Angular app and automatically launch it in the browser on the URL http://localhost:4200.
+NOTE: You can also start the CRUD app with the Angular CLI command ng serve --open. To do this first install the Angular CLI globally on your system with the command npm install -g @angular/cli.
+
+For more info on setting up your local Angular dev environment see Angular - Setup Development Environment.
+
+========================================================
+Angular 11:
+	https://jasonwatmore.com/post/2020/12/15/angular-11-crud-example-with-reactive-forms
+	
+Angular 11 - CRUD Example with Reactive Forms
+
+Tutorial built with Angular 11.0.4
+
+Other versions available:
+
+Angular: Angular 10
+React: React Hook Form, Formik
+This tutorial shows how to build a basic Angular 11 CRUD application with Reactive Forms that includes pages for listing, adding, editing and deleting records from a JSON API. The records in the example app are user records, but the same CRUD pattern and code structure could be used to manage any type of data e.g. products, services, articles etc.
+
+Fake backend API with CRUD routes
+The example app runs with a fake backend api by default to enable it to run completely in the browser without a real api (backend-less), the fake api contains routes for user CRUD operations (Create, Read, Update, Delete) and it uses browser local storage to save data. To disable the fake backend you just have to remove a couple of lines of code from the app.module.ts file, you can refer to the fake backend to see what's required to build a real api for the example.
+
+Example CRUD App Overview
+The example app includes a basic home page and users section with CRUD functionality, the default page in the users section displays a list of all users and includes buttons to add, edit and delete users. The add and edit buttons navigate to a page containing an Angular Reactive Form for creating or updating a user record, and the delete button executes a function within the user list component to delete a user record. The add and edit forms are both implemented with the same add/edit component which behaves differently depending on which mode it is in ("add mode" vs "edit mode").
+
+The example project is available on GitHub at https://github.com/cornflourblue/angular-11-crud-example.
+
+Here it is in action: (See on StackBlitz at https://stackblitz.com/edit/angular-11-crud-example)
+
+
+Run the Angular CRUD Example Locally
+Install Node.js and npm from https://nodejs.org.
+Download or clone the Angular project source code from https://github.com/cornflourblue/angular-11-crud-example
+Install all required npm packages by running npm install or npm i from the command line in the project root folder (where the package.json is located).
+Start the app by running npm start from the command line in the project root folder, this will compile the Angular app and automatically launch it in the browser on the URL http://localhost:4200.
+NOTE: You can also start the CRUD app with the Angular CLI command ng serve --open. To do this first install the Angular CLI globally on your system with the command npm install -g @angular/cli.
+
+For more info on setting up your local Angular dev environment see Angular - Setup Development Environment.
+
+========================================================

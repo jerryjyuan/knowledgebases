@@ -186,11 +186,11 @@ HttpClient:
 						  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
 						];					
 				  component.ts:
-				  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-					http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-					  this.forecasts = result;
-					}, error => console.error(error));
-				  }
+					  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+						http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+						  this.forecasts = result;
+						}, error => console.error(error));
+					  }
 			==>Get from parent class:
 				export class BackendBaseService {
 				  baseURL: string = 'http://localhost:8080/myApp';
@@ -295,7 +295,9 @@ HttpClient:
 			==>They pass in: xml request and returned as: xml response: similar to SOAPUI...
 	
 		==>Method 1:
-			There is a way to consume SOAP services in Angular; no third party packages or libraries required. In a nutshell, you set the response type as text, construct an XML document out of the XML text, and (if desired) parse the XML document into JSON format
+			There is a way to consume SOAP services in Angular; no third party packages or libraries required. 
+			In a nutshell, you set the response type as text, construct an XML document out of the XML text, and (if desired) parse the XML document 
+			into JSON format
 			https://stackblitz.com/edit/angular-soap-test?file=src%2Fapp%2Fsoap.service.ts
 			
 			import { HttpClient } from '@angular/common/http';
@@ -332,7 +334,7 @@ HttpClient:
 					https://stackblitz.com/angular/ldbamexeojd?file=src%2Fapp%2Frequest-cache.service.ts
 				
 				Promise: a kind of special callback... 
-					=> intead of a generic callback function... 
+					=> instead of a generic callback function... 
 					(It serves the same function as callbacks but has a nicer syntax and makes it easier to handle errors)
 					+ ...
 					==>var promise = new Promise((resolve, reject) => {});
@@ -343,11 +345,22 @@ HttpClient:
 				
 				Observable:
 					Observable is just a function that takes an observer and returns a function Observer: an object with next, error.
-					Observer allows to subscribe/unsubscribe to its data stream, emit next value to the observer, notify the observer about errors and inform the observer about the stream completion
+					Observer allows to subscribe/unsubscribe to its data stream, emit next value to the observer, notify the observer about errors 
+						and inform the observer about the stream completion
 					Observer provides a function to handle next value,errors and end of stream(ui events,http responses,data with web sockets).
 					Works with multiple values over time
-					It is cancel-able/retry-able and supports operators such as map,filter,reduce etc.
-					Creating an Observable can be -Observable.create() - returns Observable that can invoke methods on -Observer  Observable.from() - converts an array or iterable into -Observable  Observable.fromEvent() - converts an event into Observable -Observable.fromPromise() - converts a Promise into Observable -Observable.range() - returns a sequence of integers in the speciﬁed range
+					It is cancel-able/retry-able and supports operators such as map,filter, reduce etc.
+					Creating an Observable can be 
+							-Observable.create() 
+								- returns Observable that can invoke methods on Observer  
+							-Observable.from() 
+								- converts an array or iterable into Observable 
+							-Observable.fromEvent()
+								- converts an event into Observable 
+							-Observable.fromPromise() 
+								- converts a Promise into Observable 
+							-Observable.range() 
+								- returns a sequence of integers in the specified range
 				Promise:
 					A promise represents a task that will finish in the future;
 					Promises become resolved by a value;

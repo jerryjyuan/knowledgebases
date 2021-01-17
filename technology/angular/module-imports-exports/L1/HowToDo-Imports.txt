@@ -47,8 +47,12 @@ How To Do: Angular Imports
 	5) Unknown Scenarios:
 		rxjs-compat
 		
-==>
+==>import * as $ from 'jquery';
+
+==>import * as data from '../../assets/data.json';
 	
+==>...
+
 ==========================================================
 
 

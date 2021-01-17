@@ -1,0 +1,96 @@
+
+========================================================
+Example Apps: Guide:
+
+Angular 9:
+https://jasonwatmore.com/post/2018/04/26/npm-jw-angular-pagination-component
+https://github.com/cornflourblue/jw-angular-pagination
+
+Angular 10:
+https://jasonwatmore.com/post/2020/10/03/angular-10-simple-pagination-example
+https://stackblitz.com/edit/angular-10-pagination-example
+
+npm - JW Angular Pagination Component
+
+Compatible with Angular 2+ (2, 4, 5, 6, 7, 8, 9) and Bootstrap 3 & 4.
+
+This component is based on a previous example I posted showing an Angular 2+ pagination example with logic like Google's search results, I extracted the Angular pagination component from the example and published it to npm to make it easier for people to use.
+
+The source code for the component is available on GitHub at https://github.com/cornflourblue/jw-angular-pagination
+
+Update History:
+
+15 Jun 2020 - Updated to be compatible with Angular 9 / Ivy
+26 Apr 2018 - Built for Angular 2+
+Demos
+The below examples show the pagination component in action with Angular 9 and Angular 8:
+
+Angular 9 - Simple Pagination Example
+Angular 8 - Simple Pagination Example
+
+========================================================
+Angular 2:
+	https://jasonwatmore.com/post/2016/08/23/angular-2-pagination-example-with-logic-like-google
+	https://github.com/cornflourblue/angular2-pagination-example
+	
+Angular 2/5 - Pagination Example with Logic like Google
+
+Tutorial built with Angular 5.0.3
+
+Other versions available:
+
+Angular: Angular 10, 9, 8, Angular + Node
+React: React, React + Node
+Vue: Vue, Vue + Node
+AngularJS: AngularJS
+ASP.NET: Razor Pages, ASP.NET MVC
+UPDATE 26 Apr 2018 - This Angular pagination component is now available on npm, for details check out npm - JW Angular Pagination Component.
+
+This is an example of how to implement pagination in Angular 2/5 and TypeScript with logic like Google's search results.
+
+Project is available on GitHub at https://github.com/cornflourblue/angular2-pagination-example.
+
+Here it is in action: (See on Plunker at https://plnkr.co/edit/vPXf2U?p=preview)
+
+Update History:
+19 May 2018 - Removed dependency on underscore / lodash
+26 Apr 2018 - Added Angular pagination component to npm, details at npm - JW Angular Pagination Component
+29 Nov 2017 - Updated to Angular 5.0.3
+16 Mar 2017 - Updated to Angular 2.4.9
+18 Nov 2016 - Updated to Angular 2.2.1 and moved dummy data from client side array to json file on the server to show how to paginate items from api call
+21 Sep 2016 - Updated to Angular 2.0 Final
+
+Google's Pagination Logic
+The logic in Google's pagination is as follows:
+
+there are 10 page links shown at any time (e.g. 1 2 3 4 5 6 7 8 9 10) unless there are less than 10 total pages
+the active link (current page) is in the 6th position, except for when the active link is below 6 or less than 4 from the last position
+
+Here's what it looks like for each page if there are 15 total pages:
+
+[1] 2 3 4 5 6 7 8 9 10
+1 [2] 3 4 5 6 7 8 9 10
+1 2 [3] 4 5 6 7 8 9 10
+1 2 3 [4] 5 6 7 8 9 10
+1 2 3 4 [5] 6 7 8 9 10
+1 2 3 4 5 [6] 7 8 9 10
+2 3 4 5 6 [7] 8 9 10 11
+3 4 5 6 7 [8] 9 10 11 12
+4 5 6 7 8 [9] 10 11 12 13
+5 6 7 8 9 [10] 11 12 13 14
+6 7 8 9 10 [11] 12 13 14 15
+6 7 8 9 10 11 [12] 13 14 15
+6 7 8 9 10 11 12 [13] 14 15
+6 7 8 9 10 11 12 13 [14] 15
+6 7 8 9 10 11 12 13 14 [15] 
+
+
+Running the Angular 2/5 Example Locally
+I used the Angular 2 quickstart project as a base for the application, it's written in TypeScript and uses systemjs for loading modules. If you're new to angular 2 I'd recommend checking out the quickstart as it provides details on the project tooling and configuration files which aren't covered in this post.
+
+Install NodeJS (> v4) and NPM (> v3) from https://nodejs.org/en/download/, you can check the versions you have installed by running node -v and npm -v from the command line.
+Download the project source code from https://github.com/cornflourblue/angular2-pagination-example
+Install all required npm packages by running npm install from the command line in the project root folder (where the package.json is located).
+Start the application by running npm start from the command line in the project root folder.
+	
+========================================================

@@ -1,0 +1,453 @@
+
+===============================================
+NodeJS: Example Apps:
+	
+	https://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api
+	
+	==>NodeJS style MVC
+	npm start ~= npm run <script>
+	NodeJS: use many packages like Java jars, Angular APIs, etc.
+	
+C:\Users\jerry\git\knowledgebases\technology\nodejs\security\L6\node-jwt-authentication-api-master>npm install
+C:\Users\jerry\git\knowledgebases\technology\nodejs\security\L6\node-jwt-authentication-api-master>npm start
+
+> node-jwt-authentication-api@1.0.0 start C:\Users\jerry\git\knowledgebases\technology\nodejs\security\L6\node-jwt-authentication-api-master
+> node ./server.js
+
+Server listening on port 4000	
+			    
+==>http://localhost:4000/users/authenticate
+==>http://localhost:4000/users
+/users/authenticate
+/users
+
+Before running in production also make sure that you update the secret property in the config.json file, it is used to sign and verify JWT tokens for authentication, 
+change it to a random string to ensure nobody else can generate a JWT with the same secret and gain unauthorized access to your api. A quick and easy way is join a couple of GUIDs together to make a long random string (e.g. from https://www.guidgenerator.com/).
+
+How to authenticate a user with Postman
+
+To authenticate a user with the api and get a JWT token follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the authenticate route of your local API - http://localhost:4000/users/authenticate.
+Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON".
+Enter a JSON object containing the test username and password in the "Body" textarea:
+{
+    "username": "test",
+    "password": "test"
+}
+Click the "Send" button, you should receive a "200 OK" response with the user details including a JWT token in the response body, make a copy of the token value because we'll be using it in the next step to make an authenticated request.
+Here's a screenshot of Postman after the request is sent and the user has been authenticated:
+
+How to make an authenticated request to retrieve all users
+
+To make an authenticated request using the JWT token from the previous step, follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "GET" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the users route of your local API - http://localhost:4000/users.
+Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+Click the "Send" button, you should receive a "200 OK" response containing a JSON array with all the user records in the system (just the one test user in the example).
+
+Node JWT Helpers Folder
+Path: /_helpers
+
+Node JWT Global Error Handler Middleware
+Path: /_helpers/error-handler.js
+
+Node JWT Token Verification Middleware
+Path: /_helpers/jwt.js
+
+Node JWT User Service
+Path: /users/user.service.js
+The user service contains a method for authenticating user credentials and returning a JWT token, and a method for getting all users in the application.
+
+On successful authentication the authenticate method generates a JWT (JSON Web Token) using the jsonwebtoken npm package which generates a token that is digitally signed using a secret key stored in config.json. The JWT token is returned to the client application which must include it in the HTTP Authorization header of subsequent requests to secure routes.
+
+// users hardcoded for simplicity, store in a db for production applications
+const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+
+Node JWT Users Controller
+Path: /users/users.controller.js
+The users controller defines all /users routes for the api, the route definitions are grouped together at the top of the file and the implementation functions are below. The controller is bound to the /users path in the main server.js file.
+
+Express is the web server used by the api, it's one of the most popular web application frameworks for Node.js. For more info see https://expressjs.com/.
+const express = require('express');
+const router = express.Router();
+const userService = require('./user.service');
+ 
+Node JWT App Config
+Path: /config.json
+The app config file contains configuration data for the api.
+IMPORTANT: The secret property is used to sign and verify JWT tokens for authentication, change it with your own random string to ensure nobody else can generate a JWT with the same secret to gain unauthorized access to your api. A quick and easy way is join a couple of GUIDs together to make a long random string (e.g. from https://www.guidgenerator.com/).
+{
+    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+}
+ 
+Package.json
+Path: /package.json
+The package.json file contains project configuration information including package dependencies which get installed when you run npm install.
+
+start script
+	starts the api normally using node
+start:dev 
+	starts the api in development mode using nodemon which automatically restarts the server when a file is changed.
+
+Node JWT Server Startup File
+Path: /server.js
+The server.js file is the entry point into the api, it configures application middleware, binds controllers to routes and starts the Express web server for the api.
+
+===============================================
+
+Tutorial built with Node.js and Express.js 4.17.1
+
+Other versions available:
+
+ASP.NET: ASP.NET Core 3.1, ASP.NET Core 2.2
+In this tutorial we'll go through a simple example of how to implement JWT (JSON Web Token) authentication in a Node.js + Express.js API.
+
+For an extended example that includes role based access control see Node.js - Role Based Authorization, and for an example that includes refresh tokens see Node.js + MongoDB - JWT Authentication with Refresh Tokens.
+
+The example API has just two endpoints/routes to demonstrate authenticating with JWT and accessing a restricted route with JWT:
+
+/users/authenticate - public route that accepts HTTP POST requests containing the username and password in the body. If the username and password are correct then a JWT authentication token and the user details are returned.
+/users - secure route that accepts HTTP GET requests and returns a list of all the users in the application if the HTTP Authorization header contains a valid JWT token. If there is no auth token or the token is invalid then a 401 Unauthorized response is returned.
+The tutorial project is available on GitHub at https://github.com/cornflourblue/node-jwt-authentication-api.
+
+Update History:
+
+13 Aug 2020 - Added instructions to run with an ASP.NET Core Blazor WebAssembly client app.
+02 Jul 2020 - Updated to express-jwt 6.0.0 to fix security vulnerability.
+18 Jun 2020 - Uploaded video showing how to run the Node.js api with a React + Redux app.
+12 Jun 2020 - Uploaded video showing how to download, run and test the Node.js api with Postman.
+08 Jun 2020 - Updated to Express.js 4.17.1, added testing with Postman instructions and made a couple of small improvements to the user service and controller.
+05 Jun 2020 - Uploaded video showing how to run the Node.js api with an Angular 9 app.
+06 Aug 2018 - Built with Node.js and Express.js 4.16.3.
+
+Tutorial Contents
+Run the example API locally
+Test the Node.js API with Postman
+Run an Angular 9 app with the Node.js API
+Run a React app with the Node.js API
+Run a Vue.js app with the Node.js API
+Run a Blazor app with the ASP.NET Core API
+Node.js API project structure
+
+Running the Node.js JWT Authentication API Locally
+Install Node.js and npm from https://nodejs.org/en/download/.
+Download or clone the tutorial project code from https://github.com/cornflourblue/node-jwt-authentication-api
+Install all required npm packages by running npm install from the command line in the project root folder (where the package.json is located).
+Start the api by running npm start (or npm run start:dev to start with nodemon) from the command line in the project root folder, you should see the message Server listening on port 4000.
+Follow the instructions below to test with Postman or to hook up with an example Angular, React or Vue application.
+Before running in production
+Before running in production also make sure that you update the secret property in the config.json file, it is used to sign and verify JWT tokens for authentication, change it to a random string to ensure nobody else can generate a JWT with the same secret and gain unauthorized access to your api. A quick and easy way is join a couple of GUIDs together to make a long random string (e.g. from https://www.guidgenerator.com/).
+
+
+
+
+Testing the Node.js JWT Auth API with Postman
+Postman is a great tool for testing APIs, you can download it at https://www.getpostman.com/.
+
+Below are instructions on how to use Postman to authenticate a user to get a JWT token from the api, and then make an authenticated request with the JWT token to retrieve a list of users from the api.
+
+How to authenticate a user with Postman
+To authenticate a user with the api and get a JWT token follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the authenticate route of your local API - http://localhost:4000/users/authenticate.
+Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON".
+Enter a JSON object containing the test username and password in the "Body" textarea:
+{
+    "username": "test",
+    "password": "test"
+}
+Click the "Send" button, you should receive a "200 OK" response with the user details including a JWT token in the response body, make a copy of the token value because we'll be using it in the next step to make an authenticated request.
+Here's a screenshot of Postman after the request is sent and the user has been authenticated:
+
+
+
+How to make an authenticated request to retrieve all users
+To make an authenticated request using the JWT token from the previous step, follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "GET" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the users route of your local API - http://localhost:4000/users.
+Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+Click the "Send" button, you should receive a "200 OK" response containing a JSON array with all the user records in the system (just the one test user in the example).
+Here's a screenshot of Postman after making an authenticated request to get all users:
+
+
+ 
+
+
+Running an Angular 9 client app with the Node.js JWT Auth API
+For full details about the example Angular 9 application see the post Angular 9 - JWT Authentication Example & Tutorial. But to get up and running quickly just follow the below steps.
+
+Download or clone the Angular 9 tutorial code from https://github.com/cornflourblue/angular-9-jwt-authentication-example
+Install all required npm packages by running npm install from the command line in the project root folder (where the package.json is located).
+Remove or comment out the line below the comment // provider used to create fake backend located in the /src/app/app.module.ts file.
+Start the application by running npm start from the command line in the project root folder, this will launch a browser displaying the Angular example application and it should be hooked up with the Node.js JWT Auth API that you already have running.
+
+
+
+Running a React client app with the Node.js JWT Auth API
+For full details about the example React application see the post React + Redux - JWT Authentication Tutorial & Example. But to get up and running quickly just follow the below steps.
+
+Download or clone the React tutorial code from https://github.com/cornflourblue/react-redux-jwt-authentication-example
+Install all required npm packages by running npm install from the command line in the project root folder (where the package.json is located).
+Remove or comment out the 2 lines below the comment // setup fake backend located in the /src/index.jsx file.
+Start the application by running npm start from the command line in the project root folder, this will launch a browser displaying the React example application and it should be hooked up with the Node JWT Auth API that you already have running.
+
+
+
+Running a Vue.js client app with the Node.js JWT Auth API
+For full details about the example Vue.js JWT application see the post Vue.js + Vuex - JWT Authentication Tutorial & Example. But to get up and running quickly just follow the below steps.
+
+Download or clone the VueJS tutorial code from https://github.com/cornflourblue/vue-vuex-jwt-authentication-example
+Install all required npm packages by running npm install from the command line in the project root folder (where the package.json is located).
+Remove or comment out the 2 lines below the comment // setup fake backend located in the /src/index.js file.
+Start the application by running npm start from the command line in the project root folder, this will launch a browser displaying the VueJS example application and it should be hooked up with the Node JWT Auth API that you already have running.
+
+Running a Blazor WebAssembly (WASM) client app with the Node.js JWT Auth API
+For full details about the example Blazor application see the post Blazor WebAssembly - JWT Authentication Example & Tutorial. But to get up and running quickly just follow the below steps.
+
+Install the .NET Core SDK from https://www.microsoft.com/net/download/core.
+Download or clone the tutorial project code from https://github.com/cornflourblue/blazor-webassembly-jwt-authentication-example
+Change the "fakeBackend" setting to "false" in the /wwwroot/appsettings.json file.
+Start the app by running dotnet run from the command line in the project root folder (where the BlazorApp.csproj file is located)
+Open a new browser tab and navigate to the URL http://localhost:5000, the ASP.NET Core Blazor app should be hooked up with the Node JWT Auth API that you already have running.
+NOTE: To enable hot reloading during development so the app automatically restarts when a file is changed, start the app with the command dotnet watch run.
+
+ 
+Node.js JWT Authentication Project Structure
+The tutorial project is structured into feature folders (users) and non-feature / shared component folders (_helpers). Shared component folders contain code that can be used by multiple features and other parts of the application, and are prefixed with an underscore _ to group them together and make it easy to differentiate between feature folders and non-feature folders.
+
+The example only contains a single (users) feature at the moment, but could be easily extended with other features by copying the users folder and following the same pattern.
+
+Click any of the below links to jump down to a description of each file along with its code:
+
+_helpers
+error-handler.js
+jwt.js
+users
+user.service.js
+users.controller.js
+config.json
+package.json
+server.js
+ 
+Node JWT Helpers Folder
+Path: /_helpers
+The helpers folder contains all the bits and pieces that don't fit into other folders but don't justify having a folder of their own.
+
+Back to top
+ 
+Node JWT Global Error Handler Middleware
+Path: /_helpers/error-handler.js
+The global error handler is used catch all errors and remove the need for redundant error handler code throughout the application. It's configured as middleware in the main server.js file.
+
+module.exports = errorHandler;
+
+function errorHandler(err, req, res, next) {
+    if (typeof (err) === 'string') {
+        // custom application error
+        return res.status(400).json({ message: err });
+    }
+
+    if (err.name === 'UnauthorizedError') {
+        // jwt authentication error
+        return res.status(401).json({ message: 'Invalid Token' });
+    }
+
+    // default to 500 server error
+    return res.status(500).json({ message: err.message });
+}
+Back to top
+ 
+Node JWT Token Verification Middleware
+Path: /_helpers/jwt.js
+The Node.js JWT middleware checks that the JWT token received in the http request from the client is valid before allowing access to the API, if the token is invalid a 401 Unauthorized response is returned.
+
+The JWT middleware is configured to make all routes secure except for the authenticate route (/users/authenticate) which is publicly accessible.
+
+const expressJwt = require('express-jwt');
+const config = require('config.json');
+
+module.exports = jwt;
+
+function jwt() {
+    const { secret } = config;
+    return expressJwt({ secret, algorithms: ['HS256'] }).unless({
+        path: [
+            // public routes that don't require authentication
+            '/users/authenticate'
+        ]
+    });
+}
+Back to top
+ 
+Node JWT Users Folder
+Path: /users
+The users folder contains all code that is specific to the users feature of the api.
+
+Back to top
+ 
+Node JWT User Service
+Path: /users/user.service.js
+The user service contains a method for authenticating user credentials and returning a JWT token, and a method for getting all users in the application.
+
+I hardcoded the array of users in the example for simplicity and to keep the tutorial focused on JWT authentication, but in a production application it is recommended to store user records in a database with hashed passwords. For an extended example that includes user registration and stores data in MongoDB with hashed passwords check out NodeJS + MongoDB - Simple API for Authentication, Registration and User Management.
+
+The top of the file contains the exported service object with just the method names to make it easy to see all the methods at a glance, the rest of the file contains the implementation functions followed by local helper functions.
+
+On successful authentication the authenticate method generates a JWT (JSON Web Token) using the jsonwebtoken npm package which generates a token that is digitally signed using a secret key stored in config.json. The JWT token is returned to the client application which must include it in the HTTP Authorization header of subsequent requests to secure routes.
+
+const config = require('config.json');
+const jwt = require('jsonwebtoken');
+
+// users hardcoded for simplicity, store in a db for production applications
+const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+
+module.exports = {
+    authenticate,
+    getAll
+};
+
+async function authenticate({ username, password }) {
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) throw 'Username or password is incorrect';
+
+    // create a jwt token that is valid for 7 days
+    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+
+    return {
+        ...omitPassword(user),
+        token
+    };
+}
+
+async function getAll() {
+    return users.map(u => omitPassword(u));
+}
+
+// helper functions
+
+function omitPassword(user) {
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+}
+Back to top
+ 
+Node JWT Users Controller
+Path: /users/users.controller.js
+The users controller defines all /users routes for the api, the route definitions are grouped together at the top of the file and the implementation functions are below. The controller is bound to the /users path in the main server.js file.
+
+Express is the web server used by the api, it's one of the most popular web application frameworks for Node.js. For more info see https://expressjs.com/.
+
+const express = require('express');
+const router = express.Router();
+const userService = require('./user.service');
+
+// routes
+router.post('/authenticate', authenticate);
+router.get('/', getAll);
+
+module.exports = router;
+
+function authenticate(req, res, next) {
+    userService.authenticate(req.body)
+        .then(user => res.json(user))
+        .catch(next);
+}
+
+function getAll(req, res, next) {
+    userService.getAll()
+        .then(users => res.json(users))
+        .catch(next);
+}
+Back to top
+ 
+Node JWT App Config
+Path: /config.json
+The app config file contains configuration data for the api.
+
+IMPORTANT: The secret property is used to sign and verify JWT tokens for authentication, change it with your own random string to ensure nobody else can generate a JWT with the same secret to gain unauthorized access to your api. A quick and easy way is join a couple of GUIDs together to make a long random string (e.g. from https://www.guidgenerator.com/).
+
+{
+    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+}
+Back to top
+ 
+Package.json
+Path: /package.json
+The package.json file contains project configuration information including package dependencies which get installed when you run npm install.
+
+The scripts section contains scripts that are executed by running the command npm run <script name>, the start script can also be run with the shortcut command npm start.
+
+The start script starts the api normally using node, and the start:dev script starts the api in development mode using nodemon which automatically restarts the server when a file is changed.
+
+For more info see https://docs.npmjs.com/files/package.json.
+
+{
+    "name": "node-jwt-authentication-api",
+    "version": "1.0.0",
+    "description": "NodeJS JWT Authentication API",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cornflourblue/node-jwt-authentication-api.git"
+    },
+    "scripts": {
+        "start": "node ./server.js",
+        "start:dev": "nodemon ./server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-jwt": "^6.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "rootpath": "^0.1.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
+}
+Back to top
+ 
+Node JWT Server Startup File
+Path: /server.js
+The server.js file is the entry point into the api, it configures application middleware, binds controllers to routes and starts the Express web server for the api.
+
+require('rootpath')();
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const jwt = require('_helpers/jwt');
+const errorHandler = require('_helpers/error-handler');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// use JWT auth to secure the api
+app.use(jwt());
+
+// api routes
+app.use('/users', require('./users/users.controller'));
+
+// global error handler
+app.use(errorHandler);
+
+// start server
+const port = process.env.NODE_ENV === 'production' ? 80 : 4000;
+const server = app.listen(port, function () {
+    console.log('Server listening on port ' + port);
+});
+Back to top
+
+===============================================

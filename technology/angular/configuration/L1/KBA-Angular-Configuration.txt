@@ -1,0 +1,45 @@
+
+#Angular Configuration: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Configure Angular application:
+
+##To Configure Project Configurations:
+	https://www.typescriptlang.org/tsconfig
+	Bases:
+		https://github.com/tsconfig/bases/
+		npm install --save-dev @tsconfig/recommended
+		yarn add --dev @tsconfig/recommended
+	Examples:
+		http://json.schemastore.org/tsconfig
+	Usages:
+		https://www.typescriptlang.org/tsconfig#resolveJsonModule
+			settings.json
+			import settings from "./settings.json";
+			settings.debug === true;
+		https://www.typescriptlang.org/tsconfig#esModuleInterop
+		https://www.typescriptlang.org/docs/handbook/module-resolution.html
+		
+##To Configure Services Module:
+
+Method 1: Utilize centralizaed configuration management:
+		  ==>RESTful Config API provided configuration data
+		  ==>Cloud Config Server
+		  ==>Platform Config Server
+
+Method 2: Add service API configuration data (including API urls etc) into a JSON configuration data file: config.json
+
+Method 3: Utilize environment class: each environment can has its own API urls
+
+Method 4: Create a central ApiConfig class 
+
+Method 5: Create a parent service class:
+		  ==>BackendBaseService: baseURL: string = 'http://localhost:8080/myApp';
+		  ==>export class ItemsService extends BackendBaseService{ }
+
+Method 6:
+
+##

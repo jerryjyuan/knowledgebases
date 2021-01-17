@@ -23,7 +23,9 @@ Angular:
 		https://nodejs.org/en/docs/es6/
 		
 	==>TypeScript:
+		https://www.typescriptlang.org/docs/handbook/
 		https://www.typescriptlang.org/docs/handbook/basic-types.html
+		https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
 	==>NodeJS:
 		https://nodejs.org/en/

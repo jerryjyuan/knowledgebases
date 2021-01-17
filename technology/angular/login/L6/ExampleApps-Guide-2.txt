@@ -1,0 +1,32 @@
+
+========================================================
+Example Apps: Guide:
+	https://github.com/cornflourblue/angular-7-tutorial
+
+angular-7-tutorial
+A video tutorial series showing how to build an Angular 7 application step by step that supports user registration and login functionality.
+
+Part 1 (Windows) - Setup Development Machine on Windows
+Part 1 (Mac) - Setup Development Machine on Mac
+Part 2 - Create Base Project Structure & Webpack Config
+Part 3 - Add Routing & Multiple Pages
+Part 4 - Login Form, Authentication Service & Route Guard
+Part 5 - Registration Form & User Service
+Part 6 - Home Page & Alert Component
+Part 7 (Optional) - Migrating to an Angular CLI Project
+
+========================================================
+Misc:
+
+angular-7-registration-login-example-cli-master
+	https://github.com/cornflourblue/angular-7-registration-login-example-cli
+angular-10-facebook-login-example-master
+	https://github.com/cornflourblue/angular-10-facebook-login-example
+angular-10-signup-verification-boilerplate-master
+	https://github.com/cornflourblue/angular-10-signup-verification-boilerplate
+node-mysql-registration-login-api-master
+
+mean-angular2-registration-login-example-master
+	https://github.com/cornflourblue/mean-angular2-registration-login-example
+	
+========================================================

@@ -1,0 +1,22 @@
+
+===============================================
+NodeJS: Example Apps:
+
+	https://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api
+	https://github.com/cornflourblue/node-jwt-authentication-api
+	
+More Examples:
+
+	https://jasonwatmore.com/post/2018/07/06/vue-vuex-jwt-authentication-tutorial-example
+	https://github.com/cornflourblue/vue-vuex-jwt-authentication-example
+	
+	Similar to ReactJS, but many differences:
+		The main difference between Vue. js and React is that Vue. js uses templates with declarative rendering (xxx.vue files)
+		while React uses JSX, which is a pretty much a JS extension that allows using HTML within it (render()...). 
+		That means React requires more complex implementations for even simple tasks(comparing to Vue).
+		
+		JavaScript XML
+			JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
+
+===============================================
+	

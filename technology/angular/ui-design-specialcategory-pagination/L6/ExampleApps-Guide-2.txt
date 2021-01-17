@@ -1,0 +1,53 @@
+
+========================================================
+Example Apps: Guide:
+	
+========================================================
+Angular 10:
+	https://jasonwatmore.com/post/2020/10/03/angular-10-simple-pagination-example
+	https://stackblitz.com/edit/angular-10-pagination-example
+	
+Example built with Angular 10.1.4
+
+Other versions available:
+
+Angular: Angular 9, 8, 2/5, Angular + Node
+React: React, React + Node
+Vue: Vue, Vue + Node
+AngularJS: AngularJS
+ASP.NET: Razor Pages, ASP.NET MVC
+This is a simple example of how to implement client-side pagination in Angular 10.
+
+The example contains a hard coded array of 150 objects split into 15 pages to demonstrate how the pagination component works. Styling in the example is done with bootstrap 4.5 css but you can style any way you like using the provided css classes, details are provided later in the tutorial.
+
+========================================================
+Angular 8:
+	https://jasonwatmore.com/post/2019/06/28/angular-8-node-server-side-pagination-tutorial-example
+	https://github.com/cornflourblue/angular-8-node-server-side-pagination
+	
+Angular 8 + Node - Server Side Pagination Tutorial & Example
+
+Example built with Angular 8.0.0
+
+Other versions available:
+
+Angular: Angular 10, 9, 8, 2/5
+React: React, React + Node
+Vue: Vue, Vue + Node
+AngularJS: AngularJS
+ASP.NET: Razor Pages, ASP.NET MVC
+This is a simple example of how to implement server-side pagination in Angular 8 with a Node.js backend API.
+
+The example contains a hard coded array of 150 objects split into 30 pages (5 items per page) to demonstrate how the pagination logic works. Styling of the example is done with Bootstap 4.
+
+The tutorial code is available on GitHub at https://github.com/cornflourblue/angular-8-node-server-side-pagination.
+
+
+Running the Angular + Node Pagination Example Locally
+Install NodeJS and NPM from https://nodejs.org/en/download/.
+Download or clone the tutorial project source code from https://github.com/cornflourblue/angular-8-node-server-side-pagination.
+Install required npm packages of the backend Node API by running the npm install command in the /server folder.
+Start the backend Node API by running npm start in the /server folder, this will start the API on the URL http://localhost:4000.
+Install required npm packages of the frontend Angular app by running the npm install command in the /client folder.
+Start the Angular frontend app by running npm start in the /client folder, this will build the app with webpack and automatically launch it in a browser on the URL http://localhost:8080.
+========================================================

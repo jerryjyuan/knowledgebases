@@ -90,5 +90,34 @@
 			CREATE src/app/clicommands/web-workers/web-worker1.worker.ts (157 bytes)
 			UPDATE tsconfig.json (634 bytes)
 
-2. 
+2. NodeJS/NPM:
+
+	==>npm uninstall
+	==>npm cache clean --force
+		Or: manually delete %appdata%\npm-cache folder
+	==>npm clean-install
+		if the node_modules folder exists, npm deletes it and installs a fresh one
+	==>uninstall node and NPM:
+		Windows:
+			Open the Windows Control Panel.
+			Choose the Programs and Features option.
+			Click the “Uninstall a program”
+			Select Node. js, and click the Uninstall link.		
+		Linux:
+			sudo npm uninstall npm -g
+			Or, if that fails, get the npm source code, and do:
+				sudo make uninstall
+			rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/npm* ...
+			ls -laF /usr/local/{lib/node{,/.npm},bin,share/man} | grep npm. ...
+			find /usr/local/{lib/node,bin} -exec grep -l npm \{\} \; ;
+
+	==>Uninstalling npm packages
+		npm uninstall <package-name>
+		npm uninstall -S <package-name>
+		npm uninstall -D <package-name>
+		npm uninstall -g <package-name>
+		npm uninstall <name>
+		npm uninstall <name> --save
+		npm uninstall <name> --save-dev
+		npm uninstall -g <name> --save
 

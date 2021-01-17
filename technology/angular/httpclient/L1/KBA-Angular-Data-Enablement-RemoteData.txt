@@ -15,7 +15,41 @@
 
 ##To Add Remote Data:
 
-1. HttpClient
+1. Data Flow Categories:
+	HTML -> Component -> Hardcoded-Model-Files / Constants-Files
+	HTML -> Component -> Service -> Hardcoded-Model-Files / Constants-Files
+	HTML -> Component -> Service -> Internal/Local/Mock-JSON-Data-Files
+	HTML -> Component -> Service -> JavaScript DOM's SessionStorage/LocalStorage
+	HTML -> Component -> Service -> Fake Backend APIs via simulation
+			https://jasonwatmore.com/post/2020/07/18/angular-10-user-registration-and-login-example-tutorial
+	HTML -> Component -> Service -> In-Mem-Service APIs
+	HTML -> Component -> Service -> Client-Side-Browser-Databases/DataStores
+	HTML -> Component -> Service -> Internal-ServiceModule -> External-RESTfulAPIs
+	HTML -> Component -> Service -> External-RESTfulAPIs (SpringBoot, NodeJs, BlazorWebAssembly, MS-Tech, ...)
+	HTML -> Component -> Service -> External-SOAP-APIs	
+	HTML -> Component -> Service -> External-ASP.Net Core 3.1-APIs
+			https://github.com/cornflourblue/aspnet-core-3-registration-login-api
+			https://github.com/cornflourblue/aspnet-core-3-jwt-authentication-api
+	HTML -> Component -> Service -> External-NodeJS-APIs
+			https://jasonwatmore.com/post/2020/07/09/angular-10-jwt-authentication-example-tutorial
+			https://github.com/cornflourblue/angular-10-jwt-authentication-example
+			https://github.com/cornflourblue/node-jwt-authentication-api
+	HTML -> Component -> Service -> External-NodeJS/MySQL-APIs
+			https://github.com/cornflourblue/node-mysql-registration-login-api
+	HTML -> Component -> Service -> External-NodeJS/Mongo-APIs
+			https://jasonwatmore.com/post/2018/06/14/nodejs-mongodb-simple-api-for-authentication-registration-and-user-management
+			https://github.com/cornflourblue/node-mongo-registration-login-api
+	HTML -> Component -> Service -> Cloud/Platform-based services/data-stores
+			==>AWS: https://jasonwatmore.com/post/2019/12/02/angular-nodejs-on-aws-how-to-deploy-a-mean-stack-app-to-amazon-ec2
+			==>Azure: https://jasonwatmore.com/post/2020/01/08/angular-net-core-sql-on-azure-how-to-deploy-a-full-stack-app-to-microsoft-azure
+2. APIs: Logic:
+	1) All HttpClient: Ajax calls:
+					1) Reason 1: why not? - Angular is based on JavaScript and JavaScript is so popular to make Ajax calls: example: jQuery, ...
+					2) Reason 2: it is for a component, and a component is just part of the HTML page, retrieving data for one component - why do you want to refresh entire page?
+								 ==>Component-based data retrieval and update is for sure suitable for partial page data change/update: which is Ajax
+	2) Internally: Angular code is similar to jQuery Ajax calls? - but for sure it uses: XHR calls
+	3) HttpClient APIs all return Observable
+2. HttpClient
 	get(url: string, 
 		options: { 
 			headers?: HttpHeaders | { [header: string]: string | string[]; }; 
@@ -31,8 +65,10 @@
 		(| can be pipe as well)
 	==>this.http:get(JSON data).map(() => response.json());
 
-2. HttpClient
+3. HttpClient
     post()
 
 
 
+9. Data:
+	var promise = new Promise((resolve, reject) => {});

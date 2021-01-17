@@ -1,0 +1,16 @@
+﻿{
+    "compilerOptions": {
+        "declaration": true,
+        "experimentalDecorators": true,
+        "lib": [ "es2015", "dom" ],
+        "rootDir": "src",
+        "outDir": "lib",
+        "target": "es5"
+    },
+    "angularCompilerOptions": { 
+        "skipTemplateCodegen": true 
+    },
+    "files": [
+        "src/jw-angular-social-buttons.module.ts"
+    ]
+}

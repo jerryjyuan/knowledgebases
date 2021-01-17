@@ -13,6 +13,10 @@
 4. Remote Data: RESTful APIs, Database, Server Integration, Cloud Platform
 5. 
 
+##To know how to declare all kinds of data:
+	https://www.typescriptlang.org/docs/handbook/basic-types.html
+	https://www.typescriptlang.org/docs/handbook/generics.html
+	
 ##To Add JavaScript Web Storage:
 
 1. Add DOM Window's SessionStorage: SessionStorage is per tab/window: so by default it is enabled by browsers (part of DOM property)

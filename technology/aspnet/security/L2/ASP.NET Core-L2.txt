@@ -1,0 +1,642 @@
+
+===============================================
+ASP.NET Core: Example Apps:
+
+==>ASP.NET Core 3.1
+	https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api
+
+ASP.NET Core - Setup Development Environment.
+	https://jasonwatmore.com/post/2020/05/26/aspnet-core-setup-development-environment
+
+Tools required to run the ASP.NET Core 3.1 JWT Example Locally
+
+	To develop and run ASP.NET Core applications locally, download and install the following:
+	
+	.NET Core SDK - includes the .NET Core runtime and command line tools
+	Visual Studio Code - code editor that runs on Windows, Mac and Linux
+	C# extension for Visual Studio Code - adds support to VS Code for developing .NET Core applications
+		https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp
+
+==>Running the ASP.NET Core JWT Authentication API Locally
+	Download or clone the tutorial project code from https://github.com/cornflourblue/aspnet-core-3-jwt-authentication-api
+	Start the api by running dotnet run from the command line in the project root folder (where the WebApi.csproj file is located), you should see the message Now listening on: http://localhost:4000. Follow the instructions below to test with Postman or hook up with one of the example single page applications available (Angular, React or Vue).
+	NOTE: You can also start the application in debug mode in VS Code by opening the project root folder in VS Code and pressing F5 or by selecting Debug -> Start Debugging from the top menu. Running in debug mode allows you to attach breakpoints to pause execution and step through the application code.
+	http://localhost:4000
+
+C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master>dotnet run
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:4000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master
+      
+==>How to authenticate a user with Postman
+
+To authenticate a user with the api and get a JWT token follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the authenticate route of your local API - http://localhost:4000/users/authenticate.
+Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON (application/json)".
+Enter a JSON object containing the test username and password in the "Body" textarea:
+{
+    "username": "test",
+    "password": "test"
+}
+Click the "Send" button, you should receive a "200 OK" response with the user details including a JWT token in the response body, make a copy of the token value because we'll be using it in the next step to make an authenticated request.
+
+POST: http://localhost:4000/users/authenticate
+{
+    "username": "test",
+    "password": "test"
+}
+
+{
+    "id": 1,
+    "firstName": "Test",
+    "lastName": "User",
+    "username": "test",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE2MTA5MDg3NzYsImV4cCI6MTYxMTUxMzU3NiwiaWF0IjoxNjEwOTA4Nzc2fQ.yKFNqDm8Cekic6SCT3fx-7xQSQsDbePxZKU-tO8CoR4"
+}
+
+==>How to make an authenticated request to retrieve all users
+
+To make an authenticated request using the JWT token from the previous step, follow these steps:
+
+Open a new request tab by clicking the plus (+) button at the end of the tabs.
+Change the http request method to "GET" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the users route of your local API - http://localhost:4000/users.
+Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+Click the "Send" button, you should receive a "200 OK" response containing a JSON array with all the user records in the system (just the one test user in the example).
+
+GET: http://localhost:4000/users
+[{"id":1,"firstName":"Test","lastName":"User","username":"test"}]
+
+===============================================
+Application Structures and Modules:
+
+	==>ASP.NET Core JWT Authentication Project Structure
+		Controllers - define the end points / routes for the web api, controllers are the entry point into the web api from client applications via http requests.
+		Models - represent request and response models for controller methods, request models define the parameters for incoming requests, and response models can be used to define what data is returned.
+		Services - contain business logic, validation and data access code.
+		Entities - represent the application data.
+		Helpers - anything that doesn't fit into the above folders.
+
+	==>MVC Structures and Framework:
+	
+		==>Use Web API
+		
+		==>RESTful APIs: similar to Java Spring Boot
+			==>Annotations have different syntaxes - enabled as attributes
+	
+		==>Utilize / Similar to C-Sharp coding scenarios
+
+ASP.NET Core Custom Authorize Attribute
+Path: /Helpers/AuthorizeAttribute.cs
+
+The custom authorize attribute is added to controller action methods that require the user to be authenticated.
+
+Authorization is performed by the OnAuthorization method which checks if there is an authenticated user attached to the current request (context.HttpContext.Items["User"]). An authenticated user is attached by the custom jwt middleware if the request contains a valid JWT access token.
+
+On successful authorization no action is taken and the request is passed through to the controller action method, if authorization fails a 401 Unauthorized response is returned.
+
+ASP.NET Core Custom JWT Middleware
+Path: /Helpers/JwtMiddleware.cs
+The custom JWT middleware checks if there is a token in the request Authorization header, and if so attempts to:
+
+Validate the token
+Extract the user id from the token
+Attach the authenticated user to the current HttpContext.Items collection to make it accessible within the scope of the current request
+If there is no token in the request header or if any of the above steps fail then no user is attached to the http context and the request is only be able to access public routes. Authorization is performed by the custom authorize attribute which checks that a user is attached to the http context, if authorization fails a 401 Unauthorized response is returned.
+
+ASP.NET Core JWT Authenticate Request Model
+Path: /Models/AuthenticateRequest.cs
+The authenticate request model defines the parameters for incoming requests to the /users/authenticate route, it is attached to the route as the parameter to the Authenticate action method of the users controller. When an HTTP POST request is received by the route, the data from the body is bound to an instance of the AuthenticateRequest class, validated and passed to the method.
+
+ASP.NET Core Data Annotations are used to automatically handle model validation, the [Required] attribute sets both the username and password as required fields so if either are missing a validation error message is returned from the api.
+
+ASP.NET Core JWT Authenticate Response Model
+Path: /Models/AuthenticateResponse.cs
+The authenticate response model defines the data returned after successful authentication, it includes basic user details and a JWT access token.
+ 
+ASP.NET Core JWT User Service
+Path: /Services/UserService.cs
+The user service contains methods for authenticating user credentials and returning a JWT token, getting all users in the application and getting a single user by id.
+
+ASP.NET Core JWT App Settings (Development)
+Path: /appsettings.Development.json
+Configuration file with application settings that are specific to the development environment.
+ 
+ASP.NET Core JWT App Settings
+Path: /appsettings.json
+Root configuration file containing application settings for all environments.
+IMPORTANT: The "Secret" property is used by the api to sign and verify JWT tokens for authentication, update it with your own random string to ensure nobody else can generate a JWT to gain unauthorised access to your application.
+
+ASP.NET Core JWT Program
+Path: /Program.cs
+The program class is a console app that is the main entry point to start the application, it configures and launches the web api host and web server using an instance of IHostBuilder. ASP.NET Core applications require a host in which to execute.
+
+Kestrel is the web server used in the example, it's a new cross-platform web server for ASP.NET Core that's included in new project templates by default. Kestrel is fine to use on it's own for internal applications and development, but for public facing websites and applications it should sit behind a more mature reverse proxy server (IIS, Apache, Nginx etc) that will receive HTTP requests from the internet and forward them to Kestrel after initial handling and security checks.
+
+ASP.NET Core JWT Startup
+Path: /Startup.cs
+The startup class configures the services available to the ASP.NET Core Dependency Injection (DI) container in the ConfigureServices method, and configures the ASP.NET Core request pipeline for the application in the Configure method.
+ 
+ASP.NET Core JWT Web Api csproj
+Path: /WebApi.csproj
+
+===============================================
+ASP.NET Core JWT Authentication Project Structure
+
+The tutorial project is organised into the following folders:
+Controllers - define the end points / routes for the web api, controllers are the entry point into the web api from client applications via http requests.
+Models - represent request and response models for controller methods, request models define the parameters for incoming requests, and response models can be used to define what data is returned.
+Services - contain business logic, validation and data access code.
+Entities - represent the application data.
+Helpers - anything that doesn't fit into the above folders.
+
+Click any of the below links to jump down to a description of each file along with its code:
+
+Controllers
+UsersController.cs
+Entities
+User.cs
+Helpers
+AppSettings.cs
+AuthorizeAttribute.cs
+JwtMiddleware.cs
+Models
+AuthenticateRequest.cs
+AuthenticateResponse.cs
+Services
+UserService.cs
+appsettings.Development.json
+appsettings.json
+Program.cs
+Startup.cs
+WebApi.csproj
+ 
+ASP.NET Core JWT Users Controller
+Path: /Controllers/UsersController.cs
+The ASP.NET Core users controller defines and handles all routes / endpoints for the api that relate to users, this includes authentication and standard CRUD operations. Within each route the controller calls the user service to perform the action required which keeps the controller 'lean' and completely separated from the business logic and data access code.
+
+Routes restricted to authenticated users are decorated with the [Authorize] attribute. The auth logic is implemented in the custom authorize attribute.
+
+using Microsoft.AspNetCore.Mvc;
+using WebApi.Models;
+using WebApi.Services;
+
+namespace WebApi.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateRequest model)
+        {
+            var response = _userService.Authenticate(model);
+
+            if (response == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _userService.GetAll();
+            return Ok(users);
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT User Entity
+Path: /Entities/User.cs
+The user entity class represents the data for a user in the application. Entity classes are used to pass data between different parts of the application (e.g. between services and controllers) and can be used to return http response data from controller action methods. If multiple types of entities or other custom data is required to be returned from a controller method then a custom model class should be created in the Models folder for the response.
+
+The [JsonIgnore] attribute prevents the password property from being serialized and returned in api responses.
+
+using System.Text.Json.Serialization;
+
+namespace WebApi.Entities
+{
+    public class User
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+
+        [JsonIgnore]
+        public string Password { get; set; }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT App Settings
+Path: /Helpers/AppSettings.cs
+The app settings class contains properties defined in the appsettings.json file and is used for accessing application settings via objects that are injected into classes using the ASP.NET Core built in dependency injection (DI) system. For example the User Service accesses app settings via an IOptions<AppSettings> appSettings object that is injected into the constructor.
+
+Mapping of configuration sections to classes is done in the ConfigureServices method of the Startup.cs file.
+
+namespace WebApi.Helpers
+{
+    public class AppSettings
+    {
+        public string Secret { get; set; }
+    }
+}
+Back to top
+ 
+ASP.NET Core Custom Authorize Attribute
+Path: /Helpers/AuthorizeAttribute.cs
+The custom authorize attribute is added to controller action methods that require the user to be authenticated.
+
+Authorization is performed by the OnAuthorization method which checks if there is an authenticated user attached to the current request (context.HttpContext.Items["User"]). An authenticated user is attached by the custom jwt middleware if the request contains a valid JWT access token.
+
+On successful authorization no action is taken and the request is passed through to the controller action method, if authorization fails a 401 Unauthorized response is returned.
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using WebApi.Entities;
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+{
+    public void OnAuthorization(AuthorizationFilterContext context)
+    {
+        var user = (User)context.HttpContext.Items["User"];
+        if (user == null)
+        {
+            // not logged in
+            context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core Custom JWT Middleware
+Path: /Helpers/JwtMiddleware.cs
+The custom JWT middleware checks if there is a token in the request Authorization header, and if so attempts to:
+
+Validate the token
+Extract the user id from the token
+Attach the authenticated user to the current HttpContext.Items collection to make it accessible within the scope of the current request
+If there is no token in the request header or if any of the above steps fail then no user is attached to the http context and the request is only be able to access public routes. Authorization is performed by the custom authorize attribute which checks that a user is attached to the http context, if authorization fails a 401 Unauthorized response is returned.
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebApi.Services;
+
+namespace WebApi.Helpers
+{
+    public class JwtMiddleware
+    {
+        private readonly RequestDelegate _next;
+        private readonly AppSettings _appSettings;
+
+        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        {
+            _next = next;
+            _appSettings = appSettings.Value;
+        }
+
+        public async Task Invoke(HttpContext context, IUserService userService)
+        {
+            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token != null)
+                attachUserToContext(context, userService, token);
+
+            await _next(context);
+        }
+
+        private void attachUserToContext(HttpContext context, IUserService userService, string token)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+
+                // attach user to context on successful jwt validation
+                context.Items["User"] = userService.GetById(userId);
+            }
+            catch
+            {
+                // do nothing if jwt validation fails
+                // user is not attached to context so request won't have access to secure routes
+            }
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT Authenticate Request Model
+Path: /Models/AuthenticateRequest.cs
+The authenticate request model defines the parameters for incoming requests to the /users/authenticate route, it is attached to the route as the parameter to the Authenticate action method of the users controller. When an HTTP POST request is received by the route, the data from the body is bound to an instance of the AuthenticateRequest class, validated and passed to the method.
+
+ASP.NET Core Data Annotations are used to automatically handle model validation, the [Required] attribute sets both the username and password as required fields so if either are missing a validation error message is returned from the api.
+
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApi.Models
+{
+    public class AuthenticateRequest
+    {
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT Authenticate Response Model
+Path: /Models/AuthenticateResponse.cs
+The authenticate response model defines the data returned after successful authentication, it includes basic user details and a JWT access token.
+
+using WebApi.Entities;
+
+namespace WebApi.Models
+{
+    public class AuthenticateResponse
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+        public string Token { get; set; }
+
+
+        public AuthenticateResponse(User user, string token)
+        {
+            Id = user.Id;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Username = user.Username;
+            Token = token;
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT User Service
+Path: /Services/UserService.cs
+The user service contains methods for authenticating user credentials and returning a JWT token, getting all users in the application and getting a single user by id.
+
+I hardcoded the array of users in the example to keep it focused on JWT authentication, in a production application it is recommended to store user records in a database with hashed passwords. For an extended example that includes support for user registration and stores data with Entity Framework Core check out ASP.NET Core 3.1 - Simple API for Authentication, Registration and User Management.
+
+The top of the file contains an interface that defines the user service, below that is the concrete user service class that implements the interface.
+
+On successful authentication the Authenticate() method generates a JWT (JSON Web Token) using the JwtSecurityTokenHandler class which generates a token that is digitally signed using a secret key stored in appsettings.json. The JWT token is returned to the client application which must include it in the HTTP Authorization header of subsequent requests to secure routes.
+
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using WebApi.Entities;
+using WebApi.Helpers;
+using WebApi.Models;
+
+namespace WebApi.Services
+{
+    public interface IUserService
+    {
+        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        IEnumerable<User> GetAll();
+        User GetById(int id);
+    }
+
+    public class UserService : IUserService
+    {
+        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
+        private List<User> _users = new List<User>
+        {
+            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
+        };
+
+        private readonly AppSettings _appSettings;
+
+        public UserService(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
+
+        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        {
+            var user = _users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+
+            // return null if user not found
+            if (user == null) return null;
+
+            // authentication successful so generate jwt token
+            var token = generateJwtToken(user);
+
+            return new AuthenticateResponse(user, token);
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _users;
+        }
+
+        public User GetById(int id)
+        {
+            return _users.FirstOrDefault(x => x.Id == id);
+        }
+
+        // helper methods
+
+        private string generateJwtToken(User user)
+        {
+            // generate token that is valid for 7 days
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT App Settings (Development)
+Path: /appsettings.Development.json
+Configuration file with application settings that are specific to the development environment.
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}
+Back to top
+ 
+ASP.NET Core JWT App Settings
+Path: /appsettings.json
+Root configuration file containing application settings for all environments.
+
+IMPORTANT: The "Secret" property is used by the api to sign and verify JWT tokens for authentication, update it with your own random string to ensure nobody else can generate a JWT to gain unauthorised access to your application.
+
+{
+  "AppSettings": {
+    "Secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+Back to top
+ 
+ASP.NET Core JWT Program
+Path: /Program.cs
+The program class is a console app that is the main entry point to start the application, it configures and launches the web api host and web server using an instance of IHostBuilder. ASP.NET Core applications require a host in which to execute.
+
+Kestrel is the web server used in the example, it's a new cross-platform web server for ASP.NET Core that's included in new project templates by default. Kestrel is fine to use on it's own for internal applications and development, but for public facing websites and applications it should sit behind a more mature reverse proxy server (IIS, Apache, Nginx etc) that will receive HTTP requests from the internet and forward them to Kestrel after initial handling and security checks.
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace WebApi
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://localhost:4000");
+                });
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT Startup
+Path: /Startup.cs
+The startup class configures the services available to the ASP.NET Core Dependency Injection (DI) container in the ConfigureServices method, and configures the ASP.NET Core request pipeline for the application in the Configure method.
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using WebApi.Helpers;
+using WebApi.Services;
+
+namespace WebApi
+{
+    public class Startup
+    {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        // add services to the DI container
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors();
+            services.AddControllers();
+
+            // configure strongly typed settings object
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
+        }
+
+        // configure the HTTP request pipeline
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
+
+            app.UseEndpoints(x => x.MapControllers());
+        }
+    }
+}
+Back to top
+ 
+ASP.NET Core JWT Web Api csproj
+Path: /WebApi.csproj
+The csproj (C# project) is an MSBuild based file that contains target framework and NuGet package dependency information for the application.
+
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
+  </ItemGroup>
+</Project>
+Back to top
+ 
+===============================================

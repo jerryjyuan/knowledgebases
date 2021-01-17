@@ -1,0 +1,25 @@
+
+===============================================
+ASP.NET Core: Example Apps:
+
+	https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api
+	https://github.com/cornflourblue/aspnet-core-3-jwt-authentication-api
+
+C:\Windows\System32>cd C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master
+
+C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master>dotnet run
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:4000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+C:\Users\jerry\git\knowledgebases\technology\aspnet\security\L6\aspnet-core-3-jwt-authentication-api-master>
+	
+===============================================
+	

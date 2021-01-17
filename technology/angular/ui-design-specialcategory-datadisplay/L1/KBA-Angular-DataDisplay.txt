@@ -1,0 +1,49 @@
+
+#Angular Data Display: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##To Do Data Display/Presentation:
+
+Method 1: Data Tables
+
+Method 2: HTML Tags/Selectors
+			{{}}
+			...
+			
+Method 3: Components Data Display:
+		  1) Angular Structural Directives
+		  	 *ngFor:
+		  	 	*ngFor directive to iterate over fetched data in the template
+		  	 *ngIf
+		  	 *ngSwitch
+		  2) Angular Container Directives:
+		     ng-container
+		  	 ng-template
+		  	 ...
+		  3) ...
+
+Method 4: 
+
+## Data Access:
+	JSON Object:
+		JSONObject.name
+		data.articles
+		this.articles = data['articles'];?
+	JSON Array:
+		JSONArray.find
+		...
+	JSON methods:
+		JSON.stringify()
+		...
+	...
+	...
+	back tick
+	concatenation
+	...
+	JavaScript Methods:
+		==>array
+		==>...
+##

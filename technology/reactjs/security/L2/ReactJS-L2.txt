@@ -1,0 +1,906 @@
+
+===============================================
+ReactJS:
+
+https://jasonwatmore.com/post/2020/06/02/react-setup-development-environment
+	==>Similar to Angular: NodeJS + NPM
+	==>VSC: IDE
+
+==>ReactJS: different from Angular: Angular is a framework while ReactJS is a DOM-based library
+	==>Utilize JavaScript to enable ReatJS features: NodeJS/Webpack/Babel/ReactJS: package.json webpack.config.js .babelrc
+		/src/index.html: <div id="app"></div>
+			Webpack bundles up all of the react + redux code into a single javascript file and injects it into the body of the page
+		/src/index.jsx
+	==>Similar syntaxes to NodeJS and JavaScript
+	==>This example app hightlights: Redux Store (State Management) + JWT
+		==>Redux/State: related to actions/reducers/sessions/session-data/etc.
+		==>Without Angular component based OOP design, ReactJS utilizes many of its own ways to thrive: including: render() {}
+			==>render() becomes similar Angular component's template html file, ..., AKA: render() is ReactJS's html template
+		==>ReactJS: use xxx.jsx to define ReactJS components
+	==>Run: npm install + npm start: it doesn't have a similar angular.json to configure separate CLI config
+		==>login: configured in the hardcoded file: fake-backend.js
+		==>Changes of login info can be reflected in the running app: http://localhost:8080/
+
+Procedures:
+	==>1) Create React + Redux Tutorial Project Structure
+		 	==>Does ReactJS have a starter or initializr or CLI template/schematics to create structures?
+		 	==>
+				The index.js files in each folder are barrel files that group all the exported modules together
+				 so they can be imported using the folder path instead of the full module path 
+				 and to enable importing multiple modules in a single import
+				 (e.g. import { userActions, alertActions } from '../_actions').
+	==>2) Create src code modules:
+			==>Feature Modules
+				==>ReactJS Modules: similar to Angular but pure NodeJS and JavaScript code
+					configureFakeBackend(): window.fetch = function (url, opts) {}
+				React + Redux App Component
+					Path: /src/App/App.jsx
+					==>Similar to Angular App Component
+				React + Redux Home Page Folder
+					Path: /src/HomePage		
+				React + Redux Login Page Folder
+					Path: /src/LoginPage								
+			==>Non-Feature Modules
+				Redux Actions Folder
+					Path: /src/_actions
+					Redux Store
+				Redux Reducers Folder
+					Path: /src/_reducers
+					each reducer updates a different part of the application state in response to dispatched redux actions
+				React + Redux Services Folder
+					Path: /src/_services			
+===============================================
+
+React + Redux Tutorial Project Structure
+All source code for the React + Redux JWT authentication app is located in the /src folder. Inside the src folder there is a folder per feature (App, HomePage, LoginPage) and a bunch of folders for non-feature code that can be shared across different parts of the app (_actions, _components, _constants, _helpers, _reducers, _services).
+
+I prefixed non-feature folders with an underscore "_" to group them together and make it easy to distinguish between features and non-features, it also keeps the project folder structure shallow so it's quick to see everything at a glance from the top level and to navigate around the project.
+
+The index.js files in each folder are barrel files that group all the exported modules together so they can be imported using the folder path instead of the full module path and to enable importing multiple modules in a single import (e.g. import { userActions, alertActions } from '../_actions').
+
+Click any of the below links to jump down to a description of each file along with it's code:
+
+src
+_actions
+alert.actions.js
+index.js
+user.actions.js
+_components
+index.js
+PrivateRoute.jsx
+_constants
+alert.constants.js
+index.js
+user.constants.js
+_helpers
+auth-header.js
+fake-backend.js
+history.js
+index.js
+store.js
+_reducers
+alert.reducer.ts
+authentication.reducer.js
+index.js
+users.reducer.js
+_services
+index.js
+user.service.js
+App
+App.jsx
+index.js
+HomePage
+HomePage.jsx
+index.js
+LoginPage
+index.js
+LoginPage.jsx
+index.html
+index.jsx
+.babelrc
+package.json
+webpack.config.js
+ 
+Redux Actions Folder
+Path: /src/_actions
+The _actions folder contains all the Redux action creators for the project, I've organised the action creators into different files by action type (e.g. user actions, alert actions etc).
+
+If you're not familiar with Redux actions or action creators you can learn about them at https://redux.js.org/basics/actions.
+
+Back to top
+ 
+Redux Alert Action Creators
+Path: /src/_actions/alert.actions.js
+Contains Redux action creators for actions related to alerts / toaster notifications in the application. For example to display a success alert message with the text 'Great Job!' you can call dispatch(alertActions.success('Great Job!'));.
+
+I've wrapped the action methods in an alertActions object at the top of the file so it's easy to see all available actions at a glance and simplifies importing them into other files. The implementation details for each action creator are placed in the below functions.
+
+import { alertConstants } from '../_constants';
+
+export const alertActions = {
+    success,
+    error,
+    clear
+};
+
+function success(message) {
+    return { type: alertConstants.SUCCESS, message };
+}
+
+function error(message) {
+    return { type: alertConstants.ERROR, message };
+}
+
+function clear() {
+    return { type: alertConstants.CLEAR };
+}
+Back to top
+ 
+Redux User Action Creators
+Path: /src/_actions/user.actions.js
+Contains Redux action creators for actions related to users. Public action creators are exposed via the userActions object at the top of the file and function implementations are located below, I like this structure because you can quickly see all of the actions that are available.
+
+Most of the actions for users are async actions that are made up of multiple sub actions, this is because they have to make an http request and wait for the response before completing. Async actions typically dispatch a request action before performing an async task (e.g. an http request), and then dispatch a success or error action based on the result of the async task.
+
+For example the login() action creator performs the following steps:
+
+dispatches a LOGIN_REQUEST action with dispatch(request({ username }));
+calls the async task userService.login(username, password)
+dispatches a LOGIN_SUCCESS with dispatch(success(user)); if login was successful, or dispatches a LOGIN_FAILURE action with dispatch(failure(error)); if login failed
+To keep the code tidy I've put sub action creators into nested functions within each async action creator function. For example the login() function contains 3 nested action creator functions for request(), success() and failure() that return the actions LOGIN_REQUEST, LOGIN_SUCCESS and LOGIN_FAILURE respectively. Putting the sub action creators into nested functions also allows me to give them standard names like request, success and failure without clashing with other function names because they only exist within the scope of the parent function.
+
+import { userConstants } from '../_constants';
+import { userService } from '../_services';
+import { alertActions } from './';
+import { history } from '../_helpers';
+
+export const userActions = {
+    login,
+    logout,
+    getAll
+};
+
+function login(username, password) {
+    return dispatch => {
+        dispatch(request({ username }));
+
+        userService.login(username, password)
+            .then(
+                user => { 
+                    dispatch(success(user));
+                    history.push('/');
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+}
+
+function logout() {
+    userService.logout();
+    return { type: userConstants.LOGOUT };
+}
+
+function getAll() {
+    return dispatch => {
+        dispatch(request());
+
+        userService.getAll()
+            .then(
+                users => dispatch(success(users)),
+                error => { 
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error))
+                }
+            );
+    };
+
+    function request() { return { type: userConstants.GETALL_REQUEST } }
+    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
+    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+Back to top
+ 
+React Components Folder
+Path: /src/_components
+The _components folder contains shared React components that can be used anywhere in the application.
+
+Back to top
+ 
+React Private Route Component
+Path: /src/_components/PrivateRoute.jsx
+The react private route component renders a route component if the user is logged in, otherwise it redirects the user to the /login page.
+
+The way it checks if the user is logged in is by checking that there is a user object in local storage. While it's possible to bypass this check by manually adding an object to local storage using browser dev tools, this would only give access to the client side component, it wouldn't give access to any real secure data from the server api because a valid authentication token (JWT) is required for this.
+
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+        localStorage.getItem('user')
+            ? <Component {...props} />
+            : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    )} />
+)
+Back to top
+ 
+Redux Action Constants Folder
+Path: /src/_constants
+The _constants folder contains all of the redux action type constants used by redux action creators and reducers. It could be used for any other constants in the project as well, it doesn't have to be only for redux action types.
+
+I decided to put redux action constants into their own files (rather than the same files as redux actions) to simplify my redux action files and keep them focused on one thing.
+
+Back to top
+ 
+Redux Alert Action Constants
+Path: /src/_constants/alert.constants.js
+The alert constants object contains the redux alert action types used to display and clear alerts in the react application.
+
+export const alertConstants = {
+    SUCCESS: 'ALERT_SUCCESS',
+    ERROR: 'ALERT_ERROR',
+    CLEAR: 'ALERT_CLEAR'
+};
+Back to top
+ 
+Redux User Action Constants
+Path: /src/_constants/user.constants.js
+The user constants object contains the redux user action types that can be dispatched in the react application, async actions that perform http requests involve a request followed by a success or error response, so each of these three steps is represented by a redux action.
+
+export const userConstants = {
+    LOGIN_REQUEST: 'USERS_LOGIN_REQUEST',
+    LOGIN_SUCCESS: 'USERS_LOGIN_SUCCESS',
+    LOGIN_FAILURE: 'USERS_LOGIN_FAILURE',
+
+    LOGOUT: 'USERS_LOGOUT',
+
+    GETALL_REQUEST: 'USERS_GETALL_REQUEST',
+    GETALL_SUCCESS: 'USERS_GETALL_SUCCESS',
+    GETALL_FAILURE: 'USERS_GETALL_FAILURE'
+};
+Back to top
+ 
+React + Redux Helpers Folder
+Path: /src/_helpers
+The helpers folder contains all the bits and pieces that don't fit into other folders but don't justify having a folder of their own.
+
+Back to top
+ 
+React Auth Header
+Path: /src/_helpers/auth-header.js
+Auth header is a helper function that returns an HTTP Authorization header containing the Json Web Token (JWT) of the currently logged in user from local storage. If the user isn't logged in an empty object is returned.
+
+The auth header is used to make authenticated HTTP requests to the server api using JWT authentication.
+
+export function authHeader() {
+    // return authorization header with jwt token
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.token) {
+        return { 'Authorization': 'Bearer ' + user.token };
+    } else {
+        return {};
+    }
+}
+Back to top
+ 
+React Fake / Mock Backend
+Path: /src/_helpers/fake-backend.js
+The fake backend is used for running the tutorial example without a server api (backend-less). It monkey patches the fetch() function to intercept certain api requests and mimic the behaviour of a real api. Any requests that aren't intercepted get passed through to the real fetch() function.
+
+export function configureFakeBackend() {
+    let users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+    let realFetch = window.fetch;
+    window.fetch = function (url, opts) {
+        return new Promise((resolve, reject) => {
+            // wrap in timeout to simulate server api call
+            setTimeout(() => {
+
+                // authenticate
+                if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
+                    // get parameters from post request
+                    let params = JSON.parse(opts.body);
+
+                    // find if any user matches login credentials
+                    let filteredUsers = users.filter(user => {
+                        return user.username === params.username && user.password === params.password;
+                    });
+
+                    if (filteredUsers.length) {
+                        // if login details are valid return user details and fake jwt token
+                        let user = filteredUsers[0];
+                        let responseJson = {
+                            id: user.id,
+                            username: user.username,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            token: 'fake-jwt-token'
+                        };
+                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(responseJson)) });
+                    } else {
+                        // else return error
+                        reject('Username or password is incorrect');
+                    }
+
+                    return;
+                }
+
+                // get users
+                if (url.endsWith('/users') && opts.method === 'GET') {
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                    if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
+                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(users))});
+                    } else {
+                        // return 401 not authorised if token is null or invalid
+                        reject('Unauthorised');
+                    }
+
+                    return;
+                }
+
+                // pass through any requests not handled above
+                realFetch(url, opts).then(response => resolve(response));
+
+            }, 500);
+        });
+    }
+}
+Back to top
+ 
+React Router History
+Path: /src/_helpers/history.js
+The history is a custom history object used by the React Router, the reason I used a custom history object instead of the built into React Router is to enable redirecting users from outside React components, for example from the user actions after successful login.
+
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
+Back to top
+ 
+Redux Store
+Path: /src/_helpers/store.js
+ 
+
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import rootReducer from '../_reducers';
+
+const loggerMiddleware = createLogger();
+
+export const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        thunkMiddleware,
+        loggerMiddleware
+    )
+);
+Back to top
+ 
+Redux Reducers Folder
+Path: /src/_reducers
+The _reducers folder contains all the Redux reducers for the project, each reducer updates a different part of the application state in response to dispatched redux actions.
+
+If you're not familiar with Redux reducers you can learn about them at https://redux.js.org/basics/reducers.
+
+Back to top
+ 
+Redux Alert Reducer
+Path: /src/_reducers/alert.reducer.js
+The redux alert reducer manages the application state for alerts / toaster notifications, it updates state when an alert action is dispatched from anywhere in the application, for example when an alertConstants.SUCCESS action is dispatched, the reducer updates the alert state to an object with type: 'alert-success' and message: action.message.
+
+import { alertConstants } from '../_constants';
+
+export function alert(state = {}, action) {
+    switch (action.type) {
+    case alertConstants.SUCCESS:
+        return {
+        type: 'alert-success',
+        message: action.message
+        };
+    case alertConstants.ERROR:
+        return {
+        type: 'alert-danger',
+        message: action.message
+        };
+    case alertConstants.CLEAR:
+        return {};
+    default:
+        return state
+    }
+}
+Back to top
+ 
+Redux Authentication Reducer
+Path: /src/_reducers/authentication.reducer.js
+The redux authentication reducer manages the state related to login (and logout) actions, on successful login the current user object and a loggedIn flag are stored in the authentication section of the application state. On logout or login failure the authentication state is set to an empty object, and during login (between login request and success/failure) the authentication state has a loggingIn flag set to true and a user object with the details of the user that is attempting to login.
+
+import { userConstants } from '../_constants';
+
+let user = JSON.parse(localStorage.getItem('user'));
+const initialState = user ? { loggedIn: true, user } : {};
+
+export function authentication(state = initialState, action) {
+    switch (action.type) {
+    case userConstants.LOGIN_REQUEST:
+        return {
+        loggingIn: true,
+        user: action.user
+        };
+    case userConstants.LOGIN_SUCCESS:
+        return {
+        loggedIn: true,
+        user: action.user
+        };
+    case userConstants.LOGIN_FAILURE:
+        return {};
+    case userConstants.LOGOUT:
+        return {};
+    default:
+        return state
+    }
+}
+Back to top
+ 
+Redux Users Reducer
+Path: /src/_reducers/users.reducer.js
+The redux users reducer manages the users section of the application state which is used by the HomePage to display a list of users and enable deleting of users.
+
+import { userConstants } from '../_constants';
+
+export function users(state = {}, action) {
+    switch (action.type) {
+    case userConstants.GETALL_REQUEST:
+        return {
+        loading: true
+        };
+    case userConstants.GETALL_SUCCESS:
+        return {
+        items: action.users
+        };
+    case userConstants.GETALL_FAILURE:
+        return { 
+        error: action.error
+        };
+    default:
+        return state
+    }
+}
+Back to top
+ 
+React + Redux Services Folder
+Path: /src/_services
+The _services layer handles all http communication with backend apis for the application, each service encapsulates the api calls for a content type (e.g. users) and exposes methods for performing various operations (e.g. CRUD operations). Services can also have methods that don't wrap http calls, for example the userService.logout() method just removes an item from local storage.
+
+I like wrapping http calls and implementation details in a services layer, it provides a clean separation of concerns and simplifies the redux actions (and other modules) that use the services.
+
+Back to top
+ 
+React + Redux User Service
+Path: /src/_services/user.service.js
+The user service encapsulates all backend api calls for performing CRUD operations on user data, as well as logging and out of the example application. The service methods are exported via the userService object at the top of the file, and the implementation of each method is located in the function declarations below.
+
+In the handleResponse method the service checks if the http response from the api is 401 Unauthorized and automatically logs the user out. This handles if the JWT token expires or is no longer valid for any reason.
+
+import config from 'config';
+import { authHeader } from '../_helpers';
+
+export const userService = {
+    login,
+    logout,
+    getAll
+};
+
+function login(username, password) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    };
+
+    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('user', JSON.stringify(user));
+
+            return user;
+        });
+}
+
+function logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
+}
+
+function getAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+}
+
+function handleResponse(response) {
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                // auto logout if 401 response returned from api
+                logout();
+                location.reload(true);
+            }
+
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+
+        return data;
+    });
+}
+Back to top
+ 
+React + Redux App Folder
+Path: /src/App
+The app folder is for react components and other code that is used only by the app component in the tutorial application.
+
+Back to top
+ 
+React + Redux App Component
+Path: /src/App/App.jsx
+The app component is the root component for the react tutorial application, it contains the outer html, routes and global alert notification for the example app.
+
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { history } from '../_helpers';
+import { alertActions } from '../_actions';
+import { PrivateRoute } from '../_components';
+import { HomePage } from '../HomePage';
+import { LoginPage } from '../LoginPage';
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    }
+
+    render() {
+        const { alert } = this.props;
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    <div className="col-sm-8 col-sm-offset-2">
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <Router history={history}>
+                            <div>
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/login" component={LoginPage} />
+                            </div>
+                        </Router>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App };
+Back to top
+ 
+React + Redux Home Page Folder
+Path: /src/HomePage
+The home page folder is for react components and other code that is used only by the home page component in the tutorial application.
+
+Back to top
+ 
+React + Redux Home Page Component
+Path: /src/HomePage/HomePage.jsx
+The home page component is displayed after signing in to the application, it shows the signed in user's name plus a list of all users in the tutorial application. The users are loaded into redux state by dispatching the redux action userActions.getAll() from the componentDidMount() react lifecycle hook.
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userActions } from '../_actions';
+
+class HomePage extends React.Component {
+    componentDidMount() {
+        this.props.dispatch(userActions.getAll());
+    }
+
+    render() {
+        const { user, users } = this.props;
+        return (
+            <div className="col-md-6 col-md-offset-3">
+                <h1>Hi {user.firstName}!</h1>
+                <p>You're logged in with React & JWT!!</p>
+                <h3>Users from secure api end point:</h3>
+                {users.loading && <em>Loading users...</em>}
+                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
+                {users.items &&
+                    <ul>
+                        {users.items.map((user, index) =>
+                            <li key={user.id}>
+                                {user.firstName + ' ' + user.lastName}
+                            </li>
+                        )}
+                    </ul>
+                }
+                <p>
+                    <Link to="/login">Logout</Link>
+                </p>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    const { users, authentication } = state;
+    const { user } = authentication;
+    return {
+        user,
+        users
+    };
+}
+
+const connectedHomePage = connect(mapStateToProps)(HomePage);
+export { connectedHomePage as HomePage };
+Back to top
+ 
+React + Redux Login Page Folder
+Path: /src/LoginPage
+The login page folder is for react components and other code that is used only by the login page component in the tutorial application.
+
+Back to top
+ 
+React + Redux Login Page Component
+Path: /src/LoginPage/LoginPage.jsx
+The login page component renders a login form with username and password fields. It displays validation messages for invalid fields when the user attempts to submit the form. If the form is valid, submitting it causes the userActions.login(username, password) redux action to be dispatched.
+
+In the constructor() function the userActions.logout() redux action is dispatched which logs the user out if they're logged in, this enables the login page to also be used as the logout page.
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userActions } from '../_actions';
+
+class LoginPage extends React.Component {
+    constructor(props) {
+        super(props);
+
+        // reset login status
+        this.props.dispatch(userActions.logout());
+
+        this.state = {
+            username: '',
+            password: '',
+            submitted: false
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.setState({ submitted: true });
+        const { username, password } = this.state;
+        const { dispatch } = this.props;
+        if (username && password) {
+            dispatch(userActions.login(username, password));
+        }
+    }
+
+    render() {
+        const { loggingIn } = this.props;
+        const { username, password, submitted } = this.state;
+        return (
+            <div className="col-md-6 col-md-offset-3">
+                <h2>Login</h2>
+                <form name="form" onSubmit={this.handleSubmit}>
+                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+                        <label htmlFor="username">Username</label>
+                        <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
+                        {submitted && !username &&
+                            <div className="help-block">Username is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                        <label htmlFor="password">Password</label>
+                        <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
+                        {submitted && !password &&
+                            <div className="help-block">Password is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary">Login</button>
+                        {loggingIn &&
+                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        }
+                    </div>
+                </form>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return {
+        loggingIn
+    };
+}
+
+const connectedLoginPage = connect(mapStateToProps)(LoginPage);
+export { connectedLoginPage as LoginPage }; 
+Back to top
+ 
+Base Index HTML File
+Path: /src/index.html
+The base index html file contains the outer html for the whole tutorial application. When the app is started with npm start, Webpack bundles up all of the react + redux code into a single javascript file and injects it into the body of the page.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React + Redux - JWT Authentication Example & Tutorial</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <style>
+        a { cursor: pointer; }
+        .help-block { font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+Back to top
+ 
+Main React Entry File
+Path: /src/index.jsx
+The root index.jsx file bootstraps the react + redux tutorial application by rendering the App component (wrapped in a redux Provider) into the app div element defined in the base index html file above.
+
+The boilerplate application uses a fake / mock backend by default, to switch to a real backend api simply remove the fake backend code below the comment // setup fake backend.
+
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import { store } from './_helpers';
+import { App } from './App';
+
+// setup fake backend
+import { configureFakeBackend } from './_helpers';
+configureFakeBackend();
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
+);
+Back to top
+ 
+React Babel RC (Run Commands)
+Path: /.babelrc
+The babel config file defines the presets used by babel to transpile the React and ES6 code. The babel transpiler is run by webpack via the babel-loader module configured in the webpack.config.js file below.
+
+{
+  "presets": [
+    "react",
+    "env",
+    "stage-0"
+  ]
+}
+Back to top
+ 
+React Package.json
+Path: /package.json
+The package.json file contains project configuration information including package dependencies which get installed when you run npm install. Full documentation is available on the npm docs website.
+
+{
+  "name": "react-redux-jwt-authentication-example",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cornflourblue/react-redux-jwt-authentication-example.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
+  "dependencies": {
+    "history": "^4.6.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "webpack": "^4.15.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
+Back to top
+ 
+React Webpack Config
+Path: /webpack.config.js
+
+Webpack is used to compile and bundle all the project files so they're ready to be loaded into a browser, it does this with the help of loaders and plugins that are configured in the webpack.config.js file. For more info about webpack check out the webpack docs.
+
+The webpack config file also defines a global config object for the application using the externals property, you can also use this to define different config variables for your development and production environments.
+
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'development',
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader'
+            }
+        ]
+    },
+    plugins: [new HtmlWebpackPlugin({
+        template: './src/index.html'
+    })],
+    devServer: {
+        historyApiFallback: true
+    },
+    externals: {
+        // global app config object
+        config: JSON.stringify({
+            apiUrl: 'http://localhost:4000'
+        })
+    }
+}
+Back to top
+ 
+===============================================

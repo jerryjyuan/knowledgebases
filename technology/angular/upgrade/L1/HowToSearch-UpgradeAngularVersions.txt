@@ -69,7 +69,7 @@ C:\Users\jerry\wksp\fundraiser-ui-apps\src\main\ng>
 
 ==============================================
 Upgrade: 9.1.3 to 10.2.4:
-
+	ng update @angular/core@10 @angular/cli@10
 
 C:\Users\jerry\wksp\angular\toh-pt6>ng update @angular/core@10 @angular/cli@10
 Your global Angular CLI version (10.1.3) is greater than your local
@@ -160,6 +160,6 @@ Fetching dependency metadata from registry...
   Migration completed.
   
 ==============================================
- 
+
 
 ==============================================

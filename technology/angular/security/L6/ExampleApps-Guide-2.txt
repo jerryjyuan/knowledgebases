@@ -1,0 +1,18 @@
+
+========================================================
+Example Apps: Guide:
+
+	https://jasonwatmore.com/post/2020/09/09/angular-10-role-based-authorization-tutorial-with-example
+	https://github.com/cornflourblue/angular-10-role-based-authorization-example
+	
+	
+========================================================
+Misc:
+	angular-10-jwt-refresh-tokens-master
+		https://github.com/cornflourblue/angular-10-jwt-refresh-tokens
+	angular-10-basic-authentication-example-master
+		https://github.com/cornflourblue/angular-10-basic-authentication-example
+	angular-10-role-based-authorization-example-master
+		https://jasonwatmore.com/post/2020/09/09/angular-10-role-based-authorization-tutorial-with-example
+
+========================================================

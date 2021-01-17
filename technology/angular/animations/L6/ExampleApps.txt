@@ -1,0 +1,3 @@
+
+
+https://github.com/cornflourblue/angular-8-animation-example

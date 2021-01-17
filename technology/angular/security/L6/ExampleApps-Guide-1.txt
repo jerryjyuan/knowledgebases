@@ -1,0 +1,61 @@
+
+========================================================
+Example Apps: Guide:
+
+Tutorial built with Angular 10.0.3
+
+Other versions available:
+
+Angular: Angular 9, 8, 7, 6, 2/5
+React: React + Redux, React (without Redux)
+Vue: Vue.js + Vuex
+AngularJS: AngularJS
+ASP.NET Core: Blazor WebAssembly
+The following is a custom JWT authentication example and tutorial showing how to setup a simple login page in Angular 10.
+
+For an extended example that includes the use of refresh tokens see Angular 10 - JWT Authentication with Refresh Tokens.
+
+The angular app runs with a fake backend by default to enable it to run completely in the browser without a real backend api (backend-less), to switch to a real api you just have to remove or comment out the line below the comment // provider used to create fake backend located in the app module (/src/app/app.module.ts). You can build your own api or hook it up with the ASP.NET Core api or Node.js api available (instructions below).
+
+Styling of the example app is all done with Bootstrap 4.5 CSS, for more info about Bootstrap see https://getbootstrap.com/docs/4.5/getting-started/introduction/.
+
+The example project is available on GitHub at https://github.com/cornflourblue/angular-10-jwt-authentication-example.
+
+Here it is in action: (See on StackBlitz at https://stackblitz.com/edit/angular-10-jwt-authentication-example)
+
+
+Running the Angular 10 JWT Auth Example Locally
+Install NodeJS and NPM from https://nodejs.org.
+Download or clone the Angular project source code from https://github.com/cornflourblue/angular-10-jwt-authentication-example
+Install all required npm packages by running npm install or npm i from the command line in the project root folder (where the package.json is located).
+Start the app by running npm start from the command line in the project root folder, this will compile the Angular app and automatically launch it in the browser on the URL http://localhost:4200.
+NOTE: You can also start the app with the Angular CLI command ng serve --open. To do this first install the Angular CLI globally on your system with the command npm install -g @angular/cli.
+
+For more info on setting up an Angular development environment see Angular - Setup Development Environment.
+
+
+Running the Angular App with an ASP.NET Core 3.1 API
+For full details about the example ASP.NET Core API see the post ASP.NET Core 3.1 - JWT Authentication Tutorial with Example API. But to get up and running quickly just follow the below steps.
+
+Install the .NET Core SDK from https://www.microsoft.com/net/download/core.
+Download or clone the project source code from https://github.com/cornflourblue/aspnet-core-3-jwt-authentication-api
+Start the api by running dotnet run from the command line in the project root folder (where the WebApi.csproj file is located), you should see the message Now listening on: http://localhost:4000.
+Back in the Angular app, remove or comment out the line below the comment // provider used to create fake backend located in the /src/app/app.module.ts file, then start the Angular app and it should now be hooked up with the ASP.NET Core API.
+The below video goes through the steps to hook up the Angular app with the ASP.NET Core api, the video was created with the previous (Angular 9) version version of the app but the steps are exactly the same for the Angular 10 version.
+
+
+
+
+Running the Angular App with a Node.js API
+For full details about the example Node.js API see the post NodeJS - JWT Authentication Tutorial with Example API. But to get up and running quickly just follow the below steps.
+
+Install NodeJS and NPM from https://nodejs.org.
+Download or clone the project source code from https://github.com/cornflourblue/node-jwt-authentication-api
+Start the api by running npm start from the command line in the project root folder, you should see the message Server listening on port 4000.
+Back in the Angular app, remove or comment out the line below the comment // provider used to create fake backend located in the /src/app/app.module.ts file, then start the Angular app and it should now be hooked up with the Node.js API.
+The below video goes through the steps to hook up the Angular app with the Node.js api, the video was created with the previous (Angular 9) version version of the app but the steps are exactly the same for the Angular 10 version.
+	
+========================================================
+	
+	
+========================================================

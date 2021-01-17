@@ -1,8 +1,6 @@
-
 #Angular - Deployment: KBA (practical-guide-keys) Guide
 
 #Goals:
-
 #Procedure:
 
 ##To Enable Deployment:
@@ -61,10 +59,8 @@
 	https://github.com/typescript-eslint/tslint-to-eslint-config
 	https://github.com/typescript-eslint/typescript-eslint
 	https://github.com/typescript-eslint/tslint-to-eslint-config/blob/main/docs/Development.md
-	
 6. Angular Bug Report:
 	https://github.com/angular/angular/issues/new?template=1-bug-report.md
-	
 7. Platform: Hosted Deployment:
 	Firebase Hosting to deploy the prototype to a publicly accessible URL
 		https://firebase.google.com/docs/hosting/
@@ -98,3 +94,7 @@
 		==>2) ng build --prod --base-href ./
 		==>3) "baseHref": "./"
 		==>4) <script>document.write('');</script>???
+	AWS: https://jasonwatmore.com/post/2019/12/02/angular-nodejs-on-aws-how-to-deploy-a-mean-stack-app-to-amazon-ec2
+	Azure Cloud:
+		https://jasonwatmore.com/post/2020/01/08/angular-net-core-sql-on-azure-how-to-deploy-a-full-stack-app-to-microsoft-azure
+		Angular + .NET Core + SQL on Azure - How to Deploy a Full Stack App to Microsoft Azure

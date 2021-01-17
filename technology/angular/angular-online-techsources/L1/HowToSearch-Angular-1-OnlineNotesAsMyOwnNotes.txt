@@ -4,6 +4,16 @@ Online Notes:
 
 	https://www.ngdevelop.tech/angular/angular-basics/
 
+Why keeping brushing up Angular:
 
-
+	==>IT/Tech: I have been a tech guy, so tech is one main part of my life parts
+	==>Java:    I don't need to become super hands-on in everything except Java-Domains (including web/JS parts)
+				==>Because you cannot know every domain as super-hands-on except 1-2 main domains
+				==>And Java-domain(s) is my default and enabled choice(s) of these super-hands-on domain(s)
+				==>And Java-domain(s) is actually No.1 tech-domains in IT/tech world
+				==>And Java-domain(s) can do the same solutions as any other 6 IT domains
+				==>And Angular is part of Java-domains' brothers or parts, so Jerry includes Angular as part of Java-Domains
+	==>Other Domains: can do everything except the higher-standards of "super-hans-on"
+	==>But Jerry can still develop insights and products scenarios in all tech sectors and all IT domains
+	
 ============================================
