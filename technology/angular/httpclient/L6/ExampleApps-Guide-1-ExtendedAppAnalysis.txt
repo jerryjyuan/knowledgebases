@@ -1,0 +1,158 @@
+
+========================================================
+Example Apps: Guide:
+
+========================================================
+Angular 10:
+	https://jasonwatmore.com/post/2020/09/01/angular-master-details-crud-example
+
+Angular 10.0.8
+
+
+
+    private createUser() {
+        this.userService.create(this.form.value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    this.alertService.success('User added', { keepAfterRouteChange: true });
+                    this.router.navigate(['../'], { relativeTo: this.route });
+                },
+                error: error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                }
+            });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Notes:
+	==>Author: forms his coding styles
+	==>
+
+
+
+
+
+
+Angular - Master Details CRUD Example
+
+Tutorial built with Angular 10.0.14
+
+Other versions available:
+
+Angular: Angular 11
+React: React Hook Form, Formik
+This tutorial shows how to build a basic Angular CRUD application with master and detail views for listing, adding, editing and deleting records from a JSON API. The records in the example app are user records, but the same CRUD pattern and code structure could be used to manage any type of data e.g. products, services, articles etc.
+
+The example app includes a basic home page and users section, the default page in the users section displays a list of all users and includes buttons to add, edit and delete users. The add and edit buttons navigate to a page containing a form for creating and updating user records, and the delete button executes a function within the user list component to delete a user record. The add and edit forms are both implemented with the same add/edit component which behaves differently depending on which mode it is in ("add mode" vs "edit mode").
+
+The example project is available on GitHub at https://github.com/cornflourblue/angular-master-details-crud-example.
+
+Here it is in action: (See on StackBlitz at https://stackblitz.com/edit/angular-master-details-crud-example)
+
+
+Running the Angular CRUD Example Locally
+Install NodeJS and NPM from https://nodejs.org.
+Download or clone the Angular project source code from https://github.com/cornflourblue/angular-master-details-crud-example
+Install all required npm packages by running npm install or npm i from the command line in the project root folder (where the package.json is located).
+Start the app by running npm start from the command line in the project root folder, this will compile the Angular app and automatically launch it in the browser on the URL http://localhost:4200.
+NOTE: You can also start the CRUD app with the Angular CLI command ng serve --open. To do this first install the Angular CLI globally on your system with the command npm install -g @angular/cli.
+
+For more info on setting up your local Angular dev environment see Angular - Setup Development Environment.
+
+========================================================
+C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master
+
+55 Files  660 KB
+==>npm install
+	59029 Files  340 MB
+	added 1474 packages from 1215 contributors
+
+C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master>npm install
+
+> core-js@3.6.4 postinstall C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master\node_modules\core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon:
+> https://opencollective.com/core-js
+> https://www.patreon.com/zloirock
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+
+> @angular/cli@10.0.8 postinstall C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master\node_modules\@angular\cli
+> node ./bin/postinstall/script.js
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\webpack-dev-server\node_modules\fsevents):npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\watchpack-chokidar2\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 1474 packages from 1215 contributors and audited 1482 packages in 125.04s
+
+62 packages are looking for funding
+  run `npm fund` for details
+
+found 5 vulnerabilities (3 low, 2 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master>
+
+C:\Users\jerry\git\knowledgebases\technology\angular\httpclient\L6\angular-master-details-crud-example-master>ng serve
+Your global Angular CLI version (10.1.3) is greater than your local
+version (10.0.8). The local Angular CLI version is used.
+
+To disable this warning use "ng config -g cli.warnings.versionMismatch false".
+? Would you like to share anonymous usage data about this project with the Angular Team at
+Google under Google’s Privacy Policy at https://policies.google.com/privacy? For more
+details and how to change this setting, see http://angular.io/analytics. No
+Compiling @angular/core : es2015 as esm2015
+Compiling @angular/animations : es2015 as esm2015
+Compiling @angular/compiler/testing : es2015 as esm2015
+Compiling @angular/common : es2015 as esm2015
+Compiling @angular/animations/browser : es2015 as esm2015
+Compiling @angular/core/testing : es2015 as esm2015
+Compiling @angular/platform-browser : es2015 as esm2015
+Compiling @angular/common/http : es2015 as esm2015
+Compiling @angular/common/testing : es2015 as esm2015
+Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+Compiling @angular/platform-browser/testing : es2015 as esm2015
+Compiling @angular/router : es2015 as esm2015
+Compiling @angular/animations/browser/testing : es2015 as esm2015
+Compiling @angular/common/http/testing : es2015 as esm2015
+Compiling @angular/forms : es2015 as esm2015
+Compiling @angular/platform-browser/animations : es2015 as esm2015
+Compiling @angular/platform-browser-dynamic/testing : es2015 as esm2015
+Compiling @angular/router/testing : es2015 as esm2015
+
+chunk {main} main.js, main.js.map (main) 46.7 kB [initial] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 141 kB [initial] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 9.01 kB [entry] [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 13.6 kB [initial] [rendered]
+chunk {users-users-module} users-users-module.js, users-users-module.js.map (users-users-module) 48.8 kB  [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 3.02 MB [initial] [rendered]
+Date: 2021-01-17T23:24:31.798Z - Hash: d5960c42fa2cea500b37 - Time: 12764ms
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+: Compiled successfully.
+
+ 
+ 
+========================================================

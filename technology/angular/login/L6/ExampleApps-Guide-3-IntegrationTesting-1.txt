@@ -1,0 +1,175 @@
+
+========================================================
+Example Apps: Guide:
+	https://github.com/cornflourblue/angular-7-tutorial
+
+angular-7-tutorial
+A video tutorial series showing how to build an Angular 7 application step by step that supports user registration and login functionality.
+
+Part 1 (Windows) - Setup Development Machine on Windows
+Part 1 (Mac) - Setup Development Machine on Mac
+Part 2 - Create Base Project Structure & Webpack Config
+Part 3 - Add Routing & Multiple Pages
+Part 4 - Login Form, Authentication Service & Route Guard
+Part 5 - Registration Form & User Service
+Part 6 - Home Page & Alert Component
+Part 7 (Optional) - Migrating to an Angular CLI Project
+
+========================================================
+Misc:
+
+angular-7-registration-login-example-cli-master
+	https://github.com/cornflourblue/angular-7-registration-login-example-cli
+angular-10-facebook-login-example-master
+	https://github.com/cornflourblue/angular-10-facebook-login-example
+angular-10-signup-verification-boilerplate-master
+	https://github.com/cornflourblue/angular-10-signup-verification-boilerplate
+node-mysql-registration-login-api-master
+
+mean-angular2-registration-login-example-master
+	https://github.com/cornflourblue/mean-angular2-registration-login-example
+	
+========================================================
+Integration Testing:
+
+	==>Use Frontend:
+		==>angular\login\L6\angular-10-registration-login-example-master
+		http://localhost:4200/
+		
+	==>Use Backend:
+		https://jasonwatmore.com/post/2019/10/14/aspnet-core-3-simple-api-for-authentication-registration-and-user-management
+		==>angular\login\L6\aspnet-core-3-registration-login-api-master
+		http://localhost:4000/users/register
+		http://localhost:4000/users/authenticate
+		http://localhost:4000/users
+		http://localhost:4000/users/1
+		
+	==>Testing Goal 1: Process how the Angular UI works with fakeBackendProvider: LocalStorage:
+						==>Done
+	==>Testing Goal 2: Process how the Backend APIs work
+						==>Done
+	==>Testing Goal 3: Integration between Angular UI and Backend APIs
+						==>Done
+						==>HttpInterceptor works between Angular UI and Backend APIs
+	==>Testing Goal 4: HttpClient APIs work:
+						==>Not tested in this integration
+						==>...
+
+
+==>Frontend: Angular UI:
+	angular\login\L6\angular-10-registration-login-example-master
+	
+	==>Do CRUD:
+		==>fakeBackendProvider
+			==>Override:
+				==>JwtInterceptor: this go to the real running backend APIs: http://localhost:4000/
+			
+			==>Use: LocalStorage: do CRUD:
+				==>LocalStorage: no expiration date: so test data stay
+			
+			==>
+
+	app.module.ts:
+	
+	    providers: [
+	        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+	        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+	
+	        // provider used to create fake backend
+	        //fakeBackendProvider
+	    ],
+	    bootstrap: [AppComponent]
+	    
+    	==>Talk to backend APIs:
+
+			[{"id":1,"firstName":"test","lastName":"test2","username":"test"},{"id":2,"firstName":"newtest","lastName":"newtest2","username":"newtest"}]
+
+		==>export class JwtInterceptor implements HttpInterceptor {
+		
+			==>Both interceptors work: talk to localStorage and http://localhost:4000/
+				==>But: this is not using HttpClient directly....
+				
+				==>So still not testing: HttpClient calls
+				
+		
+==>Backend: APS.NET Core 3.1: APIs:
+	angular\login\L6\aspnet-core-3-registration-login-api-master
+	
+	==>User profile is available. Using 'C:\Users\jerry\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+	
+	==>DataContext : DbContext
+		EntityFrameworkCore
+		==>In-Mem?
+		==>Can be migrated to other DB:...
+			==>aspnet-core-3-registration-login-api-master\Migrations
+		==>Can be configured to SQL Server:
+			OnConfiguring(DbContextOptionsBuilder options)
+		==>Enabled an in-mem like Java HashMap:
+			DbSet<User> Users
+			==>Save users data
+		
+		==>The SQLite data context class is used by the api in development environments, it inherits from the main data context and overrides the provider to use SQLite instead of SQL Server.
+		
+		options.UseSqlite(Configuration.GetConnectionString("WebApiDatabase"));
+		
+			
+		
+	==>UserService:
+	
+		==>Create: hashed password storage
+	            _context.Users.Add(user);
+	            _context.SaveChanges();
+		==>Authenticate:
+				fetch and validate
+				VerifyPasswordHash()
+		==>Why the previous login saved after app restart?
+			==>Because of the above SQLite data context: use: SQLite: store data
+			==>It does exist after restarting the server app
+			
+		==>
+	
+	APIs:
+	
+	Register:
+		POST: http://localhost:4000/users/register
+		Open a new request tab by clicking the plus (+) button at the end of the tabs.
+		Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+		In the URL field enter the address to the register route of your local API - http://localhost:4000/users/register.
+		Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON (application/json)".
+		Enter a JSON object containing the required user properties in the "Body" textarea, e.g:
+		body: Raw/JSON:
+		{
+		    "firstName": "test",
+		    "lastName": "test1",
+		    "username": "test",
+		    "password": "test1"
+		}
+	Token:
+		POST: http://localhost:4000/users/authenticate
+		body: Raw/JSON:
+		Response:
+		{
+		    "id": 1,
+		    "username": "test",
+		    "firstName": "test",
+		    "lastName": "test1",
+		    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE2MTA5MzEyMTAsImV4cCI6MTYxMTUzNjAxMCwiaWF0IjoxNjEwOTMxMjEwfQ.ckspRU0MCrIm8XMhiMBfvS-T3NDJl5y2hFzEEE8nap4"
+		}
+	Login:
+		GET: http://localhost:4000/users
+		Authorization: Bearer Token: Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE2MTA5MzEyMTAsImV4cCI6MTYxMTUzNjAxMCwiaWF0IjoxNjEwOTMxMjEwfQ.ckspRU0MCrIm8XMhiMBfvS-T3NDJl5y2hFzEEE8nap4
+		[{"id":1,"firstName":"test","lastName":"test1","username":"test"}]
+	Update:
+		PUT: http://localhost:4000/users/1
+		Authorization: Bearer Token: Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE2MTA5MzEyMTAsImV4cCI6MTYxMTUzNjAxMCwiaWF0IjoxNjEwOTMxMjEwfQ.ckspRU0MCrIm8XMhiMBfvS-T3NDJl5y2hFzEEE8nap4
+		body: Raw/JSON:
+		Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+		Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON (application/json)".
+		Enter a JSON object in the "Body" textarea containing the properties you want to update, for example to update the first and last names:
+		{
+		    "firstName": "test",
+		    "lastName": "test2",
+		    "password": "test2"
+		}
+	
+========================================================

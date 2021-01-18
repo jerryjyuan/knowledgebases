@@ -1,0 +1,93 @@
+
+SpringBoot:
+	Enabled with Spring Security
+	
+	Spring Security:
+		Integrated with OAuth2
+
+
+==>Switch off the Spring Boot Security Configuration
+	If you define a @Configuration with a WebSecurityConfigurerAdapter or a SecurityFilterChain bean 
+	in your application, it switches off the default webapp security settings in Spring Boot.
+
+
+
+
+
+MVC Security
+The default security configuration is implemented in SecurityAutoConfiguration and UserDetailsServiceAutoConfiguration. SecurityAutoConfiguration imports SpringBootWebSecurityConfiguration for web security and UserDetailsServiceAutoConfiguration configures authentication, which is also relevant in non-web applications. To switch off the default web application security configuration completely or to combine multiple Spring Security components such as OAuth2 Client and Resource Server, add a bean of type SecurityFilterChain (doing so does not disable the UserDetailsService configuration or Actuator’s security).
+
+To also switch off the UserDetailsService configuration, you can add a bean of type UserDetailsService, AuthenticationProvider, or AuthenticationManager.
+
+Access rules can be overridden by adding a custom SecurityFilterChain or WebSecurityConfigurerAdapter bean. Spring Boot provides convenience methods that can be used to override access rules for actuator endpoints and static resources. EndpointRequest can be used to create a RequestMatcher that is based on the management.endpoints.web.base-path property. PathRequest can be used to create a RequestMatcher for resources in commonly used locations.
+
+
+
+
+
+
+https://docs.spring.io/spring-security/site/docs/4.0.x/apidocs/org/springframework/security/config/annotation/web/configuration/EnableWebSecurity.html
+
+
+
+package com.wonders.fundraiser.security;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+@Component
+public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+	@Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, 
+    		AuthenticationException authEx) throws IOException {
+        response.addHeader("LoginUser", "Basic " +getRealmName());
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        PrintWriter writer = response.getWriter();
+        writer.println("HTTP Status 401 - " + authEx.getMessage());
+    }
+	@Override
+    public void afterPropertiesSet() {
+        setRealmName("springboot");
+        super.afterPropertiesSet();
+   }
+}
+
+
+package com.wonders.fundraiser.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Autowired
+	private AuthenticationEntryPoint authEntryPoint;
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable().authorizeRequests()
+		    .antMatchers("/users").hasRole("manager")//secure specific url
+			.anyRequest().authenticated()
+				.and().httpBasic() //provide default login form
+				//.and().formLogin() //Provide login form
+				.authenticationEntryPoint(authEntryPoint);
+	}
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("username").password("admin").roles("USER");
+	}
+}
+
+

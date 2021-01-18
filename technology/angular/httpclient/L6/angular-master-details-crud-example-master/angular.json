@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-master-details-crud-example"
+    }
+  },
+  "defaultProject": "angular-master-details-crud-example",
+  "cli": {
+    "analytics": false
+  }
 }

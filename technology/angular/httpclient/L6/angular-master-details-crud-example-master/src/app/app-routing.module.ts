@@ -7,7 +7,7 @@ const usersModule = () => import('./users/users.module').then(x => x.UsersModule
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'users', loadChildren: usersModule },
+    { path: 'users', loadChildren: usersModule }, //refer to the module's children's array
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
