@@ -1,0 +1,24 @@
+
+
+
+
+IE:
+	mode
+	https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/ie-mode/
+		F12 Developer Tool: can tune mode level
+		1) Your own control of IE: you can set it up as default
+		2) Company installed/controlled/configured IE: the default level is fixed: like 5, so you cannot permanently set it up
+			==>But you can set up temporary browser sessions with the mode level
+			==>You may need to keep the F12 developer tool window open in order to keep mode settings effective
+			==>Different mode levels: may have different settings scenarios
+			Mode 11: not working completely with SiteScope: with some main screen display issues
+			Mode 10: working fine with SiteScope
+			Default Mode 5: not displaying the menus well
+				==>Actually it works for the main functions - except the above menu display issues
+				==>The menu items still work - but display is not good enough - but mode 10 may help with the display
+				==>This is ok because most of the users will not do analysis like Jerry does
+					but their mode=5 IE should work like this - maybe they feel weird - or Jerry's IE was abused specifically
+			==>If closing the F12 tool screen, it is back to mode 5 as the default
+			
+	
+	...

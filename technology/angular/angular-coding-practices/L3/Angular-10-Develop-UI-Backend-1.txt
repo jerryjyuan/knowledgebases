@@ -115,6 +115,11 @@ Development Methodology: Level 0: Foundations
 		==>NodeJS: package.json
 						==>App specifies a package.json: as an expected versions packages management:
 							==>NPM:
+							
+								package.json:
+									^: deal with Major and Minor versions
+									~: deal with patch versions
+							
 								==>Concepts 1: app-release-versions: stable/release-version: 2.2.1 + prerelease/buildmetadata-version: 2.2.1-alpha/beta/rc.0/1/2/3...
 								==>Concepts 2: major-version + minor-version + patch-version: x.y.z
 											   MAJOR.MINOR.PATCH

@@ -1,0 +1,141 @@
+
+========================================================
+Google Map Integration:
+
+==>Methods:
+	==>Method 1: Native Google JavaScript APIs:
+				 Google Map APIs Platform:
+				 	 https://cloud.google.com/maps-platform/
+				 	 https://developers.google.com/maps/documentation/javascript/overview
+				 	 https://developers.google.com/maps/documentation/javascript/using-typescript
+				 API Documentation:
+					 https://developers.google.com/maps/documentation/javascript/reference/map
+					 https://developers.google.com/maps/documentation/javascript/tutorial
+				 Example Apps:
+				 	MissionMap: MissionMap is basically writing its own UI Google Map component using native Google Map JavaScript APIs
+	==>Method 2: Google Map UI Component: Angular official one
+				 ==>Google Map is now officially an angular component with the release of angular version 9.x? yeah, it is true.
+					Now we can use google map like we are using any other component.
+				 Source Code:
+				 	 https://github.com/angular/components/blob/master/src/google-maps/README.md
+				 	 	==>@angular/google-maps@11.1.0
+				 	 https://github.com/angular/components/releases/tag/9.0.0-rc.0
+	==>Method 3: AGM: Angular Google Map:
+				 https://angular-maps.com/
+				 https://angular-maps.com/guides/getting-started/
+				 https://www.digitalocean.com/community/tutorials/angular-angular-google-maps
+				 https://www.itsolutionstuff.com/post/angular-google-maps-get-current-locationexample.html
+	==>Method 4: Angular Google Maps - Bootstrap 4 & Material Design
+				 ==>Similar to AGM:
+				 https://mdbootstrap.com/docs/angular/advanced/google-maps/
+				 
+	Notes:
+		==>Extensions:
+			https://www.npmjs.com/package/@angular-material-extensions/google-maps-autocomplete
+			Demo:
+				https://angular-material-extensions.github.io/google-maps-autocomplete/
+			ng add @angular-material-extensions/google-maps-autocomplete
+		==>Legacy UI Components:
+			Angular Google Maps: AngularJS
+			https://angular-ui.github.io/angular-google-maps/#!/
+
+==>App Design and Implementation:
+	==>When needing Google JavaScript APIs in code, then need:
+			npm install --save @types/googlemaps
+			npm i -D @types/googlemaps
+			==>Not required for Google Map UI component only if you use native Google Map JavaScript APIs: like google.maps.Map, etc.
+			https://developers.google.com/maps/documentation/javascript/using-typescript	
+	==>The GoogleMapsModule exports three components that we can use:	
+		GoogleMap: this is the wrapper around Google Maps, available via the google-map selector
+		MapMarker: used to add markers on the map, available via the map-marker selector
+		MapInfoWindow: the info window of a marker, available via the map-info-window selector
+		Features:
+			MapControl
+			MapMarker
+			Map Info Window
+
+==>Get an API Key:
+	https://developers.google.com/maps/documentation/javascript/get-api-key
+	
+	(1) Create a project
+		https://console.cloud.google.com/google/maps-apis/metrics?project=wondersfundraiserapp
+	(2) Enable API(s) for this project
+		https://developers.google.com/maps/gmp-get-started#enable-api-sdk
+		(Error if not enabled: ApiNotActivatedMapError: https://developers.google.com/maps/documentation/javascript/error-messages#api-not-activated-map-error)
+		(Similar to Google Book APIs)
+	(3) Create a credential: API Key
+		Can add 100 test users with google account: cannot delete
+		jerryjyuanusa@gmail.com
+		jerryjyuangithub@gmail.com
+		key=AIzaSyA-KUu4vTDD8I7MD7aJlmNfwfyoq2U16NU
+	(4) Done
+		https://console.cloud.google.com/google/maps-apis/metrics?project=wondersfundraiserapp
+	(5) Productionization:
+		Before going to production, need to restrict API and also verify the app by google cloud console
+	(6) Usage:
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-KUu4vTDD8I7MD7aJlmNfwfyoq2U16NU"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-KUu4vTDD8I7MD7aJlmNfwfyoq2U16NU&callback=initMap"
+		  type="text/javascript"></script>
+
+==>Evaluations:
+	==>Because Angular has formal Google Map UI Component: it becomes easier to add Google Map now
+	==>90%: use official Google Map UI Component
+	==>10%: use AGM
+	==>Native Google Map APIs: basically no need to use now	
+========================================================
+==>App Implementation Procedures:
+
+(1) Install:
+	npm install @angular/google-maps
+(2) Enable Module:
+	import { GoogleMapsModule } from '@angular/google-maps'
+	References: App Demo:
+		https://timdeschryver.dev/blog/google-maps-as-an-angular-component
+		https://medium.com/@jinalshah999/official-angular-components-google-map-youtube-player-clipboard-67f04531ffc4
+(3) Write Component/HTML:
+	1) Part 1: GoogleMap:
+		1) APIs:
+			==>Native Google Map JavaScript APIs:
+				https://developers.google.com/maps/documentation/javascript/reference/map
+				https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+				https://developers.google.com/maps/documentation/javascript/tutorial
+			==>Google Map API UI Component:
+				==>1) No Angular official API documents found yet: because it is new to Angular 9.x
+				==>2) Go to: 
+						components\src\google-maps\google-map\google-map.ts
+						Or: https://github.com/angular/components/blob/master/src/google-maps/README.md
+						==>Look for @Input properties: 6 total
+							==>5 can be directly used
+							==>1: need to look up Google JavaScript APIs:
+								  google.maps.MapOptions
+								  	https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+								  ==>Configurations: very complicated: To Explore
+		2) @Output() properties:
+			==>Very complicated: need to explore one by one
+			==>
+			
+		3) GoogleMap HTML template reference:
+			==>GoogleMap Component:
+			   ==>Class-level: Methods and getters
+	
+	2) Part 2: MapMarker
+	
+		==>Similar to Part 1: GoogleMap
+	
+	3) Part 3: Map Info Window		   
+		   
+		==>Similar to Part 1: GoogleMap
+		
+	Based on the above 3 Parts, we can see: Google Map UI component can enable very normal production quality Google Map
+	
+	4) Actually, it is more than 3 parts:
+	
+		==>It is actually 12 Parts: the above is just 3 of them
+		
+		==>So Google Map UI component is full functional component
+		
+		==>Becoming an expert takes at least 1 week
+			==>But basically this component can write much more powerful functions than MissionMap Map component
+		
+		
+========================================================

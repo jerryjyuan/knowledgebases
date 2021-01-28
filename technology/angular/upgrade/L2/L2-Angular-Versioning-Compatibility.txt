@@ -1,0 +1,48 @@
+
+==============================================================
+
+
+
+
+==============================================================
+Angular Upgrades:
+
+==>Angular has good documentation, including Angular upgrades
+==>General Guidelines:
+	1) Type 1: Normal Upgrades:
+		==>Available via Angular Documentation
+		==>Guideline 1: upgrade via main version one by one
+		==>Examples:
+			ng update @angular/core@10 @angular/cli@10
+			==>1) It will upgrade all the main Angular modules from 9.1.3 (the current 9.x in code) into 10.2.4 (the highest 10.x)
+			==>2) But it doesn't show upgrades for any other node_modules' parts except Angular's own parts
+				  ==>This should be normal because Angular upgrade doesn't handle any other additional packages
+				  ==>This might not be a main issue: because the application can do various upgrades for other packages like googlemaps
+				  		==>Question(s):
+				  			1) Amount of packages: how about there are 30 other packages? We have to do upgrade one by one?
+				  			2) Compatibility Ranges: some packages are compatible within some Angular version ranges as well
+				  			3) Additional Ways:
+				  				==>1) Remove node_modules, and then update package.json files with better versions, and run: npm install
+				  					==>These will be simpler to upgrade all other packages when new Angular version is upgraded
+				  				==>2) How about not removing node_modules or not updating package.json, just run: npm install
+				  					==>Will this bring up some new versions of these packages due to Angular upgrade? - TBD
+	2) Type 2: Other Scenarios:
+		==>Scenario 1: Mixing of different Angular packages:
+			1) Partial upgrades of some Angular packages - instead of entire Angular 9 to 10: Aka: some mixtures of Angular 9 and 10
+				==>I don't know about it, but this is for sure a possible issues due to different APIs between some packages
+			2) Some other installations cause these mixing:
+				==>So be careful with other upgrades/installations
+		==>Scenario 2: Mixing of the package modules for other packages
+		==>Scenario 3: 
+		
+==>Possible Problems:
+	==>Data/Format Corruptions: Angular project configuration files
+	==>Data/Format Corruptions: Angular project src configuration files
+	==>...
+	
+==>Main Possible Problems:
+	==>Mismatch of Angular versions and Some Other Packages:
+		==>How to know which versions are matching each other? ==>TO DO...
+	==>...
+
+==============================================================

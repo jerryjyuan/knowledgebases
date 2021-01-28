@@ -1,0 +1,64 @@
+
+#Angular UI - Layout Design: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Layout Design: Common Ways/Methods
+
+1. HTML Ways:
+
+	==>Method: Block Selector Stacks:
+				<div>
+					<div>
+						<div>
+						</div>
+					</div>
+				</div>
+
+	==>Method: HTML5 Ways:
+	
+	==>Method: 
+
+2. CSS Ways:
+
+	==>Positioning CSS
+		absolute
+		relative
+		...
+		box-model
+		...
+	==>Display CSS
+		display: none/inline/inline-block/block/inline-flex/flex/grid
+		
+	==>
+
+3. JavaScript Ways:
+
+4. CSS Framework Ways:
+	==>bootstrap CSS/JS: BT4
+		==>BT4 Themes
+		==>Layout Selectors/Tags:
+			==>Container
+			==>
+		==>...
+	...
+	
+5. 
+
+##Layout Design: Angular Ways/Methods
+
+1. Material Design Ways: MD
+		==>MD Themes
+
+2. CDK Ways:
+		==>CDK Themes
+		
+3. UI Components Ways:
+		==>UI Component Themes
+
+4. ...
+
+
+

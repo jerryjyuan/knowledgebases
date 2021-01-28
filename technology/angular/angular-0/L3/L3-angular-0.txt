@@ -1,0 +1,26 @@
+
+=======================================================
+
+=======================================================
+https://brianflove.com/2014-09-02/whats-the-double-exclamation-mark-for-in-javascript/#:~:text=If%20you%20have%20ever%20noticed,(true%20or%20false)%20value.
+
+double exclamation mark (!!) in someone's JavaScript code 
+	==>it's short way to cast a variable to be a boolean (true or false) value.
+	==>convert a truthy value to a Boolean value
+	==>JavaScript coercion
+	==> If it was falsey (e.g. 0, null, undefined, etc.), it will be false, otherwise, true.
+		!oObject  // inverted boolean
+		!!oObject // non inverted boolean so true boolean representation
+	==>In some cases you may want to cast a variable to be explicitly boolean. Why? Well, the number one reason is that most of time developers do not use type safe comparison operators
+		To cast your JavaScript variables to boolean, simply use two exclamation signs
+		window.alert(typeof bool);
+JavaScript is not a static language, rather it is a dynamic language. That means that a variable can reference or hold a value of any type, and further, that type can be changed at any point. Whether you prefer a static or dynamic language is for you to decide.
+	data types in JavaScript:
+		Boolean
+		String
+		Number
+		Object
+=======================================================
+most of time developers do not use type safe comparison operators
+
+=======================================================

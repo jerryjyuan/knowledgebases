@@ -49,5 +49,6 @@
 	APIs: https://developers.google.com/maps/documentation/javascript/reference/info-window
 	Examples:
 		(1) https://timdeschryver.dev/blog/google-maps-as-an-angular-component
+		
 
 		

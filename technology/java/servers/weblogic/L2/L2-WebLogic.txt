@@ -1,0 +1,20 @@
+
+
+https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html#:~:text=Oracle%20WebLogic%20Server%2010.3.,6
+
+WebLogic:
+	Oracle WebLogic Server 14c (14.1.1.0)
+	
+	Versioning:
+		==>14.<1-9>.<1-9>.<0-9>
+			Example: 14.2.1.4
+			Sometimes: it goes to one more digit:
+				14.<1-9>.<1-9>.<0-9>.<0-9>
+					Example: 12.1.3.0.0
+		==>14.<1-9>.<1-9> ~== 14.<1-9>.<1-9>.0
+			Or: 14.<1-9>.<1-9> ~== 14.<1-9>.<1-9>.<0-9>
+			Example: 12.1.3 ~== 12.1.3.0
+			
+			Sometimes: it goes to one more digit:
+				12.1.3 ~== 12.1.3.0.0
+			

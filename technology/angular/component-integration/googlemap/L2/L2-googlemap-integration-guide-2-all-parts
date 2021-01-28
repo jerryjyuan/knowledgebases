@@ -1,0 +1,92 @@
+
+========================================================
+Google Map Integration: Application Implementation Procedures
+
+(1) All Parts (Components): total 12:
+	1) APIs:
+		==>Native Google Map JavaScript APIs:
+			https://developers.google.com/maps/documentation/javascript/reference/xxx
+			https://developers.google.com/maps/documentation/javascript/reference/xxx#yyy
+			https://developers.google.com/maps/documentation/javascript/tutorial
+		==>Google Map API UI Component:
+			==>1) No Angular official API documents found yet: because it is new to Angular 9.x
+			==>2) Go to: 
+					components\src\google-maps\<part>\<part>.ts
+					Or: https://github.com/angular/components/blob/master/src/google-maps/README.md
+	1) @Input properties:
+		==>Look for @Input properties:
+		==>1-1) Properties: primitive types: can be directly used
+		==>1-2) Properties: API object types: need to look up Google JavaScript APIs:
+							Example: google.maps.MapOptions
+							  	https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+							==>Configurations: very complicated: To Explore
+	2) @Output() properties:
+		==>Very complicated: need to explore one by one
+		==>Aka: events: inside Angular code: it is an EventEmitter
+
+	3) GoogleMap HTML template reference:
+		==>GoogleMap Component/Part:
+		   ==>Class-level: Methods and getters
+		   ==>These class members can be found inside these component classes
+		   ==>These class members provide manipulations and accesses to the component instance: just like any app-component's methods and public variables
+		   ==>These class members are accessed via the part's HTML references inside HTML file selector, and @ViewChild('xxx')
+		   ==>These class members are the same as API document's API contents (such as: Angular MD and CDK APIs contents)
+		   Functions:
+		   		Provide internal functionalities to interact with all variables and other functions
+		   		Provide inter-component methods via constructor and method calls
+
+========================================================
+12 Parts:
+
+==>Procedures: APIs:
+	==>Search API: https://developers.google.com/maps/documentation/javascript/reference
+
+Part 1: google-map:
+
+Part 2: map-bicycling-map:
+
+Part 3: map-circle:
+
+Part 4: map-ground-overlay:
+
+Part 5: map-info-window:
+		https://developers.google.com/maps/documentation/javascript/reference/info-window
+
+Part 6: map-kml-layer:
+
+Part 7: map-marker:
+		https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions
+
+Part 8: map-polygon:
+
+Part 9: map-polyline:
+
+Part 10: map-rectangle:
+		https://developers.google.com/maps/documentation/javascript/reference/polygon#RectangleOptions
+		
+		https://developers.google.com/android/reference/com/google/android/gms/maps/model/LatLngBounds
+		https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBoundsLiteral
+		google.maps.LatLngBoundsLiteral interface
+		https://developers.google.com/maps/documentation/javascript/reference/coordinates
+		https://developers.google.com/android/reference/com/google/android/gms/maps/model/LatLng
+		https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngLiteral
+
+Part 11: map-traffic-layer:
+		<map-traffic-layer [autoRefresh]="false"></map-traffic-layer>
+		Whether the traffic layer refreshes with updated information automatically.
+
+Part 12: map-transit-layer:
+		<map-transit-layer></map-transit-layer>
+		==>Simple part
+		==>A layer showing bike lanes and paths
+
+========================================================
+How to Style Google Map:
+
+	https://developers.google.com/maps/documentation/javascript/styling
+
+	MAP_ID:	
+	38654be887f8ad89
+	
+
+========================================================

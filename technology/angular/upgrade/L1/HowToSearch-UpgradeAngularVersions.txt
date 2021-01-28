@@ -2,6 +2,10 @@
 ==============================================
 NPM:
 
+	https://angular.io/cli/update
+	https://update.angular.io/
+
+
 npm install -g @angular/cli@latest
 npm install -g @angular/cli@10.1.2
 
@@ -98,7 +102,7 @@ Fetching dependency metadata from registry...
     Updating package.json with dependency @angular/platform-browser-dynamic @ "10.2.4" (was "9.1.13")...
     Updating package.json with dependency @angular/router @ "10.2.4" (was "9.1.13")...
   UPDATE package.json (1464 bytes)
-√ Packages installed successfully.
+âˆš Packages installed successfully.
 ** Executing migrations of package '@angular/cli' **
 
 > Update Browserslist configuration file name to '.browserslistrc' from deprecated 'browserslist'.
@@ -128,7 +132,7 @@ Fetching dependency metadata from registry...
 
 > Update workspace dependencies to match a new v10 project.
   UPDATE package.json (1464 bytes)
-√ Packages installed successfully.
+âˆš Packages installed successfully.
   Migration completed.
 
 > Update 'module' and 'target' TypeScript compiler options.
@@ -160,6 +164,74 @@ Fetching dependency metadata from registry...
   Migration completed.
   
 ==============================================
+Upgrade: 10.0.3 => 10.2.4
+
+
+
+C:\Users\jerry\wksp\kbs\loginapp10>ng update @angular/cli@^10 @angular/core@^10
+Your global Angular CLI version (10.1.3) is greater than your local
+version (10.0.3). The local Angular CLI version is used.
+
+To disable this warning use "ng config -g cli.warnings.versionMismatch false".
+The installed local Angular CLI version is older than the latest stable version.
+Installing a temporary version to perform the update.
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+Using package manager: 'npm'
+Collecting installed dependencies...
+Found 29 dependencies.
+Fetching dependency metadata from registry...
+    Updating package.json with dependency @angular-devkit/build-angular @ "0.1002.1" (was "0.1000.3")...
+    Updating package.json with dependency @angular/cli @ "10.2.1" (was "10.0.3")...
+    Updating package.json with dependency @angular/compiler-cli @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/animations @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/common @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/compiler @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/core @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/forms @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/platform-browser @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/platform-browser-dynamic @ "10.2.4" (was "10.0.4")...
+    Updating package.json with dependency @angular/router @ "10.2.4" (was "10.0.4")...
+  UPDATE package.json (1290 bytes)
+√ Packages installed successfully.
+** Executing migrations of package '@angular/cli' **
+
+> Removing "Solution Style" TypeScript configuration file support.
+  DELETE tsconfig.base.json
+  UPDATE tsconfig.json (645 bytes)
+  UPDATE tsconfig.app.json (347 bytes)
+  UPDATE tsconfig.spec.json (333 bytes)
+  UPDATE e2e/tsconfig.json (294 bytes)
+  Migration completed.
+
+
+C:\Users\jerry\wksp\kbs\loginapp10>
+
+C:\Users\jerry\wksp\kbs\loginapp10>ng serve
+Compiling @angular/core : es2015 as esm2015
+Compiling @angular/common : es2015 as esm2015
+Compiling @angular/platform-browser : es2015 as esm2015
+Compiling @angular/forms : es2015 as esm2015
+Compiling @angular/platform-browser-dynamic : es2015 as esm2015
+Compiling @angular/common/http : es2015 as esm2015
+Compiling @angular/router : es2015 as esm2015
+
+chunk {account-account-module} account-account-module.js, account-account-module.js.map (account-account-module) 37.6 kB  [rendered]
+chunk {main} main.js, main.js.map (main) 81.7 kB [initial] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 141 kB [initial] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 9.06 kB [entry] [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 14.7 kB [initial] [rendered]
+chunk {users-users-module} users-users-module.js, users-users-module.js.map (users-users-module) 36.9 kB  [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 3 MB [initial] [rendered]
+Date: 2021-01-20T06:39:26.145Z - Hash: 8917de63d0ff7965d5c5 - Time: 10146ms
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+: Compiled successfully.
+
+Date: 2021-01-20T06:39:27.971Z - Hash: 8917de63d0ff7965d5c5
+7 unchanged chunks
+
+Time: 1233ms
+: Compiled successfully.
 
 
 ==============================================

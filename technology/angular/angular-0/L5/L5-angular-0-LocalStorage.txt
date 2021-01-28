@@ -1,0 +1,64 @@
+
+=======================================================
+LocalStorage/SessionStorage:
+
+    public get userValue(): User {
+        return this.userSubject.value;
+    }
+
+	function showItemsByKey() {
+	   var typeofKey = null;
+	   for (var key in localStorage) {
+	       typeofKey = (typeof localStorage[key]);
+	       console.log(key, typeofKey);
+	   }
+	}
+
+	Object.keys(localStorage).forEach(function(key){
+	   console.log(localStorage.getItem(key));
+	});
+	
+	for (x in localStorage){
+	    console.log(localStorage.getItem(x));
+	}
+	
+	for(var key in localStorage) {
+	  $('body').append(localStorage.getItem(key));
+	}
+	
+	$.each(localStorage, function(key, value){
+	
+	  // key magic
+	  // value magic
+	
+	});
+	
+	localStorage.setItem("words", JSON.stringify(["Lorem", "Ipsum", "Dolor"]));
+	var words = JSON.parse(localStorage.getItem("words"));
+	words.push("hello");
+	localStorage.setItem("words", JSON.stringify(words));
+	
+	localStorage.setItem(1,'Lorem|Ipsum|Dolor')
+	var split_list = localStorage.getItem(1).split('|');
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================

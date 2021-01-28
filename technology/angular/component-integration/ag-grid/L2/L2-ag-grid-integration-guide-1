@@ -1,0 +1,62 @@
+
+====================================================
+Integration Guide:
+
+==>Procedures:
+
+	(1) Installations
+		https://www.ag-grid.com/documentation/angular/getting-started/
+		npm install --save ag-grid-community
+		npm install --save ag-grid-angular
+	(2) Configurations:
+		==>import { AgGridModule } from 'ag-grid-angular';
+		==>Add Ag-Grid's CSS/theme files:
+			@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+			@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+			==>This is important because it contains: CSS for the structures and styling
+			
+			The code above imports the grid "structure" stylesheet (ag-grid.css), 
+			and one of the available grid themes: (ag-theme-alpine.css). 
+			The grid ships several different themes; pick one that matches your project design. 
+			You can customise it further with Sass variables, a technique which we will cover further down the road.
+			
+==>Ag-Grid Features:
+	==>Ag-Grid: could have 10+ or 50+ features due to its powers and complexities: @Input/@Ouput > 100+?
+	==>Its integration and features: could pair with Google Map APIs...
+	==>...
+	
+==>AG-GRID Styling:
+
+	==>Structures.css + Theme css
+	==>Customization of themes
+	==>ag-grid-angular selector
+		==>Direct style attribute
+			==>Does this work for Google Map API selector, and other selectors?
+			==>
+		==>
+	==>
+	
+==>AG-GRID APIs:
+	https://www.ag-grid.com/documentation/javascript/
+
+==>Application Design and Implementation:
+
+	==>Core/POC Development
+	
+	
+	==>Fully Functional Application Development
+	
+	
+	
+	==>Special Feature Application Development:
+		Example:https://github.com/ag-grid/ag-grid-angular-cli-example
+		
+
+
+	==>Enterprise Version Application Development:
+		https://www.ag-grid.com/documentation/angular/licensing/
+		The Enterprise version of ag-Grid comes with more features and support via Zendesk. The features that are only available in ag-Grid Enterprise are marked with the Enterprise icon as demonstrated in the image to the right. See Pricing for details on purchasing an ag-Grid Enterprise license.
+
+
+
+

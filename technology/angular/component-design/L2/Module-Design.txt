@@ -1,0 +1,24 @@
+
+
+============================================================
+Some Modules:
+	https://angular.io/guide/router-tutorial-toh#clear-secondary-routes
+
+==>Take an example module:
+
+	A crisis center with child routes
+	
+	This section shows you how to organize the crisis center to conform to the following recommended pattern for Angular applications:
+	
+		Each feature area resides in its own folder.
+		Each feature has its own Angular feature module.
+		Each area has its own area root component.
+		Each area root component has its own router outlet and child routes.
+		Feature area routes rarely (if ever) cross with routes of other features.
+
+	==>Not every module is enabled as this design
+	
+==>		
+
+============================================================
+

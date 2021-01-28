@@ -1,0 +1,25 @@
+
+Procedures:
+	(1) Online Reference Documentations:
+	
+	(2) Install:
+		package.json:
+			primeng: ^4.3.0
+		
+	(3) Add Primeng Styling:
+		angular.json:
+			themes/omega/theme.css
+			primeng.min.css
+	
+	(4) app.module.ts:
+		Add various Primeng modules
+		
+	(5) Components' HTML template files:
+	
+		<p-* selectors
+		
+		==>
+		
+	
+	(6) 
+		

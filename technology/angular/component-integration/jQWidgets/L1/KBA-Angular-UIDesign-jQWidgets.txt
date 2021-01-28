@@ -11,6 +11,61 @@
 	https://www.jqwidgets.com/angular/?gclid=CjwKCAiAt9z-BRBCEiwA_bWv-MU6yFWHt6-bUrKsF75YZMmKkyTlIuop3-S1ZBUL7XiCrPg-TqYT6RoCawkQAvD_BwE
 
 2. How to Use it
+	1) Open Source? - should be
+	2) Then similar to Ag-Grid, etc.
+	3) jqxWidget UI Components: one main example to illustrate: there is no need to replicate these samples into your local sample apps at all
+
+	npm install jqwidgets-ng
+	"node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css"
+
+3. Highlights:
+	1) New Usage: embedded and customized components' html template
+	2) New Usage: utilize: this.employees.nativeElement.innerHTML += table;
+	3) New Usage: Omit HTML template's original html design, and dynamically create sub-html contents by app component
+				  ==>Could be used as popup/dialog/modal contents while can be used in many other usages
+	4) Good Features:
+		jqxDataTable
+		jqxTimePicker
+		jqxButtons
+		jqxCalendar
+		jqxFileUpload
+		jqxForm
+		jqxDateTimeInput
+		jqxDropDownList
+		jqxDragDrop
+		jqxPasswordInput
+		jqxMenu
+	
+Summaries:
+	https://www.jqwidgets.com/angular/angular-popover/#https://www.jqwidgets.com/angular/angular-popover/angular-popover-defaultfunctionality.htm
+		import { Component, ViewChild, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+		@ViewChild('employees', { static: false }) employees: ElementRef;
+		this.employees.nativeElement.innerHTML += table;
+	https://www.jqwidgets.com/angular/angular-popover/#https://www.jqwidgets.com/angular/angular-popover/angular-popover-positioning.htm	
+		<jqxPopover #popover
+		            [offset]="{ left: 0, top: -125 }"
+		            [arrowOffsetValue]="-240"
+		            [position]="'left'"
+		            [title]="'Employees'"
+		            [showCloseButton]="true"
+		            [selector]="'#container'">
+		  <div #employees></div>	
+		  ==>1) Enable customized html template (or overriding?)
+		  ==>2) Or internally it is a Directive without a view? - customized/overriding
+		  [selector]="'#container'"
+		  <div class="jqx-widget-header" id="container">
+		    <jqxButton style="float: left; margin-left: 50%; left: -75px; top: 0px; position: relative; padding: 5px 22px; border-radius: 6px;"
+		               [width]="150" [height]="35">View Employees</jqxButton>
+		  </div>		  
+		  ==>Enable a modal popup: [isModal]="true": internal code: z-index=100, ...
+	https://www.jqwidgets.com/angular/angular-datatable/#https://www.jqwidgets.com/angular/angular-datatable/angular-datatable-paging.htm
+		<jqxDataTable
+		    [width]="getWidth()" [source]="source" [columns]="columns"
+		    [pageable]="true" [altRows]="true" [pagerMode]="'advanced'">
+		</jqxDataTable>
 
 
 
+
+  
+  

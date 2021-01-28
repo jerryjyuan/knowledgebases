@@ -1,0 +1,17 @@
+
+====================================================================
+core-js is different from Angular APIs' core.ts:
+
+> core-js@3.6.4 postinstall C:\Users\jerry\wksp\kbs\loginapp10\node_modules\core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon:
+> https://opencollective.com/core-js
+> https://www.patreon.com/zloirock
+
+====================================================================
+
+
+====================================================================

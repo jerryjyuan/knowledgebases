@@ -1,0 +1,45 @@
+
+==============================================
+SPARTA UI:
+
+==>Why does SPARTA UI look like a great Angular app?
+
+==>App UI Design and Implementation: How did this app get designed and developed?
+
+	==>AG-GRID Enterprise:
+		ag-grid
+		ag-grid-angular
+		ag-grid-enterprise
+	==>Styling:
+		style.css:	1) Global
+					2) Choose business preferred look and feel: deep blue: #25354c
+					3) 
+	==>
+	==>
+	==>Centric Data Display and Data Table
+	==>
+	==>
+	==>
+	==>Map in Use: but limited to Google Map APIs: GeoChart - with loan state aggregations
+	==>
+	==>Some Good Features:
+		==>Lodash
+		==>
+		==>
+	==>Separate Responsibilities: Data Fetching: All data come from various Service APIs apps
+		==>Performance Considerations:
+			==>Load all data and cache
+			==>Also query data via Service APIs when needed
+		==>...
+	==>
+	==>
+	==>SPARTA AutoSys Jobs: SPARTA does have some AutoSys jobs
+		==>Type 1: Control/Manipulate/Facilitate some backend Service APIs and their data in MSSQL
+		==>Type 2: DCU processing AutoSys Jobs
+		==>...
+	==>
+	==>Deployment: Why ROTN OCP?
+		==>ROTN OCP: company designated cloud/container platform - no other reasons
+	==>
+
+==============================================

@@ -1,0 +1,26 @@
+
+#Web: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##Tools List:
+
+1. Web
+	https://developer.mozilla.org/en-US/docs/Web
+	
+	https://developer.mozilla.org/en-US/docs/Web/HTML
+	https://developer.mozilla.org/en-US/docs/Web/CSS
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+2. Data:
+
+	lpsum
+
+3. Angular Themes:
+
+	https://material.angular.io/guide/theming
+	
+	
+4. 

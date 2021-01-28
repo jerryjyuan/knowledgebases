@@ -3,6 +3,9 @@
 Chart Libraries
 
 ============================================
+Animations:
+
+npm install --save @types/spin
 
 
 ============================================

@@ -1,0 +1,87 @@
+
+
+Material Design Styling:
+
+==>Can each of the MD components be styled?
+	==>It seems like...
+	==>
+
+==>Can each of the MD components be styled using its exact name?
+	==>Yes
+		Reasons:
+		1) Reason 1: almost every selector is inside the default theme: to enabled/recognized by default
+		2) Reason 2: default css selector: only has small styling, so your additions enrich them
+					 Example 1: .mat-card-title{font-size:24px;font-weight:500}.mat-card-header .mat-card-title{font-size:20px}
+					 			==>You can add more to enrich it...
+		3) If you are unsure, check the default theme file to see if the selector is inside the file
+		4) This styling way makes it very simpler
+	==>
+	
+==>Summary Scenarios:
+
+	==>Use 4 default themes:
+		==>Are these 4 default themes good enough?
+			==>By looking into these theme files: answers are showing: most of them - pretty simpler - so may need some styling when needed
+			==>We can summarize more when using them in html files
+		==>Customizations: modifying these 4 themes:
+			==>not recommended per several reasons unless...
+		==>Customizations: combined with some other styling methods: BT4, ...?
+			==>Method 1: BT4
+			==>Method 2: Added with normal CSS file and css selector to further enrich the MD selectors
+		==>Customizations: added new themes?
+		==>How to identify and use these themes?
+			1) 
+			2) 
+	==>
+
+	==>
+	
+	==>How to enable and configure RWD?
+		==>
+		==>Method: CDK Layout package
+			==>Add: MD Selector: Grid-List		
+				BreakpointObserver
+					https://material.angular.io/cdk/layout/api#BreakpointState
+					BreakpointObserver utility of the CDK Layout package assesses media queries and makes UI changes based on them
+				To Do:
+					==>Look into it and make it more robust UI html template design patterns: ...
+		==>Method: ...
+		==>...
+		
+	==>	
+
+	==>MD Design Patterns:
+	
+		==>Depending up what layout styles:
+			<mat-grid-list>
+			...
+			
+		==>Data:
+			Depending up the layouts
+			
+			
+			
+
+==>How to add comments into json files?
+	==>
+	"./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+	"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+	"./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+	"./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+	
+	https://www.techiediaries.com/json-comments/
+		JSON doesn't support comments by design
+		We use the underscore as a convention to differentiate comments from the rest of data
+		"__comment": "This is a comment!",
+		{
+		    "//a": "This is the first comment.",
+		    "//b": "This is the second second." 
+		}
+		{
+		    "Comments": [
+		        "First comment,",
+		        "Second comment"
+		    ]
+		}	
+		Adding Comments in JSON with External Tools
+		JSON5 Supports Comments

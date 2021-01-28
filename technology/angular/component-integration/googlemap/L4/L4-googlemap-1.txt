@@ -1,0 +1,88 @@
+
+
+radius of 6,378,137 meters => 6,378 km
+	Diameter = 12,700 km
+
+perimeter: SF -> NY: 3000 miles ==>3000 x 1.6 = 4800,000 meters
+		   ==>A circle: 4800,000 x 24/3 = 3,840,000 meters
+		   ==>Compared with equator circle:
+				==>SF: 38 Lat ==>40
+				===>Estimate: equator perimeter = 3,840,000 x 1.05 = 40,054,700 meters ==>Earth to Moon: about 9-10 times distance of the earth's equator perimeter
+					==>Earth to Moon: about 30 times distance of the earth's diameter
+						380,000km
+				
+				==>r = x / 2 / 3.14 ==>6378137
+					==>x = 
+					
+
+Google Map JavaScript APIs:
+
+	Map
+	Drawing
+	StreetView
+	Place:
+		Geocoder APIs:
+			[MissionMap]:
+				==>Need to access address/place via LatLng geocoder
+				==>Usage 1: Search Address:
+							==>Usage 1: Only used as an alternate service second to the main service: Autocomplete service
+										==>Autocomplete Service:
+											==>google.maps.AutoComplete APIs
+							==>Usage 2: When Mission Map processes: multiple addresses
+										==>Need to look for geocoder for the list of addresses
+										==>Loop through the list of addresses and call GeoCoder APIs
+				==>Usage 2: Search Properties
+							==>
+	Routes
+	LocalContext
+	
+	
+	Bootstrap Request:
+		==>Main libraries
+		==>Additional libraries:
+			https://developers.google.com/maps/documentation/javascript/libraries
+
+=================================================	
+UI Layout - Design:
+
+==>Define several main components
+	==>Lay out main sections:
+	1) Map Section:
+		==>Call Google Map APIs: display and configure Google Map
+		==>Enable core functions on Map
+		==>Define 1 of the 4 main functions: Search Addresses
+	2) Left Menus Section
+		==>Define 3 of the 4 main functions:
+			1) Search Properties
+			2) Search Geo-Areas
+			3) Search quick start?
+	3) Right Results Section:
+		==>Display 2 main tabs
+		==>
+	4) Top/Header Menus Section:
+		==>Links to other apps and corporate resources
+	5) Header Title Section:
+		==>Favicon, Logo, and title
+	
+=================================================	
+Service Layers - Design:
+
+	==>Provide App Level Service
+	
+	==>Provide App Cache Service
+
+	==>Provide App Level Service
+	
+
+
+=================================================	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	

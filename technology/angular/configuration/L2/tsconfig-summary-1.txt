@@ -1,0 +1,35 @@
+
+
+
+==>Enable local JSON files:
+
+	"resolveJsonModule": true,
+	"esModuleInterop": true
+  
+==>Enable Google Maps Integration:
+
+	"types": [ "googlemaps" ]
+	
+Example: tsconfig.app.json:
+
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}
+
+
+	
+	

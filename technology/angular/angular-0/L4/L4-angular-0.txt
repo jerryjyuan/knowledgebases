@@ -1,0 +1,19 @@
+
+=======================================================
+LocalStorage:
+	==>Should be affiliated with each browser type: Chrome/IE/Edge/Firefox, ...
+
+=======================================================
+HttpInterceptor:
+	==>How to add Service into it
+
+=======================================================
+Multiple Outlets:
+
+    						1) global page: multiple or named <router-outlet>
+    						2) sub-pages:   multiple or named <router-outlet>
+    						https://angular.io/api/router/RouterOutlet: 2 main usage
+    							{path: <base-path>, component: <component>, outlet: <target_outlet_name>}
+    							http://base-path/primary-route-path(outlet-name:route-path)
+    							
+=======================================================

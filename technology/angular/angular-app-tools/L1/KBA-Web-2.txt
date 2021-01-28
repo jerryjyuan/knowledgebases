@@ -51,7 +51,10 @@ GUIDs are used in enterprise software development in C#, Java, and C++ as databa
 			  e2e
 			    ng e2e
 			    
-			    
+3. Colors:
+	https://htmlcolorcodes.com/
+	
+4. 		    
 			    
 			    
 			    

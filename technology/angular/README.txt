@@ -11,4 +11,9 @@
 	https://github.com/cornflourblue
 
 
+##Announcements:
+	# Stage 1: 01/25/2021: Jerry's Angular Foundations: built and completed
+				==>Means: I can start building any Angular applications
+	# Stage 2: ...
+	
 	

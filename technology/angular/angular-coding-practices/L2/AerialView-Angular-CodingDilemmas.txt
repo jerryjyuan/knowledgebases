@@ -1,5 +1,13 @@
 
 #==============================================================
+Angular Coding:
+
+==>Unused files don't need to be deleted
+==>commas are not mandatory: like swift
+==>
+==>
+
+#==============================================================
 Angular: Coding Dilemmas:
 
 	==>If you know it is pronounced as:

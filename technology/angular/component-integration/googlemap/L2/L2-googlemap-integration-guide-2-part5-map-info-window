@@ -1,0 +1,31 @@
+
+========================================================
+Google Map Integration: Application Implementation Procedures
+
+(1) Part 1: GoogleMap:
+	1) APIs:
+		==>Native Google Map JavaScript APIs:
+			https://developers.google.com/maps/documentation/javascript/reference/map
+			https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+			https://developers.google.com/maps/documentation/javascript/tutorial
+		==>Google Map API UI Component:
+			==>1) No Angular official API documents found yet: because it is new to Angular 9.x
+			==>2) Go to: 
+					components\src\google-maps\google-map\google-map.ts
+					Or: https://github.com/angular/components/blob/master/src/google-maps/README.md
+					==>Look for @Input properties: 6 total @Input
+						==>5 can be directly used
+						==>1: need to look up Google JavaScript APIs:
+							  google.maps.MapOptions
+							  	https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+							  ==>Configurations: very complicated: To Explore
+	2) @Output() properties:
+		==>Very complicated: need to explore one by one
+		==>Total: 18 @Output
+			
+	3) GoogleMap HTML template reference:
+		==>GoogleMap Component:
+		   ==>Class-level: Methods and getters
+
+	
+========================================================

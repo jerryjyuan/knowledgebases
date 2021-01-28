@@ -1,0 +1,206 @@
+
+==============================================
+$ ps
+PID        TTY     STAT   TIME          CMD 
+5140     pts/4    Ss        00:00:00     bash 
+61244    pts/4    R+        00:00:00     ps
+
+TIME: Total time of CPU Usage
+RSS: Resident set size, the non-swapped physical memory that is used by a process
+VSZ: Virtual memory usage of the process
+%MEM: Ratio of the processâ€™s resident set size to the physical memory on the machine
+
+Main Memory:
+Swap Space: used for swapped processes: waiting/blocked
+==============================================
+lsof command stands for List Of Open File
+
+==============================================
+RSS (RDF Site Summary or Really Simple Syndication) is a web feed that allows users and applications to access updates to websites in a standardized, computer-readable format. These feeds can, for example, allow a user to keep track of many different websites in a single news aggregator.
+==============================================
+Linux:
+
+Fedora/CentOS/RHEL:
+	RPM: yum (Fedora: dnf)
+	Currently in the business server environment, Redhat is the leader
+Ubuntu/Debian: apt-get DEB
+	DEB: APT (Advanced Package Tool) / dpkg
+openSUSE (SUSE)
+	RPM: rpm / zypper / YaST
+Arch
+	pacman
+SunOS/Solaris
+
+os-release
+lsb_release -a
+	LSB (Linux Standard Base) information about your specific Linux distribution, including version number, release codename, and distributor ID
+uname -r/-a
+	(unix system/kernal information)
+	
+==============================================
+Linux Scripts:
+	Dependencies:
+		==>Teams: Which teams are you working for?
+		==>Accesses/Accounts/Privileges
+		==>Server Boxes: distributions/patches/installations/customizations
+		
+	Level 1: Simple:
+		==>Dev Team: App Development
+	Level 2: Complex:
+		==>Part 1: Server Groups/App-Server/
+		==>Part 2: Tools Groups
+		==>
+	Level 3: Advanced
+		==>
+	
+Windows Scripting:
+	==>The only years I had the need of writing some Windows scripts were: 2004-2007 when I worked for Tom Nolan's Teradata JDBC driver team
+	==>Other companies/Projects: I didn't have any main work to write Windows scripts
+	
+==============================================
+GNU:
+https://www.gnu.org/
+The name â€œGNUâ€� is a recursive acronym for â€œGNU's Not Unix.â€� â€œGNUâ€� is pronounced g'noo, as one syllable, like saying â€œgrewâ€� but replacing the r with n.
+
+Short for GNU's Not Unix, GNU (pronounced g'noo) is a free software project to provide a distributable replacement for Unix. GNU was first announced by Richard Stallman on September 27, 1983, and later published in the March 1985 issue of Dr. Dobb's Journal.
+
+GNU's goal is to give all computer users the freedom of copying, developing, distributing, modifying, and studying software with the understanding that its redistribution cannot be limited. The goal of the project was achieved in 1992 when Linux was released under the GNU General Public License.
+
+The program in a Unix-like system that allocates machine resources and talks to the hardware is called the â€œkernelâ€�. GNU is typically used with a kernel called Linux. This combination is the GNU/Linux operating system. GNU/Linux is used by millions, though many call it â€œLinuxâ€� by mistake.
+
+GNU's own kernel, The Hurd, was started in 1990 (before Linux was started). Volunteers continue developing the Hurd because it is an interesting technical project.
+
+GNU is an operating system that is free softwareâ€”that is, it respects users' freedom. The GNU operating system consists of GNU packages (programs specifically released by the GNU Project) as well as free software released by third parties. The development of GNU made it possible to use a computer without software that would trample your freedom.
+
+We recommend installable versions of GNU (more precisely, GNU/Linux distributions) which are entirely free software.
+
+==>Linux: is GNU/Linux operating system: GNU Unix system using Linux as kernel.
+	==>A Unix system (GNU) with Linux kernel
+	==>Simplified as Linux System
+	==>"installable versions of GNU": using Linux kernel becomes more installable (instead of using GNU's own kernel Hurd)
+==============================================
+FYA means â€œFor Your Amusementâ€œ
+==============================================
+%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+
+%AppData%\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+
+C:\Users\jerry\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+
+==>To Search:
+	==>How to arrange the items on TaskBar: make important ones to level 1
+	==>Drag and arrange them
+	==>...
+
+==============================================
+Team Chats:
+
+	==>Only the recipients' names show red? So they also see the same?
+	
+	==>How to test and verify this?
+	
+	
+==============================================
+https://www.baeldung.com/java-gc-overhead-limit-exceeded
+https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/jrdocs/refman/optionXX.html
+https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html
+http://middlewaremagic.com/weblogic/?tag=outofmemory
+http://middlewaremagic.com/weblogic/?p=4456
+	==>Good JVM info
+==============================================
+https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
+grep command examples in Linux and Unix
+Below is some standard grep command explained with examples to get you started with grep on Linux, macOS, and Unix:
+
+Search any line that contains the word in filename on Linux: grep 'word' filename
+Perform a case-insensitive search for the word â€˜barâ€™ in Linux and Unix: grep -i 'bar' file1
+Look for all files in the current directory and in all of its subdirectories in Linux for the word â€˜httpdâ€™grep -R 'httpd' .
+Search and display the total number of times that the string â€˜nixcraftâ€™ appears in a file named frontpage.md: grep -c 'nixcraft' frontpage.md
+How do I list just the names of matching files?
+Use the -l option to list file name whose contents mention main():
+$ grep -l 'main' *.c
+OR
+$ grep -Rl 'main' /path/to/project/dir/
+==============================================
+WebLogic Doc:
+	https://www.appservgrid.com/documentation111/docs/fmw12c1211documentation/web.1211/e24432.pdf
+	https://www.appservgrid.com/documentation111/docs/fmw12c1211documentation/web.1211/e21048/overview.htm
+	https://www.appservgrid.com/documentation111/docs/fmw12c1211documentation/web.1211/e21048/failures.htm#START162
+	
+	https://docs.oracle.com/cd/E17904_01/doc.1111/e14308/startstop_comp.htm#OMADM4211
+	https://www.appservgrid.com/documentation111/docs/fmw11g1115documentation/web.1111/e13708/toc.htm
+	
+	Managed Servers: need to sync up configurations with Admin Servers: so prefer to have a restart after admin server restarts
+	
+	If Managed Servers are down, maybe don't have to restart Admin Servers when restarting Managed Servers
+	
+What Happens if the Administration Server Fails?
+
+	The failure of an Administration Server does not affect the operation of Managed Servers in the domain but it does prevent you from changing the domain's configuration. If an Administration Server fails because of a hardware or software failure on its host machine, other server instances on the same machine may be similarly affected. However, the failure of an Administration Server itself does not interrupt the operation of Managed Servers in the domain.
+
+	If an Administration Server for a domain becomes unavailable while the server instances it managesâ€”clustered or otherwiseâ€”are up and running, those Managed Servers continue to run. Periodically, the Managed Servers attempt to reconnect to the Administration Server. If the domain contains clustered server instances, the load balancing and failover capabilities supported by the domain configuration remain available, even if the Administration Server fails.
+
+	You can start a Managed Server even if the Administration Server is not running. In this case, the Managed Server uses a local copy of the domain's configuration files for its starting configuration and then periodically attempts to connect with the Administration Server. When it does connect, it synchronizes its configuration state with that of the Administration Server.
+
+	For information on starting a Managed Server without a running Administration Server, see "Managed Server Independence Mode" in Managing Server Startup and Shutdown for Oracle WebLogic Server. For information on re-starting an Administration Server, see "Avoiding and Recovering From Server Failure" in Managing Server Startup and Shutdown for Oracle WebLogic Server.
+
+Managed Server Independence Mode
+	Managed Servers maintain a local copy of the domain configuration. When a Managed Server starts, it contacts its Administration Server to retrieve any changes to the domain configuration that were made since the Managed Server was last shut down. If a Managed Server cannot connect to the Administration Server during startup, it can use its locally cached configuration informationâ€”this is the configuration that was current at the time of the Managed Server's most recent shutdown. A Managed Server that starts up without contacting its Administration Server to check for configuration updates is running in Managed Server Independence (MSI) mode. By default, MSI mode is enabled. For information about disabling MSI mode, see "Disable Managed Server independence" in Oracle WebLogic Server Administration Console Help.	
+
+Managed Servers and the Re-started Administration Server
+
+	If an Administration Server stops running while the Managed Servers in the domain continue to run, each Managed Server periodically attempts to reconnect to the Administration Server, at the interval specified by the ServerMBean attribute AdminReconnectIntervalSeconds. By default, AdminReconnectIntervalSeconds is ten seconds.
+
+	In order for Managed Servers to reconnect after an Administration Server is restarted on a different IP address, you must have:
+
+	Configured a DNS name for the Administration Server URL that maps to multiple IP addresses. For example, a DNS server named wlsadminserver which maps to 10.10.10.1 and 10.10.10.2
+
+	Provided the DNS name for the Administration Server URL when starting the Managed Servers. For example:
+
+	-Dweblogic.management.server=protocol://wlsadminserver:port
+
+	or
+
+	startManagedWebLogic.cmd managed_server_name protocol://wlsadminserver:port
+
+	If the Administration Server goes down, Managed Servers will attempt to reconnect to the Administration Server on all the available URLs. When the Administration Server comes up on any of these URLs, Managed Servers connect to the Administration Server and stop attempting to reconnect on the other URLs. If the Administration Server goes down again, they attempt to reconnect again.
+
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+==============================================
+

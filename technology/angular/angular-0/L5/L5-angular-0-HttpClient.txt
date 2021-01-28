@@ -1,0 +1,152 @@
+
+=======================================================
+HttpClient:
+
+
+logIn(username: string, password: string) {
+    const url = 'http://server.com/index.php';
+    const body = JSON.stringify({username: username,
+                                 password: password});
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    this.http.post(url, body, {headers: headers}).subscribe(
+        (data) => {
+            console.log(data);
+        },
+        (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+                console.log('Client-side error occured.');
+            } else {
+                console.log('Server-side error occured.');
+            }
+        }
+    );
+}
+
+let headers = new HttpHeaders();
+headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+or
+
+const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+Update: adding multiple headers
+
+let headers = new HttpHeaders();
+headers = headers.set('h1', 'v1').set('h2','v2');
+or
+
+const headers = new HttpHeaders({'h1':'v1','h2':'v2'});
+Update: accept object map for HttpClient headers & params
+
+Since 5.0.0-beta.6 is now possible to skip the creation of a HttpHeaders object an directly pass an object map as argument. So now its possible to do the following:
+
+http.get('someurl',{
+   headers: {'header1':'value1','header2':'value2'}
+});
+
+const url = `${environment.APP_API}/api/request`;
+
+let headers = new HttpHeaders().set('header1', hvalue1); // create header object
+headers = headers.append('header2', hvalue2); // add a new header, creating a new object
+headers = headers.append('header3', hvalue3); // add another header
+
+let params = new HttpParams().set('param1', value1); // create params object
+params = params.append('param2', value2); // add a new param, creating a new object
+params = params.append('param3', value3); // add another param 
+
+return this._http.get<any[]>(url, { headers: headers, params: params })
+
+return this.http.get(url, { headers: new HttpHeaders({'Authorization': 'Bearer ' + token})
+ });
+
+let headers = new HttpHeaders();
+let headers1 = headers.append('key', 'value');
+
+  getCustomHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Api-Key', 'xxx');
+    return headers;
+  }
+  
+return this.http.get(url, {headers: new HttpHeaders().set('UserEmail', email ) });
+
+
+   let header = new HttpHeaders({ "Authorization": "Bearer "+token});
+
+   const requestOptions = {  headers: header};                                                                                                                                                                            
+
+    return this.http.get<any>(url, requestOptions)
+        .toPromise()
+        .then(data=> {
+            //...
+            return data;
+    });
+    
+    import { Injectable } from '@angular/core';
+    import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+    import { Student } from '../model/student';
+    import { Observable, throwError } from 'rxjs';
+    import { retry, catchError } from 'rxjs/operators';
+
+    @Injectable({
+      providedIn: 'root'
+    })
+    export class ApiService {
+
+      // API path
+      base_path = 'http://localhost:3000/students';
+
+      constructor(private http: HttpClient) { }
+
+      // Http Options
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }
+
+      // Handle API errors
+      handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+          // A client-side or network error occurred. Handle it accordingly.
+          console.error('An error occurred:', error.error.message);
+        } else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong,
+          console.error(
+            `Backend returned code ${error.status}, ` +
+            `body was: ${error.error}`);
+        }
+        // return an observable with a user-facing error message
+        return throwError(
+          'Something bad happened; please try again later.');
+      };
+
+
+      // Create a new item
+      createItem(item): Observable<Student> {
+        return this.http
+          .post<Student>(this.base_path, JSON.stringify(item), this.httpOptions)
+          .pipe(
+            retry(2),
+            catchError(this.handleError)
+          )
+      }
+            
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================
+
+
+
+=======================================================

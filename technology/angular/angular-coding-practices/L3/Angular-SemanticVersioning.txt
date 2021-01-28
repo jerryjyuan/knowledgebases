@@ -1,0 +1,9 @@
+
+
+Semantic Versioning
+
+	https://angular.io/guide/releases
+	https://semver.org/
+	
+	
+	
