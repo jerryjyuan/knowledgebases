@@ -1,4 +1,10 @@
 
+uptime
+df -h
+df -h | wc -l
+top
+
+
 ==============================================
 $ ps
 PID        TTY     STAT   TIME          CMD 
@@ -166,6 +172,19 @@ Managed Servers and the Re-started Administration Server
 	If the Administration Server goes down, Managed Servers will attempt to reconnect to the Administration Server on all the available URLs. When the Administration Server comes up on any of these URLs, Managed Servers connect to the Administration Server and stop attempting to reconnect on the other URLs. If the Administration Server goes down again, they attempt to reconnect again.
 
 ==============================================
+ssh:
+
+sudo nano /etc/ssh/sshd_config
+
+ssh -L 5901:localhost:5901 -N -f -l username hostname_or_IP
+
+ssh : this starts the SSH client program on your local machine and enables secure connection to the SSH server on a remote computer.
+-L 5901:localhost:5901 : states that the local port for the client on the local machine is to be forwarded to the specified host and port of the remote machine. In this case, local port 5901 on the local client is being forwarded to the same port of the given remote server.
+-N : instructs to only forward ports, and not to execute a remote command.
+-f : sends SSH to background after the password is provided, just before the command is executed. Then, you can freely use the terminal to type commands on the local machine.
+-l username : the username you insert here will be used for logging in to the remote server you specified.
+hostname_or_IP : this is the remote system with a VNC server. An example of an IP address would be 172.16.0.5 and the example of a hostname would be myserver.somedomain.com.
+
 ==============================================
 ==============================================
 ==============================================

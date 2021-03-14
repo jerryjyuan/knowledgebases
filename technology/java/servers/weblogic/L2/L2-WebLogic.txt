@@ -1,20 +1,140 @@
 
-
+==============================================
 https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html#:~:text=Oracle%20WebLogic%20Server%2010.3.,6
 
+==============================================
 WebLogic:
 	Oracle WebLogic Server 14c (14.1.1.0)
 	
-	Versioning:
-		==>14.<1-9>.<1-9>.<0-9>
+	Versioning: 5 parts overall
+		==>14.<1-9>.<1-9>.<0-9>.<0-9>
 			Example: 14.2.1.4
 			Sometimes: it goes to one more digit:
 				14.<1-9>.<1-9>.<0-9>.<0-9>
 					Example: 12.1.3.0.0
+			If No.5 part (or any trailing parts) is omitted, it means: 0
+				12.2.1.4 ==>12.2.1.4.0
+				==>12214
+					==>Sometimes it can be also meaning: the highest available sub-version of the version:
+					Example: 12214 ==>12.2.1.4.<highest-sub-version>
+				1221 ==>12.2.1.0.0
+				1213 ==>12.1.3.0.0
 		==>14.<1-9>.<1-9> ~== 14.<1-9>.<1-9>.0
 			Or: 14.<1-9>.<1-9> ~== 14.<1-9>.<1-9>.<0-9>
 			Example: 12.1.3 ~== 12.1.3.0
 			
 			Sometimes: it goes to one more digit:
 				12.1.3 ~== 12.1.3.0.0
-			
+	==>How to easy check Oracle WebLogic Server version
+		AdminServer -> Monitoring tab
+	==>Admin User Credentials:
+		https://emarcel.com/recover-decrypt-weblogic-server-admin-password/
+		$DOMAIN_HOME/security:
+			One of the most important WebLogic Server files in terms of security is SerializedSystemIni.dat which contains encrypted security data
+		$DOMAIN_HOME/servers/AdminServer/security
+			boot.properties
+			decrypt_password.py:
+				==>
+		database username and password of JDBC Connection pool – encrypted password resides in $DOMAIN_HOME/config/jdbc directory, in xml files
+		password of a keystore where we store SSL certificates
+		encrypted password from config.xml  located in $DOMAIN_HOME/config dir
+==============================================
+decrypt_password.py
+
+from weblogic.security.internal import *
+from weblogic.security.internal.encryption import *
+encryptionService = SerializedSystemIni.getEncryptionService(".")
+clearOrEncryptService = ClearOrEncryptedService(encryptionService)
+
+# Take encrypt password from user
+pwd = raw_input("Paste encrypted password ({AES}fk9EK...): ")
+
+# Delete unnecessary escape characters
+preppwd = pwd.replace("\\", "")
+
+# Display password
+print "Decrypted string is: " + clearOrEncryptService.decrypt(preppwd)
+
+==============================================
+source $DOMAIN_HOME/bin/setDomainEnv.sh
+
+#Username:
+grep username $DOMAIN_HOME/servers/AdminServer/security/boot.properties | sed -e "s/^username=\(.*\)/\1/"
+
+#Password:
+grep password $DOMAIN_HOME/servers/AdminServer/security/boot.properties | sed -e "s/^password=\(.*\)/\1/"
+
+
+cd $DOMAIN_HOME/security
+
+java weblogic.WLST decrypt_password.py
+
+
+Initializing WebLogic Scripting Tool (WLST) ...
+
+Welcome to WebLogic Server Administration Scripting Shell
+
+Type help() for help on available commands
+
+Please enter encrypted password (Eg. {AES}fk9EK...): {AES}jkIkkdh693dsyLt+DrKUfNcXryuHKLJD76*SXnPqnl5oo\=
+Decrypted string is: welcome01
+
+
+Summary:
+	https://chronicler.tech/simplest-way-to-decrypt-passwords-in-oracle-weblogic-server-12c/
+	http://oracleiam.com/decrypt-weblogic-password/
+	Types:
+		1) Admin Console:
+			$DOMAIN_HOME/security/boot.properties
+		2) JDBC DataSource:
+			$DOMAIN_HOME/config/jdbc/*.xml		
+		3) Other types of encrypted password:
+			$DOMAIN_HOME/config/config.xml
+	==>java WLST tool Java API works:
+		==>PROD: the security folder and/or boot.properties file: owned by wlsmgr, and not readable
+		==>NonProd: allow developers to do something like this
+	==>wlst CLI: not working completely: maybe due to some typos
+		cd /u01/app/oracle/middleware/oracle_common/common/bin
+		./wlst.sh
+		domain = "/u01/app/oracle/middleware/user_projects/domains/wl_domain"
+		service = weblogic.security.internal.SerializedSystemIni.getEncryptionService(domain)
+		encryption = weblogic.security.internal.encryption.ClearOrEncryptedService(service)
+		print encryption.decrypt("{AES}nFIptO4HdY8fxSgLjrS8ZNqsVlcB2zQZzYJQ9o7AbJU=")
+		
+		
+java.io.IOException: mark/reset not supported
+	==>What is that? I need expert help...	==>Add: BufferedInputStream
+	[Jerry]: mostly they were not expert at all, just when they had a chance to google it and find some solution, and used it for just one time,
+			 and then they can tell you here, ...
+			 ==>I didn't know about it (or unfamiliar) this morning, and right now I am one of the experts you named...: and now you have also become an expert.
+			 
+			 
+			 
+xml String => InputStream:
+	==>ByteArrayInputStream:
+		==>Variation 1) string.getBytes()
+		==>Variation 2) string.getBytes(Charsets.UTF_8)
+	==>String Reader + reading (and writing) chunks of data at a time:
+	    Reader initialReader = new StringReader("With Java");
+	    char[] charBuffer = new char[8 * 1024];
+	    StringBuilder builder = new StringBuilder();
+	    int numCharsRead;
+	    while ((numCharsRead = initialReader.read(charBuffer, 0, charBuffer.length)) != -1) {
+	        builder.append(charBuffer, 0, numCharsRead);
+	    }
+	    InputStream targetStream = new ByteArrayInputStream(
+	      builder.toString().getBytes(StandardCharsets.UTF_8));		
+	==>StringReader + Guava/ByteArrayInputStream:
+		==>Key 1: CharStreams.toString(initialReader): StringReader -> String
+	    Reader initialReader = new StringReader("With Guava");
+	    InputStream targetStream = 
+	      new ByteArrayInputStream(CharStreams.toString(initialReader).getBytes(Charsets.UTF_8));	
+	==>StringReader + CommonIO:
+	    Reader initialReader = new StringReader("With Commons IO");
+	    InputStream targetStream = 
+	      IOUtils.toInputStream(IOUtils.toString(initialReader), Charsets.UTF_8);	
+	==>
+
+==============================================
+
+

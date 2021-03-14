@@ -1,0 +1,95 @@
+
+==============================================
+Java:
+	 use: +
+	 concatenations: str1+str2
+PHP:
+	 echo: use dot (not spaces)
+	 	echo $str1 . " " . $str2;
+Shell Script:
+	 echo: everything after echo...	==>spaces: ok
+	 echo str1 str2
+	 	Or: can add "" ==>>No.1 meaning: interpolation
+
+==============================================
+Indentation in Action:
+
+Python: Yes
+
+Non-Python: No
+
+==============================================
+Bash:
+
+https://devhints.io/bash
+
+==>if [[ EXPR ]]; then
+	example: if [[ "string" ]]; then
+	
+	negation: function as normal negation
+	==>!
+	==>interpolation: 	good for: "", or no-quotes
+						not good for: ''
+						==>'$alias' ==>like a normal string
+						==>Also: can add {} like: "${str1}", or ${str1}
+						
+						Aka:
+							"${str1}" == "$str1"
+							${str1} == $str1
+	
+	==>backtick: ``:	can be replaced by eval command
+	
+	==>empty: false
+	str=""
+	if [[ "$str" ]]; then
+		==>false
+	if [[ "" ]]; then
+		==>false
+	
+	==>values or spaces: true
+	str=" "
+	if [[ "$str" ]]; then
+		==>true
+	if [[ " " ]]; then
+		==>true
+	if [[ "string" ]]; then
+		==>true
+
+	==>interpolation: 	good for: "", or no-quotes
+						not good for: ''
+	str="str"
+	if [[ "$str" ]]; then
+		==>true
+	if [[ '$str' ]]; then
+		==>true
+	if [[ $str ]]; then
+		==>true
+	
+==>use: semicolon:	==>on the same line	
+	if [ "$PHONE_TYPE" == "NEC" ] || [ "$PHONE_TYPE" == "CISCO" ]
+	then
+	    :        # do nothing
+	else
+	    exit
+	fi
+
+==>Using the operators for string comparison:
+	use: != 			==>not: -ne or -eq
+		if [ "$PHONE_TYPE" != "NEC" ] && [ "$PHONE_TYPE" != "CISCO" ]
+		(-eq / -ne are for number comparison, use = / != for string comparison)
+		==>arithmetic syntax error
+    use: ==
+    	if [ "$act" == "add" ]
+    use: 
+    
+==>Use: [[]] vs. []
+	[[]] test is a Bash specific construct, and this example works just as well with the POSIX [] as used in the question
+	==>If the interpreter is explicitly given as #!/bin/bash or similar, the [[]] can be used without issues 
+		(and it is a bit faster than the alternative in Bash, I believe - not that it should be a bottle neck anyway), 
+		otherwise one should stick with []
+    	
+==============================================
+
+not(A || B || C) => not(A) && not(B) && not (C)
+
+==============================================

@@ -15,7 +15,12 @@
 	https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 	Chrome: Blink
-	Edge
+	Edge:
+		Edge - new: similar to Chrome
+		Edge - legacy: ...
+		==>macOS
+		==>Windows Server: 2016/2019
+		==>Windows 7/8/8.1/10
 	Firefox: Gecko
 	IE: Trident (also known as MSHTML) is a proprietary browser engine
 	Opera: Presto
@@ -24,7 +29,9 @@
 2. Mobile:
 
 	Chrome:		Chrome Android
-	Edge
+	Edge:
+		iOS
+		Android
 	Firefox: 	Firefox Android
 	IE
 	Opera:		Opera Android

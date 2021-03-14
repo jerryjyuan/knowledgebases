@@ -1,0 +1,54 @@
+
+Online Resources:
+	https://www.experts-exchange.com/topics/java/
+
+
+Java APIs:
+	==>URL:
+		(space character) is changed to %20
+		==>Solution:
+			URI uri = path.toURI();
+			File file = new File(uri);
+			More:
+				URI uri = url.toURI(); FileInputStream fis = new FileInputStream(uri.getPath());
+			URI is the bridge:
+				File file = new File("/Users/work space/tempFile.txt");
+				URL url = file.toURI().toURL();
+	==>Class.getResource vs. Classloader.getResource:
+		Class.getResource: can take a "relative" resource name, which is treated relative to the class's package.
+			Alternatively you can specify an "absolute" resource name by using a leading slash. 
+		Classloader.getResource: resource paths are always deemed to be absolute
+		==>I have reasoned these many times
+		==>Right now: just need to get the keys to memorize it forever
+			1) Key 1: it is both about classpath...: all/both are getting resources from classpath
+			2) Key 2: Class has class's package concept, so it takes both relative and absolute paths | ClassLoader only able to find via absolute
+		
+	==>Multiple APIs: may not be exactly equal:
+		==>Sometimes make a difference
+			StreamSource(File f)
+			StreamSource(InputStream inputStream)		
+		==>Sometimes: Some APIs have more usage: such as: Source[], ...
+			abstract Schema	newSchema(Source[] schemas)
+			
+	==>Enable simple way to process multiple XSD files into Source[]:	
+		private static StreamSource[] generateStreamSourcesFromXsdPathsJdk8(  
+		   final String[] xsdFilesPaths)  
+		{  
+		   return Arrays.stream(xsdFilesPaths)  
+		                .map(StreamSource::new)  
+		                .collect(Collectors.toList())  
+		                .toArray(new StreamSource[xsdFilesPaths.length]);  
+		}  
+
+	==>Validate an XML document by using DTD, XDR, or XSD
+		Microsoft XML-Data Reduced (XDR) schema
+		https://docs.microsoft.com/en-us/troubleshoot/dotnet/visual-basic/validate-xml-document-by-dtd-xdr-xsd
+		
+	==>Java Virtual Machine specification, the code of a method must not be bigger than 65536 bytes
+		65536 = 256 x 256
+		==>65536/100
+		==>6553 lines
+	
+	==>
+	
+	

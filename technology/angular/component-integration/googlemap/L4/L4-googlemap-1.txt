@@ -76,13 +76,50 @@ Service Layers - Design:
 
 
 =================================================	
+Deployment:
+	==>Apache Servers
+		==>Prod Deployment Processes:
+			1) Back up Apache Server vhost file
+			2) Update vhost file
+				# rules for Google Transit API
+				RewriteCond "%{QUERY_STRING}" "^latitude=(-?[0-9]+\.?[0-9]+?)&longitude=(-?[0-9]+\.?[0-9]+?)$"
+				RewriteRule "^\/api\/google\/transit" "https://<server>:<post>/<app>/api/google/transit?" [QSA,P]
+				
+				Notes:
+					Regular expressions:
+						()		grouping
+						-		What is this?
+						?		0 or 1
+						-?		zero - or one -:	means: either positive or negative values
+						[0-9]+:	1 or more digits:	how about starting from 0?
+						\.		decimal point
+						\.?		decimal point:		have a decimal point or not having decimal point
+						Reluctant quantifiers:
+							==>[0-9]+?				X+?	X, one or more times
+						
+				
+				Example:
+					1) Incoming HTTP Request:
+						"/api/google/transit?latitude=48.123456&longitude=75.123456
+						==>https://<server>:<post>/<app>/api/google/transit?latitude=48.123456&longitude=75.123456
+			3) Restart Apache Instance
+
+	==>UI Deployment:
+		==>Jenkins Build: Job: with tag
+		==>Back up app contents
+			mkdir apache-xxxApp <date> bkup
+			mv assets *.* apache-xxxApp <date> bkup
+		==>Deploy the new app contents
+			Copy .../<app>/* to <deployment-location>/apache-xxxApp
 	
+	==>Spring Boot + SOAP/RESTful Service App:
+		==>Deployed as docker image
+		==>OCP ROTN Platform
+		==>
 	
-	
-	
+	==>Deployment: Create OpenShift project: Docker Image
 	
 	
 
-	
-	
-	
+
+=================================================

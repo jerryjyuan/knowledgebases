@@ -1,0 +1,353 @@
+
+================================================
+664VEC: MFUW
+
+	==>
+		
+
+================================================
+App:
+
+
+
+================================================
+Servers:
+
+
+================================================
+Incidents: Case Study: 2 ASAP DCRs
+
+==>Date/Time: 02/19/2021: Friday
+
+==>Who:
+	==>Hayward Local Park Criminal Assault: 2 Network Criminal Players
+		==>Criminal 1:
+		==>Criminal 2:
+	==>Accomplice Player: Ping:
+		==>Ping: faked his accident:
+			==>Anthony faked 2 DCRs
+
+==>Background:
+	==>Jerry talked about Hayward Local Park Criminal Assault more focused on 02/18/2021
+	
+==>Natures:
+	==>Abusers Networks: Simulating Hayward Local Park Criminal Assault toward Jerry
+
+================================================
+Incidents: Case Study: MFUW TAM URL: not accessible:
+
+==>Date/Time: 02/21/2021: Sunday + 02/22/2021: Monday
+
+==>Who:
+	==>
+
+==>Background:
+	==>2pm-4pm EST: Jerry didn't check MFUW apps etc in formal fashion on Sunday, 02/21/2021, instead he might have done some quick informal checking
+	==>...
+	==>664VEC doesn't have monitors: so someones pinpoint this... ==>No alarms and incidents reported
+		[Jerry]: Why did 664VEC monitors get disabled/removed? Who did this?
+	==>...
+	
+==>Natures:
+
+==>Methods:
+	==>2-Ends Wrapping:
+	==>2-Ends + Center-Ripplizing:
+	==>...
+
+==>RCA:
+
+	==>Background:
+		==>...
+	==>Timeline Sequencing:
+		==>02/21/2021: Sunday: 2:00am: MFUW servers (both Ping and TAM URL servers): bounced: by CHG WIO team
+								==>Bounces: sequences are correct
+								==>No errors found
+								Issues/Questions:
+									==>TAM Servers are not included in CHG and Excel files: but still bounced together with Ping url
+										==>Reason 1: Excel file just didn't include them, but actually included in the CHG changes ==>This is a possible existence... sometimes
+		==>02/21/2021: Sunday: 8:00am: 
+								L3 Sunday health check: didn't report its issues:
+								1) Reason 1: The app didn't have issue (the issue was starting after that, such as: 2pm-6pm EST): TBD
+								2) Reason 2: L3 didn't check it completely or skipped it, so the access issue was not reported
+		==>02/22/2021: Monday: 6:00am: 
+								L3 morning health check: saw the access issue, and reported its issues:
+								[Gokul]: he didn't have permission to check or he said "couldn't see it?": a kind of networks-enabled small-lying?, ...: he didn't want to confirm?
+										 ==>Jerry ignored this, ...
+								[Jerry]: added it to the check email report
+		==>02/22/2021: Monday: 8:00am - 11:00am: debugging processing:
+								==>...
+								
+								
+								==>Request Flows:
+									==>VPN Only: Only using TAM Internal PROD:
+										Browser -> TAM junction (check TAM groups: Authentication: mfs-viewer?) -> TAM delegates to Apache url: configured in TAM DB2 DB or Config files
+												==>Apache receives the requests:
+													==>access log: every single request will go through this log
+													==>error log: only errors are added here
+													==>
+												==>AJP13 worker ==>Delegate to WebLogic Server url
+													==>WebLogic has various logs - see below
+													
+												==>Response back from the same flow reverted
+								
+								==>he2alxvpmid357: AServer/MServer1
+								   he1alxvpmid360: MServer2:
+													==>I think it is: WebLogic HA features: failover/load-balancing/...:
+													   1) HA/Failover: If MServer2 is down: the AServer and MServer1: should be still running fine
+																	   ==>AServer: can function well in handling this: similar to ZooKeeper?
+																	   ==>How about adding a WebLogic NodeManager? ==>Without NodeManager, AServer can do the work
+																	   ==>How about MServer2 is not down, but got some exceptions: like Stuck Threads, etc.?
+																			==>These errors/exceptions: AServer and MServer1 should be still ok and running/working: I think
+																				==>Because if MServer2 is shutdown, or bad situations, HA/Failover should work it out
+																				
+																				[Existing Failures: Stuck Threads]: not the root cause to this TAM issue
+																					Proof 1: After 11:10am TAM Url showing up, this error still occurs so not the root cause
+																					...
+																					
+																					[StuckThread]: processing time reaches max limit: 10 min
+																					
+																					Started: 02/21/2021: 4:40:41PM EST
+																					
+																					ExecuteThread: 0:	==>719-720 seconds
+																					
+																					
+																					
+																					==>However, the increase of heap size helps avoid this kind of error
+																								==>Also ...
+																					
+																	   ==>Is MSS Maint Servers last time the same situation?
+													   2) Load Balancing:
+																	   ==>If high volume: for sure both servers are serving: how to divide the flows, up to AServer's configurations, ..
+																	   ==>If small requests: maybe AServer allows MServer1 mainly doing the serving, so MServer2 is more idling, ...
+																	   
+																	   
+									==>Summaries:
+										==>Mem/HeappSize: not the root causes: checked top commands and mem usage %
+								
+								==>Servers Summaries:
+								
+									==>Apache Server:
+										==>one parent PID: spawn 4 sub processes: PIDs
+											==>Also spawn 3 log PIDs
+											
+											
+											
+										==>Logging:
+										
+											access.log:
+												common access log: not actually in use: logs are subject vhosts configurations
+										
+											only in use:
+												mfuw_access_yyyymmdd.log
+													==>This is the Prod Apache log: all access from my browser to Ping URL: go to this access log
+													
+													==>This is a proof: in the morning: my test requests didn't go to the TAM Apache log file like this evening's tests:
+
+												==========>TBD: where is it configured?
+													www/servers/mfuw/conf/vhosts/v-11008-mfuw-664VEC: also configure WebLogic integration
+													
+													==>Each request should go through Apache access log file
+													
+													Summaries:
+														==>Each valid request should show in access log: so this becomes the first troubleshooting scenario
+														==>access log: also shows HTTP Status Code
+														==>access log and/or many other scenarios: IP addresses: not so useful yet: TBD
+															==>Maybe due to VPN, or other scenarios: my laptop IP is not matched in log files: TBD
+																
+																https://www.iplocation.net/public-vs-private-ip-address
+																
+																IP Address is a unique address assigned to a computing devices such as computers, tablets and smartphones to communicate with other devices within the Internet. No device can connect to the Internet without a public IP address, and a public IP address is assigned to you by the Internet Service Provider (ISP) you are subscribing from. There are two versions of IP in use today, IPv4 (32-bit) and IPv6 (128-bit). There are two types of IP addresses: public and private. To use the Internet, you'll need a public IP address. To connect to a local area network such as your home or work network, a private IP address is suffice. To learn more about IP Addresses, you may refer IP Address and Public vs. Private IP Address articles.
+																
+																What is public IP address?
+																A public IP address is the address that is assigned to a computing device to allow direct access over the Internet. A web server, email server and any server device directly accessible from the Internet are candidate for a public IP address. A public IP address is globally unique, and can only be assigned to a unique device.
+
+																What is private IP address?
+																A private IP address is the address space allocated by InterNIC to allow organizations to create their own private network. There are three IP blocks (1 class A, 1 class B and 1 class C) reserved for a private use. The computers, tablets and smartphones sitting behind your home, and the personal computers within an organizations are usually assigned private IP addresses. A network printer residing in your home is assigned a private address so that only your family can print to your local printer.
+
+																When a computer is assigned a private IP address, the local devices see this computer via it's private IP address. However, the devices residing outside of your local network cannot directly communicate via the private IP address, but uses your router's public IP address to communicate. To allow direct access to a local device which is assigned a private IP address, a Network Address Translator (NAT) should be used.
+
+																https://www.iplocation.net/ip-lookup
+																192.168.208.45
+																
+																Your public IP Address is 67.169.155.74
+																
+																	==>This is used and shown when being on public internet
+																
+																Warning: 192.168.208.45 is a private IP address.
+																
+																	==>Seems like: logging into VPN: then this private IP address is in use:
+																		1) Example 1: When opening a broswer and access to MFUW: it shows: this IP in Apache access log file
+
+																Geolocation data from IP2Location (Product: DB6, updated on 2021-2-1)
+																IP Address	Country	Region	City
+																67.169.155.74	United States of America 	California	Fremont
+																ISP	Organization	Latitude	Longitude
+																Comcast Cable Communications LLC	Not Available	37.5483	-121.9886
+															
+														==>404 error for some default output: ignored: it could be mixed with normal request statements
+														==>The most important statement is the first one from the request: GET/POST: 200, ...
+															==>Other could be sub-requests from some Ajax calls, or subsequent resource calls: images, ..., ...
+													
+												mfuw_error_yyyymmdd.log
+
+												==========>TBD: where is it configured?
+													www/servers/mfuw/conf/vhosts/v-11008-mfuw-664VEC
+													
+													==>error log: don't log normal access: only for Apache configured error scenarios
+													==>So error log is not so useful currently: TBD
+													
+													Error log:
+														==>Show some exception logs:
+														Exception Type [READ_TIMEOUT]: these kinds of exceptions: not impacting the app: because these exceptions still show up after 11:10am this morning
+										
+										==>Questions:
+										
+											==>Why Apache: TAM: use he1 server 360 server, and Ping: use he2 server 1153 server?
+												==>Maybe due to some load-balancing/failover/HA configurations: TBD
+												==========>TBD: where is it configured?
+																==>Mostly it is configured in TAM junctions: TAM app url
+																	For Ping app side: it could be configured by Ping firewall or proxy servers, or some Ping configurations
+												So:
+													1) Either remember this settings, TAM: go to 360 server for Apache, and Ping: go to 1153 server for Apache
+													2) Or: open both Apache servers for logging checking
+										
+											==>.../MServer1-2/access.log: what is this?
+								
+												==>Maybe it is WebLogic side's access log: log the incoming request urls from Apache server: all of them - only one line / request
+												
+												==========>TBD: where is it configured?
+								
+									==>3 Servers: have start/stop logs: only recording start/stop contents
+												  ==>But I do see some additional contents going to start logs: maybe some internal logging, ...
+												  
+										==>startMServer2.log:
+											==>log files are archived monthly
+										
+											==>Log 1: MServer2 start processing:
+													  ==>3 PID processes:
+														==>WIO script call WebLogic start script
+															==>Shell: call startMWebLogic shell MServer2
+															==>Shell: startMWebLogic root script: startWebLogic script
+															==>Then call Java CLI to JVM for MServer2: listen/connect to AServer
+															
+															WebLogic Classloader running: process web module: so MFUW app's JSP compiled files and also TLD files logging going to this log file
+											
+											==>Log 2: MFUW App's JSP compiled servlet logging
+											
+											==>Log 3: MFUW App's Web Module's tld/tag files' Java code logging
+
+												  
+									==>3 Servers: have their console logs: Java code System.out.println output also goes to this logging
+									
+										==>
+										
+										==>
+										
+										==>MServer2: log:
+											==>log files are archived monthly
+											==>Log Contents: mostly: WebLogic console related contents, ...
+											==>This is almost the same as startMServer2.log: such as: [StuckThread] error messages
+												==>So maybe:
+												
+													startMServer2.log: contain:
+														1) Start server logs
+														2) The same error contennts as: MServer2.log: such as: [StuckThread] error messages
+														3) Add some app's JSP compiled logging + TLD file tag logging, etc.
+													MServer2.log: contain:
+														1) The same error contennts as: startMServer2.log: such as: [StuckThread] error messages
+														2) Add WebLogic console logging contents, etc.
+														
+													==>This should be the same as: startMServer1.log and MServer.log
+													
+													startAServer.log
+														==>Contains AServer start processing log
+													AServer.log
+														==>Contains weblogic console contents
+														
+													Overall:
+														There are almost no needs to check:
+															mfuwProdAServer folder's logging: AServer.log, etc.   ==>Because startAServer.log is similar
+															mfuwProdMServer1 folder's logging: MServer1.log, etc. ==>Because startMServer1.log is similar
+															mfuwProdMServer2 folder's logging: MServer2.log, etc. ==>Because startMServer2.log is similar
+															
+														So: the log files are not so complicated based on the above + log4j_uw.log
+															+ Apache access log files
+															
+															Summaries: the useful log files are:
+															
+																WebLogic:
+																	start/stopAServer.log
+																	start/stopMServer1.log
+																	start/stopMServer2.log
+																	log4j_uw.log
+																Apache:
+																	mfuw_access_yyyymmdd.log
+																	mfuw_error_yyyymmdd.log
+															
+									==>Java Code: has its own log4j logging contents and log file: log4j_uw.log
+										==>Rolling Log: 1MB:	log4j_uw.log.1/2/...: 8583 lines: 8583 x 120: similar to the size of largest Java method limit
+										==>Current Configurations: only keep one backup: log4j_uw.log.1
+										=======>It outputs all log4j output: 1240 matches
+												(System.out.println: 127 matches)
+												So most of the logging: from log4j
+												
+										
+									==>MWS_JDBC_JMS_Monitoring log:
+										==>No main use at this time
+										==>Some good servers statistics data
+
+									==>mfuwProdDomain log:
+										==>No main use at this time
+										==>Contain almost the similar logging data as: startMServer2.log and MServer2: log: such as: [StuckThread] error messages
+								
+		==>02/22/2021: Monday: 11:10am:	 MFUW TAM url is back up running
+								==>...
+		==>
+	
+	
+	==>Summaries:
+	
+		==>Maybe the MFUW TAM url was up running?
+			==>But why my browser was not displaying it?
+				==>11:10am: it started back up running: Why?
+					==>Reason 1: TAM junction? ==>Actually: right now: Based on Apache logs, etc.: TAM junction: no issues	==>It did delegate to Appache...
+								 ==>But why some of my requests were not showing up? ==>This is still somewhat weird...
+									1) You didn't test it better using Apache log at that time...:
+										==>I am still unsure about this because my tests didn't show up some Apache access log...: this was weird... 
+									2) The server hung due to extra stuck threads?
+									3) Why there are still some stuck threads right now while the app is up running?
+										==>>Because right now the stuck threads are much less?
+										
+									==>The amount of stuck threads: should not be a factor for the issue
+										
+					==>Reason 2: 
+					
+					
+		==>Currently: MFUW TAM url is back up running, so RCA is not so urgent, ...
+		
+			==>RCA might not be so obvious due to some abusers' scenarios, I feel.
+			
+			==>
+			
+		==>CHG Request: I am not seeing any Apache related changes so far, ...
+		
+			==>ReCheck its 2-3 time windows...
+			
+			==>...
+		
+		==>By removing or minimizing or consolidating some of the above factors, server bounces + increase of 2G to 3G: ===>could be combined solution...
+	
+	==>Solutions:
+	
+		==>
+		==>
+		==>Alarms:
+			==>664VEC: add monitors back
+		==>
+	
+================================================
+Incidents: Case Study:
+
+
+================================================

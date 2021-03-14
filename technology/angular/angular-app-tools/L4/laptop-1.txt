@@ -1,0 +1,76 @@
+
+==============================================
+Laptop:
+
+
+
+==============================================
+AppData:
+	%appdata%
+
+	Local, LocalLow, and Roaming
+
+Application Data
+	The Application Data—or AppData—folder contains data created by programs. Almost every program you install creates its own folder in AppData and stores information there. At least in theory, users don't have to worry about these files.
+
+Why is AppData hidden?
+	Typically, you won't have to worry about the data inside the AppData folder – that is why it is hidden by default. It is only used by application developers to store the necessary data required by the application.
+
+What is the AppData Roaming folder used for?
+	Open your AppData folder and you'll see Local, LocalLow, and Roaming folders. Let's start with Roaming. The Roaming folder contains data that would “roam” with a user account from computer to computer if your PC was connected to a domain with a roaming profile. This is often used for important settings
+
+Can I clear AppData roaming?
+	OK, the AppData\Roaming folder definitely should not (and probably can't) be deleted as it typically contains settings, temporary and cache files for many of your installed applications
+
+LocalLow: This folder ( %appdata%/../LocalLow ) contains data that can't move, but also has a lower level of access. For example, if you're running a web browser in a protected or safe mode, the app will only be able access data from the LocalLow folder.
+
+
+The AppData folder includes application settings, files, and data unique to the applications on your Windows PC. The folder is hidden by default in Windows File Explorer and has three hidden sub-folders: Local, LocalLow, and Roaming. You won't use this folder very often, but this is where your important files reside.
+
+You want to delete the contents of AppData folder. The AppData folder would have data regarding the applications in the computer. If its contents are deleted, data would be lost and you may not be able to use some applications as well.
+
+Is it safe to clear AppData?
+Yes, you can because some of those old files can become corrupt. So if you delete the entire folder nothing bad will happen. ... And if you can't delete some then a program you are running is running those temp files so just leave those alone.
+
+==>And the reason has been that they couldn't see the AppData folder. That's because Windows hides the AppData folder by default, and you have to 'unhide' it before you can see it. ... Under Files and Folders > Hidden files and folders, select the option to Show hidden files, folders and drives.
+
+Can I delete AppData local Microsoft?
+can i delete the files inside c:\Users\User\AppData\Local\Microsoft? No Don`t Do it. Anything in "Local" can be deleted. However doing so can delete settings for applications and will need to be created again.
+
+==============================================
+Laptop: IP:
+
+																https://www.iplocation.net/public-vs-private-ip-address
+																
+																IP Address is a unique address assigned to a computing devices such as computers, tablets and smartphones to communicate with other devices within the Internet. No device can connect to the Internet without a public IP address, and a public IP address is assigned to you by the Internet Service Provider (ISP) you are subscribing from. There are two versions of IP in use today, IPv4 (32-bit) and IPv6 (128-bit). There are two types of IP addresses: public and private. To use the Internet, you'll need a public IP address. To connect to a local area network such as your home or work network, a private IP address is suffice. To learn more about IP Addresses, you may refer IP Address and Public vs. Private IP Address articles.
+																
+																What is public IP address?
+																A public IP address is the address that is assigned to a computing device to allow direct access over the Internet. A web server, email server and any server device directly accessible from the Internet are candidate for a public IP address. A public IP address is globally unique, and can only be assigned to a unique device.
+
+																What is private IP address?
+																A private IP address is the address space allocated by InterNIC to allow organizations to create their own private network. There are three IP blocks (1 class A, 1 class B and 1 class C) reserved for a private use. The computers, tablets and smartphones sitting behind your home, and the personal computers within an organizations are usually assigned private IP addresses. A network printer residing in your home is assigned a private address so that only your family can print to your local printer.
+
+																When a computer is assigned a private IP address, the local devices see this computer via it's private IP address. However, the devices residing outside of your local network cannot directly communicate via the private IP address, but uses your router's public IP address to communicate. To allow direct access to a local device which is assigned a private IP address, a Network Address Translator (NAT) should be used.
+
+																https://www.iplocation.net/ip-lookup
+																192.168.208.45
+																
+																Your public IP Address is 67.169.155.74
+																
+																	==>This is used and shown when being on public internet
+																
+																Warning: 192.168.208.45 is a private IP address.
+																
+																	==>Seems like: logging into VPN: then this private IP address is in use:
+																		1) Example 1: When opening a broswer and access to MFUW: it shows: this IP in Apache access log file
+
+																Geolocation data from IP2Location (Product: DB6, updated on 2021-2-1)
+																IP Address	Country	Region	City
+																67.169.155.74	United States of America 	California	Fremont
+																ISP	Organization	Latitude	Longitude
+																Comcast Cable Communications LLC	Not Available	37.5483	-121.9886
+
+==============================================
+
+
+==============================================

@@ -54,7 +54,21 @@ GUIDs are used in enterprise software development in C#, Java, and C++ as databa
 3. Colors:
 	https://htmlcolorcodes.com/
 	
-4. 		    
+4. HTTP: Status Codes:
+	1xx?
+	2xx: Creating
+	3xx: Moving
+	4xx: Entering: Entrance/Id/Ticket/Boarding/Austin-RVAddress-Not-Valid/MattProvidesNewAddressButRefuseToMeet/...
+		 400    Wrong entrance/gateway: Bad Request
+		 401	Authentication/Authorization issue: at the entrance: no driver's license shown
+		 402	Ticket/payment not purchased to the entrance
+		 403	Forbidden: Refuse to authorize it/ticket: CCP Virus policies
+		 404	Not find the address (Not find Holly) (Not found crimes: Jerry has been no-crime)
+		 405	Found the address, but not allowed/supported except Matt
+		 ...
+	5xx: Server Erroring
+	
+	  
 			    
 			    
 			    

@@ -1,0 +1,26 @@
+
+
+Remove Magic about NET:
+
+==>
+
+C:\Windows\System32>echo %PATH%
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_261\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\jerry\Installs\nvm;C:\Program Files\nodejs;C:\Program Files\dotnet\;C:\Ruby27-x64\bin;C:\Users\jerry\AppData\Local\Microsoft\WindowsApps;C:\Users\jerry\AppData\Roaming\npm;C:\Users\jerry\Installs\mvn363\bin;C:\Users\jerry\Installs\nvm;C:\Program Files\nodejs;C:\Users\jerry\Downloads\Installs\axis2-1.7.9\bin;C:\Users\jerry\Downloads\Installs\ant1108\bin;C:\cygwin64\bin;C:\Users\jerry\Installs\MicrosoftVSCode\bin;C:\Users\jerry\.dotnet\tools
+
+==>Only 3 needed:
+C:\Program Files\dotnet\
+C:\Users\jerry\Installs\MicrosoftVSCode\bin;
+C:\Users\jerry\.dotnet\tools
+
+Your ASP.NET Core development environment: EnvSetup:
+	==>NET Framework
+		==>NET Core: https://www.microsoft.com/net/download/core:
+			==>Include: ASP.NET Core 3.1
+		==>ASP.NET
+			==>ASP.NET Core 3.1
+	==>Similar to JDK: .NET Core SDK ==>But not NET Framework 4.5:
+		NET Framework 4.5: much larger distribution and files
+	==>
+
+==>Even: NET, ASP, etc: change quite a bit from original ASP apps
+

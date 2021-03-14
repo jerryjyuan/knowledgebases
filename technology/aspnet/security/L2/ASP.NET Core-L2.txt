@@ -37,6 +37,8 @@ info: Microsoft.Hosting.Lifetime[0]
 
 To authenticate a user with the api and get a JWT token follow these steps:
 
+(1) Get the token:
+
 Open a new request tab by clicking the plus (+) button at the end of the tabs.
 Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
 In the URL field enter the address to the authenticate route of your local API - http://localhost:4000/users/authenticate.
@@ -65,6 +67,8 @@ POST: http://localhost:4000/users/authenticate
 ==>How to make an authenticated request to retrieve all users
 
 To make an authenticated request using the JWT token from the previous step, follow these steps:
+
+(2) Send the request with token:
 
 Open a new request tab by clicking the plus (+) button at the end of the tabs.
 Change the http request method to "GET" with the dropdown selector on the left of the URL input field.

@@ -1,0 +1,328 @@
+
+===========================================================
+MissionMap/RMT:
+
+===========================================================
+Topic: Build/Deployment
+
+==>Build:
+	==>Jenkins: Enterprise way + Enable cross-team work / TCM
+		==>CI Jobs
+		==>CD Jobs: pipelines...
+		Procedures:
+			==>Login to Jenkins with sufficient privileges
+			==>Navigate to the app link/job dashboard
+			==>Click "Configuration" to create a new CI or CD job: add details to enable it
+			(CI/CD jobs can be scheduled at intervals, commits/checkins, nightly builds, and other scheduled scenarios, and can also be run manually)
+		TCM:
+			==>Login and go to that CI/CD job screen
+			==>Java Apps Deployments:
+				Execute/run the CI jobs: maven builds => create JAR/WAR/EAR files =>Either manually move or Jenkins enabled file storage of these files in some workspace/staging places
+				($Workspace: should be added by Jenkins executions: similar to local Maven Repo places, or loca target folders, etc., and can be sent to another server too)
+				==>TCM utilizes these JAR/WAR/EAR files to do deployment
+				==>Jenkins can have TCM(DM-Jobs)/DevFactory/BIO-Jobs(AppTeams)/... all can run and generate these files (can be pre-created by Jenkins job runs)
+			==>Pipeline Deployments:
+				Execute/run the CD / pipeline jobs: similar to CI jobs above: but it will do many deployments based on the json files
+				1) Scenario 1: the pipeline jobs can pick up one specified tag repo to run the pipeline flow to deploy it to multiple env/servers (this is like automation flow)
+				2) Scenario 2: the pipeline jobs can be just one environment based CD flow: deploy the builds to one environment only: such as prod pipeline
+								==>When executing the prod pipeline, it will deploy the docker image to prod env
+								==>the pipeline configuration file can include multiple app/docker-images to prod env
+				3) ...
+				==>Why don't some Java apps use similar pipeline deployments?
+					==>Reason 1: depends upon which app: some deployments across-env is not consecutive ... 
+								 ==>each env uses different versions and could be also managed by different ones, and runs at different times for different versions
+					==>Reason 2: some deployment and apps: utilize simpler ways instead of more configurations via CD/Pipeline
+	==>Why Pipelines:
+		==>Main concept: CI and CD: and CD is more highlighted in pipeline
+		==>Enable a flow to do a lot more than just one simple deployment: SIT->SIT1->MAINT->UAT->...->
+			Docker Pipeline: utilize Docker to process the pipeline flows
+		==>Each Pipeline/CD:
+			have different configurations:
+			Jenkins: xxx.pipeline.json: with this json file, run the pipeline via Jenkins job
+			Gitlab:  xxx.yml/yaml
+
+==>Deployment:
+	==>UI: Apache
+
+	==>Backend Service Apps: Cloud/Container: OCP/ROTN (docker and Kubernetes both): Similar to SPARTA Services Apps
+
+===========================================================
+Topic: Data Mapping
+
+==>Concepts and Design/Implementation:
+	Layers
+	
+==>ODS Data:
+
+	==>Collaterals
+	
+	==>Property
+	
+	==>SourcingProduct
+
+
+==>RDS Data:
+
+===========================================================
+Topic: Backend Services / APIs / DB: ETL ODS App
+
+==>ETL ODS App:
+	==>Use: ODS
+	
+	RESTful APIs:
+		Services API Design: bulk: https://...-uat.ocp.paasxxx.com/app/yyy-service/v1/yyy?fields=x,y,z&masterids={masterids}
+		Services API Design: single: https://...-uat.ocp.paasxxx.com/app/yyy-service/v1/yyy/masterid/{masterids}?fields=x,y,z,masterid
+
+
+	App Design And Impl:
+	
+		Deployment:
+			==>...
+	
+		App Entry Point: CommandLineRunner:
+			When app starts up: running the call:
+			==>Load properties
+				==>Call RESTful APIs
+
+		Use: external configuration file/data: cmap: instead of application.properties file:
+			 PROS:
+				==>Not using Spring Boot profiles
+			 CONS:
+		Use: logback as logging
+		
+		
+		Testing:
+			Spring Test
+			JUnit: 
+			MockBean
+			
+		Data Flows:
+		
+		
+		Logging:
+			ETLPerfLogger
+			
+===========================================================
+Topic: Backend Services / APIs / DB: RMT Services App
+
+==>Configurations:
+
+	==>External configurations: similar to application.properties file
+		@PropertySource(value={"classpath:filename"})
+		@PropertySource(value="file:${<configfilenameasloaded>:<file_location_fullpath>}")
+	
+		==>The values inside these external configuration files: can be used in @Value etc like config data in application.proprties file, etc.
+
+==>RMT Services App:
+	==>Use/Call Other Apps: ETL
+	
+		==>Sourcing Products
+		==>Collaterals
+		
+	
+	==>Use/Call Other Apps: RDS
+	
+		RDS SOAP APIs:
+			Enterprise PM Service V1 WSDL
+		
+		
+==>
+
+===========================================================
+Topic: MissionMap - UI:
+
+==>Google Tag Manager:
+	Google Tag Manager lets you manage various Javascript tracking codes (also known as Tags) on your website. 
+	Google Analytics tracking code is one of those tags. Google Analytics is an analytics tool that provides reports. ... 
+	It is used to send data from your website to other marketing/analytics tools (including GA)
+	
+	Google Tag Manager is a free tool that allows you manage and deploy marketing tags (snippets of code or tracking pixels) 
+	on your website (or mobile app) without having to modify the code. ... GTM becomes very handy when you have lots of tags 
+	to manage because all of the code is stored in one place.
+	
+	Instead of hardcoding several tags on a website, one tag (called the GTM container code) is placed on each and every web page 
+	and this tag is used to deploy and manage other tags on the website. ... 
+	This makes tag management efficient. This is the advantage of using GTM.
+	
+	tagmanager.google.com
+	
+	The Analytics tag is a snippet of JavaScript that collects and sends data to Analytics from a website. 
+	You can add the Analytics tag directly to the HTML of each page on your site, 
+	or indirectly using a tag management system such as Google Tag Manager.
+
+==>Google Analytics
+	Google Analytics real-time reports (if you have configured any events or pageviews)
+
+	To see the Site Speed reports:
+		Sign in to Google Analytics.
+		Navigate to your view.
+		Open Reports.
+		Select Behavior > Site Speed
+
+	Google Analytics works by the inclusion of a block of JavaScript code on pages in your website. When users to your website view a page, this JavaScript code references a JavaScript file which then executes the tracking operation for Analytics
+
+==>
+
+
+==>app.json
+
+
+==>Call Backend RMT Services APIs:
+
+===========================================================
+Topic: 
+
+===========================================================
+Topic: 
+
+===========================================================
+RESTful API Calls: RestTemplate:
+
+==>JSON -> Object Mapping:
+	==>Spring Boot: AutoConfigurations: Normally it is done by Jackson Json Mapper
+	==>RestTemplate: a tool in Spring and used by Spring Boot: AutoConfigured into it
+		==>Because Spring Boot auto-configure Jackson as mapper, so RestTemplate will use Jackson by default due to Spring Boot AutoConfiguration
+	==>When doing GET call:
+		==>3x2 Variations of APIs: 6 APIs
+		==>1) Pass in parameters in a map / an array/vararg parameters / no arg
+		==>2) Return / Retrieve response's JSON data into: 1) Entity (get Michael Pence or Kamala Harris in charge) 2) Object from body (government cabinet)
+		
+		President: Response
+		VicePresident: ResponseEntity
+			3-power balancing:
+			==>Congress: Headers
+			==>Executive: Body
+			==>Supreme Court: Status
+
+	==>T:
+		==>Generic JSON representation class: JsonNode, ArrayNode:
+			https://www.javadoc.io/doc/com.fasterxml.jackson.core/jackson-databind/2.10.0/com/fasterxml/jackson/databind/JsonNode.html
+			==>You don't need to have a model class to do direct mapping by Jackson, 
+				instead you use JsonNode as an object holder from the incoming response's JSON string inside the Response's body and use its APIs to parse the values
+		==>Specific classes: 1) Java JDK classes 2) App Object Classes
+
+9 HTTP Methods:
+	5: GET/POST/PUT/PATCH/DELETE
+	4: HEAD/OPTIONS/TRACE/CONNECT
+	
+	APIs:
+	
+	<T> ResponseEntity<T>	getForEntity(String url, Class<T> responseType, Map<String,?> uriVariables)
+	Retrieve a representation by doing a GET on the URI template.
+	<T> ResponseEntity<T>	getForEntity(String url, Class<T> responseType, Object... uriVariables)
+	Retrieve an entity by doing a GET on the specified URL.
+	<T> ResponseEntity<T>	getForEntity(URI url, Class<T> responseType)
+	Retrieve a representation by doing a GET on the URL .
+	<T> T	getForObject(String url, Class<T> responseType, Map<String,?> uriVariables)
+	Retrieve a representation by doing a GET on the URI template.
+	<T> T	getForObject(String url, Class<T> responseType, Object... uriVariables)
+	Retrieve a representation by doing a GET on the specified URL.
+	<T> T	getForObject(URI url, Class<T> responseType)
+	Retrieve a representation by doing a GET on the URL .
+	
+	POST:
+	<T> ResponseEntity<T>	postForEntity(String url, Object request, Class<T> responseType, Map<String,?> uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the response as HttpEntity.
+	<T> ResponseEntity<T>	postForEntity(String url, Object request, Class<T> responseType, Object... uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the response as ResponseEntity.
+	<T> ResponseEntity<T>	postForEntity(URI url, Object request, Class<T> responseType)
+	Create a new resource by POSTing the given object to the URL, and returns the response as ResponseEntity.
+	<T> T	postForObject(String url, Object request, Class<T> responseType, Map<String,?> uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the representation found in the response.
+	<T> T	postForObject(String url, Object request, Class<T> responseType, Object... uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the representation found in the response.
+	<T> T	postForObject(URI url, Object request, Class<T> responseType)
+	Create a new resource by POSTing the given object to the URL, and returns the representation found in the response.
+		
+	URI	postForLocation(String url, Object request, Map<String,?> uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the value of the Location header.
+	URI	postForLocation(String url, Object request, Object... uriVariables)
+	Create a new resource by POSTing the given object to the URI template, and returns the value of the Location header.
+	URI	postForLocation(URI url, Object request)
+	Create a new resource by POSTing the given object to the URL, and returns the value of the Location header.
+
+
+	==>PATCH: T only
+	<T> T	patchForObject(String url, Object request, Class<T> responseType, Map<String,?> uriVariables)
+	Update a resource by PATCHing the given object to the URI template, and return the representation found in the response.
+	<T> T	patchForObject(String url, Object request, Class<T> responseType, Object... uriVariables)
+	Update a resource by PATCHing the given object to the URI template, and return the representation found in the response.
+	<T> T	patchForObject(URI url, Object request, Class<T> responseType)
+	Update a resource by PATCHing the given object to the URL, and return the representation found in the response.
+	
+	
+	void	put(String url, Object request, Map<String,?> uriVariables)
+	Creates a new resource by PUTting the given object to URI template.
+	void	put(String url, Object request, Object... uriVariables)
+	Create or update a resource by PUTting the given object to the URI.
+	void	put(URI url, Object request)
+	Creates a new resource by PUTting the given object to URL.
+	
+	void	delete(String url, Map<String,?> uriVariables)
+	Delete the resources at the specified URI.
+	void	delete(String url, Object... uriVariables)
+	Delete the resources at the specified URI.
+	void	delete(URI url)
+	Delete the resources at the specified URL.
+
+	Set<HttpMethod>	optionsForAllow(String url, Map<String,?> uriVariables)
+	Return the value of the Allow header for the given URI.
+	Set<HttpMethod>	optionsForAllow(String url, Object... uriVariables)
+	Return the value of the Allow header for the given URI.
+	Set<HttpMethod>	optionsForAllow(URI url)
+	Return the value of the Allow header for the given URL.
+
+
+===========================================================
+RESTful API Calls: RestTemplate:	Exchange APIs: ==>Generic for Http methods:
+
+	<T> ResponseEntity<T>	exchange(RequestEntity<?> entity, Class<T> responseType)
+	Execute the request specified in the given RequestEntity and return the response as ResponseEntity.
+	<T> ResponseEntity<T>	exchange(RequestEntity<?> entity, ParameterizedTypeReference<T> responseType)
+	Execute the request specified in the given RequestEntity and return the response as ResponseEntity.
+
+
+6 APIs:
+
+<T> ResponseEntity<T>	exchange(String url, HttpMethod method, HttpEntity<?> requestEntity, Class<T> responseType, Map<String,?> uriVariables)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+<T> ResponseEntity<T>	exchange(String url, HttpMethod method, HttpEntity<?> requestEntity, Class<T> responseType, Object... uriVariables)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+<T> ResponseEntity<T>	exchange(String url, HttpMethod method, HttpEntity<?> requestEntity, ParameterizedTypeReference<T> responseType, Map<String,?> uriVariables)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+<T> ResponseEntity<T>	exchange(String url, HttpMethod method, HttpEntity<?> requestEntity, ParameterizedTypeReference<T> responseType, Object... uriVariables)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+<T> ResponseEntity<T>	exchange(URI url, HttpMethod method, HttpEntity<?> requestEntity, Class<T> responseType)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+<T> ResponseEntity<T>	exchange(URI url, HttpMethod method, HttpEntity<?> requestEntity, ParameterizedTypeReference<T> responseType)
+Execute the HTTP method to the given URI template, writing the given request entity to the request, and returns the response as ResponseEntity.
+
+3 APIs:
+
+<T> T	execute(String url, HttpMethod method, RequestCallback requestCallback, ResponseExtractor<T> responseExtractor, Map<String,?> uriVariables)
+Execute the HTTP method to the given URI template, preparing the request with the RequestCallback, and reading the response with a ResponseExtractor.
+<T> T	execute(String url, HttpMethod method, RequestCallback requestCallback, ResponseExtractor<T> responseExtractor, Object... uriVariables)
+Execute the HTTP method to the given URI template, preparing the request with the RequestCallback, and reading the response with a ResponseExtractor.
+<T> T	execute(URI url, HttpMethod method, RequestCallback requestCallback, ResponseExtractor<T> responseExtractor)
+Execute the HTTP method to the given URL, preparing the request with the RequestCallback, and reading the response with a ResponseExtractor.
+
+===========================================================
+Topic: Git:
+
+How to delete a tag in Git
+To create your tag: git tag release/aug2002.
+To push local tags to remote: git push --tags. ...
+To delete a local tag: git tag -d release/aug2002.
+To delete a remote tag:
+
+How do I delete all tags?
+Delete All local tags. (Optional Recommended) git tag -d $(git tag -l)
+Fetch remote All tags. (Optional Recommended) git fetch.
+Delete All remote tags. git push origin --delete $(git tag -l) # Pushing once should be faster than multiple times.
+Delete All local tags. git tag -d $(git tag -l)
+
+===========================================================
+
+
+===========================================================
+

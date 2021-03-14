@@ -1,0 +1,229 @@
+
+=============================================
+Topic: SOAP:
+
+=============================================
+Javaee Documentation:
+	https://javaee.github.io/metro-jax-ws/doc/user-guide/release-documentation.html
+	https://javaee.github.io/metro-jax-ws/doc/user-guide/release-documentation.html#installation-instructions
+	https://javaee.github.io/metro-jax-ws/doc/user-guide/release-documentation.html#ws-addressing-in
+	
+SOAP: JAX-WS: Developer Guide:
+	https://jonas.ow2.org/JONAS_5_1_1/doc/doc-en/html/jaxws_developer_guide.html#jaxws-annotations-reference
+
+WS Resources:
+	https://docs.oracle.com/cd/E17802_01/webservices/webservices/docs/2.0/tutorial/doc/JAXWS3.html
+
+=============================================
+SOAP and XML-Brothers:
+
+	==>Common:
+		==>XML based request(input/reading)/response(output/writing): marshalling/unmarshalling exist in both sides:
+			==>Marshalling/Unmarshalling: Concepts between XML and JavaCode
+			   1) Common Big Names: Jackson/...: Jackson is used for serializer/deserializer for RESTful APIs (but Jackson has an XML marshaller as well? see Spring Boot reference doc)
+			   2) Usage: JAXB (Java generic technology): javax.xml.bind.*
+				  ==>Scenario 1: SOAP: marshaller/unmarshaller: Spring Boot provides its autoconfigured(allow customized as well) XML marshaller (see Spring Boot reference doc)
+								 JAXB into: Java API for XML-Based Web Services (JAX-WS) leverages the JAXB API and tools
+				  ==>Use JAXB independently of JAX-WS when you want to leverage the XML data binding technology to manipulate XML within your Java applications
+				  ==>Scenario 2: XML reader/writer app: need marshaller/umarshaller as well
+								 (Non JAX-WS Usage 1)
+				  ==>Scenario 3: RESTful APIs - when using XML as data formats, it needs marshaller/unmarshaller as well (see Spring Boot reference doc)
+								 (Non JAX-WS Usage 2)
+								 
+		==>JAXB APIs:
+		
+			Better Summaries:
+				JAXB provides the xjc schema compiler tool, the schemagen schema generator tool, and a runtime framework. You can use the xjc schema compiler tool to start with an XML schema definition (XSD) to create a set of JavaBeans that map to the elements and types defined in the XSD schema. You can also start with a set of JavaBeans and use the schemagen schema generator tool to create the XML schema. Once the mapping between XML schema and Java classes exists, XML instance documents can be converted to and from Java objects through the use of the JAXB binding runtime API. Data stored in XML documents can be accessed without the need to understand the data structure. You can then use the resulting Java classes to assemble a web services application.
+				
+				JAXB: Contract and Protocols:
+					JAXB Concepts and Tools:
+						==>xjc: XSD -> Java
+						==>schemagen: Java -> Schema/XSD
+					JAX-WS Concepts and Tools:
+						==>wsimport: WSDL -> Java
+							app_server_root\bin\wsimport.bat [options] WSDL_URI
+							https://www.ibm.com/support/knowledgecenter/SSEQTP_9.0.5/com.ibm.websphere.base.doc/ae/rwbs_wsimport.html
+						==>wsgen: Java -> WSDL
+							app_server_root\bin\wsgen.bat [options] service_implementation_class
+							The wsgen tool accepts a properly annotated service endpoint implementation using the @WebService annotation as input and generates the following artifacts:
+							any additional Java Architecture for XML Binding (JAXB) classes that are required to marshal and unmarshal the message contents.
+							a WSDL file if the optional -wsdl argument is specified. The wsgen tool does not automatically generate the WSDL file
+							https://www.ibm.com/support/knowledgecenter/SSEQTP_9.0.5/com.ibm.websphere.base.doc/ae/rwbs_wsgen.html
+					JAXB is a Java Tech: like a parent:
+						Java/XSD: like Java with parent (or parent-domain)
+					JAX-WS: a WS tech: like a child
+						Java/WSDL: like Java with child (or sub-domain)
+						(WSDL can be regarded as a child of XSD in JAX-WS)
+						Good Resources:
+							https://www.ibm.com/support/knowledgecenter/SSEQTP_9.0.5/com.ibm.websphere.base.doc/ae/twbs_wsp_learning.html
+							https://www.ibm.com/support/knowledgecenter/SSEQTP_9.0.5/com.ibm.websphere.base.doc/ae/cwbs_wsdl.html
+							
+					JAXB: a parent-domain tools and toolsets
+						==>javax.xml.bind.*
+							==>Example Class/APIs: JAXBContext
+							==>Maven: jar: javaee jar
+						==>Coming to Child-Domain: JAX-WS:
+							==>javax.xml.ws.* (javax.jws.*)
+							==>Maven: jar: javaee jar
+							==>Coming to the actual JAX-WS applications:
+								==>
+					
+				XML instance documents:
+					==>The actual XML data document(s): example 1: FSConverterTest.java generates various XML files that contain the loan data, and these files are bound to XSD rules
+					==>These XML instance documents: different from SOAP Message
+						==>These XML instance documents: follows XSD rules: but don't contain SOAP Message's envelope/header/body, etc.
+						==>SOAP Message: follows into SOAP XML rules: soapenv:Envelope...
+							==>When SOAPUI sends the SOAP Request to SOAP Server APIs: it uses: SOAP Message Format instead of direct "XML instance documents"
+							==>But the contents are similar: because they follow into same XSD (and SOAPUI with WSDL as well)
+								(XSD is JAXB concept and WSDL is SOAP/JAX-WS concept)
+							Example Flow:
+								"XML instance documents" (with XSD) -> (JAXBContext) Unmarshalled into Java Schema Object 
+									-> Marshalled into SOAP Message (XML) -> Send to SOAP Server Side -> ...
+									(so the XML instance documents have similar contents to SOAP Message payloads)
+				JAXB binding runtime API: annotation-driven binding framework
+					==>Work on these XML instance documents to do the conversions
+					1) Many Usages
+					2) Example Usage 1: "Reading Unmarshalling": Unmarshall XML instance documents into Java code
+										==>intake/read the incoming "XML instance documents" into Java schema objects
+										==>Impl: such as: JAXBContext.unmarshall...
+					3) Example Usage 2: "Response Unmarshalling": Receive SOAP Response: XML response into local client Java Schema code
+					4) Example Usage 3: "Request marshalling": marshall client schema Java code into SOAP request message
+				XSD Validation:
+					Optionally, you can use JAXB to provide XML validation to enforce both incoming and outgoing XML documents to conform to the XML constraints defined within the XML schema
+			
+			Runtime APIs:
+				Means: handle XML instance documents and actual Java objects
+			Binding:
+				1) JAXB Binding: XSD/Java
+					==>JAXB binding runtime API: ==>Maven: jar: javaee jar
+				2) SOAP Binding:
+					SOAP HTTP Binding: SOAP Message binds to Http Protocol
+				3) JAX-WS Runtime APIs:
+					==>Maven: jar: jaxws-ri / ri jar
+					...
+				4) SPI Provider:
+					javax.xml.ws.spi.Provider
+						com.sun.xml.ws.spi.ProviderImpl
+						com.sun.xml.internal.ws.spi.ProviderImpl
+						org.jboss.ws.core.jaxws.spi.ProviderImpl
+						
+			Protocol: JavaCode (@XmlRootElement) <---XSD(XML Schema Document)--> XML
+					  (@XmlRootElement: similar to ORM's @Entity: enable metadata info between JavaCode and XML mapping)
+					  (XSD: 2nd and the current way: define and validate XML file based on predefined rules/tags/elements/attributes/etc.)
+			Client: JavaCode <-> XML <======> Server: XML <-> JavaCode
+					(Special: SOAP Request <======> SOAP Response)
+							  (SOAP: have 2 sets: XSD and WSDL: almost / basically the same but in different ways: mostly seperate sets: WSDL defines its own: but combine - see below)
+									 (XSD: define/validate all XML tags/data rules)
+									 (WSDL: SOAP concept: provide server-side description of the SOAP APIs (operations/etc) to clients
+											(Because these APIs work on valid XML, and thus XSD rules applied, so eventually and internally WSDL is the same as XSD info)
+											(WSDL: encapulating: 1) APIs (operations) 2) XML 3) XSD 4) JavaSchemaObjects)
+									 (SOAP API App Development: 1) WSDL -> Java API 2) Java API -> WSDL )
+									 (Client:
+										==>Get WSDL Doc: https://server:port/app/ServerService?wsdl: this will return Server SOAP API WSDL:
+														 Client Call: no need to have client side schema jar file
+														 ==>Usage 1: Know all the operations/APIs from Server APIs: so can create client requests to talk to server APIs
+														 ==>Usage 2: Can this WSDL be used to construct client side schema Java jar file if client doesn't have it??? - I forget...)
+																	 (but client side can receive the WSDL file)
+														 Server Side:
+															==>How does server side implement this URL call?
+															   1) First of all, this is one of the SOAP standards because WSDL is one standard, so server supports this client need
+																  ==>But each server uses its own way to define and enable this WSDL url:
+																  ==>1) Spring SOAP: http://localhost:8080/ws/countries.wsdl
+																  ==>2) Axis2: http://localhost:8080/wsapp/countryService?wsdl
+															   2) Each Server Side uses some different internal implementation to return WSDL when receiving this client call
+																  ==>Spring SOAP: https://spring.io/guides/gs/consuming-web-service/
+																	 Spring SOAP: use Spring Beans to enable/generate/expose WSDL: internal code is different from JAX-WS
+																					1) DefaultWsdl11Definition 2) XsdSchema
+																  ==>Spring Boot: Newer Ways:
+																					- Auto-configure the above 2 beans:
+																					- Add config: the location where XSD and WSDL reside:
+																					  spring.webservices.wsdl-locations=classpath:/wsdl
+																					- Should omit the jar: wsdl4j
+																  ==>JAX-WS/Axis2: may use internal logic/API to generate WSDL
+										==>
+									 )
+							  (SOAP: can also combine XSD and WSDL together by adding XSD files imports / referrals into WSDL file: example: MSS PSS-WS WSDL file)
+					(Special Env/Tool: Postman/SOAPUI: SOAP Request <======> SOAP Response)
+			Request: JavaCode <-> XML <======> Response: XML <-> JavaCode
+			Reader: JavaCode <-> XML <======> Writer: XML <-> JavaCode
+	==>SOAP Mechanisms:
+		==>2007-2010: Axis2_1.3: Stub/Skeleton Files:
+					  From WSDL (also from XSD files, or combined together): 1) By jxc, 1) Generate by CLI (Installers/OpenSource) 2) BuildTool-Plugins(Maven/Gradle) 3) IDE_Plugins
+		==>Current:	  Axis2 | Apache CXF | Spring SOAP | JAX-WS
+					  ==>Create schema Java @XmlRootElement model classes: linked and hold XML data fields: XOM (XML/Object Mapping)
+					  Methods: From WSDL (also from XSD files, or combined together): 1) Generate by CLI (Installers/OpenSource) 2) BuildTool-Plugins(Maven/Gradle) 3) IDE_Plugins
+	==>Brothers Mechanism:
+		==>XML Readers/Writers
+	==>Client-Server Scenarios:
+		Client: Java Code	==>marshalling/unmarshalling: XML Schema Jar: same as client/server side (but previously: stub/skeleton files may be different)
+							==>Java Code: need to create its own HttpClient API calls
+		Client: Browser
+		Client: Curl
+		Client: Postman/SOAPUI: encapsulate the steps internally: 1) Client: "JavaCode <-> XML" (actually directly use XML request) 2) Send HTTP request to server
+							==>Do need to refer to WSDL document: configure Postman/SOAPUI: so they can: 
+								1) know all the sending details 2) can create sample VALID xml requests based on WSDL document 3) validate XML requests
+							==>Practical Guides:
+								==>How to create valid XML request file?
+								1) SOAPUI/Postman can create sample request based on WSDL:	==>This is the best way to create SOAP sample request files
+									==>These sample xml request: fall into Server WSDL document requirements - in return it also follows XSD rules...
+										==>The main tags are WSDL specific - see example below:
+									==>Example:
+										Sample SOAP Request
+										<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+										   <soapenv:Header/>
+										   <soapenv:Body>
+											  <addPerson>
+												<person>
+												   <id>0</id>
+												   <name>This Person</name>
+												</person>
+											  </addPerson>
+										   </soapenv:Body>
+										</soapenv:Envelope>				
+									==>Notes:
+										==>FSConverterTest.java converts the Excel files into XML files: these XML files are NOT SOAP Request xml files
+											==>But these xml files are still XSD bound, but different from SOAP request xml files
+											==>XSD files are still somewhat different from WSDL due to their main xml tags
+								2) Manual creation based on WSDL document
+								3) Programmatic creation like: FSConverterTest.java does
+
+=============================================
+SOAP: Security:
+
+==>Https: it is one way
+==>But SOAP: has many other ways: SSL, JKS, certificate, WebService Security Policy, Server Security, ...
+	==>RESTful APIs: https/http: easy enablement with SSL by key stores
+	==>SOAP: may need to add by its own methods and configurations
+
+=============================================
+Testing:
+
+	==>See other notes for various testing scenarios
+
+	SOAPUI:
+		==>Project1
+			==>Request1
+			==>Request2
+			==>Request3
+		==>Notes:
+			==>Can export/import project file
+			
+	Postman:
+		==>A little bit more complicated than SOAPUI + more config
+		==>Worldpay team: like it more than SOAPUI
+			==>Good for their SOAP APIs testing
+		==>Project1???
+			==>Request1
+			==>Request2
+			==>Request3
+		==>Notes:
+			==>Can export/import project file
+
+	Curl:
+		PROS:
+			==>Faster testing on RESTful APIs
+		==>Cygwin: installed
+
+
+
+=============================================

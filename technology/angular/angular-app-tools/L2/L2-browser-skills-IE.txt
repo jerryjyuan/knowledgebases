@@ -1,0 +1,41 @@
+
+
+
+Ctrl-u:	view source
+
+Ctrl-U:	view usage statistics
+
+
+
+
+
+Jade: my high school class' rank: No.7-12? - similar to Ping's ranking
+Cheng, Fang: No.5-9
+Zhang, Rui: No.4-7
+
+
+
+JSP -> Servlet: Compiling:
+	==>Stage 1: JSP -> Servlet Java Source File???
+	==>Stage 2: Servlet Source -> Servlet byte code class files?
+	
+	Or:
+	JSP -> Servlet byte code class files?
+		==>Maybe this ...
+		
+		
+Is Manish not qualified for L3 team tech lead?
+
+Most of L3 folks except silly Jerry, etc. don't buy it in terms of Manish being the tech lead?
+...
+
+Is it right that Manish will make L3 downturn to some degree if he has become the L3 team tech lead?
+
+He is not Mr Bowl, but, ...
+
+
+
+
+
+	
+	

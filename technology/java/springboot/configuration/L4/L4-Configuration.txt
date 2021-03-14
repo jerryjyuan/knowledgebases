@@ -1,0 +1,17 @@
+
+==================================================
+
+==================================================
+Older/Long-Time Ways:
+
+==>Spring Boot: have 10-20+ Configuration Ways
+==>Spring Framework:
+	==>org.springframmework.context.annotation.*
+	==>@PropertySources({@PropertySource(), @PropertySource()})
+			==>@PropertySources({@PropertySource(value={""}), @PropertySource(value={""})})
+			==>@PropertySources({@PropertySource(value={"classpath:sql.xml"}), 
+								 @PropertySource(value={"file:${config.file:/pkgs/configmaps/cmap}"})})
+								 =======>These expressions should be in Spring Framework API doc pages
+	   @Configuration
+
+==================================================

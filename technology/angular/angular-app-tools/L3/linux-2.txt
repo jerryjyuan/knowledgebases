@@ -1,0 +1,409 @@
+
+==============================================
+Running Commands:
+	https://linuxhandbook.com/tag/bash-beginner/
+	
+3 Ways:
+
+1) Way 1: <shell> file.sh
+	==>This will override the internal: sha-bang
+
+	==>This doesn't require: chmod +x file.sh
+
+	==>This is No.1 override way:
+		==>No, it is not a simple override (Override Way2 and Way3 and Way4 below)
+		==>Yes: If it specifies a different interpreter than you do when you execute it, then it may behave differently (or may not work at all)
+		
+	Good Rule:
+		if you haven't written a script yourself, invoke it directly (./foo.sh, bar/foo.sh) instead of guessing a shell (sh foo.sh, sh bar/foo.sh). The shebang should invoke the right shell.
+		
+	==>Using the path or giving it to /bin/sh creates a new process in which commands are executed
+	
+	==>The specified shell will start as a subshell of your current shell and execute the script. This is done when you want the script to start up with specific options or under specific conditions which are not specified in the script.
+
+2) Way 2: Place the shell inside the file: use sha-bang
+	sha-bang,[1][2] hashbang,[3][4] pound-bang,[5][6] or hash-pling
+	
+	A lot of system scripts (like in init.d, in /etc and so on) have a shebang #!/bin/sh, 
+	but /bin/sh is in fact a symbolic link to another shell - in former times /bin/bash, nowadays /bin/dash. 
+	But when one of them is invoked as /bin/sh, they behave differently, i.e. they stick to POSIX-compatibility-mode.
+	
+	So the way you invoke it can always lead to different results
+	
+	As a rule of thumb: If you're learning a specific shell like bash, and write commands from a bash tutorial, 
+	put #!/bin/bash in the headline, not #!/bin/sh, except where otherwise noted. Else your commands might fail.
+	==>Use: #!/bin/bash
+	
+	1) #!/bin/ksh
+		Equal to: ksh file.sh
+		White space after #! is optional
+		==>Shebang is needed for way2: without it ==>the executable doesn't know which shell, it might use default /bin/sh
+	2) chmod +x file.sh
+		==>This is required if you are running it: ./file.sh
+			 the script must be marked executable to run it directly
+		==>can we run it like: file.sh?	==>NO because the principle is: /path/to/script # using the path (absolute or relative)
+			 (YES: If you put the scripts directory in your PATH, and . (the current directory) is in the PATH)
+			 but can run it using: <folder>/file.sh: this is the same as the principle: /path/to/script
+	3) ./file.sh
+			 ==>This is the same as: <folder>/file.sh
+			    because . here is the current folder meaning ==>This is different from bash's ". file.sh"
+			 ==>Actually the principle is not: <folder>/file.sh
+			 	It is:
+			 		1) /path/to/script	# using the path (absolute or relative)
+			 		2) script			# the scripts directory in your PATH, and . (the current directory) is in the PATH
+					==>This requires: chmod +x file.sh
+					
+	All scripts under Linux execute using the interpreter specified on a first line[1].
+	Almost all bash scripts often begin with #!/bin/bash (assuming that Bash has been installed in /bin)
+	This ensures that Bash will be used to interpret the script, even if it is executed under another shell
+	
+	If you do not specify an interpreter line, the default is usually the /bin/sh. But, it is recommended that you set #!/bin/bash line.
+		==>It will go to the default one: such as: /bin/sh: Bourne Shell
+			==>Why called default one: mostly the /bin/sh will be first one inside the $PATH or env...
+			==>sh is the standard command interpreter for the system. 
+				The current version of sh is in the process of being changed to conform with the POSIX 1003.2 
+				and 1003.2a specifications for the shell.
+	
+3) Way 3: Use env sh to locate the shell from env file and run: ==>so no need to specify the full path of sh, it is found in env file
+	#!/usr/bin/env sh
+	
+	This mostly works because the path /usr/bin/env is commonly used for the env utility, and it invokes the first sh found in the user's $PATH, typically /bin/sh.
+	
+	#!/usr/bin/env bash
+	==> The advantage of #!/usr/bin/env bash is that it will use whatever bash executable appears first in the running user's $PATH variable.
+	
+	chmod +x file.sh
+		==>This is required for way3
+	
+4) Way 4: Enter some <shell>: enter some <shell> env...: so this shell becomes the current default shell
+	Enter: this shell's commands
+	Example 1:
+		> bash
+		bash > . file.sh
+		"." only works in bash related shells
+		
+		==>This doesn't require: chmod +x file.sh
+		Running it with ‘bash’ doesn’t require the permission.
+		command bash [filename] only needs read permission from the file.
+
+	==>. and source are equivalent in that they don't spawn a subprocess but execute commands in the current shell. 
+		This is important when the script sets environment variables or changes current working directory.
+	==>Also it's a good way to keep current directory. If you change directory in script, it won't be applied in the shell which you execute that script. But if you source it to run it, after the script exits, the current directory will be kept.
+	
+	==>(dot) runs a shell script in the current environment and then returns. Normally, the shell runs a command file in a child shell so that changes to the environment by such commands as cd, set, and trap are local to the command file. The . (dot) command circumvents this feature.
+		1) Exist in shell - not just Bash
+			The dot command ( . ), aka full stop or period, is a command used to evaluate commands in the current execution context. 
+		2) But:
+			In Bash, the source command is synonym to the dot command ( . ) ... filename [arguments] Execute commands from a file in the current shell. Read and execute commands from FILENAME in the current shell.
+		3) In C Shell, a similar functionality to dot command is provided as the source command, and this name is seen in "extended" POSIX shells as well.
+		
+		When to use the Dot Command in Bash?
+			1) The most obvious use case for using the dot command is when you want to change your current context 
+				by setting new variables or changing some existing one. 
+				You may also have a script that expect to change your current directory by using cd. 
+				==>Example: there is no subprocess, so the returned values or new values are available in the current shell
+			2) It may also be convenient when trying to run a script that doesn’t have the execute (x) permission.
+				==>This is very convenient
+				
+		==>The dot command (.), aka full stop or period, is a command used to evaluate commands in the current execution context. In Bash, the source command is synonym to the dot command (.) and you can also pass parameters to the command, beware, this deviate from the POSIX specification.
+		
+		==>Generally, your current context is your terminal window. This mean that the dot command will apply changes to your current shell
+			==>When you run an executable script as ./my-script.sh, the commands are run in a new subshell, 
+				while when run as . my-script.sh the current shell context will be used.
+			Example 1: When run as an executable using ./my-script.sh, the A variable is not exported in your current shell 
+					   and would just return an empty result.
+			https://www.shell-tips.com/bash/source-dot-command/
+			#!/usr/bin/env bash
+			export A="hello world"
+			echo $A
+			$ ./test.sh 
+			hello world
+			$ echo $A
+			==>the shell script we ran had its own environment (including its own directory where commands were being run), and that environment went away once the script finished running
+			$ . test.sh 
+			hello world
+			$ echo $A
+			hello world
+			==>Sourcing a script doesn't call a separate process. It is like typing all of the commands in the parent process by hand; its environment is preserved after the script ends
+						
+		==>More elaboration:
+			When a script is run using source it runs within the existing shell, any variables created or modified by the script will remain available after the script completes. In contrast if the script is run just as filename, then a separate subshell (with a completely separate set of variables) would be spawned to run the script.
+			
+		==>More Examples:
+			The period (dot) is short hand for the bash built in source. It will read and execute commands from a file in the current environment and return the exit status of the last command executed. The files can be in the current directory or anywhere in the PATH. It does not need to be executable.
+		
+		==>More Info and Comparisons:
+			==>Format 1: . file.sh or: . ./file.sh	or: . /tmp/file.sh
+						 (. file.sh:	file.sh can be in the current directory or anywhere in the PATH)
+						 ==>Principle: dot command (same as source command)
+						 	(Read and execute commands from FILENAME in the current shell.
+						 	 The entries in $PATH are used to find the directory containing FILENAME.)
+			==>Format 2: ./file.sh or: file.sh 		or /tmp/file.sh
+						 ==>Principle: 	/path/to/script # using the path (absolute or relative)
+						 				script			# the scripts directory in your PATH, and . (the current directory) is in the PATH
+			==>Format 3: .file.sh:	   run a hidden file that is executable
+			
+5) Way 5: source file.sh
+
+	"source" works in both bash and csh related shells
+	
+	==>. and source are equivalent in that they don't spawn a subprocess but execute commands in the current shell. 
+		This is important when the script sets environment variables or changes current working directory.
+		
+	==>If you don't want to start a new shell but execute the script in the current shell, you source it
+	
+	==>source = .
+ 		The Bash source built-in is a synonym for the Bourne shell . (dot) command.
+ 		
+ 		source is a synonym for dot/period '.' in bash, but not in POSIX sh, so for maximum compatibility use the period.
+ 		
+ 	==>source is a Unix command that evaluates the file following the command, as a list of commands, executed in the current context.
+		Extracted from https://en.wikipedia.org/wiki/Source_(command)
+
+6) Way 6:
+	you can prefix any of these ways to execute a script with eval, so, you can have
+	
+	eval sh script
+	eval script
+	eval . script
+	
+7) Way 7:
+	
+	Ubuntu: use: dash
+
+	cat foo.sh | dash
+	dash < foo.sh
+
+8) Way 8:
+
+	source are a bit different in zsh at least(that's what I use) because
+		source file
+	
+	Works,while
+		. file
+
+	doesn't,it needs	
+		. ./file
+
+	. ./filename
+	# ( dot space dot slash filename )
+	Runs the script in the current shell when the directory is not in the path.	????????
+
+==============================================
+shebang:
+
+	A chain of shebangs and wrappers yields a directly executable file that gets the encountered scripts as parameters in reverse order. For example, if file /bin/A is an executable file in ELF format, file /bin/B contains the shebang #!/bin/A optparam, and file /bin/C contains the shebang #!/bin/B, then executing file /bin/C resolves to /bin/B /bin/C, which finally resolves to /bin/A optparam /bin/B /bin/C.
+
+#!/bin/ksh
+#!/bin/sh – Execute the file using the Bourne shell, or a compatible shell, assumed to be in the /bin directory
+#!/bin/bash – Execute the file using the Bash shell
+#!/usr/bin/env python3 – Execute with a Python interpreter, using the env program search path to find it
+#!/bin/false – Do nothing, but return a non-zero exit status, indicating failure. Used to prevent stand-alone execution of a script file intended for execution in a specific context, such as by the . command from sh/bash, source from csh/tcsh, or as a .profile, .cshrc, or .login file.
+
+/bin/sh: Bourne Shell, or point to Bash: it points to bash
+/bin/bash:
+	Bourne-Again Shell: with many handy features, ...
+	==>You can do a comparison with all shells and see their pros and cons, and good features
+/bin/ksh:
+	==>Why so uneasy to use compare with bash?
+		==>1) BASH has many good features
+		==>2) Ksh needs some configurations, which I have not done...
+
+/bin/csh
+	==>chsh? lchsh
+/bin/zsh
+/bin/ssh
+
+tcsh
+
+dash
+
+==============================================
+File Name Extensions:
+	==>...
+	==>Also for OS needs
+	==>...
+==============================================
+Case Studies:
+
+==>Log on as mfssmgr2: ksh
+	==>mfssmgr2: configured with ksh as default?
+==>bash
+	==>Set up bash as default interpreter shell env
+	==>Run some commands: ..., even inside some shell script files...
+		==>1) Run /path/script or ./file.sh: start a new sub-process, and done, and back to the current process: bash...
+		==>2) Run a command: exit
+				==>This will exit the current bash shell env, and back to ksh env
+				==>When back to ksh env and process: some of the commands: not saved into some history of bash, ...
+		==>Solution 1: Can remove these exit commands where not needed
+			==>Still run: . file.sh
+			==>This will not be back to ksh env because it doesn't exit the current BASH env
+		==>Solution 2: use: ./file.sh
+			==>This starts a new sub-process, even with exit, it just exits the new sub-process, and still back to BASH
+		
+		Better Shell Scripting:
+			1) Create a new shell script
+			2) Add shebang into the first line of the shell script: so it always pre-configured good
+			3) Make it executable and Run the script using: ./file.sh
+				==>because this will stay in the current shell (./file.sh starts a new sub-process) even with a possible "exit" command
+				==>If needing to have some output, the shell script itself can do echo etc. - no need to echo the data by current shell
+			4) Inside the shell script:
+				==>Maybe better to use: . file2.sh
+					==>In this way: it uses the curren file.sh sub-process, so the results can be echoed inside the script
+		More Notes:
+			==>Run:
+				. file.ksh
+				==>It uses Bash command . to run ksh scripts:
+				Mostly ok
+				1) this ksh script file contents: use bash compatible syntaxes so bash command can run and interpret them correctly
+					==>If there are any issues, it will display the incorrect syntax for bash run
+					==>So the ksh file adds one comment: works also with BASH due to its coding contents
+						==>They wrote this ksh file to be compatible with BASH run when working on it
+						Why did they write it in ksh?
+							==>KSH (The Korn Shell) was developed many years before the BASH. Ksh has associative arrays and handles loop syntax better than bash. ... Bash can handle exit codes from pipes in a cleaner way. Bash and KSH are both Bourne=compatible shell, they share common function and features and can be interchangeable to use.
+				2) also . command may not be only bash, ..., it is also: Bourne shell . (dot) command
+					==>So maybe ksh is ok with this, ...
+					==>Can use: source file.sh
+				
+			==>Sometimes cannot tell exactly all logic details - it is ok, ..., technology combinations are so vast and variations...
+				==>not so critical, ...
+				==>If at this time, you check and figure out and note down all combinations or scenarios,
+					next time you could still forget some of these variations or details, but as long as you got core parts
+					in action, then ok, ...
+					And also the task works, then good...
+				
+==============================================
+debug shell scripts by adding the following debuging flags to the script:
+
+set -x     # Print command traces before executing command.
+set -v     # Prints shell input lines as they are read.
+set -xv    # Or do both
+==============================================
+More:
+	https://linuxhandbook.com/chmod-command/
+	
+which -a script_name
+
+whereis script_name
+
+locate script_name
+
+dot file notation
+	~/.ssh folder is a hidden folder using the dot file notation
+	
+chmod OPTIONS {u,g,o}{+,-,=}{r,w,x} /path/to/file
+	chmod a+x my_script.sh
+
+sudo bash filename.sh
+	Type your password. Another option is to use the su command as follows to become superuser:
+su -
+	Type root user password and finally run your script:
+bash filename.sh
+
+sudo export GREP_OPTIONS='--color=auto' GREP_COLOR='100;8'
+
+==============================================
+grep:
+	Additional explanation of grep : By default it returns just the matching lines.
+	
+	In its simplest form, when no regular expression type is given, grep interpret search patterns as basic regular expressions. 
+	To interpret the pattern as an extended regular expression, use the -E ( or --extended-regexp ) option.
+
+	Grep stands for "Global Regular Expressions Print", were as Egrep for "Extended Global Regular Expressions Print". ... 
+	The grep command will check whether there is any file with . text
+	
+grep -E
+egrep
+	egrep is a pattern searching command which belongs to the family of grep functions. 
+	It works the same way as grep -E does. 	
+	It treats the pattern as an extended regular expression and prints out the lines that match the pattern.
+
+	How do I grep for multiple patterns?
+		Use single quotes in the pattern: grep 'pattern*' file1 file2
+		Next use extended regular expressions: egrep 'pattern1|pattern2' *.py
+		Finally, try on older Unix shells/oses: grep -e pattern1 -e pattern2 *.pl
+		Another option to grep two strings: grep 'word1\|word2' input.
+		
+	To match a character that is special to grep –E, put a backslash ( \ ) in front of the character.
+
+	egrep “search_string” filename
+	egrep "search_string" filename_pattern
+	egrep -r "search_string" *
+		==>search for a string in all the files from a directory and its sub-directories
+	egrep -i "search_string” filename
+	egrep -iw "search_string” filename
+		==>Searching for a string as a full word and not as a sub-string
+	egrep -l "search_string" filename_pattern
+		==>Printing only the filenames that contain the string
+	egrep -o "search_string" filename
+		==>print the string itself
+	egrep -A <N> "search_string" filename
+		==>N number of lines After the search string
+	egrep -B <N> "search_string" filename
+		==>N number of lines Before the search string
+	egrep -C <N> "search_string" filename
+		==>N number of lines Before and After the search string
+	egrep "RegularExpressions" filename
+	Example 9:  Matching regular expression in files
+		?	The preceding item before ? is optional and is matched maximum one time
+		*	The preceding item before * will be matched zero or more times
+		+	The preceding item before + will be matched one or more times
+		{n}	The preceding item is exactly matched n number of times.
+		{n,}	The preceding item is matched n or more times
+		{,m}	The preceding item is matched maximum m times
+		{n,m}	The preceding item is matched at least n times but not more than m times
+	Example 10: Highlighting the search string
+		When you set the GREP_OPTIONS environment variable as below, you get your output with the search string/pattern 
+		highlighted in the results:
+		$ sudo export GREP_OPTIONS='--color=auto' GREP_COLOR='100;8'
+		You can then search for the string in any manner we have described in the examples of this article.
+	Example 11: Performing Invert search in a file
+		By invert search, we mean that the egrep command prints everything in the file, except the lines that contain the search string. 		$ egrep -v "search_string" filename
+	Example 12:  Performing invert search based on multiple criteria/search pattern
+		With the -v flag, you can also make the egrep command to perform an inverted search based on more than one search string/pattern.
+		$ egrep -v -e "search_string"/”pattern” -e "search_string"/”pattern” .... filename
+		$ egrep -v -e “one” -e "two" samplefile_.txt
+	Example 13: Printing the number of lines that match the search string
+		$ egrep -c "search_string” filename
+		$ grep -v -c "search_string” filename
+	Example 14: Displaying the line number where the string is matched
+		With the -n flag, you can make the egrep command to print the matched line along with 
+		the line number that contains the search string.
+		$ grep -n "search_string” filename
+	Example 15: Displaying the position in the file where the search string matches
+		If you want to know the position in the file where the search string exists, you can use the -b flag with the egrep command.
+		$ grep -o -b "search_string” filename
+		The search results print the byte offset of the file where the search word exists.
+				
+grep -F
+fgrep
+	--fixed-strings Interpret PATTERN as a list of fixed strings, separated by newlines, any of which is to be matched
+	grep –F when you don't need special pattern matching
+	To search for an exact string, use -F , so that 2* isn't treated as a regular expression
+		
+grep -R:
+	To recursively search using grep , use the -R option. 
+	==>grep multiple folders
+
+grep -v:
+	Grep to invert Output
+	
+	The -v option instructs grep to print all lines that do not contain or match the expression. 
+	The –v option tells grep to invert its output, meaning that instead of printing matching lines, 
+	do the opposite and print all of the lines that don't match the expression.
+	
+	
+
+==============================================
+Variables:
+	Some of these variables are environment variables 
+		==>export var="aaa"
+		==>env
+	whereas others are local variables
+
+Awk:
+	Awk is mostly used for pattern scanning and processing. It searches one or more files to see if they contain lines that matches with the specified patterns and then performs the associated actions. 
+	Awk is abbreviated from the names of the developers – Aho, Weinberger, and Kernighan.
+	
+	
+==============================================

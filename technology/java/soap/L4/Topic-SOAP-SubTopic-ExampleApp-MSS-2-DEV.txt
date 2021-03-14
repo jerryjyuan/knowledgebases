@@ -1,0 +1,93 @@
+
+============================================================
+Topic: SOAP:
+
+
+=========================================================
+DEV: Server Module: JAX-WS:
+
+	1) Both have: WSDL -> Java + Java -> WSDL
+	2) Each has variations: APIs, Frameworks, Servers, ...
+	3) IBM knowledgebank URL: has very good resources
+	
+==>JSR 181: javax.jws.*:
+
+	==>See Michael Yong's webite
+
+==>JSR 224: JAX-WS 2.0
+
+	==>Procedures: Contract (XSD + Supporting Parts + WSDL) -> Java
+		======================>MSS SecuritizationEventService SOAP: use this way
+		==>Procedure 1: create XSD files and WSDL file
+						 (Some Server Side app implementation: only create XSD files, and WSDL will be created by server code: such as: http://server:port/app/...wsdl)
+						 MSS SecuritizationEventService SOAP: create both XSD files and WSDL file: and WSDL file is based on XSD files inside WSDL file)
+						 ===>How did "MSS SecuritizationEventService SOAP" create the XSD files?
+							 ==>It is based on business requirements and models and database design/tables
+							 ==>Why choosing manually creation of XSD files?
+								==>Due to complexities of business data
+								==>Creating Java model code first might be too difficult, or a duplicate to PSS-Domain entity classes
+								   (And these schema objects would be a subset of the complicated PSS-Domain objects, so it is not so easy to directly use PSS-Domain entity classes)
+								==>So choosing to create XSD files might be much easier and straightforward
+		==>Procedure 2: Generate Java Code schema files: this is done by another maven module based on XSD files
+							==>CLI:
+								Java: xjc
+								IBM:  wsimport?
+									 use “wsimport” tool to parse the published wsdl file, and generate necessary client files (stub) to access the published web service.
+									 (Why called stub files and skeleton files: stub files are also different in some ways: ... for client side to use...)
+							==>Maven/Gradle/IDE
+							==>Framework Enabled:
+								Axis2: Wsdl2Java...
+							==>Server Enabled?
+						==>WSDL is optional to create based on the tools
+							==>But WSDL can be created using the above tool(s)
+							==>For MSS SecuritizationEventService SOAP: WSDL seems to be manually created because it uses/refers to XSD files inside its contents
+							==>But WSDL is required to be created and provided to client side by common URL: http://server:port/app/...wsdl
+								==>This is a common requirement for Server Side implementation
+						==>If WSDL is generated via some ways, and then it is added to Server webapp/wsdl module
+		==>Procedure 3: XSD/WSDL and Java schema code are done, then next step is moving to: Service Impl class
+						==>How to implement the server side code for these operations and APIs?
+						
+						1) Maybe different from JSR 181
+						2) Also maybe have some variations
+						
+						MSS SecuritizationEventService SOAP Approaches:
+						1) Add Port Interface class
+							==>Are these interaces mapped to WSDL operation name?
+								==>I was able to map FinancialStatementDataUpdate XSD/elements/tags, WSDL/operation name to this interface API...
+									==>By some namespaces and naming, ...: the API name (operation) is mapped to these scenario
+								==>So I am sure where in this interface class's API is handling the WSDL's operation call...
+							Internal Code:
+								==>JAX-WS Server APIs: enable endpoints and SOAPHttpBinding, and SOAPBinding, etc.
+								==>When client enables Service(WSDL, QName): it gets a remote access to the server side SOAPNode
+									==>It enables as SOAP Message Binding (through envelope to SOAP Node/Address) - previously RPC/Document style binding
+						2) Add Port Implementation class
+							==>Implementation class: should be internally mapped to the WSDL operation like its interface class
+							==>Implementation Class: arguments: unmarshalled schema objects
+							==>It can directly use the schema objects to retrieve data
+							So the coding processes:
+								==>Include the schema objects inside this class
+								==>Can use PSS-EJB classes
+								==>So the coding process in impl class is straightforward
+						3) Call PSS-EJB module service APIs: move down to PSS-Domain and DB layer code	
+	
+	==>Procedures: Java -> Contract (XSD + Supporting Parts + WSDL)
+		==>Procedure 1: Create Java Code first: @XmlRootElement, etc.: like POJO / Entity classes
+		==>Procedure 2: Generate XSD files: this is main part of the Contract
+							==>CLI:
+								Java: schemagen
+								IBM:  wsgen?
+							==>Maven/Gradle/IDE
+							==>Framework Enabled:
+								Axis2: Java2Wsdl...
+							==>Server Enabled?
+						==>WSDL is optional to create based on the tools
+							==>But WSDL is required to be created and provided to client side by common URL: http://server:port/app/...wsdl
+								==>This is a common requirement for Server Side implementation
+		==>Procedure 3: Add WSDL to webapp module
+		==>Procedure 4: Add interface and implementation class:
+						==>Should be similar to above ways: because the main differences are: creating Java-schema-model code first or creating XSD files first
+	
+=========================================================
+
+=========================================================
+

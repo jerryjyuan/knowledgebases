@@ -1,0 +1,424 @@
+
+============================================================
+Topic: SOAP:
+
+=========================================================
+TBD:
+	==>Why is the client code to PSS-WS: not working?
+	
+		==>No provider is found
+		==>Use the new way: JAX-WS 2.0: JAXB
+			...
+
+This is the way to use:
+	Authentication with Authorization header for Http Basic way
+	
+	https://etfdevlab.blogspot.com/2009/12/http-basic-authentication-with-jax-ws.html
+	
+	
+HTTP basic authentication with JAX-WS (Client)
+JAX-WS does not do very well with HTTP basic authentication. In general, to create and use a web-service client you have to perform the following steps: 1. Use wsimport to generate the stub files 2. Create a service class in the client 3. Retrieve a proxy to the service, also known as a port All three steps could require HTTP basic authentication. And for each step it have to be handled in a different way.
+1. The stub files generation
+If access to a wsdl file is restricted with basic authentication, wsimport fails to get it. Unfortunately it does not support the common approach to write access credentials right into the URL (RFC 1738). It is not a big deal to resolve this issue. You just need to create a server authentication file: $HOME/.metro/auth. This file should have the WSDL URL with username and password in the RFC 1738 format:
+http[s]://user:password@host:port//
+You can have line delimited multiple entries in this file and they can be used for various sites that need basic authentication.
+2. The service class creation
+A constructor of the service object requires access to the WSDL. And again it does not support basic authentication out of the box. You have an option to download the wsdl file and use it locally. Another option is to use the default authenticator:
+Authenticator.setDefault(new Authenticator() {
+ @Override
+ protected PasswordAuthentication getPasswordAuthentication() {
+   return new PasswordAuthentication(
+     USER_NAME,
+     PASSWORD.toCharArray());
+ }
+});
+3. The service class configuration
+And the last but not least part of our adventure is configuration of the service port:
+OurWebService service = new OurWebService ();
+OurWebServicePortType port = service.getOurWebServicePortType();
+
+BindingProvider bindingProvider = (BindingProvider)port;
+Map requestContext = bindingProvider.getRequestContext();
+requestContext.put(BindingProvider.USERNAME_PROPERTY, USER_NAME);
+requestContext.put(BindingProvider.PASSWORD_PROPERTY, PASSWORD);
+Done! Now you are able to use methods of the port object to communicate with a web service.
+
+
+=========================================================
+Tests: ==>JAX-WS Server: Client Test Code:
+
+
+==>JSR 181: javax.jws.*:
+
+	==>See Michael Yong's webite
+	
+	1) Test 1: Not using: stub Java class objects
+	
+				==>One question: why is there a model class HelloWorld.java in client code?
+								 ==>When compiling client code, where is this class coming from? 1) Client creates this model class due to WSDL 2) Server side provides it?
+	
+	2) Test 2: Utilize stub Java class objects
+
+				==>This is straightforward
+				==>Stub files: different from server side backbone implementation classes
+							   ==>Added some stub assisting code as well...
+
+==>JSR 224: JAX-WS 2.0
+
+	==>PSS-WS:
+		1) Some code in place: 
+		2) I assumed that the test code worked...
+	==>Standalone test code
+	
+	==>Real Client Module Code: ...
+		==>1) 2007-2010: Axis 1.3 - client code:
+				==>Get stub jar file
+				==>Code Java to create client objects and call stub files' sender code
+		==>2) Apache CXF/...: client code
+		==>3) Michael Yong RPC/Document JAX-WS client code
+		==>4) Spring SOAP Client Code
+		==>5) SecuritizationEventService - Client Code:
+				1) MIL Client Code?
+				2) DMS Client Code?
+				3) MPS Client Code?
+				4) OUS Client Code?
+				5) ICT Client Code?
+				6) PM Client Code?
+				==>These code maybe all come from MIL modules to call MSS SecuritizationEventService APIs
+				
+				Notes:
+					==>Method 1: get WSDL: Without a schema jar, can those clients call server WSDL and create schema by the WSDL? => should be able to do so
+					==>Method 2: directly instantiate a client side Service object by JAX-WS APIs (see below): then get port/dispatch, and compile a SOAP Message and call Server APIs
+								 ==>But Service constructor requires an argument, which is the WSDL: so WSDL is indeed required
+									(Same as SOAPUI/Postman: they need a WSDL to create a SOAP request:
+										==>With WSDL: SOAPUI/Postman: can create sample XML request for every API in WSDL
+										==>Without WSDL: SOAPUI/Postman: can create SOAP request but user provide a XML request?
+														 ==>Next time: try to create a SOAP request without WSDL in SOAPUI, and see if the SOAP request can be sent
+															==>If able to do so: then it means SOAPUI sends out a blind XML request without any validations and marshalling, ...)
+										==>But the current JAX-WS Service constructor requires a WSDL argument
+										
+								 ==>Some of Previous SOAP Client -> Server apps: I worked on some apps:
+									==>Directly use: stub files to call Server APIs...
+													 ==>Utilize client schema object/classes: create request object and add data fields
+													 ==>Call stub files to send out SOAP request
+													 ======>This kinds of apps: will not use Service() APIs:
+															1) Axis2 app?
+															2) Spring Boot SOAP app?
+															3) SOAP apps using stub files? or JSR 181 JAX-RPC apps?
+															4) ...
+															==>More like a JAX-RPC app: SEI
+															JAX-RPC is based on the RPC programming model for invoking operations of a web service. The RPC programming model invokes stubs located on the client to call methods on a remote server.
+															
+															Service Endpoint Interface (SEI) as a web service using an annotation:
+
+																HelloWorld.java
+
+																import javax.jws.WebService;
+																 
+																@WebService
+																public interface HelloWorld {
+																 
+																	public String sayHello(String name);
+																}
+																There are two things to note here:
+
+																The @WebService annotation communicates to the JAX-WS runtime to expose all public methods on this bean as web service operations.
+																JAX-WS does not require the SEI to extend java.rmi.Remote, as is the case with JAX-RPC, since it does not use the RPC programming model.
+																You can fine-tune the web service by adding additional annotations on individual methods and parameters. Here are some common annotations used.
+
+																Note: These annotations are part of the javax.jws package.
+
+																Annotation	Description
+																@WebMethod	Used to indicate that this method is a web service operation.  Typically used when specific public methods in the class should be exposed as web service operations.
+																@WebParam	Used to map the name of the parameter to the element in the WSDL file.
+																@WebResult	Used to map the name of the result response to the element in the WSDL file.
+																Here is an example of how these annotations are used:
+
+																Other Web Service Annotations Example
+
+																@WebMethod()
+																@WebResult(name="NumberOutput")
+																public int echoNumber(
+																	@WebParam(name="NumberInput")
+																	int input)
+																{
+																  System.out.println("echoNumber '" + input + "' back to you.");
+																  return input;
+																}
+																The JAX-RPC programming model was based on the older 1.4 version of Java.
+										
+															JAX-RPC does not support asynchronous invocation of a web service
+															
+								 ==>1) Scenario 1: create a Service object by WSDL
+												   ==>Create a SOAPMessage payload by Java APIs and add some data into the SOAPMessage
+												   ==>Get a port/dispatch to send SOAPMessage to Server API
+												   ================>This way: It may not need client side schema jar
+																	1) it uses remote WSDL (or local WSDL?): it should shows http, so it becomes a SOAPHttpBinding
+																	2) hook up with the port/operation
+																	3) call JAX-WS APIs to create SOAPMessage (not the schema Java objects)
+																	4) call port/dispatch to send the payload
+																	5) When receiving response: it is the JAX-WS response object? - not the schema java objects? - double check
+																		==>Some client doesn't care about actual responses (like schema objects) except normal SOAP Response/SOAP Faults
+												   ==>[Mahesh]: this is magic, how come does the client can send SOAP calls to Server without schema jar file?
+												   ==>[Jerry]:  this is the 2nd way between the 1st way (SOAPUI/Postman) and 3rd way (add schema jar file)
+																 ================>This 2nd way:
+																	1) Mainly use JAX-WS APIs as doctrines and principles: because JAX-WS APIs implements all main SOAP concepts
+																	2) Add WSDL: this is also common for SOAP and JAX-WS APIs
+																	3) Add SOAPMessage: this JAX-WS APIs: common Java APIs
+																	4) Add port/dispatch and call Server: this is common to JAX-WS APIs and SOAP
+																	So no need to have schema jar
+																	==>The above procedures use JAX-WS APIs to add data and internally marshall the data into XML request to Server side
+								 ==>2) Scenario 2: create a Service object by WSDL
+												   ==>Create a payload by JAXBContext and XML instance documents
+												   ==>Get a port/dispatch to send payload to Server API
+												   ================>This way: It may need client side schema jar
+																	1) Method 1: have a local client schema jar file: so these schema objects can be directly used
+																	2) Method 2: utilize the WSDL obtained and create a schema jar through WSDL
+																	3) Method 3: utilize the WSDL obtained and create a schema object jar on the fly: can this happen?
+																	4) Method 4: there is no need to have client jar and schema objects on client side:
+																				 ==>[Jerry]:  I don't think so: it is indeed required in this way
+																				 ==>[Mahesh]: why the event Junit code can work without a client jar?
+																				 ==>[Jerry]:  this junit code is actually on the server side inside IDE, the jar file is inside pom.xml
+					==>Method 3: get WSDL: Also with a schema jar, client side can do the above: Schema Objects or JAXBContext implementation
+
+								==>JAXB and Schema Objects:
+								
+									JAX-RPC uses its own data mapping model. This is because the JAXB specification had not been finalized when when the first version of JAX-RPC was completed. The JAX-RPC data mapping model lacks support for some XML schemas.
+
+									JAX-WS uses JAXB for data binding. JAXB provides mapping for virtually all schemas.
+
+									You can use JAXB annotations on your Java bean and JAX-WS will convert it and its properties to XML elements at runtime when sending the SOAP message.
+
+									Person.java
+
+									import javax.xml.bind.annotation.*;
+									 
+									@XmlRootElement(name = "person")
+									@XmlType(propOrder = {"id","name"})
+									public class Person {
+									 
+									 
+										@XmlElement(name = "id", required = true)
+										int ID;
+										@XmlElement(name = "name", required = true)
+										String Name;
+									 
+										// accessors and mutators
+									}
+									Sample SOAP Request
+
+									<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+									   <soapenv:Header/>
+									   <soapenv:Body>
+										  <addPerson>
+											<person>
+											   <id>0</id>
+											   <name>This Person</name>
+											</person>
+										  </addPerson>
+									   </soapenv:Body>
+									</soapenv:Envelope>
+
+
+									The following table describes the JAXB annotations used in the code example above.
+
+									Annotation	Description
+									@XmlRootElement(name = â€œpreferredNameâ€�)	Defines the root element for an XML tree
+									@XmlType(propOrder = { â€œfield2â€�, â€œfield1â€�,.. })	Used to define the order in which the fields are written in the XML file
+									@XmlElement(name = â€œnewNameâ€�)	Define the XML element name to use for this property. This is only used if the â€œnewNameâ€�is different than the JavaBean name
+
+									JAX-WS is the successor to JAX-RPC. JAX-WS provides support for message-oriented web services. This model allows service requests to be sent asynchronously. Additionally, JAX-WS provides support for the more recent versions of the following specifications: SOAP, WSDL, WS-I BP (Basic Profile), and SAAJ (SOAP with Attachments API for Java)
+									
+									JAX-WS Support: Asynchronous Invocation of Web Services
+
+										JAX-WS supports both the callback and polling methods of invoking a web service asynchronously. When using the callback method, the client provides a callback handler to accept and process the response.
+
+										When using the polling method, a client issues a request and receives a response object, which is polled intermittently to check if the server has responded. When the server responds, the actual response is acquired.
+
+										Here is an example of a Service Endpoint Interface with methods for both synchronous and asynchronous requests:
+
+										ChangeMessage.java
+
+										import java.util.concurrent.Future;
+										 
+										import javax.jws.WebService;
+										import javax.xml.ws.AsyncHandler;
+										import javax.xml.ws.Response;;
+										 
+										@WebService
+										public interface ChangeMessage {
+										 
+											// sync operation
+											public String changeMessage(String message);
+											 
+											// async operation with callback
+											public Future changeMessageAsync(String message, AsyncHandler asyncHandler);
+										 
+											// async operation with polling
+											public Response changeMessageAsync(String message);
+										}
+
+										Asynchronous method names are suffixed with â€œAsyncâ€� as this is the naming convention.  
+										The AsyncHandler callback handler is provided by the caller and is responsible for handling the response when using the callback method.  The method returns a Future that represents the pending result of the task.  The Future interface exposes methods to test for completion of a task and to retrieve the result of the task.
+
+										The client receives an object of type javax.xml.ws.Response when using the polling method,. The Response object is polled to determine when the operation is complete and to get the actual result, as described earlier.
+									
+									JAX-WS: SOAP Message Attachments and MTOM:
+										JAX-RPC: uses the SOAP with Attachments (Sw/A) model for exchanging binary data and uses the SAAJ specification. 
+										JAX-WS: The SAAJ specification includes the javax.xml.soap package and provides the API for creating and populating a SOAP message.
+										
+										MTOM Tests: JSR 224: Message Transmission Optimization Mechanism (MTOM)
+											Set the MTOM enabled property of the SOAPBinding to true .
+
+									JAX-WS: dynamic invocation interface (DII):
+										JAX-RPC clients use javax.xml.rpc.Call for this purpose.
+											Call call = service.createCall(); 
+											// Invoke the operation.
+											Object[] actualArgs = {"Java Code Geeks"};
+											String response = (String) call.invoke(actualArgs);
+										JAX-WS:
+											SOAPMessage response = dispatch.invoke(request);
+									
+								==>JAXB and Schema Objects: Usage:
+									Usage 1: create schema objects and its request object
+												dispatch.send(schemaRequestObject);
+									Usage 2: Use JAXBContext to unmarshall a schema object as request object: from XML instance document
+												dispatch.send(unmarshalledSchemaRequestObject);
+												
+								 ==>Where is the client jar?
+									[Jerry]: Nowadays the so-called client jar is the same as server jar
+											 Also: this jar has been added to JFrog Artifactory for every team to integrate and use
+																 ================>This 3rd way:
+																	1) Mainly use JAX-WS APIs as doctrines and principles: because JAX-WS APIs implements all main SOAP concepts
+																	2) But also added bottom-level's schema jar file and objects
+																	3) Add WSDL: this is also common for SOAP and JAX-WS APIs
+																	3) Add payload using bottom-level's schema jar file and objects instead of SOAPMessage APIs:
+																		this level belongs to schema objects and jar, it is lowest level Java code (SOAPMessage is above it...)
+																		==>In XML level: this schema code is similar to XML instance documents: both follow: XSD levels
+																		==>With SOAPMessage API level: it is similar to SOAP encoding/node/envelope wrapped XML request:
+																									   ==>Similar to: SOAPUI level and its request XML level
+																		Illustrations:
+																			Java Code: Schema Code <=====> XML Level: XML Instance Document <======> Tools: Service port/dispatch calls
+																						Sender: Service port/dispatch calls (schema Java code)
+																			Java Code: SOAPMessage <=====> XML Level: SOAP encoded XML request <======> Tools: SOPAUI/Postman
+																						Sender: Service port/dispatch calls (SOAPMessage)
+																							==>Variations: 2 Variations: ==>The variations determine how Java JAX-WS APIs are used:
+																							working at the XML message level: the Dispatch object is not concerned about the operation being invoked and is only sending XML data
+																							The dispatch client is an XML messaging oriented client. 
+																							1) Variation 1: Data is sent in PAYLOAD mode. 
+																							When using the PAYLOAD mode, the dispatch client is responsible for providing the contents of the SOAP body only and JAX-WS adds the SOAP envelope and header. 
+																							2) Variation 2: Data is sent in MESSAGE mode.
+																							When using the MESSAGE mode, the dispatch client is responsible for providing the entire SOAP envelope including the SOAP header and body. 
+																						Sender: SOPAUI/Postman calls (SOAP encoded XML request)
+																		================>This 1st way:
+																						 ==>Sender: SOPAUI/Postman calls (SOAP encoded XML request): same level as SOAPMessage APIs
+																						 ==>How abour CURL commands?
+																							==>Can CURL send SOAP request and its payload as SOAP XML request?
+																							==>TBD
+																	4) Add port/dispatch and call Server: this is common to JAX-WS APIs and SOAP
+																	So no need to have schema jar
+																	==>The above procedures use JAX-WS APIs to add data and internally marshall the data into XML request to Server side
+					==>Method 4: For sure you can customize and add your own code and impl... plus maven plugins and new interfaces, etc.
+								 ==>But no need because the above APIs are good enough and available
+
+		==>JAX-WS Official Documentation URL: client code examples?
+		==>Based on JAX-WS APIs: Deduce Client Code:
+			==>Client Code Example 1: SOAPUI/Postman: are tools that function as clients
+			==>Client Code Example 2: the following should be common ways based on JAX-WS APIs:
+				Step 1: Service service;
+					==>new Service();
+						==>This will initiate none of the ports yet: but the current JAX-WS APIs don't have this API any more
+					==>new Service(URL(wsdl));
+						==>This will initiate (added) ALL ports from the WSDL
+					==>new Service(URL(wsdl), QName(...));
+						==>This will initiate (added) the specific port (per QName) from the WSDL
+					Variations:
+						==>Added HTTP Basic: security realm: user credential: to get WSDL and Service APIs
+							==>Server Side:
+								==>Add HTTP Basic to web.xml, and add: user credentials into weblogic.xml
+								==>WebLogic Admin Console: needs to add the configured user (inside weblogic.xml) into Security Realm
+								==>How does this work?
+									1) web.xml: enable HTTP Basic for this web app
+									2) How HTTP Basic is implemented: depend upon how the app is enabled and deployed:
+										==>Simple web app: can embedded the login in web.xml or somewhere..., I remember, ...
+										==>Tomcat: maybe goes to: users-role.xml?
+										==>Spring Security: go to LDAP, ..., and all other ways
+										==>WebLogic Deployment:
+											==>This app "MSS SecuritizationEventService SOAP": enabled as a WAR file inside a WebLogic EAR file
+												==>So: it is configured its weblogic.xml to add user credentials (this is the way for WebLogic deployment and also HTTP Basic)
+												==>WebLogic manages its HTTP Basic way via its console's security realm
+												==>So when users login, it needs to use the configured user in security realm and also weblogic.xml to log in
+							==>Client Side:
+								==>WSDL: generate schema files: such as: wsimport, etc.
+								==>Create a Service
+								==>GetPort
+								All three steps could require HTTP basic authentication. And for each step it have to be handled in a different way.
+								==>SOAPUI: add to Authorization header
+								==>Java Code
+								==>https://etfdevlab.blogspot.com/2009/12/http-basic-authentication-with-jax-ws.html
+									HTTP basic authentication with JAX-WS (Client)
+									JAX-WS does not do very well with HTTP basic authentication. In general, to create and use a web-service client you have to perform the following steps: 1. Use wsimport to generate the stub files 2. Create a service class in the client 3. Retrieve a proxy to the service, also known as a port All three steps could require HTTP basic authentication. And for each step it have to be handled in a different way.
+									1. The stub files generation
+										If access to a wsdl file is restricted with basic authentication, wsimport fails to get it. Unfortunately it does not support the common approach to write access credentials right into the URL (RFC 1738). It is not a big deal to resolve this issue. You just need to create a server authentication file: $HOME/.metro/auth. This file should have the WSDL URL with username and password in the RFC 1738 format:
+										http[s]://user:password@host:port//
+										You can have line delimited multiple entries in this file and they can be used for various sites that need basic authentication.
+									2. The service class creation
+										A constructor of the service object requires access to the WSDL. And again it does not support basic authentication out of the box. You have an option to download the wsdl file and use it locally. Another option is to use the default authenticator:
+										Authenticator.setDefault(new Authenticator() {
+										 @Override
+										 protected PasswordAuthentication getPasswordAuthentication() {
+										   return new PasswordAuthentication(
+											 USER_NAME,
+											 PASSWORD.toCharArray());
+										 }
+										});
+										===============>But I turned off HTTP Basic, it still throws the exception: so configuring this might not be useful...
+									3. The service class configuration
+										And the last but not least part of our adventure is configuration of the service port:
+										OurWebService service = new OurWebService ();
+										OurWebServicePortType port = service.getOurWebServicePortType();
+
+										BindingProvider bindingProvider = (BindingProvider)port;
+										Map requestContext = bindingProvider.getRequestContext();
+										requestContext.put(BindingProvider.USERNAME_PROPERTY, USER_NAME);
+										requestContext.put(BindingProvider.PASSWORD_PROPERTY, PASSWORD);								
+						==>...
+						
+						==>What differences between a live server's SOAP WSDL url and a local WSDL file?
+						
+						==>Why is there an API: addPort()?
+							==>Example: it is a local WSDL, but there is a new API on the server, but not inside this client Service object, so you call addPort to add this new operation/API, ...==>So you don't need to call remote or new updated WSDL to instantiate a new Service object
+						
+				Step 1-1: Get callers
+					==>get Port: service.getPort():
+						Port: aka: a proxy to the service's operation
+					==>create a dispatcher: Dispatch ...
+						working at the XML message level: the Dispatch object is not concerned about the operation being invoked and is only sending XML data
+						The dispatch client is an XML messaging oriented client. Data is sent in either PAYLOAD or MESSAGE mode. When using the PAYLOAD mode, the dispatch client is responsible for providing the contents of the SOAP body only and JAX-WS adds the SOAP envelope and header. When using the MESSAGE mode, the dispatch client is responsible for providing the entire SOAP envelope including the SOAP header and body. This example uses the MESSAGE mode since the â€œtypeâ€� parameter is SOAPMessage.
+					==>create a Call: DII
+						Call call = service.createCall();
+				Step 2: create SOAP Message as payload
+				Step 3: call callers to send SOAP Message
+					==>Call port.operationXXX()
+					==>Call dispatcher.operationXXX()
+					==>More???
+					
+		==>Approaches:
+			==>Method 1: Go through the common JAX-WS client code, and then find out why ProviderImpl not intantiated encountered in the JUnit code
+			==>Method 2: Check what happened with Service construction with WSDL?
+						 ==>Sub-Method 1: check Java API source code and find out why that exception is encountered?
+			
+								
+==>
+
+
+
+=========================================================
+MSS: MSS upload failed:
+
+==>Validation Flows:
+
+==>
+
+=========================================================
+

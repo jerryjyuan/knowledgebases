@@ -1,0 +1,94 @@
+
+==============================================
+Heap Size:
+
+https://dzone.com/articles/how-to-capture-java-heap-dumps-7-options
+https://stackoverflow.com/questions/12797560/command-line-tool-to-find-java-heap-size-and-memory-used-linux
+
+
+==============================================
+Command-line Tool to find Java Heap Size and Memory Used
+
+
+However, if -Xms or -Xmx is absent for the Java process you are interested in, it means your Java process is using the default heap sizes. You can use the following command to find out the default sizes.
+
+java -XX:+PrintFlagsFinal -version | grep HeapSize
+
+or a particular jvm, for example,
+
+/path/to/jdk1.8.0_102/bin/java -XX:+PrintFlagsFinal -version | grep HeapSize
+
+and look for InitialHeapSize and MaxHeapSize, which is in bytes.
+
+First get the process id, the first number from the process listed, from one of the following: (or just use ps aux | grep java, if you prefer that)
+
+jps -lvm
+Then use the process ID here:
+
+jmap -heap $MY_PID 2>/dev/null | sed -ne '/Heap Configuration/,$p';
+jmap -permstat $MY_PID
+
+==============================================
+jstat:
+
+	https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
+	
+	Each Java process has a pid, which you first need to find with the jps command.
+	
+	Once you have the pid, you can use jstat -gc [insert-pid-here] to find statistics of the behavior of the garbage collected heap.
+	
+	jstat -gccapacity [insert-pid-here] will present information about memory pool generation and space capabilities.
+	
+	jstat -gcutil [insert-pid-here] will present the utilization of each generation as a percentage of its capacity. Useful to get an at a glance view of usage.
+
+jstat -gccapacity javapid  (ex. stat -gccapacity 28745)
+jstat -gccapacity javapid gaps frames (ex.  stat -gccapacity 28745 550 10 )
+
+==============================================
+jmap:
+
+	Find the process id of your webapp/java process from top. Use jmap heap to get the heap allocation
+	
+==============================================
+Java Code Way:
+	https://viralpatel.net/blogs/getting-jvm-heap-size-used-memory-total-memory-using-java-runtime/
+	
+	
+public static void main(String [] args) {
+
+    int MB = 1024*1024;
+
+    //Getting the runtime reference from system
+    Runtime runtime = Runtime.getRuntime();
+
+    //Print used memory
+    System.out.println("Used Memory:" 
+        + (runtime.totalMemory() - runtime.freeMemory()) / MB);
+
+    //Print free memory
+    System.out.println("Free Memory:" 
+        + runtime.freeMemory() / mb);
+
+    //Print total available memory
+    System.out.println("Total Memory:" + runtime.totalMemory() / MB);
+
+    //Print Maximum available memory
+    System.out.println("Max Memory:" + runtime.maxMemory() / MB);
+}
+}
+==============================================
+jrcmd 5127 print_memusage
+
+
+use "jrcmd help" to list them.
+
+https://blogs.oracle.com/jrockit/entry/why_is_my_jvm_process_larger_t
+
+
+==============================================
+
+
+
+
+==============================================
+

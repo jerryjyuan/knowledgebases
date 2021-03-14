@@ -1,6 +1,26 @@
 
 
 
+Browsers:
+	==>Website Urls: case sensitivity:
+		==>1) Normally: the main domain names/addresses: case insensitive
+						==>Either due to W3C's default or normal settings or standards
+						==>Or: each domain owners registered case insensitive addresses
+		==>2) But sub-domain part, app-context, war-context-root, servlet name, etc.
+						==>Can be case sensitive - depending upon how the application or company configurations
+						==>Especially servlet name: could be case sensitive by web.xml
+						==>query strings, parameters: could be depending how servlet or RESTful APIs parse/validate them
+	==>Browser: can utilize the entire free space of Disk C as storage space: such as 303GB
+		https://developers.google.com/web/tools/chrome-devtools/storage/cookies
+		Chrome -> Dev Tool -> Application -> Storage
+
+	==>Manage AppData:
+		==>Generally no need or not recommend to delete AppData folder(s) and data:
+			==>Because there may be some or more configuration data in addition to cached or pure data
+			==>So some apps are dependent upon some their configurations there, or your own customization configurations as well
+		==>If need to clean up AppData:
+			1) Use each browser to do deletion or cleanup
+			2) Use each app to do uninstall, or deleation, or their cleanup tools
 
 IE:
 	mode

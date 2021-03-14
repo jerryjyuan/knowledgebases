@@ -1,0 +1,553 @@
+﻿
+
+C:\Users\jerry\git\knowledgebases\technology\angular\login\L6\aspnet-core-3-registration-login-api-master>dotnet run
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[0]
+      User profile is available. Using 'C:\Users\jerry\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:4000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jerry\git\knowledgebases\technology\angular\login\L6\aspnet-core-3-registration-login-api-master
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:4000/users/authenticate application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[3]
+      Route matched with {action = "Authenticate", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(WebApi.Models.Users.AuthenticateModel) on controller WebApi.Controllers.UsersController (WebApi).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
+      Executed action WebApi.Controllers.UsersController.Authenticate (WebApi) in 466.0416ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 751.2785ms 400 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:4000/users/authenticate application/json 53
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[3]
+      Route matched with {action = "Authenticate", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(WebApi.Models.Users.AuthenticateModel) on controller WebApi.Controllers.UsersController (WebApi).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
+      Executed action WebApi.Controllers.UsersController.Authenticate (WebApi) in 63.1595ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 76.2834ms 400 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:4000/users/authenticate application/json 53
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[3]
+      Route matched with {action = "Authenticate", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(WebApi.Models.Users.AuthenticateModel) on controller WebApi.Controllers.UsersController (WebApi).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
+      Executed action WebApi.Controllers.UsersController.Authenticate (WebApi) in 12.8921ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 20.1713ms 400 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:4000/users/authenticate application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[3]
+      Route matched with {action = "Authenticate", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(WebApi.Models.Users.AuthenticateModel) on controller WebApi.Controllers.UsersController (WebApi).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
+      Executed action WebApi.Controllers.UsersController.Authenticate (WebApi) in 10.1976ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 16.1641ms 400 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost:4000/users/authenticate application/json 53
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[3]
+      Route matched with {action = "Authenticate", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(WebApi.Models.Users.AuthenticateModel) on controller WebApi.Controllers.UsersController (WebApi).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[2]
+      Executed action WebApi.Controllers.UsersController.Authenticate (WebApi) in 10.9764ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'WebApi.Controllers.UsersController.Authenticate (WebApi)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 13.5233ms 400 application/json; charset=utf-8
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:4000/users
+info: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler[2]
+      Successfully validated the token.
+fail: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler[3]
+      Exception occurred while processing message.
+System.ArgumentNullException: Value cannot be null. (Parameter 's')
+   at System.Int32.Parse(String s)
+   at WebApi.Startup.<>c.<ConfigureServices>b__3_2(TokenValidatedContext context) in C:\Users\jerry\git\knowledgebases\technology\angular\login\L6\aspnet-core-3-registration-login-api-master\Startup.cs:line 61
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.TokenValidated(TokenValidatedContext context)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+fail: Microsoft.AspNetCore.Server.Kestrel[13]
+      Connection id "0HM5R8R3QD9RF", Request id "0HM5R8R3QD9RF:00000005": An unhandled exception was thrown by the application.
+System.ArgumentNullException: Value cannot be null. (Parameter 's')
+   at System.Int32.Parse(String s)
+   at WebApi.Startup.<>c.<ConfigureServices>b__3_2(TokenValidatedContext context) in C:\Users\jerry\git\knowledgebases\technology\angular\login\L6\aspnet-core-3-registration-login-api-master\Startup.cs:line 61
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.TokenValidated(TokenValidatedContext context)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 530.2215ms 500
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+C:\Users\jerry\git\knowledgebases\technology\angular\login\L6\aspnet-core-3-registration-login-api-master>
+
+
+
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace WebApi
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://localhost:4000");
+                });
+    }
+}
+
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using WebApi.Helpers;
+using WebApi.Services;
+using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
+
+namespace WebApi
+{
+    public class Startup
+    {
+        private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _configuration;
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
+        {
+            _env = env;
+            _configuration = configuration;
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // use sql server db in production and sqlite db in development
+            if (_env.IsProduction())
+                services.AddDbContext<DataContext>();
+            else
+                services.AddDbContext<DataContext, SqliteDataContext>();
+
+            services.AddCors();
+            services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // configure strongly typed settings objects
+            var appSettingsSection = _configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                        var userId = int.Parse(context.Principal.Identity.Name);
+                        var user = userService.GetById(userId);
+                        if (user == null)
+                        {
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
+        {
+            // migrate any database changes on startup (includes initial db creation)
+            dataContext.Database.Migrate();
+
+            app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using WebApi.Helpers;
+using Microsoft.Extensions.Options;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using WebApi.Services;
+using WebApi.Entities;
+using WebApi.Models.Users;
+
+namespace WebApi.Controllers
+{
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private IUserService _userService;
+        private IMapper _mapper;
+        private readonly AppSettings _appSettings;
+
+        public UsersController(
+            IUserService userService,
+            IMapper mapper,
+            IOptions<AppSettings> appSettings)
+        {
+            _userService = userService;
+            _mapper = mapper;
+            _appSettings = appSettings.Value;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        {
+            var user = _userService.Authenticate(model.Username, model.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info and authentication token
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Token = tokenString
+            });
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]RegisterModel model)
+        {
+            // map model to entity
+            var user = _mapper.Map<User>(model);
+
+            try
+            {
+                // create user
+                _userService.Create(user, model.Password);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _userService.GetAll();
+            var model = _mapper.Map<IList<UserModel>>(users);
+            return Ok(model);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user = _userService.GetById(id);
+            var model = _mapper.Map<UserModel>(user);
+            return Ok(model);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]UpdateModel model)
+        {
+            // map model to entity and set id
+            var user = _mapper.Map<User>(model);
+            user.Id = id;
+
+            try
+            {
+                // update user 
+                _userService.Update(user, model.Password);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _userService.Delete(id);
+            return Ok();
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using WebApi.Entities;
+using WebApi.Helpers;
+
+namespace WebApi.Services
+{
+    public interface IUserService
+    {
+        User Authenticate(string username, string password);
+        IEnumerable<User> GetAll();
+        User GetById(int id);
+        User Create(User user, string password);
+        void Update(User user, string password = null);
+        void Delete(int id);
+    }
+
+    public class UserService : IUserService
+    {
+        private DataContext _context;
+
+        public UserService(DataContext context)
+        {
+            _context = context;
+        }
+
+        public User Authenticate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+
+            // check if username exists
+            if (user == null)
+                return null;
+
+            // check if password is correct
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            // authentication successful
+            return user;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _context.Users;
+        }
+
+        public User GetById(int id)
+        {
+            return _context.Users.Find(id);
+        }
+
+        public User Create(User user, string password)
+        {
+            // validation
+            if (string.IsNullOrWhiteSpace(password))
+                throw new AppException("Password is required");
+
+            if (_context.Users.Any(x => x.Username == user.Username))
+                throw new AppException("Username \"" + user.Username + "\" is already taken");
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return user;
+        }
+
+        public void Update(User userParam, string password = null)
+        {
+            var user = _context.Users.Find(userParam.Id);
+
+            if (user == null)
+                throw new AppException("User not found");
+
+            // update username if it has changed
+            if (!string.IsNullOrWhiteSpace(userParam.Username) && userParam.Username != user.Username)
+            {
+                // throw error if the new username is already taken
+                if (_context.Users.Any(x => x.Username == userParam.Username))
+                    throw new AppException("Username " + userParam.Username + " is already taken");
+
+                user.Username = userParam.Username;
+            }
+
+            // update user properties if provided
+            if (!string.IsNullOrWhiteSpace(userParam.FirstName))
+                user.FirstName = userParam.FirstName;
+
+            if (!string.IsNullOrWhiteSpace(userParam.LastName))
+                user.LastName = userParam.LastName;
+
+            // update password if provided
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+            }
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var user = _context.Users.Find(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
+
+        // private helper methods
+
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            if (password == null) throw new ArgumentNullException("password");
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        {
+            if (password == null) throw new ArgumentNullException("password");
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != storedHash[i]) return false;
+                }
+            }
+
+            return true;
+        }
+    }
+}
+

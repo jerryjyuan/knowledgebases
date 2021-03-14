@@ -1,0 +1,171 @@
+
+====================================================
+https://help.eclipse.org/2020-12/index.jsp?nav=%2F8
+
+
+WS-BPEL 2.0 stands for Web Service Business Process Execution Language. Like EAI, BPEL is an XML-based language, but BPEL is more specific and targeted. BPEL is used by developers to join sometimes disparate functions into an integrated process, resulting in a seamless use of the Internet to conduct business transactions ranging from simple money exchanges to complex calculations and asset reallocation.
+
+
+====================================================
+How to gather heap and thread dump for the Adminserver java process
+How to create heap dump and/or thread dump against a java executable
+How to take heap dumps from a JVM using jmap tool.
+How to take thread dumps from a JVM using jstack tool.
+
+https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html
+
+<DLC>\jdk\bin\jps -l -m -v 
+
+Request a Thread Dump from the JVM
+C:\Windows\System32>jstack -l
+Usage:
+    jstack [-l] <pid>
+        (to connect to running process)
+    jstack -F [-m] [-l] <pid>
+        (to connect to a hung process)
+    jstack [-m] [-l] <executable> <core>
+        (to connect to a core file)
+    jstack [-m] [-l] [server_id@]<remote server IP or hostname>
+        (to connect to a remote debug server)
+
+Options:
+    -F  to force a thread dump. Use when jstack <pid> does not respond (process is hung)
+    -m  to print both java and native frames (mixed mode)
+    -l  long listing. Prints additional information about locks
+    -h or -help to print this help message
+
+C:\Windows\System32>
+
+Request a Heap Dump from the JVM
+<DLC>\jdk\bin\jmap -heap 912 >> admserv.jmap912_1
+
+kill -3 <AdminServerPID> 
+
+In a Unix environment, kill -3 JAVA_PID  will cause the heap dump to be created (in addition to a stack trace).
+
+
+jcmd PID GC.heap_dump /tmp/dump
+
+How to get Thread dump?
+
+jcmd PID Thread.print > thread.dump
+
+Reference link
+
+You can even use jstack to get thread dump (jstack PID > thread.dump). Reference link
+
+
+====================================================
+Summary:
+
+Inorder to take thread dump/heap dump from a child java process in windows, you need to identify the child process Id as first step.
+
+By issuing the command: jps you will be able get all java process Ids that are running on your windows machine. From this list you need to select child process Id. Once you have child process Id, there are various options to capture thread dump and heap dumps.
+
+Capturing Thread Dumps:
+
+There are 8 options to capture thread dumps:
+
+jstack
+kill -3
+jvisualVM
+JMC
+Windows (Ctrl + Break)
+ThreadMXBean
+APM Tools
+jcmd
+Details about each option can be found in this article. Once you have capture thread dumps, you can use tools like fastThread, Samuraito analyze thread dumps.
+
+Capturing Heap Dumps:
+
+There are 7 options to capture heap dumps:
+
+jmap
+
+-XX:+HeapDumpOnOutOfMemoryError
+
+jcmd
+
+JVisualVM
+
+JMX
+
+Programmatic Approach
+
+Administrative consoles
+
+Details about each option can be found in this article. Once you have captured heap dump, you may use tools like Eclipse Memory Analysis tool, HeapHero to analyze the captured heap dumps.
+
+
+====================================================
+Create a Heap Dump Automatically on OutOfMemoryError
+
+You can use the -XX:+HeapDumpOnOutOfMemoryError JVM option to automatically create a heap dump when an OutOfMemoryError exception is thrown.
+
+This creates a heap dump file in the HPROF format, usually located in EAP_HOME or EAP_HOME/bin. Alternatively, you can set a custom path for the heap dump using -XX:HeapDumpPath=/path/. If you specify a file name using -XX:HeapDumpPath, for example, -XX:HeapDumpPath=/path/filename.hprof, the heap dumps will overwrite each other.
+
+
+jstack -l JAVA_PROCESS_ID > high-cpu-tdump.out
+
+https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2/html/performance_tuning_guide/diagnosing_performance_issues
+====================================================
+
+What is a Heap dump ?
+A heap dump is a snapshot of the memory of a Java process at a certain point of time. The snapshot contains information about the java objects and classes in the heap at the moment the snapshot was triggered. 
+
+What is a Thread dump dump ? 
+A thread dump is a snapshot of the state of all threads that are part of the process. The state of each thread is presented in a stack trace, which shows the contents of a thread’s stack. This is especially useful if application seems stuck, or is running out of resources, a thread dump will reveal the state of the server.
+
+How to create heap dump and thread dump
+ 
+Once the AdminServer has started up, to get heap dump and/or thread dump take a snapshots with both jmap to see what changed and with jstack if something is blocked. 
+
+Step 1: Find the PID of the java process
+Java JDK ships with the jps command which lists all java process ids running on the machine including the PID of the process.
+<DLC>\jdk\bin\jps -l -m -v 
+Example, the adminserver is running on PID 912
+912 com.progress.chimera.adminserver.AdminServerStarter -port 20946 -adminport 7846 ... 
+
+Step 2: Request a Thread Dump from the JVM
+The jstack tool prints thread dumps to the command line console or a file, 
+The thread dumps can be used to see which threads are blocked 
+The -l argument provides additional "Locked ownable synchronizers" for each thread 
+To obtain a thread dump using jstack, use the PID of the AdminServer java process (912) to run the following command at least 5 times over a few seconds interval, changing the output filename:
+<DLC>\jdk\bin\jstack -l 912 >> admserv.jstak_912_1 
+
+Step 3: Request a Heap Dump from the JVM
+The jmap tool it prints out what is in the memory to see what changed to the command line console or a file.
+To obtain a heap dump using jmap, use the PID of the AdminServer java process (912) to run the following commands :
+a. With -heap to see the java heap summary: 
+<DLC>\jdk\bin\jmap -heap 912 >> admserv.jmap912_1
+          
+b.With -dump to dump the full java heap:
+<DLC>\jdk\bin\jmap -dump:file=admserv912_1.dump 912 
+        
+or in hprof binary format. There are several tools available to review the binary content, like jvisualvm (https://visualvm.github.io/) or Eclipse's Memory Analyzer (https://www.eclipse.org/mat/downloads.php) for example: 
+<DLC>\jdk\bin\jmap -dump:format=b,file=admserv912_1.bin PID 
+
+
+====================================================
+
+$  ps -ef | grep java | grep AdminServer
+
+kill -3 <AdminServerPID> 
+
+A file will be created with the format: javacore.<date>.<time>.<PID>
+
+When a full heap dump is needed:
+
+Before starting the AdminServer:
+run "/usr/sbin/slibclean" to remove any currently unused modules in kernel and library memory.
+Edit the $DLC/properties/AdminServerPlugins.properties file under the [PluginPolicy.Progress.AdminServer] section to add the following at the end of jvmargs: -Xdump:java+heap+system+snap:events=user 
+kill -3 <AdminServerPID>
+
+====================================================
+
+jmap -dump:format=b,file=cheap.hprof <pid>
+to get the heap for that process.
+
+To take a thread dump on Windows, CTRL+BREAK if your JVM is the foreground process is the simplest way
+
+

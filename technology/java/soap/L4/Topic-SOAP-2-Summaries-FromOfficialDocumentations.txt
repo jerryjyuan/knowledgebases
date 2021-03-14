@@ -1,0 +1,81 @@
+
+=============================================
+Topic: SOAP:
+
+W3 Consotium: http://www.w3c.org
+
+SOAP 1.1 1.2:
+SOAP 1.1 : http://schemas.xmlsoap.org/soap/envelope/
+SOAP 1.2 : http://www.w3.org/2003/05/soap-envelope
+==>SOAP 1.1 is based on XML 1.0. SOAP 1.2 is based on XML Information Set (XML Infoset). The XML information set (infoset) provides a way to describe the XML document with XSD schema. However, the infoset does not necessarily serialize the document with XML 1.0 serialization on which SOAP 1.1 is based.. This new way to describe the XML document helps reveal other serialization formats, such as a binary protocol format.
+
+XML
+Extensible Markup Language (XML) 1.0 (Third Edition), W3C, eds. Tim Bray, Jean Paoli, C.M. Sperberg-McQueen, Eve Maler, François Yergeau. 4 February 2004. Available at http://www.w3.org/TR/REC-xml.
+XML 1.1
+Extensible Markup Language (XML) 1.1, W3C, eds. Tim Bray, Jean Paoli, C.M. Sperberg-McQueen, Eve Maler, John Cowan, François Yergeau. 4 February 2004. Available at http://www.w3.org/TR/xml11.
+
+https://www.w3.org/TR/xml-infoset/
+
+
+SOAP node
+SOAP fault
+SOAP Data Model
+	https://www.w3.org/TR/soap12-part2/#datamodel
+	SOAP Data Model represents application-defined data structures and values as a directed edge-labeled graph of nodes
+	Address/Node/Envelope/Header/Body
+SOAP RPC
+	The representation is entirely platform-independent
+	use and implementation of the SOAP RPC Representation is OPTIONAL
+	SOAP RPC Representation is not limited to the SOAP HTTP Binding
+SOAP Message:
+	a SOAP message is the information that one SOAP node wishes to exchange with another SOAP node according to a particular set of features, including a MEP. In addition, there may be information essential to exchanging a message that is not part of the message itself. Such information is sometimes called message metadata
+	https://www.w3.org/TR/2007/REC-soap12-part1-20070427/#transpbindframew
+	https://www.w3.org/TR/2007/REC-soap12-part1-20070427/#soapenv
+message exchange patterns (MEPs)
+	SOAP Request-Response Message Exchange Pattern
+	
+https://www.w3.org/TR/soap12-part2/#WebMethodFeature
+
+This binding of SOAP to HTTP is intended to make appropriate use of HTTP as an application protocol. 
+	For example, successful responses are sent with status code 200 or 202, and failures are indicated as 4XX or 5XX. 
+	This binding is not intended to fully exploit the features of HTTP, but rather to use HTTP specifically for the purpose of communicating with other SOAP nodes implementing the same binding. 
+	==>herefore, this HTTP binding for SOAP does not specify the use and/or meaning of all possible HTTP methods, header fields and status responses. 
+	==>It specifies only those which are pertinent to the 6.2 SOAP Request-Response Message Exchange Pattern or the 6.3 SOAP Response Message Exchange Pattern, 
+		or which are likely to be introduced by HTTP mechanisms (such as proxies) acting between the SOAP nodes
+
+SOAP and Web Methods:
+	SOAP with POST/GET:
+		==>http://www.w3.org/2003/05/soap/features/web-method/Method property. POST and GET are the only values supported by this binding.
+		(SOAP is just using HTTP for transmitting/communicating SOAP Message to nodes: not interested in all 9 HTTP methods)
+	Rules for carrying SOAP messages in media type "application/soap+xml" are given in A. The application/soap+xml Media Type.
+	Property Description	Property Type
+		http://www.w3.org/2003/05/soap/features/web-method/Method	One of "GET", "POST", "PUT", "DELETE" (or others which may subsequently be added to the repertoire of Web methods.)
+WSDL:
+	WSDL Version 1.1 only defines how to render a SOAP 1.1 payload
+Java™ Architecture for XML Binding (JAXB)
+	JAXB provides the xjc schema compiler tool and the schemagen schema generator tool to transform between XML schema and Java classes
+		xjc: XML Java Compiler
+		schemagen
+
+https://www.ibm.com/support/knowledgecenter/SSEQTP_9.0.5/com.ibm.websphere.base.doc/ae/cwbs_jaxb.html
+
+
+=============================================
+SOAP:
+	JSR 181: RPC Style and Document Style
+		javax.jws.*
+	JSR 224: JAX-WS 2.0: Java™ API for XML-Based Web Services (JAX-WS) | Jakarta XML Web Services (JAX-WS) | Java Architecture for XML Web Services (JAX-WS) 
+		javax.xml.ws.*
+		JSR-224 does explicitly support/include JSR-181
+		(JSR-224: 7.10 Annotations Defined by JSR-181)
+		==>Java-to-WSDL mapping determines which Java method gets invoked and how that SOAP message is mapped to the method’s parameters
+		==>JAX-WS 2.0 replaced the JAX-RPC API in Java Platform, Enterprise Edition 5 which leans more towards document style Web Services
+
+
+=============================================
+Oracle:
+	WebLogic
+	O4J Container/Server
+	GlassFish open-source Application Server community of Oracle Corporation
+
+=============================================

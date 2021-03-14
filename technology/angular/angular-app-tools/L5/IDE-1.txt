@@ -1,0 +1,23 @@
+
+==============================================
+IDE:
+
+==============================================
+Zooming:
+	==>Common Ways:
+		==>Laptop/Keyboard Ways:
+			==>Main Way 1: Ctrl + +/-	Ctrl + 0
+				==>This is main way: many other ways can be linked to this way: 1) Mouse 2) Menus 3) Context-Menus 4) 
+			==>Main Way 2: Ctrl + Mouse roll-up/down		==>It is a resemblance to: Main Way 1 from mouse
+			==>
+		==>
+	==>IDE Ways:
+		==>Use: Main Way 2: Ctrl + Mouse roll-up/down
+		==>
+	==>App/Tool Based Ways
+
+==============================================
+
+
+
+==============================================
