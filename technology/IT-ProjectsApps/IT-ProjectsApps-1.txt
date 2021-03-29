@@ -1,0 +1,209 @@
+
+
+I am looking for:
+	Angular Apps
+	Spring Boot Apps
+	Java RESTful/SOAP APIs apps
+	AWS
+	...
+	
+	I am really good at mixed/combined/grandmastercombined/.../overall-balanced/...
+		==>but I am able to do dev, ...
+		==>yes, you are able to do dev, it doesn't you have to be in dev team, ...
+		==>right, but I can be in dev team sometimes, ...
+		==>oh, Rama in Worldpay said: maybe not
+		==>en, at that time at Worldpay, it was not due to Rama and Rama's words, ...
+			==>I remembered I spoke really loud during one main PM meeting, ..., especially about Jade as well, but for sure
+			   this was not the main scenario, but complicated aspects, not really about Rama or SOAP Apps, etc.
+			==>
+			Sometimes I can be overall-balanced, and sometimes, I can do some dev, like CoreLogic, ...,
+				or even 2 job work, ..., ...
+	
+
+Search:
+
+	accuracy
+	efficiency
+	...
+	complicated commands and coding...
+	...
+	new versions
+	refresh
+	more info...
+	non-expert areas...
+	...
+	
+	Overall:
+		Balanced scenarios as well
+		...
+		
+	
+How to balance status vs. dev/testing/deployment... 
+			vs. information sharing vs. how to treat others and being treated... vs. common scenarios vs personalized scenarios...
+			vs. special scenarios
+	==>...
+	==>Scenarios: We do have terminologies for all scenarios/stages:
+		==>POC
+		==>
+		
+		
+	Status Updates:
+		==>No updates
+		==>
+		==>
+		==>
+		==>Update too often and repeatedly
+		==>Update in advanced scenarios or too early: some good and some neutral and some bad
+			==>Due to?
+			1) Credit
+			2) Push/pressures?
+			3) Core parts?
+			4) Multitasking
+			5) Catchup due to lag behind...
+			6) ...
+			7) Relaxed and come back, and Mahesh said: hurry up since you relaxed too much, ...
+			8) ...
+			9) Show how fast you are...
+			10) Satisfy some demands from some silly ones or ones that do not understand well
+		==>
+
+
+	information sharing:
+
+	
+	how to treat others
+
+
+	how being treated:
+		==>Only you need to do this...
+		==>Only when it is your turn or shift, then you need to do this...
+		==>Only you need to send our VPN/NonVPN word document, ...
+			[Actual Happenings]:
+				==>1) Mahesh represented Livilly so ...
+				==>2) Possibly: you were new to L3 and health check, so new members should have some scenarios like that, ...
+				==>3) ...
+		==>...
+
+
+	common scenarios:
+	
+	
+	personalized scenarios:
+	 
+	 
+	special scenarios:
+	
+	
+
+summaries:
+
+project: 
+	new
+	maintenance
+	new feature
+
+team
+	team size
+
+communication
+	onshore
+	offshore
+	...
+
+app
+	system
+	architecture
+	framework
+	...
+	technologies
+	...
+	
+companies
+	business models
+	data
+	infrastructures
+	
+fullstack
+	ways
+		==>how to do fullstack and methods and ways
+			1) All the time
+			2) Jump in between
+			3) ...
+	...
+
+Devleopers:
+
+	Different kinds
+	
+
+Lifestyles
+
+	
+ToolSets:
+	Playgrounds...
+	
+	Hangouts...
+	
+	...
+	
+	
+	
+Jerry:
+	Combined...
+	
+	Reviews
+	
+	No second one: talk, reviews, No Tom Nolan (actually he is below me, quite a bit, ...), ...
+	
+	
+
+How to know it is unix and dos formats?
+	==>Rerun the command: size stays the same
+	+ 162 bytes: from unix -> dos: cr: 1 byte: 158 lines: close
+	
+	=>If running dos format: complain about '\r'
+	
+	
+	Why looking differently?
+		<94>
+		<93>
+		
+	Root causes:
+		1) Deployment: cause the file got corrupted? No: it was the old file, but why is this file?
+		2) 
+
+
+
+TDD:
+	==>Useful principle(s)
+	==>Practical Guides/Ways:
+		==>Need to enable some methodologies...
+		==>Depends...
+		==>...
+		
+		==>Angular: how to enable practical guides?
+		
+		==>
+		
+		==>1) Percentage based: how much percentages are used for TDD in different apps and domains and technologies?
+		
+		==>2) Apps Based
+		
+		==>3) Technology Based
+		
+		==>...
+
+	==>Scenarios:
+		==>TDD
+		==>Testing: it is important: but not necessarily the same as Tom Nolan's TDD
+			==>Testing is a common terminology and a set of procedures
+			==>Even without TDD, testing itself is always important and needed as part of dev processes
+		==>...
+		
+	==>Overall: Jerry does and will do: "overall-balanced" ways regarding TDD/BDD, and plus more good testing scenarios
+
+BDD:
+
+
+
+

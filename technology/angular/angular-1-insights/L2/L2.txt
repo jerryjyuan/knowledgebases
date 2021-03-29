@@ -1,0 +1,23 @@
+
+
+
+==>the best place to handle data transformation is in your selector
+	Selectors have a function call as their last parameter that takes all the data slices from the previous parameters.
+	What I think is:
+		==>selctors of UI Components: use @Input and @Output to manipulate data and parameters: simpler and it is the place to take in and display the main data sets
+	
+==>global style.css:
+	==>Common practice
+	==>SCSS: better for:
+		==>JS/CSS centric apps
+		==>Very much Customized themes...
+	because all the main information is going to be in your theme, there is no benefit to using SCSS within your project. And, in fact, every project I’ve ever been a part of that tried to use SCSS as part of the project has become more of a mess and harder to maintain because of it
+
+	Apps:
+		Use CSS for your application projects
+	SCSS:
+		Use SCSS for your theme projects
+	
+Broadly speaking, Angular components can be classified as “Smart Components” or “Dumb Components”.
+
+

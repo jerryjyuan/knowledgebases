@@ -1,0 +1,76 @@
+
+==========================================================
+
+https://angular.io/guide/module-types
+
+https://angular.io/guide/feature-modules
+
+NgModule FAQ
+	https://angular.io/guide/ngmodule-faq#q-reimport
+	
+The SharedModule may re-export other widget modules, such as CommonModule, FormsModule, and NgModules with the UI controls that you use most widely.
+	==>MD shared module
+
+The SharedModule should not have providers for reasons explained previously. Nor should any of its imported or re-exported modules have providers.
+	==>Service shared module
+	
+	==>Shared modules: different from core and feature modules:
+		==>Core modules: can have providers (providers are mostly services, ...)
+			==>Providers: have several kinds/types:
+			https://angular.io/api/core/Provider
+				type Provider = TypeProvider | ValueProvider | ClassProvider | ConstructorProvider 
+								| ExistingProvider | FactoryProvider | any[];			
+
+				StaticProvider
+				TYPE-ALIAS
+				Describes how an Injector should be configured as static (that is, without reflection). A static provider provides tokens to an injector for various types of dependencies.
+				
+				type StaticProvider = ValueProvider | ExistingProvider | StaticClassProvider | ConstructorProvider | FactoryProvider | any[];
+
+==>Several Main Types: NgModules:
+	https://angular.io/guide/module-types
+	
+	Domain: A domain NgModule is organized around a feature, business domain, or user experience.
+	Routed: The top component of the NgModule acts as the destination of a router navigation route.
+	Routing: A routing NgModule provides the routing configuration for another NgModule.
+	Service: A service NgModule provides utility services such as data access and messaging.
+	Widget: A widget NgModule makes a component, directive, or pipe available to other NgModules.
+	Shared: A shared NgModule makes a set of components, directives, and pipes available to other NgModules.
+				
+==>Why multiple service instances may not be good?
+	==>It can't add them to the app root injector because that injector is closed to new providers.
+	==>So should use singleton service instance using 3 ways...	
+	
+==========================================================
+How forRoot() works
+	https://angular.io/guide/singleton-services#the-forroot-pattern
+	
+forRoot() takes a service configuration object and returns a ModuleWithProviders, which is a simple object with the following properties:
+
+ngModule: in this example, the GreetingModule class
+providers: the configured providers
+In the live example / download example the root AppModule imports the GreetingModule and adds the providers to the AppModule providers. Specifically, Angular accumulates all imported providers before appending the items listed in @NgModule.providers. This sequence ensures that whatever you add explicitly to the AppModule providers takes precedence over the providers of imported modules.
+
+The sample app imports GreetingModule and uses its forRoot() method one time, in AppModule. Registering it once like this prevents multiple instances.
+
+You can also add a forRoot() method in the GreetingModule that configures the greeting UserService.
+
+
+
+==========================================================
+forRoot() and the Router
+
+	==>RouterModule: a special NgModule: forRoot() pattern works below:
+
+RouterModule provides the Router service, as well as router directives, such as RouterOutlet and routerLink. The root application module imports RouterModule so that the application has a Router and the root application components can access the router directives. Any feature modules must also import RouterModule so that their components can place router directives into their templates.
+
+If the RouterModule didn’t have forRoot() then each feature module would instantiate a new Router instance, which would break the application as there can only be one Router. By using the forRoot() method, the root application module imports RouterModule.forRoot(...) and gets a Router, and all feature modules import RouterModule.forChild(...) which does not instantiate another Router.
+
+==========================================================
+Why does lazy loading create a child injector?
+
+When an applications starts, Angular first configures the root injector with the providers of all eagerly loaded NgModules before creating its first component and injecting any of the provided services. Once the application begins, the app root injector is closed to new providers.
+
+Time passes and application logic triggers lazy loading of an NgModule. Angular must add the lazy-loaded module's providers to an injector somewhere. It can't add them to the app root injector because that injector is closed to new providers. So Angular creates a new child injector for the lazy-loaded module context.
+
+==========================================================

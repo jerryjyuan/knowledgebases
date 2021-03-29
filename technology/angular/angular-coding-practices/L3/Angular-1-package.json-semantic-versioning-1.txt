@@ -1,0 +1,134 @@
+
+==========================================================
+NodeJS: package.json
+
+						==>App specifies a package.json: as an expected versions packages management:
+							==>NPM:
+							
+								package.json:
+									^: deal with Major and Minor versions
+									~: deal with patch versions
+							
+								==>Concepts 1: app-release-versions: stable/release-version: 2.2.1 + prerelease/buildmetadata-version: 2.2.1-alpha/beta/rc.0/1/2/3...
+								==>Concepts 2: major-version + minor-version + patch-version: x.y.z
+											   MAJOR.MINOR.PATCH
+												MAJOR version when you make incompatible API changes,
+												MINOR version when you add functionality in a backwards compatible manner, and
+												PATCH version when you make backwards compatible bug fixes.
+												1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 1.0.0-beta.2 < 1.0.0-beta.11 < 1.0.0-rc.1 < 1.0.0
+								==>Concepts 3: version representations:
+											   x
+												==>Same: x.0.0
+												==>Same: x.y
+												Unsure....
+									Confusing:
+												https://semver.org/
+												https://docs.npmjs.com/about-semantic-versioning
+												For example, to specify acceptable version ranges up to 1.0.4, use the following syntax:
+												Patch releases: 1.0 or 1.0.x or ~1.0.4
+												Minor releases: 1 or 1.x or ^1.0.4
+												Major releases: * or x									
+								==>Due to larger scope of compatibility, so it allows a range of versions to be checked and pulled down to the app
+								==>For app: it should specify a fixed version, but due to fast-development of Angular UI APIs/versions and open-source UI components:
+											==>You don't know which ones are new or compatible, so you can specify a range of versions for dependencies
+											==>From NPM, it should pull the newest one from the specified range in package.json:
+												==>...
+											==>
+								==>How to specify the ranges of versions:
+									==>Method 1: Based on "app-release-versions": mostly we should just use this method:
+												 >, <, = >=, <=, v1 - v2:		<stable/release-version>: but the fetched versions are only for "stable/release-version"
+												 >, <, = >=, <=, v1 - v2:		<prerelease-version>: but the fetched versions are only for "prerelease-version"
+									==>Method 2: Tweaking into smaller ranges of versions, or well-known version ranges within "major-version + minor-version + patch-version":
+												 ==>Scenario 1:	When we are in the middle of app development, and we have enabled a set of many versions in package.json
+																==>So we just need to tweak some or a couple of dependencies' versions within some known ranges
+																==>By limiting these ranges, so we can achieve better compatibility and version-error-free issues
+																==>In this way, we can use this method 2
+												 ==>Scenario 2: We add a new dependencies, and we should limit its version to a specified ranges
+												 ==>...				
+												 ==>Methods:
+													==>Method 1: tweaking major version: ^x		^x.y	^x.y.z
+																 include everything greater than a particular version in the same major range
+																	^x ==>equals to: ^x.<max-minor>.<max-patch> OR: ^x.0.0
+																	==>It will pull: latest one major, then second latest one, ..., 
+																		until the base one: ^x.<max-minor>.<max-patch> OR: ^x.0.0																 
+																	^x.y ==>equals to: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one major, then second latest one, ..., 
+																		until the base one: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one major, then second latest one, ..., until the base one: ^x.y.z		
+															      ==>Summaries:
+																		Major version scenarios: very rare usage
+																		==>Its version scenarios can be enabled by using Angular versions like: Angular 6, 7, 8, 9, 10, etc.
+													==>Method 2: tweaking minor version: ^x ?	^x.y	^x.y.z
+																 include everything greater than a particular version in the same minor range
+																	^x ==>equals to: ^x.0.<max-patch> OR: ^x.0.0
+																	==>It will pull: latest one x.<max-minor>, then second latest one, ..., 
+																		until the base one: ^x.0.<max-patch> OR: ^x.0.0																 
+																	^x.y ==>equals to: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one x.<max-minor>, then second latest one, ..., 
+																		until the base one: ^x.y.<max-patch> OR: ^x.y.0
+																	^x.y.0
+																	==>It will pull: latest one, then second latest one, ..., until the base one: ^x.y.0
+																	^x.y.z (z > 0)
+																	==>It will pull: latest one, then second latest one, ..., until the base one: ^x.y+1.0
+														Example 1:	^1.4.0 ==>download dependency: 1.5.4 (this also approves: x.<max-minor>.<max-patch>)
+																  ==>Summaries:
+																	==>Usage 1: when some "stable" dependencies are in use: like some first-tier libs or integration dependencies
+																				==>Minor versions can be in use
+																	==>Usage 2: Mostly: its form is: ^x.y.z
+																				==>In this form, it starts: x.<max-minor>.<max-patch>	=================>This is most recent update
+																																						  (ignore some of the above...)
+																				==>Base is: x.y.z
+																				Example 1: ^5.0.0 ==>5.2.2
+																	==>...
+																	==========================>This is the most often usage 2: ^x.y.z
+													==>Method 3: tweaking patch version: ~x ?	~x.y ?	~x.y.z
+																 include everything greater than a particular version in the same patch range
+																	~x ==>equals to: ~x.0.0
+																	==>It will pull: latest one x.0.<max-patch>, then second latest one, ..., 
+																		until the base one: x.0.0																 
+																	~x.y ==>equals to: ~x.y.0
+																	==>It will pull: latest one x.y.<max-patch>, then second latest one, ..., 
+																		until the base one: ~x.y.0
+																	~x.y.z
+																	==>It will pull: latest one x.y.<max-patch>, then second latest one, ..., 
+																		until the base one: ~x.y.z
+														Example 1: ~1.0.2 it means to install the latest one with this patch 1.0.x like 1.0.4, then 1.0.3, and ..., until the base 1.0.2
+																   ~8.2.4 ==>install the latest one with this patch 8.2.x like 8.2.14, then 8.2.13, and ..., until the base 8.2.4
+																   ==>If using patch version: mostly means: the dependences are tight, ... ==>Only bug fixes changes, ...
+																		==>No API changes ok
+																		==>Functional changes might be: also impacting this integration dependencies
+																   ============================>This is the most often usage 1: ~x.y.z
+									==>Method 3: Combine the above together
+												 1) AND:	just list some of the above with ONE space:	no need to use: &&
+												 2) OR: 	||
+								==>Does the Angular CLI automates some default versions?
+									==>Yes...
+										==>If you use angular 8, it brings in Angular 8 compatible dependencies, ...
+									==>No?
+									
+								==>MISC:
+									==>node_modules: hold all dependencies
+									==>dependencies: may depend upon other dependencies...: but basically all related dependencies and trees: need to be in node_modules
+										==>Multiple dependencies are included for the same package: use the highest one:
+											1) Reason 1: generally highest one can backcompatible for lower versions - but not so easy vice versa
+														 ==>This should be for MINOR version: functional enhancements - generally no API changes
+														 ==>For MAJOR version, it is related to API changes, it could become very complicated... - this app versions may need to be reshaped
+														 ==>Example 1: tslib@^1.10.0: it has 1.10.0 and 1.9.0, etc.
+																	   1) Use 1.10.0 should be fine with 1.9.0 dependencies - no API changes
+																	   2) When consolidated into 1.10.0, it generally use: ^1.10.0: because it can go high to max-minor ==>No API change concerns
+																	   ==>It actually locks: 1.13.0
+											2) Dependency Package - Analysis:
+												  "main": "tslib.js",
+												  "module": "tslib.es6.js",
+												  "typings": "tslib.d.ts",
+									==>Dependencies inside node_modules:
+										==>No need to have package-lock.json
+										==>Each dependency package uses: package.json as the entry point by NPM
+										==>All the config is in package.json
+										==>Derived dependencies are common in Angular and NodeJS/NPM apps
+									==>
+						==>After build run: it creates package-lock.json: enabled the actually pulled down versions into the app
+						==>...
+						
+==========================================================
+

@@ -1,0 +1,91 @@
+
+==========================================================
+World Pay: Java Apps:
+
+==========================================================
+RESTful API Apps:
+
+==>Spring Boot
+	==>SAML:
+		==>Company Security Maven Framework (similar to BNSF and Apple): Wrap SAML as internal security protocol
+		==>
+
+==>Company enabled main microservices architectures:
+	Citibank: has about 1000-2000 services
+	Worldpay: may have hundreds of service APIs
+			  ==>Example: IQ Portal / Upload / Fax Services (documents/images), Many API services, ...
+			  ==>Example: Provide external APIs for other vendors to call company APIs and delegate to Spring Batch Apps
+			  ==>Example: Spring Batch Apps: call external vendors and merchants Services APIs
+			  
+==========================================================
+SOAP APIs:
+
+==>SOAPUI and Postman: main tools
+
+==>Some Apps: have both SOAP and RESTful API apps
+
+==========================================================
+Spring Batch Apps:
+
+==>Business Modeling:
+	1) Use schedulers: to process business data at some time intervals as batch processing
+	2) Asynchronous Processing and Integration among business parts
+	3) Provide many commercial and partner payment gateways and solutions and cards, etc.
+
+==>Integration:
+	1) Call RESTful APIs	
+
+==>New Development/Features/...:
+	1) Integrate new retailors and vendors and customers' services and solutions
+	2) Enable Spring Batch app template development: similar to FM's MS Java apps template development
+	
+==========================================================
+XML Processing: readers/writers/marshalling/unmarshalling
+
+==========================================================
+Liferay Apps:
+
+	Liferay 6 and 7
+
+==========================================================
+
+                - Security: use enterprise and company security modules:
+                            - like Apple's inter-app security APIs and BNSF's security framework APIs and modules
+                            - Use security protocol: SAML: saml: xml between client/server...
+                              HttpHeader:
+                              Authorization = "VANTIV license="""
+                              Authorization = "VANTIV saml="
+                            - SAML: need to send in the saml token - different from OAuth2/OAuth0
+                                - it is Base64 encoded string
+                                - One dependency jar processes the saml token and authenticate it
+                                - it is integrated with Spring Security
+                            - Company enables a security module to do saml token generation: app-management-service APIs: RESTful
+                            - Method 1: Client Apps can integrate with this service to obtain saml token and talks to API apps
+                            - Method 2: Client Apps can talk to Data Power Urls - which obtains the saml token for you and talk
+                                        to API apps
+                                        (internally app-management-service endpoint configured with API app)
+                                        (This endpoint should be used by the security module code to obtain saml token
+                                         when the API app is deployed onto Data Power url env)
+                            - Method 3: Tools talking to API Apps (enabled with SAML):
+                                        Postman: use pre-request scripts (mostly JS scripts?) to: call app-management-service
+                                                 and obtain the SAML token and tak to any API app that are not deployed to Data
+                                                 Power env: such as: localhost
+                                                 ===>if talking to Data Power env, then no need to obtain saml token
+                                        SoapUI/JMeter:
+                                                 - Possibly they can do similar pre-request scripting using their own features
+                                                 - But not explored
+                                                 - Simple way: use Postman to obtain the SAML token and use it inside their tools
+                                                 - The SAML token is valid for 15 minutes - configured via app-management-service
+                                                 - Also the way for this SAML token being used in RESTful API headers
+                                                   are configured and parsed via security jar and also app-management-service
+                                                   XXX saml=<saml-token>
+                                                   Other tokens include: appId=... Content-Type=application/json
+                                        Data Power Urls:
+                                                - Could be IBM cloud env or server features
+                                                - Like Google DataFlow/DataProc
+                                                - It is configured to use and validate its own RESTful Header tokens:
+                                                  xxx license="<license>"
+                                                  
+                                                  
+                                                  
+

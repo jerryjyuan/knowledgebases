@@ -1,0 +1,90 @@
+
+Assets Tools:
+
+	AIM:
+		Asset Identification Management
+	Asset
+	App
+
+
+DB Tools:
+	Apps/Accts Locking Scenarios
+		==>Depends
+		
+		==>DB Locks
+			==>...
+			
+			1) User failed logins/attempt-limits
+			2) Configuration Reasons
+			3) InfoSecurity Reasons:
+				Timeout
+				Timeout - Lock
+				...
+				Not in use - lock
+			4) Manual Control...
+				Revoking
+				Temporarily revoking
+				...
+			...
+			
+		==>...
+		
+		
+		
+MAC Vault: Tools:
+
+	==>CyberArk AIM:
+		CARKAIM
+	
+	==>Types:
+		PAM: Privilege Account
+		NonA2A:
+			==>no need to do a retrieval...
+		A2A: app1-to-app2
+			 (need to map app1's paths...)
+		Password file:
+			eTrust protected
+			push a file
+	
+	==>MAV Vault:
+		Shell
+		Java
+		.NET
+		Perl
+		
+	==>Why are your apps not using Java integrations?
+		==>Spring Boot as standalone?
+		==>Some issues with the MAC Vault jar files inclusion, right?
+			==>So switch to shell script integration, this is what I remember
+			1) Spring Boot: can compile and local run
+			2) Spring Boot: come to the shell script: standalone: need to be in separate jars by -D...
+			3) Spring Boot: how to find the MAC Vault API calls from Spring Boot jar: unknown...
+				==>Research? take more time... ==>Too much time...
+				
+				==>This is new to L3 and maybe other teams too in MF, so ...
+				
+	==>Shell Script:
+		==>New?
+			==>Not new, but still work on your own ways: asking others: many hassles/unknowns/useless-scenarios
+						based on my experiences...
+			==>I saw scripts: but didn't see their enablement forms? ==>What paths did they add?
+			==>How to see their CHG and forms?
+		==>
+	
+	==>New routines: integrations
+	
+	==>New members?
+	
+	==>Abuses
+	
+	
+Service Now Tools:
+
+	==>Create New: will get a new sequence number:
+		==>If you didn't finish the creation of the ticket: will this sequence number get wasted?
+		
+	==>
+	
+
+	
+	

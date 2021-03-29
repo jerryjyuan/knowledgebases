@@ -1,0 +1,152 @@
+
+==============================================
+Spring Batch:
+
+==>How to Search versions and code and docs?
+
+	==>3G(GrandGrandGrand)Parents:	Web tech / Internet
+
+	==>2G(GrandGrand)Parents:	Java and JavaJDK
+
+	==>GrandParents: Spring Framework:	5.2.6.RELEASE
+		Official Docs:
+			https://spring.io/projects
+			https://docs.spring.io/spring-framework/docs/
+				==>CAN SEARCH ALL VERSIONS: Reference Documentations + JavaDoc APIs
+			https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/
+		JavaDoc APIs:
+			https://docs.spring.io/spring-framework/docs/current/javadoc-api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/spring-framework-reference/
+		Github:
+			https://github.com/spring-projects/
+			https://github.com/spring-projects/spring-framework
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+			https://spring.io/guides
+						
+	==>Parents: Spring Boot:	2.2.6.RELEASE
+		Official Docs:
+			https://docs.spring.io/spring-boot/docs/
+				==>CAN SEARCH ALL VERSIONS: Reference Documentations + JavaDoc APIs
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		JavaDoc APIs:
+			https://docs.spring.io/spring-boot/docs/current/api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		Github:
+			https://github.com/spring-projects/spring-boot
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+		
+		Resources:
+			http://zetcode.com/all/#springboot
+		
+		==>Spring Boot + Spring Batch:
+			==>spring-boot-starter-batch: same version
+				==>could include slightly different version of Spring-Batch-Core
+					(Such as: newest 2.2.6.RELEASE vs second newest 4.2.1.RELEASE)
+					
+
+		==>Special Example: Spring Boot: 2.2.6.RELEASE and Spring-Batch: 4.2.2.RELEASE:
+			Hierarchy:
+				spring-boot-starter-parent: x.x.x.RELEASE
+				spring-boot-starters (spring-boot-starter)
+					==>spring-boot-starter-xxx (should be the same as x.x.x.RELEASE)
+						==>individual JARS: spring-yyy:
+						   1) spring-boot-dependencies: or the table in the end of the Spring Boot documentations
+						   		==>These jars' versions vary: depends how Spring Boot support them
+						   2) PART 1: not overridable by using the property-name in "spring-boot-dependencies"
+						   			  ==>Use: the above starter-way to directly declare with its own version in pom.xml
+						   3) PART 2: overridable by using the property-name in "spring-boot-dependencies"
+						   			  ==>However, if not using "spring-boot-starter-parent", then have to use "import" way
+	
+	==>Uncles:
+		https://docs.spring.io/spring-data/
+
+	==>Spring Batch:
+		Official Docs:
+			https://spring.io/projects/spring-batch
+			https://docs.spring.io/spring-batch/docs/
+			https://docs.spring.io/spring-batch/docs/current/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/
+			PDF:
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/reference/pdf/spring-batch-reference.pdf
+		JavaDoc APIs:
+			https://docs.spring.io/spring-batch/docs/current/api/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-batch/docs/current/reference/
+		Github:
+			https://github.com/spring-projects/spring-batch
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+			...
+		Samples:
+			https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples#composite-itemwriter-sample
+				
+==============================================
+Siblings: Brothers and Sisters
+
+	==>Spring SOAP:
+		Official Docs:
+			https://spring.io/projects/spring-ws
+			
+			
+			https://docs.spring.io/spring-batch/docs/
+			https://docs.spring.io/spring-batch/docs/current/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/
+			PDF:
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/reference/pdf/spring-batch-reference.pdf
+		JavaDoc APIs:
+			https://docs.spring.io/spring-batch/docs/current/api/
+			https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/api/
+		Reference Documentations:		
+			https://docs.spring.io/spring-batch/docs/current/reference/
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+		Github:
+			https://github.com/spring-projects/spring-batch
+				==>CAN SEARCH ALL VERSIONS: tags + branches
+		Guides:
+			...
+		Samples:
+			https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples#composite-itemwriter-sample
+					
+==============================================
+
+https://spring.io/projects
+https://docs.spring.io/spring-framework/docs/
+https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/
+https://docs.spring.io/spring-framework/docs/5.2.6.RELEASE/spring-framework-reference/
+https://github.com/spring-projects/
+https://github.com/spring-projects/spring-framework
+https://spring.io/guides
+https://docs.spring.io/spring-boot/docs/
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+https://docs.spring.io/spring-boot/docs/current/api/
+https://spring.io/projects/spring-batch
+https://docs.spring.io/spring-batch/docs/
+https://docs.spring.io/spring-batch/docs/current/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/reference/pdf/spring-batch-reference.pdf
+https://docs.spring.io/spring-batch/docs/current/api/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/api/
+https://docs.spring.io/spring-batch/docs/current/reference/
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+https://github.com/spring-projects/spring-batch
+https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples#composite-itemwriter-sample
+https://spring.io/projects/spring-ws
+https://docs.spring.io/spring-batch/docs/
+https://docs.spring.io/spring-batch/docs/current/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/reference/pdf/spring-batch-reference.pdf
+https://docs.spring.io/spring-batch/docs/current/api/
+https://docs.spring.io/spring-batch/docs/4.2.2.RELEASE/api/
+https://docs.spring.io/spring-batch/docs/current/reference/
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+https://github.com/spring-projects/spring-batch
+https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples#composite-itemwriter-sample
+					
+==============================================	
+					

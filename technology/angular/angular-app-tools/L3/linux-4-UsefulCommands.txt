@@ -1,0 +1,198 @@
+
+==============================================
+Linux: Useful Commands:
+
+
+==============================================
+tail -n 10000 MyLog| grep -i "search phrase"
+tail -f -n 10000 MyLog | less
+
+tail -f -n LINE_CNT LOG_FILE | less
+
+Duplicates the output to the screen and to a file:
+	tail -f -n -10000 MyLog | tee <filename>
+Then search within the file.
+
+Show lines that do not contain the words INFO or DEBUG
+	tail -f logfile | grep -v -E 'INFO|DEBUG'
+
+cat
+less
+more
+tail
+	tail -n filename
+		– The -n option displays n lines from the end of the file.
+		– The +n option displays the file from line n to the end of the file
+head
+	head -n filename
+wc
+
+==============================================
+more:
+
+Keyboard Command	Action
+Space bar	Moves forward one screen
+Return	Scrolls one line at a time
+b	Moves back one screen
+h	Displays a help menu of features
+/string	Searches forward for pattern
+n	Finds the next occurrence of pattern
+q	Quits and returns to the shell prompt
+
+==============================================
+wc:
+
+wc -options filename
+
+Symbol	Description
+-l	Line count
+-w	Word count
+-c	Byte count
+-m	Character count
+
+==============================================
+Firewall:
+
+Prior to CentOS/RHEL 7, checking the system firewall using the iptables command was sufficient to know 
+	if a firewall was being used. For example, checking with below command was enough to determine how to control the firewall rules
+
+With CentOS/RHEL 7, either the newer FIREWALLD service or the older IPTABLES-SERVICE could be controlling the firewall rules.
+
+
+
+==============================================
+Using the process accounting tools, you can get basic information about who ran a specific command. Below are the steps to find out who run the command.
+
+1. The service must be running before the accounting will take place, this is achieved with the command:
+
+# /etc/init.d/psacct start
+
+2. This can be enabled to run at every boot with the command
+
+# chkconfig psacct on
+
+3. To find out who run a specific command, provide the command name as a parameter to the lastcomm command.
+
+# lastcomm rm
+
+And it should show you who run the command.
+
+
+==============================================
+
+lastb -a | more
+lastb -F | more
+
+Invalid login attempts can be tracked using command lastb provided the file /var/log/wtmp is present
+
+==============================================
+cat /proc/meminfo
+cat /etc/services
+
+==============================================
+sticky bit:
+	https://www.thegeekstuff.com/2013/02/sticky-bit/
+	chmod +t allAccess/
+	chmod -t allAccess/
+	
+Different OS behave differently with sticky bits as explained in this wikipedia article. For example, Linux only looks for sticky bit if a user tries to rename a file. It will not check the sticky bit if a file is being deleted.
+
+Setting special permissions:
+	Symbolic or numerical
+	Numerical:
+		chmod X### file | directory
+			Start at 0
+			SUID = 4
+			SGID = 2
+			Sticky = 1
+
+https://www.redhat.com/sysadmin/suid-sgid-sticky-bit
+https://www.howtogeek.com/656646/how-to-use-suid-sgid-and-sticky-bits-on-linux/
+https://www.liquidweb.com/kb/how-do-i-set-up-setuid-setgid-and-sticky-bits-on-linux/
+
+setuid
+setgid
+sticky bit:
+	example /tmp
+
+Linux Commands That Use SUID
+The following are a few of the Linux commands that use the SUID bit to give the command elevated privileges when run by a regular user:
+
+ls -l /bin/su
+ls -l /bin/ping
+ls -l /bin/mount
+ls -l /bin/umount
+ls -l /usr/bin/passwd
+
+root@host [~]#  chmod u-s myfile
+root@host [~]#  chmod g-s mydir
+root@host [~]#  chmod -t mydir2
+
+SUID only works on files.
+You can apply SGID to directories and files.
+You can only apply the sticky bit to directories.
+If the “s“, “g“, or “t” indicators appear in uppercase, the executable bit (x) hasn’t been set.
+
+==============================================
+echo
+
+  echo interprets the following escape sequences:
+  \a     alert (bell)
+  \b     backspace
+  \c     suppress further output
+  \e
+  \E     an escape character
+  \f     form feed
+  \n     new line
+  \r     carriage return
+  \t     horizontal tab
+  \v     vertical tab
+  \\     backslash
+  \0nnn  the eight-bit character whose value is  the  octal  value
+         nnn (zero to three octal digits)
+  \xHH   the  eight-bit  character  whose value is the hexadecimal
+         value HH (one or two hex digits)
+         
+==============================================
+How to disable “sudo su” for users in sudoers configuration file
+	https://www.thegeekdiary.com/how-to-disable-sudo-su-for-users-in-sudoers-configuration-file/
+
+This post outlines steps to tighten system security by preventing users with sudo access from gaining superuser privilege by the command:
+
+$ sudo su
+The sudo command allows a system administrator to enable a user, or a group of users, to run specific command-line tools with different privileges (such as superuser “root” privilege) knowing only the original user password.
+
+As the sudo command is run, it attempts to find a matching command in its configuration files /etc/sudoers or /etc/sudoers.d/; if a match is found the user is granted privilege to run the command, if not the event is logged and the command is rejected.
+
+
+ 
+The sudo command works by matching the arguments from the command line against each entry in the /etc/sudoers or /etc/sudoers.d/ files. The first match found determines the outcome. Each rule is tested in their order in the /etc/sudoers file. The rule is matched against the beginning of the command. If the rule is shorter than the command, only the matching portion at the beginning of the command is checked; any remainder of the command is not checked. The order of /etc/sudoers rules matters; always put the longer rules before a shorter version.
+
+1. Login as root account into the server.
+
+2. Backup the /etc/sudoers config file.
+
+# cp -p /etc/sudoers /etc/sudoers.ORIG
+3. Edit the /etc/sudoers config file.
+
+# visudo -f /etc/sudoers
+From:
+
+##Allow orarom user to run any command (enabled for patching from oracle platinum support)
+orarom ALL=(ALL) ALL
+To:
+
+##Limit the orarom user to run any command (enabled for patching from oracle platnum support), except for sudo su to root
+orarom ALL = ALL, !/bin/su
+4. Then save the file.
+
+5. Please do the same to other user account in sudo.
+
+Verify
+Lets verify if we have disabled the sudo access to user.
+
+$ sudo su -
+[sudo] password for orarom:
+Sorry, user orarom is not allowed to execute '/bin/su -' as root on testvm01.
+
+==============================================

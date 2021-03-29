@@ -1,0 +1,43 @@
+
+
+VPN:
+
+Cloud:
+	AWS
+	OCP
+	...
+
+Zones:
+	DR
+	AG
+	IsoZone
+	
+	...
+	
+Fields:
+
+
+Data Centers:
+
+SSO:
+	==>Firewall?
+	==>IDP?
+	==>SAML?
+	==>SSO-Ping?
+
+	1) IDP: login?
+		==>
+	
+	2) Ping: login???
+		==>PIP login
+		
+
+Windows 10:
+
+	==>Laptop: local profile: still use old pwd
+	==>AD/LDAP: updated password: when the new pwd sync up to local laptop?
+	
+	
+Servers:
+
+

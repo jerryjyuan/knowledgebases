@@ -87,7 +87,27 @@ https://devhints.io/bash
 	==>If the interpreter is explicitly given as #!/bin/bash or similar, the [[]] can be used without issues 
 		(and it is a bit faster than the alternative in Bash, I believe - not that it should be a bottle neck anyway), 
 		otherwise one should stick with []
-    	
+
+==============================================
+Bash: history:
+	Remove/ disable Bash shell commands history on Linux.
+
+1. Disable history for a current shell.
+	# set +o history
+
+2. Clean command history.
+	# history -c
+
+3. Permanently disable bash history.
+	# echo 'set +o history' >> ~/.bashrc
+	Next time when user login to the shell it will not store any commands to a history file .bash_history.
+	To apply this settings immediately for the current shell session execute the .bashrc file:
+		# . ~/.bashrc
+		
+4. Disable a command history system wide:
+	# echo 'set +o history' >> /etc/profile
+	It will be effective for the new users created after this.
+
 ==============================================
 
 not(A || B || C) => not(A) && not(B) && not (C)

@@ -1,0 +1,35 @@
+
+
+Linux:
+	==>Should never have CR characters:
+		==>Mostly for shell scripts, ...
+		==>Except: inside-jar files, etc.
+		
+		Methods:
+			1) Local -> Automatically:
+				1) Repo settings
+				2) Platform default settings on repo machine
+				-> Repo -> Jenkins
+			2) Local -> Linux: WinSCP:
+				==>Use: text:	==>No worries for shell scripts: it just removes CR characters
+				
+				Exceptions:
+					==>Jar files: should always use: binary mode: default mode
+					==>...
+					==>...
+			3) 
+			
+		How to show CR characters, etc?
+		
+			1) Local: Laptop
+					==>Notepad++
+					==>IDE as well?
+					==>
+			2) Linux: some editors or some editor features and menus, ...
+			
+			3) 
+			
+	==>
+	
+	
+

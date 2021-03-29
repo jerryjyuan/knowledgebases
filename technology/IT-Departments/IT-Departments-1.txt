@@ -1,0 +1,45 @@
+
+
+
+
+
+Duty to Serve
+
+
+Conservatorship
+
+
+BIO
+
+BTO: Business Technology
+
+Development
+
+	TAM to Ping:
+		Dev Factory
+		Business Kickoff
+		...
+
+Impacts: Criticality:
+
+Deployment Schedules:
+	==>MF Business
+	
+Downtime
+	
+
+	
+==>Business Users Groups
+	==>Business Support Groups
+		==>Business Operations Groups (BOS)
+		==>L3 Support Group
+			==>Dev Factory Team
+			==>DEV Team
+			==>QA Team
+			==>Systems/Tools Teams
+	==>L2: BEAM
+==>L1: OC/GOC
+		
+		
+		
+		

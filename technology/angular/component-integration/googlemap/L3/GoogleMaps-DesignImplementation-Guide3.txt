@@ -1,0 +1,138 @@
+
+=======================================================================
+Documentation:
+
+	https://developers.google.com/maps/documentation/javascript/reference
+	https://developers.google.com/maps/documentation/javascript/reference/map
+	
+	https://developers.google.com/chart/interactive/docs/gallery/geochart
+
+
+Google Map: Display Ways:
+	==>Way 1:
+		1) Use Google Map UI Components: GoogleMap, AGM, ...
+		2) These UI Components' selectors can be directly used the same way as normal HTML tag/selector: and the Map gets displayed on its own selector/tag
+		
+		Examples:
+			==>Normal GoogleMap and AGM Angular applications etc
+				==>Internal Code: do they do the same as SPARTUI's component's html DIV binding? ==>Internal code should be similar: use DIV or ...
+		
+	==>Way 2:
+		1) Create normal HTML file
+		2) Specify one of the <div> or other block element section as the placeholder to display the Map
+		3) Use: the getElementById to bind the Map/Chart to this element, and the Map will be displayed inside this element
+			var map = new google.Map(document.getElementById('regions_div'));... or more accurate expression
+			var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+			
+		Examples:
+			==>Example 1: SPARTUI: Map: bind to its own component's html's DIV element
+						  ==><app-map>: a very simple/tiny Google GeoChart app-customized UI Component: googleMap/AGM: a very sophisticated UI component with many @Input and @Output
+			==>Example 2: MissionMAP UI: Map: it is a large app-customized UI Component: but also bind to its own html file's DIV element
+		
+	==>Way 3: ...
+
+
+=======================================================================
+SPARTUI: MAP
+
+==>App Level: index.html: no need to add google map JS API code with app key: because the google map usage inside this app: only very limited usage: demographic and metric display
+							==>Not using Google Map's main features: Map, Marker, Location, GeoCoding, InfoWindow, Place, etc.
+==>App Level: tsconfig.json: no need to add googlemaps as types: due to its very limited API usage
+
+==>Need:
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+=======================================================================
+Features:
+	Angular 4.x
+	
+=======================================================================
+Module Design:
+
+==>Module: ==>Compartment
+	Define: feature module
+==>Entity/UI:
+	Construct: Component: component, html, css, spec.ts
+	UI:
+		Display:
+			Table:	AG-GRID
+			...
+		...
+==>Data:
+	==>Design: Data depends upon UI: and vice versa
+	==>Data Design:
+		Retrieval
+			==>1) Define: Service Module and/or Service Class
+			==>2) Service:
+					1) Global Service Class
+					2) Module Service Class
+					3) 
+		Sending
+		Saving
+	==>Testing:
+		Mock Data:
+			Mock JSON Data
+			Mock Parts:
+				Component
+				Service
+				...
+		Static Data
+		...
+==>
+
+=======================================================================
+Map: Design and Implementation
+
+==>Map Component:
+	1) Function: google.visualization.GeoChart API	==>Belong to Chart APIs
+	2) Data:	 Fetch data
+	3) Call Flows:
+				 ==>Supply data to Google Charts APIs
+				 ==>Draw
+				 	==>Not clickable
+				 	==>Display data
+				 ==>...
+				 
+	Overall: simple impl and usage:
+		==>DataHoldService
+		==>
+
+==>Mock Map Component:
+	==>1) Used inside .spec.ts test files
+	==>2) Because app.module.ts is only used for app code, so each test file needs to import Mock Map component for their testing
+
+==>Usage:
+
+	==>Page: Deal
+
+	==>Page: Pipeline
+
+	==>Page: Scenario
+
+	==>Page: Watchlist
+
+
+=======================================================================
+MissionMap: MAP:
+
+	==>Also an app-customized UI component
+	==>Large
+	
+	==>But different from Open Source UI Components like GoogleMap or AGM, ...
+		==>Open Source UI Components like GoogleMap or AGM:
+			Need to input parameters and data: so define 100+ @Input and 50+ @Output, ...
+			==>So the app can use it...
+		==>But MissionMap MAP: internal component, so it doesn't need so many @Input and @Output, ..., ...
+			==>Internally it is a tightly coupled component instead of an integration component like AGM, etc.
+	
+	
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
+=======================================================================
