@@ -1,0 +1,30 @@
+
+#DocStack - Summaries Domain: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+#Summaries: Types and Patterns
+
+	Summary Type: Documentation Styles
+	
+	Summary Type: Notes Styles:
+					==>Primarily: should not use: Nannyman-teaching ways or documentation ways
+					==>But: for useful teaching to someones like Rubi: Jerry tends to use Nanyman-ways... (because of easy/fast or even immediate understanding...)
+						(But based on human natures and common world: many or most of so-called teachers/tutors don't want to or don't know about Nannyman-teaching ways) 
+						(due to LOE and efforts, ...)
+						(due to the fact that many or most of so-called teachers/tutors deal with or handle "average/general-people" scenarios...)
+						(and intelligent ones or pre-study ones can understand better...)
+						
+					Also most of people: not put thinking/analytical/... - processing into notes...
+					
+	Summary Type: Practical Guide Styles:
+				  ==>This is useful for personalized and customized and practical-user-guide scenarios
+
+	Summary Type: Categorization Guide Styles
+		
+	Summary Type: Keys Guide Styles
+	
+	Summary Type: Criticality Guide Styles
+	

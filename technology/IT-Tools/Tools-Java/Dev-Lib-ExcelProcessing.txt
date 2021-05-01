@@ -1,0 +1,187 @@
+
+===========================================
+Dev - Lib: Excel Processing
+
+===========================================
+Topic: Lib:
+	==>Java POI Apache lib
+
+==>Highlights:
+	1) Excel format file: .xls (eXceL Spreadsheet: why using XL? they are suffix of each syllable: 
+						  because this is a file type: so using suffix instead of prefix)
+						  HSSF
+	2) Excel format file: .xlsx (eXceL Spreadsheet eXtension: why using XL? they are suffix of each syllable: 
+						  because this is a file type: so using suffix instead of prefix)
+						  XSSF
+	3) 5 Types: check POI JavaDoc API Online
+		STRING/NUMERIC/BLANK/FORMULA/BOOLEAN
+		==>You can: getRawValue()
+		==>But for each of the above 5 types: use its own APIs
+		1) FORMULA: getRawValue() as a String: then you can do a "transformation" to other values
+		2) BOOLEAN: getBooleanCellValue(): will return a boolean value
+		3) NUMERIC: cannot get a String from it (exception): can do String.valueOf(val)
+		4) STRING:  getStringCellValue()
+		5) BLANK:   Empty cell values: mostly belong to BLANK
+	4) Cell Value: contain: "\n":
+		==>Do: indexOf('\n'): this can get a substring
+		==>Do: split('\\n'): this can return a String array
+	5a) Cell Value: contain 'E': scientific notations
+		Key: use: new BigDecimal(str): to get value from Excel:
+			==>1) To long integer or integer
+			==>2) To doubleValue():
+					==>2a) Return double
+					==>2b) Can also enable decimal point precision
+		1) Long integer / big integer:
+			==>just use: indexOf("E+") or indexOf("E5")
+			==>String str = new BigDecimal(str).toBigInteger().toString();
+		2) Check if it is decimal: indexOf("."):
+			2a) String str = String.valueOf(new BigDecimal(str).doubleValue());
+			2b) String str = String.valueOf(new BigDecimal(str).setScale(decimalPrecision, RoundingMode.HALF_UP).doubleValue());
+			==>If need to add trailing 0 into decimal value string, just loop with precision: add 0
+	5b) Cell Value: contain 'large integer': but shows: NUMERIC type:
+		Key: use some good way:
+			Double loanNum = cell.getNumericCellValue();
+			String str = String.valueOf(loanNum.longValue());
+	6) Cell Value: contain '%': just use: indexOf("%")
+	7) Cell Value: contain ''': special single quote: 8217 (int value): str = str.replace(str.charAt(i), '\'');
+	8) Excel File: rows/columns: index = 0: startWith
+		==>So far: only index being not start with index=0:
+			1) C program: args: program name itself is arg[0]
+			2) Java JDBC API: ResultSet: get(1) as the first result column
+		==>How to loop:
+			1) Get lastRowNum: and while(rowNum <= lastRowNum)
+		==>Data Holding:
+			==>A list of Java Objects: List/Set/...
+			==>Even nested HashMaps
+
+==>Processors:
+	==>Sorting:
+		Object
+		Array
+		List
+		Map:
+			==>by key
+			==>by value
+			==>Simple way:
+				==>Place integer as the key: loop the counter: it is in sorted mode
+				map.put(String.valueOf(++totalQueryCount), query)
+				1) Resolve: sequencing
+				2) Resolve: overriding issues due to the duplicate keys
+	==>
+
+==>Utility:
+	StringUtil.java:
+		isDigit(): Character.isDigit()/isLetterOrDigit()/isWhitespace()/
+		int value:
+			char c = '5';
+			Character.getNumericValue(ch)
+			Integer.parseInt(String.valueOf(ch))
+		ASCI value:
+			int a = ch - '0';
+			(int)ch
+			converts the char to int by finding the difference of the ASCII value of this char and ASCII value of 0.
+			OR: implicit type casting
+			char c = '\'';
+		get formatted string display:
+			String.format("%s | %s | ...", data1, data2, ...);
+	FileUtil.java:
+		==>4+ ways: write out data:
+			==>Way 1: write to logs
+			==>Way 2: simple way to simulate logs: write a list of strings into a file:
+					WRITER:
+					==>Create a list of String: List<String>
+					==>BufferedWriter br = new BufferedWriter(new FileWriter(string FileName, append));
+						br.write(str)
+						br.flush()
+					READER:
+					==>BufferedReader br = new BufferedReader(new FileReader(string FileName)):
+						==>1) Difference 1: from FileInputStream:	"different APIs": more like: test code
+								==>Production code: you may need to specify a file folder...
+						==>2) Difference 2: from getResource(AsStream): classpath: more like: deliverable code: ...
+					API: while ((line = br.readLine()) != null) {
+							str = line.trim()
+						 }
+			==>Way 3: utilize: key/value pairs: mostly for .properties files
+					WRITER:
+					==>FileOutputStream fileInput = new FileOutputStream(fileName);
+						for (Map.Entry<String, String> entry : map.entrySet()) {
+							prop.setProperty(entry.getKey(), entry.getValue());
+						}
+						prop.store(fileOutput, comments);//String comments = "...";
+					READER:
+					==>FileInputStream fileInput = new FileInputStream(fileName);
+						prop.load(fileInput);
+						for (String key : prop.stringPropertyNames()) {
+							map.put(key, prop.getProperty(key));
+						}
+			==>Way 4: MissionMap way
+			==>
+	DateUtil.java:
+		==>Pre-JDK8
+			==>Method: use: Format to do parse(string)/format(date)
+			1) Create a XXXFormat: can use free ways to build up formats using the tokens:
+				==>JavaDoc: has all kinds of formats
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS"); //2021-01-01 12:00:00.123456
+					SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); //Tue Feb 27 00:00:00 EST 2018
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); //2021-01-01
+			2) Parse: into Date
+			3) Format: into String
+		==>JDK8
+			==>Method: use: Date/DateTime API: use Format as an argument to do parse/format
+	
+==>Flows:
+	Flow 1: Controller/RestController: RESTful API: 
+	Flow 2: Controller/View: MVC API: 
+	Flow 3: Spring Batch/Scheduler: Jobs/Tasklet:
+			Example 1: DTS Reporter Spring Batch//Scheduler App(s)
+	Flow 4: CLI App: Spring Boot CLI App:
+			Example 1: DTS Reporter Spring Boot Standalone CLI App(s)
+				==>Flow 1: Can run as Java CLI app
+				==>Flow 2: AutoSys Job Starts:
+					==>Shell Script
+					==>Call Java CLI: ==>OSSA id needed from Cyberark: enable this CLI app to run to include: ARKAIM libs on classpath: enable Java call cyberarck API
+					==>Or: Shell Script gets Cyberark OSSA id info and pass them to Java CLI call as System properties: -D...
+						==>Java Spring Boot app: can utilize these OSSA info to override application.properties username/pwd info and make DS connections
+			Example 2: MSSDMImporter (Query Generator) Spring Boot Standalone CLI App(s)
+				==>Define DB username/pwd inside application.properties
+			==>Flow 4a: CommandLineRunner: call various services/beans
+			==>Flow 4b: CommandLineRunner: call Master Service Class(es)
+		==>Call individual service classes
+		==>Service:
+			=>Repository
+			=>JdbcTemplateDB1: 2+ DBs: can be implemented as factory, or facade, ...
+				=>Processors
+					=>Call real JdbcTemplates: configured inside Config.java
+					=>JdbcTemplates: have all kinds of JDBC APIs: to do CRUD operations
+	==>JdbcTemplate:
+		1) Visit JavaDoc
+		2) CRUD:
+			==>Object[] args = new Object[10];//values
+			==>int result = update(query, args)
+			==>query(query, args, new XXXRowMapper()): List<Map<String String>>: each Map is one row data: column name + value
+				==>ResultSetMetaData mData = resultSet.getMetaData();
+				for (int i=1; mData.getColumnCount(); i++) {
+					map.put(mData.getColumnName(i), String.valueOf(resultSet.getObject(i))
+				}
+			==>query(query, args, new XXXRowMapper()): List<Integer>: each Integer is one row data: one id column value
+			==>query(query, args, new XXXRowMapper()): List<JavaModelClass>: each model-call is one row data: ...
+		3) Get PreparedStatement ? or keys string list: keys.stream().collect(Collectors.joining(",")) + StringBuilder/StringBuffer
+		4) @Autowired @Qualifier("jdbcTemplateDB1") private JdbcTemplaete jdbcTemplateDB1;
+		5) @Value("${value1.val}"): can come from application.properties or any other Spring Boot environment object...
+===========================================
+Topic: Decimal / Hex / Oct calculations:
+
+	==>2+ Ways
+		1) Way 1: Use division: 30/8	30/16
+					36 = 3 x 8(1) + 6 x 8(0) = 30
+		2) Way 2:
+			==>Origin: Decimal:	==>Divide it into 2-based binary:	30:			0001 1110
+									(Group by 1 digit: binary: ... Oct: triple of binary..., Hex: 4 times of binary)
+								==>Then: group them into oct: by 3 digits:		36
+								==>Then: group them into hex: by 4 digits		1E
+			==>Origin: Oct/Hex: 36: 	==>11 110
+
+===========================================
+
+===========================================
+

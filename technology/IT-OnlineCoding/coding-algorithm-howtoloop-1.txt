@@ -1,0 +1,69 @@
+
+===============================
+Coding: Algorithm: How to Loop
+===============================
+
+Example:
+
+n=4:
+
+   X
+  X X
+ X   X
+XXXXXXX
+
+Solutions:
+	==>Solution 1: See below - my own solution
+				   ==>Enhancements: make it one loop?
+									==>Challenge 1: how to print out some "X" string?
+									   1) Loop
+									   2) Use: some separate methods
+									   3) JDK or Apache APIs?
+									   4) Online Insights
+											Collections.nCopies(n, T)
+											Arrays.asList(IntStream.range(0, numOfElements) .mapToObj(Objects::new) .toArray(Objects[]::new));
+											.map(x -> new Objects(x)) or better .map(Objects::new)
+											IntStream.range(0, numOfElements)
+											  .mapToObj(x -> new Objects())
+											  .collect(Collectors.toList());
+											List<Object> objects = Lists.mutable.withNValues(10, Object::new);
+											Stream.generate(() -> new SomeClassName(someValue_01, ... , someValue_N)).limit(size).collect(Collectors.toList());
+											Stream.generate(Objects::new).limit(numOfElements).collect(Collectors.toList());
+											Stream.generate(Objects::new).limit(numOfElements).collect(Collectors.toCollection(() -> new ArrayList<>(numOfElements)));
+											List<T> temp = new ArrayList<>(); temp.addAll(Collections.nCopies(n, T)); return temp;
+											IntStream.range(0, numOfElements)
+											  .mapToObj(Object::new) // or x -> new Object(x).. or any other constructor 
+											  .collect(Collectors.toList()); 
+	==>Solution 2: Search some online solutions: get some insights...
+	==>...
+
+===============================
+Solution 1: 
+
+class Main {
+
+  private static void printNumberGraph(int n) {
+    for (int i=1; i<=n; i++) {
+      for (int j=1; j<=(2*n-1); j++) {
+        if (i < n) {
+          if ((j == n-i+1) || (j == n-i+1 + 2*(i-1)))  {
+            System.out.print("X");
+          } else {
+            System.out.print(" ");
+          }
+        } else {
+          System.out.print("X");
+        }
+      }
+      System.out.print("\n");
+    }
+  }
+
+  public static void main(String[] args) {
+    int n = 1;
+    printNumberGraph(n);
+  }
+}
+
+===============================
+

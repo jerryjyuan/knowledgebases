@@ -1,0 +1,20 @@
+
+===============================
+Coding: Game: Tic Tac Toe
+===============================
+
+	I mentioned: 2-dimension array + calculate/print/display each time a set is added
+	
+	
+	
+
+	Use: sample to code: take 3x3
+	Use: draw graph
+	Use: Concept: slot
+	
+
+	Online Insights:
+		https://www.geeksforgeeks.org/tic-tac-toe-game-in-java/
+		
+		
+		

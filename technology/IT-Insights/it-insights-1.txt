@@ -1,0 +1,58 @@
+
+IT Work:
+	==>Jerry has had 18-year foundation and buildup and accumulations in IT industry and experiences
+		So: it is natural and better to utilize it as one of the main ways for his career and work types: before 59.5/62 or even 67 years old
+		...
+		For sure: he can develop or utilize some other ways/scenarios to do career/work: ...: but IT is one of the existing good/common ways...
+
+
+Scale Down:
+	Shut down
+	
+URL:
+	Determined by client
+	Allow redirect for changes of URL
+	Allow simplified wording in url
+	No: Http verbs inside url
+	Case-sensitive: enable case-sensitive: app-root, app-context, sub-paths
+		==>But: not for domain/sub-domain names: because public internet domain DNS needs, ...
+	...
+	
+Sessions:
+	==>Browsers: 
+		==>Across: same browser type
+			==>MS Java Apps
+		==>Across: Different browser types:
+			==>AutoSys Job Prod Dashboard URL?
+			==>Server Controlling Settings?
+			==>SSO Controlling Settings?
+			==>VPN Controlling Settings?
+			==>Network Controlling Setting?
+			==>Proxy Controlling Setting?
+			==>Identity Platform Controlling Setting? PIP, TAM, ..., AD, ...
+			==>InfoSec Controlling Setting?
+			==>...
+			
+			Methods:
+				==>1) Close Browsers: and re-launch
+				==>2) Clean up browsers' sessions, caches, and history, ...
+				==>3) Task Manager: Kill all related browser windows: and re-launch
+				==>4) ...
+				
+				==>9) Reboot laptop
+			
+		==>
+	==>Settings: Timeout
+	
+	==>Settings: Sessions
+	
+	==>
+	
+	==>Tools:
+		SN: big scenarios with sessions
+		
+	==>Systems:
+	
+	==>	
+	
+	

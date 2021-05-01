@@ -1,0 +1,24 @@
+
+===============================
+List: Online Interview WebSites
+===============================
+
+List:
+
+	MS Teams:
+
+	skype:
+
+	webex.com:
+
+	bluejeans.com:
+
+	zoom.us:
+		https://us02web.zoom.us/j/8746643529?pwd=SVdvay9FSkpiaWVWRXlGZUpKRnoyQT09
+			If you prefer a MEETING ID please use:
+			8746643529
+			If Zoom asks for a password please use:
+			coder
+
+
+===============================

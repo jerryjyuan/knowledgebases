@@ -1,0 +1,221 @@
+
+===========================================
+SQL Scenarios:
+
+==>DDL:
+	Create table ...
+==>DCL:
+	Grant privileges to DB groups, users, 
+	Accesses privileges
+==>DML: CRUD
+
+===========================================
+DML-SQL Methods 1: Common/Basic
+
+CRUD:
+	SELECT:
+		select * from table1 where ...
+		select * from table1, table 2 where ...
+			==>largest scope of joins: cross join | cartesian join		
+				Cross-join is SQL 99 join and Cartesian product is Oracle Proprietary join
+				Cartesian product result-set contains the number of rows in the first table, multiplied by the number of rows in second table	
+			==>outer join / inner join: needs ON clause to map two columns of tables:
+				==>Full outer joins: left outer join and right outer join
+					==>Left outer join: right side table's special data applied to all of the left side table
+						==>Left side table: not matched with the conditions: but still included
+					==>...
+				==>inner joins (based on on-conditions)
+					==>Without on-conditions:
+						1) natural join: based on default common names of columns
+						...
+					==>inner join: exact match from both table by conditions
+					
+		select * from table1 t1 join tables t2 on t1.col1 = t2.col2 where ...
+	INSERT
+		insert values
+		insert select
+	UPDATE
+	DELETE
+
+===========================================
+DML-SQL Methods 2: Intermediate
+
+==>Variations:
+	as
+	Use: single quote
+	
+==>Case:
+	Expression
+	Column
+	
+	case 
+		when ... then ...
+		when ... then ...
+		else ... end
+	(case 
+		when ... then ...
+		when ... then ...
+		else ... end) as caseColName
+		
+		
+
+
+==>Usage:
+	==>Conditional Inserts/Updates:
+		==>not exists
+		==>exists
+	==>
+	
+==>Usage:
+	==>use aggregate functions and column names together:
+		==>The column names: need to be in the "group by" statement:
+			1) Aggregate functions: operate on a collection of tupled/rows ==>How come one row's data can be selected together:
+				==>Unless this aggregate function value is listed in each of the rows select repeatedly, but not so reasonable
+				==>So using aggregate function, the column names need to be in "Group By" clause
+				==>aggregate functions operate on the group-by columns
+				==>without group-by clause, aggregate functions operate on all rows based on the condition clauses
+	
+	==>
+
+==>Usage:
+	==>Player Concepts: Players can be a table, a sub-query, ..., ...
+
+	==>Joins:
+		==>Players:
+			==>1) Tables
+			==>2) SubQuery or man-made query data sets - function as a table
+							  ==>This is good for some  difficult-to-join or standalone data sets, or aggregate function generated data sets to participate into the current join
+							  ==>This can enable any tables and any datasets to be added to the join clauses
+===========================================
+DML-SQL Methods 3: Advanced/Expert
+
+==>example: case
+
+==>example: tokens, declare, ...
+
+===========================================
+DML-SQL Methods 4: Master
+
+
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+Topic: Upsert:
+
+==>Upload + Insert
+
+==>Java
+
+
+==>SQL:
+	==>Use: exists
+			not exists
+
+	==>Examples:
+	
+		TBD
+		
+		
+===========================================
+SQL:
+
+==>INSERT:
+	==>conditional inserts
+
+
+
+===========================================
+===========================================
+===========================================
+Topic: FM:
+
+==>Solution Analysis:
+	==>DCR
+	==>DCU:
+		1) AutoSys Jobs:
+			==>Run .sql files: a list of queries
+		2) AutoSys Jobs:
+			==>Run more than sql files: also run Java logic
+	==>Java Programs
+	==>Combined Solutions
+
+SQL: DCU:
+	==>Scenario: Upsert:
+		==>Method 1:
+			==>Add both insert and update SQL: ==>one of them: runs and succeeds + another one: runs and does nothing
+				1) INSERT:
+					==>Topic 1: SELECT clause: ==>If empty: does it mean the INSERT does nothing?
+								==>insert into table (..., ...) select a, b from table2;
+					==>
+				2) UPLOAD:
+					==>where clause: easy to set
+		==>Method 2:
+			==>Use conditional: select, tokens, etc.
+	==>Scenario: Large sizes of data rows:
+			400 rows
+			4000 rows
+			...
+	==>Scenario:	Why production DB?
+					Why does production systems have this main data issues?
+						Solutions:
+						==>ETL
+						==>Database refresh
+						==>DBA solutions
+						==>
+
+===========================================
+===========================================
+===========================================
+Examples:
+
+Insert into #123(columns1,2....
+Select field1= @date, field2 = 1, field3 =2, Courier, field4 =4, .....
+
+case when Customer in (12345,2345,12323) then Courier = 1 else Courier = 2 end Courier
+
+Select field1= @date, field2 = 1, field3 =2, case when Customer in (12345,2345,12323) then Courier = 1 else Courier = 2 end Courier , field4 =4, .....
+
+Select 
+	field1= @date, 
+	field2 = 1, 
+	field3 = 2, 
+	Courier = 
+		case 
+			when Customer in (12345,2345,12323) 
+				then 1 
+			else 
+				2 
+		end, 
+	field4 = 4, 
+	.....
+
+INSERT INTO <table> (<columns>)
+SELECT <columns>
+FROM <table>
+WHERE <condition>;
+
+INSERT INTO Persons (FirstName, LastName)
+SELECT *
+FROM #tmp t
+WHERE NOT EXISTS (SELECT * FROM Persons where FirstName=t.FirstName and LastName=t.LastName)
+
+===========================================
+Examples:
+
+MSSQL:
+	https://www.sqlservertutorial.net/sql-server-system-functions/convert-string-to-datetime/
+	Convert(varchar(30),'7/7/2011',102)
+
+Sybase as well
+	Convert(varchar(30),'7/7/2011',102)
+
+
+===========================================
+===========================================
+===========================================
+

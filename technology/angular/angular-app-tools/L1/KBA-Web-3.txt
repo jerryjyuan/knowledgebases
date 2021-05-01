@@ -1,0 +1,46 @@
+
+#Web: KBA (practical-guide-keys) Guide
+
+#Goals:
+
+#Procedure:
+
+##GUID and UUID:
+
+1. Web Browser: Sessions:
+
+	Session: Creation
+	
+	
+	Session: 
+	
+
+	Session: Stay On:
+	
+		==>Access to the tab?
+	
+		==>Access to the tab and click on something: user events?
+		
+		==>Access to the tab and confirm the pop-up dialog's stay-on session question/prompt
+	
+
+2. Web Browser: Starting Processing/Displaying:
+
+	Access: continue processing
+		==>Example 1: YouTube: open a new tab: only access to the tab: YouTube starts processing and displaying
+
+
+3. Web Browser:
+
+	==>Closing the tab:
+		==>Pop up a dialog window: for closing
+		
+	==>
+	
+	  
+			    
+			    
+			    
+			    
+			    
+			    

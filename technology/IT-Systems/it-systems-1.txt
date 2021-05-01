@@ -1,0 +1,21 @@
+
+
+==>Company Systems
+
+	==>Terminology:
+		LAN:
+			==>Based on the concept: VPN / Intranet: LAN =>Local Area Network (inside VPN)
+			==>LAN ID... or Windows ID login
+		AD:
+			Active Directory: MS concept
+				==>Manage their Windows systems including Windows login domain/concept
+		Windows:
+			MS Operating Systems
+		LDAP: Protocol and related implementation vendors/providers supplied user credentials storage and systems
+			MS's user credentials' storage place and systems with authentication and authorization privileges and logic
+			LDAP: beyond MS, but used by MS for Windows and AD needs, ...
+			(Light-Weighted Directory Access Protocol: very suitable to Windows Systems and AD and Windows Servers)
+		...
+	
+==>
+

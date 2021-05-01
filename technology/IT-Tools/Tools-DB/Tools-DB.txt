@@ -1,0 +1,25 @@
+
+===========================================
+IT: Tools: DB
+
+
+
+
+==>Tool: DB Refresh
+	
+==>DB Ranks:
+	Oracle
+	IBM-DB2/MS-MSSQL
+	...
+	Teradata
+	SAP-Sybase
+	IBM-Informix
+	MS-Access
+==>OpenSource DB:
+	MySQL
+	PostgreSQL
+==>NoSQL
+	MongoDB
+	...
+	
+===========================================

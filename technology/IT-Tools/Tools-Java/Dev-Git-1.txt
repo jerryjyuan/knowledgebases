@@ -1,0 +1,124 @@
+
+===========================================
+Dev - Git:
+
+===========================================
+Topic: 
+
+
+===========================================
+Topic: 
+
+
+===========================================
+Topic: Web Portal
+	==>Companies: can do customized and configured scenarios
+	==>
+
+===========================================
+Topic: DesktopApps: GitEye
+	==>Repo: Settings
+	==>User Privileges: for all roles: common operations, branches, tags, checkin, ...
+	==>Usage: Repo:
+		==>Local Repo/Branches
+		==>Remote Repo/Branches
+	==>Usage: Terminology:
+		==>Pull:
+			Pull ...
+			Pull from Upstream: pull all remote artifact changes...
+		==>Push:
+			Push
+			Push to Upstream
+			Push to branch/master
+		==>...:
+		==>stash
+		==>tracked/untracked...
+		==>staged/unstaged
+			git add .
+		==>commit
+		==>GIT CLI commands...: a lot...
+	==>Usage: Tags:
+		==>Some Repo: settings:
+			allows tag overriding + no overriding
+		==>Some Users: privileges:
+			allow tag overriding + no overriding
+		==>User Privilege: Allow overriding:
+			==>1) Can update the same tag
+			==>2) Check checkbox: override existing tag
+			==>3) On subsequent pane: check checkboxes: force override remote tags
+		==>User Privilege: Disallow overriding:
+			==>1) Create a new tag each time: but can use: <ENV>/1.2.3_x: so this will not be interrupted with other users' tags
+		==>When creating a tag:
+			==>Select a commit: this is important
+		==>How to check the files in a tag?
+			==>Method 1: Check out a tag: then all the files are checked out into your workspace
+			==>Method 2: Go to all kinds of Git portals: they have "tag" functionality to check its contents
+			==>Method 3: Download a tag contents and check contents and timestamps
+			==>Method 4: Right click a file and see history: TBD: can we see its tag info?
+			
+			Tag: important:
+				1) Deployment Team:
+					==>Build: use tag to do Jenkins build
+						==>Can we have access to their Jenkins build?
+						==>Maybe: but someones say: checking their Jenkins takes another 15-minute time...
+						==>TCM Builds: generate EAR, WAR, and even JAR files...
+					==>Get the files:
+						==>Get the files based on tag and tag deltas
+							1) Deployment team's workspace: get the deltas of the files?
+								[Jerry]: not the tag's files?
+								[AbuserCom]: Jerry, you know Delta's meaning?
+								[Jerry]: for sure, it was everywhere in middle-school and high-school physics (and mathematics class) textbooks...
+								[AbuserCom]: Why did you forget it one time several months ago?
+								[Jerry]: Not normal? you are really stupid: ... did you know about Gamma? Alpha? Beta? or even AlphaBeta? How about: where is Aruba?
+									     and stupid geek, did you know why Delta Airlines is named as Delta Airlines?
+							2) Why do they use deltas? - make their work easier...
+					==>Delta:
+							==>Master Branch: can be based on 2 consecutive tags
+							==>Your own branch: Should base on your own previous tag: not others' tag...
+							==>Because each tag can tag any branches or codebase, ...
+								==> But recommend: FOR UAT/PROD tags (except DEV/SIT tags): merge into master branch or release branch before tagging
+				2) 
+	==>Usage: reset:
+		==>Mostly override the existing changes for version-controlled files:
+			==>Local changes can be: stashed or merged into the reset files
+		==>But any test files that are not version-controlled: will still stay in the workspace
+	==>Usage: rebase...
+	
+	
+	==>Specials:
+		==>.gitignore
+			==>Useful: can temporary change this file to allow any files to check in
+			==>Useful: use: ! to allow some special files to check in
+			==>Useful: can use: sub-module's .gitignore files to do overriding to the parent modules' .gitignore settings
+		==>
+	
+===========================================
+Topic: DesktopApps: Tortoise | ...
+
+
+===========================================
+Topic: Git CLI: Windows/Linux CLI:
+
+
+===========================================
+Topic: Git Bash: ... Linux CLI on Laptop:
+
+
+===========================================
+Topic: IDE:
+	==>Enabled plugin for GIT Repository Perspective
+	==>Similar to CLI and DesktopApps like GitEye
+	==>All functions are enabled via IDE plugin menus: toolbar menus and Right-Click menus
+	
+	IDE Git Repository Perspective:
+		==>Can do its own checkin/checkout from other portals like GitEye: such as: use different checkout folders
+		==>Can import projects from its own checked-out projects from its Git Repository Perspective
+		
+	IDE: can also not use its own Git Repository Perspective:
+		==>Import the existing projects from anywehere on laptop
+		==>Import GitEye's checkout folder's projects:
+			==>let GitEye manage main Git operations
+			==>but still IDE can manage some core GIT functions: via its main menus and right-click menus
+	
+===========================================
+

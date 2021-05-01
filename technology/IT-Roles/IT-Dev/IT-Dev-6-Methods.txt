@@ -1,0 +1,184 @@
+
+========================================================
+Dev/Work: Methods
+
+
+========================================================
+Method: TDD
+
+========================================================
+Method:	xxx-Through
+
+	==>xxx-Through:
+		==>Core-Through: flow/data/...
+		
+	==>
+
+========================================================
+Method: Test Methods/Flows: Enabled
+
+==>Example: MSS SM-Migration
+
+========================================================
+Method: Work on Business Logic:
+
+==>Use better ways/tools/...:
+	Sometimes: no mixed coding ways
+	==>Query: not coding inside Java app
+	==>Notepad or Studio: ...: then add to Java code file...
+
+==>
+
+
+========================================================
+Method: Better Scheduling/Estimates/...
+
+==>Communications
+	==>
+==>Methods
+
+==>Procedures Enabled:
+	==>Agile/Scrum/PI Meetings:
+		==>Due to its common-ways and fairness: mostly not get abused
+				==>Managers talked to leads: for pre-discussions and plannings
+				==>Engineers: should do some pre-research as well to know these stories better and prepare for scrum meeting
+				==>During the meetings: everyone can have a say...
+			Good Examples:
+				==>Trion World: during the meeting, everyone raised a card with estimates: managers take averages as estimates for each one
+				==>Worldpay: PI meetings are fair but Rama might not be...
+				==>Teradata: Waterfall models: the ways from Bob Alex and Tom Nolan were fine based on their waterfall models
+							 ==>Each quarterly meeting planning for next 3-month release:
+							 	1) Alex came to Tom's cubicle to discuss all features involved: I always knew because I sat next to Tom
+							 		==>During the quarterly meetings: Alex listed all schedules for each feature based on pre-discussions
+							 			But also consulted with each assigned engineer with their feedbacks about schedules
+							 	2) This included other task items too
+			Neutral Examples:
+				==>...
+			Bad Examples:
+				==>Nike:	Provided you a big story: all main tests plus their coverage for one app
+							[Jerry]: should break down its entire story into: 
+								1) sub-story for each package or section based 
+								2) various tasks ...
+								==>So it became deliverables for related iterations
+		==>
+	==>
+
+========================================================
+Method: Ask Information and Questions:
+
+==>
+
+========================================================
+Method: Only Focused on its priorities?
+
+
+========================================================
+Method: Evaluate your current workloads and bandwidths:
+	==>Do not accept overloaded workloads...: unless higher priority
+	==>Do not engage unreasonable schedules
+	==>Do not provide immediate estimates without sufficient information:
+			(Then what you should do?
+				==>Say: Get back to him/her
+				==>Evaluate it now or today, and provide estimates to him/her in the afternoon or in one hour
+				==>Ask key questions and define on your own:
+					==>Example 1: ask and define:
+						==>Sub-Example:
+							[Jerry]: What kind of need is this from the business side?
+							[Mahesh]: All user's needs are important, that is why MF BTO moves to MF Business
+									  Whatever business teams need us to do, we need to take high priority, so does this migration
+							[Jerry]:  I don't think this would be so urgent because it is a migration process
+									  Can I evaluate it and come up with the estimates today?
+							[Mahesh]: Like what I said, all users and business needs are high, this should be done today if possible
+							[Jerry]:  I opened the excel, it involves some Java program, so it takes some time to process it
+									  And I haven't evaluated the data sets yet, so the data set complexities could contribute to its estimates
+									  as well, which I need to check its implementation scenarios, so I would like to get back to you this morning
+									  after I review the data sets
+							[Mahesh]: Like I said, users needs are important, we should not wait for some evaluations
+							[Jerry]:  Based on current review of the file, normally it may need 1-2 weeks to move to production considering data involved
+									  and code module required, plus my current workloads, and more importantly based on its criticality of being
+									  a data migration instead of incidents or PROD issues
+									  Can Vamsi look into it?
+							[Mahesh]: Vamsi is not able to look into it due to his new scenario?
+							[Jerry]:  Vamsi has joined L3 for several weeks, ...
+							[Mahesh]: What do you think when you can get it done?
+							[Jerry]:  Like I said above, it should normally take 1-2 week process to move it to PROD
+							[Mahesh]: (I am not happy with it, I will report to Sudhir) ...
+							[Jerry]:  If unable to provide accurate time to some more evaluations needed, how about we do stage-based processing?
+							[Mahesh]: How does it work?
+							[Jerry]:  We can work on some stages based updates. I will set up a meeting this afternoon to involve Justin
+									  and we discuss the entire scenarios including urgency, justifications, schedules, and estimates, and deliverables
+									  (Why did you hire Vamsi if he cannot work on it?
+									   [Mahesh]: what did you murmur about?
+									   [Jerry]:  Vamsi...
+									   [Mahesh]: Vamsi was assigned to L3 due to Robert, he was part of SF Robert's team previously...
+									   			 Vamsi was like part of skirt circle of Robert's resources, ...
+									   [Jerry]:  He should be able to do some MSS code, which is why he got assigned to MSS and SPARTA replacing Ravinder
+									   [Mahesh]: He is not ready, ...
+									   [Jerry]:  Can you do coding as well?
+									   [Mahesh]: I interact with business groups and users everyday ...
+									   [Jerry]:  Recent weeks I have been having business user issues for MFUW, etc. kind of preoccupied, ...
+									   			 Can you check with previous Java POC Harish?
+									   [Mahesh]: Harish has had some personal scenarios going on while also busy with MFPV etc.
+									   [Jerry]:  What personal scenarios?
+									   [Mahesh]: Harish is busy with YouTube episodes and films, especially Friday evenings...
+									   [Jerry]:  Why did business or Justin told you that this was high priority and their PROD being down 
+									   			 if not conducting migration right now considering its being a data migration instead of
+									   			 PROD issues?
+									   [Mahesh]: Justin could report to MF BTO office (now it is: MF Business Office or BO office) if we don't do this within 2 days
+									   [Jerry]:  I really think this is their planning problem instead of our support issues
+									   			 I am setting up a meeting this afternoon to streamline these aspects and schedules
+									   			 By the way, BO office might be also renamed as: MF BDO Office, or MF DO office, I think)
+					==>Example 2: define directly and see how he/she responds:
+						==>Sub-Example:
+							[Jerry]: this is a migration task, not an incident or a PROD or user issue, so it should not be urgent
+							[Mahesh]: it is critical, if we don't do migration today, PROD MSS will be down
+							[Jerry]: how come?
+							[Mahesh]: Oh, what I meant is: their PROD will be down
+							[Jerry]: Then it is their planning issue: if their PROD will be down today, then why didn't they plan it several weeks ago?
+							[Mahesh]: This was what Justin told me, and I just repeated what he said and I don't know why
+							[Jerry]: Can we arrange a meeting with Justin this afternoon...? From there, we can define its criticality and schedules
+									 Even for taking this business requirement into our MSS, we may need to invite Manish/Rahul to the meeting
+									 I will set up a meeting for discussing this today.
+									 (Then: Jerry set up a meeting to discuss this: before commitment and scheduling it)
+							[Mahesh]: Actually I intended to say that if we didn't do it within 2 days, business users will not be happy, ...
+							[Jerry]: So our support and schedules are based on their being happy or not instead of business reasons
+									 and justifications?
+							[Mahesh]: One thing you didn't know is: Justin is MF BDO Office BR Program lead, ..., so
+							[Jerry]: This should not be the factor in consideration, and the factors should be the business needs and justifications.
+									 Especially consider Justin leaves office at 4pm everyday and ...
+					==>
+		==>Your words: maybe just some possibilities or rough estimates or 
+		==>But others:
+			1) Could take it seriously or as a promise/commitment
+				(Point 1: Change:
+					Even commitment could change, but still looks bad...)
+				(Point 2: How to change a commitment?
+				(Point 3: How to about your words becoming a commitment?
+				(Point 4: ...
+				==>In normal procedures, this is not a concern 
+					because we have scrum meeting, we have OnTrac/JIRA/Collaborator/..., not by words...
+			2) Could utilize your words to do unfair things...
+			3) 
+	==>How to conduct some better communications:
+		==>Normal communication needs:
+			==>...
+		==>Special Communication needs:
+			==>Someone talking to you without management's awareness and involvement, or normal work procedures:
+				==>Regarding your benefit scenarios: ...
+					1) take your credits
+					2) use you as a labor for their benefits
+					3) delegate extra work or their work items to you
+					4) does something non-professionally
+					5) 
+		==>...
+	==>How to deal with:
+		==>Pressures
+		==>...
+		==>Small-Reporting/Bad-Mouthing (out of normal work evaluations, surveys, or team-work, ..., or ranged-performance scenarios, ...)
+		==>Intimidation:
+			==>If you worry about or start worrying about job-security (could lose your work/job) while you have normal or full workloads already,
+				==>This is an example of intimidation..., or at least a manipulation, ..., or unfair treatment, ...
+				==>Because at most this could be belonging to performance ranges or variations, not subject to this kind of intimidation
+		==>Threats?
+	
+========================================================

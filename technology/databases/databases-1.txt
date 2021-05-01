@@ -1,0 +1,43 @@
+
+DB Systems:
+	RDMS DB
+	Network DB
+	Graph DB
+	Object DB
+	...
+	
+DB:
+	Oracle
+	MSSQL
+	DB2
+	Teradata
+	Sybase
+	Informix
+	...
+	
+	NoSQL
+	...	
+	
+	Open Source DB:
+		MySQL
+		Postgre-SQL
+		...
+	
+	
+Vendor-Specific:
+	Oracle: PL/SQL
+	MSSQL:  Transact-SQL
+	...
+	Sybase: Similar to MSSQL?
+	MS Access
+	
+Types:
+	SQL
+	Triggers
+	Index
+	Functions
+	Stored Procedures
+	System DB
+	Constants
+	...
+

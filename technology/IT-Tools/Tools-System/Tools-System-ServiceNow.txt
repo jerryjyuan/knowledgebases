@@ -1,0 +1,113 @@
+
+===========================================
+Tools-System: Service Now:
+
+Summaries:
+	==>Service Now: nicknames: SNOW/SN
+	==>One of the most important current Ticket/Ops/Task management systems provided by ServiceNow vendor/company:
+		==>Many IT companies use it
+		==>It means: becoming an expert and summarizing better: useful for many companies/clients IT work: not just TCS-FM client IT work
+	==>ServiceNow: pretty powerful:
+		==>Many automation items: 
+			==>CMDB 
+			==>Send out emails 
+			==>Linkage of tickets
+			==>Create tasks for the ticket types
+
+===========================================
+Topic: Service Now: Characteristics:
+	==>Ownership: Installed and Managed by company's enterprise team or Service Now team
+	==>Portal/Interfaces:
+		==>1) Web Portal: Service portal
+		==>2) Web Portal: Navigation Dashboard
+	==>Each company:
+		==>Can configure SN in customized ways: by using common features plus their customized feature sets
+		
+===========================================
+Topic: Ticket Cateogries:
+	==>Based on Teams: (SN: teams: called as: Groups)
+		Example: IT Services
+	==>Based on Functional Types
+		Example: General Monitoring
+		Example: ...
+	==>Based on Functional+Team Types
+		Example: GOC Execution - tickets
+		Example: WIO Middleware Instances Alarm Suppression - tickets
+
+===========================================
+Topic: New to some client-companies or teams/tasks:
+	==>Method 1: search SN tickets to gain methods/solutions:
+				 ==>
+	==>Method 2: ask coworkers...: an example ticket, ..., or a Teams Chat session, or Sharepoint documentation
+		==>PROS:
+			==>Faster plus some communications/teamwork
+			==>
+		==>CONS:
+			==>Showcasing:
+				==>Too new and too lower-level concerns: even just simply asking some questions (yes, indeed, ..., even though it is good to ask questions)
+				   (For sure: GMC ways are good: all combined ways...)
+			==>Deal with:
+				==>Difficult-to-work coworkers...
+				==>
+			==>Some coworkers:
+				==>do not like "documentations or excessive ones"
+				==>do not think: "some style documentations are required for their duties", or belong to their roles' duties
+					Example: business models and data
+					Example: code analysis
+					Example: non-official or required documentation
+					...
+					Example: many so-called documentation items: can be done via: calls/Teams Chat sessions/...
+
+===========================================
+Topic: Ticket Roles:
+
+	==>Build/Run Teams:
+		==>Walkups
+
+	==>L3 Teams:
+		==>Emergency:
+			==>Resolve Conflicts: Need to bypass much more items
+		==>Break-Fix
+		==>Routine
+		==>DCU
+		==>RCA
+		
+	==>Change Manager Team: come to help
+		
+===========================================
+Topic: Ticket Types:
+
+	==>Change CHG:
+		==>Almost any main/small change types...: Application + Infrastructure
+			==>Teams' scenarios: Application
+				==>AppDeployment/Break-fix/DCU/Routine/...
+			==>Tools Teams Scenarios: Infrastructure:
+				==>Example: Increase/Decrease WebLogic server mem/heap sizes
+				==>Example: Add/remove SiteScope monitors
+			==>
+		==>Scenarios:
+			==>CHG: can be planned/created earlier (draft/review: can be stage based to move forward): but not easily moving to "Approval/Scheduled state"
+			==>CHG: Updated statuses: can be closed in a few days after status update
+			==>
+	==>INC:
+		==>Aka: incident/"Unexpected Outage"
+		==>When to create an incident?
+			==>Scenario: the below 2 common routes
+			==>Scenario: any scenarios that can be defined as: "outage"
+			==>Scenario: any CHG or SN tickets require a prerequisite for the tickets: and mostly it is kind of "outage" as well: 
+				Such as: SM has been retired and data are orphaned: it is an outage if no parents taking care of them... except Justin as a guardian and milk-feeder
+			==>
+		==>Who to create an incident?
+			==>Anyone
+			==>But common/preferred 2 routes:
+				1) MF Service Desk: upon request from BOS/L3/.../users...
+				2) Service Now automated ticket creation processes by alarms, etc.
+	
+	==>REQ:
+		==>IT Services ticket
+		==>...
+		
+	==>KBA/KB...
+		
+	
+===========================================

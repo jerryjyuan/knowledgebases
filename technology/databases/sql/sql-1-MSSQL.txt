@@ -1,0 +1,115 @@
+
+===========================================
+SQL MSSQL:
+
+===========================================
+Topic: MSSQL Queries:
+
+==>RDMS Common:
+	current_timestamp
+	CAST(GETDATE() AS DATE): get the current date: 04/10/2021
+	columns: underscore
+
+==>Special Tech:
+	==>Escape: single quote: ==>Use another single quote: ''
+	==>SELECT top(100) column...
+	==>Special characters
+	==>
+
+==>Table Design:
+	==>Every table: dttm_creatd, dttm_updtd, id_user_creatd, id_user_updtd
+		==>PROS: each manage queries + timestamp
+	==>Primary Keys:
+		==>Type 1: similar to Hibernate: auto-incremented: cannot set up a value to it
+		==>Type 2: non-null int: need to set up a value to it: mostly by: max(id)+1
+		==>Type 3: combo primary keys
+	==>Index Constraints:
+		==>Can enable search/retrieve performance
+		==>Can enable non-duplicate constraint
+	==>DB table column: design:
+		decimal(12,2): total digits = 12: integer part digits = 10, decimal digits = 2 (precision)
+	
+==>CRUD Operations:
+	==>INSERT INTO ... SELECT ... (not from a table without a where condition): 
+		==>This could lead select all rows (due to without a where clause) into the table
+	==>INSERT INTO ... SELECT ... (no need to use a from a table: a table is not required) 
+	==>INSERT INTO ... SELECT ... where not exists (SELECT ...: check joined tables don't have the insert row) 
+	==>INSERT INTO ... SELECT ... where not exists (SELECT ...: check joined tables don't have the insert row) and exists (...): check some conditions exist (such as some values)
+
+	==>SELECT subquery: return multiple values/rows:
+		==>cannot use: "="
+		==>need to use: "in"
+		==>another way is: add more where condition to limit to one value only
+
+	==>Try to use DB functions and SP:	
+		==>Functions:
+			==>Similar to Java/JS functions: but for sure differs from SP (SP: an independent routine running-processor on its own):
+				1) So it returns a value (to differ from SP)
+				==>Then: it doesn't need another way to do so: which is OUT parameter (like having Rubi, then no need to have Holly): so OUT/Holly is given to SP/Matt
+				==>Because SP is more powerful and standalone, so SP can calls functions and not vice versa
+		==>Stored Procedures: need to be inside DB: so queries or JDBC calls can invoke it...
+	
+===========================================
+Topic: MSSQL-Transact: maybe similar to Sybase
+
+
+===========================================
+Topic:
+
+https://codingsight.com/sql-server-lock-escalation/
+
+-- Listing 5: Disable and Enable Lock Escalation
+
+ALTER TABLE Production.ProductsI SET (LOCK_ESCALATION=DISABLE);
+
+ALTER TABLE Production.ProductsI SET (LOCK_ESCALATION=TABLE);
+
+
+select name, lock_escalation_desc
+from sys.tables
+
+Lock Escalation Modes –
+
+Table (default)
+Auto
+Disable
+
+
+ALTER TABLE tablename
+SET (LOCK_ESCALATION = DISABLE) — or TABLE or AUTO
+
+
+https://samirbehara.com/2017/08/22/lock-escalations-in-sql-server/
+
+How to prevent Lock Escalations?
+
+You can reduce the locking issues by following the below 3 good practices —
+
+Keep transactions shorter.
+Reduce lock footprint of expensive queries by doing performance tuning and making them efficient.
+Break up large operations into batches.
+
+
+https://blog.pythian.com/disable-lock-escalation-in-sql-server/
+
+ALTER TABLE – table option:
+
+SET ( LOCK_ESCALATION = { AUTO | TABLE | DISABLE } )
+
+AUTO (should be considered if you have a partitioned table)
+If tables is partitioned – the locks will be escalated to the partition-level
+If table is not partitioned – the locks will be escalated to the table-level
+TABLE
+Default behavior
+Locks are escalated to the table-level
+DISABLE
+Lock escalation to the table-level is deactivated in most cases
+In some necessary cases it’s allowed to escalate to the table-level
+
+
+https://logicalread.com/sql-server-2012-lock-escalation-mc03/#.YH8VRuhKjIU
+
+===========================================
+===========================================
+===========================================
+

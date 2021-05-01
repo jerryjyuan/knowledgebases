@@ -195,4 +195,66 @@ $ sudo su -
 [sudo] password for orarom:
 Sorry, user orarom is not allowed to execute '/bin/su -' as root on testvm01.
 
+
+
+
+Summaries:
+
+1) switch user:
+
+	su <username>
+	su - <username>
+	
+	Special:
+		su 	==>Do we ever use this?
+		su - 
+		==>default for root: omitting root keyword
+
+	su -
+		==>su to root by default
+	su - <username>
+		==>su to another user
+		
+	with "-": run its login process as well
+		Login process + The session shell (SHELL) and home (HOME) environment variables are set from substitute user’s /etc/passwd entry?, and the current directory is changed.
+	without "-": not running its login process
+		The session shell (SHELL) and home (HOME) environment variables are set from substitute user’s /etc/passwd entry, and the current directory is not changed.
+		
+	- ==> -l or --login
+	Example:
+		==>For bash, it will run the common bash login process: .profile, .bash_profile, ... ==>just like login user + changes the current directory
+		
+
+	
+2) 	Not switching to that users like root, but run on behalf of it with its privileges: as another user ==>not become or not switch...
+	sudo
+
+	sudo su - 
+	
+		The sudo command allows you to run programs as another user, by default the root user. 
+		
+		If the user is granted with sudo assess, the su command is invoked as root. 
+		
+		Running sudo su - and then typing the user password has the same effect the same as running su - and typing the root password.
+	
+		/etc/sudoers
+		
+		sudo su - smtpdbs
+			==>Become smtpdbs1: switch to smtpdbs
+			==>But you can enter your own password
+
+		su - smtpdbs
+			==>Become smtpdbs1: switch to smtpdbs
+			==>But you can need to enter smtpdbs password
+			
+		
+	sudo <other-command>
+	
+	...
+	
+	
+	
+	
+		
+
 ==============================================

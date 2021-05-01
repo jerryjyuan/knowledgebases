@@ -1,0 +1,33 @@
+
+===========================================
+IT-Dev: Ways
+
+
+==>Maven Projects:
+	==>Sources
+	
+	==>Build Paths:
+		==>Method 1: Enable Maven Dependencies: but not completely...=>Previously it was showing works...
+		==>Method 2: Create plugin to output all jars from dependencies
+					 ==>Add jars to build path
+		==>...
+		==>Method 9: Add jars one by one from maven local repository...
+		==>
+
+
+==>IDE:
+	==>2 kinds of errors:cannot be cleared out by IDE configurations:
+		1) Lambda Expressions
+		2) Lombok ...
+	==>What is the build all workspace: keyboard shortcut?
+		==>Very annoying
+	==>
+	
+==>Dev: should be always trying to get the better/best tools and ways...
+
+	==>Monitors/Keyboards: work good
+	==>Walmart: Onn products: great companies and products
+	==>
+
+
+===========================================

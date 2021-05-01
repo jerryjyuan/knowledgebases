@@ -1,0 +1,356 @@
+
+========================================================
+Dev/Work:
+
+==>Highlights:
+	==>Meetings
+	==>Emails:
+		==>Method: not chime in
+		==>Method: not fall into trap discussions
+		==>
+	==>Chats
+	==>Task Items:
+		==>Tightened Schedules
+	==>Primary Items + Secondary Items:
+		==>Challenge 1: 
+			==>Primary Items 	==>Become busy
+			==>Secondary Items 	==>Also become sticky + busy
+		==>
+
+==>Main Highlights:
+	==>Currently: You are in L3
+	==>
+	
+	
+==>Jerry said: support is easier than dev or coding...
+	==>So support bombing...
+	==>
+	
+	
+========================================================
+Dev-Tools:
+
+Dev-Tools-Debugging:
+	==>
+	==>IDE Debuggers:
+		==>Enable/Streamline IDE's debugger configurations and fast-setups
+	==>Test Tools:
+		==>IDE
+		==>Build
+		==>
+	==>TDD:
+		==>Depends
+		==>ManyTimes/Sometimes: useful...
+	==>...
+	==>Logging
+	==>
+
+
+========================================================
+Dev Challenges:
+
+	==>POC
+	==>Agile/Scrum/PI/...
+		PI Planning stands for Program Increment Planning. PI Planning sessions are regularly scheduled events held throughout the year where multiple teams within the same Agile Release Train (ART) meet to align to a shared vision, discuss features, plan the roadmap, and identify cross-team dependencies.
+		==>Example:
+			==>Worldpay Agile Way
+				==>I was ok overall, but with the following issues:
+					1) Shouted about Jade and Jade's issues: very loud
+					2) Didn't aggressively pursue tasks or assignments from PI and Scrums
+					3) Abused by cubicle-next-next-lady: looked like some ladies or even Hillary Clinton...
+					4) Abused by Rama to some degree?
+					5) Abused by Matt, together with Rama to some degree?
+					6) Abused by Frank in Denver, together with Rama to some degree?
+					7) Abused by ChnNanny in architect team?
+					8) Abused by Azhizhi in Scrum Master?
+			==>...
+	==>Optimizations
+	==>Better Configurations
+	==>Stages
+	==>Based:
+		==>Method Based
+			==>Handle Different Methods:
+				==>Checking and double checking
+				==>No checking at all
+				==>...
+		==>Stage-Based
+	==>Deliveries
+		==>Method-Based Deliveries
+		==>Time-Based Deliveries:
+			==>Big challenges to TDD
+			==>Big challenges to: ...
+			==>
+		==>Stage-Based Deliveries
+		==>DevType-Based Deliveries:
+			App code:
+				==>Lots of business logic...
+			Framework
+			Open Source
+			Lib
+			...
+		==>Scenario-Based Deliveries:
+			Dev
+			Dev Factory
+			L3:
+				...
+				...
+			...
+			Overall-balanced scenarios:
+				==>Include: self-balanced and self-decision scenarios...
+		==>Result-Based Deliveries:
+			==>Key Results
+			==>Core Results
+			==>Complete Results
+			==>Partial Results
+			==>... 
+	==>...
+	==>Refactoring
+	==>Rewrites
+	==>Frameworks
+	==>
+	
+	
+========================================================
+Dev Tools:
+
+	==>Create small sample apps:
+		==>Mainly: personal laptop
+	
+	==>Should use many APIs
+		String:
+			replaceAll
+			replace
+
+	==>
+
+
+
+
+========================================================
+Dev:
+
+	Dev-Team
+	
+	L3-Team
+	
+	Various Team
+	
+	
+	
+	
+========================================================
+Lessons:
+
+	==>Losing Balances: Consequences:
+
+		==>Could lead to die:
+			<- Diseases
+			<- Sick
+			<- Body uncomfortableness + issues
+				==>Even currently: 90% due to added medicine simulations: simulating sickness and uncomfortablenesses
+				==>But in reality: someone will become actually sick and diseases gradually and quickly
+			<- Abusers add medicines accordingly
+			<- Unhappy
+			<- Stressed
+			<- Lose life/work balances
+			<- Being abused via it by someones like Livilly, ..., through Mahesh, ...
+			<- Being retsaliated
+			<- Being harassed
+			<- Being watched by many ones: laugh at Jerry's sufferings, unhappiness, and even sickness, ..., and then demonize Jerry's claimed/declared No.1s: IT Tech, Driver, KB, ..., ...
+			<- ...
+			<- ...
+		
+	==>
+	
+	
+	
+	==>Coding:
+		==>Non-Dev Team Dev-Work Styles:
+			==>Take MSS as an examples:
+				==>Not doing it like DEV team does
+				==>Can or try to make up dev-deficits in the evenings/weekends ... instead of "afternoon-time"
+					1) Avoid promises with "afternoon-time" and 5pm updates (especially production/user urgent support issues)
+						==>For coding parts, no one including Mahesh should or have the reasons to push for coding-based support update in the same day or during non-reasonable days
+						==>
+					2) Do not get pressed/intimidated/... by some ones like Mahesh in some forms ..., ...
+						==>Find out more reasons and methods: 
+						==>If you cannot manage him or tasks or coding-based parts, try to find some more good methods
+							Otherwise, manage him and/or tasks...
+							==>Even it is hard to manage someone like snake heads like Mahesh and Gokul, ...
+			==>...
+			==>But still do good coding except:
+				==>Better scheduling and flexibility regarding L3 standpoint and balanced lifestyle and sustainability of L3+CodingPart...
+		==>
+		
+		==>Coding-based support:
+			Different from production/user/code-repo-review/check-code/etc urgent support issues
+		
+		==>However, for 2nd work like Cognizant: take Dev Team Dev-Work Styles
+			
+
+	==>Better Tech / Task Decisions from your side?
+	
+		==>...
+			
+	==>Handle SomeOnes' trying to make you look/showcase/do bad...
+	
+	==>Handle Review feedbacks and Scheduling...
+		==>Do a scheduling and do a self-scheduling
+		==>...
+		==>Utilize buffer times
+		==>Enable reasonable buffer times, ...
+		==>...
+		==>
+		
+		==>NOT: to get too sticky...: with anyone, any tasks, any communications, and any scenarios: NO STICKY...
+
+			==>I am 5-10 app POC
+			==>I am indeed 5-10 app POC, not just nominally
+			==>I indeed work on many items on 5-10 apps, ...
+			==>...
+			
+			==>MSS: just a prev POC2, ...
+				==>Mahesh: did you know this?
+					==>If Mahesh feels bossy, teaching and bringing Vamsi up to speed like Ravinder does good to you, Mahesh, ..., not a top IT technologist Jerry, ...
+					==>Also, I am against ChnCom, Livilly and her and her family's demonizations/abuses, so ..., ...
+			==>
+			
+			No-Sticky:
+				==>Indeed very important to MSS and Mahesh, ...
+
+		==>High Pressures and Demands?
+			==>Then we do add more REASONABLE and BETTER methods...
+			==>...
+			
+			==>More:
+				==>No.1: SPEED
+				==>No.2: NonSticky
+				==>No.3: Watch out your in-front tasks-plate
+				==>No.4: Enough is enough: for everything:
+							==>Exposure
+							==>Emails
+							==>Chats
+							==>Updates
+							==>Info
+							==>...
+							==>...
+							==>...
+				==>
+				==>Agile to Innovation
+				==>...
+				==>Add various handlers...
+				==>...
+
+		==>Business People become fanciful and ..., and even crazy?
+			==>Is this an IT engineers' bad day?
+			
+			==>
+			
+			==>
+			
+			==>
+			
+			We (as IT Engineers) do think...
+				==>Business people: 8am-5pm: and go home...
+				==>Business people: ..., 
+				==>
+				
+				And also we DO!
+				
+				==>Do have more reasonable strategies and methods to survive in IT world, and do better, ...
+				==>Agile applied to business people too, ...
+				==>...
+				
+				Business is important, but business people cannot make wrong use of it, ..., or take advantage of it, ..., or enable nonequality to IT people, ...
+				
+				USA (and many nations) does have some military methods in corporations/mgmtment, but corporations are different from military, with more and complete rights and policies, regulations, ...
+			
+
+		==>Cores + Keys + ...
+		
+		==>SPEED: it is No.1
+			Except some special scensarios
+		
+		==>...
+		
+	
+	==>Handle others' strategies...
+		==>Switch channels, emails, ...
+		==>Change topic...
+		==>...
+		
+		
+		
+========================================================
+Case Studies: Being Sticky + Being Utilized/Abused + Being Trapped:
+
+	Example:
+	=>MFPV:
+		==>Not nanny Harish
+		==>Not being abused and enslaved by Harish
+		==>Not abuse yourself
+		==>Belong to possible sticky domain:
+			==>Chime in, and then you take care of everything, it is not just 5 min, 30 min server bounce, much much more, 
+				this is one meaning of "sticky": actually deeper and deeper, ...
+				this is another meaning of "sticky": actually longer and longer, ...
+				this is another meaning of "sticky": actually more and more, ...
+				this is another meaning of "sticky": actually your being a slave, a nanny, a labor, a used ..., ...
+				this is another meaning of "sticky": actually not just this time, more times and more times down the road, ...,
+				this is another meaning of "sticky": actually not just a help, become a habit, a habit being used ..., ...
+	
+	Reasons:
+		1) Non-urgent
+		2) POC work: same as MFUW's server bounces
+		3) He is aware of it and will do it
+		Most importantly: not urgent...
+		This doesn't belong to teamwork domains in the "current" "MF-L3" "ecosystems"...
+		
+	How about 2 peers on Java apps?
+		==>1) Bad Example 1: He didn't help me? in any of my workloads and apps so far...
+		==>2) Bad Example 2: He used me as a pure labor for MFCM work last time...
+		==>3) Bad Scenario: I am very weak in personality and handling when dealing with so-called teamwork in this regard: 
+							==>mostly being used...
+							==>many times: being taken advantaged of
+							==>many times: as a nanny
+							==>many times: result is: increase my workloads with less values, ...
+							==>...
+							==>Often times: these so-called team members or peers try to, and tend to become MY MANAGER, ..., when working with me on items, ...
+							==>...
+							
+	How about leaving some spaces for your travel next time?
+	
+		==>OK, but need to do reasonable "leaving spaces" and solutions:
+			==>If your apps need server bounces without you: Solution 1: then you need to locater 2nd POC or 3rd POC, but not Harish, or unrelated
+				==>This is No.1 solution: POC2/POC3
+			==>If your apps need server bounces without you: Solution 2: get closer to internet, or, ...
+			==>If your apps need server bounces without you: Solution 3: something wrong: then you need ...:
+			==>Also leaving spaces: ok: not by unreasonable ways: this is No.1 key:
+					==>pleasing someones
+					==>Chncom backdoor, gifting, corruptions
+					==>...
+				==>It is by normal ways...
+					==>If something at work needed, there are normal ways, if not, then add normal ways, ...
+					==>Why you don't worry right now? - because there is no such a need, or strong need, ...
+					==>If there are some needs, then we put some normal ways...
+					==>Example 1: why MSS / Mahesh adds more, besides Livilly, ..., he says: you only do server bounces, ..., that means: for sure, I can handle server bounces ...
+
+		==>Handle these kinds of human world scenarios:
+			==>Volunteering is really not right..., violate "professionalism", and also "make yourself bad stated above", ...
+			
+				==>Just assume: if I need someone's help, and really need, then I would say/ask for it, ...
+
+			==>
+			
+			
+		Points:
+			==>L3 + ...
+			==>We can do better schedules...
+			==>
+			
+========================================================
+
+========================================================
+
+========================================================
+
+========================================================

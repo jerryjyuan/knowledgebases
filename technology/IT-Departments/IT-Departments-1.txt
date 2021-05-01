@@ -1,8 +1,20 @@
 
+===========================================
+IT Departments:
 
+==>Team Structures:
+	==>Scenario 1: Divide line-management and project-management-team
+				   ==>But for some resources: line-manager could be the same as project-team-manager
+				   Example: Qualcomm:
+				   			==>Line-manager different from project-team-manager: especially when you move around across different projects
+				   Example: TCS-FM:
+				   			Robert Patterson: my TCS-FM-line-manager plus my TCS-FM-L3 manager
+				   Example: TCS:
+				   			Manish Kumar: my TCS line-manager plus my TCS-FM-L3 tech lead
+	==>...
+==>
 
-
-
+===========================================
 Duty to Serve
 
 
@@ -40,6 +52,9 @@ Downtime
 	==>L2: BEAM
 ==>L1: OC/GOC
 		
-		
+===========================================
+
+===========================================
+	
 		
 		

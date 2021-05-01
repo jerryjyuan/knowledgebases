@@ -1,0 +1,348 @@
+
+===========================================
+===========================================
+===========================================
+
+
+===========================================
+Online Coding URLs:
+	http://collabedit.com/fsbr8
+	https://www.hackerrank.com/test/d8qtrg5524f/feedback/done
+	...
+	http://hr.gs/g-java-js-typescript-test
+	
+===========================================
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'fizzBuzz' function below.
+     *
+     * The function accepts INTEGER n as parameter.
+     */
+
+    public static void fizzBuzz(int n) {
+        // Write your code here
+        if (n < 1) {
+            return;
+        }
+        IntStream.rangeClosed(1, n).forEach(i -> {
+            if (i%3 == 0 && i%5 == 0) {
+                System.out.println("FizzBuzz");             
+            } else if (i%3 == 0) {
+                System.out.println("Fizz");             
+            } else if (i%5 == 0) {
+                System.out.println("Buzz");             
+            } else {
+                System.out.println(i);
+            }
+        });
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        Result.fizzBuzz(n);
+
+        bufferedReader.close();
+    }
+}
+===========================================
+
+user@workspaceqr6vp9j76mh2aux8:/projects/challenge$ npm test
+
+> solution-ans-ng2@0.0.0 pretest /projects/challenge
+> npm install
+
+npm WARN solution-ans-ng2@0.0.0 No description
+npm WARN solution-ans-ng2@0.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+audited 1188 packages in 18.968s
+found 351 vulnerabilities (164 low, 60 moderate, 123 high, 4 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+> solution-ans-ng2@0.0.0 test /projects/challenge
+> ng test
+
+ 10% building modules 1/1 modules 0 active                                         
+START:
+03 04 2021 20:21:51.590:INFO [karma]: Karma v1.7.1 server started at http://0.0.0.0:9876/
+03 04 2021 20:21:51.591:INFO [launcher]: Launching browser ChromeHeadless with unlimited concurrency
+03 04 2021 20:21:51.597:INFO [launcher]: Starting browser ChromeHeadless
+03 04 2021 20:21:57.634:INFO [HeadlessChrome 78.0.3904 (Linux 0.0.0)]: Connected on socket 0f423RfbmcnkPcCnAAAA with id 38496611
+  AppComponent
+    ✔ should create the app
+    ✔ should have as title 'app works!'
+    ✔ should render title in a h1 tag
+
+Finished in 0.099 secs / 0.148 secs @ 20:21:59 GMT+0000 (UTC)
+
+SUMMARY:
+✔ 3 tests completed
+user@workspaceqr6vp9j76mh2aux8:/projects/challenge$ 
+
+
+===========================================
+user@workspaceqr6vp9j76mh2aux8:/projects/challenge$ npm install
+npm WARN solution-ans-ng2@0.0.0 No description
+npm WARN solution-ans-ng2@0.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+audited 1188 packages in 8.849s
+found 351 vulnerabilities (164 low, 60 moderate, 123 high, 4 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+
+   ╭───────────────────────────────────────────────────────────────╮
+   │                                                               │
+   │       New major version of npm available! 6.4.1 → 7.8.0       │
+   │   Changelog: https://github.com/npm/cli/releases/tag/v7.8.0   │
+   │               Run npm install -g npm to update!               │
+   │                                                               │
+   ╰───────────────────────────────────────────────────────────────╯
+
+user@workspaceqr6vp9j76mh2aux8:/projects/challenge$ 
+
+===========================================
+
+user@workspaceqr6vp9j76mh2aux8:/projects/challenge$ npm start
+
+> solution-ans-ng2@0.0.0 prestart /projects/challenge
+> npm install
+
+npm WARN solution-ans-ng2@0.0.0 No description
+npm WARN solution-ans-ng2@0.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.1.3 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+audited 1188 packages in 9.028s
+found 351 vulnerabilities (164 low, 60 moderate, 123 high, 4 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+> solution-ans-ng2@0.0.0 start /projects/challenge
+> ng serve --host 0.0.0.0 --port 8000 --disable-host-check
+
+WARNING Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+** NG Live Development Server is listening on 0.0.0.0:8000, open your browser on http://localhost:8000 **
+Hash: b6b05879d1a35a3d1872                                                               
+Time: 8970ms
+chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 271 kB {4} [initial] [rendered]
+chunk    {1} main.bundle.js, main.bundle.js.map (main) 3.72 kB {3} [initial] [rendered]
+chunk    {2} styles.bundle.js, styles.bundle.js.map (styles) 10.5 kB {4} [initial] [rendered]
+chunk    {3} vendor.bundle.js, vendor.bundle.js.map (vendor) 2.51 MB [initial] [rendered]
+chunk    {4} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry] [rendered]
+webpack: Compiled successfully.
+webpack: Compiling...
+Hash: b6b05879d1a35a3d1872                                                               
+Time: 4281ms
+chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 271 kB {4} [initial]
+chunk    {1} main.bundle.js, main.bundle.js.map (main) 3.72 kB {3} [initial]
+chunk    {2} styles.bundle.js, styles.bundle.js.map (styles) 10.5 kB {4} [initial]
+chunk    {3} vendor.bundle.js, vendor.bundle.js.map (vendor) 2.51 MB [initial]
+chunk    {4} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry]
+webpack: Compiled successfully.
+
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'getMaxUnits' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts following parameters:
+     *  1. LONG_INTEGER_ARRAY boxes
+     *  2. LONG_INTEGER_ARRAY unitsPerBox
+     *  3. LONG_INTEGER truckSize
+     */
+
+    public static long getMaxUnits(List<Long> boxes, List<Long> unitsPerBox, long truckSize) {
+    // Write your code here
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int boxesCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Long> boxes = new ArrayList<>();
+
+        for (int i = 0; i < boxesCount; i++) {
+            long boxesItem = Long.parseLong(bufferedReader.readLine().trim());
+            boxes.add(boxesItem);
+        }
+
+        int unitsPerBoxCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Long> unitsPerBox = new ArrayList<>();
+
+        for (int i = 0; i < unitsPerBoxCount; i++) {
+            long unitsPerBoxItem = Long.parseLong(bufferedReader.readLine().trim());
+            unitsPerBox.add(unitsPerBoxItem);
+        }
+
+        long truckSize = Long.parseLong(bufferedReader.readLine().trim());
+
+        long result = Result.getMaxUnits(boxes, unitsPerBox, truckSize);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+===========================================
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+
+class Result {
+
+    /*
+     * Complete the 'getMaxUnits' function below.
+     *
+     * The function is expected to return a LONG_INTEGER.
+     * The function accepts following parameters:
+     *  1. LONG_INTEGER_ARRAY boxes
+     *  2. LONG_INTEGER_ARRAY unitsPerBox
+     *  3. LONG_INTEGER truckSize
+     */
+
+    public static long getMaxUnits(List<Long> boxes, List<Long> unitsPerBox, long truckSize) {
+    // Write your code here
+        if (truckSize == 0 || boxes.isEmpty() || unitsPerBox.isEmpty() || boxes.size() != unitsPerBox.size()) {
+            return 0;
+        }
+        Map<Long, Long> unitsMap = new HashMap<>();
+        IntStream.range(0, boxes.size()).forEach(i -> {
+            unitsMap.put(boxes.get(i), unitsPerBox.get(i));
+        });
+        Map<Long, Long> sortedMap = unitsMap.entrySet().stream()
+            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        long unitsCount = 0;
+        long boxCount = 0;
+        for (Map.Entry entry : sortedMap.entrySet()) {
+            boxCount++;
+            unitsCount += ((Long)entry.getValue()).longValue();
+            if (boxCount >= truckSize) {
+                break;
+            }
+        }
+        System.out.println("unitsCount: " + unitsCount);
+        return unitsCount;
+    }
+
+}
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int boxesCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Long> boxes = new ArrayList<>();
+
+        for (int i = 0; i < boxesCount; i++) {
+            long boxesItem = Long.parseLong(bufferedReader.readLine().trim());
+            boxes.add(boxesItem);
+        }
+
+        int unitsPerBoxCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Long> unitsPerBox = new ArrayList<>();
+
+        for (int i = 0; i < unitsPerBoxCount; i++) {
+            long unitsPerBoxItem = Long.parseLong(bufferedReader.readLine().trim());
+            unitsPerBox.add(unitsPerBoxItem);
+        }
+
+        long truckSize = Long.parseLong(bufferedReader.readLine().trim());
+
+        long result = Result.getMaxUnits(boxes, unitsPerBox, truckSize);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================
+===========================================

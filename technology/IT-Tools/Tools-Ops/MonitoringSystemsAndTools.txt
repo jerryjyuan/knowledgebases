@@ -1,0 +1,204 @@
+
+===========================================
+Tools-Ops: Monitoring Systems and Tools:
+
+Summaries:
+	==>Most of the Ops Systems and Tools: are from common industrial vendors/companies/providers: so these knowledge bases could be common
+	==>However, each client company could do some customized to select/enable special features in addition to common features: so tools could look differently
+	==>Many tools/systems: 
+		==>integrated with Service Now:
+			==>Monitoring Tools: can triggers alarms and create ServiceNow incident tickets: automatically
+		==>integrated with Corporation's Ops Teams (Ops teams are also integrated with Service Now)
+	
+===========================================
+Topic: Systems and Tools
+
+==>Scenario: Server Host Monitoring:
+	==>Tool: Spectrum
+	==>Tool: Dynatrace Monitoring Tool
+	==>
+==>Scenario: Monitoring: Server Instance + Application Name
+	==>Tool: SiteScope:
+			 ==>Managed by SN: can add/remove monitors
+			 ==>Node/Monitors
+			 ==>How to check?	==>Login to SiteScope: TBD: if disabled: it should show: disabled
+	==>
+==>Scenario: Monitoring: Server Instance (middleware instances) + port
+	==>Tool: Middleware instance alarms
+==>Scenario: 
+==>
+==>
+
+===========================================
+Topic: Ownerships:
+
+==>Configured via Service Now: SN also managed teams (groups)
+	==>Spectrum/SiteScope and Alarms: GOC (Execution and Monitoring Support + ... + MWS's front-desk)
+	==>Middleware Instance Alarms:  Middleware Service Team: MWS/WIO
+
+===========================================
+Topic: Routes:
+	==>Route 1: Simplest way: 2 minutes
+		==>Update existing ticket's field/status
+	==>Route 2: Simple way:
+		==>Create a ticket: 5 minutes
+			==>No Call needed + Automatically processed + No approval needed
+	==>Route 3: Medium way:
+		==>Create a ticket: 5-30 minutes
+			==>Chat/Email needed
+			==>Call to execute needed
+			==>And/or: Documentation needed
+			==>And/or: Approval needed
+			==>And/or: Some unknown fields and data to enter
+	==>
+	
+	==>Route 5: Someones tell you... and you behave a puppet first and does it and follow-up with some research/RCA/understanding: during the CHG session
+		==>Example 1: Sindhu: told you to close it...
+	
+	==>Route 6: Need some research and/or some understanding: the second morning 5am in office...
+
+
+==>Follow-up Routes:
+	==>Emails:
+		1) ownership groups: respond with some status or emails:
+			==>SiteScope: GOC: process it via SiteScope site
+			==>Middleware Instances Alarms: WIO: process it via their tool: sometimes they send an email with the screen print as confirmation
+		2) SN emails about the task/ticket's info
+	==>SN: SN Task pages?: Task: has various info: status: completion: images
+		==>SN: can confirm status: it is a REQ and TASK
+	==>Login:
+		SiteScope
+		...
+
+===========================================
+Topic: Type 1: CHG
+
+	CHG: create CTASK directly: but not for alarm suppressions: instead use the following ways:
+
+	==>Have more categories than: 1) INC 2) Other normal "Alarm disabling and enabling"
+	==>Can automate a lot:
+		Create is done via CHG checkbox and info
+	==>1) Specify the time window: better:
+			==>Guideline 1: Specify window: start-hour to the CHG's backout-end hour (cannot use entire CHG's window: because it could be much longer)
+			==>Guideline 1: Double the time window: e.g: if CHG is 3 hours, specify 6 hours
+			==>Guideline 3: If doubling time window reaches next day business hour timeline: specify until next business hour timeline
+			(Can always create a new ticket to specify a new window for the same CHG: extend its window)
+	==>2) CHG: Adjust: Reset/Reschedule:
+			==>This applied to CHG: "in scheduled state": means: the suppressions have been enabled in OC/WIO
+				==>Then: what happened?
+					1) Scenario 1: CHG: reset: to the same schedule (maybe including same weekend or same day...)
+					2) Scenario 2: CHG: reset: to the different schedule (different weekend specifically: aka: major changes)
+					3) Scenario 3: CHG: cancelled (also: a major change)
+				==>Lessons:
+					1) CHG: do not easily go to "in scheduled state" - make sure all items are ready for approval:
+							==>not rush to "Approval" - avoid "CHG reset... if possible"
+					2) CHG: next time working with Justin and Mahesh: we should do better by using Narender or Amar ways: better scheduling and estimates, ...
+							==>We should not easily use: emergency CHG or 2-day-work instead of actual-3-4-weeks-L3-developer-work...
+							==>Not just some evenings or weekend hours, also wipe out those tickets' shits..., plus ...
+			
+			==>Scenario 1:			
+				==>Process: No need to create a new ticket
+					==>If suppression contents no change: No action needed
+					==>If suppression contents change:
+					(a) Spectrum:
+						==>Then: Send an email (with CTASK number) to GOC + Make a call to GOC: notification+processing(or: notification+verification)
+					(b) SiteScope:
+						==>Then: Send an email (with CTASK number) to GOC + Make a call to GOC: notification+processing(or: notification+verification)
+					(c) WIO Middleware Instances Alarm:
+						==>Then: Send an email (with CTASK number) to MWS to syncup (if MWS is not responding: contact GOC)
+			
+			==>Scenario 2 and 3:
+				Process: Reset/Cancel: ==>The below tickets can do "overriding" of any other submitted tickets: which enables: "cancelling"
+				Create a new ticket: provide reason for the removal of suppression
+				(a) Spectrum: No approval needed
+					==>Ticket 1: IT Services Ticket:
+							     ==>Should be: Summary: "Enable Spectrum Monitoring"
+				(b) SiteScope: No approval needed
+					==>Ticket 1: IT Services Ticket:
+								==>Should be: Summary: "Enable SiteScope Monitoring"
+					==>Then: Send an email (with CTASK number) to GOC + Make a call to GOC: notification+processing(or: notification+verification)
+				(c) WIO Middleware Instances Alarm: No approval needed
+					==>Ticket 1: IT Services Ticket:
+								==>Should be: Summary: "Enable Middleware Monitoring"
+					==>Then: Send an email (with CTASK number) to MWS to syncup (if MWS is not responding: contact GOC)
+								
+	==>3) Change: add/adjust/delete (suppression):
+			1) Scenarios: Add/Adjust: (Adjust uses similar ways to "Create/Add")
+				(TBD: maybe SN doesn't allow "Adjust": only allows: "Add/Delete": ==>RIGHT NOW: Assume: "Adjust" can be done via a new "Add" to override
+					  ==>For "Adjust": users may need: 1) Delete+Add: ==>But I don't think so because you cannot cancel (means: delete) an "Add" ticket...)
+					  		==>TBD: if an "Add" ticket can be cancelled, then we don't need "Adjust": just do: Cancel+Add-a-new-one
+				==============>UPDATES: "adjust" belongs to the above category "Adjust: Reset/Reschedule"
+				(a) Spectrum: No approval needed
+					==>Ticket 1: GOC Execution:  (will link to CHG)
+						==>Add: create a ticket ==>Adjust: it is a new ticket from "Add" (overriding)
+						(IT Services: can do it too (Exection and Monitoring Support group), but not listed as No.1 way)
+				(b) SiteScope: No approval needed
+					==>Ticket 1: IT Services Ticket: No approval needed
+								==>Should be: Summary: "Disable SiteScope Monitoring": specify the time window
+								==>Add: create a ticket ==>Adjust: it is a new ticket from "Add" (overriding)
+				(c) WIO Middleware Instances Alarm: No approval needed
+					==>Ticket 1: "WIO Middleware Instances Alarm Suppression - tickets" (will link to CHG)
+						==>Add: create a ticket ==>Adjust: it is a new ticket from "Add" (overriding)
+						(IT Services: can do it too, but not listed as No.1 way)
+			2) Scenarios: Delete: (similar to the below "finishes early or stopped")
+				Spectrum: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (add "delete desc" or: specify a past time?) in the description "Maybe No"
+				SiteScope: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (add "delete desc" or: specify a past time?) in the description? "Maybe No"
+								==>Should be: Summary: "Enable SiteScope Monitoring"
+				WIO Middleware Instances Alarm: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (add "delete desc" or: specify a past time?) in the description? "Maybe No"
+								==>Should be: Summary: "Enable Middleware Monitoring"
+	==>4) Change finishes early or stopped: create a ticket (5 minutes) (similar to the above "delete")
+			1) Too much time left: create a new ticket: specify the finish-time as the end-time: so alarms can be turned on earlier
+				Spectrum: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (earlier finish time) in the description? ==>"No need"
+							     ==>Should be: Summary: "Enable Spectrum Monitoring"
+				SiteScope: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (earlier finish time) in the description? ==>"No need"
+								==>Should be: Summary: "Enable SiteScope Monitoring"
+				WIO Middleware Instances Alarm: No approval needed
+					==>Ticket 1: IT Services Ticket: ==>Specify the time window (earlier finish time) in the description? ==>"No need"
+								==>Should be: Summary: "Enable Middleware Monitoring"
+			2) Just shorter time left: do nothing
+	==>3) 
+				
+===========================================
+Topic: Type 2: INC
+
+	INC: create ITASK directly: but not for alarm suppressions: instead use the following ways:
+
+	Delete-Suppression/Enable-Earlier/Etc:
+		INC: you can also refer to CHG section if you need to enable monitoring earlier before the specified time window done
+
+==>Spectrum: No approval needed
+				==>Ticket 1: GOC Execution  (will link to INC)
+==>SiteScope: No approval needed
+	==>Ticket 1: IT Services Ticket: ==>Specify the time window in the description
+				==>Summary: "Disable SiteScope Monitoring"	
+				(QUESTION: can we create an ITASK to do this? maybe not...)		
+==>WIO Middleware Instances Alarm: No approval needed
+				==>Ticket 1: "WIO Middleware Instances Alarm Suppression - tickets" (will link to INC)
+				(IT Services: can do it too, but not listed as No.1 way)
+
+===========================================
+Topic: Type 3: Normal non-CHG and non-INC:
+
+	Examples:
+		==>Non-CHG and Non-INC
+		==>Others' CHG: but cannot be used for this
+		==>Infrastructure weekends: generic scenarios...
+
+	Delete-Suppression/Enable-Earlier/Etc:
+		You can also refer to CHG section if you need to enable monitoring earlier before the specified time window done
+
+==>Spectrum: No approval needed
+				==>Ticket 1: GOC Execution
+==>SiteScope: No approval needed
+	==>Ticket 1: IT Services Ticket: ==>Specify the time window in the description
+				==>Summary: "Disable SiteScope Monitoring"			
+==>WIO Middleware Instances Alarm: No approval needed
+	==>Ticket 1: IT Services Ticket: ==>Specify the time window in the description
+				==>Summary: "Disable SiteScope Monitoring"
+
+===========================================

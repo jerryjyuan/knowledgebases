@@ -1,0 +1,12 @@
+
+
+==>Limitation 1: not always 100% accommodated:
+	Example: https://dictionary.cambridge.org/us/dictionary/english/draw
+		==>Not completely: RWD:
+			==>Use: 576 / 768 / 992 / 1200
+				    m-phone/tablet/laptop/desktop/large-desktop
+
+==>Limitation 2: UI capability: also based on app/system design
+	Example: SPARTA-UI: based on backend service apps
+	Example: ...
+

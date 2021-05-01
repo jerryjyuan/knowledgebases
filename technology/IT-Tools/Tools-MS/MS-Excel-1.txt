@@ -1,0 +1,35 @@
+
+===========================================
+MS Excel:
+
+===========================================
+Topic: Expand Rows:
+
+Methods:
+
+(1) Highlight all + double check the gaps
+(2) Disable filters: could be all columns if needed
+(3) 
+
+===========================================
+Topic: Expand Columns:
+
+Methods:
+
+(1) Select all "related" columns (including the hide ones): right click: unhide
+	(Reversal scenarios: to hide some columns...)
+(2) 
+
+
+TBD:
+
+How to expand all collapsed columns or rows in Excel?
+Select the whole sheet, click Data > Ungroup > Clear Outline to display all collapse columns and rows which are grounded by the Group function.
+Select the data range you want to expand the data, click Data > Filter to disable the Filter function, then all cells have been displayed at once.
+
+===========================================
+Topic: Filter: columns
+	==>Place search contents to do the search in addition to checkboxes
+	
+===========================================
+

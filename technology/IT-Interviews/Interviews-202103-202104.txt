@@ -1,0 +1,231 @@
+
+===========================================
+===========================================
+===========================================
+TCS-MF-L3: Position Status:
+	==>Stability:
+		==>03/19/2021?: 90%:	Before contract issue in the meeting announced
+		==>03/19/2021?: 60%:	After contract issue in the meeting announced
+		...
+		...
+		==>03/?/2021: 	45%:	When first wave transition meetings: started
+		...
+		==>03/?/2021: 	35%:	When timesheet "temporary hold" email from Ajay: sent to the team
+		...
+		==>03/31/2021:	25%:	When no updates about timesheet "temporary hold" status
+		==>04/01/2021:	20%:	When timesheets should not be entered
+		==>04/02/2021:	30%:	When timesheets can be resumed (allocations are added: at least for now... even for transition periods, ...) + transition is still going on
+		==>...
+		==>04/05/2021:	30%:	1) schedule interview outside: 8-12 and 1-5 EDT; 2) focus on core work; 3) ...	
+		==>...
+		==>...
+	==>L3:
+		==>Scenario 1: Unfairness and Abuses or Personalized: Only try to oust Jerry but L3 stays the same
+		==>Scenario 2: A big gaming: entire L3 come to play but only Jerry takes the transition scenario from L3: including good/neutral/bad/abusive/...
+		==>Scenario 3: Normal USA or world business/company re-org or organizational change scenarios: including good/neutral/bad(layoffs, downsizing, ...)/abusive/...
+		==>Scenario 4: Normal IT-Services-Agencies/On-Site-Teams/Contracts/Contractors/ project scenarios: changes, including good/neutral/bad(layoffs, downsizing, ...)/abusive/...
+		==>Scenario 5: Normal L3 as a contract-team/onsite-team: project scenarios: changes, including good/neutral/bad(layoffs, downsizing, changes,...)/abusive/...
+		==>Scenario 6: ...
+		==>Scenario 7: L3 Resources: if or assuming the above Scenario 5 is true
+					 ==>Overall:
+						==>
+					 ==>Individuals:
+						==>Sudhir: stays in FM as another TCS project PM, or move to other TCS client as PM
+									==>He should have known this approximately back in October, 2020 (about 3-4 months ago) as L3 PM/TCS-Manager
+									==>Suman: discussed with him: and allocated one PM position to him about January/February 2021 (as long as he thinks Sudhir is basically ok overall)
+									==>But he cannot tell L3 team memebers at all: did he tell anyone of L3?
+										==>Cannot - otherwise leaking the business secrets and violate policies, or also breach Suman's trust and help or instructions
+						==>Rahul:  Could be similar to Sudhir, but depends...
+						==>Shiv:   He might be knowing it about December 2020, ...
+								   ==>Is this one of the reasons why he left for Mumbai? Visiting mother can be an excuse as general public, ...
+									==>He might be even working for another TCS client RIGHT NOW, ... in USA, ...
+						==>Members:
+								   ==>99% of them: not knowing it as a certainty: due to cotnract and policy natures
+								   ==>But rumors could arise:
+										==>Narender: heard of some rumors due to some special reasons: October, 2020: moved to another team, ...
+											==>Could be due to some other reasons too:
+												1) Reason: One of the dev or dev factory teams to add new resources: could come from other teams as well - not always from recruiting
+															==>Example: Michael McCarthy, ..., ...
+												2) ...
+										==>
+								   ==>Most of them: moved to other FM teams or other TCS clients in USA and India, ...
+		==>Scenario 8: 
+	==>
+	
+===========================================
+Methods:
+	==>Time Windows: Interviews:
+		11AM-12PM: CDT
+		4PM-5PM: CDT
+		==>Where are you?
+			==>Work remotely due to CCP-Virus...
+		==>...
+		
+===========================================
+Daily Notes:
+	==>Items List: MySelf
+	==>Items List: Work
+	==>Items List: Interviews
+	==>Items List: Phone
+	==>
+===========================================
+
+
+===========================================
+===========================================
+===========================================
+===========================================
+04/03/2021: Satursday
+
+Google Client:
+
+==>Code Test: 1h
+==>HCL Interview
+==>Google Client Interview
+
+Coding Test Link -- As discussed
+Inbox
+No7-Stage3/_All_Interviews/interview-tests1
+
+Shubham Srivastava <shubham.srivastava@quantumworld.us>
+Apr 1, 2021, 4:53 PM (2 days ago)
+to me
+
+Hi Jerry as discussed below is the coding test link which you have to complete , please complete the test ASAP and let me know ..!!
+
+ 
+
+http://hr.gs/g-java-js-typescript-test
+
+Welcome to
+HCL America - G Team - Java, Java Script & Angular/Typescript Developer Screening Test
+
+
+Regards,
+
+ 
+
+Shubham Srivastava
+
+Quantum World Technologies Inc.
+
+199 W Hillcrest Dr, Suite#0112, Thousand Oaks, CA 91360
+
+250 Yonge street  , Suite #2201, Unit #10, Toronto, ON, M5B 2L7, Canada
+
+160 City Road , London EC1V 2NX , United Kingdom  
+
+www.quantumworld.us
+
+Contact : 402-267-1054
+
+Fax : 805-834-0532
+
+E: shubham.srivastava@quantumworld.us
+
+LinkedIn: https://www.linkedin.com/in/shubham-s-b8b276137/
+
+===========================================
+04/01/2021: Thursday
+
+	6:00pm EDT: Aravind Nagasundaram's Personal Room
+		Apple / Cognizant
+	
+
+	Asher Mintzer
+
+	Zoom Interview: 12:00pm EDT
+
+===========================================
+03/31/2021: Wednesday
+
+==>2nd Round Interview: Jitendra Kumar / Cognizant
+
+===========================================
+03/30/2021: Tuesday: 2:15pm EDT
+
+Interview availability for Sr java Developer at Austin, TX
+
+take pair programming interview at 01.15pm, CST on Tuesday- 03/30/2019
+
+Regards,
+
+Jagarriti Sharmaa
+
+Next Level Business Services, Inc.
+
+Talent Solutions | Digital Transformation | Data Analytics
+
+Phone: (904) 371-2644 | Fax: +1 (608)646-8326
+
+E-mail: jagariti.sharma@nlbservices.com | Web:www.nlbservices.com
+
+===========================================
+03/26/2021: Friday: 12:00PM EDT
+
+Call Carl: 714-915-1572
+
+===========================================
+03/25/2021: Thursday: 4:30PM EDT
+
+We have got an interview request for you with Cognizant. They want to schedule on Thursday (3/25) or Friday (3/26) this week. We have the following time slot, so let me know which time suits you best for 90 minutes pair programming coding test?
+
+8:30 pm cst
+10:30 pm cst
+1:15 pm cst
+==>3:30 pm cst
+
+Jitendra Kumar
+
+Ventures Unlimited Inc.
+
+309 Fellowship Road, East Gate Center, Suite 200
+
+Mount Laurel, New Jersey 08054.
+
+Tel: 201-377-5954 Ext- 410    
+Fax: 888-534-5731
+
+E-Mail : jiten@vui-inc.us
+
+NJ License #:  CT0357900
+MBE/DBE Certified Firm
+
+USA | India |Singapore| Malaysia
+
+Thu Mar 25, 2021 4:30pm – 6pm (EDT)
+Where	https://cognizantcorp.webex.com/meet/John.Heckenliable
+Who	ayan.saha@cognizant.com, rahul.k@vui-inc.com, kumar.abhishek8@cognizant.com*
+
+===========================================
+03/24/2021: Wednesday:	5:00 PM EDT
+
+Client Synechron would like to take the interview(Video) on 24th March at 5:00 PM EST. 
+
+Kindly Confirm your Availability.
+
+Name:JERRY JING YUAN
+Email:jerryjyuanusa@gmail.com
+contact No: (510) 331-9231 
+Time:05:00 PM EST.
+Date/Day.24th March /Wednesday.
+
+Thanks and regards
+Amar
+IT recruitment specialist
+Ph-732-385-1158
+Eros Technologies INC
+https://www.linkedin.com/in/amarendra-sethy-454948143/
+Skype:live:amarendrasethy149
+
+===========================================
+03/24/2021: Wednesday: 11:00 AM EDT
+
+Nag
+	NukasaniGroup
+	
+	30 minute technical interview
+
+===========================================
+===========================================
+===========================================

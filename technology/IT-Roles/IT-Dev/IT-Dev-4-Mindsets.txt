@@ -1,0 +1,31 @@
+
+===========================================
+IT-Dev: Mindsets
+
+==>Factors/Facets:
+	==>1) Personality:
+		  ==>Example: Warehouseman
+		  ==>Example: Nannyman
+		  ==>Example: ...
+	==>2) 
+
+
+==>Finalizations:
+
+
+==>Showing:
+	==>ShowDetails:	
+	==>ShowRoutes:
+	==>ShowCases:
+	==>
+
+	Summaries:
+		==>What are better/best scenarios?
+			==>Reason 1: Remove: scaffolding/drafts/notes/developmental-aspects/...
+			==>Reason 2: Most of the readers/viewers: are not interested in reading these + cause confusions mostly
+			==>Reason 3: it is for "average/general-coworkers" scenarios: so use: finalized code...
+		
+==>WorkingProcessing:
+	==>		
+
+===========================================

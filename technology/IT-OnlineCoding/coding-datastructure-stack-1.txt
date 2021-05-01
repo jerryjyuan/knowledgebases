@@ -1,0 +1,177 @@
+
+===============================
+Coding: Data Structure: Stack
+===============================
+
+
+
+(1) Solution 1:
+	looping
+	
+(2) Solution 2:
+	indexOf
+	
+(3) Solution 3:
+	Looping + HashMap
+	Looping + LinkedhashMap
+	
+(4) Solution 4:
+	Stack
+	
+	
+
+
+// package whatever; // don't place package name!
+
+//Given a string s containing letters, numbers and Parentheses like 
+// '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+//An input string is valid if:
+
+//Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+
+// Valid Ex
+// [abd (a) (b) (c)]
+// [(adfd(dfd(ddfd)))]
+ // () [] {}
+
+// Invalid ex
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+class MyCode {
+  
+  private static boolean isMatchSymbol(String value, String prevValue) {
+    if ((prevValue.equals("(") && value.equals(")"))
+        || (prevValue.equals("{") && value.equals("}"))
+        || (prevValue.equals("[") && value.equals("]"))
+        ) {
+      return true;
+    }
+    return false;
+  }
+    
+	public static void main (String[] args) {
+    
+    String input = "[ab(a)(c)]";
+
+    Map<Integer, String> map = new LinkedHashMap<>();
+    for (int i=0; i<input.length(); i++) {
+      if (input.charAt(i) == '(' || input.charAt(i) == ')'
+          || input.charAt(i) == '{' || input.charAt(i) == '}'
+          || input.charAt(i) == '[' || input.charAt(i) == ']') {
+            map.put(i, String.valueOf(input.charAt(i)));
+          }
+    }
+    System.out.println("Size: " + map.size());
+     
+    boolean isValid = true;
+    String prevValue = "";
+    int symbolCount = 0;
+    //List<String> sameSymbolList = new ArrayList<>();
+    for (Map.Entry<Integer, String> entry : map.entrySet()) {
+      String value = entry.getValue();
+      
+      if (!prevValue.equals("")) {
+        if (value.equals(prevValue)) {
+          System.out.println("Equals: value: " + value + ", prevValue: " + prevValue);
+          symbolCount++;
+        } else if (!isMatchSymbol(value, prevValue)) {
+          System.out.println("!isMatchSymbol: value: " + value + ", prevValue: " + prevValue);
+          isValid = false;
+          break;
+        } else if (isMatchSymbol(value, prevValue)) {
+          System.out.println("isMatchSymbol: value: " + value + ", prevValue: " + prevValue);
+          symbolCount--;
+          if (symbolCount == 0) {
+            prevValue = "";
+          }
+        }
+      } else {
+        prevValue = value;
+        symbolCount++;
+      }
+    }
+    
+    System.out.println("isValid: " + isValid);
+    System.out.println("symbolCount: " + symbolCount);
+    if (!isValid || symbolCount > 0) {
+      System.out.println("It is not a matching String");
+    } else {
+      System.out.println("It is a matching String");
+    }
+	}
+}
+
+
+
+
+https://codeinterview.io/WVEDMCGWSY
+
+Kamya Singh
+
+// package whatever; // don't place package name!
+
+//Given a string s containing letters, numbers and Parentheses like 
+// '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+//An input string is valid if:
+
+//Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+
+// Valid Ex
+// [abd (a) (b) (c)]
+// [(adfd(dfd(ddfd)))]
+ // () [] {}
+
+// Invalid ex
+import java.io.*;
+import java.util.*;
+
+class MyCode {
+  
+  private static boolean isMatchSymbol(String value, String prevValue) {
+    if ((prevValue.equals("(") && value.equals(")"))
+        || (prevValue.equals("{") && value.equals("}"))
+        || (prevValue.equals("[") && value.equals("]"))
+        ) {
+      return true;
+    }
+    return false;
+  }
+    
+	public static void main (String[] args) {
+    
+    //String input = "[ab(a)(c)]";
+    //String input = "[abd (a) (b) (c)]";
+    String input = "[(adfd(dfd(ddfd)))]";
+    boolean isValid = true;
+    Stack<String> stack = new Stack<>();    
+    for (int i=0; i<input.length(); i++) {
+      if (input.charAt(i) == '('
+          || input.charAt(i) == '{'
+          || input.charAt(i) == '[') {
+            stack.push(String.valueOf(input.charAt(i)));
+      } else if (input.charAt(i) == ')'
+          || input.charAt(i) == '}'
+          || input.charAt(i) == ']') {
+          String prevValue = stack.pop();  
+          if (prevValue == null 
+            || !isMatchSymbol(String.valueOf(input.charAt(i)), prevValue)) {
+            isValid = false;
+            break;
+          }
+      }
+    }
+    if (!isValid) {
+      System.out.println("It is not a matching String");
+    } else {
+      System.out.println("It is a matching String");
+    }
+	}
+}
+
+
