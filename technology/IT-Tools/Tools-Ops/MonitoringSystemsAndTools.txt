@@ -30,6 +30,16 @@ Topic: Systems and Tools
 ==>
 
 ===========================================
+DynaTrace Tool:
+
+	Dynatrace is an American technology company that produces a software intelligence platform based on artificial intelligence 
+	to monitor and optimize application performance and development, IT infrastructure, and user experience for businesses 
+	and government agencies throughout the world.
+
+	Dynatrace: The Leader in Cloud Monitoring
+	==>
+
+===========================================
 Topic: Ownerships:
 
 ==>Configured via Service Now: SN also managed teams (groups)

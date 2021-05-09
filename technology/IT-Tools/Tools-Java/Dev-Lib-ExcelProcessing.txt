@@ -2,6 +2,18 @@
 ===========================================
 Dev - Lib: Excel Processing
 
+DB:
+	Query conducted:
+		2021-05-02 09:24:00
+	date >= current_timestamp-6:
+		Compared with: 2021-04-26 09:24:00
+		2021-04-26 09:23:12.163: not displayed
+		2021-04-26 11:59:38.293: displayed
+	date >= current_timestamp-7:
+		Compared with: 2021-04-25 09:24:00
+		2021-04-26 09:23:12.163: displayed
+		2021-04-26 11:59:38.293: displayed
+		
 ===========================================
 Topic: Lib:
 	==>Java POI Apache lib

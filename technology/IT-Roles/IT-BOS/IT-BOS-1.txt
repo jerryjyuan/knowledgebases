@@ -1,0 +1,30 @@
+
+===========================================
+IT-BOS:
+	Business Operation Support:
+
+	Business Operarions and Client Management
+
+BTO Office
+
+Applications:
+	Foundational Applications
+	
+		External Users: FAM: FM Access Manager
+		External Users: COPS
+	
+	Digital Applications
+
+Data Quality
+
+Data Governance
+
+Strategic Transformation
+
+Business Groups
+
+	SPARTA/MSS: Capital Markets / CM
+	
+	
+
+===========================================

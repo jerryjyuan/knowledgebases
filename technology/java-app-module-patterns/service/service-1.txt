@@ -1,0 +1,18 @@
+
+
+***********************
+Module Patterns: Service
+***********************
+
+ServiceImpl: EJB Remote Interface Implementation Classes:
+	==>	BO Class
+		==>BO Class:
+			==>Has a wrapper VO class
+			==>Fetch SQL Queries from XPath in xxx.xml files
+			==>Build up values HashMap: mainly done via xxxBOHelper class
+		==>CRUD Calls: xxxDAO.CRUD
+			==>Call BaseDAO: CRUD APIs
+				==>Call: Util.Db class: JDBC API calls
+			==>Set up JDBC calls' results to BO in HashMap
+		==>BO Class: have the results from the HashMap returned from xxxDAO class
+

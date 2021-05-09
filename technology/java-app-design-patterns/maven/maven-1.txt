@@ -1,0 +1,29 @@
+
+*********************************
+Maven Build: pom.xml: properties
+*********************************
+
+(1) Maven Properties: profiles
+	<prop1>xxx</prop1>
+(2) Usage:
+	application.properties:
+		==>Point 1: Define: application-level properties files: provide app-level config data: key=value
+		==>Point 2: Location: same as pom.xml folder
+		==>Point 3: Enabled to copy to post-maven-build classpath, which is packaged into the final EAR file
+					==>Use: maven-resources-plugin: process-resources: copy-resources
+					==>Location: ${basedir}/target/<app>/APP-INF/classes
+					==>Enable: delimiter: such as: @
+						==>@prop1@
+					==>Enable: filtering
+	Load Properties Class:
+		==>Enable: Singleton class
+		==>Use: xxx.class.getResourceAsStream("/application.properties")
+				prop.load(inputStream)
+
+
+
+***********************
+
+***********************
+
+

@@ -1,0 +1,81 @@
+
+***********************
+Self Working Patterns
+***********************
+
+(1) Procedures/Patterns:
+	1) Records:
+		==>Needed
+		==>PROS:
+			==>INFO/Needs: Pre-Stage/Prehand/In-Advance
+			==>INFO/Needs: Ongoing
+			==>INFO/Needs: Post-Stage
+			==>INFO/Needs: Issues/Repair/Fix/Responsibilities/Tracing/Troubleshooting
+		==>CONS:
+		
+(2) Procedures/Patterns: Tasking/TaskEstimates
+	1) Task Estimates:
+		==>Utilize: Estimate/Analysis "Five Main Principles" Guide
+
+(3) Procedures/Patterns: Teams Work
+	1) Team Engagements:
+		==>L3: Engagement with Dev Team: normal and nothing wrong
+		==>Engagement Methods:
+			==>1) Meetings
+			==>2) MS-Teams Calls
+			==>3) MS-Teams Chats
+			==>4) SN - Tickets
+			==>5) Emails
+	2) Team Work:
+		==>PROS:
+			==>Nature 1: Problem Resolution: needs
+			==>Nature 2: Enterprise / Corporate teams: buildup/enablement
+						 ==>These team ecosystems: determine how many problems get resolved
+			==>...
+		==>CONS:
+		
+		
+		
+(9) Procedures/Patterns:	
+	1) Working Styles: GO Players? or Just Special Styles? or Actually Common Sense Styles?
+		==>Example: 
+		==>Example: Deep-and-not-mentioning styles:
+					Example: Mahesh: not mentioning his 2 other changes in the chat
+		==>Example: 
+		==>Example: Sounds/Looks helping others mainly or solely: but actually belong to his main duties
+					Example: Mahesh helped the CHG: deployed Justin's changes: 90%
+							 1) He is POC1 for SPARTA and this is not related to SM data migration directly
+		==>Example: Sounds/Looks helping others mainly or solely: but actually add some self-needs or based on self-needs
+					Example: Mahesh helped the CHG: deployed Justin's changes: 80%
+							 1) He has 2 other changes
+		==>Example: Sounds/Looks helping others mainly or solely: but actually belong to "take easy credits because it is simple change"
+					Example: Mahesh helped the CHG: deployed Justin's changes: 33%
+							 1) It may still take some efforts/8pm for CHG ticket, but overall very straightforward and simple
+		==>Example: 
+		==>Example: 
+	2) Working Styles: Handle "difficult to work with":
+		==>Example: Except some good/needed communications: dealing with "difficult to work with" (both yourself and others):
+					==>"Not becoming too talkative"
+					==>"Sometimes quite/silent": actually being better
+					==>"Sometime miss some emails?/chats?": reasonable if 
+						==>you are really busy
+						==>really don't know how to respond
+						==>really no need to respond immediately
+					==>Exceptions: fight against abusers...
+		==>Example:
+		==>Example:
+		==>Example:
+		==>Example:
+	
+	
+		
+(20) Procedures/Patterns:
+
+***********************
+Misc:
+***********************
+
+Outlook Web Access (OWA)
+	Outlook Web Access is a full-featured, web-based email client with the look and feel of the Outlook client.
+	In addition to email, OWA allows users to access their calendars, contacts, tasks and folders through a secure connection, 
+	just like they would in the office.

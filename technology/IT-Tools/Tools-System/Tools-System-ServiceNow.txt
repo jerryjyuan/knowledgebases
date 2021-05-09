@@ -67,6 +67,10 @@ Topic: Ticket Roles:
 	==>L3 Teams:
 		==>Emergency:
 			==>Resolve Conflicts: Need to bypass much more items
+			==>SIT Test Plan + SIT Approval
+			==>UAT Test Plan + UAT Approval
+			==>Business GO
+			==>Manager Approval - close ticket
 		==>Break-Fix
 		==>Routine
 		==>DCU

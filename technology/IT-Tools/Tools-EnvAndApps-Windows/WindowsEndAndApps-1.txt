@@ -1,0 +1,47 @@
+
+===========================================
+Windows: Env and Apps
+
+===========================================
+Topic: Zooming:
+
+==>Zooming: Monitor Display
+
+==>Zooming: Windows Desk Configurations
+	==>Keyboards + Shortcuts...
+
+==>Zooming: Via App
+
+==>Zooming: Via Inside-App Menus/Features
+
+==>Zooming: ...
+
+==>Zooming: Combined...
+	==>Example 1: Entire Outlook app + Display-Pane: can be zoomed independently
+	
+	
+==>Zooming Impacts:
+	==>...
+	==>...
+	==>L3 Morning Health Check table formats...
+	==>...
+	==>...
+
+===========================================
+Topic: Drag and Drop:
+
+==>It is more like Windows OS functions and some Windows apps enable this capability
+
+==>Examples:
+	==>Notepad++
+	==>Service Now pages/work notes/...:
+		==>Image files
+		==>MS Outlook email files: .msg
+		==>...
+
+
+===========================================
+
+
+===========================================
+

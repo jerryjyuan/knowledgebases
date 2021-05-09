@@ -1,0 +1,66 @@
+
+==============================================
+
+
+
+==============================================
+SPARTA UI:
+
+env.info.ts:
+	==>getDealLoanInventoryColumnConfig:
+		==>DealLoanInventoryGrid
+		==>getCodeValidValue
+		==>DealInventory
+		==>watchListGrid
+		==>Tranche
+		==>LoanInventoryGrid
+		==>balances
+		
+		
+
+
+
+==============================================
+
+
+
+
+==============================================
+Backend: Metadata Service:
+
+
+==>Service Module: Design:
+	==>RESTful API: internal:
+		==>JAX-RS + Jersey
+		==>Internal RESTful APIs: have much less APIs than external RESTful APIs
+	==>RESTful API: external
+	
+	==>Modules:
+		==>Cache: ehcache:
+			==>cacheconfig.properties: config all the CONFIG_LOADERS: so ehcache will run all these loaders configured to load data into ehcache
+			==>Because these configurations are not in the RESTful API call flows, instead it is for ehcache configurations during app startup:
+				==>The cached data will be loaded at app startup time
+
+		==>(Business)Service Module
+			==>Persistence
+				==>DAO
+					==>Return DO
+			==>Convert DO to BO
+			==>resources: contains all the sql query xml files
+			
+		==>BO Module
+			==>BO is used by API layers/classes: Services convert DO to BO
+
+	==>Deployment:
+		docker
+			==>SEC Int WAR
+			==>SEC Ext WAR
+			
+	==>Features:
+		==>Security: CAM PDP
+			==>WEB web.xml: SecurityFilter
+				==>AUTHZ_SERVICE
+		==>
+		
+
+==============================================

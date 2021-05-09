@@ -88,7 +88,11 @@ Topic: DesktopApps: GitEye
 	==>Specials:
 		==>.gitignore
 			==>Useful: can temporary change this file to allow any files to check in
-			==>Useful: use: ! to allow some special files to check in
+			==>Useful: use: ! to allow some special sub-modules/folders/files to check in
+				Example:
+					/**/*
+					!mfsec/MSSDMImporter
+					==>Only list the files from the module: mfsec/MSSDMImporter
 			==>Useful: can use: sub-module's .gitignore files to do overriding to the parent modules' .gitignore settings
 		==>
 	

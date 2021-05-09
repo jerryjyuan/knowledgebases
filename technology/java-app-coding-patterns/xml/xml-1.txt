@@ -1,0 +1,100 @@
+
+
+Java XML Processing:
+
+
+	==>Readers/Writers
+	
+	==>JAXB2
+	
+	==>SOAP APIs
+
+	==>...
+
+
+
+
+***********************
+Excel: Usage 1
+***********************
+(1) Usage:
+	1) Business Teams: use Excel files such as: .xlsm files: create/build business data template files
+	2) 
+
+(2) Java Processing
+
+	==>FSConverter.java:
+		==>Convert the incoming Excel file contents into an XML data file using XSD rules
+		==>Generate an XML file containing all the data fields (abide by XSD rules) from the above Excel file
+	==>FSConverter.java:
+		==>Should simulate the FS Statement Document upload module like DMS...
+		==>DMS:
+			==>Upload Excel file via UI: internally convert it into an XML data file
+			==>XML data file is passed to SOAP-API's eventService calls to insert the data into DB
+
+(3) Integration with XML files
+
+	SOAP-API Logic: Requests
+		==>Method 1: Client Side Java Code:
+						->Client Java Module: Set up fields to Schema-Request Object (which is via new operator or other ways)
+						-> Marshalling (to XML) -> Call SOAP-API -> Unmarshalling (to Schema-Object) 
+						->Server Processing ->Return Schema-Response Object
+		==>Method 2: Client Side Java Code:
+						->Client Java Module: 
+						-> Call JAXB2 APIs: passing in an XML file containing the field data (the file from teh above step (2))
+							(internally:
+								JAXB2 APIs: do XML-reader ->Generate the schema-request object (auto-populate all fields from XML)
+							)
+						-> Generate Schema-Request Object from the XML data contents
+						-> Marshalling (to XML) -> Call SOAP-API -> Unmarshalling (to Schema-Object) 
+						->Server Processing ->Return Schema-Response Object
+		==>...
+
+(4) Validation: XML files
+
+	==>Use: Java JDK APIs: validate XML file and its contents:
+		1) Logic 1: XML files have 2 types: XML-Schema(XSD) and DTD
+		2) Logic 2: JDK APIs: utilize its XSD standards to validate the XML to be compatible with the XSD files
+		3) Logic 3: If the XML files have been validated with XSD files, then no need to send to SOAP-API to do more real testing
+					because SOAP-API and implementation use the same XSD and WSDL
+
+(5) Call Java SOAP-APIs
+
+	==>The above JDK validation should be sufficient to certify the XML
+	==>Additional Validation Processes:
+		==>1) Real Calls: Call EventService SOAP APIs:
+			  ==>PROS:
+			  ==>CONS:
+			  	==>Call flows to DB: DB impacts: CRUD's editing functions: Not good
+		==>2) JUnit Tests: EventService SOAP APIs - JUnit Tests: can certify the incoming XML files
+			  ==>JUnit Tests: got some blockers: Provider not found or not instantiated: TBD
+
+***********************
+Excel: Usage 2
+***********************
+(1) Usage:
+	1) Business Teams: use Excel files such as: .xlsx files: create data migration files
+
+
+***********************
+Excel: Usage 3
+***********************
+(1) Usage:
+	1) Business Teams: use Excel files such as: .xlsx or .xls files: create source data files
+
+
+
+***********************
+Excel: Usage 4
+***********************
+(1) Usage:
+	1) Business Teams: use Excel files such as: .xlsx or .xls files: as input files, and/or as output files
+
+
+
+
+***********************
+
+***********************
+
+

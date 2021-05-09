@@ -1,0 +1,46 @@
+
+***********************
+Business Teams:
+***********************
+
+(1) Business Requirements:
+	1) Level 1: Agile Story + Formal Word Documents
+	2) Level 2: 
+	3) Level 3: 
+	4) Level 4: Service Now Tickets:
+				Incidents
+				MF Service Desk: Incidents
+				...
+	5) Level 5: Production P3/P2
+	6) Level 6: An email
+	7) Level 7: Teams Chat: Messages
+				==>How to render chat messages into an email/a doc/a PDF?
+					(a) Integrated with MS Outlook email app: TBD: maybe not
+					(b) Teams Chat messages are available on Teams Chat online
+						==>Print / Save:
+							Download a chat from teams meeting?
+								Alternatively, you can open Teams in your browser and select the conversation you're interested in. 
+								Right-click on the conversation you just selected, and click on Print → Print as PDF. Save the file on your computer
+								[Jerry]:
+									1) Works - but only the display page - not the entire chat messages
+									2) Also: how to find the URL for the current Teams Chat app?	
+										https://teams.microsoft.com/_#/conversations/, and then click on "Chat"/etc.
+										Procedures:
+											==>Open browser: https://teams.microsoft.com/_#/conversations/
+											==>Click on "Chat", and locate the chat you are looking for
+											==>Right click on the chat and select: Print...
+											==>
+						==>
+					(c) 
+				==>Can employer read Microsoft teams messages?
+					Can your boss read messages on Microsoft Teams? Microsoft Teams does encrypt messages at rest 
+					and in transit, according to its pricing page, but the Teams administrator can still access 
+					your account. Your boss may or may not be the administrator, but requests could still be made 
+					to read your messages.
+
+
+(2) 
+
+***********************
+
+***********************

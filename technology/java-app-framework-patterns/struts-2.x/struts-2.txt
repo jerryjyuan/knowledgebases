@@ -1,0 +1,54 @@
+
+***********************
+Struts 2.x
+***********************
+
+(1) Struts 2.5.17
+(2) web.xml:
+	1) Enable: both *.do and * to map with Struts filter: StrutsPrepareAndExecuteFilter
+
+
+(3) struts.xml:
+	1) Use: common Struts 2 xml configurations
+	2) Delegate: Tiles pages as view
+
+(4) UI Design: JSP Style
+	1) Use: Tiles as layout template: tiles-defs.xml
+	2) Template: /jsp/template.jsp
+	3) Enable Tiles: definitions: define parts for template.jsp
+	
+(5) Struts Call Flows:
+	1) struts.xml
+	2) Define action classes
+	3) Define View: JSP files using Tiles
+		==>Integrated with JS files
+		==>JS functions: call Struts 2 action class url
+	4) Action Class:
+		==>Enabled via struts.xml
+		==>
+		==>Invoke Service Impl class: ServiceObjectFactory.invokeService(arg)
+	5) Call EJB Service Layer: Service Layer is enabled as EJB Session Beans
+	5) Call Service Impl class/layer:
+		All service implementation classes: implements MFServiceObject: remote interface
+		==>So all these service classes: are EJB remote interface implementation classes
+	6) Call BO Layer: Business Object
+		==>BO class: across both: Service and DAO
+		==>1) Parse XPath to fetch queries from .xml query files
+		==>2) Build up values' HashMap: this HashMap will be passed to BaseDAO's CRUD methods
+		==>3) Have enclosed Value Object (VO), which contains the POJO/Model class values
+	7) Call DAO Layer:
+		==>Build up DAO class hierarchy:
+			BaseDAO:
+				Core CRUD APIs
+			subClassDAO
+				Sub Class DAO calls BaseDAO CRUD APIs
+		==>Call Utility class: Db.java: perform JDBC API calls to DB
+			BaseDAO: Core CRUD APIs: call Db.java functions
+					 ==>Results from JDBC Calls: Saved into HashMap
+		==>Return a BO object, which contains the returned JDBC calls' result data
+
+***********************
+
+***********************
+
+

@@ -1,0 +1,459 @@
+
+===========================================
+IT Task: Case Study: Summaries:
+
+===========================================
+Solutions/Methods Summary:
+
+(1) Use: Principle:	Real/Fair/Actual Estimates:
+		==>Be professional
+		==>Be neutral:		==>No need to use purchase/market price bargaining ways
+							==>No need to use negotiation ways
+		==>My part: use the above principles:
+			==>What others think is their issues or problems...: 1) they discuss their feedbacks in the real technical parts, it is welcome 2) being personal, it is their problems
+		==>One bottom line:
+			==>Estimates based on solution-analysis + average-time on them...: this is the estimates from you
+			==>And Jerry welcomes others to provide feedbacks and/or their solution-analysis + LOE
+
+(2) Methodology Aspects: Solutions and Methods:
+		==>Method 1: Concurrent-Analysis-Solutions
+					 ==>Do in-meeting evaluations using the following analysis portfolios
+		==>Method 2: Background-Analysis-Readiness Solutions
+					 ==>Background Analysis: set up a meeting + do pre-meeting evaluations using the following analysis portfolios
+		==>Method 3: Combined-Concurrent-And-Background-Analysis Solutions
+		
+		Analysis:
+			==>Point 1: Do task-solution analysis:
+						==>module/processing/data/tools/integration/etc analysis
+			==>Point 2: Do capacity analysis
+						==>data and data size
+						==>data design and complexities
+						==>...
+			==>Point 3: Do procedures and stages analysis:
+						==>DEV/SIT
+						==>UAT
+						==>PROD
+			==>Point 4: Do schedules analysis: your current workloads + ...
+			==>Point 5: Optional: Do performance/resources/... analysis
+			==>Point 6: Then come up with estimates
+		
+(3) Psychological Aspects: Solutions and Methods:
+		==>If unsure about capacity and analysis and estimates, ask for a time to evaulate and set up a meeting
+		==>Handle pressures
+		==>  						
+			  						
+(4) Communication Aspects: Solutions and Methods:
+		==>Do better communications
+		==>Utilize previous work and task sessions:
+			==>I may not be completely right or completely wrong
+			==>So do others...
+				Example 1: including the work items with Mahesh
+				...
+		==>
+				
+(5) Personality/Weakness/Actual-Stupidity Aspects: Solutions and Methods:
+		==>1) Avoid: show how good or quick you are compared with others:
+			==>This is wrong basically
+			==>Most of companies work on procedures and processing: including Agile, DEV/SIT/UAT/PROD...
+			==>Standards:
+				==>Same team comparison
+				==>Same task type comparison
+				==>The task itself's natures and analysis
+				==>...
+		==>2) Avoid: pointless passions or excitement or wrong feelings
+			==>Work natures: mostly neutral and professional
+			==>Normal work: mostly good work - just see all other coworkers and other teams, and those on the bridge...
+		==>3) Normal/neutral/balanced and "Real/Fair/Actual Estimates" ways
+		==>All scenarios:
+			==>Nothing perfect
+			==>All have PROS and CONS: especially CONS
+			==>The 3)-Way "Being neutral and normal ways" have more PROS and less CONS for you than the above 1)+2):
+				More PROS:
+					==>Health/exercises
+					==>Life/work balances
+					==>...
+				Less CONS:
+					==>Many more issues if using the above 1)+2) than 3):
+						==>Example 1: Cause your health and personal issues in various scenarios...
+						==>Example 2: In the long run and real world: doing 1)+2) would cause more work/job security and rights issues: actually jeopardize your work/job security
+					==>...
+						
+			==>If not doing 1)+2), but doing 3): cause your work/job security and rights issue:
+				==>Then it is some others' abuse issues
+				==>Not your issues
+
+===========================================
+Mistakes:
+
+	==>Mistake 1:	"Psychologically weakened aspects in IT workplaces and working scenarios"
+		==>
+	==>Mistake 2: 
+		==>Didn't say: "I am in the middle of some items, can I review it and set up a meeting this afternoon
+						to discuss with you about the evaluations and estimates? Can you invite business user for this need?
+						If we can add dev team to the meeting, it would be even better."
+	
+	==>Mistake 3:	Technical Areas
+	
+	==>Mistake 4:		
+	
+===========================================
+Analysis:
+
+==>Analysis 1: 	
+	[Mahesh]: Hi GM, ...
+	[Jerry]:  Hi morning...
+	[Mahesh]: ...sending the file
+	[Jerry]:  (
+				Jerry was busy with some other tickets at that time, and also afraid of Mahesh's scenarios a little bit
+				Instinctly, Jerry was not interested in working on his items due to previous tasks' issues from him
+				[Someones]: What issues were from previous tasks with him?
+				[Jerry]: several issues - see below:
+						 1) Abuser side: he did show some Livilly's abusing scenarios or resemblance
+						 2) Difficult Aspect 1: he didn't do coding, so all items with his SPPARTA/MSS would be me or Ravinder, so we were busy..., 
+						 						==>Especially when you had work with other 5-10 apps, then it would be a nightmare...
+						 						[Someones]: so you think Mahesh didn't do anything good to you?
+						 						[Jerry]: not really, he did something good to me below:
+						 								 1) His SPARTA/MSS work (when I was pre POC2) helped me with some meaningful workloads when I was not so busy
+						 								 2) He did communicate sometimes, even though not perfectly
+						 3) Difficult Aspect 2: he did have some scenarios or expected me to work during the entire evening or overnight
+						 		(at least I worried about it during these times:
+						 			because I was not SPARTA/MSS POC any more, and I was kind of busy with other apps plus Ravinder was POC2 at that time, ...
+						 			so I didn't tend to work for his items during evening or weekends,
+						 			and as an example: there was one time: he worked for PROD deployment and I worked for UAT deployment, 
+						 				and I didn't tell him to join his PROD deployment,
+						 			and another example was the reports generation for MSS: I was somewhat hesitated due to the concerns of prolonged time into evening
+						 				and he didn't tell me that he was able to do 3 chunk data division to generate the reports on his side
+						 			also I kept worrying about his intentions to get me busy on purpose due to his behalf of Livilly's retaliation needs,
+						 			As an overall summary:
+						 				- his Livilly representation and possible retaliation in terms of making me busy on purpose
+						 				- his not involved in coding and purely function as a POC business handler to BOS/BusinessUsers, which made me stuck in his tasks
+						 					without his sufficient help (during these items: he didn't provide sufficient task info and for sure no coding side help at all,
+						 					or even no project direction info like Tom Nolan, which was not so right because he was 5-year SPARTA/MSS POC, and he was supposed
+						 					to provide task direction and "solution analysis" even though not involved in coding, this didn't make sense.
+						 					To make this more understandable: if I was 5-year POC for some app, I was able to provide key solution analysis with any POC2/3 when
+						 					they work on any tasks for these apps)
+						 					==>This shows that he lacks the core POC1 leadership and Tom Nolan's style solution technical stacks (even non-coding side)
+						 						==>He is unable to provide some guidance or technical solution directions - aka: everything is almost on my own
+						 							(This SM Data Migration: he did a little bit better alongside the processes...
+						 								Examples: ...)
+						 				- his not provide sufficient task information sometimes... cannot take excuses of saying Jerry didn't ask, ...
+						 4) Difficult Aspect 3: handling business users using extreme ends instead of balanced ways:
+						 		==>He basically completely stayed me away from the user side: this is fine for him to be the main POC contact to business users
+						 			- this can save my communication time, or avoid some communication problems/issues, etc.
+						 			However, for special scenarios, he didn't bootstrap it:
+						 				Example 1: when he talked to me about this task: he didn't initiate a meeting together with Justin with me ...
+						 					he didn't give me time to evaluate...
+						 					he didn't know about this task's scope as a 5-year POC1
+						 			Due to this task size, he did let Justin to talk to me directly, which was actually correct, ...
+						 5) Difficult Aspect 4: he might have discussed with Sudhir in some bad-mouthing ways...
+						 		==>Not spend more time in his tasks
+						 		==>Not willing to work during evenings and weekends for his tasks even though he hinted me 
+						 			(in my sense: more like 
+						 				1) Livilly's retaliation, 
+						 				2) inappropriate demandings to me as a pre-POC2,
+						 				3) kinda of shakening my work/life balances to work for a non-POC app tasks,
+						 				4) Why did not Mahesh address or involve me better when business side pressures were applied?
+						 					==>Such as: you got these reports: why gave me so short time?
+						 						and I was not MSS POC any more, and there were some app technical unknowns because of MSS/SPARTA are large apps
+						 			)
+						 		==>His words might have involved Sudhir to rebuff/intimidate me for at least one time:...
+						 			(the above reports work scenario)
+						 			Sudhir told me that I could release you from L3 if you wanted to...
+				[Someones]: Seems like some issues, then how did you respond to him?
+				[Jerry]: I was indeed busy at that time, I told him that I would take a look into at 11:00am
+				...
+				[Jerry]: Then I took at a very quick look at the Excel file, and something reminded me of his previous reports work, and I was really want Vamsi to work on it
+						 because I thought he had become POC2 like Ravinder, why not he continued Ravinder's role and do this task...
+						 Based on the check of the Excel file, I knew it was some Java code to generate the queries but didn't know about any of the following difficulties:
+						 	1) do UPSERT
+						 		but I did know it was possible to use similar function and tokens I used for Borrower and Borrower Principals, etc,
+						 		but didn't think about using: not exists
+						 		Also wondered why the previous Borrower and Borrower Principals were not used, ...
+						 		[This was just an example about 60-70% of time Mahesh didn't do communication well]
+						 	2) Data Size:
+						 		Also didn't think about the size of the data, and this caused many issues:
+						 			1) Running time: 2 hour to run one time...: this was one reason why the first week was busy but not so enabled to build up test flows...
+						 			2) ...
+						 			3) Many exceptions during the DEV/UAT testing
+						 	3) More code changes:
+						 		Didn't know the DCU tool needed to be changed
+						 	4) Data complexities:
+						 		Didn't know some difficulties with the fields and their complexities...
+						 	5) App Logic/Business Models:
+						 		Didn't know which tables I needed to insert/update...
+						 		Didn't know the involved tables except deal table: didn't know the table secr at all...
+						 		(had to analyze these tables completely: size, types, non-null, have to go through all these tables: a lot of time...)
+						 		Didn't know the DB tables for this, so lack info to build up data patterns (understand data in Excel as well) and create test flows, etc.
+						 		(bonds tables were completely new to me)
+						 	6) Env and Test Flows:
+						 		Not existing to me:
+						 		==>UAT DB, dev box, how to test UAT UI, ...
+						 		==>Even using MSSQL Management Studio: validate and/or run queries... - size (Mahesh helped it at this time...)
+						 		....
+				[Someones]: how did Mahesh respond to you?
+				[Jerry]: He said that Vamsi was not for that...
+						 But I was really not interested in it mostly due to not POC for SPARTA/MSS plus worried about this task's doubts
+						 and also I was just in the on-call/healthcheck dual shifts
+						 I remember that I mentioned: why not having dev team doing it?
+						 Mahesh said: no, he didn't think dev team could do this
+						 Then I thought that I did need to take a look into it, but I got the following issues when I was ready to work on it...
+						 1) evaluation and meeting:
+						 	==>During the call with Mahesh and Vamsi at 11:00am: I didn't mention: I need to evaluate it and come up with some estimates
+						 	   [Jerry]: Since Vamsi and dev team cannot do it, and you want me to do it, I do need to conduct some evaluation on this task
+						 	   			By the way, Mahesh, I do think this is a task instead of a simple business user side support scenario
+						 	   [Mahesh]: Jerry, I think you didn't understand what L3 work really means:
+						 	   			L3 work is always supporting business user to be running fine and immediately resolve their issues as soon as possible
+						 	   			same for this need
+						 	   [Jerry]: I understand what L3 work means, but this one does seem to be different, and it is more like a dev task, which is why I
+						 	   			did check with you about Vamsi and dev team availability because it is different from normal L3 support issues
+						 	   [Mahesh]: Like I said, L3 work is to support and resolve any business user issues in a timely manner, ...
+						 	   			if you don't understand this need, I can have business manager call you
+						 	   [Jerry]: that is fine, can I set up a meeting this afternoon to come up with some estimates like 3pm, is this fine?
+						 	   [Mahesh]: 3pm? (I would say that based on the business user needs, by 3pm this issue should be already done, ...)
+						 	   			Just to be honest, this issue could be urgent, ...
+						 	   [Jerry]: Urgent? can you elaborate why it is urgent instead of a simple data migration? Is their production app down? or?
+						 	   			Also if it is urgent, why didn't business users contact you in a planning scenario so L3 can accommodate and support
+						 	   			their issues based on better schedules?
+						 	   			Or if they did sync up with you about L3 support need in a scheduled scenarios, you should have involved me earlier so
+						 	   			I can prepare my work with supported schedules
+						 	   [Mahesh]: ok then, 3pm we can have a meeting to discuss about estimates...
+						 	   (What Jerry did was like: the actual conversations during the 11:00am meeting:
+						 	   		[Jerry]: ok, if Vamsi and dev team are not for this, I can work on it...
+						 	   				 it is like a Java code, which may be similar to previous borrower query generator...
+						 	   		[Mahesh]: Java? fine, can you get it done soon? (I didn't exactly remember what he said here...)
+						 	   				(Overall here: his tones and words pushed me to some degree...: I forgot how he said...)
+						 	   				(due to his pushing scenarios: I was even hesitated to say 2 days because my psychological feeling was:
+						 	   					he expected me to get it done tomorrow ...
+						 	   					==>Didn't he know about this task's scope?
+						 	   					==>Didn't I know about this task's scope?
+						 	   					Were we all morons? or fools?
+						 	   					At that time, on my mind it was about 1 day to get it done or 2-day to get it done...
+						 	   					Actually I chose to say 2-day
+						 	   				)
+						 	   		[Jerry]: I could try to work on it and maybe get it ready with 2 days if there are no blockers..., 
+						 	   				 but I will see if there are some issues..., it could be based on previous borrower module, but the data are different this time, ...
+						 	   		...
+						 	   		[Mahesh]: ..., ok, that is fine...
+						 	   		...
+						 	   		[Jerry]: I will create an IT service ticket for this work
+						 	   		...
+						 	   		[Mahesh]: (here is the only meaningful or genuine or helpful words from him for this task)
+						 	   				  No need to create the IT service ticket, ..., because I think it will break up SLA if you create an IT service ticket
+						 	   		[Jerry]:  Breaking up SLA? no, IT service ticket is for 5 days...
+						 	   		
+						 	   	(Then I created an IT Service ticket..., and tried to see the borrower module could be used quickly for this excel file
+						 	   		..., but there were many items different...
+						 	   )
+						 	   Ideally, we have a 3pm meeting...
+						 	   [Jerry]: Mahesh, I think we should invite business users, who are they? this is like a triage call
+						 	   			More importantly, I have done some preliminary analysis, and come up with some estimates here
+						 	   [Mahesh]: Analysis? estimates? I thought you should be almost done with it now...
+						 	   [Jerry]: Not like this at all, based on my analysis, this task is actually like a dev work, instead of normal L3 support work item
+						 	   			1) I have analyzed the Excel file, the file size and data are completely different from borrower module
+						 	   				that module cannot be used directly for this new excel and datasets
+						 	   			2) There are significant code module buildup and changes required for this task
+						 	   [Mahesh]: are you sure? then it would just add several days, right?
+						 	   [Jerry]: This task should follow the normal PROD deployment flows because of its large data size and PROD deployment could incur some risks
+						 	   			due to this large data size.
+						 	   			Also the normal PROD deployment flows should involve DEV/SIT and UAT deployment processes before PROD processes
+						 	   			These factors should be all included into the entire analysis and estimates.
+						 	   			Without these processes, PROD deployment is too risky
+						 	   [Mahesh]: En, business user side expects this to be done as soon as possible, they prefer this week
+						 	   [Jerry]: Like I said, it needs to go through DEV/SIT and UAT deployment processes.
+						 	   			PROD deployment is not possible without these processes plus its large data size causing some risks to PROD apps.
+						 	   			If you really need some quick solutions, we can provide estimates for UAT env deployment first, but I prefer to have entire
+						 	   			estimates for PROD deployment
+						 	   			(At that time: actually Jerry didn't think about PROD deployment, because:
+						 	   				1) Borrower module was aborted and went nowhere, and in my mind I thought this would be the same...
+						 	   				2) Because of borrower module scenario, I was even thinking about its joking aspect...
+						 	   					==>So when later on Justin mentioned PROD deployment, I was surprised and ...
+						 	   						==>After I realized Justin being serious about PROD deployment, I became more serious as well...
+						 	   				3) Also the large data size, due to the large data size, it gave me doubts about feasibility of PROD deployment
+						 	   			)
+						 	   			By the way, I sent an email before the meeting with the estimates, can you check?
+						 	   			BTW, here is the screen print about my estimates
+						 	   	[Mahesh]: Let me check, 3 weeks?
+						 	   	[Jerry]: this is based on my current workloads, I am on-call plus also doing health check work. I also have had some other apps' work ongoing
+						 	   			So I have provided estimates from 03/29 through 04/16
+						 	   	[Mahesh]: it is just some simple queries generated by Java, right?
+						 	   	[Jerry]: its data size is large, and also the data tables are unfamiliar to me.
+						 	   	[Mahesh]: I sent you some sample table updates...
+						 	   	[Jerry]: Right, but these data are completely different from borrower / borrower principals, so I cannot simply reuse the same code
+						 	   			My estimates consider and include the normal PROD deployment flows, so I added DEV/SIT deployment date, and UAT dates
+						 	   			Without these testing and deployment processes, we cannot do PROD deployment
+						 	   			By the way, is this task only for providing RCA to business users? or L3 analysis for feasibility?
+						 	   	[Mahesh]: seems like they need actual PROD DB migration, but I may need to check with the business side
+						 	   	[Jerry]: If you are not so sure, can we set up another meeting tomorrow to add business users for a triage call
+						 	   			to understand the scopes better and provide formal estimates to all stakeholders for this task?
+						 	   			Also can you forward me some of the emails from business users for this task?
+						 	   			One more point is: adding business users to the call would help synchronize the estimates with them about this task.
+						 	   	[Mahesh]: What are the estimated time that I should talk to business users?
+						 	   	[Jerry]: Can we invite them into the call or tomorrow's meeting to discuss these estimates together instead of provide estimates
+						 	   			 simply like this way?
+						 	    [Mahesh]: I would rather send them some information right now by me
+						 	    [Jerry]: I can provide some estimates to you to forward to them, but anyways I will set up a meeting tomorrow morning to keep everyone
+						 	    		 on the same page about this task. Please send me the business users email regarding this request.
+						 	    		 I will work on some module right now as well and conduct more thorough analysis.
+						 	   			 You can tell business users about its Java module needs and its large data size plus DEV/SIT and UAT env deployment stages and dates.
+						 	   			 Currently my estimates on my email should be fine, which is 03/29 through 04/16.
+						 	   			
+						 	   	on Wednesday, 03/31/2021: Jerry set up another meeting:	
+						 	   	[Jerry]: Mahesh, I have found out we might need running multiple sql files, so we need to modify the current DCU tool,
+						 	   			 this would add some more time estimates due to this DCU tool changes
+						 	   	[Mahesh]: more time? business users will not understand, and it is hard for me to extend more time to talk to them
+						 	   	[Jerry]: I have run some query generation and it involves 20000+ queries, and a sql file with more than 20000 queries will lead to some
+						 	   			 DB table lock scenarios, so multiple sql files may need to be processed. So DCU tool needs to be modified.
+						 	   	[Mahesh]: modifying the DCU tool?
+						 	   	[Jerry]: yes
+						 	   	[Mahesh]: are you sure the DB table lock was due to the large set of sql queries in one file instead of the query errors?
+						 	   	[Jerry]: Good question, but currently it is unavailable to verify this until all logic is done plus the all the queries are validated
+						 	   			 But the estimates may need to be adjusted if DCU tool needs to be changed
+						 	   	[Mahesh]: This is against L3 support to business user scenarios ... it is hard to explain to business side
+						 	   	[Jerry]: In nature this task belongs to dev team
+						 	   	[Mahesh]: No, it belongs to L3 team, dev team won't do it
+						 	   	[Jerry]: Why doesn't dev team do it?
+						 	   	[Mahesh]: L3 should also involve break-fix work (but not including me)
+						 	   	[Jerry]: Are you sure this task will go to PROD deployment? the large data sets seem to me that it is not easy to update so many PROD DB tables
+						 	   	[Mahesh]: ... (I am not really sure) (this is another plausibly genuine words from Mahesh...)
+						 	   	[Jerry]: ...
+						 	   	
+						 	   	(Jerry was busy with on-call and health check work plus other meetings						 	   		
+						 	   	
+						 	   	(1 week: Jerry pushed hard to get something running and made it working...
+						 	   		==>But failed to push forward with the first week when Friday comes... and Saturday dawning...
+						 	   		==>But through the first week work, Jerry realized that it was beyond the simple work ...
+						 	   		==>Jerry adjusted the work estimates on his side
+						 	   			by talking to Justin directly, Jerry gained more info ...
+						 	   			but slowed down to think about its feasibility with PROD, and only thinking about UAT, ...
+						 	   	...
+						 	   			
+						 	   	04/07/2021: Jerry's on-call was eventually done: Jerry got serious about Hari's updates on xMatters...
+						 	   	04/09/2021: Jerry's morning health check work was done as well: ..., so Jerry's morning got released between 6am-9am
+						 	   		(because 8am-9am: Jerry still wrapped up some items...)
+								2-3 week Transition sessions still went on...: ate up most of Jerry's afternoon time...
+								some apps work...
+								some meetings...
+									==>One of the meetings: Jerry didn't know it was so related so didn't pay attention to: MF Bonds Proxy Service...
+								Then Jerry kept spending his time in the evenings and weekends to get this task going...
+						 	   			
+						 	   	During the 2-4 week work on this, more issues showed up and blockers...
+						 	   	...
+						 	   			
+						 2) under some pressures, I didn't use common methodologies and healthy psychological ways and also anti-abuse/anti-unfairness scenartios:
+						 	==>
+						 3) 
+			  )
+			  
+			  
+			  			==>Summaries: better
+			  				==>Do not provide estimates via Teams Chat and the short meeting in the morning at 11:00am
+			  					==>Fighting Point 1: during the chat/short-meeting: feel intimidated or nervous with Mahesh's pressures?
+			  						==>This is first issue/challenge Jerry has had... ==>Also for any future tasks... and for anyone else other than Mahesh
+			  						(key 1: if you don't use real/fair estimates, situations are worse: so you will see that this is just a better way...: so you will do this fair ways../)
+			  						(...
+			  					==>Fighting Point 2: during the chat/short-meeting: communications...
+			  						==>Discussions itself is a result...
+			  					==>Fighting Point 3: during the chat/short-meeting: try to show how quick I could do the work due to some personal weaknesses?
+			  						(key 1: if you are not doing normally balanced or reasonable ways: you could become sick, or even impacting
+			  								many of your personal life scenarios...: so you don't need to become too aggressive...)
+			  						(...
+			  						==>This is basically wrong:
+			  							Solution: just based on what the REAL work / items / task is up to: (focus on the work natures instead of who you are)
+			  									  ==>This is only fix and solution to Jerry's weakness
+			  									  ==>Issues with Mahesh(others) or job security?
+			  									  	 ==>Mostly it can be addressed: aka: no concerns: if you don't do this way, you could have more concerns...
+			  									  	 Analysis 1:
+			  									  	 	[Mahesh]: ok, you cannot do it? I give this to others...
+			  									  	 	[Jerry]: this is purely based on the work analysis and come up with estimates, nothing personal
+			  									  	 			 (by the way, a lot of people provide buffered estimates
+			  									  	 			 	because they are not interested and use them as an excuse..., right?)
+			  									  	 			 (no, a lot of people are not using this as an excuse, instead they do human-world
+			  									  	 			  negotiation process: so the other side can cut it down, and eventually
+			  									  	 			  reach the real fairness: which is in the middle ...
+			  									  	 			  Without buffered time, negotiation logic won't work...
+			  									  	 			  	because the other side also use the same human world negotiation logic and will start from your time
+			  									  	 			  	point and move it down to the middle and that middle is favoring them, ...
+			  									  	 			  	so to make negotiation principle work, just like price bargaining, you need to supply some buffered time
+			  									  	 			  	to let the other side do their cut-down...
+			  									  	 			 [Someones] but Agile methods and IT work estimates is not like price bargaining, right?
+			  									  	 			 [Jerry]: right, should be. Which is why I provide real estimates based on the real needs and work natures
+			  									  	 			 	based on analysis. It is the same ways I have done to deal with CCP, FCP, LiviCom, YiviCom, and abusers
+			  									  	 			 	based on the entire truth.
+			  									  	 Anyways, the real solution for Jerry to overcome this weakness is: do REAL work / items / task analysis and estimates
+			  									  	 	and do not feel any intimidation or concerns from the others...
+			  									  	 	==>If you are not sure about the estimates, say: set up a meeting or in the afternoon...
+			  									  	 		and do an analysis and provide estimates
+			  									  	 	Worried about losing work or job?
+			  									  	 		==>Compared with this, doing this estimates is "better" (less risky and less dangerous...) than the above concern
+			  									  	 		==>Aka: there is no such a thing that is perfect and no concerns, just "better"
+			  				==>Set up a meeting at 3pm: provide initial estimates based on preliminary analysis: which is: 3 weeks: 03/29-04/16
+			  					==>List items
+			  					==>>Focus on natures of this task
+			  				==>Adjust more estimates when new issues or blockers are identified and encountered
+			  				==>
+
+
+						Estimates: it is on its own domain:
+							It is overall analysis scenarios
+							Jerry's estimates ways should use Jerry's normal ways:
+								1) Write-down analysis way:
+									==>Works for analysis and estimates...
+									==>It might not work for inside-meeting quick analysis/estimate...
+										But if Jerry lacks this ability or stronger personality-related scenarios, then Jerry tries to do personal-time analysis/estimate scenario
+										==>Will try to practice inside-meeting quick analysis/estimate, but sometimes some analysis needs some time...
+										
+										inside-meeting quick analysis/estimate:
+											==>break down modules...
+											==>Utilize procedures: dev/sit, uat, ...
+											
+										Modules -> Stages -> ... do not immediately talk about days... (no need to come to hours, ...)
+										
+								2) ...
+						Blockers are another domain
+
+	
+						"I am in the middle of some items, can I review it and set up a meeting this afternoon
+						to discuss with you about the evaluations and estimates? Can you invite business user for this need?
+						If we can add dev team to the meeting, it would be even better."
+
+==>Analysis 2: 
+
+===========================================
+Keywords:
+	- 
+	- Company Enabled Procedures and Scenarios:
+		==>Meetings
+		==>Procedure: DEV date
+		==>Procedure: UAT date
+		==>Procedure: PROD date
+	- 
+	- 
+	
+===========================================
+Methods Points:
+
+	=>Utilization of 18-year experience
+		==>Build up knowledgebases/templates for all main same/similar IT tasks
+	=>Utilization of 5-year experience
+		==>Do some tasks like health check with 1-hr only
+	=>Utilization of 1-year experience
+		==>Build up templates for all main same/similar tasks
+	=>Utilization of ... experience
+
+	=>Build up boundary
+	
+	=>
+
+===========================================
+Critical Points:
+
+	==>Understand the problem and the task
+	==>Every task could be a new PROBLEM/data/flows/design, or partially new...
+		==>Impact business model design, ...
+	==>Streamline the test flows and 
+	
+
+===========================================
+
+
+===========================================
