@@ -1,0 +1,301 @@
+
+===========================================
+Tools-System: Windows/LAN/Network/AD:
+
+===========================================
+Topic: Windows Login/Authentication: Systems:
+
+==>Laptop: Windows:
+	==>Windows OS + Windows Accounts
+==>Windows: Apps: Authentications:
+	==>LAN / Network
+	==>AD Group: Windows Security Users: Registry
+	==>AD (LDAP mainly): Windows OS: Implementation: LDAP:
+		Placing/Storing users into Windows system/LDAP-directories: and enable LDAP to access/manage them
+	==>Interaction With AD/LDAP:
+		==>MAC
+		==>TAM
+		==>Keychain:
+			==>1) Migrate all TAM security/access groups to keychain access
+			==>2) Migrate all
+
+
+	==>Example Windows Login/Authentication Scenarios:
+		==>Users -> Apps' TAM access gateway -> Apps:
+			==>TAM Gateways: receive users' access url + user-login-username/pwd: talk to AD/LDAP groups: 
+				==>validate/authenticate user login based TAM's groups:
+				   1) TAM: external groups: authenticate with AD external groups
+				   2) TAM: internal groups: authenticate with AD internal groups
+				==>Questions:
+				   1) Do TAM groups just authenticate on its own groups info without AD groups?
+				   	  ==>[Jerry]:
+				   	  		90%: TAM groups are stored in AD groups places: TAM gateway will talk to AD integrated/stored TAM groups?
+				   	  			 ==>This is mostly right
+				   	  			  ==>Do TAM store the same names' groups in TAM?
+				   	  			  ==>Maybe correct: the same named groups are stored in AD as well?
+					  		10%: TAM groups manage its own groups - without AD involvement
+					  			  ==>Depends: Maybe TAM does its authentications on its own?
+					  			  	 ==>No: because logged-in user is for sure needed to be validated for the users' network AD credentials
+					  			  	 ==>TAM is doing access control for the apps: and user authentication should go through AD as well
+				==>After authentications: TAM delegates the flow to App's Apache/WebLogic servers: added TAM groups in request's headers
+			==>TAM migration to Ping:
+				==>All TAM groups are moved to Ping PIP (Ping Identify Platform)
+				==>Existing users: no actions needed
+				==>Procedures:
+					==>1) Create all corresponding AD groups to match TAM groups: so TAM groups are on its own before PING?
+					==>2) All existing users are added/configured into PIP: so PIP store the same names' groups in PIP?
+						  ==>OR: when users login to PING url, its login/usernames are delegated to AD groups for authentication
+						  	 and PING doesn't store any same name groups
+						  	 ==>Because the AD groups are same names, so existing users can still use the same groups
+					==>
+		==>Users -> Apps' Ping access gateway -> Apps:
+			==>Ping Gateways: receive users' access url + user-login-username/pwd: talk to AD/LDAP groups: 
+				==>validate/authenticate user login based AD groups:
+				   1) AD: external groups: authenticate with AD external groups
+				   2) AD: internal groups: authenticate with AD internal groups
+				==>Questions:
+				   1) Do Ping groups just authenticate on its own groups info without AD groups?
+				   	  ==>[Jerry]:
+				   	  		100%: PIP groups are stored in AD groups places: Ping gateway will talk to AD integrated/stored groups
+				   	  			  ==>Do PIP store the same names' groups in PIP?
+				   	  			  ==>Maybe not: the actual groups are stored in AD
+				==>After authentications: PING delegates the flow to App's Apache/WebLogic servers: added AD groups in request's headers
+					==>However, the userids are not changed into lower-cases, so whoever logs in as upper-case: got some issues
+					   (because the Sybase DB sec_user_bsc uses: lower-case mostly for id_empl field)
+		==>Users -> MAC:
+			==>MAC is a configuration tool
+				1) Configure: AD, TAM, Server, DB, OSSA, etc.
+				2) It integrates with various backend systems
+				3) All the configurations are saved to corresponding backend systems plus its own configuration management pool/DB
+		==>Users -> Keychain:
+			==>Keychain is a configuration tool: similar to MAC
+				1) Configure: AD, TAM, Server, DB, OSSA, etc.
+				2) It integrates with various backend systems
+				3) All the configurations are saved to corresponding backend systems plus its own configuration management pool/DB
+			==>Keychain: Concepts:
+				Application Access: like AD/TAM group access
+				Entitlements/Roles
+				Application Enrollment
+			==>Keychain:
+				Can manage more groups than: AD/TAM groups
+				Examples:
+					==>MFUW's DB users/groups: can be added to Keychain as well
+
+==>Usage:
+	==>Usage 1: As a type of SSO
+	==>Usage 2: 
+
+==>SSO:
+	==>TAM/PING/AD/...
+		==>Usage: Utilize browser's session tokens, ...
+		==>
+	==>SiteMinder
+	==>CAS Server
+	==>...
+	==>
+	
+==>Firewalls
+
+==>eTrust
+
+==>Teams:
+	==>ENS: Enterprise Network System/Support
+	==>ISO: Intel Support Operations Team: Mostly Windows/NT Servers?
+	==>MAC
+	==>MAC Vault
+	==>Keychain
+	==>TAM
+	==>Ping/PIP
+	==>Service Desk
+	==>VDI Support Team
+	==>
+===========================================
+MAC: Modern Access Control
+
+==>Linked to AD groups, and many other backend access systems
+==>Menu: "My Access":
+	==>Can be viewed and downloaded into Excel/PDF: all the configured access control request/info for this user
+==>Feature:
+	OSSA: Operational Support System Accounts:
+		==>Details: Can be searched and viewed with information
+		==>
+	...
+==>Scenarios:
+	Approvers:
+		==>Can be checked and contact them for approvals
+
+===========================================
+RSA: Token:
+
+==>Installed via: Software Center and Software Request
+==>RSA Tokens:
+	==>Hard Token: a small device
+	==>Soft Token: installed as a desktop application above
+	
+
+Usage:
+	==>Cyberark: MAC Vault:
+		==>Similar to Nationwide Randy's MAC Vaulted user/pwd management
+		==>Randy: has a UI tool: can directly manage a list of MAC Vault password
+		==>Every 3-month, or 180-days: he has a list of password management change needs: Run Team can do the tasks
+	==>Procedures:
+		==>Cyberark: RSA login
+		==>Secure Connection:
+			==>Use RSA token again
+			==>
+
+===========================================
+Windows: Laptop/NPVDI:
+	==>May admin rights:
+		==>Service Desk
+		1) Installations
+		2) Run installers: software center: sometimes
+	==>	
+===========================================
+NP VDI:
+
+	==>Windows Similar Platform: NP VDI has different IP address
+	==>Task Manager: right click taskbar: select: Start Task Manager
+	==>Application:
+		Via Task Manager: right click and select: Maximize (because of "Minimize": The RSA Token App: cannot be seen)
+	
+	==>Why NP VDI?
+		==>A desktop/Window systems for NonProd env
+		==>Software Center:
+			1) Some common ones: same as normal Laptop
+			2) Some NonProd MAC Request ones: if they are for NonProd env
+			3) Some special ones: need to be requested via NonPROD MAC requests to be added to: NonPROD NP VDI
+				==>RSA Token: NonProd
+				==>...
+		
+	==>Tools: Can only be used in NP VDI
+		==>NonProd: Accesses:
+			NonProd-MAC-Requests: created ones: net user /domain <CID>
+				==>Shows all NonProd access list
+			NonPROD-UAT:
+				==>UAT Servers
+				==>UAT App URLS
+				==>
+			...
+			
+			Notes:
+				Access to Normal Laptop:
+					==>For developers' conveniences: Some NonProd Servers: DEV/SIT servers: are open to normal Laptop connections
+					==>Sybase DB: NonProd: can also be accessed via normal laptop: Sybase IDERA Rapid SQL
+				Not Access to Normal Laptop:
+					==>MSSQL DB: NonProd: can ONLY be accessed via NP PROD: Microsoft SQL Server Management Studio
+					
+		==>NonProd: Tools
+			==>NonProd SST:
+				==>Mainly for UAT/MAINT Servers: bounces
+				==>For DEV/SIT servers/instances: developers/engineers: use appropriate login-ids to do the bounces/etc
+					DEV/SIT/MAINT:
+						  DEV:   
+						  SIT:  mfssmgr1
+						  MAINT: ...
+						  Summaries:
+						  ==>App Server Deployment Machines:
+						  	 ssumgr: MAC Vaulted
+						  ==>AutoSys Job Run Machines:
+						  	 TCM/WIO/OC/...: sftumgr, ...
+						  ==>DB Accesses:
+						  ==>App URL Accesses:
+					UAT:  TCM/WIO/OC/...:
+						  ==>App Server Deployment Machines:
+						  	 ssumgr: MAC Vaulted
+						  ==>AutoSys Job Run Machines:
+						  	 TCM/WIO/OC/...: sftumgr, ...
+						  ==>DB Accesses:
+						  ==>App URL Accesses:
+					PROD: TCM/WIO/OC/...:
+						  ==>App Server Deployment Machines:
+						  	 CID/FID
+						  ==>AutoSys Job Run Machines:
+   						     TCM/WIO/OC/...: edsmgr, ...
+						  ==>DB Accesses:
+						  ==>App URL Accesses:
+			==>NonProd RSA: can only be accessed via NP VDI
+			==>NonProd Jump Servers: can only be accessed via NP VDI
+				==>Previously:
+					Linux:   Jump Servers
+					Windows: RDC: connecto Windows Jump Servers
+				==>Currently: Use NonProd Cyberark login/dashboard:
+					==>Secure Connection
+					==>
+					1) SSH: Connect to Linux Jump Servers
+					2) RDBROKER.FHLMC.COM: login to Windows Jump Servers
+					   
+			==>NonProd Cyberark URL: can only be accessed via NP VDI
+			==>NonProd AutoSys Job Dashboard URL: can only be accessed via NP VDI
+			==>NonProd OCP-ROTN: can only be accessed via NP VDI
+				==>Dashboard
+				==>Admin Console
+
+===========================================
+Windows Commands: Common Ones
+
+==>net user /domain <user-id>
+
+
+===========================================
+Application Servers/Systems:
+	MWS: Middleware Services
+	WIO: WebLogic Instances Operations
+
+==>WebLogic
+==>Apache
+==>OCP: OpenShift (Redhat Corporation)
+	==>ROTN
+	==>Pod:
+		One type of orchestration
+	==>Docker
+	
+	1) Dashboard: User Profiles / Normal Platform Dashboard
+	2) Admin Console: Manage apps on ROTN
+	
+	oc login https://...
+	oc project <project-name>
+	oc logs <project-name>
+	oc help
+	oc <command> --help
+	oc options
+	oc get pods
+
+===========================================
+Accounts:
+
+==>AD based Accounts
+	Password Reset
+	Account unlock
+==>TAM Accounts
+	Password Reset
+	
+==>MAC Vaulted
+==>Non-MAC-Vaulted
+
+PROD
+NonProd
+
+===========================================
+OSSA: Operational Support System Accounts:
+
+==>How to unlock its password if locked?
+	==>MAC Vaulted Accounts
+	==>Non-MAC-Vaulted Accounts
+	==>
+==>Unlock:
+	==>ServiceDesk/SN/...: tickets/Teams: unlock:
+		==>This is help desk ways (via tickets/teams/service-desks)
+	==>Tools: Self-Service Portal: unlock
+		==>Web-based tools
+	==>Some OSSA Ids: 30-min automatically unlocked:
+		==>Example 1: OSSA ID: UAT Test User ubna_btest2: automatically unlocked in 30 minutes
+	==>
+
+===========================================
+Database User Accounts:
+	Password Reset
+	Account unlock
+
+
+===========================================

@@ -50,8 +50,20 @@ Topic: MSSQL Queries:
 		==>Stored Procedures: need to be inside DB: so queries or JDBC calls can invoke it...
 	
 ===========================================
+Topic: Database Pairs:
+
+==>RDMS DB:
+	==>MSSQL/Sybase(SAP): Transact-SQL
+	==>Oracle: PL/SQL
+	==>DB2:
+==>OpenSource DB
+==>NoSQL DB
+
+===========================================
 Topic: MSSQL-Transact: maybe similar to Sybase
 
+==>Many functions
+==>select top(1) ...
 
 ===========================================
 Topic:

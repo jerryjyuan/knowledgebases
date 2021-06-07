@@ -107,7 +107,7 @@ Summaries:
 							
 							
 							Summaries:
-								1) A pure child-component: but very comploicated one
+								1) A pure child-component: but very complicated one
 								2) Utilize much more features and APIs than a normal application component
 								3) Utilize: many @Input (286) and @Output (82) data fields: due to configurations and settings, and multiple functions
 											Also define many application events:

@@ -1,0 +1,23 @@
+
+================================================
+Web Browser: Refresh:
+
+================================================
+How do you prevent a form from submitting when the page is refreshed?
+	One way to stop page resubmission on page refresh is to unset the form data after it is submitted so that the variable storing form data becomes empty 
+	and wrap up your form processing block of codes to check if the form is empty.
+
+================================================
+How do I stop a form from submitting?
+	The simplest solution to prevent the form submission is to return false on submit event handler defined using the onsubmit property in the HTML <form> element.
+
+
+How can I refresh a webpage without the browser asking if I want to resend again?
+	If you want to show the user a page that can be refreshed without the repost option, you'll have to do it via a redirect following the post to a page 
+	that you retrieve with a GET not a POST. Try a javascript redirect
+
+================================================
+
+================================================
+
+================================================

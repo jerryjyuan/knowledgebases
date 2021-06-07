@@ -1,0 +1,234 @@
+
+
+https://cli.vuejs.org/guide/cli-service.html
+
+Summaries:
+	==>1) Similar to Angular
+	==>2) Flows:
+			Usage: vue-cli-service serve [options] [entry]
+			==>default: [entry]
+			   If not overriding:
+			   ==>[entry] in the CLI command is defined as the entry file (default: src/main.js or src/main.ts in TypeScript project), 
+			      not an additional entry file. If you overwrite the entry in the CLI, then the entries from config.pages are no longer considered, which may cause an error.
+			==>main.js ==>main component
+				==>mount('#app')
+					==>Instantiate App component:
+						import App from './App.vue'
+						==>Similar to Angular: AppComponent.ts
+						==>All Vue components have the same 3-part design: similar to Angular's component's 3-part design
+						1) Template: same as Angular's .html file: the view/page contents
+						2) Style
+						3) Script
+						
+			==>Template Part: HTML page part:
+				==>Same as Angular: mixed with HTML elements/tags/selectors
+				==>Vue's own tags/selectors:
+					<v-xxx>
+					
+				1) App.vue:
+					==>main page: layout the 4 sections
+						1) App-bar
+						2) Navigation-drawers
+						3) Main Section
+						4) Footer
+			
+					==>App.vue: bootstrap component: similar to Angular
+					
+					==>App: router: '/': so it goes to Home Component in Home.vue and component file: "home.js"
+				
+				==>Way 1: <template> <script> <style>
+						  (Equals to: Angular counterparts: .html, component.ts, .css)
+				==>way 2: divide the above into separate files
+				==>
+				==>
+				
+				
+				
+Vue.JS UI:
+	Vuetify: Material Design Framework
+	https://vuetifyjs.com/en/
+	https://vuetifyjs.com/en/components/footer/#usage
+	
+	<template>
+	
+	<v-data-table>
+	
+	
+	
+Vue.JS: Components:
+	==>Similar design to Angular with some differences
+	
+	==>Similarity:
+		==>Define: selectors
+		==>
+	
+	
+	==>Differences:
+	
+	
+	==>Component Natures:
+		==>Have some default fields and functions:
+			name
+			components
+			props
+			data
+			mounted()
+				==>Service API calls -> Its own web module service client module -> Service Caller - API calls...
+			methods
+			computed()
+			
+			
+==>Component: Home.vue
+
+	==>v-data-table:
+		==>Look and Feel: ==>Mostly: enabled by the v selector features...
+		
+		==>
+	
+
+==>Component: Insights.vue
+
+	==>
+
+==>Component: IvrTranscript.vue
+
+	==>
+
+==>Component: XXX.vue
+
+	==>
+	
+			
+==>MD in Vuetify:
+	https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VDataTable/VDataTable.ts
+	==><v-data-table>
+		==>Have some default display: "No data available"
+		==>
+	==>
+	
+	
+==>Features:
+	==>Runtime Compiling: Same as Angular
+	
+	==>Bootstrap?
+	
+	==>Router:
+		==>Similar to Angular
+		
+		==>Router Module:
+			router/index.js
+			==>How to locate the router? ==>import router from './router/index'
+			<router-link>	
+	
+	
+Stages:
+	Stage 1: use html tags: div and tables, ...
+			 + mock data
+	Stage 2: use Vue tags: v-xxx
+			 + mock data
+	Stage 3: use Vue tags
+			 + real data
+	
+	
+Questions:
+	==>UI Feature/Design: Screen prints: not really like: wireframe/mockup/prototype/...
+	==>
+	
+	
+==>UI Summaries:
+	==>Summary 1:
+		naming conventions
+	==>Summary 2:
+		component template can contain exactly one root element
+	==>Summary 3:
+		template file: *.html
+			==>Work together with: component *.js file
+			==>Also impacted with: *.scss file
+	==>Summary 4:
+		==>v-XXX usage example 1: v-data-table
+		==>Usage:
+			Line 1: main tag definition
+			Line 2 -> Line X: views and data parts
+				==>Starting with: <template>
+				==>Layout its UI view: to display its data into the view parts
+				==>These view parts: can be enabled via multiple ways
+					==>HTML Tags
+					==>Tables
+					==>...
+		
+		
+		==>Notes:
+			==>Use table to organize the columns when needed
+			==>Also for each callUUID: there is a list of rows of data/details
+	==>
+	==>
+
+
+
+
+
+
+
+<v-toolbar
+    dense
+  >
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-toolbar-title>Title</v-toolbar-title>
+    <v-text-field
+      hide-details
+      label="Filled"
+      placeholder="Search"
+      filled
+      rounded
+      dense
+      single-line
+      append-icon="mdi-magnify"
+    ></v-text-field>
+    <v-btn rounded>Button 1</v-btn>
+    <v-btn icon>
+      <v-icon></v-icon>
+    </v-btn>
+    <v-btn icon>
+      <v-icon>mdi-dots-vertical</v-icon>
+    </v-btn>
+  </v-toolbar>
+  
+  import Vue from "vue";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+    
+Vue.use(Vuetify);
+    
+export default new Vuetify({
+  theme: {
+    themes: {
+      light: {
+        primary: "#14C6FF",
+        secondary: "#424242",
+        accent: "#82B1FF",
+        error: "#FF5252",
+        info: "#2196F3",
+        success: "#4CAF50",
+        warning: "#FFC107",
+        lightblue: "#14c6FF",
+        yellow: "#FFCF00",
+        pink: "#FF1976",
+        orange: "#FF8657",
+        magenta: "#C33AFC",
+        darkblue: "#1E2D56",
+        gray: "#909090",
+        neutralgray: "#9BA6C1",
+        green: "#2ED47A",
+        red: "#FF5c4E",
+        darkblueshade: "#308DC2",
+        lightgray: "#BDBDBD",
+        lightpink: "#FFCFE3",
+        white: "#FFFFFF"
+      }
+    }
+  }
+});
+
+
+	
+	

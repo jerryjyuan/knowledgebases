@@ -454,6 +454,61 @@ Critical Points:
 	
 
 ===========================================
+New Summary: 05/29/2021: Saturday
+
+==>Summarize 4 Scenarios: When Dealing With IT Tasks and IT Coworkers/Management:
+
+	Scenario 1: Urgent Scenarios: 20%
+				==>Point 1: Urgent Scenarios: Do Happen in IT World/Tasks/Coworkers/Management
+				==>Point 2: Urgent Scenarios: Need to Be "Real"
+											  ==>Not the following "NonReal" Scenarios:
+											  	 1) Abuser-Enabled
+											  	 2) Management: extra-needs/unreasonable-needs/strategies/goals/... enabled or empowered or driven or demanded
+											  	 3) Coworker: extra-needs/unreasonable-needs/strategies/goals/... enabled or empowered or driven or demanded
+											  	 4) Company Ignored/Neglected:
+											  	 	==>Procedures/Solutions:
+											  	 		No procedures/solutions to be discussed and enabled to deal with it
+											  	 	==>Enhancements:
+											  	 		No enhancements to be added to reduce/minimize/optimize it
+											  	 	==>Fairness:
+											  	 		No fairness measures to be checked and enabled
+											  	 		Examples:
+											  	 			==>No fair shifts
+											  	 				==>Example 1: Manish
+											  	 			==>No fair work duties combo:
+											  	 				==>Example 1: Enable TCS-FM-L3 duties as a combo of "core-8-hours + extra-hours + no-shifts"
+											  	 					Aka:
+											  	 						1) it requires L3: work weekdays: 8-core-hours
+											  	 						2) it requires L3: work during evenings and weekends:
+											  	 										   ==>Without clear/explicit (except possibly implicit/self-guided) team guidelines/instructions about "allowing OOO or non-benefit-program-sick-days"
+											  	 						3) it requires L3: take on-call and POC-calls 24-hour timeframes without normal-8hour-shifts like BEAM-MF and GOC teams
+											  	 				==>Example 2: Enable TCS-FM-L3 duties as a combo: smoke-validation-tests + "business/QA-functionality-validation-tests(such as someones do it on his/her own initiatives)"
+											  	 				==>Example 3: Enable TCS-FM-L3 duties as a combo: some resources: non-code specialists + some resources: code-specialist (example: break-fixes CHG)
+											  	 5) Personalized: Personal-Targeted
+				==>Point 3: Urgent Scenarios: Need to be "Intervaled/NonFrequent/Reasonable/Justified/Method-Handled/Solution-Enhanced"
+				
+	Scenario 2: Normal Scenarios: 78%
+				==>This comprises majority of work items and scenarios
+
+	Scenario 3: Self-Moron Scenarios: 1%:
+				==>Should be limited to 1%
+
+	Scenario 4: Ignore Scenarios: 1%:
+				==>Should be limited to 1%
+				(but this doesn't include: legitimate-ignoring scenarios to ensure: some rights/anti-abuses/anti-mistreatment/performance/work-life-balances/etc.
+
+===========================================
+New Summary: 05/29/2021: Saturday
+
+==>Summarize DEV Insights:
+
+	==>POC or even apps:
+		==>Focus on core flows and core parts first / primarily
+		
+		==>
+
+
+===========================================
 
 
 ===========================================

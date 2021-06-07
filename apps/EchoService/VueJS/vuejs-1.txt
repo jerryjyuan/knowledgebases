@@ -1,0 +1,81 @@
+
+*************************************
+Vue:
+
+
+*************************************
+Vuex:
+
+Vuex is a state management pattern + library for Vue. js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+
+If your application is small, it is probably a better choice to stick to the vanilla Vue props and data pattern. 
+Whenever you add Vuex to your application you add a whole lot of boilerplate code. 
+So, if your application is small, the payoff is not that great.
+
+While the Vue instance has a data property, the Vuex store has State. Both are reactive. ... And while the instance has computed properties, the Vuex store has Getters , which allow us to access filtered, derived, or computed State. The difference with the Vuex store is that it also has Mutations.
+
+Summary:
+	Reactive
+	State
+	Mutations
+	Actions
+
+It works by having a central store for shared state, and providing methods to allow any component in your application to access that state. In essence, Vuex ensures your views remain consistent with your application data, regardless of which function triggers a change to your application data.
+
+How does VUEX store data?
+	When it comes to storing data in Vuex, it's as simple as adding key-value pairs like you would in any other normal JavaScript object.
+	export default new Vuex. Store({
+	state: {
+	month: 08,
+	day: 12,
+	year: 2008.
+
+Should I always use VUEX?
+	Since no other component needs to know about any changes to that data, one should manage it in the component using it. Vuex allows organisation of data into modules so you can keep everything tidy and maintainable.
+
+Do I really need VUEX?
+	Vuex also eases unit testing on your whole app, which may be helpful if your app grows in complexity, making your state difficult to manage. However, you can absolutely complete testing without ever using Vuex
+
+How do you use VUEX?
+	So after understanding the project, if a particular state is consumed by multiple components then and then you have to use Vuex.
+	Step 1: Configure VueJS Application. ...
+	Step 2: Make index. ...
+	Step 3: Create a Vuex Store. ...
+	Step 4: Make two components: Add and Remove Counter. ...
+	Step 5: Create Mutations and Actions.
+
+What is difference between VUE and VUEX?
+	While the Vue instance has a data property, the Vuex store has State. Both are reactive. ... And while the instance has computed properties, the Vuex store has Getters , which allow us to access filtered, derived, or computed State. The difference with the Vuex store is that it also has Mutations
+
+
+*************************************
+axios:
+
+	http client communication
+	
+	Axios is a promise based HTTP client for the browser and Node. js. Axios makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations. It can be used in plain JavaScript or with a library such as Vue or React.
+	
+	Axios has the ability to intercept HTTP requests. Fetch, by default, doesn't provide a way to intercept requests. Axios has built-in support for download progress. Fetch does not support upload progress.
+
+	Axios is a library for http communication, making ajax requests, and so on. There is also a library called 'vue-resource' to do such things, but it's said that it is not used well due to it's slow update cycle and larger community of Axios.
+
+*************************************
+moment:
+
+	MomentJS is a JavaScript library which helps is parsing, validating, manipulating and displaying date/time in JavaScript in a very easy way. ... Moment JS allows displaying of date as per localization and in human readable format. You can use MomentJS inside a browser using the script method.
+
+*************************************
+vue2-daterange-picker:
+
+	==>date range picker
+	
+*************************************
+
+
+*************************************
+
+
+*************************************
+
+
+*************************************

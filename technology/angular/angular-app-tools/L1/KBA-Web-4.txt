@@ -1,0 +1,67 @@
+
+**************
+robots.txt:
+
+	A robots. txt file tells search engine crawlers which pages or files the crawler can or can't request from your site. This is used mainly to avoid overloading your site with requests; it is not a mechanism for keeping a web page out of Google.
+	
+	Is a robots txt file necessary?
+		txt file controls which pages are accessed. The robots meta tag controls whether a page is indexed, but to see this tag the page needs to be crawled. If crawling a page is problematic (for example, if the page causes a high load on the server), you should use the robots. txt file.
+
+	Should I delete robots txt?
+		You should not use robots.txt as a means to hide your web pages from Google Search results. This is because other pages might point to your page, and your page could get indexed that way, avoiding the robots.txt file.
+
+	What should I put in robots txt?
+		txt file, also known as the robots exclusion protocol or standard, is a text file that tells web robots (most often search engines) which pages on your site to crawl. It also tells web robots which pages not to crawl. Let's say a search engine is about to visit a site.
+
+	What happens if no robots txt?
+		txt is completely optional. If you have one, standards-compliant crawlers will respect it, if you have none, everything not disallowed in HTML-META elements (Wikipedia) is crawlable. Site will be indexed without limitations. spiders will follow whatever they find.
+
+	Is robots txt a vulnerability?
+		The presence of the robots. txt does not in itself present any kind of security vulnerability. However, it is often used to identify restricted or private areas of a site's contents.
+
+	Do search engines ignore robots txt?
+		All-Access for all bots		
+		In other words, search engines ignore it. That's why this disallow directive has no effect on the site. Search engines can still crawl all pages and files.
+
+	Where should robots txt be located?
+		The robots. txt file must be located at the root of the website host to which it applies. For instance, to control crawling on all URLs below http://www.example.com/ , the robots. txt file must be located at http://www.example.com/robots.txt .
+
+	Do search engines respect robots txt?
+		Google officially announced that GoogleBot will no longer obey a Robots. txt directive related to indexing. Publishers relying on the robots. txt noindex directive have until September 1, 2019 to remove it and begin using an alternative.
+
+	How do you check if robots txt is working?
+		Test your robots. txt file
+		Open the tester tool for your site, and scroll through the robots. ...
+		Type in the URL of a page on your site in the text box at the bottom of the page.
+		Select the user-agent you want to simulate in the dropdown list to the right of the text box.
+		Click the TEST button to test access.
+
+	What happens if you dont follow robots txt?
+		The Robot Exclusion Standard is purely advisory, it's completely up to you if you follow it or not, and if you aren't doing something nasty chances are that nothing will happen if you choose to ignore it.
+
+	What happens if a website does not have a robots.txt file?
+	
+		Robots.txt is a strictly voluntary convention amongst search engines; they're free to ignore it, or implement it in any way they choose. That said, barring the occasional spider looking for email addresses or the like, they pretty much all respect it. Its format and logic are very, very simple, and the default rule is allow (since you can only disallow). A site without a robots.txt will be fully-indexed.
+	
+		If the robots.txt file is missing in the root directory of a website, how are things treated as:
+			the site is not indexed at all
+			the site is indexed without any restrictions
+			It should logically be the second one according to me.
+
+		Site will be indexed without limitations. spiders will follow whatever they find. i don't think you want that. some spiders like baidu can be very aggressive about that. it can even evaluate even urls in javascript codes.
+
+		here is detailed information. http://www.robotstxt.org/orig.html
+		
+		ps. also you will have many 404 logs in your webserver. it's also disadvantage while reading logs. & dont forget to put favicon.ico file. that is another stupid file that all browsers demand on every page.
+
+	What does a Sitemap do?
+		A sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them. Search engines like Google read this file to more intelligently crawl your site.
+
+
+**************
+
+**************
+
+**************
+
+**************

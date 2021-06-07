@@ -1,0 +1,338 @@
+
+===========================================
+IT Coworkers:
+
+==>Principles:
+	==>Nothing is perfect
+	==>No one is perfect
+	==>Living is imperfect
+	==>Working is imperfect
+	==>Words/Scenarios: are imperfect
+
+==>
+
+===========================================
+Topic: TCS-FM:
+
+==>...
+==>...
+==>[Mahesh]: Jerry worked on the report run in the second day morning instead of the same day or during the afternoon
+==>...
+==>[Managers]: L3 is a mixed combo, we gotta reform it...
+			   ==>Some L3 items: move to dev team: dev team can do it...
+			   ==>Enable shifts?
+			   ==>...Reorg scenarios: 
+			   		conservatorships
+			   		foundational apps -> digital apps
+			   		L3 reforms
+			   		...
+			   		
+			   33%: Only Jerry: L3 stays
+			   33%: L3: partially stays? - No: but most of them are added to other MF TCS teams
+			   33%: L3: most of them are added to other TCS clients
+			   
+			   L3: partially stays? NO
+			   L3: 2 vendors? NO
+			   
+==>...
+
+
+==>Jerry:
+	==>Why TCS-FM-L3 and TCS-FM Coworkers stay-feeling? 100%: No need: just normal human beings and normal coworkers:
+		==>All coming from: 5-Lakes + 4-Oceans + UN + ...
+		==>All like: lake-water-waves/tides: meet with each other...
+		==>
+	==>Why TCS-FM-L3 stay-feeling? 99%: No need
+	==>Why TCS-FM stay-feeling? 50%: No need
+	==>Why TCS stay-feeling? ?%
+		==>PROS
+		==>CONS: TBD
+		==>Neutral
+	==>Why Other-IT-New-Companies/Jobs feeling?
+		==>For sure: prefer to be always until age of 60+, or age-65+
+
+
+	Some HumanWorld and Humans Common Senses:
+		==>Feel about the current ones...
+		==>Feel about the current ones' good parts...
+		==>Feel about the other ones's unknowns/bad parts...
+	
+		==>Easiness
+		==>Get used to
+		==>No changes needed
+		==>Routines
+		==>Stability...
+		==>...
+		
+		Examples:
+			==>Living places
+			==>GFs:
+				Holly, where are you now? can we meet?
+					==>Lessons: debts issues: manage better...
+				Sweetheart Rubi: I really love you, ...
+				...
+			==>Jobs
+			==>Tech...
+			==>...
+
+===========================================
+Topic: Why does Sudhir do the "Email-Limitation" to Jerry?
+
+==>Reasons: Valid:
+	==>20%:	Because some of your emails were bad...
+	==>20%: You spend too much time in emails, so I use this way to ...
+	==>20%: Some FM teams/coworkers/managers talked to me about your emails, so I use this way to ...
+			==>Robert?
+			==>...
+			==>...
+	==>
+	
+	Summaries:
+		==>Jerry opposes: email restrictions and limitations, but doing some email handling enhancements
+		==>
+	
+==>Reasons: Invalid:
+	==>50%: Abuses
+	==>
+
+==>PROS
+
+==>CONS
+
+===========================================
+My Tolerance Levels:
+
+==>Sudhir or anyones involved:
+
+	==>Level 1: Escalate to TCS HR in abusive and demonization ways and TCS HR terminates Jerry's TCS employment
+
+	==>Level 2: ...
+
+	==>Level 3: Bad-mouth Jerry so Jerry cannot find a new TCS client work and also no bench-time pays (like previous bench time: <= 1-month)
+
+	==>Level 4: Bad-mouth Jerry so Jerry cannot find a new TCS client work: after 05/26/2021, but still get bench-time pays
+
+	==>Level 5: Only ended Jerry's TCS-FM-L3 work on 05/26/2021, but still get RMG new client(s) work
+
+===========================================
+Topic: Pandemic/CCPVirus Stages:
+
+	==>Stage 1: 01/2020 03/2020 - 04/2021
+	==>Stage 2: 04/2021 - 07/2021 08/2021?
+				==>Vaccine?
+				
+				==>Back to Office: 07/2021 08/2021?
+				==>
+	==>Stage ...
+
+===========================================
+Topic:
+
+==>[INFO]: ...
+	==>[...]: Can I have the WIFI password?
+	==>[Jerry]: Ask Sam Dutchman
+	==>[...]: Why?
+	==>[Jerry]: Sam Dutchman could have different sets of passwords for different ones or personalized passwords...
+	==>[...]: ..., en, but Sam Dutchman told me that he wanted you to provide me WIFI password
+	==>[Jerry]: It is a test I feel from Sam Dutchman, plus...
+	==>[...]: Sam Dutchman is on the phone, and he wants you to provide, ...
+	==>[Jerry]: He can text me..., or 
+	==>[Sam Dutchman]: Hey, Jerry, please provide her the WIFI password, ...
+	==>[Jerry]: ..., I don't feel it is right, ...
+	==>[Sam Dutchman]: I am telling you, please do it, ...
+	==>[Jerry]: ..., just wondering: if I need to do this, why can't you just provide her the WIFI password? Why me?
+	==>[Sam Dutchman]: I am in restroom, and also it is 9:01pm, ..., also not with my computer, ...
+	==>[Jerry]: She can wait for you, ...
+	==>[Sam Dutchman]: I am away from home, ...
+	==>[Jerry]: Oh, just find out, possibly my WIFI password is added to my WIFI config, and the written-down one is not with me right now, 
+				It is 9:02pm now, maybe you can memorize it or find it for her, ...
+==>
+
+===========================================
+Lessons: L3
+
+	==>L3 is a combo: but Jerry got some small issues:
+		==>Self Principles + Flows (Team Flows)
+		==>Try too hard on something: no need:
+			==>Add more apps
+			==>Support POC2 apps in an aggressive manner
+			==>...
+		==>...
+	==>Examples:
+		==>Support windows: several scenarios:
+			[Jerry]: has some specials:
+				1) No stable residence: so no easy env: 
+					WIFI
+					Stay until 12am midnight during Friday PROD deployment: like MMAPS/MFCM, etc...
+						(Mahesh can stay in his cozy couch and snacks until 12am and 1am PROD done... while watching TV and YouTube...)
+				2) need money: so want a 2nd income
+				3) 
+		==>
+
+	==>
+
+===========================================
+Lessons: DEV Work
+
+===========================================
+Lessons: IT Work
+
+
+Work Types: Daily Work Stress/EnergyUsage Levels: Average/Common Scenarios
+
+	I know this is a little bit unfair measurements or calculations (especially for Sam Dutchman's frontdesk lady), but...
+	
+
+	==>FrontDesk/Admin:
+		==>Usage: Their daily energy level: 60%
+		==>Usage: Their daily stress level: 60%
+
+
+
+	==>FrontDesk/Admin:
+		==>Usage: Their daily energy level: 60%
+		==>Usage: Their daily stress level: 60%
+
+
+	==>L3 - Normal:
+		==>Usage: Their daily energy level: 80%
+		==>Usage: Their daily stress level: 90%
+		
+		
+		Can we or L3 or anyone work more normally and still do the good work?
+			==>Answer: yes, many ones can do normal scenarios and still have work done...
+			==>Normal: doesn't mean: relax...: right? Mahesh?
+				
+				Example:
+					==>I ran 5.5 mile/hr yesterday, it was a normal example but not stressed scenarios like ...	
+						I still did good exercises goals, ..., 
+						But I know IT work is different to some degree, especially to your managers when handling your teams...
+						
+					But still:
+						Relax and work
+						Normal and work
+						Stress and work
+						Completely stressed and work
+			==>Jerry's Summaries:
+				==>We/I deal with IT work stresses due to some natures, but watch out: on-purpose stressed
+				==>Also: do life/work balanced ways...
+				==>Also: best utilize your 18-year IT experiences and knowledge bases
+				==>...
+		
+		==>Specials
+		==>Tickets...
+		==>Issues
+		==>Crisis
+		==>P3...
+		
+
+	==>L3 - Special:
+		==>Usage: Their daily energy level: 90%
+		==>Usage: Their daily stress level: 100+%
+			==>Examples: Jerry's SM Data Migrations
+
+	==>L3 - 05/2021 - In Transition:
+		==>Usage: Their daily energy level: 70%
+		==>Usage: Their daily stress level: 80%
+
+	==>...
+	
+===========================================
+Reporting to managers?
+	==>Is it an AKA: communications?
+	==>Is it a "request-help" or "having-a-blocker"?
+	==>...
+	==>...
+	==>Is it a good way to handle "difficult-to-work-with" ones?
+	==>...
+	==>Is it a scenario to offload issues/blames to someone else?
+		[Mahesh]: business user is not happy with me due to the report, but the issue was: Jerry didn't run the report until the next day morning
+		[...]:    en, ...,
+				  Hey, Jerry, why didn't you run the report for MSS upload failed?
+		[Jerry]:  I didn't check the email. if important, why not sending a chat?
+		[Mahesh]: It is a common task, so... you should know...
+		[Jerry]:  ok, I can double check email next time, ...
+				  (Can you run the report check? It is just a JUnit ...)
+				  [Mahesh]: I am MSS manager
+				  [Jerry]:  No, you are just POC1
+				  [Mahesh]: I have had some principles: I don't run code while I don't write code as well
+				  [Jerry]:  I think you don't look into code either...
+				  			But it is better to do these?
+				  [Mahesh]: That is why I always get a POC2 - just like Gokul for OUS...
+				  [Jerry]:  OUS is big app
+				  [Mahesh]: Not really, and also MSS/SPARTA are big, ...
+				  [Jerry]:  Seems like I work on big apps plus 5-10 other apps
+				  [Mahesh]: I deal with business users all the time
+				  [Jerry]:  Have you ever seen snakes in local city streets?
+				   
+===========================================
+KT:
+Company Accounts:
+	==>TCS:
+		==>Citrix Hosted Web Mail (Lotus)
+			1) India Time Zone
+			2) Features:
+				==>Can click on the webex link to join the webex calls
+				==>Need to "reply to all": 1) inbox 2) highlight the meeting invite email 2) click menu "Reply to All"
+	==>Depends upon many factors
+	
+		==>Time
+		
+		==>Scopes/Domains
+		
+		==>Needs:
+			Extra
+			In need / needed
+			Security data
+			...
+			Principles:
+				Only needed and/or approved...: minimal info-levels to do the work...
+				...
+			
+		==>Availability
+		
+		==>Common Senses and Practices
+		
+		==>Customized Practices/Procedures: Teams and Team and Coworkers
+		
+		==>Anyone's their own homework: 
+			Nanny? 
+			Their-qualifications? 
+			Can they google? 
+			Can they create/collect/enable their own OneNote?
+				==>Currently: Jerry doesn't feel: OneNote is a sharable document type or team-document type...
+			Use-Others? 
+			Delegating-Too-Much?
+			Is this becoming teaching (or even tutoring, ...) instead of: normal teamwork, normal team doc or KT, or normal syncup?
+			You want someones or your team to be up to speed, can you find some other ways (many good ways)...
+				==>...
+				==>...
+			Some Principles:
+				You want yourself to be treated in some ways, then you need to treat others in the same/similar ways, ...
+					==>And vice versa
+				...
+				
+		==>Fairness
+	
+		==>Any abuses?
+	
+	
+	==>Scenarios:
+	
+	
+		==>
+		
+		==>
+		
+		==>Summarize all tickets or problem definitions:
+			==>Overall: overdo
+			==>All tickets: in SN
+			==>All problem definitions: in SN and also ...		
+			
+		==>
+		
+===========================================
+
+
+===========================================
+		

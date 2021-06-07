@@ -77,7 +77,7 @@ Topic: Routes:
 	==>SN: SN Task pages?: Task: has various info: status: completion: images
 		==>SN: can confirm status: it is a REQ and TASK
 	==>Login:
-		SiteScope
+		SiteScope: manage all SiteScope nodes/monitors
 		...
 
 ===========================================

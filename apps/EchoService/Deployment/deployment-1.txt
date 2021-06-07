@@ -1,0 +1,17 @@
+
+
+http://10.1.10.36:8080/
+
+https://cli.vuejs.org/guide/deployment.html
+
+
+  App running at:
+  - Local:   http://localhost:8080/
+  - Network: http://10.1.10.128:8080/
+  
+  
+Spring Boot App/Module:
+	==>Utilize embedded web servers:
+	1) Normal: tomcat/undertow/jetty
+	2) Reactive/WebSocket/: Netty
+	

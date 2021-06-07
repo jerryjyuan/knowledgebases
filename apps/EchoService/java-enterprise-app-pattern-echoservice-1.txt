@@ -1,0 +1,204 @@
+
+***********************
+Application: Tech Stacks
+***********************
+==>Node/NPM
+==>VUI JS:
+	==>Not Angular UI: Use VUI to replace Angular (aka: use JS to replace TS)
+==>Other UI Tools:
+	==>Babel: web packer/loader
+==>Maven
+==>Java
+	
+	Apple Products/Systems/Modules/Frameworks/Features	
+		Wireless Carrier
+		A3
+		IVR
+		CKit
+		Siri
+		...
+	
+	Spring Boot:
+		==>Jackson
+		
+	Spring Boot WebFlux/Reactive:
+		Reactor:
+		Mono
+	
+	Spring Boot WebSocket
+
+	Spring Rest Docs:
+		==>Compared with Spring Fox Swagger UI and REST docs
+			https://dzone.com/articles/spring-rest-docs-versus-springfox-swagger-for-api
+			1) By default, Spring REST Docs uses Asciidoctor. Asciidoctor processes plain text and produces HTML, styled and laid out to suit your needs. If you prefer, Spring REST Docs can also be configured to use Markdown. This really distinguished it from Swagger, which uses its own notation called OpenAPI Specification.
+			2) Spring REST Docs makes use of snippets that are produced by tests written with Spring MVC’s test framework, Spring WebFlux’s WebTestClient or REST Assured 3.
+		asciidocs
+		1) .asciidocs: .adoc files
+			src/docs/ascidosc/*.adoc
+		2) snippet files:
+			target/generated-snippets
+		3) generated docs files:
+			targte/generated-docs
+				index.adoc => index.html
+		Processes:
+			==>Add a plugin: asciidoctor-maven-plugin
+			==>Add plugin's dependencies: org.springframrwork.restdocs	spring-restdocs-asciidoctor
+	
+	Spring Test
+	
+==>Misc:
+	Sonar
+	Spotbugs:
+		looks for bugs in Java programs
+	Jacoco
+		Reporting: JaCoCo runtime agent to your tests and allows basic report creation
+		==>Test results reporting?
+	Log4j2
+	
+	Test Reports / Code Coverage:
+		==>JUnit
+		==>Jacoco
+		==>Spotbugs/Findbugs
+		==>Sonar
+		
+		1) Maybe needed in these apps
+		2) 
+		
+==>More:
+	BOM: echo-dependencies: bundle a list of default maven jars and versions: import a BOM
+		docker
+		Apple jars:
+			Apple AIS account security
+			a3: aluminum: app-to-app
+			rio?
+			fabrics.docker
+			...	
+			jacoco
+			...	
+
+	echo-shared: create a jar: with common files
+		==>util
+		==>constants
+		==>annotation: @Log
+		==>error codes: echo/review/siri
+		==>error responses
+		==>Modules:
+			common/sirickit/review/filter
+				Lombok @Data models
+				Requests
+				Responses
+				==>Lombok + Spring Boot Jackson
+
+***********************
+Application: Build
+***********************
+
+==>Docker build: docker-maven-plugin
+
+
+==>Generate a Spring Boot jar file: Echo Business Service RESTful API Application
+
+	==>Scheduler
+	
+	==>Reactor/Reactive/WebFlux: Asynchronous and Non-blocking
+		Router
+		
+	==>
+
+***********************
+Application: Run
+***********************
+
+
+
+***********************
+Application: Deployment
+***********************
+
+
+
+
+***********************
+Application: Modules
+***********************
+
+==>Web UI:
+
+	Admin UI
+	
+
+==>Backend Services:
+
+	RESTful APIs: Service Types:
+		
+		Review:
+			post reviews
+			get reviews
+			add comments
+
+		Siri:
+			Fetch Siri Details
+			Spring WebSocket
+
+		Sirickit:
+			siri path
+			fetch data: fetch Siri Details APIs
+				==>Spring Scheduler: cron entry
+			fetch sirickit details
+			update siri ckit
+			lookup siri ckit
+			
+		Ckit:
+		
+		Filter: internal?
+			filter data
+			
+		Nuance APIs:
+			==>Get
+				Call Details: audio files: .wav
+				Audit Details: log files: -LOG
+				Zip files
+			==>Post
+				Call Details: audio files: .wav
+				Audit Details: log files: -LOG
+				Zip files
+				
+			Data: transfer from Nuance to EchoService:
+			Data: also from Siri:
+			
+			==>Compare both data: matching or mismatching
+			
+			Scripts:
+				sudo su - gatt
+				cd echo/Echo_Client/
+				ls -lrt
+				a3Token_script.sh
+				nuanceLogsZipfiles
+			
+
+==>Integration:
+
+	==>Nuance:
+		==>Upload logs to Nuance: .wav and -LOG files
+
+	==>AWS/S3
+		==>UI: Data: ==>Store in Cloud / Trove
+	
+	==>Kakfa:
+		==>UI: Review: ==>Elastic Search
+	
+	==>Siri
+	
+	==>CKit
+
+	==>Reports
+		==>Generate report files: CSV and Excel
+		
+	==>Splunk
+	
+	==>
+	
+***********************
+TDD/Test Domains:
+
+***********************

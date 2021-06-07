@@ -62,12 +62,48 @@ Self Working Patterns
 						==>really don't know how to respond
 						==>really no need to respond immediately
 					==>Exceptions: fight against abusers...
-		==>Example:
+		==>Example: "Difficult to work with" Scenario: Not happy/accept "Team/Manager/Coworker-enabled extra work time": but ok with "Self-enabled extra work time"
+					==>Example 1: GMC-IT-Technologist Jerry:
+								  ==>How to deal with Jerry
+								  ==>How does Jerry deals with others
+								  Unfair Facts:
+								  	==>In year 2020:
+								  		==>Pandemic/CCPVirus
+								  		==>No fixed office areas and WIFI
+								  		==>New to L3
+								  		==>No cozy living room, TV, kitcken, and refrigerator at 10:00pm EDT on Fridays
+					==>
 		==>Example:
 		==>Example:
 		==>Example:
 	
 	
+(15) Procedures/Patterns:	
+	1) Working Styles: 3-type-super-good/tough resources/styles?
+		==>Example: 
+		
+		
+		==>Enablements:
+			==>Talks
+			==>Keys/Paths/Solutions
+			==>Balanced Schedules
+
+(16) Procedures/Patterns:	
+	1) Working Styles: Enemies (and useful sometimes)
+		==>Example: Emails
+
+(18) Procedures/Patterns:	
+	1) Working Styles: Sometimes: open to listen to others' technical views - even you know some
+		==>Example: Google Map API and API Keys
+		However:
+			==>Over the past experiences:
+			   [60%]: Jerry was right
+			   [30%]: Online Documentations
+			   [10%]: Only 10% from others:
+			   			1) Due to not sharing, or not willing to share 
+			   			2) Most of them are not better than "Online Official Documentations" 
+			   			3) Jerry has had 18-year experiences, ...
+
 		
 (20) Procedures/Patterns:
 

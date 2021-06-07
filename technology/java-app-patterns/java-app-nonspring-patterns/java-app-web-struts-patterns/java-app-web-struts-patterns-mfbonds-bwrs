@@ -1,0 +1,528 @@
+
+***********************
+Application: Troubleshooting
+***********************
+
+==>Deployment: 11/07/2020: TAM to Ping Migration
+
+==>End-of-Month Cycles and Wires
+
+==>Lower Env: Setup and Testing:
+	==>DEV
+	==>SIT
+	==>UAT
+		==>Database Refresh
+		==>Reinsert the User Data:
+			sec_user_bsc
+			user_team table
+
+			Principles:
+				==>AD / TAM / Ping: groups: used for login
+				==>sec_user_bsc: all user data: used by the application queries
+				==>apps table: used for defining app info
+				==>team table: used for defining team info
+				==>user-team joined table: used to enable user to access to some teams/apps
+				==>fm_empl table: used for storing FM employee info?
+		==>UAT: Admin Console:
+			==>mflrudbo1
+		==>Handle Tricky Issues: at IT Workplaces and Projects and Tasks:
+			==>Tricky: incorrect urls: BWRS -> MFBonds
+			==>gunzip
+			==>...
+			
+			
+			Methods:
+				==>Pause
+				==>Revisit
+				==>Check: Copy/Paste
+				==>Read-Through: just like the way you review others' scenarios
+				==>
+				
+==>Servers
+	==>WebLogic: Timeout Settings: weblogic.xml: 10800 seconds: 3 hours
+	==>Server Logs
+	
+==>Integration:
+	Wire Instructions URL
+	Wire Transfer URL
+	BondProxy
+	CMS.Net
+	
+==>Web Browsers:
+	Session Cookies
+	Caches
+
+==>User Events/Actions:
+	Double Clicks
+	Back Button
+	Refresh
+	Session Timeout
+	
+==>Resolutions:
+	==>L3: Morning Health Check: Queries
+	==>L3: DTS Reporter Email/Reports generators: Monitoring queries and issues
+		   ==>Today is a demonstration: 05/15/2021
+		   	  (1) Management/Teams/Coworkers: try to pull Jerry's last night status into sync + push forward more advanced status
+		   	  	  1) All my extra updates/hours are sync-ed up
+		   	  	  2) My Monday's statuses are enabled and updated today: Originally I planned on a "complete RCA" to Robert on Monday end of day, which I have almost done today
+		   	  	  	 [Robert]: a complete RCA
+		   	  	  	 [Jerry]:  NP
+		   	  	  	 		   [Mukund]: this means: a break-fix and root cause identified...
+		   	  	  	 		   [Jerry]:  No, it is just a complete RCA
+		   	  	  	 		   [Mukund]: you know why I have been working here for 5+ years?
+		   	  	  	 		   [Jerry]:  Why?
+		   	  	  	 		   [Mukund]: I know what leads really mean
+		   	  	  	 		   [Jerry]:  I see, but also plus your similar skillsets like Mahesh and Gokul? with many snake skins?!
+		   	  	  	 [Robert]: Monday end of day
+		   	  	  	 [Jerry]:  NP
+		   	  	  	 		   [Mukund]: this means: Monday morning 9am if not Saturday / Sunday ...
+		   	  	  	 		   [Jerry]:  Mukund, are you from China?
+		   	  	  	 		   [Mukund]: You are silly, even today when Robert said that we could call it a day, it didn't really mean that, ...
+		   	  	  	 		   [Jerry]:  I use balanced life strategies even though sometimes I am nervous about managements or leads' real meanings,
+		   	  	  	 		   			 BTW, we are in transition, so I have more items to deal with, ...
+		   	  	  	 		   			 Also, are you Miro or William? or Kevin, or Derek C?
+			(2) Why is today's scenarios with Jerry?
+				==>It was a fair game: so many others joined, so it was fair
+				==>Also those helped to some degree
+	==>DCR:
+		==>Why DCR? Sybase is DCR while L3-MSSQL is DCU		   	  	  	 
+	==>break-Fix if root causes are identified
+	==>CMS Solutions?
+
+==>Misc:
+	==>Bridge Norms:
+		==>Lower voices and Not interrupt others
+		==>...
+	==>
+
+***********************
+Application: Monitoring
+***********************
+
+(1) Morning Health Check:
+	1) Identify similar new occurrences to the 3 main instances
+	2) Identify similar new occurrences to the 19 instances
+	3) Identify all of the above with same combined queries
+	
+	DONE
+
+(2) DTS Reporter: Add query and display status
+
+
+(3) DCR: Fix duplicate wires
+	1) Fix ongoing duplicate wires
+	2) Fix all previous duplicate wires: No need
+
+(4) CMS.Net
+
+(5) Break Fix
+
+RCA:
+	==>DONE: with monitoring as workaround
+	==>
+
+***********************
+ENV: UAT
+***********************	
+
+==>DEV/SIT
+==>Build Apps
+==>Deployment
+==>
+
+***********************
+Application: Incident Issues
+***********************
+
+Issue 1:
+
+Issue 2: 
+
+***********************
+Application: Resources
+***********************
+
+==>Development Team:
+	Mukund
+		Dev Factory
+	Sridhar
+		Developer
+	Kethana:
+		UAT Tests
+	Rakesh Jain:
+		Brillio Resources: he is an example: involvement, but seems like he knows good technical parts
+	Koochana Kumar?
+	
+***********************
+Application: EAR
+***********************
+
+==>DB Connection:
+	==>WebLogic: Admin Console: DataSource
+
+
+***********************
+BWRS:
+***********************
+
+==>App:
+	==>MVC:
+		==>Struts 2.x (2.5)
+		==>Complete Struts
+		==>Flows:
+			==>1 Way: Struts Action/Mapping Flow
+	==>UI/View:
+		==>JSP/Tiles
+
+==>UI:
+	Tiles Design
+	
+==>Business Data/Flows:
+	trusteeId: institutionId
+	
+==>Function: Save
+
+	Fields:
+		Wire Requests: similar to some payments:
+			==>Can pay interest and/or principal
+		Principal Amount: can be $0.00
+
+	==>Save: no checkbox
+		==>Pending Wire Requests: ==>Go to the same "Save" screen
+		==>Click: "Save": add: checkbox
+			==>This will update the existing loan row:
+				Table: bond_predc_dbmt: Update the existing row
+			==>Table: insttn_trste_apprd: Insert a new row
+				
+	==>Save: add: checkbox
+		==>1) Scenario 1: Choose a loan: add fields
+			  ==>Table: bond_predc_dbmt: Insert a new row
+			  ==>Table: insttn_trste_apprd: Insert a new row
+			  Increment cnt from 1 to more
+		==>2) Scenario 2: 
+			  ==>Update an existing row: increment the cnt+1
+			  ==>Kethana: tested it but I didn't pay attention to it
+		
+==>Function: Delete
+
+	Summaries:
+		==>This function is not related to duplicate rows
+
+	==>UI: Tiles/JSP
+		==>JS: wireRequest.js
+			==>deleteWireRequest()
+		==>Form: Post: wireRequestAction.do:
+			userAction: DeleteWireRequest
+			submit: Delete
+		==>WireRequestAction.java: execute()
+			==>DeleteWireRequest:
+				==>Delete a wire request
+				1) UI Events:
+					==>Select loan number:
+						==>Unsure if this loan number is in use for this processing: Not in use for "delete"
+					==>Other fields: no need to select
+					==>Click: "Delete"
+						==>Session: get id_bond_perdc_dbmt: there is only one single "id_bond_perdc_dbmt" in the session: either set or NULL
+						==>Call Service Impl:
+							==>WireRequestBO.java
+							==>WireRequestDAO.java
+							==>Delete the row based on: id_bond_perdc_dbmt
+						==>Clean up session: remove id_bond_perdc_dbmt
+						==>The page will be delegated to:
+							==>Search Pending Request: "View Requests Pending Signature"
+								1) use institutionId to do the search
+							==>Double Check: if after deletion, this page is displayed
+				2) Action Class Processing:
+					==>Get the session's bond_perdc_dbmt: this is correct: delete an existing row: the row will be deleted
+					==>Call internal Service Layers by ServiceObjectFactory Design Patterns:
+						==>Pattern Mapping: enabled via ApplicationMetadata.xml
+				
+				Notes:
+				Update flag_deltd = 'Y':
+					==>Done by MF Bonds
+					
+					1) BondsServlet.java:
+						==>Delete button
+						Disbur Screen (Payments): user clicks: "Delete"
+						==>Session: BondDetailID: same as: id_bond_perdc_dbmt
+					2) BondProxy.java:
+						deleteDisb()
+					3) BondMgrEJB.java: BondsSQL.xml:
+						==>Update: Table: bond_perdc_dbmt:		flag_deltd = 'Y'
+						==>Insert: Table: insttn_trustee_apprd: flag_deltd = 'Y'
+						
+					Usage:
+						==>Insert a row: insttn_trustee_apprd
+							==>Select data: bond_perdc_dbmt:	based on the same id_bond_perdc_dbmt
+							==>Get the current max(nbr_insttn_trustee_apprd)+1
+							==>Use: 'Y'
+					
+					This should not be the same as this incident
+				
+			==>Get Wire Request: SearchVO
+				==>Pinter Friendly Flow
+				==>Search
+				==>Display a prior request: requested from approval page
+				
+				Retrieve bond_perdc_dbmt row based on id_bond_perdc_dbmt
+					==>Use 2 PK: id_bond_perdc_dbmt + max(nbr_insttn_trustee_apprd)
+						==>max: ensure the latest one
+					==>Search the insttn_trstee_apprd table:	==>This table: hosts apprd data
+					==>Provide apprd data to the UI display
+				And set session: "id_bond_perdc_dbmt" = id_bond_perdc_dbmt
+				
+			==>GetNewWireRequestServiceImpl:
+				==> retrieve property name, date prepared, and today's date
+				1) UI Flows:
+					==>Loan Number Field:
+						==>User: change to another loan: modified: so it makes a call to WireRequestAction.java: GetWireInstructions
+							==>pass the loan number into query string of the POST call
+						==>WireRequestAction.java: GetWireInstructions:
+							==>Set up Session: "id_bond_perdc_dbmt" => NULL		==>It is another loan
+							==>Call internal Service Impl to retrieve Wire Instructions:
+								==>get loan number
+							==>Query: select from loan number:
+								==>What does it mean?
+								1) User: selects a new loan to create a new wire request
+												==>When user selects a new loan number from the list:
+													1) It will be a new loan number: onChange
+												==>It will prompt: are you proceed? all edits are unsaved
+													1) User selects: yes: then switch to the new loan and all previous loan's edits are lost
+													2) User selects: no: the drop down list will be reset to the existing loan selection
+								2) System/App: needs to get all needed initialization data and base data for the user to create a new wire
+											   (these data are not filled out by the user, and they are internal base data: aka: instructions data)
+											   ==>dt_prpard => current date: theoretically: the same date as the signed date
+											   ==>Initialize a new id_bond_perdc_dbmt:
+											   		==>When you click the menu and select a loan, it will be always a new id_bond_perdc_dbmt
+											   		==>This is true for the same loan number (when user switches to one other loan and switch back, or initiate the menu click again)
+											   		SAVE Processing:
+											   		==>After SAVE: the session's id_bond_perdc_dbmt stays the same: YES
+											   			==>But the page cannot save it again
+											   		Basically each new wire save got a new id_bond_perdc_dbmt
+											   		But during the same wire initiation and configuration of this page before clicking SAVE: it is the same id_bond_perdc_dbmt
+											   			==>How about user: not clicking SAVE, and have the following scenarios:
+											   				Refresh:
+											   					Does session storage clear on refresh?
+																	sessionStorage is similar to localStorage; the difference is that while data in localStorage doesn't expire, 
+																	data in sessionStorage is cleared when the page session ends. ... 
+																	A page session lasts as long as the tab or the browser is open, and survives over page reloads and restores
+																Yes, a browser refresh starts a new session?
+																refresh the web page in order to see the updated information – refreshing the page tells the browser to go back to the server and see if there is anything new. On most browsers, the refresh button is shaped like a circular arrow near the browser’s address bar. 
+																Refresh:
+																	==>Call server to reload the same page
+																	1) Load the server contents and Page
+																	2) Client side changes: will be lost and overridden
+																	3) 
+															===>My feeling is: this could be No.1 root cause																
+											   				Back button
+											   				Timeout
+											   				Sessions...
+											   				...
+
+															TCP/IP stack
+															
+															Application layer creates a HTTP request, packs it into a TCP packet, and sends it to the Transport layer.
+															Transport layer packs the TCP packet into an IP packet and sends it to the Network layer.
+															Network layer forwards the packet based on its destination IP and sends the packet along with the address of the next network node to the Data-Link layer.
+															Data-Link layer transfers the packet to the next node via the Physical layer.
+															Physical layer propagates the bits of the packet along a wire back to the Data-Link layer
+															Then the packet will crawl its way back the TCP/IP stack to the web server. Then a new copy of the page will crawl its way back down and up the TCP/IP stack back to your Web Browser.
+											   				
+											   				Tests:
+											   					Run tests and check DB rows
+											   				
+											   ==>Always: electronic
+											   ==>...
+											   Code_cycl_fnl: LA and FA
+											   
+								3) Delete Button: for sure disabled...
+						==>
+					==>
+			==>SaveWireRequestServiceImpl:
+				==>1) Check if checkbox checked: SNG or UNS
+				==>2) Get id_bond_perdc_dbmt: from Session: see above
+				==>3) Call SaveWireRequestServiceImpl
+					==>
+				==>Save/update
+				
+				==>5) Enable: delete button after successful SAVE
+				
+				Why after clicking SAVE, it cannot be clicked again?
+					1) After clicking SAVE, it finishes the WireRequestAction execute() call with "SaveWireRequest"
+					2) It then moves to the view: WireRequest Page
+					3) When the WireRequest page is rendered again: the default "Save" button: disabled (even though it is not greyed out)
+						==>So you cannot click it again after SAVE and the resulting page
+							==>Even you cannot double/multiple-click: because after click it goes to the Struts flow and more clicks don't change it
+						==>Only when user processes some events on the page, the Save button can be enabled again
+							==>Need to test: ...
+							Because the page should still have the same id_bond_perdc_dbmt
+							==>Will this lead to an UPDATE to the existing id_bond_perdc_dbmt?
+					
+					
+					4) Save Operations:
+						==>Struts call						
+						==>						
+						==>sData:
+							==>Set VO as InputData
+								==>VO.set Properties: FormData
+								==>VO.set id_bond_perdc_dbmt from session
+						==>SaveWireRequestServiceImpl:
+							==>Check DB: if the id_bond_perdc_dbmt is SNG
+							==>If not SNG: then Save:
+							==>BO.save()
+								==>DAO.save(Bo)
+									==>Db.update():
+										save_bond_perdc_dbmt	
+										==>Call SP
+					5) Page Rendering:		
+						Not going to: signedWireRequest page: hasErrors: the message saved
+						Going to: WireRequest page
+				
+			==>Get Pending Requests:
+				==>Use id_bond_perdc_dbmt
+				
+		==>WireRequestAction.java: execute(): finally block():
+			==>Use trusteeId: retrieve the trustee's loans list
+
+***********************
+Fixes:
+***********************
+
+(1) Reset: Form
+
+	How do I reset a form?
+		reset() method restores a form element's default values. This method does the same thing as clicking the form's reset button. If a form control (such as a reset button) has a name or id of reset it will mask the form's reset method. It does not reset other attributes in the input, such as disabled .Feb 19, 2021
+
+	One way to stop page resubmission on page refresh is to unset the form data after it is submitted so that the variable storing form data becomes empty and wrap up your form processing block of codes to check if the form is empty.
+	
+	if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+	   $data = // processing codes here
+	   unset $data;
+	}
+	This will make $data empty after processing and the first clause would stop form resubmission on page refresh.
+
+(2) Use: JavaScript
+
+This method is quite easy and blocks the pop up asking for form resubmission on refresh once the form is submitted. Just place this line of javascript code at the footer of your file and see the magic.
+
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+
+
+(3) preventDefault()
+
+	The event. preventDefault() method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. Prevent a link from following the URL.
+
+(4) 
+	The simplest solution to prevent the form submission is to return false on submit event handler defined using the onsubmit property in the HTML <form> element.
+	
+	preventDefault() will stop the submit. One great way to prevent reloading the page when submitting using a form is by adding return false with your onsubmit attribute. You can use this code for form submission without a page refresh.
+
+<form action="#" onsubmit="yourJsFunction();return false">
+    <input type="text"/>
+    <input type="submit"/>
+</form>
+	
+(5) 
+
+
+Use jQuery’s submit event to handle the form submit, add return false; at the end of the submit handle function to prevent the page to reload.
+
+1
+2
+3
+4
+5
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<form action="" id="my-form">
+    <input type="text"/>
+    <input type="submit"/>
+</form>
+1
+2
+3
+4
+5
+6
+$(document).ready(function() {
+    $(document).on('submit', '#my-form', function() {
+      // do your things
+      return false;
+     });
+});
+
+
+***********************
+MF-Bonds:
+***********************
+
+==>App:
+	==>MVC:
+		==>Struts 1.x
+		==>Java Web App: Servlet + partial Struts
+		==>Flows:
+			==>3 Ways:
+				1) index.jsp
+				2) Servlet
+				3) Struts action/mapping flows
+	==>UI/View:
+		==>XLST: XSL / XML + Mergers
+	==>Integrations:
+		==>CMS RESTful APIs
+		==>
+	==>SQL: BondSQL.xml
+		
+==>Concepts:
+	==>Disbursement: payments
+	==>UI:
+		==>"Prepared By": From BWRS: "Signed By"
+		==>
+
+==>UI:
+	In xml/*.xsl (merged with xml data files)
+	==>XLST
+
+==>Function: Disbur Screen:
+
+	"Approve"
+	
+	"Update"
+	
+	"Delete"
+	
+	"New"
+
+	/bonds/home?action=Payments
+		BondsServlet.java
+			BondProxy.java
+			==>UpdateDisb()
+			==>approveDisb()
+			==>DeleteDisb()
+
+==>Function: Approve Wires Screen: "Approve"
+
+
+	Approve:
+		==>Update table: bond_perdc_dbmt
+		==>Update 5-10 tables
+		==>BondMgrEJB:			
+			==>Wire Request Approval Service:
+				==>Start CMS Call: approveWireDisburment()
+					WireRequestApprovalServiceImpl.java
+				==>Call: Proxy Webservices: Get Wire Instructions
+					==>Cyberark: Get Rest Service Call credentials
+					==>postRestXmlCall
+					==>Call CMS: response DMC:
+						DMC: DataMovementControl
+				==>Call: getMPSUserId()
+				==>Call getBondPerdcDbmtData()
+				==>Call: SSRJrnl SP
+				==>Call: Create Wire Request Proxy Service: create wire record in the table: wire_disbmt: Created by CMS RESTful API
+			==>DONE
+
+		==>Summaries:
+			==>Regardless of its logic: ==>I don't see any relevance to the duplicate rows of the table
+

@@ -1,0 +1,239 @@
+
+================================================
+DB:
+
+==>Sybase: MPS
+
+	==>Concepts and Terminology:
+		==>Scenario 1: Users:
+			==>All users are basically secured, so another name is called: secured users (but seems like for cyber, we only need Cyber not CyberSecurirty, ..., positive...)
+			Table: sec_user_bsc
+				   ==>Contain all main user data: 	1) id_user: used for all other tables as a non-enforced foreign keys
+													2) names, ...
+													3) id_empl: FID/CID: needs to be in lower cases
+		==>Scenario 2: users want to access many apps etc:
+			==>Procedure 1: join a team as the initial processing: sec_user_team: a team pprovisioning some users
+			==>This is critical: through the team, user reaches out: apps
+			(apps are also managed through team concepts, "application team")
+			So id_app_team is also added to this user team: this connects the user to the configured app(s)
+		==>Scenario 3: application team:
+			The team portfdolios that manage all the applications
+			==>application team can also be called: secure application team, similar to user scenarios
+			==>...
+		==>Scenario 4: application data: Table: appl_bsc
+	==>
+
+
+
+	Examples:
+		==>Example 1: CMS Application
+			==>
+		==>
+
+==>
+
+================================================
+DB and Business Models/Rules:
+
+==>MPS Apps: Underwriting:
+	==>Search loan ==>Show who owns it: but the owner and the managers can change it into another owner's name
+	==>This same owner names can also be shown in LAP app
+
+==>MFUW:
+	==>If not the owner, the hedge provider screen has greyed buttons: save, ...
+	
+	==>Menus
+		==>Loan Terms:
+			==>Why do some loans show "Hedge Provider"?
+			
+			==>
+		==>
+		
+	==>
+
+
+================================================
+Sybase DB:
+
+==>id_user: / id_empl / ...
+
+	==>MOP<NME>
+		NME: FirstName + LastName: Pick up 3 capital letters
+		MOPERR: ...
+	
+==>MPS: 1269 Tables:
+	
+		==>Category: App Usage:
+			==>
+			
+			==>
+			
+			==>
+		
+			==>
+	
+
+
+		==>Category: types:
+
+			Summaries:
+				==>Table Definition: "Code"
+				==>No primary keys: mostly
+					==>Implicit Primary Key 1: master tables: 	id_xxx:		Auto-incremented?	==>numeric(8,0) IDENTITY
+					==>Implicit Primary Key 2: l_xxx_yyy:		id_xxx_yyy:	datetime
+					==>Implicit Primary Key 3: xxx_yyy:			id_xxx_yyy:	datetime
+				==>Foreign Keys:
+					==>1) l_xxx_yyy
+						  ==>Some tables: refer to l_xxx_yyy, but not defined as a foreign keys
+							 Example 1: sec_user_bsc: column: code_sect_mf: refer to l_sect_mf, not define it as a foreign key
+						  ==>
+					==>2) some master tables' id_xxx
+					==>3) 
+				==>Data Integration:
+					==>Not mainly through foreign keys
+					==>DQ Teams + DCRS/DCU + Database Refresh + ... + Constraints
+
+			==>Type 1: Similar to MSSQL: l_xxx_yyy
+				==>Standards:
+					id_xxx_yyy
+					code_xxx_yyy:	char(2) vs. MSSQL: digit
+					desc_xxx_yyy
+					name_xxx_yyy
+					dt_lst_chg
+					text_desc
+					
+				==>
+			
+			==>
+			
+			==>
+		
+		==>Category: Correlations:
+
+			==>Empl + Mrtg:
+			
+			==>...
+			
+			==>
+
+================================================
+4 Tables: user/appl/team:
+
+	User -> User+Team (Changed into User+ApplTeam)
+	Appl -> Appl+Team
+
+	==>sec_user_bsc:	User
+	
+	
+	==>sec_user_team:
+		==>So user can link to teams, and teams are associated with appls
+		
+	==>
+
+================================================
+Topic: Table: sec_user_bsc:
+
+	==>NOT NULL: can be empty string: '', " ", "         ": all the same
+		==>Default: " "
+	==>Entire MPS table: only has: 34 primary keys:
+		==>Other primary keys are done: sp_primarykey:	
+		
+Table Summaries:
+	==>When creating a new row: some defaults are created... - can you omit all these defaults' columns when doing inserting of a new row?
+	==>Who created my row on 02/11/2020?
+		==>Must be a tool through some MAC request or onboarding AD groups...
+			==>Such as Sybase TAM group request
+			
+			Jerry: created an MAC PROD request: Sybase: add user to Sybase group: ==>group/server/database-name, ...
+				   ==>Approved
+				   ==>App/Product owner (Sybase Prod DBA group): do provisioning: ==>create this row in the table: sec_user_bsc
+			
+		==>Then why do we need to add external users into Sybase sec_user_bsc table via DCU?
+		
+			==>Current Ping's AD groups: have internal AD groups and external AD groups?
+		
+			==>MF Bonds WR: TAM: existing: internal users => added to Ping's internal AD groups: automated migration
+															 ==>How do their id_empl get added to Sybase PROD DB?
+															 1) By Sybase MAC request? ==>My row was added like this, I think.
+			==>MF Bonds WR: TAM: existing: external users => added to Ping's external AD groups: automated migration
+															 ==>How do their id_empl get added to Sybase PROD DB?
+															 1) By Sybase MAC request? ==>My row was added like this, I think. ==>same one row ...
+															 2) How about external users (non FID/CID)?
+																==>1) Added to the table by previous MAC request? 
+																	  Was MAC request available to these external users via BOS or FM customer service?
+																==>2) Added via other FM customer management or business/BOS teams on behalf of external users
+			==>MF Bonds WR: Ping: new user: internal: 	  => create keychain request to add to Ping's internal AD groups
+															 ==>How do their id_empl get added to Sybase PROD DB?
+															 1) By the same AD group keychain request?
+															 2) By Sybase keychain request - counterpart of Sybase MAC request?
+			==>MF Bonds WR: Ping: new user: external: 	  => Keychain request: NA? to add to Ping's external AD groups
+																==>By some InfoSec special routines or procedures?
+															 ==>How do their id_empl get added to Sybase PROD DB?
+															 1) ?
+															 2) DCU?
+	==>Total: 3705 rows
+		==>fxxxxx: 1934
+		==>Fxxxxx: 54
+		==>cxxxxx: 672
+		==>Cxxxxx: 38
+		==========>2698
+		==>Not: f/F/c/C/emptyString: 88
+			==>Name_First: "External":	==>4
+		==>Empty String: 919
+		==>Non-EmptyString: 2786
+	==>
+	
+	
+	
+	
+==>code_sect_mf: 999: MF ==>Sector: department, business unit
+	==>Table: l_sect_mf
+	==>Not defined as a foreign key, but there are 2 triggers (insert/update) to enable its checking with the table: l_sect_mf
+==>code_title_user:	999: all users are using: 999
+	==>Table: l_title_user
+	==>Defined as a foreign key, and also there are 2 triggers (insert/update) to enable its checking with the table: l_title_user
+==>code_rgn_mf_text:	MF Regional Area
+	==>Table: l_rgn_mf
+	==>Value: HO ==>00: Home Office
+==>dt_end:
+	==>CAN BE: NULL
+	==>So all added rows will stay even not in use?
+	==>Just added dt_end date: if not null, this user is no longer using it and being valid
+==>dt_lst_chg: whenever changed this row: such as: add dt_end, etc.
+==>dt_sec_user_bsc: the date when this row was initially added
+==>id_lst_chg: whoever made the last change to this row: MFCOPY: could be a DCR, or some systematic change
+==>id_user: mostly like FID/CID with F/C part
+	==>Index 1
+	==>This is enabled as primary key: by sp_primarykey procedure
+	==>...
+	==>...
+==>name_first:
+
+==>name_lst
+
+==>name_mid_init:
+
+==>name_title
+
+==>addr_email:
+	==>CAN BE: NULL
+==>id_empl
+	==>Index 3
+
+==>id_sec_user_bsc: auto-generated
+	==>Index 2
+
+
+================================================
+Topic: Table: code_sbrdnt_debt:
+
+	==>Debt types: unknown: 999
+		==>H, ...
+		
+	==>Usage: MF Underwriting: Valuation:
+		==>Calculate LTV: hard loans' debts: amount total
+		==>Select table: asesmt_sbrdnt: field: "code_sbrdnt_debt": "H": hard ==>cannot be NULL
+		1) Set it up: 999: unknown
+		2) Set it up: default blank string: " " ???: could be ok too
+		
+================================================

@@ -1,0 +1,202 @@
+
+***********************
+Application: Tech Stacks - EchoWeb - VueJS
+***********************
+==>Node/NPM
+==>VUI JS:
+	==>Not Angular UI: Use VUI to replace Angular (aka: use JS to replace TS)
+==>Other UI Tools:
+	==>Babel: web packer/loader
+==>Maven
+
+***********************
+UI Domains:
+
+***********************
+
+==>Maven
+==>frontend-maven-plugin
+	==>
+
+	The vue-cli-service serve command starts a dev server (based on webpack-dev-server) that comes with Hot-Module-Replacement (HMR) working out of the box.
+
+	In addition to the command line flags, you can also configure the dev server using the devServer field in vue.config.js.
+	
+	[entry] in the CLI command is defined as the entry file (default: src/main.js or src/main.ts in TypeScript project), not an additional entry file.
+
+	==>npm run serve
+		==>vue-cli-service serve
+	
+	Similar to Angular Flows:
+	
+	==>main.ts
+	
+	==>App component
+	
+	==>App.vue
+		==>template
+		==>script
+		==>style
+		
+	==>UI Flows
+	
+	
+	
+==>Backend Data:
+
+	==>Integration
+	
+		services
+		
+			==>Call EchoService service module's RESTful APIs...
+			
+			
+	
+	==>Data Flows
+	
+	
+	
+	
+	
+
+***********************
+TDD/Test Domains:
+***********************
+==>Modules:
+	Module: echo-dependencies:
+		==>No tests
+	Module: echo-shared:
+		==>No tests
+	Module: echo-services:
+		==>Tests: 1
+	Module: echo-web:
+		==>No tests
+		
+==>Test Frameworks:
+	==>Spring Boot:
+		==>JUnit 5
+		==>Spring Test
+		==>Spring Boot Test
+			@SpringBootTest:
+				If you are using JUnit 4, don’t forget to also add @RunWith(SpringRunner.class) to your test, otherwise the annotations will be ignored. If you are using JUnit 5, there’s no need to add the equivalent @ExtendWith(SpringExtension.class) as @SpringBootTest and the other @…​Test annotations are already annotated with it.
+			Spring Boot WebFlux Test
+		==>Spring Web Reactive Test
+		==>Spring Security Test
+		==>Spring REST Docs: Tests
+		==>
+	==>Reactor:
+		==>Reactor Test
+	==>Vue JS
+		==>Test Runners: Karma or Jest
+		==>
+
+==>Notes:
+	pom.xml:
+	==>Import: some pom as BOM: such as: version.appeng.aluminum:
+		==>This brings its BOM's bundled dependencies: including many jars
+		==>These jars: maybe no need to specify its versions:
+			1) Its BOM: defined inside dependencyManagement: ech-dependencies module
+			2) All the versions from the bundled BOM
+
+
+
+==>@WebFluxtest
+
+	To test that Spring WebFlux controllers are working as expected, you can use the @WebFluxTest annotation. @WebFluxTest auto-configures the Spring WebFlux infrastructure and limits scanned beans to @Controller, @ControllerAdvice, @JsonComponent, Converter, GenericConverter, WebFilter, and WebFluxConfigurer. Regular @Component and @ConfigurationProperties beans are not scanned when the @WebFluxTest annotation is used. @EnableConfigurationProperties can be used to include @ConfigurationProperties beans.
+	
+	WebTestClient
+		WebTestClient is an HTTP client designed for testing server applications. 
+		It wraps Spring’s WebClient and uses it to perform requests but exposes a testing facade for verifying responses. 
+		WebTestClient can be used to perform end-to-end HTTP tests. 
+		It can also be used to test Spring MVC and Spring WebFlux applications without a running server via mock server request and response objects.
+
+	Spring Test:
+		https://docs.spring.io/spring-framework/docs/5.3.7/reference/html/testing.html#webtestclient
+	
+	
+	(1) Method 1:
+		Auto-configured Spring WebFlux Tests:
+		1) @WebFluxTest is limited to a single controller and used in combination with the @MockBean annotation to provide mock implementations for required collaborators.
+			@WebFluxTest(UserVehicleController.class)
+			@MockBean
+		    private UserVehicleService userVehicleService;
+		2) @WebFluxTest also auto-configures WebTestClient, which offers a powerful way to quickly test WebFlux controllers without needing to start a full HTTP server
+			@Autowired
+    		private WebTestClient webClient;
+    
+	(2) Method 2:
+		Auto-configure WebTestClient in a non-@WebFluxTest (such as @SpringBootTest) by annotating it with @AutoConfigureWebTestClient
+	
+	Search:
+		1) Spring Boot Test: Auto-configured Spring WebFlux Tests
+			https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+			==>Spring Boot @WebFluxTest:
+				Automatically configure all the needed steps below 2): also auto-configure/enable @WebClientTest
+				No need to add the steps in 2)
+			Examples:
+				https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#test-auto-configuration
+				org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration
+				org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration
+				org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration		
+			How to use: 	WebClientTest
+				==>https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+				==>https://docs.spring.io/spring-framework/docs/current/javadoc-api/
+					Search: WebClientTest
+					https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient.UriSpec.html#uri-java.lang.String-java.lang.Object...-
+					https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient.RequestHeadersSpec.html
+		2) Spring Test: General Scenarios: WebClientTest:
+			https://docs.spring.io/spring-framework/docs/5.3.7/reference/html/testing.html#webtestclient
+			==>These involve manual configurations to set up a WebClientTest to run Spring Test for" 1) MVC apps 2) WebFlux apps
+			
+	
+	
+==>WebFlux:
+	==>Nature 1: Non-Blocking
+	==>Nature 2: Functional
+
+==>WebSocket:
+	==>Nature 1: Non-Blocking
+	==>Nature 2: Asynchronous
+
+	
+
+==>Spring Boot Test: Starter:
+	https://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/html/boot-features-testing.html
+	==>Auto-Configuration: bring in a list of default test frameworks:
+	
+	Test scope dependencies
+		If you use the spring-boot-starter-test ‘Starter’ (in the test scope), you will find the following provided libraries:
+		
+		JUnit — The de-facto standard for unit testing Java applications.
+		Spring Test & Spring Boot Test — Utilities and integration test support for Spring Boot applications.
+		AssertJ — A fluent assertion library.
+		Hamcrest — A library of matcher objects (also known as constraints or predicates).
+		Mockito — A Java mocking framework.
+		JSONassert — An assertion library for JSON.
+		JsonPath — XPath for JSON.
+		
+		[Note]
+			By default, Spring Boot uses Mockito 1.x. However it’s also possible to use 2.x if you wish.
+			==>From Mockito:
+			import static org.mockito.BDDMockito.*;
+
+
+***********************
+Meeting Notes:
+
+wav files
+	v-files
+LOG files
+
+
+
+==>Siri ASR
+==>CKit ASR
+
+***********************
+Docker:
+
+	Dockerize Spring Boot Application
+
+
+***********************

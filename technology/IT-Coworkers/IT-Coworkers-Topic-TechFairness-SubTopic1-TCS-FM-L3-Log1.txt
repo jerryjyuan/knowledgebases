@@ -1,0 +1,397 @@
+
+===========================================
+IT Coworkers:
+
+
+===========================================
+Tech Fairness:
+
+==>[Jerry]: Domain-Age/Experiences-Fairness: ==>Self-Summaries:
+	==>Related Factors:
+		Age
+		Experiences count
+		Fairness: team members + team duties + common-scenarios (HumanWorld-jobs/USA-jobs/IT-industry/TCS/TCS-FM/TCS-FM-L3)
+	==>Summary:
+		1) Scenario: Job Duties: Duties Fulfillment:
+					   ==>I can do the SAME
+		2) Scenario: Job Duties: Duties: Do-Better:
+					   ==>I can do better when applicable
+					   ==>Actually: I have done better when applicable
+					   	  1) Example 1: Full-stack / 33%-dev / ...
+					   	  2) Example 2: 
+		3) Scenario: When switching to a new job/client: duties/work-type/tech/...
+					 Example 1: Can Mahesh compare with Jerry?
+		4) Scenario: Considering "Full-stack engineer":
+					 Example 1: Can most of L3 compare with Jerry?
+		5) Scenario: In both short-term and long-run scenarios and "complicated-problems" scenarios:
+					 Example 1: Can "Dhivya" and "Qian, Min" compare with Jerry?
+		6) Scenario: Real performance and results:
+					 1) Compare with junior/young engineers:
+						 ==>Factor/Example 1: time:
+						 					  ==>how about Jerry's spending more time? (if only one-job duties)
+						 ==>Factor/Example 2: how about Dhivya doing the same MF Bonds incident "Duplicate Wires" RCA?
+						 ==>
+					 2) Compare with experienced engineers:
+					 	 ==>Example: Compare with non-full-stack:
+					 	 		==>Full-stack:
+					 	 			==>Is most of L3 able to do full-stack like Jerry?
+					 	 		==>
+					 	 ==>Example: Compare with full-stack:
+					 	 		==>Example 1: Narender
+					 	 			==>[Jerry]:
+					 	 				Is Narender doing other apps' support or more duties than 1-month break-fix PROD-Deployment for back button?
+					 	 			==>[Jerry]:
+					 	 				If anyone does the same company-procedures like Narender's 1-month break-fix PROD-Deployment for back button
+					 	 				Why cannot Jerry do the same due to fairness and procedures? and Jerry has to do 2-week release?
+					 	 				[Someones]: just demonstrate how well you are
+					 	 				[Jerry]:    wrong. it will lead to some PROD defects due to lack of procedures
+					 	 				[Someones]: because you got higher pays
+					 	 				[Jerry]:    wrong: 1) I am not getting higher pays 2) also even someones with higher pays can do the same tasks at one time based on overall career scenarios
+					 	 				[Someones]: due to job security
+					 	 				[Jerry]:    wrong. because the company-procedures are the standards
+					 	 				[Someones]: due to your being experienced engineer
+					 	 				[Jerry]:    wrong. Each task has its own natures plus company-procedures. This is not related to someone being experienced
+					 	 							Aka: experiences-count should not be a factor of this kind of task's completion based on company-procedures and fairness and normal standards
+					 	 				[Someones]: En, then someones asked: why did it take you actually 1 more week than Narender?
+					 	 				[Jerry]:	Because I have had 2-3 other tasks ongoing at that time while Narender only focused on this task during that month
+					 	 		==>
+					 	 ==>Example: Compare with experienced-developers/...:
+					 	 		==>Example 1: Siva
+					 	 		==>...
+					 	 ==>Example: Compare with architects/leads/...:
+					 	 		==>Example 1: Yasser
+					 	 		==>Example 2: Shiv
+					 	 		==>Example 3: Manish
+					 	 		==>Example 4: Rahul
+					 	 		==>...
+					 	 ==>Example: Compare with managers/...:
+					 	 		==>Example 1: Sudhir
+					 	 		==>Example 2: Robert Patterson
+					 	 		==>Example 3: Gregg Leonard
+					 	 		==>Example 4: Pradeep (he is a manager while someone told me that he was not ...)
+					 	 		==>Example 5: ...
+					 	 		==>...
+					 3) Compare with potentials:
+					 	 ==>Leads:
+					 	 	==>Example: Assigned as L3 or other-client's "Tech Lead" (Shiv's role):
+					 	 		==>Is Dhivya able to do it? (Jerry can definitely do it)
+					 	 	==>
+					 	 ==>Depth:
+					 	 	==>Example: Real-Case RCA...
+					 	 		==>Is Dhivya able to compete with Jerry on it? (Jerry can definitely do it)
+					 	 	==>
+					 	 ==>Width/Broadth:
+					 	 	==>Example: Work on some other apps, or even NET apps...
+					 	 		==>Is Dhivya able to compete with Jerry on it? (Jerry can definitely do it)
+					 	 	==>
+					 	 ==>...
+					 4) Compare with Jerry's own real/actual performances and results (excluding excuses and factors): 02/2020-05/2021
+					 	 ==>Example: Overall performance/results: Overall 80%
+					 	 			Summary: L3 Actual Overall Performance (duties/roles/LOE/time/hours/workloads/results/issues/errors):
+					 	 				==>02/2020-05/2021 Period
+					 	 				==>Based on my own understanding/views
+					 	 				Sudhir: 50-70% (not sure his management team meetings and other duties, etc.)
+					 	 						==>PROS:
+					 	 							==>Maybe some other FM/FM-L3 meetings... ==>Unknown to me
+					 	 						==>CONS:
+					 	 							==>PoliticalStudy-Standups + abusive to Jerry to some degree
+					 	 							==>NonOr10%Technical
+					 	 							==>Only done 50% P2/P3 summaries
+					 	 				Rahul:  70-80%:
+					 	 						==>PROS:
+					 	 							==>Maybe some other FM/FM-L3 meetings... ==>Unknown to me
+					 	 							==>Scrum master + manage tickets + ...
+					 	 						==>CONS:
+					 	 							==>33%Technical: as 70%-nominal POCs for NET apps
+					 	 							==>Only done 50% P2/P3 summaries
+					 	 							==>+ abusive to Jerry to some degree
+					 	 				Shiv:  70-80%:
+					 	 						==>PROS:
+					 	 							==>Maybe some other FM/FM-L3 meetings... ==>Unknown to me
+					 	 							==>L3 team tech lead roles
+					 	 							==>Involved in on-call shift
+					 	 						==>CONS:
+					 	 							==>50%Technical: as 50%-nominal POCs for Java apps
+					 	 							==>+ abusive to Jerry to some degree
+					 	 							==>As L3 Team Tech Lead:
+					 	 								1) Not attend POCs' sessions: most of them
+					 	 								2) Not send emails after-hours: evenings/weekends: mostly
+					 	 								3) Not showcase: working overtime: evenings/weekend: mostly
+					 	 								   (maybe he did attend some overtime work, but not so obviously to me... by emails/bridges, etc.)
+					 	 								   (only possibilities: when on-call delegated to him if any...)
+					 	 								   (my memories: he did show one-time: MMAPS UAT deployment... called me at 7/8pm and chewing dinner)
+					 	 								4) If he worked overtime, he did take sick-days...)
+					 	 				Manish:  70-80%:
+					 	 						==>PROS:
+					 	 							==>Maybe some other FM/FM-L3 meetings... ==>Unknown to me
+					 	 							==>L3 team associate tech lead roles
+					 	 							==>Involved in on-call shift
+					 	 						==>CONS:
+					 	 							==>50%Technical: AutoSys jobs L3 general-support scenarios
+					 	 							==>+ abusive to Jerry sometimes
+					 	 							==>As L3 Team Associate Tech Lead:
+					 	 								1) Not attend POCs' sessions: most of them
+					 	 								2) Not send emails after-hours: evenings/weekends: mostly
+					 	 								3) Not showcase: working overtime: evenings/weekend: mostly
+					 	 								   (maybe he did attend some overtime work, but not so obviously to me... by emails/bridges, etc.)
+					 	 				Jerry: 80-85/90%:
+					 	 						==>PROS: a lot
+					 	 						==>CONS:
+					 	 							==>Time spent...:
+					 	 								1) During the first 1-3 months as new member: 02/2020-05/2020
+					 	 								2) When doing 2+ jobs...: 04/2021-...
+					 	 							==>Some errors... and issues...
+					 	 								==>Exaggerated scenarios:
+					 	 									1) MMAPS: deployment session: 1-time
+					 	 									2) OMC/CSRM: Sunday's issue sessions
+					 	 									3) BWRS-ProxyGateway: ?
+					 	 								==>Designed/Unfair scenarios
+					 	 									1) MFUW: Ping issues 1/2 + Stuck threads issue
+					 	 									2) MF Bonds: Duplicate Wire incident
+					 	 									3) MPS: one incident: HFI / HFS
+					 	 								==>Overdo/Slow scenarios:
+					 	 									==>L3 Validation Tests: for PROD deployments
+					 	 								==>Fairness scenarios:
+					 	 									==>On-call: Java apps are different from Manish's AutoSys jobs support
+					 	 									==>Gokul: DCRS issue list
+					 	 							==>Emails scenarios...
+					 	 				Mahesh: 80-90%:
+					 	 						==>PROS:
+					 	 							==>L3-POC-Specialist:
+					 	 								==>L3-5Year-Specialist
+					 	 								==>L3-business-techsupport-specialist
+					 	 								==>L3-queries-specialist
+					 	 								==>L3-MSS/SPARTA/MIL-specialist
+					 	 						==>CONS:
+					 	 							==>Boundary: Code related
+					 	 							==>Communications:
+					 	 							==>Job-Security expert: he is a job-security expert
+					 	 				Gokul: 80-90%:
+					 	 						==>PROS:
+					 	 							==>L3-POC-Specialist:
+					 	 								==>L3-5Year-Specialist
+					 	 								==>L3-business-techsupport-specialist
+					 	 								==>L3-OUS-specialist
+					 	 						==>CONS:
+					 	 							==>Boundary: Unknown to me
+					 	 							==>Job-Security expert: he is a job-security expert
+					 	 				Hari/Bil/Eskinder/Yogesh: 80-90%
+					 	 						==>PROS:
+					 	 							==>L3-POC-Specialist:
+					 	 								==>NET Apps
+					 	 								==>Related Code Scenarios (some unknown to me)
+					 	 						==>CONS:
+					 	 							==>Unknown to me due to their apps
+					 	 				Harish: 80-85%:
+					 	 					PROS:
+					 	 						==>Active L3-business/app-techsupport-specialist
+					 	 					CONS:
+					 	 						==>Boundary: Code related
+					 	 						==>Less experienced
+					 	 				Chinju/Vamsi: 70-80%:
+					 	 					PROS:
+					 	 						==>Normal/Understandable less experienced members of L3
+					 	 					CONS:
+					 	 						==>Less experienced
+					 	 						==>Less duties
+					 	 		==>Full-stack:
+					 	 			==>Is most of L3 able to do full-stack like Jerry?
+					 	 		==>Ability:
+					 	 			==>Able to support all POC1 apps
+					 	 		==>Duties:
+					 	 			==>Also support additional apps like MSS/SPARTA, etc.
+					 	 		==>Special Comparisons:
+					 	 			==>Manish:
+					 	 				==>Is his AutoSys job support requiring specials like: 1) Code 2) Code-Check 3) Special DCU/DCR?
+					 	 				==>He didn't do the above, and mostly AutoSys job force starts, and DQ team/Gnanesh work
+					 	 				==>Jerry's ActualPerformanceComparions:
+					 	 					Jerry's 80-85/90% vs. Manish's 70-80%
+					 	 			==>Rahul...
+					 	 				==>ActualPerformanceComparions
+					 	 			==>Shiv...
+					 	 				==>ActualPerformanceComparions
+					 	 			==>Mahesh...
+					 	 				==>ActualPerformanceComparions
+					 	 			==>Harish...
+					 	 				==>ActualPerformanceComparions
+					 	 			==>Chinju...
+					 	 				==>ActualPerformanceComparions
+					 	 			==>...
+					 	 				==>ActualPerformanceComparions
+					 	 ==>Example: Jerry has actually known all MAIN work scenarios of L3 after 1-year work in L3
+					 	 		==>Compared with: Mahesh and Hari working in L3 for 5-year
+					 	 		==>...
+					 	 ==>[Jerry]:
+					 	 		==>Measure 1: normalized his L3 role:
+					 	 			==>Age: Jerry didn't tell anyone about his age in L3/FM: trying to normalize his L3 member status
+					 	 				==>Exception 1: 04/2021: looked for a new role/client: so sent out resume
+					 	 				(Resume: removed BS degree in resume so no one could guess Jerry's age due to age-fairness needs)
+					 	 				(Resume: showed MS in 2000: someones can still guess Jerry's age:
+					 	 						==>It could be close to age of 40s if someones think: Jerry graduated in year 2000 as MS at age of 25: 25+20=>45)
+					 	 					1) So Jerry: functions like age of 40s: ok: because of his exercices and healthy living styles
+					 	 					2) So Jerry: Jerry shows his young profile image
+					 	 					3) So Jerry: works like age of 40s for both L3 on-call/shifts/work + any other client work as developers
+					 	 				)
+=					 	 			==>Tech/Experiences: Jerry didn't tell anyone about his 18-year experiences in L3/FM: trying to normalize his L3 member status
+					 	 				==>Exception 1: 04/2021: looked for a new role/client
+					 	 				==>Exception 2: showcased his tech background when someones pinpointed some of his errors
+					 	 		==>Measure 2: showcase: L3 can have experienced engineers plus L3 can have L3-specialists like RCA/Code-Developer, etc.
+		7) Scenario: All related aspects:
+					 ==>Insights
+					 ==>New tasks
+					 ==>Background
+					 
+		10) Scenario: Pays and Duties: See below analysis
+	
+	
+	==>Pays and Duties:
+		==>Jerry's Scenarios
+		==>TCS-Scenarios:
+			==>TCS
+			==>TCS-FM
+			==>TCS-FM-L3:
+				[Someones or L3]: I have heard that Jerry has had 18-year IT experiences, ...so and why ...
+				[Jerry]:		  I like IT and I promote: age-neutrality and fairness, so everyone can work on IT regardless of age
+				[Someones or L3]: We think age is indeed a factor even considering age-fairness, ...
+				[Jerry]: 		  But someones could be special (if age-fairness is ok overall), isn't it?
+				[Someones or L3]: So we think your pay may be much higher than us, so we should let you do more work, ...
+				[Jerry]:		  Due to special scenarios, my pay is just slightly or moderately higher than some of you, but Manish's pay is higher than me, ...
+								  So this is another special scenario about me
+				[Someones or L3]: So we have had you do more in morning health check even when you were the secondary, this was wrong?
+				[Jerry]:          It was wrong
+				[Someones or L3]: But someones said that because you didn't more when you were initially joining L3, so it was a makeup "more"
+				[Jerry]:		  This is also wrong because as a new team member of some teams like L3, accommodating new members' slowness or unfamiliarity is normal
+								  and should not be treated as "later-on-makeup", and it should be normal scenario after being not new any more
+				[Someones or L3]: Someones said that you were willing to do more and it was based on your initiatives
+				[Jerry]:		  Might be, but mostly we should do normal ways and fairness ways...
+				[Someones or L3]: Then one more question is: why did you do L3 or production support work?
+				[Jerry]:		  As a TCS employee, we could move from client to client, so working on various work types for some clients is still normal,
+								  and we can do various duties when moving to another client
+				[Someones or L3]: We thought that you got much higher pays than us, so ...
+				[Jerry]:		  This is not so true, like I said, as an example, Manish has higher pay than me to my knowledge, ...
+								  Also L3 team can still have various experienced engineers, and their pays could be higher, which is normal
+				[Someones or L3]: Are you sure that you have shown much better scenarios or good scenarios when you compare with other L3 in terms of experiences?
+				[Jerry]:		  It really depends:
+								  1) As a TCS employee, we move to different clients, which could be short-term like less than 1-2 years, this doesn't have sufficient
+								  	 bandwidths to showcase so-called leadership or SME, or tech lead, or much better performance
+								  	 Mostly it is just a fulfillment of client job duties
+								  	 Overall better scenarios are reflected in TCS ranks and overall job scenarios
+								  2) I have had some personal specials as well
+								  	 1) I have other life/work balance factors including time contributions
+								  	 2) I am not actually being treated or expected to do "tech lead" roles so far with TCS clients
+								  	 3) Regarding my L3 app support: I have done full-stack roles: 33% dev tasks, etc. so indeed I have done quite better than some of L3
+		==>USA-IT-Industry Scenarios:
+			Notes:
+				Annual increase of pays (if any): generally speaking, include the inflation factors in USA as a nation level
+			==>Teradata:
+				Jerry:
+					2004: $80K
+					2005: $83K
+					2006: $85K
+					...If still in Qualcomm in 2020: ==>$2000(or: 2000-2500)/year x 14: ==>$113K
+			==>Qualcomm:
+				Jerry:
+					2007: $90K
+					2008: $92K
+					2009: $94K
+					2010: $96K
+					...If still in Qualcomm in 2020: ==>$2000(or: 2000-2500)/year x 10: ==>$116K (Qualcomm has one of the IT-company's benefits program)
+				One girl in one other team:
+					(In year 2009 or 2010, there was one time when I walked to a printer, I saw one printed out page: it was some other girl's print-out with her salary...)
+					Her Salary: $$95K or $97K, ..., and I knew her name, and she was similar to Raghuram or Grace scenario (for sure below a manager like Henry Chin), ...)
+			==>
+		==>IT-Industry Scenarios:
+			==>India-IT-Services-Companies: have been caught up with world-standards and IT-standards after 2/3-decades streamlinizations
+			==>TCS: TCS' USA employees: overall matching up with USA-IT-Jobs:
+				==>Additional factors:
+				1) TCS: H1-B employees: processing fees for green cards and H1-B plus related benefits
+				2) TCS: bench-time pay indeed being as a factor
+				3) TCS: some employees are not 100% USA based employees (have India bases): for those, the pays are lower to some degree
+				4) TCS: some employees fit into TCS's No.1 Indian IT company portfolios: resources pooling/pools are one of its global strategies as IT services company
+						==>Due to resources pooling/pools scenarios: various less-experienced engineers are hired:
+						   Examples:
+						   		Steven, ..., ...
+						   		Onsite-teams: assimilations (in-team-training) and internal-structuring scenarios
+						   		(some on-site teams: do not require "client-interviews")
+				So how much lower pays should a normal TCS USA employee be compared with normal USA-IT-engineer?
+				   $15K differences on average: such as: $110K vs $125K
+				==>Questions:
+				   [Someone]: What about Jerry's TCS salary?
+				   [Jerry]:   Due to some reasons (see below): TCS treated Jerry as lower-pay in 2018/10
+				   [Someone]: So what salary do you think you should have TCS pay considering overall scenarios?
+				   [Jerry]:   If just considering common-scenarios: I think my 10/2018 hire-salary should be: $115K-$120K (compared with $100K)
+				   [Someone]: Why is it?
+				   [Jerry]:   Here is my listing:
+				   			  1) I didn't need "H1-B employees: processing fees"
+				   			  2) I was 100% USA-based TCS employee
+				   			  3) My experiences
+				   			  Based on the above, my pay should have been like: $120K in 10/2018
+				   			  But due to the following factors, I think that my pay could be: $115-120K in 10/2018:
+				   			  1) Bench-time factor
+				   			  2) ...
+				   [Someone]: then why did you get $100K?
+				   [Jerry]:   Some other reasons: some were ok, and some were not so right/accurate:
+				   			  1) They didn't review and treat me completely with my experiences when extending the offer, and I didn't negotiate either
+				   			  2) They treated me as an experienced engineer but not assigned the same level client duties: Citibank, CoreLogic, etc.
+				   			  3) Some of the TCS clients: belong to various job duties, including app/prod support work types (which should be lower pays than developers) 
+				   			  4) TCS has its own internal ranking systems, so if you are not get right pays when hired, then you gotta climb up the promotion/annual ladders
+				   [Someone]: How do you think about TCS-FM-L3 folks and their pays?
+				   [Jerry]:   Overall, all TCS employees' pays are company-wide scenarios, not directly related to one client like TCS-FM-L3
+				   			  So all the L3 employees' pays are from their TCS ranks and hire-agreement..., 
+				   			  	one client is just providing their performance reviews and adding one more client duties into their resume as work type, tech etc.
+				   [Someone]: How do you think about their pays?
+				   [Jerry]:   Like I said, their pays are based on TCS overall rank systems, not due to FM-L3 duties or client-scenario
+				   			  (how do you know about each one's ranks? 1) line management ... 2) TCS bands (like: Jerry is: C3A), ...3) ...
+				   			  Example:
+				   			  	Manish Kumar: his TCS rank is above me, so his band is above C3A, and (generally speaking) his pay is above me, ...
+				   			  				  [My estimate]: his salary is: $110-115K
+				   			  	Sudhir Menon: [My estimate]: his salary is: $125K
+				   			  	Rahul:		  [My estimate]: his salary is: $110K
+				   			  	Shiv:		  [My estimate]: his salary is: $110K
+				   			  	Mahesh:		  [My estimate]: his salary is: $105K
+				   			  	Hari:		  [My estimate]: his salary is: $105K
+				   			  	Bil:		  [My estimate]: his salary is: $100K
+				   			  	Eskinder:	  [My estimate]: his salary is: $98K
+				   			  	Harish:		  [My estimate]: his salary is: $95K
+				   			  	Yogesh:	  	  [My estimate]: his salary is: $92K
+				   			  	Chinju:		  [My estimate]: his salary is: $85K
+				   			  	Vamsi:		  [My estimate]: his salary is: $85K
+				   			  	Steven:		  [My estimate]: his salary is: $80K				   			  	
+				   [Someone]: then one more question, why don't you get a pay raise this year?
+				   [Jerry]:   First of all, I am not sure if I don't get a pay raise at all this year until June 2021 paycheck.
+				   			  Here is my TCS pay raises over the past 2 years:
+				   			  1) 10/2018: 100K plus $5000 bonus statement
+				   			  2) 06/2019: 104K? (bonus didn't get verified ... to my knowledge)
+				   			  			  Performance band: B
+				   			  3) 06/2020: 107K? (bonus didn't get verified ... to my knowledge)
+				   			  			  Performance band: D ==>Mostly due to Fedex work scenarios
+				   			  4) 06/2021: Unknown
+				   			  			  Performance band: C ==>Mostly due to my work/life balances scenarios + some unfair scenarios
+				   			  			  (My side evaluation: should be B)
+				   	[Someone]: You mentioned that your TCS salary should be close to 115K-120K, why are you still ok with 107K?
+				   	[Jerry]:   Like some of the above reasons:
+				   			   1) TCS is No.1 India IT service company with some stability in terms of clients domains
+				   			   2) TCS: bench time pays (at least over my past clients experiences)
+				   			   3) TCS: multiple types of clients and client work types: this multiplicity also gives me flexibility of pay ranges
+				   			   4) I enable some of my own initiatives:
+				   			   		==>Life/work life balances
+				   			   		==>2nd work incomes
+				   			   		==>Independent Contributor work aspects
+				   			   		==>Team-specialist work aspects:
+				   			   			==>Such as: worked to some degree as L3-specialist in TCS-FM-L3 team and work tasks
+				   			   		==>At this time, keeping and having TCS client work and focusing on technical scenarios 
+				   			   			are somewhat more useful and important to me than below parts:
+				   			   			==>Significant pay raises
+				   			   			==>Promotion
+				   			   			==>Become a TCS line manager: like Manish or Prabhu
+				   			   			==>Super good in Ultimatix iEvolve courses and/or certifications
+				   			   			==>...
+
+		==>USA-Jobs Scenarios
+		==>
+		
+===========================================
+
+
+===========================================
+		

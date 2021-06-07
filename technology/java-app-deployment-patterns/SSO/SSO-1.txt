@@ -1,0 +1,18 @@
+
+
+***********************
+SSO: Usage 1
+***********************
+
+Internal:
+https://<app-name-env>.app<env>-optigo.<company>.com/<war-app-context-root>
+External:
+https://<app-name-env>.app<env>.optigo.com/<war-app-context-root>
+
+BWRS: PROD:
+	==>External: Need to login again after closing browsers
+	==>Internal: No need
+	
+***********************
+: Usage 1
+***********************

@@ -1,0 +1,42 @@
+
+===========================================
+MS Email:
+
+===========================================
+MS - Outlook: Features:
+
+
+==>Feature: Text Highlight Color:
+	==>Way 1: Normal Way:
+			  ==>Highlight or traverse the word(s): then choose highlight color:
+			  	 the word(s) will be highlighted as this color
+	==>Way 2: Choose highlight color
+			  ==>Highlight or traverse the word(s): then the word(s) will be highlighted as this color
+	==>Way 3: ...
+
+===========================================
+Topic: Handling/Writing Emails:
+
+==>Factors:
+	==>No.1: Time
+	==>...
+	
+==>...
+
+==>...
+
+
+==>PROS
+	==>...
+	==>...
+	==>...
+	==>...
+	==>At-Work:
+		==>Part of At-Work
+	==>Images/Reputations:
+		==>part of reputations
+	==>...
+	
+==>CONS
+
+===========================================

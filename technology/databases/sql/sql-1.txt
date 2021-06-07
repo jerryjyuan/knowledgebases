@@ -41,8 +41,9 @@ CRUD:
 DML-SQL Methods 2: Intermediate
 
 ==>Variations:
-	as
-	Use: single quote
+	Use: as
+	Use: single quotes
+	Use: underscores
 	
 ==>Case:
 	Expression
@@ -64,8 +65,52 @@ DML-SQL Methods 2: Intermediate
 	==>Conditional Inserts/Updates:
 		==>not exists
 		==>exists
-	==>
+		==>Example 1: conditional inserts
+			INSERT INTO table1(col1, col2, ...)
+			SELECT val1, val2, ... (mostly should not use: from table2: this could select all related rows in tables and insert into table1)
+					(val1/val2: could be: multiple forms:
+						id_key_column=(select max(id_key_column)+1 from table1):
+							==>Use Cases: 1) this column is primary key 2) cannot be NULL 3) But it is not auto-incremented by ORM or DB
+							   (Some tables' primary key column is auto-incremented by ORM or DB, and cannot be assigned like this)
+						current_timestamp
+						CAST(GETDATE() AS DATE)
+						date column: can be a string value for the column value here: '...'
+						'a string value': 'name'
+						an integer: 1000
+						a double value: 300.00
+						a select clause: this is very useful
+							1) PRO 1: It can avoid any joins to get this value: joins are very expensive =>Using this way: just a simple select
+								val5=(select col1 from table3 where ...)
+							2) ...
+						...
+				WHERE table2.col1='col1'
+					  and not exists (select table1.col1 from table1, table2 where table1.col1 = table2.col1 and table2.col2='name2')
+					  ==>Only insert when the condition is true: table1 doesn't have a row with col1 with these conditions: mostly the primary key col1
+		==>Example 2: 
+
+==>Usage: IN | NOT IN
+	==>Guideline 1: used for multiple values returned
+		(otherwise: can use: "=")
 	
+	UPDATE table set col1=val1, col2-val2, ...
+	WHERE col3 IN (select ...)
+
+	UPDATE table set col1=val1, col2-val2, ...
+	WHERE col3 = (select ...)
+	
+==>Usage:
+	==>Table Design:
+		==>Add: id_created, id_lst_updated, dttm_created, dttm_lst_updated
+
+==>Usage:
+	==>Common Errors to Avoid:
+	1) NULL:
+		==>WHERE clause: where col1 is NULL (is not NULL)
+		==>UPDATE Clause: Update table set col1 = NULL where...
+		==>INSERT Clause: INSERT INTO table(...) values(NULL, ...)
+		==>INSERT Clause: INSERT INTO table(...) SELECT ..., NULL, ...
+	2) 
+
 ==>Usage:
 	==>use aggregate functions and column names together:
 		==>The column names: need to be in the "group by" statement:

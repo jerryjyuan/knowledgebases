@@ -1,0 +1,125 @@
+
+***********************
+Apple: Apps: Corporate
+***********************
+
+Summaries:
+	==>Apple apps: similar/shared across platforms:
+		1) Laptop: MacBook
+		2) iPhone
+		3) ...
+		
+	==>Examples:
+		Mail/Calender
+		Siri
+		...
+		
+Apple Network:
+	AppleConnect
+	VPN:	CORP/CORP(Full-Funnel): works
+			DCVPN
+			DCVPN AMR EAST: works
+			DCVPN AMR WEST
+		
+Apple Mail:
+	Calendar:
+		==>Linked with Apple Mail App
+	
+		==>
+
+Apple Meetings:
+	Cisco Webex Meetings
+	(1) Scheduling
+		1) Way 1: Webex -> Calendar:
+				  Can schedule and download to Calendar
+				  ==>Works:
+				  	 PROS: simple + automatically enabled as a Webex meeting
+				  	 CONS: not sure how to check availability
+		2) Way 2: Calender -> Webex
+				  ==>Select option: Webex_Meeting
+				  1) Cannot add yourself
+				  2) Can check availability
+				  3) Can have 2 types Events: Calendar (pink) + Webex_meeting (blue)
+				  4) 
+	(2) Start a Meeting
+		1) Personal's Room
+		
+Apple Messenger:
+	Slack
+	
+	
+***********************
+Apple: Apps: Enterprise Engineering/Enablement
+***********************
+
+Access:
+	Access manager
+
+Open Directory:
+
+
+
+***********************
+Apple: Products/Teams
+***********************
+
+Caesar: Requests Systems
+
+***********************
+Apple: Apps
+***********************
+
+App-to-App Communications:
+	Aluminum
+
+	IDMS:
+		a3token
+
+	==>App-to-App Communication
+
+Apple IVR Auth
+
+Siri
+
+***********************
+Common DEV:
+***********************
+
+IDE: IntelliJ IDEA:
+	.iml
+	
+Plugins:
+	Checkstyle: check syntax...: clover...
+Lombok
+
+	
+
+Spring Boot Reactive Programming
+
+Java Web Socket
+
+JUnit 5: JUnit Jupiter
+
+Deployment:
+	CI/CD/Pipelines:
+		Gitlab
+		Jenkins
+		...
+		ACI RIO / Artifactory
+	Github
+	Platforms:
+		Firebase
+		Heroku
+		...
+	Cloud:
+	Container:
+		Kubernetes/Docker
+		OCP ROTN
+	Tools:
+		Fortress/Ansible
+
+
+***********************
+
+***********************
+

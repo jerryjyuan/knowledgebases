@@ -1,0 +1,18 @@
+
+***********************
+DateUtil: Usage 1
+***********************
+
+(1) Pre-JDK8
+
+(2) JDK8
+
+
+(3) Common Ways:
+
+	==>Calendar: Usage 1:
+		==>PROS:	
+			==>Fields: changes or enabling
+		==>CONS
+		==>Methods:
+			Calendar => Date

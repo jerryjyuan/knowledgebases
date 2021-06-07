@@ -3,6 +3,32 @@
 Windows: Env and Apps
 
 ===========================================
+Topic: MS Office:
+
+==>MS Outlook:
+	==>Web Mail:
+		https://outlook.com/owa/<company-name>
+		https://outlook.office365.com/mail/inbox
+	==>Set up: OOO:
+		==>Scheduled time: 6am-6am
+		==>Not entire day event
+	
+==>MS 
+
+===========================================
+Topic: Emails: All Summaries:
+
+==>MS Emails
+==>Internet Accounts
+==>Company Accounts:
+	==>TCS:
+		==>Citrix Hosted Web Mail (Lotus)
+			1) India Time Zone
+			2) Features:
+				==>Can click on the webex link to join the webex calls
+				==>Need to "reply to all": 1) inbox 2) highlight the meeting invite email 2) click menu "Reply to All"
+	==>
+===========================================
 Topic: Zooming:
 
 ==>Zooming: Monitor Display
@@ -41,6 +67,7 @@ Topic: Drag and Drop:
 
 
 ===========================================
+Topic:
 
 
 ===========================================

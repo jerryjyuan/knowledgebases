@@ -1,0 +1,40 @@
+
+***********************
+Java/Angular App: Build
+***********************
+
+Local Env:
+	==>Set up local global NODE/NPM:
+		==>On Paths: all default commands are from these global installations
+			==>Installations: Manual
+			==>Installations: Maven pom.xml
+	==>Multiple Installations:
+		==>NVM
+		==>Project local Node/NPM
+			==>Installations: Manual
+			==>Installations: Maven pom.xml
+			==>
+		==>
+	==>Use: maven builds:
+		frontend-maven-plugin
+		exec-maven-plugin
+
+MissionMap:
+	==>OCP/ROTN
+
+SPARTA UI:
+	==>OCP/ROTN
+
+
+***********************
+Java/Angular App: Deployment
+***********************
+
+MissionMap:
+	==>OCP/ROTN
+
+
+SPARTA UI:
+	==>OCP/ROTN
+
+

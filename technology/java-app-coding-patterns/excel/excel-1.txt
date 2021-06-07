@@ -3,7 +3,7 @@
 Excel: Usage 1
 ***********************
 (1) Usage:
-	1) Business Teams: use Excel files such as: .xlsm files: create/build business data template files
+	1) Business Teams: use Excel files such as: .xlsm (macro-enabled) files: create/build business data template files
 	2) 
 
 	Examples:
@@ -13,6 +13,22 @@ Excel: Usage 1
 
 	==>FSConverter.java:
 		==>Convert the incoming Excel file contents into an XML data file using XSD rules
+			==>Check if the file is an Excel: POIFSFileSystem/POIXMLDocument.hasPOIFS/OOXMLHeader()
+			
+		==>String Parsing
+			
+			==>Date Parsing
+			
+			
+			
+		==>Numeric String
+		
+		==>Boolean Parsing
+		
+		==>FORMULA Parsing
+		
+		==>BLANK: Parsing
+			
 		==>Generate an XML file containing all the data fields (abide by XSD rules) from the above Excel file
 	==>FSConverter.java:
 		==>Should simulate the FS Statement Document upload module like DMS...

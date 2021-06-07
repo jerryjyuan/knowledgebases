@@ -1,0 +1,975 @@
+
+==========================================================
+Sub Topic: Angular:	Material Design
+
+==>Methods:
+	==>Explore 5 more example Angular UI-MD apps
+	==>...
+	==>Keep exploring the following on a weekly basis - if not daily basis:
+		==>Angular
+		==>MD
+		==>Bootstrap...
+		==>...
+		Simple Principle: (weekly) eye-contacts and explorations are useful to keep good dev...
+
+==========================================================
+Development Methodology: Level 0: Foundations
+
+==>Versions Compatibility and Concerns?
+	NodeJS:
+		==>Release intervals: every 6-months
+		==>Newest version: 12
+		==>
+		node -v
+		C:\Windows\System32>node -v
+		v12.18.1		
+	NPM
+		==>Release intervals:
+		==>Newest version: 6
+		npm -v
+		C:\Windows\System32>npm -v
+		6.14.5
+	NVM:
+		1) Install multiple NPM
+			nvm install latest
+			nvm install 10.0.0
+			...
+		2) Use one of them:
+			nvm use 10.0.0
+	TypeScript:
+		==>Release Intervals:
+		==>Newest version:
+		npm ls typescript: 3.5.3
+	Compilers:
+		tsc --version
+	AngularCLI:
+		which cli creates which angular version
+		 CLI version     Angular version
+		 1.0 - 1.4.x       ^4.0.0
+		 1.5.x             ^5.0.0
+		 1.6.x - 1.7.x     ^5.2.0
+		 6.x               ^6.0.0
+		 7.x               ^7.0.0
+	Angular
+		How to use Angular CLI locally:
+		Method 1: install a global AngularCLI, and then create a new project and install a local AngularCLI to it
+		Method 2:
+			npx: 10.2.2: practice npx next time...
+				npm i -g npx
+					C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-functional>npm i -g npx
+					C:\Users\jerry\AppData\Roaming\npm\npx -> C:\Users\jerry\AppData\Roaming\npm\node_modules\npx\index.js
+					+ npx@10.2.2
+			npx -p @angular/cli ng new hello-world-project
+			npx -p @angular/cli@1.7
+			
+			Step 1: Uninstall the global version of the CLI. npm uninstall -g @angular/cli.
+			Step 2: Use npx to create a new project. npx -p @angular/cli ng new hello-world-project. ...
+			Step 3: Run the ng command using the npx as well. npx ng generate component my-component.	
+		
+		==>Release Intervals: every 6-months:
+		==>Newest version: 10.2.2
+		ng version
+			C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-functional>npm list -g @angular/cli
+			C:\Users\jerry\AppData\Roaming\npm
+			`-- @angular/cli@8.3.2		
+			C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-functional>npm uninstall -g @angular/cli
+			removed 208 packages in 2.546s
+
+			C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-functional>npm install -g @angular/cli@latest
+			npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+			npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+			C:\Users\jerry\AppData\Roaming\npm\ng -> C:\Users\jerry\AppData\Roaming\npm\node_modules\@angular\cli\bin\ng
+
+			> @angular/cli@10.1.3 postinstall C:\Users\jerry\AppData\Roaming\npm\node_modules\@angular\cli
+			> node ./bin/postinstall/script.js
+
+			+ @angular/cli@10.1.3
+			added 277 packages from 207 contributors in 27.789s
+
+			C:\Users\jerry\git\techthon-apps-angular\angular-cli\poc-functional>npm list -g @angular/cli
+			C:\Users\jerry\AppData\Roaming\npm
+			`-- @angular/cli@10.1.3			
+			
+		==>Update: newer versions:
+			https://www.angularjswiki.com/angular/update-angular-cli-version-ng-update-to-latest-6-7-versions/
+
+			==>Update to v10:
+				ng update @angular/cli @angular/core
+				ng update @angular/matverial
+
+			==>Update to v9: from below 9 versions
+				npm install --no-save @angular/cli@^8.3.15
+				ng update @angular/cli @angular/core --next
+			
+			==>Update global AngularCLI:
+				npm uninstall -g angular-cli
+				npm cache clean or npm cache verify (if npm &gt; 5)
+				npm install -g @angular/cli@latest
+		
+			==>Update local angularCLI:		
+				rm -rf node_modules
+				npm uninstall --save-dev angular-cli
+				npm install --save-dev @angular/cli@latest
+				npm install
+				
+		==>NodeJS: package.json
+						==>App specifies a package.json: as an expected versions packages management:
+							==>NPM:
+							
+								*********************************************************************************
+								package.json:
+									^: maximize/deal-with Major and Minor versions
+									~: maximize/deal-with patch versions
+									
+									Example Summary:
+										^<major>.<minor>.<patch>
+											==><major>.<max-minor>.<max-patch>
+											^1.4.0
+												Patch releases: 1.0 or 1.0.x or ~1.0.4
+												Minor releases: 1 or 1.x or ^1.0.4
+												Major releases: * or x				
+												
+									Notes:
+										==>Mostly use: the entire string (3 parts): x.y.z
+									Key Summary:
+										(1) Key 1:
+											^x.y.z
+												x.<max-minor>.<max-patch>
+												...
+												x.y.z
+												==>Usage: Common
+													==>1) Example 1: for some libs or packages, the app supports same minor max range version as compatible, so use this way
+													==>...
+										(2) Key 2:
+											~x.y.z
+												x.y.<max-patch>
+												...
+												x.y.z
+												==>Usage: Common
+													==>1) Example 1: for some plugins, the app supports same patch max range version as compatible, so use this way
+														  (such as: API integration, parameters, methods, and integration needs, ...)
+													==>...
+																									
+									==>Maximize: major release
+										* ==>
+											<max-major>.<max-minor>.<max-patch>
+											==>Usage: rare
+										x ==>
+											x.<max-minor>.<max-patch>
+											==>Usage: rare
+									==>Maximize: minor release:
+										^x ==>
+											x.<max-minor>.<max-patch>
+											...
+											...
+											x.0.0
+											==>Usage: rare											
+										^x.y
+											x.<max-minor>.<max-patch>
+											...
+											x.y.0
+											==>Usage: rare
+										^x.y.z
+											x.<max-minor>.<max-patch>
+											...
+											x.y.z
+											==>Usage: Common
+									==>Maximize: patch release:
+										~x ==>
+											x.0.<max-patch>
+											...
+											...
+											x.0.0
+											==>Usage: rare											
+										~x.y
+											x.y.<max-patch>
+											...
+											x.y.0
+											==>Usage: rare
+										~x.y.z
+											x.y.<max-patch>
+											...
+											x.y.z
+											==>Usage: Common
+											
+								==>Concepts 1: app-release-versions: stable/release-version: 2.2.1 + prerelease/buildmetadata-version: 2.2.1-alpha/beta/rc.0/1/2/3...
+								==>Concepts 2: major-version + minor-version + patch-version: x.y.z
+											   MAJOR.MINOR.PATCH
+												MAJOR version when you make incompatible API changes,
+												MINOR version when you add functionality in a backwards compatible manner, and
+												PATCH version when you make backwards compatible bug fixes.
+												1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 1.0.0-beta.2 < 1.0.0-beta.11 < 1.0.0-rc.1 < 1.0.0
+								==>Concepts 3: version representations:
+											   x
+												==>Same: x.0.0
+												==>Same: x.y
+												Unsure....
+									Confusing:
+												https://semver.org/
+												https://docs.npmjs.com/about-semantic-versioning
+												For example, to specify acceptable version ranges up to 1.0.4, use the following syntax:
+												Patch releases: 1.0 or 1.0.x or ~1.0.4
+												Minor releases: 1 or 1.x or ^1.0.4
+												Major releases: * or x									
+								==>Due to larger scope of compatibility, so it allows a range of versions to be checked and pulled down to the app
+								==>For app: it should specify a fixed version, but due to fast-development of Angular UI APIs/versions and open-source UI components:
+											==>You don't know which ones are new or compatible, so you can specify a range of versions for dependencies
+											==>From NPM, it should pull the newest one from the specified range in package.json:
+												==>...
+											==>
+								==>How to specify the ranges of versions:
+									==>Method 1: Based on "app-release-versions": mostly we should just use this method:
+												 >, <, = >=, <=, v1 - v2:		<stable/release-version>: but the fetched versions are only for "stable/release-version"
+												 >, <, = >=, <=, v1 - v2:		<prerelease-version>: but the fetched versions are only for "prerelease-version"
+									==>Method 2: Tweaking into smaller ranges of versions, or well-known version ranges within "major-version + minor-version + patch-version":
+												 ==>Scenario 1:	When we are in the middle of app development, and we have enabled a set of many versions in package.json
+																==>So we just need to tweak some or a couple of dependencies' versions within some known ranges
+																==>By limiting these ranges, so we can achieve better compatibility and version-error-free issues
+																==>In this way, we can use this method 2
+												 ==>Scenario 2: We add a new dependencies, and we should limit its version to a specified ranges
+												 ==>...				
+												 ==>Methods:
+													==>Method 1: tweaking major version: ^x		^x.y	^x.y.z
+																 include everything greater than a particular version in the same major range
+																	^x ==>equals to: ^x.<max-minor>.<max-patch> OR: ^x.0.0
+																	==>It will pull: latest one major, then second latest one, ..., 
+																		until the base one: ^x.<max-minor>.<max-patch> OR: ^x.0.0																 
+																	^x.y ==>equals to: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one major, then second latest one, ..., 
+																		until the base one: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one major, then second latest one, ..., until the base one: ^x.y.z		
+															      ==>Summaries:
+																		Major version scenarios: very rare usage
+																		==>Its version scenarios can be enabled by using Angular versions like: Angular 6, 7, 8, 9, 10, etc.
+													==>Method 2: tweaking minor version: ^x ?	^x.y	^x.y.z
+																 include everything greater than a particular version in the same minor range
+																	^x ==>equals to: ^x.0.<max-patch> OR: ^x.0.0
+																	==>It will pull: latest one x.<max-minor>, then second latest one, ..., 
+																		until the base one: ^x.0.<max-patch> OR: ^x.0.0																 
+																	^x.y ==>equals to: ^x.y.<max-patch> OR: ^x.y.0
+																	==>It will pull: latest one x.<max-minor>, then second latest one, ..., 
+																		until the base one: ^x.y.<max-patch> OR: ^x.y.0
+																	^x.y.0
+																	==>It will pull: latest one, then second latest one, ..., until the base one: ^x.y.0
+																	^x.y.z (z > 0)
+																	==>It will pull: latest one, then second latest one, ..., until the base one: ^x.y+1.0
+														Example 1:	^1.4.0 ==>download dependency: 1.5.4 (this also approves: x.<max-minor>.<max-patch>)
+																  ==>Summaries:
+																	==>Usage 1: when some "stable" dependencies are in use: like some first-tier libs or integration dependencies
+																				==>Minor versions can be in use
+																	==>Usage 2: Mostly: its form is: ^x.y.z
+																				==>In this form, it starts: x.<max-minor>.<max-patch>	=================>This is most recent update
+																																						  (ignore some of the above...)
+																				==>Base is: x.y.z
+																				Example 1: ^5.0.0 ==>5.2.2
+																	==>...
+																	==========================>This is the most often usage 2: ^x.y.z
+													==>Method 3: tweaking patch version: ~x ?	~x.y ?	~x.y.z
+																 include everything greater than a particular version in the same patch range
+																	~x ==>equals to: ~x.0.0
+																	==>It will pull: latest one x.0.<max-patch>, then second latest one, ..., 
+																		until the base one: x.0.0																 
+																	~x.y ==>equals to: ~x.y.0
+																	==>It will pull: latest one x.y.<max-patch>, then second latest one, ..., 
+																		until the base one: ~x.y.0
+																	~x.y.z
+																	==>It will pull: latest one x.y.<max-patch>, then second latest one, ..., 
+																		until the base one: ~x.y.z
+														Example 1: ~1.0.2 it means to install the latest one with this patch 1.0.x like 1.0.4, then 1.0.3, and ..., until the base 1.0.2
+																   ~8.2.4 ==>install the latest one with this patch 8.2.x like 8.2.14, then 8.2.13, and ..., until the base 8.2.4
+																   ==>If using patch version: mostly means: the dependences are tight, ... ==>Only bug fixes changes, ...
+																		==>No API changes ok
+																		==>Functional changes might be: also impacting this integration dependencies
+																   ============================>This is the most often usage 1: ~x.y.z
+									==>Method 3: Combine the above together
+												 1) AND:	just list some of the above with ONE space:	no need to use: &&
+												 2) OR: 	||
+								==>Does the Angular CLI automates some default versions?
+									==>Yes...
+										==>If you use angular 8, it brings in Angular 8 compatible dependencies, ...
+									==>No?
+									
+								==>MISC:
+									==>node_modules: hold all dependencies
+									==>dependencies: may depend upon other dependencies...: but basically all related dependencies and trees: need to be in node_modules
+										==>Multiple dependencies are included for the same package: use the highest one:
+											1) Reason 1: generally highest one can backcompatible for lower versions - but not so easy vice versa
+														 ==>This should be for MINOR version: functional enhancements - generally no API changes
+														 ==>For MAJOR version, it is related to API changes, it could become very complicated... - this app versions may need to be reshaped
+														 ==>Example 1: tslib@^1.10.0: it has 1.10.0 and 1.9.0, etc.
+																	   1) Use 1.10.0 should be fine with 1.9.0 dependencies - no API changes
+																	   2) When consolidated into 1.10.0, it generally use: ^1.10.0: because it can go high to max-minor ==>No API change concerns
+																	   ==>It actually locks: 1.13.0
+											2) Dependency Package - Analysis:
+												  "main": "tslib.js",
+												  "module": "tslib.es6.js",
+												  "typings": "tslib.d.ts",
+									==>Dependencies inside node_modules:
+										==>No need to have package-lock.json
+										==>Each dependency package uses: package.json as the entry point by NPM
+										==>All the config is in package.json
+										==>Derived dependencies are common in Angular and NodeJS/NPM apps
+									==>
+						==>After build run: it creates package-lock.json: enabled the actually pulled down versions into the app
+						==>...
+		==>AngularCLI: angular.json
+	Marerial Design
+		C:\Users\jerry\wksp\fundraiser-ui\src\main\ng>npm list @angular/material
+		fundraiser-ui@0.0.0 C:\Users\jerry\wksp\fundraiser-ui\src\main\ng
+		`-- @angular/material@10.2.2
+
+==>Integration and UI Components: Integration and versions
+
+==>More:
+	==>How to upgrade the entire app?
+		==>To all products: NodeJS/NPM/Angular/Marerial Design
+		
+		ng update...
+		
+	==>How to upgrade one part's version?
+	
+	==>How to enable multiple version coexistences?
+		==>VPM
+		==>
+		
+		==>How to switch among multiple versions?
+	
+	==>Compatibility Buffers/Domains/Stacks:
+		==>Angular apps have larger compatibility buffers/stacks?
+		
+	==>Do we need to upgrade an app in terms of versions above?
+
+
+==>Deployment:
+	==>ng serve:
+		embedded web server
+		change the web server
+	==>...
+	==>ng build:
+		==>Where to deploy dist folder?
+		...
+	==>...
+	==>ng deploy
+	==>...
+
+==========================================================
+Development Methodology: Level 1: Basic
+
+==>Example Apps:
+	https://code.tutsplus.com/tutorials/how-to-build-a-login-and-registration-ui-with-angular-and-material-design--cms-31794
+
+==>Install AngularCLI
+	npm install -g @angular/cli
+==>Create new app
+	ng new angular-ui-materialdesign-app1
+==>Install MD
+	ng add @angular/material
+	Enable Angular Material, Angular Animations, Angular CDK
+==>Create Components
+	ng g component LoginComponent
+==>Styling:
+	1) default themes:
+		https://material.angular.io/guide/theming#using-a-pre-built-theme: based on RGB: pink/green/blue(indigo/purple/amber)
+	2) Enable bootstrap CSS:
+		style.css:
+			@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+		
+==>Enable UI in components' HTML:
+	==>UI Header: can be enabled as mat-toolbar selector
+	
+==>Configure components' customized CSS
+
+==>Create components' functions/methods inside components:
+	==>Code:  Core/Backbone Angular APIs and Parts
+		==>Scaffolding:
+			==>Root Module/Parts: like Java's global/main...
+				==>Enable Modules:
+					1) App Module:
+						==>Define root router: 
+							==>Can add it into Root Module
+							==>But most common way is: create a separate RoutingModule: this module is similar to a consolidation module
+						==>
+					2) Consolidated package based modules: ==>Is this similar to or the same as "shared feature modules"?
+						==>Similarity 1:	Similar to Java's AOP
+						==>...
+					3) Core Feature Modules
+					4) Shared Feature Modules
+				==>
+		==>Module Ecosystems:
+			==>Module: similar to Java Packages:
+				==>Type 1:	Angular built-in modules: NgModules
+				==>Type 2:	3rd-Party Modules: can be made as NgModules as well
+				==>Type 3:	App-enabled modules: Feature-Modules + Consolidation-Modules (grouping needs, collective imports/exports, enabled-services, collective-services, ...)
+							==>Feature-Modules
+							==>Consolidation-Modules:
+								==>Example 1:	AOP like consolidations
+								==>Example 2:	3rd-party or integration features or parts enabled consolidations:
+													==>Can trigger/create some design patterns, ...
+													==>Ease to use
+													==>Manage customization
+													==>...
+												==>
+												==>MD parts customized consolidations
+													https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fapp%2Fmaterial-module.ts
+												==>
+								==>Example 3:	Service enabled function consolidations
+								==>...
+				Summaries:
+					=======>They are exactly the same when used inside the app: just coming from different places
+					=======>Angular modules: functions partially for Java's "app-enabled packages"
+					=======>Angular modules: grouping services together to serve other modules/parts
+					==>Why using it? - due to Angular's needs to imports and exports needs
+					==>Access Control: Angular has similar:
+										==>class:
+											==>export class(equals to Java: "public class")
+											==>class (equals to Java: "class")
+										==>members: public, protected, private, readonly
+											==>No "package default", why?
+												==>Angular: doesn't have the Java's app-enabled packages - only Angular API's built-in packages
+												==>So Angular doesn't need "package default"
+											==>Access Control: public
+												==>Why public?
+													1) Similar to Java's public
+													2) Specific Reason 1: other modules' components' HTML can access to it (in this regard, Angular's public is similar to Java public)
+														==>HTML using them: is the No.1 reason for "public access": because after deployment, html uses these components' selectors...
+													3) ...
+												==>
+											==>Access Control: protected
+
+											==>Access Control: private
+											
+											==>Access Control: readonly
+											
+
+					==>To group similar Java's similar app-enabled packages: Angular's module functions partially for "app-enabled packages"
+					==>Usage:
+						==>Usage 1: extension function
+						==>Usage 2: Imports/Exports:
+							==>How to enable it:
+								==>No duplication concerns, they are required
+								==>Only duplication concerns are:
+									1) App Module: can import and export some modules in root level
+									2) A consolidated module: already contains some shared modules (not parts): it can be used by shared components/modules
+							==>Imports and Exports 1: Root Module Stacks:
+								==>All feature modules need to be imported into root module...
+								==>Aka: registred with root module, so other modules and parts can use it - first through root module's registration process like this
+								==>Why needing a root module?
+									==>It is used to bootstrap that module to launch the application:
+										==>The real boostrapper is main.ts file:
+											==>It uses root module to do the bootstrapping
+											==>We can place the root module into main.ts file as well:
+												https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fmain.ts
+									==>TBD: who calls main.ts?
+										Angular App:
+											index.html
+												==>Invoke <app-root> selector...
+												==>index.html: refer to some 5-6 Angular JS files: these JS files provide all kinds of functions starting from <app-root> selector...
+												==>So: main.ts is mainly used during compiling time..., not during index.html run-time...
+													==>So Angular transcompiler uses main.ts to compile all TS files into final JS files, ...
+													==>But for sure all TS code logic (including main.ts) are compiled inside the final JS files, which are enabled by JS code logic
+								==>Usage:
+									1) Import/register Angular built-in modules
+									2) Import/register all feature modules
+									3) Import all NEEDED parts (including components) per root level needs: 
+										==>1) such as: bootstrapping needs
+										==>2) such as: declarations: because it needs its AppComponent to: launch the application
+													   ==>Aka: if all/any of the @NgModule's required fields needed in root module, they do those imports..., declarations is one part
+										==>3) ...
+										============>This is similar to any other modules: import any parts needed to do some work
+									4) Root Module is a fair president:
+											(Root Component is also a fair Secretary of State...: similar to any other components, like CA secretary of state, ...)
+										==>It has the same rights as other modules
+										==>It doesn't have privileges more than other modules:
+											==>E.g.: It doesn't have inheritance privilege (his daughter doesn't use national money to go to Harvard University):
+													 ==>if it imports some modules like: BrowserModule, all other modules still need to import the same if they need it? - To confirm
+													 ==>
+											==>E.g.: It still does the same: "export class", so it is just like any other modules: not enabled with many things by default...
+													 ==>So: it still adds all needed statements: like: declarations(their parts)/imports/providers/bootstrap/...: like any other modules
+													 ==>So: it still does: "export class", otherwise, other modules/parts cannot see or use it
+											Questions:
+												==>Then why does it exist?
+													==>Reason 1: it is just another job/module, which pays higher, but at root level - but cannot become a dictator
+													==>It just serves its root level as a module - because 315 million people needs this job to launch the application
+													==>But it does have a special function: register all feature or other modules at root level, 
+														so root level can function for root level needs 
+														(but each sub-level scenarios still need to do their own imports like CA, OH, ...)
+														1) Root level has some special function to do: bootstrap and launch the application:
+															==>When the root level does this special function, they also need some special modules/parts, so they import them...
+														2) By registering all these feature or other modules at root level: so some root level functions can be enabled for
+															all these feature or other modules through root level registration: like global ..., init, or, bootstrapping, etc.
+												Overall, Nature: Root Module is very close to a normal module like other modules...
+										==>So it does the same as other modules
+										==>...
+							==>Imports and Exports 2: Module Stacks:
+								==>Modules need to imports/exports each other...
+								==>This is needed for the inclusive parts like components to ACTUALLY import these modules/parts: 
+									Aka 1: import the modules first before the components can actually import and use these imported modules' parts/components
+									Aka 2: you need to import the needed parts/components' their parents (modules) first through your parents (modules)
+									
+								==>Analysis:
+									==>Imports:
+										==>This serves its own parts (components, etc.)' usage needs
+										==>However, if this module is a consolidation/integration module, maybe it only serves as a gateway to import those modules
+											and "exports" them to the entire app, without its own components created, ...
+									
+									==>Exports:
+										==>For its own parts within the module: it doesn't need to do "exports"
+										==>If it does an "exports": it exports these imported modules to all other app-internal modules to use:
+											Example 1:	It imports some MD Modules, and then exports: so other modules doesn't need to do the same imports/exports AGAIN
+											
+										==>Module's "exports": very useful concept:
+											==>Principle 1: each module is equal..., do the same coding, except root module has some special functions + global bootstrapping/register
+											==>Principle 2: each module is almost independent, ..., no inheritance, no ...,
+											==>Principle 3: any module can do an "exports" if they want...
+															==>These exports are enabled in the entire app via root module registration for this module
+											==>Principle 4: why modules are still needing to do their own imports similar to root module even though root module has the imports?
+															==>Because root module doesn't use an "exports":
+																1) Why? and why not?
+																	==>Because root module doesn't want to become xCPs
+																2) So each module still do an import like: import { NgModule } from '@angular/core';
+											==>Also: each component is equal as well - like above, but componets are in usage domains...
+											
+											"Module" Meaning: additional notes:
+												==>...
+												==>One more: it contains many parts: its components, its pipes, its constants, its components' "selectors", ...
+															 (selectors are kind of parts, ...)
+												==>"Module": itself is a special part
+												
+												Parts: meaning: *
+											
+											"Exports" Meanings:
+												Example 1:
+													exports: [MatNativeDateModule,FormsModule, MatRadioModule,],
+												Example 2:
+													They can also export other parts besides Modules
+													exports: [MatToolbar, MatToolbarRow, MatCommonModule],
+											
+												==>Meaning 1:	Enablement of Availability...
+												
+												==>Meaning 2:	Sub-Meaning 1:	
+																==>It enables "usage" of these modules' components: can be used in other modules' component files
+																==>because component files have "imports", so they need to do an import to above modules' components...
+																	(they also need to do an import to the above modules in the component files? - to confirm...: I think so
+																	 because exports just make them available, ..., you still need to make an import ... in the component file)
+																	 
+																Notes:
+																	==>Why doesn't the component need to import the Angular built-in modules, and can directly import other parts?
+																		1) Angular built-in parts: mostly not packaged into an NgModule
+																			==>Angular built-in parts: many are standalone, so app components can directly import and use them
+																			Example 1:
+																			Example 2:	import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+																		2) Angular built-in parts: some are packaged into an NgModule
+																			==>FormsModule + FormControl
+																			==>So in order to use FormControl, you need to import FormsModule
+																
+												==>Meaning 2:	Sub-Meaning 2:
+																==>It enables "usage" of these modules' components' "selectors": can be used in other modules' HTML files
+																==>because HTML files don't have "imports", so they directly use them...
+																
+												==>Meaning 3:	Sub-Meaning 3: other additional parts, ...
+																
+											
+											
+									==>Analysis Flow:
+										This consolidation module
+											==>Imports: some modules
+											==>Exports: the same imported modules
+											==>Then: Root Module registers this consolidation module at root level by root module's "imports"
+											==>Other Modules:
+												==>Module Levels: No need to import/export these same modules any more: it is available
+												==>Other Modules' Parts/Components:
+													==>Still need to do an import to its needed parts/components from these modules
+													(Why? because imports are enabled at different domains/stacks: components need to do their own imports)
+													(But they don't need to import these modules ...)
+													(But there are no "exports" in component...: and no need)
+													(Components: usage domain and stacks)
+													(Modules: manager and parent stacks)
+									
+							==>Imports and Exports 3: Parts (non-modules) Stacks
+								==>Parts need to be imported - even though modules have been imported/exported already
+			==>Package:	Only concept in Angular built-in APIs domain
+					==>App doesn't define its own packages...
+					==>These are only used for "grouping" Angular internal built-in APIs
+					==>Similarity: Java JDK packages (but Java has app-enabled packages while Angular doesn't have)
+		==>OOP App Tiers:
+			==>MVC Stacks:
+				Components:
+					==>Similar to: "V+C" or "VM + C":
+					==>Component: more than a controller: it has a view
+					==>VM: "HTML" is kind of ViewModel: UI + Data Binding
+				Services:
+					==>Add: HTTPClient parts
+				Models: "M"
+			==>
+		==>OOP App Parts:
+			==>One Component: Similar to Java's One Package (more than "one class")
+			==>
+
+		==>App Parts - UI:
+		
+			==>HTML Design:
+				==>Just treat: All those components/selectors: MD selectors + App-enabled-components-selectors + Bootstrap elements + ...: as normal HTML Elements together...
+							   ==>A component selector is just like a normal HTML selector like <div>, ...
+							   
+							   xxx.html:
+									==>Normal HTML elements
+										HTML5 is part of Angular HTML???
+										https://www.tutorialrepublic.com/html-reference/html5-tags.php
+										https://www.go4expert.com/articles/html4-vs-html5-comparison-t30141/
+									==>MD selectors
+									==>App-enabled-components-selectors
+									==>Bootstrap elements
+									==>Any other 3rd-party components/selectors
+										==><ag-grid>...
+										==>...
+				
+				==>Specials:
+					Button:
+						==>HTML: <input type="xxx" ...>
+							<input type="submit">
+							<input type="image">
+							<input type="file">
+							<input type="reset">
+							<input type="button">			
+							"file" is used to upload a file, "reset" clears a form, and "submit" sends the data to the server.
+							There is a big difference if you are using jQuery. jQuery is aware of more events on inputs than it does on buttons. On buttons, jQuery is only aware of 'click' events. On inputs, jQuery is aware of 'click', 'focus', and 'blur' events.
+						==>HTML4/5: button
+									<button type="submit" value="Submit">Submit</button>
+									==>HTML 4 and 5 should be similar in this: TBD
+									https://www.quackit.com/html/tags/html_button_tag.cfm
+									https://www.quackit.com/html/html_4/tags/html_button_tag.cfm
+									https://html.com/attributes/button-type/
+									Although you can also use the <input> tag to create an HTML button, the <button> tag does have some advantages. 
+									In particular, you can place HTML between the <button></button> tags. 
+									This enables you to do things you wouldn't normally be able to with the <input> tag.
+							The button (<button>) element is quite versatile:
+								you can nest elements within a button, such as images, paragraphs, or headers;
+								buttons can also contain ::before and ::after pseudo-elements;
+								buttons support the disabled attribute. This makes it easy to turn them on and off.
+							==>Buttons created with the BUTTON element function just like buttons created with the INPUT element, but they offer richer rendering possibilities: the BUTTON element may have content. For example, a BUTTON element that contains an image functions like and may resemble an INPUT element whose type is set to "image", but the BUTTON element type allows content.
+							<button>
+								by default behaves like if it had a "type="submit" attribute
+								can be used without a form as well as in forms.
+								text or html content allowed
+								css pseudo elements allowed (like :before)
+								tag name is usually unique to a single form
+							vs.
+							<input type='button'>
+								type should be set to 'submit' to behave as a submitting element
+								can only be used in forms.
+								only text content allowed
+								no css pseudo elements
+								same tag name as most of the forms elements (inputs)									
+						==>Bootstrap: button:
+							https://www.w3schools.com/bootstrap/bootstrap_buttons.asp
+							https://getbootstrap.com/docs/4.0/components/buttons/
+							==>They decorate the HTML <button> selector
+							<div class="container">
+							  <h2>Button Styles</h2>
+							  <button type="button" class="btn">Basic</button>
+							  <button type="button" class="btn btn-default">Default</button>
+							  <button type="button" class="btn btn-primary">Primary</button>
+							  <button type="button" class="btn btn-success">Success</button>
+							  <button type="button" class="btn btn-info">Info</button>
+							  <button type="button" class="btn btn-warning">Warning</button>
+							  <button type="button" class="btn btn-danger">Danger</button>
+							  <button type="button" class="btn btn-link">Link</button>      
+							</div>							
+						==>MD: button
+							<div class="example-button-row">
+							  <button mat-button>Basic</button>
+							  <button mat-button color="primary">Primary</button>
+							  <button mat-button color="accent">Accent</button>
+							  <button mat-button color="warn">Warn</button>
+							  <button mat-button disabled>Disabled</button>
+							  <a mat-button routerLink=".">Link</a>
+							</div>
+						
+						Bottom Lines:
+							==>If you see the same names of the selector/tags as HTML elements, it is HTML elements
+							==>Bootstrap and MD are mostly decorating HTML elements, like <button>
+							==>If they create their own selectors, they use different names and naming conventions, like matXXX, ...
+
+			==>MD:
+				==>MD Nature 1: it is component based
+				==>MD Nature 2:	it has predefined style: so styling can be very easy
+				==>MD Nature 3: it works closely together with HTML DOM elements, so can be easily mixed with HTML elements
+				==>...
+				==>Methods:
+					==>Currently do need a lookup...
+						==>Take an example: mat-toolbar-row
+					==>
+			==>MD: Selector/Component:
+			
+				==>How to choose?
+				
+				==>Look and Feel:
+					==>How does it look like?
+						==>Methods:
+							==>Method 1:
+								MD Online Doc: have good examples to showcase the look and feel: Document API and Descriptions
+								https://v8.material.angular.io/components/toolbar/api
+							==>Method 2:
+								MD Online Doc: have good examples to showcase the look and feel: https://stackblitz.com/
+								https://stackblitz.com/angular/xkxkvpjlyqk?file=src%2Fapp%2Ftoolbar-multirow-example.html
+							==>Method 3:
+								MD Source Code: https://github.com/angular/components/blob/8.2.x/src/material/icon/icon.ts
+							==>Method 4:
+								ng serve: can dynamically display...: which is why developers like: AngularCLI
+							==>Method 5:
+								MD Components/Selectors:
+									Seems like: can take most common HTML element attributes: class="", ... ==>To Confirm
+					==>
+				
+				==>How MD Components/Selectors work together with HTML DOM elements?
+				
+					==><MD-Selector html-attribute="", ...>
+						==>HTML References:
+							https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-hidden_attribute
+						Example 1:	<mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+						
+						==>Why MD selectors can work with HTML attributes?
+							1) Reason 1: MD design enables them internally by default...: such as: class="", ...
+							2) Reason 2: Some MD component classes enables them??? - TBD...
+										 Maybe due to this:
+											elementRef: ElementRef<HTMLElement>
+											class MatIconBase {
+											  constructor(public _elementRef: ElementRef) {}
+											}				
+					==><HTML-Selector MD-Selector ...>
+					
+						==>In this regard, MD selector is used as an assisting selector to the main HTML selector, like <input MDSelector ... ...>
+				
+				==>How MD Components/Selectors work together with Bootstrap CSS?
+
+					==>Similar to the above mixture of MD selectors and HTML DOM elements
+						==>Principle 1: All those components/selectors: MD selectors + App-enabled-components-selectors + Bootstrap elements + ...:
+										==>Function similar to normal HTML DOM elements when placing into HTML xxx.html
+						==>
+			
+			==>
+
+==========================================================
+Development Methodology: Level 2: 
+
+==>Angular Feature Usage:	Intermediate Levels:
+	==>Router/Lazy-Loading:	Enable lazy loading
+	==>
+	
+	==>Incorporate intermediate 3rd-party modules
+		
+	==>Enable Service-Modules as collective services
+	
+	==>Add RouterLinks to paths and links:
+		<button routerLink="/about">About</button>
+		<button routerLink="">Home</button>
+	
+	==>
+	
+
+==>Able to:
+	==>Develop Angular UI together with Spring Boot and Java Maven: frontend-maven-plugin
+	==>Develop intermediate-level code and business logic
+	
+	==>Capability to develop MD's main/core parts
+	
+	
+
+==>MD: 70% Familiarity + Usage
+
+==>Utilize CDK
+
+==>Add Bootstrap CSS together
+
+==>Productionization/TreeShaking/...:
+
+
+==========================================================
+Development Methodology: Level 3: 
+
+==>Angular Feature Usage:	Advanced Levels:
+	==>
+
+
+	==>Incorporate advanced 3rd-party modules
+	
+	==>Enable non-root level/module router and non-root level router-outlet parts
+		<router-outlet></router-outlet>
+
+==>Able to:
+	==>Develop Angular UI together with Spring Boot and Java Maven: exec-maven-plugin
+	==>Develop Angular UI with Yarn as packager in lieu of NPM
+	==>Develop advanced-level code and business logic
+	==>
+
+
+
+==>Know: many HowTos...
+
+==>Enable:	SASS/SCSS/LESS
+
+==>Utilize mixins
+	==>Create customized themes
+	==>Utilize multiple themes inside the app
+	
+==>Utilize animations + HammerJS
+	
+==========================================================
+Development Methodology: Level 4: 
+
+==>Angular Feature Usage:	Expert Levels:
+	==>
+
+==>Able to:
+	==>Able to utilize compiler: Ivy
+	
+	==>Develop Angular UI with Bazel build tool (+ Ninja Squad) - instead of using AngularCLI:
+		https://blog.ninja-squad.com/2019/05/14/build-your-angular-application-with-bazel/
+		Example:
+		https://github.com/angular/components/blob/8.2.x/src/material/toolbar/BUILD.bazel
+		https://github.com/angular/components/blob/8.2.x/WORKSPACE
+		https://github.com/angular/components/blob/8.2.x/packages.bzl
+		https://github.com/angular/components/blob/8.2.x/.bazelrc
+		https://github.com/angular/components/blob/8.2.x/.bazelignore
+		https://github.com/angular/components/blob/8.2.x/.circleci/bazel.rc
+		==>Why MD uses Bazel build instead of AngularCLI build?
+			1) MD doesn't want to AngularCLI: they think it is for app development, they use Bazel
+				==>The Angular framework itself is built with Bazel. 
+				==>The key advantages of Bazel are: the possibility of building your backends and frontends with the same tool.
+					==>the rebuild times will be greatly improved, as Bazel will analyze the graph and only rebuild what’s necessary
+			2) MD also choose Yarn instead of NPM:
+				==>Yarn offers stability, providing lock down versions of installed packages. The speed of modules installing is higher. 
+				   It is very important for big projects, which have more dependencies.
+		==>BUILD.bazel
+		==>How to utilize Bazel to do Angular app build?
+			==>Method 1:	Standalone as a build tool:
+							Example: MD Source Code: but in MD Source Code: Bazel works together with Gulp+Yarn as a complete set of build tool
+			==>Method 2:	Together with AngularCLI:
+							https://blog.ninja-squad.com/2019/05/14/build-your-angular-application-with-bazel/
+							==>Method 1: Start from scratch for an app:
+											npm i -g @angular/cli
+											npm i -g @angular/bazel
+											ng new bazel-project --defaults --collection=@angular/bazel
+											Example 1: https://github.com/angular/angular-bazel-example
+													   ==>Very good example: using "AngularCLI + Bazel + Yarn"
+							==>Method 2: Point 1: function like MD: why? - they do the same like: ng add xxx ==>ng add @angular/bazel
+		==>Notes:
+			==>When using Bazel as a main build tool for an Angular app:
+				1) Then you have the tendency to use Yarn to replace NPM: due to the same reason of using Bazel: speed + big projects, which have more dependencies
+	==>Develop Angular UI with Gulp build tool - instead of using AngularCLI:
+		==>Gulp:
+			https://medium.com/hackernoon/building-angular-development-environment-with-gulp-230df2f2f6ca
+			==>Can function standalone as an Angular app build tool
+			==>Or: working together with other tools like Bazel, etc. - as an automation tool:
+				Gulp is a cross-platform, streaming task runner that lets developers automate many development tasks. 
+				At a high level, gulp reads files as streams and pipes the streams to different tasks. These tasks are code-based and use plugins. 
+				The tasks modify the files, building source files into production files.
+			==>Similar: to some maven plugins, ...
+	==>Develop expert-level code and business logic
+
+
+==>these xCss files can be concatenated and minified by minifiers
+
+==>Develop customized UI components for applications
+
+==========================================================
+Development Methodology: Level 5: 
+
+==>Angular Feature Usage:	Master Levels:
+	==>
+	
+	==>
+
+==>Able to:
+	==>Develop master-level code and business logic
+
+	==>Able to utilize compiler: "ngtsc"
+
+	==>Able to replace webpack in AngularCLI with Bazel
+		==>AngularCLI: by default uses: webpack as a module bundler
+		==>Bazel:
+			==>Bazel: 
+				Bazel is a build tool developed and massively used by Google, as it can build pretty much any language. 
+				The Angular framework itself is built with Bazel. 
+				The key advantages of Bazel are: 
+					the possibility of building your backends and frontends with the same tool.
+					the incremental build and tests
+					the possibility to have remote builds (and cache) on a build farm
+			==>Can function as a standalone build tool, or function as a part inside AngularCLI as a module bundler
+		==>Webpack is a popular module bundler, a tool for bundling application source code in convenient chunks and for loading that code from a server into a browser. ... 
+			This guide offers a taste of Webpack and explains how to use it with Angular applications.
+	==>Able to use: Babel:
+		Babel is a JavaScript transpiler that converts edge JavaScript into plain old ES5 JavaScript that can run in any browser (even the old ones). It makes available all the syntactical sugar that was added to JavaScript with the new ES6 specification, including classes, fat arrows and multiline strings.
+
+
+==>Develop Commercial and Open Source UI Components
+
+
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+==========================================================
+MD: UI Design:
+
+==>
+==>Step 1:	Styling
+==>Step 2:	Layout
+			==>Header
+			==>Menus
+			==>Containers/Sections:
+				==>Contents
+			==>Footer
+
+==>Step 3:	Expand the contents into the above layout
+
+
+==========================================================
+MD:
+
+==>all the components have predefined style
+
+==>Seems like: MD coding needs some more document lookup and API lookup than Spring Boot...
+
+==>Some of the MD components/selectors: are directly working together with native DOM elements as their "attirbute binding"
+
+==========================================================
+How to styling:
+
+==>MD
+==>Bootstrap
+==>Default Themes:
+	The beauty of Angular Material is that it comes with pre-built themes, so you can easily bootstrap the look and feel of your application by simply plugging in some simple snippets of code to your app
+	
+	==>Type 1: RGB's Blue Tone
+				indigo-xxx.css
+				
+		==>Type 1-variation:	RGB's Blue-and-Red Tone: this is default?
+				@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+				
+	==>Type 2: RGB's Red Tone:
+				xxx-pink.css
+
+	==>Type 3: RGB's Green Tone
+				xxx-green.css
+
+	==>Type 4: RGB's Mixed Tone
+				xxx-amber.css
+	
+==>Customized themese and mixins
+==>
+
+==========================================================

@@ -1,0 +1,80 @@
+
+===========================================
+Tools-System: MISC:
+
+===========================================
+Browsers:
+
+==>TCS-FM: Support IE as default browser
+	==>Exceptions:
+		1) GoogleMap App: MissionMap: Chrome does better
+		2) 
+==>
+
+===========================================
+SPA:
+	Infrastructure Self-Service Utilities: PROD/NonPROD
+	Usage:
+		AD and TAM account management
+
+SST:
+	Self Service Tool
+
+	==>Usage:
+		==>Monitoring Tool: monitor apps: =>Mostly use PING process
+	==>Usage 2: NonProd: Server Instances: Bounces: Stop/Start/Restart/Status
+		==>
+	
+SSP
+	Self Service Portal
+	SPT: Self Service Portal Tool
+	==>Usage:
+		==>Usage 1: Database Refresh
+	==>	
+
+
+===========================================
+Teams: OnCall:
+	xMatters
+	
+===========================================
+JFrog Factory
+
+===========================================
+Jenkins
+
+===========================================
+OneDrive
+
+===========================================
+Citrix Applications Platform:
+	==>Host Windows/NET applications
+	
+
+===========================================
+Company Data Change Request Systems:
+
+==>DCRS/DCR:
+	Data Change Request System
+	BOS/OtherTeams: do the data changes
+==>DCU:
+	Data Change Utility
+	L3 Tool: run data change
+		==>SN: CHG ticket
+		==>Add sql files
+		==>Run on-demand AutoSys jobs: execute MSSConversion Shell/Java: run JDBC calls to execute sql files
+
+===========================================
+Corporate System Changes:
+
+==>Change Types:
+	Infrastructures/Middleware/Unix/Maintenance...
+==>Weekends
+
+==>Normal Business Windows:
+	8AM-8PM
+
+==>Normal Maintenance Windows:
+	Saturday 9PM - Sunday 10AM
+
+===========================================

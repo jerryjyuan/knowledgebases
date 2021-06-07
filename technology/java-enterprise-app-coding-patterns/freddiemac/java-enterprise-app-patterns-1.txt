@@ -1,0 +1,306 @@
+
+***********************
+Application: Java Applications
+***********************
+
+Type 1: MSS:
+	==>Point 1: Web/3-Tier Application
+		==>Point 1-1: Web-Tier: JSF + xHTML as view
+		==>Point 1-2: Controller-Tier: Controller classes
+		==>Point 1-3: Model/Persistence-Tier: JPA-ORM: EclipseLink
+	==>Point 2: Module Design
+		==>Point 2-1: Maven/EAR(3-WAR Files)
+		==>Point 
+		==>Point
+	==>Point 3: System/Integration Design
+		==>Point 3-1: Login: VPN-Internal-App: SSO: (TAM and/or Ping/AD groups)
+		==>Point 3-2: Middle Instances: TAM/Ping => Apache/WebLogic: ServerSecurityZone:BronzeField?
+		==>Point 3-3: MSSQL Database: DB-Alias: 2DB-HA-cluster (2 DBs) 1DB->2DB: HA Migration (maybe different from Sybase 2-DB alias-cluster)
+					  (MSSQL 2DB-HA-Cluster: maybe only 1st-DB xxxa in use, where 2nd-DB xxxb is HA backup DB)
+					  (Maybe Sybase 2DB-HA-Cluster is similar)
+	==>Point 4: 
+
+Type 2: SPARTA
+
+	==>Point 1: Web/3-Tier Distributed/Non-Bundled Service/UI Application
+		==>Point 1-1: Web-Tier: Angular UI as view
+		==>Point 1-2: Services Apps: RESTful APIs
+		==>Point 1-3: Model/Persistence-Tier: 
+	==>Point 2: Module Design
+		==>Point 2-1: Maven: Maven antrun plugin to do the builds
+		==>Point 2-2: Non-EAR file: use docker
+					  	==>Each Service Module/App: build up 2 WAR files: int/ext war files: placed into docker dist/deploy folder
+		==>Point 2-3: Non-EAR file: use conventional maven
+					  	==>Each Service Module/App: build up 2 WAR files: int/ext war files: placed into weblogic dist/deploy folder
+		==>Point 2-4: Summary:
+						==>Services-Apps: Each service app: created as a WAR file
+						==>The same WAR files are placed into dockerDist or weblogic deploy folders
+						==>No docker images are created by maven builds
+							==>How do these docker deploy folders' WAR files are deployed to OCP/ROTN PODs: unknown to me
+							==>OCP's features: Kubernetes/docker/...: OCP dashboard should have some configurations
+	==>Point 3: System/Integration Design
+		==>Point 3-1: Login: VPN-Internal-App: SSO: (TAM and/or Ping/AD groups): similar to MSS
+		==>Point 3-2: Middle Instances: TAM/Ping => OCP/ROTN: ServerSecurityZone:AppZone?
+		==>Point 3-3: MSSQL Database: DB-Alias: 2DB-HA-cluster (2 DBs) 1DB->2DB: HA Migration (maybe different from Sybase 2-DB alias-cluster)
+					  (MSSQL 2DB-HA-Cluster: maybe only 1st-DB xxxa in use, where 2nd-DB xxxb is HA backup DB)
+					  (Maybe Sybase 2DB-HA-Cluster is similar)
+	==>Point 4: RESTful Services API Modules:
+		==>Point 4-1: JAX-RS APIs: build RESTful APIs
+		==>Point 4-2: RESTful APIs: use JSON + also use XML as data formats
+		==>Point 4-3: Modules:
+					  Common Modules:
+					  	==>Client Utils: auth username/password
+					  					 ==>Use Cyberark's SCF Alias to manage/retrieve user credentials
+					  					 ==>Can bypass SCF via cache
+					  	==>Persistence:
+					  		==>XML files => Get queries by query name: some util classes + Base-DAO classes
+					  	==>Configurations
+					  	==>BS Common
+					  	==>BO Common
+					  	==>Base Common
+					  Service Modules:
+					  
+	
+	
+	==>Point 5: AutoSys Jobs: Located inside SPARTA Loan Module:
+		==>Point 5-1: mf_sparta_cmd_allUpdtDealInventory:			  2AM Daily
+						==>Call Deal Inventory Service Module
+		==>Point 5-2: mf_sparta_cmd_allUpdtLoanInventory_AllLoad:     10AM/4PM Daily: 10 min
+		==>Point 5-3: mf_sparta_cmd_allUpdtLoanInventory_FirstLoad:   7AM Daily: ON ICE
+		==>Point 5-4: mf_sparta_cmd_allUpdtLoanInventory_ReCalUpdate: 4AM Daily: 10 min
+						==>Call Loan Inventory Service Module
+		==>Point 5-5: mf_sas_cmd_createHistoricalBalance:			  3AM Daily: 1-3 min
+						==>Call History Balance Module
+	
+
+Type 3: MF/MS Java Apps
+
+
+Type 4: MMAPS
+
+
+
+
+
+
+***********************
+Application: Tech Stacks
+***********************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==>Node/NPM
+==>VUI JS:
+	==>Not Angular UI: Use VUI to replace Angular (aka: use JS to replace TS)
+==>Other UI Tools:
+	==>Babel: web packer/loader
+==>Maven
+==>Java
+	
+	Apple Products/Systems/Modules/Frameworks/Features	
+		Wireless Carrier
+		A3
+		IVR
+		CKit
+		Siri
+		...
+	
+	Spring Boot:
+		==>Jackson
+		
+	Spring Boot WebFlux/Reactive:
+		Reactor:
+		Mono
+	
+	Spring Boot WebSocket
+
+	Spring Rest Docs:
+		==>Compared with Spring Fox Swagger UI and REST docs
+			https://dzone.com/articles/spring-rest-docs-versus-springfox-swagger-for-api
+			1) By default, Spring REST Docs uses Asciidoctor. Asciidoctor processes plain text and produces HTML, styled and laid out to suit your needs. If you prefer, Spring REST Docs can also be configured to use Markdown. This really distinguished it from Swagger, which uses its own notation called OpenAPI Specification.
+			2) Spring REST Docs makes use of snippets that are produced by tests written with Spring MVC’s test framework, Spring WebFlux’s WebTestClient or REST Assured 3.
+		asciidocs
+		1) .asciidocs: .adoc files
+			src/docs/ascidosc/*.adoc
+		2) snippet files:
+			target/generated-snippets
+		3) generated docs files:
+			targte/generated-docs
+				index.adoc => index.html
+		Processes:
+			==>Add a plugin: asciidoctor-maven-plugin
+			==>Add plugin's dependencies: org.springframrwork.restdocs	spring-restdocs-asciidoctor
+	
+	Spring Test
+	
+==>Misc:
+	Sonar
+	Spotbugs:
+		looks for bugs in Java programs
+	Jacoco
+		Reporting: JaCoCo runtime agent to your tests and allows basic report creation
+		==>Test results reporting?
+	Log4j2
+	
+	Test Reports / Code Coverage:
+		==>JUnit
+		==>Jacoco
+		==>Spotbugs/Findbugs
+		==>Sonar
+		
+		1) Maybe needed in these apps
+		2) 
+		
+==>More:
+	BOM: echo-dependencies: bundle a list of default maven jars and versions: import a BOM
+		docker
+		Apple jars:
+			Apple AIS account security
+			a3: aluminum: app-to-app
+			rio?
+			fabrics.docker
+			...	
+			jacoco
+			...	
+
+	echo-shared: create a jar: with common files
+		==>util
+		==>constants
+		==>annotation: @Log
+		==>error codes: echo/review/siri
+		==>error responses
+		==>Modules:
+			common/sirickit/review/filter
+				Lombok @Data models
+				Requests
+				Responses
+				==>Lombok + Spring Boot Jackson
+
+***********************
+Application: Build
+***********************
+
+==>Docker build: docker-maven-plugin
+
+
+==>Generate a Spring Boot jar file: Echo Business Service RESTful API Application
+
+	==>Scheduler
+	
+	==>Reactor/Reactive/WebFlux: Asynchronous and Non-blocking
+		Router
+		
+	==>
+
+***********************
+Application: Run
+***********************
+
+
+
+***********************
+Application: Deployment
+***********************
+
+
+
+
+***********************
+Application: Modules
+***********************
+
+==>Web UI:
+
+	Admin UI
+	
+
+==>Backend Services:
+
+	RESTful APIs: Service Types:
+		
+		Review:
+			post reviews
+			get reviews
+			add comments
+
+		Siri:
+			Fetch Siri Details
+			Spring WebSocket
+
+		Sirickit:
+			siri path
+			fetch data: fetch Siri Details APIs
+				==>Spring Scheduler: cron entry
+			fetch sirickit details
+			update siri ckit
+			lookup siri ckit
+			
+		Ckit:
+		
+		Filter: internal?
+			filter data
+			
+		Nuance APIs:
+			==>Get
+				Call Details: audio files: .wav
+				Audit Details: log files: -LOG
+				Zip files
+			==>Post
+				Call Details: audio files: .wav
+				Audit Details: log files: -LOG
+				Zip files
+				
+			Data: transfer from Nuance to EchoService:
+			Data: also from Siri:
+			
+			==>Compare both data: matching or mismatching
+			
+			Scripts:
+				sudo su - gatt
+				cd echo/Echo_Client/
+				ls -lrt
+				a3Token_script.sh
+				nuanceLogsZipfiles
+			
+
+==>Integration:
+
+	==>Nuance:
+		==>Upload logs to Nuance: .wav and -LOG files
+
+	==>AWS/S3
+		==>UI: Data: ==>Store in Cloud / Trove
+	
+	==>Kakfa:
+		==>UI: Review: ==>Elastic Search
+	
+	==>Siri
+	
+	==>CKit
+
+	==>Reports
+		==>Generate report files: CSV and Excel
+		
+	==>Splunk
+	
+	==>
+	
+***********************
+TDD/Test Domains:
+
+***********************

@@ -1,0 +1,45 @@
+
+================================================
+DB:
+
+==>DB Systems:
+	==>MSSQL:
+		Host/Machine/(Unix/Windows Servers) ==>Database Server (instance) (listening on some port: 2044?: default: 2044?) ==>Database Schema: ..., ... ==>Tables: <table>
+		(synonyms: Host/Machine/(Unix/Windows Servers) ==>Database Server (instance) (listening on some port: 2044?: default: 2044?): ==>...)
+		(server names: lower cases)
+		Host: ...
+		Database Server Instance: ...
+		Database Schema: ...MDB01...
+	==>Sybase:
+		Host/Machine/(Unix/Windows Servers) ==>Database Server (instance) (listening on some port: 2001/2053: default: 2053) ==>Database Schema: mfs001db, ... ==>Tables: dbo.<table>
+		(synonyms: Host/Machine/(Unix/Windows Servers) ==>Database Server (instance) (listening on some port: 2001/2053: default: 2053): ==>he1143sr6)
+		(server names: lower cases)
+		Host: he3qlxv<env>dbs123
+		Database Server Instance: he3qlv<env>dbs123sr1
+		Summaries:
+			==>Primary keys: exist: but not a lot: so ... primary keys are not so critical because there are not a lot of auto-incremented id keys like Hibernate ORM, etc.
+							 ==>Some primary key(s) are the insert/update date fields
+			==>Foreign keys: exist: but not a lot: so some data replications are used + data integrity is enabled/enforced by Java/NET app code + reports + DQ + ...
+			=====>Increase data manipulation flexibility due to large volumes of tables 
+				==>But some key tables are used as foreign keys + some keys tables are in use as well + some l_xxx tables are used
+				==>Masssive table joins are in use ==>Without extensive foreign keys, it eases the join conditions plus multiple data query variations can be used
+				==>Data quality can be assured via multiple ways instead of foreign keys as the main ways
+			==>AutoSys Jobs are used to do data transfer and migrations as some main ways in addition to SOA API services
+	==>Oracle:
+		==>Oracle OEM's default/own configuration/local DB servers: default port: 1521
+	==>DB2:
+		==>TAM Server's default/own configuration/local DB servers
+	==>WebLogic Servers:
+		==>Support many DB and JDBC drivers (prefer to use their default JDBC drivers if available, so not easily choose: "Other" from dropdown list)
+		==>DS: created and added to both AServer and MServers: why not? because both servers can use/share this DS, it is for sure good, and nothing wrong: commonly just add to both
+	==>Glassfish Servers:
+		TBD
+	==>OC4J Server/Containers:
+		TBD
+==>data fields: lower cases:	c50276 instead of C50276
+==>
+
+================================================
+
+
+================================================

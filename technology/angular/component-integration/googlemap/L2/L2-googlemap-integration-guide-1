@@ -82,6 +82,45 @@ Google Map Integration:
 	==>90%: use official Google Map UI Component
 	==>10%: use AGM
 	==>Native Google Map APIs: basically no need to use now	
+	
+	
+========================================================
+Restricting API keys
+
+==>Why adding restrictions to API Keys?
+	[Jerry]:
+		==>1) Security:
+			  ==>So no one else (their apps/sites/...) use your API keys
+			  ==>Also not mess up your API keys and could lead to not-working or revoked by Google APIs
+			  ==>...
+		==>2) Quota:
+			  ==>So no one else (their apps/sites/...) use your API keys to consume your quota... (save money and prescriptions and also the quota available for your own apps)
+			  ==>...
+		==>3) Categorizations:
+			  ==>So you can add several different keys to do different category API calls and app work 
+			  	 (different web urls or IP addresses of your apps, or <= 1 platform restriction)
+			  ==>...			  
+	[Google APIs Design / Common Senses]:
+		==>API keys are credentials, and you should manage them carefully. 
+			At a minimum, follow the recommendations below to keep your keys safe, 
+			and to make sure that you have restrictions in place to reduce the impact of compromised API keys.
+		==>You can restrict an API key by specifying an Application restriction, or one or more API restrictions.
+			Application restrictions limit usage of API keys to specific sites (IP address and web site) or specific platforms (Android and iOS). 
+			You can select at most one restriction from this category (see Google Maps Platform APIs by Platform).
+		==>API restrictions limit usage of API keys to one or more Google Maps Platform APIs or SDKs. 
+			Requests to use APIs or SDKs associated with an API key will be processed. Requests to use APIs or SDKs not associated with an API key will fail. 
+			For an API key, you can specify as many API restrictions as needed. 
+			Make sure the APIs or SDKs associated with an API key support the application restriction set for that API key.
+	==>Restrictions:
+		==>Can be combined:
+			Example 1:
+			1) Add application restrictions: For this API Key: limit it to be used for one app "YouTubeViewer" (by web url or IP address for this app)
+			2) Add APIs/SDK association as limits to this API Key: only limit this key to be associated with Google YouTube APIs/SDK calls: so the app will
+				always add this key when calling Google YouTube APIs/SDK from this app (IP address or app url)
+				
+	==>Configurations:
+		==>Need to be configured via Google Cloud Dashboard
+	
 ========================================================
 ==>App Implementation Procedures:
 

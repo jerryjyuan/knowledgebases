@@ -1,0 +1,34 @@
+
+IT Work:
+
+	==>Accuracy:
+		==>Many factors:
+			Time
+			Systems
+			Dependencies
+			...
+		==>
+		
+	==>
+	
+	
+	
+	==>Scenarios:
+		==>Double-Checking or Triple-Checking or ...:
+			==>Should dependent upon accuracy, ...
+			Examples:
+				==>Browsers:
+					==>Clean up browser histories
+					==>Clean up browser data
+					==>Close all browser sessions/tabs/windows:
+						==>Needed:
+							==>SSO/Logged-in sessions
+							==>Cached data
+							==>...
+						==>No need:
+							==>Supported browsers
+							==>
+					==>
+		==>Critical-Checking
+		==>...
+		

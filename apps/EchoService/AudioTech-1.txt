@@ -1,0 +1,37 @@
+
+Audio Tech:
+
+
+	==>JDK: sound APIs
+	
+	==>HTML5 Tags:
+
+		Which audio format is supported by HTML5?
+		The current HTML5 draft specification does not specify which audio formats browsers should support in the audio tag. 
+		
+		But most commonly used audio formats are ogg, mp3 and wav.
+	
+		ogg
+		mp3:
+			audio/ogg
+			audio/mpeg
+		wav
+	
+	==>Modules:
+		==>iTalk-Adapter:
+			ProtoBuf: Siri
+				Message format:
+					==>Packets: Audio 
+		==>
+	
+	==>Systems:
+		Siri
+		SiriCKit
+		CKit
+		Nuance
+		...
+		...
+		...Elastic Search
+		...AWS
+		...
+	

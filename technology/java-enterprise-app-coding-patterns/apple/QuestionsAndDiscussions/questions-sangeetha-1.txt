@@ -1,0 +1,86 @@
+
+*****************************************
+Questions:
+*****************************************
+
+[2021-05-18]:
+	==>[Jerry]: Github/SSH-key
+		==>This was a small error and question
+		Jerry: should have just added the SSH key regardless of ...: it is the same as normal Github and other companies' github
+			   even google protobuf is using github, ...
+			   Github:
+			   		1) a repository hub / vendor for storing git repos and codebases
+			   		2) provide github desktop and web portal clients, and also SSH/HTTPS clone
+			   		3) every company: create/maintain their repos in github: will secure it: via 2+ ways:
+			   			==>Way 1: One of the main ways is: SSH keys
+			   				==>SSH keys: configured in profile: can add multiple SSH keys: public keys
+			   					1) So multiple ones having their private keys on their parts: can access to it
+			   					2) Also from multiple platforms...
+			   			==>Way 2: GPG
+			   			==>...
+			   		4) every account/personal: do the same, ..., my github added with my SSH keys?
+			   			==>NO: because I am only using HTTPS and also web portal ==>I am not using SSH
+			   				1) IDE: I am using https
+			   					==>IDE: can use SSH as well: but needs ssh keys
+			   					==>IDE: can locate user's private key from .ssh automatically: TO see why...
+			   						1) user directory...
+			   						2) or configured via IDE's secure store...
+			   				2) Web: I am using web portal
+			   				3) Linux/Laptop/AnyGitClients: I am not using ssh to sync up with Github to do clone, etc.
+			   					Linux: ssh: needs SSH keys as well
+			   						==>But company env:
+			   							Server1->Server2: ssh he1alxvpmid1023: where is private key? in user home .ssh?
+			   								Or: automatically configured?
+			   					Github/SSH: configured by public/private key method
+			   				4) ...
+		Counteracting and fixing this small error:
+			==>Forward one of my email reply to Sangeetha...
+			
+[2021-05-19]:
+	==>[Jerry]: Calendar: Webex meeting
+		==>It shows: ...
+		[Jerry]: I worked for Apple in 2018 and 2-3 years used MacBook between 2016-2018
+				 Someone send me an email about my experiences, and here it is
+				 I am a full stack developer from Cognizant
+
+[2021-05-20]:
+[2021-05-21]:				 
+	==>[Jerry]: What branches are for iTalk-Adapter app?
+		ckit: works
+		tts:  not working:
+			==>it shows: Sangeetha is not looking into or working on code, or a test about Jerry's looking into code
+			Questions:
+				[Jerry]: why is branch tts not compiling, but ckit branch is good?
+				[Jerry]: I have reviewed all the code for EchoService and iTalk-Adapter, ...
+						 Local MacBook is the local dev env?
+						 
+	==>Apps:
+		==>How to display EchoWeb UI?
+		
+		==>Data?
+		
+		==>Integration with other components?
+			==>URLs?
+			
+		==>Please add me to the team meetings, email groups, and standups ...
+
+
+
+	==>Double Check / Verify: Sangeetha:
+		Is she receiving my message even she is offline or ...?
+			at the same time
+			Or:
+			after she logs in?
+		...
+		
+	==>Updates:
+		==>[Jerry]: why is branch tts not compiling, but ckit branch is good?
+		==>...
+		
+		
+[2021-05-24]:
+
+
+		
+*****************************************
+*****************************************

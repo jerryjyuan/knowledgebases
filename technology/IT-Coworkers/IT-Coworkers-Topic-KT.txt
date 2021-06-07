@@ -1,0 +1,90 @@
+
+===========================================
+IT Coworkers:
+
+
+===========================================
+KT:
+
+	==>Depends upon many factors
+	
+		==>"TIME": Time is No.1:
+			==>Any KT/Communications/...: take time and hours
+			
+			Under many scenarios of human life/living/work/etc: "TIME" can be explaining many things...
+		
+		==>Scopes/Domains
+		
+		==>Needs:
+			Extra
+			In need / needed
+			Security data
+			...
+			Principles:
+				Only needed and/or approved...: minimal info-levels to do the work...
+				...
+			
+		==>Availability
+		
+		==>Common Senses and Practices
+		
+		==>Customized Practices/Procedures: Teams and Team and Coworkers
+		
+		==>Anyone's their own homework: 
+			Nanny? 
+			Their-qualifications? 
+			Can they google? 
+			Can they create/collect/enable their own OneNote?
+				==>Currently: Jerry doesn't feel: OneNote is a sharable document type or team-document type...
+			Use-Others? 
+			Delegating-Too-Much?
+			Is this becoming teaching (or even tutoring, ...) instead of: normal teamwork, normal team doc or KT, or normal syncup?
+			You want someones or your team to be up to speed, can you find some other ways (many good ways)...
+				==>...
+				==>...
+			Some Principles:
+				You want yourself to be treated in some ways, then you need to treat others in the same/similar ways, ...
+					==>And vice versa
+				...
+				
+		==>Fairness:
+			==>How do others do?
+			==>How do others get treated while you are treated? the same/similar ways?
+			==>Company Hires: mostly not for teaching/tutoring...
+				==>Tutoring: mostly for supervising or guidances to ensure better productivity...
+			==>...
+	
+		==>Any abuses?
+	
+	
+	==>Scenarios:
+	
+	
+		==>
+		
+		==>
+		
+		==>Summarize all tickets or problem definitions:
+			==>Overall: overdo
+			==>All tickets: in SN
+			==>All problem definitions: in SN and also ...		
+			
+		==>Tricks:
+			==>Most of the tricks:
+				1) Not tricks or even tips
+				2) Most of them: in official documentation, user guides, and manuals, or just its features...
+				
+			1) No need to share: examples:
+				==>How to do "Reply to All"
+					==>TCS:
+					==>Citrix Hosted Web Mail (Lotus)
+						1) India Time Zone
+						2) Features:
+							==>Can click on the webex link to join the webex calls
+							==>Need to "reply to all": 1) inbox 2) highlight the meeting invite email 2) click menu "Reply to All"
+		
+===========================================
+
+
+===========================================
+		

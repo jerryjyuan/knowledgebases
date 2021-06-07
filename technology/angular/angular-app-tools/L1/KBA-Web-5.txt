@@ -1,0 +1,167 @@
+
+*********************************
+https://stackoverflow.com/questions/5654447/whats-the-difference-between-scss-and-sass
+
+
+SASS:
+	Syntactically Awesome CSS:
+	1) 2 types below
+	2) Function as pre-processor for advanced features/syntaxes of normal CSS
+	
+	->Older: SASS" .sass
+		History:
+			Ruby Sass was the original implementation of Sass, but it reached its end of life as of 26 March 2019. Dart Sass is now the primary implementation of Sass.
+	->New: SCSS: .scss
+		Sassy CSS
+		SCSS refers to the main syntax supported by the Sass CSS pre-processor.
+			Files ending with .scss represent the standard syntax supported by Sass. SCSS is a superset of CSS.
+			Files ending with .sass represent the "older" syntax supported by Sass originating in the Ruby world.
+
+	Sass is a CSS pre-processor with syntax advancements. Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets. However, they do not extend the CSS standard itself.
+	
+	CSS variables are supported and can be utilized but not as well as pre-processor variables.
+	
+	For the difference between SCSS and Sass, this text on the Sass documentation page should answer the question:
+	
+	There are two syntaxes available for Sass. 
+		
+		The first, known as SCSS (Sassy CSS) and used throughout this reference, is an extension of the syntax of CSS. This means that every valid CSS stylesheet is a valid SCSS file with the same meaning. This syntax is enhanced with the Sass features described below. Files using this syntax have the .scss extension.
+	
+		The second and older syntax, known as the indented syntax (or sometimes just “Sass”), provides a more concise way of writing CSS. It uses indentation rather than brackets to indicate nesting of selectors, and newlines rather than semicolons to separate properties. Files using this syntax have the .sass extension.
+
+	Main Differences:
+	
+		The difference is UI. Underneath the textual exterior they are identical. 
+		This is why sass and scss files can import each other. 
+		
+		Actually, Sass has four syntax parsers: scss, sass, CSS, and less. 
+		All of these convert a different syntax into an Abstract Syntax Tree which is further processed into CSS output or even onto one of the other formats via the sass-convert tool.
+		Use the syntax you like the best, both are fully supported and you can change between them later if you change your mind.
+
+	Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
+	
+	The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
+
+	Sass (Syntactically Awesome StyleSheets) have two syntaxes:
+		a newer: SCSS (Sassy CSS)
+		and an older, original: indent syntax, which is the original Sass and is also called Sass.
+	So they are both part of Sass preprocessor with two different possible syntaxes.
+
+	Comparison:
+	
+	The Sass .sass file is visually different from .scss file, e.g.
+	
+		Example.sass - sass is the older syntax
+		$color: red
+		
+		=my-border($color)
+		  border: 1px solid $color
+		
+		body
+		  background: $color
+		  +my-border(green)
+		  
+	Example.scss - sassy css is the new syntax as of Sass 3
+	
+		$color: red;
+		
+		@mixin my-border($color) {
+		  border: 1px solid $color;
+		}
+		
+		body {
+		  background: $color;
+		  @include my-border(green);
+		}
+		
+	Any valid CSS document can be converted to Sassy CSS (SCSS) simply by changing the extension from .css to .scss.
+
+	SCSS:
+	
+		Syntax is similar to CSS (so much that every regular valid CSS3 is also valid SCSS, but the relationship in the other direction obviously does not happen)
+		
+		Uses braces {}
+		
+		Uses semi-colons ;
+		Assignment sign is :
+		To create a mixin it uses the @mixin directive
+		To use mixin it precedes it with the @include directive
+		Files have the .scss extension.
+
+	Original Sass:
+	
+		Syntax is similar to Ruby
+		No braces
+		No strict indentation
+		No semi-colons
+		Assignment sign is = instead of :
+		To create a mixin it uses the = sign
+		To use mixin it precedes it with the + sign
+		Files have the .sass extension.
+
+SASS-Older-Way vs. SASS-Current-Way-SCSS:
+
+	SASS-Older-Way
+		==>No "braces" + ";" (+ lay-on-nesting)
+		==>Use: indentations + new-lines
+		
+	SASS-Current-Way-SCSS:
+		==>Similar to CSS
+
+	Original sass is ruby syntax-like, similar to ruby, jade etc...
+	
+	In those syntaxes, we don't use {}, instead we go with white spaces, also no usage of ;...
+	
+	In scss syntaxes are more like CSS, but with getting more options like: nesting, declaring, etc, similar to less and other pre-processing CSS ...
+	
+	They basically do the same thing, but I put couple of lines of each to see the syntax difference, look at the {}, ;, and spaces:
+	
+	SASS:
+	
+	$width: 100px
+	$color: green
+	
+	div
+	  width: $width
+	  background-color: $color
+	SCSS:
+	
+	$width: 100px;
+	$color: green;
+	
+	div {
+	  width: $width;
+	  background-color: $color;
+	}
+	
+	==>
+	
+	/* SASS */
+	$blue: #3bbfce
+	$margin: 16px
+	
+	.content-navigation
+	  border-color: $blue
+	  color: darken($blue, 9%)
+	
+	.border
+	  padding: $margin / 2
+	  margin: $margin / 2
+	  border-color: $blue
+	You can see from the CSS below that the SCSS style is a lot more similar to regular CSS than the older SASS approach.
+	
+	/* CSS */
+	.content-navigation {
+	  border-color: #3bbfce;
+	  color: #2b9eab;
+	}
+	
+	.border {
+	  padding: 8px;
+	  margin: 8px;
+	  border-color: #3bbfce;
+	}
+	I think most of the time these days if someone mentions that they are working with Sass they are referring to authoring in .scss rather than the traditional .sass way.
+
+	
+*********************************
